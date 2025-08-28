@@ -16,6 +16,7 @@ import LessonExercicesPage from "../features/app/pages/LessonExercicesPage";
 import LessonViewPage from "../features/app/pages/LessonViewPage";
 import LessonExercicesVideoPage from "../features/app/pages/LessonExercicesVideoPage";
 import AdminProtectedRoute from "../features/app/components/AdminProtectedRoute";
+import SujetsPage from "../features/app/pages/SujetsPage"; // Import de la nouvelle page
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
                       {
                         path: "",
                         element: <ModulesPage />,
+                      },
+                      {
+                        path: "sujets", // Nouvelle route pour les sujets
+                        element: <SujetsPage />,
                       },
                       {
                         path: ":moduleId",

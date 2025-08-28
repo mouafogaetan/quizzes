@@ -585,20 +585,20 @@ export const getLessonDocFileId = async (classId, matiereId, moduleId, chapitreI
 };
 
 /**
- * Récupère l'URL de la vidéo de cours d'une leçon
+ * Récupère toutes les vidéos de cours d'une leçon
  * @param {string} classId 
  * @param {string} matiereId 
  * @param {string} moduleId 
  * @param {string} chapitreId 
  * @param {string} lessonId 
- * @returns {Promise<string|null>} URL de la vidéo ou null si inexistant
+ * @returns {Promise<string[]>} Liste des URLs vidéo YouTube
  */
-export const getLessonVideoUrl = async (classId, matiereId, moduleId, chapitreId, lessonId) => {
+export const getLessonVideoUrls = async (classId, matiereId, moduleId, chapitreId, lessonId) => {
   try {
     const lesson = await getLesson(classId, matiereId, moduleId, chapitreId, lessonId);
-    return lesson.url_cours_video || null;
+    return lesson.url_cours_videos || [];
   } catch (error) {
-    console.error("Erreur lors de la récupération de l'URL vidéo:", error);
+    console.error("Erreur lors de la récupération des URLs vidéo:", error);
     throw error;
   }
 };
@@ -650,24 +650,24 @@ export const updateLessonDocFileId = async (classId, matiereId, moduleId, chapit
 };
 
 /**
- * Met à jour ou ajoute l'URL de la vidéo de cours
+ * Met à jour la liste des URLs vidéo de cours
  * @param {string} classId 
  * @param {string} matiereId 
  * @param {string} moduleId 
  * @param {string} chapitreId 
  * @param {string} lessonId 
- * @param {string} videoUrl 
+ * @param {string[]} videoUrls - Liste des URLs vidéo YouTube
  * @returns {Promise<void>}
  */
-export const updateLessonVideoUrl = async (classId, matiereId, moduleId, chapitreId, lessonId, videoUrl) => {
+export const updateLessonVideoUrls = async (classId, matiereId, moduleId, chapitreId, lessonId, videoUrls) => {
   try {
     const lessonRef = doc(db, `classes/${classId}/matieres/${matiereId}/modules/${moduleId}/chapitres/${chapitreId}/lecons`, lessonId);
     await updateDoc(lessonRef, { 
-      url_cours_video: videoUrl,
+      url_cours_videos: videoUrls,
       last_updated: serverTimestamp() 
     });
   } catch (error) {
-    console.error("Erreur lors de la mise à jour de l'URL vidéo:", error);
+    console.error("Erreur lors de la mise à jour des URLs vidéo:", error);
     throw error;
   }
 };
@@ -1241,6 +1241,109 @@ export const deleteExerciceVideo = async (classId, matiereId, moduleId, chapitre
       exerciceId));
   } catch (error) {
     console.error("Erreur lors de la suppression de l'exercice vidéo:", error);
+    throw error;
+  }
+};
+
+// ==================== SUJETS ====================
+
+/**
+ * Récupère tous les sujets d'une matière
+ * @param {string} classId 
+ * @param {string} matiereId 
+ * @returns {Promise<Array<{
+ *   id: string,
+ *   anneeScolaire: string,
+ *   etablissement: string,
+ *   examinateur: string,
+ *   url_doc: string,
+ *   sequence: string
+ * }>>}
+ */
+export const getSujetsByMatiere = async (classId, matiereId) => {
+  try {
+    const querySnapshot = await getDocs(collection(db, `classes/${classId}/matieres/${matiereId}/sujets`));
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+  } catch (error) {
+    console.error("Erreur lors de la récupération des sujets:", error);
+    throw error;
+  }
+};
+
+/**
+ * Ajoute un sujet à une matière
+ * @param {string} classId 
+ * @param {string} matiereId 
+ * @param {string} sujetId 
+ * @param {string} anneeScolaire 
+ * @param {string} etablissement 
+ * @param {string} examinateur 
+ * @param {string} url_doc 
+ * @param {string} sequence 
+ */
+export const addSujet = async (classId, matiereId, sujetId, anneeScolaire, etablissement, examinateur, url_doc, sequence) => {
+  try {
+    const sujetRef = doc(db, `classes/${classId}/matieres/${matiereId}/sujets`, sujetId);
+    await setDoc(sujetRef, {
+      anneeScolaire,
+      etablissement,
+      examinateur: examinateur || '',
+      url_doc,
+      sequence,
+      createdAt: serverTimestamp()
+    });
+    await updateLastUpdate(classId);
+  } catch (error) {
+    console.error("Erreur lors de l'ajout du sujet:", error);
+    throw error;
+  }
+};
+
+/**
+ * Modifie un sujet existant
+ * @param {string} classId 
+ * @param {string} matiereId 
+ * @param {string} sujetId 
+ * @param {string} anneeScolaire 
+ * @param {string} etablissement 
+ * @param {string} examinateur 
+ * @param {string} url_doc 
+ * @param {string} sequence 
+ */
+export const updateSujet = async (classId, matiereId, sujetId, anneeScolaire, etablissement, examinateur, url_doc, sequence) => {
+  try {
+    const sujetRef = doc(db, `classes/${classId}/matieres/${matiereId}/sujets`, sujetId);
+    await updateDoc(sujetRef, {
+      anneeScolaire,
+      etablissement,
+      examinateur: examinateur || '',
+      url_doc,
+      sequence,
+      updatedAt: serverTimestamp()
+    });
+    await updateLastUpdate(classId);
+  } catch (error) {
+    console.error("Erreur lors de la modification du sujet:", error);
+    throw error;
+  }
+};
+
+/**
+ * Supprime un sujet
+ * @param {string} classId 
+ * @param {string} matiereId 
+ * @param {string} sujetId 
+ */
+export const deleteSujet = async (classId, matiereId, sujetId) => {
+  try {
+    const sujetRef = doc(db, `classes/${classId}/matieres/${matiereId}/sujets`, sujetId);
+    await deleteDoc(sujetRef);
+    await updateLastUpdate(classId);
+  } catch (error) {
+    console.error("Erreur lors de la suppression du sujet:", error);
     throw error;
   }
 };

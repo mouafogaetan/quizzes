@@ -150,6 +150,7 @@ const ModulesPage = () => {
   return (
     <div className="container py-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
+        
         <div>
           <h2>Les Modules de {matiereId} en {classeId}</h2>
           <div className="d-flex gap-2">
@@ -170,16 +171,25 @@ const ModulesPage = () => {
             </Button>
           </div>
         </div>
-        <Button 
-          variant="primary" 
-          onClick={() => {
-            setCurrentEditModule(null);
-            setShowAddModal(true);
-          }}
-          disabled={processing}
-        >
-          Ajouter un module
-        </Button>
+        <div className="d-flex gap-2">
+          <Button 
+            variant="success" 
+            onClick={() => navigate(`/classes/${classeId}/${matiereId}/sujets`)}
+            disabled={processing}
+          >
+            Gérer les sujets
+          </Button>
+          <Button 
+            variant="primary" 
+            onClick={() => {
+              setCurrentEditModule(null);
+              setShowAddModal(true);
+            }}
+            disabled={processing}
+          >
+            Ajouter un module
+          </Button>
+        </div>
       </div>
 
       {loading && (

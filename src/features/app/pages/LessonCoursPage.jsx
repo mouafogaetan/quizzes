@@ -2,52 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { 
   getLessonDocUrl, 
-  getLessonDocFileId,
-  getLessonVideoUrl, 
   updateLessonDocUrl,
-  updateLessonDocFileId,
-  updateLessonVideoUrl,
-  checkTelegramLinkValidity,
-  generateTelegramDownloadLink
+  getLessonVideoUrls, 
+  updateLessonVideoUrls
 } from '../../../utils/crudfirestore';
-import { Button, Modal, Form, Alert, Spinner, Row, Col } from 'react-bootstrap';
-import FileUploader from '../components/FileUploader';
+import { Button, Modal, Form, Alert, Spinner, Row, Col, ListGroup, Badge } from 'react-bootstrap';
 
 const LessonCoursPage = () => {
   const { classeId, matiereId, moduleId, chapitreId, lessonId } = useParams();
   const [docUrl, setDocUrl] = useState(null);
-  const [docFileId, setDocFileId] = useState(null);
-  const [videoUrl, setVideoUrl] = useState('');
+  const [videoUrls, setVideoUrls] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showDocModal, setShowDocModal] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
+  const [tempDocUrl, setTempDocUrl] = useState('');
   const [tempVideoUrl, setTempVideoUrl] = useState('');
+  const [editingVideoIndex, setEditingVideoIndex] = useState(null);
 
   // Chargement initial des données
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [docUrl, fileId, video] = await Promise.all([
+        const [docUrl, videos] = await Promise.all([
           getLessonDocUrl(classeId, matiereId, moduleId, chapitreId, lessonId),
-          getLessonDocFileId(classeId, matiereId, moduleId, chapitreId, lessonId),
-          getLessonVideoUrl(classeId, matiereId, moduleId, chapitreId, lessonId)
+          getLessonVideoUrls(classeId, matiereId, moduleId, chapitreId, lessonId)
         ]);
 
-        setDocFileId(fileId);
-        setVideoUrl(video || '');
-
-        // Vérifier et régénérer l'URL si nécessaire
-        if (docUrl) {
-          const { isValid } = await checkTelegramLinkValidity(docUrl);
-          if (!isValid && fileId) {
-            const newUrl = await handleRegenerateDocUrl(fileId);
-            setDocUrl(newUrl);
-          } else {
-            setDocUrl(docUrl);
-          }
-        }
+        setDocUrl(docUrl || '');
+        setVideoUrls(videos || []);
       } catch (err) {
         setError('Erreur lors du chargement des données');
         console.error(err);
@@ -59,46 +43,55 @@ const LessonCoursPage = () => {
     fetchData();
   }, [classeId, matiereId, moduleId, chapitreId, lessonId]);
 
-  // Régénérer l'URL du document
-  const handleRegenerateDocUrl = async (fileId) => {
+  // Gestion de l'URL du document
+  const handleDocUrlSubmit = async () => {
     try {
-      const { url } = await generateTelegramDownloadLink(fileId);
-      await updateLessonDocUrl(classeId, matiereId, moduleId, chapitreId, lessonId, url);
-      return url;
-    } catch (err) {
-      console.error('Erreur lors de la régénération du lien', err);
-      throw err;
-    }
-  };
-
-  // Gestion de l'upload de document
-  const handleDocUploadComplete = async (fileData) => {
-    try {
-      // fileData doit contenir { fileId, fileUrl }
-      await Promise.all([
-        updateLessonDocFileId(classeId, matiereId, moduleId, chapitreId, lessonId, fileData.fileId),
-        updateLessonDocUrl(classeId, matiereId, moduleId, chapitreId, lessonId, fileData.fileUrl)
-      ]);
-      
-      setDocFileId(fileData.fileId);
-      setDocUrl(fileData.fileUrl);
+      await updateLessonDocUrl(classeId, matiereId, moduleId, chapitreId, lessonId, tempDocUrl);
+      setDocUrl(tempDocUrl);
       setShowDocModal(false);
+      setTempDocUrl('');
     } catch (err) {
       setError('Erreur lors de la mise à jour du document');
       console.error(err);
     }
   };
 
-  // Gestion de l'URL vidéo
-  const handleVideoUrlSubmit = async () => {
+  // Gestion des URLs vidéo
+  const handleAddVideoUrl = async () => {
     try {
-      await updateLessonVideoUrl(classeId, matiereId, moduleId, chapitreId, lessonId, tempVideoUrl);
-      setVideoUrl(tempVideoUrl);
+      const newVideoUrls = [...videoUrls];
+      if (editingVideoIndex !== null) {
+        newVideoUrls[editingVideoIndex] = tempVideoUrl;
+      } else {
+        newVideoUrls.push(tempVideoUrl);
+      }
+      
+      await updateLessonVideoUrls(classeId, matiereId, moduleId, chapitreId, lessonId, newVideoUrls);
+      setVideoUrls(newVideoUrls);
       setShowVideoModal(false);
+      setTempVideoUrl('');
+      setEditingVideoIndex(null);
     } catch (err) {
       setError('Erreur lors de la mise à jour de la vidéo');
       console.error(err);
     }
+  };
+
+  const handleDeleteVideoUrl = async (index) => {
+    try {
+      const newVideoUrls = videoUrls.filter((_, i) => i !== index);
+      await updateLessonVideoUrls(classeId, matiereId, moduleId, chapitreId, lessonId, newVideoUrls);
+      setVideoUrls(newVideoUrls);
+    } catch (err) {
+      setError('Erreur lors de la suppression de la vidéo');
+      console.error(err);
+    }
+  };
+
+  const handleEditVideoUrl = (index) => {
+    setTempVideoUrl(videoUrls[index]);
+    setEditingVideoIndex(index);
+    setShowVideoModal(true);
   };
 
   if (loading) {
@@ -114,33 +107,40 @@ const LessonCoursPage = () => {
     <div className="container py-4">
       <h1>Gestion du Cours</h1>
       
-      {error && <Alert variant="danger">{error}</Alert>}
+      {error && <Alert variant="danger" onClose={() => setError(null)} dismissible>{error}</Alert>}
 
       {/* Section Document */}
       <div className="mb-5 p-4 border rounded">
         <h3>Document du Cours</h3>
         {docUrl ? (
           <>
-            <p>Document actuel: <a href={docUrl} target="_blank" rel="noopener noreferrer">Télécharger</a></p>
-            <div className="d-flex gap-2">
-              <Button variant="primary" onClick={() => setShowDocModal(true)}>
-                Modifier le Document
-              </Button>
-              <Button 
-                variant="secondary" 
-                onClick={async () => {
-                  try {
-                    const newUrl = await handleRegenerateDocUrl(docFileId);
-                    setDocUrl(newUrl);
-                  } catch (err) {
-                    setError('Erreur lors de la régénération du lien');
-                  }
-                }}
-                disabled={!docFileId}
-              >
-                Régénérer le lien
-              </Button>
-            </div>
+            <Row>
+              <Col md={6}>
+                <h5>Prévisualisation du document</h5>
+                <div className="border rounded p-2" style={{ height: '400px', overflow: 'auto' }}>
+                  <iframe 
+                    src={docUrl} 
+                    title="Document du cours"
+                    width="100%" 
+                    height="100%"
+                    frameBorder="0"
+                    style={{ minHeight: '380px' }}
+                  />
+                </div>
+              </Col>
+              <Col md={6}>
+                <p>URL actuelle: <a href={docUrl} target="_blank" rel="noopener noreferrer">{docUrl}</a></p>
+                <Button 
+                  variant="primary" 
+                  onClick={() => {
+                    setTempDocUrl(docUrl);
+                    setShowDocModal(true);
+                  }}
+                >
+                  Modifier l'URL du Document
+                </Button>
+              </Col>
+            </Row>
           </>
         ) : (
           <>
@@ -152,37 +152,73 @@ const LessonCoursPage = () => {
         )}
       </div>
 
-      {/* Section Vidéo */}
+      {/* Section Vidéos */}
       <div className="mb-5 p-4 border rounded">
-        <h3>Vidéo du Cours</h3>
-        {videoUrl ? (
+        <h3>Vidéos du Cours</h3>
+        {videoUrls.length > 0 ? (
           <>
             <Row>
               <Col md={6}>
-                <div className="ratio ratio-16x9 mb-3">
-                  <iframe 
-                    src={`https://www.youtube.com/embed/${extractYoutubeId(videoUrl)}`} 
-                    title="Vidéo du cours" 
-                    allowFullScreen
-                  />
-                </div>
+                <h5>Liste des vidéos</h5>
+                <ListGroup>
+                  {videoUrls.map((url, index) => (
+                    <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
+                      <div>
+                        <Badge bg="secondary" className="me-2">{index + 1}</Badge>
+                        <a href={url} target="_blank" rel="noopener noreferrer">
+                          {extractYoutubeId(url) || url}
+                        </a>
+                      </div>
+                      <div>
+                        <Button
+                          variant="outline-primary"
+                          size="sm"
+                          className="me-2"
+                          onClick={() => handleEditVideoUrl(index)}
+                        >
+                          Modifier
+                        </Button>
+                        <Button
+                          variant="outline-danger"
+                          size="sm"
+                          onClick={() => handleDeleteVideoUrl(index)}
+                        >
+                          Supprimer
+                        </Button>
+                      </div>
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
               </Col>
               <Col md={6}>
-                <p>URL actuelle: <a href={videoUrl} target="_blank" rel="noopener noreferrer">{videoUrl}</a></p>
-                <Button variant="primary" onClick={() => {
-                  setTempVideoUrl(videoUrl);
-                  setShowVideoModal(true);
-                }}>
-                  Modifier la Vidéo
-                </Button>
+                <h5>Prévisualisation de la première vidéo</h5>
+                {videoUrls.length > 0 && (
+                  <div className="ratio ratio-16x9 mb-3">
+                    <iframe 
+                      src={`https://www.youtube.com/embed/${extractYoutubeId(videoUrls[0])}`} 
+                      title="Vidéo du cours" 
+                      allowFullScreen
+                    />
+                  </div>
+                )}
               </Col>
             </Row>
+            <div className="mt-3">
+              <Button variant="success" onClick={() => {
+                setTempVideoUrl('');
+                setEditingVideoIndex(null);
+                setShowVideoModal(true);
+              }}>
+                Ajouter une autre Vidéo
+              </Button>
+            </div>
           </>
         ) : (
           <>
             <p>Aucune vidéo n'a été ajoutée pour ce cours.</p>
             <Button variant="success" onClick={() => {
               setTempVideoUrl('');
+              setEditingVideoIndex(null);
               setShowVideoModal(true);
             }}>
               Ajouter une Vidéo
@@ -192,24 +228,40 @@ const LessonCoursPage = () => {
       </div>
 
       {/* Modal pour le document */}
-      <Modal show={showDocModal} onHide={() => setShowDocModal(false)} size="lg">
+      <Modal show={showDocModal} onHide={() => setShowDocModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>{docUrl ? 'Modifier' : 'Ajouter'} le Document</Modal.Title>
+          <Modal.Title>{docUrl ? 'Modifier' : 'Ajouter'} l'URL du Document</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <FileUploader 
-            onUploadComplete={handleDocUploadComplete} 
-            allowedTypes={['application/pdf']}
-            maxSize={6 * 1024 * 1024} // 6MB
-            returnFileId // Important pour obtenir le file_id
-          />
+          <Form.Group>
+            <Form.Label>URL du document (page HTML)</Form.Label>
+            <Form.Control
+              type="url"
+              placeholder="https://example.com/document.html"
+              value={tempDocUrl}
+              onChange={(e) => setTempDocUrl(e.target.value)}
+            />
+            <Form.Text className="text-muted">
+              Collez l'URL complète de la page HTML du document
+            </Form.Text>
+          </Form.Group>
         </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowDocModal(false)}>
+            Annuler
+          </Button>
+          <Button variant="primary" onClick={handleDocUrlSubmit}>
+            Enregistrer
+          </Button>
+        </Modal.Footer>
       </Modal>
 
       {/* Modal pour la vidéo */}
       <Modal show={showVideoModal} onHide={() => setShowVideoModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>{videoUrl ? 'Modifier' : 'Ajouter'} la Vidéo YouTube</Modal.Title>
+          <Modal.Title>
+            {editingVideoIndex !== null ? 'Modifier' : 'Ajouter'} une Vidéo YouTube
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group>
@@ -229,8 +281,8 @@ const LessonCoursPage = () => {
           <Button variant="secondary" onClick={() => setShowVideoModal(false)}>
             Annuler
           </Button>
-          <Button variant="primary" onClick={handleVideoUrlSubmit}>
-            Enregistrer
+          <Button variant="primary" onClick={handleAddVideoUrl}>
+            {editingVideoIndex !== null ? 'Modifier' : 'Ajouter'}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -240,6 +292,7 @@ const LessonCoursPage = () => {
 
 // Fonction utilitaire pour extraire l'ID d'une URL YouTube
 function extractYoutubeId(url) {
+  if (!url) return null;
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
   const match = url.match(regExp);
   return (match && match[2].length === 11) ? match[2] : null;
