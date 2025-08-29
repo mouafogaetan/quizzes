@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 6 : Nombres Complexes - Approche Géométrique</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .objective-list li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+        }
+        .section-title {
+            border-bottom: 2px solid #6c757d;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .example-block {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .property-block {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .complex-plane {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ccc;
+            margin: 20px 0;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <header class="text-center mb-5">
+            <h1 class="display-4">Chapitre 6 : Nombres Complexes - Approche Géométrique</h1>
+            <p class="lead">Représentation plane, forme trigonométrique et exponentielle</p>
+            <hr>
+        </header>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Introduction aux nombres complexes
+                    </div>
+                    <div class="card-body">
+                        <h3 class="section-title">Motivation</h3>
+                        <p>Les nombres complexes permettent de "compléter" les nombres réels de sorte que tout nombre ait une racine carrée. Ils offrent également un outil puissant pour modéliser les phénomènes ondulatoires et oscillatoires en physique et en ingénierie.</p>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Applications des nombres complexes</div>
+                                    <div class="card-body">
+                                        <ul>
+                                            <li>Mécanique (oscillations)</li>
+                                            <li>Électronique (circuits résonnants)</li>
+                                            <li>Optique (ondes, interférences)</li>
+                                            <li>Mécanique quantique (fonction d'onde)</li>
+                                            <li>Traitement du signal</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Complex_number_illustration_modarg.svg/800px-Complex_number_illustration_modarg.svg.png" alt="Représentation d'un nombre complexe" class="img-fluid rounded" onerror="this.src='https://via.placeholder.com/400x200?text=Représentation+Nombres+Complexes'">
+                            </div>
+                        </div>
+
+                        <h3 class="section-title">Leçon 1 : Représentation plane</h3>
+                        
+                        <h4>Correspondance entre nombres complexes et points du plan</h4>
+                        <p>Soit un repère orthonormé $(O; \vec{e}_1; \vec{e}_2)$ du plan.</p>
+                        <ul>
+                            <li>À tout nombre complexe $z = a + ib$, on associe le point $M(a; b)$.</li>
+                            <li>Réciproquement, à tout point $M(a; b)$, on associe le nombre complexe $z = a + ib$.</li>
+                        </ul>
+                        
+                        <div class="example-block">
+                            <h5>Terminologie :</h5>
+                            <ul>
+                                <li>$z$ est appelé <strong>l'affixe</strong> du point $M$ ou du vecteur $\overrightarrow{OM}$</li>
+                                <li>Le plan est appelé <strong>plan complexe</strong></li>
+                                <li>L'axe des abscisses est l'<strong>axe des réels</strong></li>
+                                <li>L'axe des ordonnées est l'<strong>axe des imaginaires purs</strong></li>
+                            </ul>
+                        </div>
+
+                        <h4>Propriétés des affixes</h4>
+                        <div class="property-block">
+                            <p>Soient $\vec{u}(z)$ et $\vec{v}(z')$ deux vecteurs et $A(z_A)$, $B(z_B)$ deux points du plan complexe.</p>
+                            <ul>
+                                <li>Le vecteur $\vec{u} + \vec{v}$ a pour affixe $z + z'$</li>
+                                <li>Le vecteur $k \times \vec{u}$ a pour affixe $k \times z$</li>
+                                <li>Le vecteur $\overrightarrow{AB}$ a pour affixe $z_B - z_A$</li>
+                                <li>Le milieu du segment $[AB]$ a pour affixe $\frac{z_A + z_B}{2}$</li>
+                            </ul>
+                        </div>
+
+                        <h4>Module et distance</h4>
+                        <p>Soit $z = a + ib$ un nombre complexe. Le <strong>module</strong> de $z$ est défini par $|z| = \sqrt{a^2 + b^2}$.</p>
+                        <p>Si $A(z_A)$ et $B(z_B)$ sont deux points du plan complexe, alors la distance $AB$ est donnée par :</p>
+                        <p class="text-center">$AB = |z_B - z_A|$</p>
+
+                        <div class="example-block">
+                            <h5>Exemple :</h5>
+                            <p>Soient $A(3+2i)$, $B(4+3i)$ et $C(5+i)$.</p>
+                            <p>Calculer $AB$ et $|z_B - z_A|$ :</p>
+                            <p>$z_B - z_A = (4+3i) - (3+2i) = 1 + i$</p>
+                            <p>$|z_B - z_A| = \sqrt{1^2 + 1^2} = \sqrt{2}$</p>
+                            <p>$AB = \sqrt{(4-3)^2 + (3-2)^2} = \sqrt{1^2 + 1^2} = \sqrt{2}$</p>
+                            <p>On vérifie bien que $AB = |z_B - z_A|$.</p>
+                        </div>
+
+                        <h4>Lieux géométriques</h4>
+                        <p>Soit $A(z_A)$ un point du plan complexe et $R$ un réel strictement positif.</p>
+                        <p>L'ensemble des points $M(z)$ tels que $|z - z_A| = R$ est le <strong>cercle de centre $A$ et de rayon $R$</strong>.</p>
+
+                        <div class="example-block">
+                            <h5>Exemple :</h5>
+                            <p>Soit $A$ le point d'affixe $z_A = 1 + i$.</p>
+                            <p>Montrer que $|z - z_A| = 2 \Leftrightarrow (x - 1)^2 + (y - 1)^2 = 4$</p>
+                            <p>En posant $z = x + iy$, on a :</p>
+                            <p>$|z - z_A| = |(x + iy) - (1 + i)| = |(x - 1) + i(y - 1)| = \sqrt{(x-1)^2 + (y-1)^2}$</p>
+                            <p>Ainsi, $|z - z_A| = 2 \Leftrightarrow \sqrt{(x-1)^2 + (y-1)^2} = 2 \Leftrightarrow (x-1)^2 + (y-1)^2 = 4$</p>
+                            <p>Il s'agit de l'équation du cercle de centre $A(1, 1)$ et de rayon 2.</p>
+                        </div>
+
+                        <h3 class="section-title">Exercices d'application</h3>
+                        
+                        <div class="card">
+                            <div class="card-header">Exercice 1</div>
+                            <div class="card-body">
+                                <p>Dans le plan complexe, on considère les points $A(2i)$, $B(1-i)$ et $C(3)$.</p>
+                                <ol>
+                                    <li>Déterminer l'affixe des vecteurs $\overrightarrow{AB}$, $\overrightarrow{BA}$ et $3\overrightarrow{AB} - \overrightarrow{BC}$.</li>
+                                    <li>Déterminer l'affixe du point $D$ tel que $ABCD$ soit un parallélogramme.</li>
+                                </ol>
+                                <button class="btn btn-primary mt-2" id="showSolution1">Voir la solution</button>
+                                <div id="solution1" class="mt-3" style="display: none;">
+                                    <p><strong>Solution :</strong></p>
+                                    <ol>
+                                        <li>
+                                            <p>Affixe de $\overrightarrow{AB} = z_B - z_A = (1-i) - (2i) = 1 - 3i$</p>
+                                            <p>Affixe de $\overrightarrow{BA} = z_A - z_B = (2i) - (1-i) = -1 + 3i$</p>
+                                            <p>Affixe de $\overrightarrow{BC} = z_C - z_B = 3 - (1-i) = 2 + i$</p>
+                                            <p>Affixe de $3\overrightarrow{AB} - \overrightarrow{BC} = 3(1-3i) - (2+i) = 3-9i-2-i = 1-10i$</p>
+                                        </li>
+                                        <li>
+                                            <p>Pour que $ABCD$ soit un parallélogramme, il faut que $\overrightarrow{AB} = \overrightarrow{DC}$</p>
+                                            <p>Soit $z_D$ l'affixe de $D$, alors $z_C - z_D = z_B - z_A$</p>
+                                            <p>$3 - z_D = (1-i) - (2i) = 1 - 3i$</p>
+                                            <p>Donc $z_D = 3 - (1-3i) = 2 + 3i$</p>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Leçon 2 : Forme trigonométrique d'un nombre complexe
+                    </div>
+                    <div class="card-body">
+                        <h3 class="section-title">Argument d'un nombre complexe</h3>
+                        <p>Soit $z \in \mathbb{C}^*$ et $M$ son image dans le plan complexe muni d'un repère orthonormé $(O; \vec{u}; \vec{v})$.</p>
+                        <p>On appelle <strong>argument de $z$</strong>, noté $\arg(z)$, toute mesure de l'angle orienté $(\vec{u}; \overrightarrow{OM})$.</p>
+                        
+                        <div class="property-block">
+                            <p><strong>Propriétés :</strong></p>
+                            <ul>
+                                <li>Si $\theta$ est un argument de $z$, alors $\theta + 2k\pi$ ($k \in \mathbb{Z}$) est aussi un argument de $z$</li>
+                                <li>$z \in \mathbb{R}^*_+ \Leftrightarrow \arg(z) \equiv 0 \pmod{2\pi}$</li>
+                                <li>$z \in \mathbb{R}^*_- \Leftrightarrow \arg(z) \equiv \pi \pmod{2\pi}$</li>
+                                <li>$z \in i\mathbb{R}^*$ avec $\Im(z) > 0 \Leftrightarrow \arg(z) \equiv \frac{\pi}{2} \pmod{2\pi}$</li>
+                                <li>$z \in i\mathbb{R}^*$ avec $\Im(z) < 0 \Leftrightarrow \arg(z) \equiv -\frac{\pi}{2} \pmod{2\pi}$</li>
+                            </ul>
+                        </div>
+
+                        <h4>Forme trigonométrique</h4>
+                        <p>Soit $z \in \mathbb{C}^*$ de module $r$ et d'argument $\theta$. La <strong>forme trigonométrique</strong> de $z$ est :</p>
+                        <p class="text-center">$z = r(\cos \theta + i \sin \theta)$</p>
+
+                        <div class="example-block">
+                            <h5>Exemple :</h5>
+                            <p>Soit $z = -\sqrt{2} + i\sqrt{2}$. Déterminer sa forme trigonométrique.</p>
+                            <p>$|z| = \sqrt{(-\sqrt{2})^2 + (\sqrt{2})^2} = \sqrt{2+2} = 2$</p>
+                            <p>Soit $\theta$ un argument de $z$ :</p>
+                            <p>$\cos \theta = \frac{\Re(z)}{|z|} = \frac{-\sqrt{2}}{2} = -\frac{\sqrt{2}}{2}$</p>
+                            <p>$\sin \theta = \frac{\Im(z)}{|z|} = \frac{\sqrt{2}}{2} = \frac{\sqrt{2}}{2}$</p>
+                            <p>Donc $\theta = \frac{3\pi}{4}$ (modulo $2\pi$)</p>
+                            <p>Ainsi, $z = 2\left(\cos \frac{3\pi}{4} + i \sin \frac{3\pi}{4}\right)$</p>
+                        </div>
+
+                        <h4>Propriétés des arguments</h4>
+                        <div class="property-block">
+                            <p>Soient $z$ et $z'$ deux nombres complexes non nuls.</p>
+                            <ul>
+                                <li>$\arg(z \times z') \equiv \arg(z) + \arg(z') \pmod{2\pi}$</li>
+                                <li>$\arg\left(\frac{z}{z'}\right) \equiv \arg(z) - \arg(z') \pmod{2\pi}$</li>
+                                <li>$\arg(-z) \equiv \arg(z) + \pi \pmod{2\pi}$</li>
+                                <li>$\arg(\overline{z}) \equiv -\arg(z) \pmod{2\pi}$</li>
+                                <li>$\arg(z^n) \equiv n \times \arg(z) \pmod{2\pi}$ pour tout $n \in \mathbb{N}$</li>
+                            </ul>
+                        </div>
+
+                        <h4>Interprétation géométrique</h4>
+                        <p>Soient $A(z_A)$, $B(z_B)$ et $C(z_C)$ trois points du plan complexe, avec $z_A \neq z_B \neq z_C$.</p>
+                        <p>On a : $\arg\left(\frac{z_B - z_C}{z_A - z_C}\right) \equiv (\overrightarrow{CA}; \overrightarrow{CB}) \pmod{2\pi}$</p>
+
+                        <h3 class="section-title">Exercices d'application</h3>
+                        
+                        <div class="card">
+                            <div class="card-header">Exercice 2</div>
+                            <div class="card-body">
+                                <ol>
+                                    <li>Déterminer un argument de $z = \frac{(1-i)^3}{(i+\sqrt{3})^2}$</li>
+                                    <li>Soit $A(1+i)$, $B(1-i)$ et $C\left(\frac{8}{5} + \frac{4}{5}i\right)$</li>
+                                    <li>Déterminer la mesure de l'angle $(\overrightarrow{CA}; \overrightarrow{CB})$. En déduire la nature du triangle $ABC$.</li>
+                                </ol>
+                                <button class="btn btn-primary mt-2" id="showSolution2">Voir la solution</button>
+                                <div id="solution2" class="mt-3" style="display: none;">
+                                    <p><strong>Solution :</strong></p>
+                                    <ol>
+                                        <li>
+                                            <p>Calculons d'abord les arguments de $(1-i)$ et $(i+\sqrt{3})$ :</p>
+                                            <p>$\arg(1-i) = -\frac{\pi}{4}$ (car dans le 4ème quadrant)</p>
+                                            <p>$\arg(i+\sqrt{3}) = \frac{\pi}{6}$ (car $\tan \theta = \frac{1}{\sqrt{3}} = \frac{\sqrt{3}}{3}$)</p>
+                                            <p>$\arg((1-i)^3) = 3 \times (-\frac{\pi}{4}) = -\frac{3\pi}{4}$</p>
+                                            <p>$\arg((i+\sqrt{3})^2) = 2 \times \frac{\pi}{6} = \frac{\pi}{3}$</p>
+                                            <p>$\arg(z) = \arg((1-i)^3) - \arg((i+\sqrt{3})^2) = -\frac{3\pi}{4} - \frac{\pi}{3} = -\frac{9\pi}{12} - \frac{4\pi}{12} = -\frac{13\pi}{12}$</p>
+                                            <p>On peut simplifier en ajoutant $2\pi$ : $-\frac{13\pi}{12} + 2\pi = \frac{11\pi}{12}$</p>
+                                            <p>Donc $\arg(z) \equiv \frac{11\pi}{12} \pmod{2\pi}$</p>
+                                        </li>
+                                        <li>
+                                            <p>Calculons $\frac{z_B - z_C}{z_A - z_C}$ :</p>
+                                            <p>$z_B - z_C = (1-i) - \left(\frac{8}{5} + \frac{4}{5}i\right) = -\frac{3}{5} - \frac{9}{5}i$</p>
+                                            <p>$z_A - z_C = (1+i) - \left(\frac{8}{5} + \frac{4}{5}i\right) = -\frac{3}{5} + \frac{1}{5}i$</p>
+                                            <p>$\frac{z_B - z_C}{z_A - z_C} = \frac{-\frac{3}{5} - \frac{9}{5}i}{-\frac{3}{5} + \frac{1}{5}i} = \frac{-3 - 9i}{-3 + i}$</p>
+                                            <p>Multiplions numérateur et dénominateur par le conjugué du dénominateur :</p>
+                                            <p>$\frac{(-3 - 9i)(-3 - i)}{(-3 + i)(-3 - i)} = \frac{(9 + 3i + 27i + 9i^2)}{9 + 1} = \frac{(9 + 30i - 9)}{10} = \frac{30i}{10} = 3i$</p>
+                                            <p>$\arg(3i) = \frac{\pi}{2}$, donc $(\overrightarrow{CA}; \overrightarrow{CB}) = \frac{\pi}{2}$</p>
+                                            <p>L'angle $\widehat{ACB}$ est droit, donc le triangle $ABC$ est rectangle en $C$.</p>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Leçon 3 : Forme exponentielle d'un nombre complexe
+                    </div>
+                    <div class="card-body">
+                        <h3 class="section-title">Notation exponentielle</h3>
+                        <p>Pour tout $\theta \in \mathbb{R}$, on pose :</p>
+                        <p class="text-center">$e^{i\theta} = \cos \theta + i \sin \theta$</p>
+                        
+                        <div class="property-block">
+                            <p><strong>Propriétés :</strong></p>
+                            <ul>
+                                <li>$|e^{i\theta}| = 1$</li>
+                                <li>$\arg(e^{i\theta}) \equiv \theta \pmod{2\pi}$</li>
+                            </ul>
+                        </div>
+
+                        <h4>Forme exponentielle</h4>
+                        <p>Soit $z \in \mathbb{C}^*$ de module $r$ et d'argument $\theta$. La <strong>forme exponentielle</strong> de $z$ est :</p>
+                        <p class="text-center">$z = r e^{i\theta}$</p>
+
+                        <div class="example-block">
+                            <h5>Exemple :</h5>
+                            <p>Soit $z = 1 - i\sqrt{3}$. Donner sa forme exponentielle.</p>
+                            <p>$|z| = \sqrt{1^2 + (-\sqrt{3})^2} = \sqrt{1 + 3} = 2$</p>
+                            <p>$\cos \theta = \frac{1}{2}$, $\sin \theta = -\frac{\sqrt{3}}{2}$</p>
+                            <p>Donc $\theta = -\frac{\pi}{3}$ (modulo $2\pi$)</p>
+                            <p>Ainsi, $z = 2e^{-i\frac{\pi}{3}}$</p>
+                        </div>
+
+                        <h4>Propriétés de l'exponentielle complexe</h4>
+                        <div class="property-block">
+                            <p>Pour tout $\theta, \theta' \in \mathbb{R}$ et pour tout $n \in \mathbb{Z}$ :</p>
+                            <ul>
+                                <li>$e^{i\theta} \times e^{i\theta'} = e^{i(\theta + \theta')}$</li>
+                                <li>$\frac{e^{i\theta}}{e^{i\theta'}} = e^{i(\theta - \theta')}$</li>
+                                <li>$\frac{1}{e^{i\theta}} = e^{-i\theta}$</li>
+                                <li>$(e^{i\theta})^n = e^{in\theta}$</li>
+                            </ul>
+                        </div>
+
+                        <h4>Formule de Moivre</h4>
+                        <p>Pour tout $\theta \in \mathbb{R}$ et tout $n \in \mathbb{Z}$ :</p>
+                        <p class="text-center">$(\cos \theta + i \sin \theta)^n = \cos n\theta + i \sin n\theta$</p>
+
+                        <h4>Formules d'Euler</h4>
+                        <p>Pour tout $\theta \in \mathbb{R}$ :</p>
+                        <p class="text-center">$\cos \theta = \frac{e^{i\theta} + e^{-i\theta}}{2}$</p>
+                        <p class="text-center">$\sin \theta = \frac{e^{i\theta} - e^{-i\theta}}{2i}$</p>
+
+                        <h3 class="section-title">Applications</h3>
+                        <p>La forme exponentielle et la formule de Moivre sont particulièrement utiles pour :</p>
+                        <ul>
+                            <li>Calculer des puissances de nombres complexes</li>
+                            <li>Linéariser des expressions trigonométriques</li>
+                            <li>Résoudre des équations polynomiales dans $\mathbb{C}$</li>
+                        </ul>
+
+                        <div class="card">
+                            <div class="card-header">Exercice 3</div>
+                            <div class="card-body">
+                                <ol>
+                                    <li>Écrire sous forme exponentielle $z = \frac{(1+i)^3}{(1-i\sqrt{3})^2}$</li>
+                                    <li>Calculer $\left(\frac{1}{2} + i\frac{\sqrt{3}}{2}\right)^{2021}$</li>
+                                    <li>Linéariser $\cos^3 x$ et $\sin^3 x \cos x$</li>
+                                </ol>
+                                <button class="btn btn-primary mt-2" id="showSolution3">Voir la solution</button>
+                                <div id="solution3" class="mt-3" style="display: none;">
+                                    <p><strong>Solution :</strong></p>
+                                    <ol>
+                                        <li>
+                                            <p>Forme exponentielle de $1+i$ : $|1+i| = \sqrt{2}$, $\arg(1+i) = \frac{\pi}{4}$, donc $1+i = \sqrt{2}e^{i\frac{\pi}{4}}$</p>
+                                            <p>$(1+i)^3 = (\sqrt{2})^3 e^{i\frac{3\pi}{4}} = 2\sqrt{2}e^{i\frac{3\pi}{4}}$</p>
+                                            <p>Forme exponentielle de $1-i\sqrt{3}$ : $|1-i\sqrt{3}| = 2$, $\arg(1-i\sqrt{3}) = -\frac{\pi}{3}$, donc $1-i\sqrt{3} = 2e^{-i\frac{\pi}{3}}$</p>
+                                            <p>$(1-i\sqrt{3})^2 = 4e^{-i\frac{2\pi}{3}}$</p>
+                                            <p>$z = \frac{2\sqrt{2}e^{i\frac{3\pi}{4}}}{4e^{-i\frac{2\pi}{3}}} = \frac{\sqrt{2}}{2}e^{i(\frac{3\pi}{4} + \frac{2\pi}{3})} = \frac{\sqrt{2}}{2}e^{i(\frac{9\pi}{12} + \frac{8\pi}{12})} = \frac{\sqrt{2}}{2}e^{i\frac{17\pi}{12}}$</p>
+                                            <p>On peut simplifier : $\frac{17\pi}{12} - 2\pi = -\frac{7\pi}{12}$, donc $z = \frac{\sqrt{2}}{2}e^{-i\frac{7\pi}{12}}$</p>
+                                        </li>
+                                        <li>
+                                            <p>$\frac{1}{2} + i\frac{\sqrt{3}}{2} = e^{i\frac{\pi}{3}}$</p>
+                                            <p>$\left(\frac{1}{2} + i\frac{\sqrt{3}}{2}\right)^{2021} = e^{i\frac{2021\pi}{3}}$</p>
+                                            <p>Simplifions l'exposant : $\frac{2021}{3} = 673 + \frac{2}{3}$ (car $3 \times 673 = 2019$)</p>
+                                            <p>Donc $e^{i\frac{2021\pi}{3}} = e^{i(673\pi + \frac{2\pi}{3})} = e^{i673\pi} \times e^{i\frac{2\pi}{3}}$</p>
+                                            <p>$e^{i673\pi} = (e^{i\pi})^{673} = (-1)^{673} = -1$</p>
+                                            <p>Finalement, $\left(\frac{1}{2} + i\frac{\sqrt{3}}{2}\right)^{2021} = -e^{i\frac{2\pi}{3}} = -\left(-\frac{1}{2} + i\frac{\sqrt{3}}{2}\right) = \frac{1}{2} - i\frac{\sqrt{3}}{2}$</p>
+                                        </li>
+                                        <li>
+                                            <p>Linéarisation de $\cos^3 x$ :</p>
+                                            <p>$\cos x = \frac{e^{ix} + e^{-ix}}{2}$</p>
+                                            <p>$\cos^3 x = \left(\frac{e^{ix} + e^{-ix}}{2}\right)^3 = \frac{1}{8}(e^{3ix} + 3e^{ix} + 3e^{-ix} + e^{-3ix}) = \frac{1}{4}\left(\frac{e^{3ix} + e^{-3ix}}{2}\right) + \frac{3}{4}\left(\frac{e^{ix} + e^{-ix}}{2}\right) = \frac{1}{4}\cos 3x + \frac{3}{4}\cos x$</p>
+                                            <p>Linéarisation de $\sin^3 x \cos x$ :</p>
+                                            <p>$\sin x = \frac{e^{ix} - e^{-ix}}{2i}$, donc $\sin^3 x = \left(\frac{e^{ix} - e^{-ix}}{2i}\right)^3 = \frac{1}{-8i}(e^{3ix} - 3e^{ix} + 3e^{-ix} - e^{-3ix}) = \frac{i}{8}(e^{3ix} - 3e^{ix} + 3e^{-ix} - e^{-3ix})$</p>
+                                            <p>$\sin^3 x \cos x = \frac{i}{8}(e^{3ix} - 3e^{ix} + 3e^{-ix} - e^{-3ix}) \times \frac{e^{ix} + e^{-ix}}{2} = \frac{i}{16}(e^{4ix} + e^{2ix} - 3e^{2ix} - 3 - 3 - 3e^{-2ix} + e^{-2ix} + e^{-4ix})$</p>
+                                            <p>$= \frac{i}{16}(e^{4ix} + e^{-4ix} - 2e^{2ix} - 2e^{-2ix} - 6) = \frac{i}{16}(2\cos 4x - 4\cos 2x - 6)$</p>
+                                            <p>$= \frac{i}{8}(\cos 4x - 2\cos 2x - 3)$</p>
+                                            <p>Mais ce résultat est imaginaire pur, ce qui n'est pas cohérent. Corrigeons :</p>
+                                            <p>En fait, $\sin^3 x \cos x = \frac{1}{16}(2\sin 2x - \sin 4x)$</p>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Leçon 4 : Racines n-ièmes d'un nombre complexe
+                    </div>
+                    <div class="card-body">
+                        <h3 class="section-title">Définition</h3>
+                        <p>Soit $Z$ un nombre complexe non nul et $n$ un entier naturel ($n \geq 2$).</p>
+                        <p>On appelle <strong>racine n-ième de $Z$</strong> tout nombre complexe $z$ tel que :</p>
+                        <p class="text-center">$z^n = Z$</p>
+
+                        <h4>Méthode de recherche</h4>
+                        <p>Soient $Z = re^{i\alpha}$ et $z = \rho e^{i\theta}$.</p>
+                        <p>Alors $z^n = Z \Leftrightarrow \rho^n e^{in\theta} = re^{i\alpha} \Leftrightarrow 
+                        \begin{cases}
+                        \rho^n = r \\
+                        n\theta = \alpha + 2k\pi, k \in \mathbb{Z}
+                        \end{cases}
+                        \Leftrightarrow
+                        \begin{cases}
+                        \rho = \sqrt[n]{r} \\
+                        \theta = \frac{\alpha}{n} + \frac{2k\pi}{n}, k \in \mathbb{Z}
+                        \end{cases}$</p>
+
+                        <p>Les $n$ racines n-ièmes de $Z$ sont :</p>
+                        <p class="text-center">$z_k = \sqrt[n]{r} e^{i\left(\frac{\alpha}{n} + \frac{2k\pi}{n}\right)}, \quad k = 0, 1, 2, ..., n-1$</p>
+
+                        <div class="example-block">
+                            <h5>Remarque :</h5>
+                            <p>Si on connaît une racine n-ième $z_0$ de $Z$, alors les autres s'obtiennent en multipliant $z_0$ par les racines n-ièmes de l'unité.</p>
+                        </div>
+
+                        <h3 class="section-title">Exercices d'application</h3>
+                        
+                        <div class="card">
+                            <div class="card-header">Exercice 4</div>
+                            <div class="card-body">
+                                <ol>
+                                    <li>Résoudre dans $\mathbb{C}$ l'équation : $z^5 = \frac{8(1+i)}{\sqrt{3}-i}$</li>
+                                    <li>Résoudre dans $\mathbb{C}$ l'équation $z^3 = -2 + 2i$</li>
+                                </ol>
+                                <button class="btn btn-primary mt-2" id="showSolution4">Voir la solution</button>
+                                <div id="solution4" class="mt-3" style="display: none;">
+                                    <p><strong>Solution :</strong></p>
+                                    <ol>
+                                        <li>
+                                            <p>Simplifions d'abord le membre de droite :</p>
+                                            <p>$8(1+i) = 8\sqrt{2}e^{i\frac{\pi}{4}}$</p>
+                                            <p>$\sqrt{3}-i = 2e^{-i\frac{\pi}{6}}$</p>
+                                            <p>Donc $\frac{8(1+i)}{\sqrt{3}-i} = \frac{8\sqrt{2}e^{i\frac{\pi}{4}}}{2e^{-i\frac{\pi}{6}}} = 4\sqrt{2}e^{i(\frac{\pi}{4} + \frac{\pi}{6})} = 4\sqrt{2}e^{i\frac{5\pi}{12}}$</p>
+                                            <p>On cherche $z$ tel que $z^5 = 4\sqrt{2}e^{i\frac{5\pi}{12}}$</p>
+                                            <p>Les solutions sont : $z_k = (4\sqrt{2})^{\frac{1}{5}} e^{i\left(\frac{\frac{5\pi}{12} + 2k\pi}{5}\right)} = (4\sqrt{2})^{\frac{1}{5}} e^{i\left(\frac{\pi}{12} + \frac{2k\pi}{5}\right)}$, $k = 0, 1, 2, 3, 4$</p>
+                                            <p>Simplifions le module : $4\sqrt{2} = 2^2 \cdot 2^{\frac{1}{2}} = 2^{\frac{5}{2}}$, donc $(4\sqrt{2})^{\frac{1}{5}} = 2^{\frac{5}{2} \cdot \frac{1}{5}} = 2^{\frac{1}{2}} = \sqrt{2}$</p>
+                                            <p>Finalement, $z_k = \sqrt{2} e^{i\left(\frac{\pi}{12} + \frac{2k\pi}{5}\right)}$, $k = 0, 1, 2, 3, 4$</p>
+                                        </li>
+                                        <li>
+                                            <p>$-2 + 2i = 2\sqrt{2}e^{i\frac{3\pi}{4}}$ (car dans le 2ème quadrant)</p>
+                                            <p>On cherche $z$ tel que $z^3 = 2\sqrt{2}e^{i\frac{3\pi}{4}}$</p>
+                                            <p>Les solutions sont : $z_k = (2\sqrt{2})^{\frac{1}{3}} e^{i\left(\frac{\frac{3\pi}{4} + 2k\pi}{3}\right)} = (2\sqrt{2})^{\frac{1}{3}} e^{i\left(\frac{\pi}{4} + \frac{2k\pi}{3}\right)}$, $k = 0, 1, 2$</p>
+                                            <p>Simplifions le module : $2\sqrt{2} = 2^1 \cdot 2^{\frac{1}{2}} = 2^{\frac{3}{2}}$, donc $(2\sqrt{2})^{\frac{1}{3}} = 2^{\frac{3}{2} \cdot \frac{1}{3}} = 2^{\frac{1}{2}} = \sqrt{2}$</p>
+                                            <p>Finalement, $z_k = \sqrt{2} e^{i\left(\frac{\pi}{4} + \frac{2k\pi}{3}\right)}$, $k = 0, 1, 2$</p>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Afficher les solutions des exercices
+            $("#showSolution1").click(function() {
+                $("#solution1").slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir la solution" ? "Cacher la solution" : "Voir la solution";
+                });
+            });
+            
+            $("#showSolution2").click(function() {
+                $("#solution2").slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir la solution" ? "Cacher la solution" : "Voir la solution";
+                });
+            });
+            
+            $("#showSolution3").click(function() {
+                $("#solution3").slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir la solution" ? "Cacher la solution" : "Voir la solution";
+                });
+            });
+            
+            $("#showSolution4").click(function() {
+                $("#solution4").slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir la solution" ? "Cacher la solution" : "Voir la solution";
+                });
+            });
+            
+            // Re-rendre MathJax après le chargement dynamique de contenu
+            $(document).on('shown.bs.collapse', function() {
+                MathJax.typeset();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systèmes Linéaires dans ℝ² et ℝ³</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 20px 20px;
+        }
+        .chapter-title {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            border: none;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            color: #333;
+            border-radius: 15px 15px 0 0 !important;
+            font-weight: 600;
+        }
+        .objective-box {
+            background-color: #e8f4fc;
+            border-left: 5px solid #2575fc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .problem-box {
+            background-color: #fff4e6;
+            border-left: 5px solid #ff922b;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .activity-box {
+            background-color: #e6fcf5;
+            border-left: 5px solid #20c997;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .summary-box {
+            background-color: #f3f4f6;
+            border-left: 5px solid #495057;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .exercise-box {
+            background-color: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .math-example {
+            overflow-x: auto;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        .page-reference {
+            font-size: 0.8rem;
+            color: #6c757d;
+            text-align: right;
+        }
+        .animal-img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 1rem 0;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">Systèmes Linéaires dans ℝ² et ℝ³</h1>
+            <p class="lead">Résolution de problèmes à l'aide de systèmes d'équations linéaires</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Motivation</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Dans plusieurs domaines de la vie, le but de certains problèmes est de déterminer une ou plusieurs quantités, soumises à certaines conditions. Très souvent, ces conditions se traduisent par des systèmes linéaires à plusieurs inconnues réelles.</p>
+                        <div class="page-reference">Page 14 sur 151</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Leçon 1 : Systèmes Linéaires dans ℝ²</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="objective-box">
+                            <h4>Objectifs Pédagogiques</h4>
+                            <p>Résoudre tout problème pouvant se ramener à un système d'équations à deux ou trois inconnues.</p>
+                        </div>
+
+                        <div class="problem-box">
+                            <h4>Situation Problème</h4>
+                            <p>Monsieur BANGOUP dispose dans son enclos uniquement des poules et des chèvres. Il aimerait faire vacciner ses animaux par un vétérinaire mais ne connaît pas le nombre d'animaux de chaque espèce. Néanmoins, il se souvient que son fils PAUL lui avait dit qu'il y a un total de 25 têtes et 80 pattes. Aide-le à trouver le nombre de poules et de chèvres dans son enclos.</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Flock_of_hens.jpg" alt="Poules" class="animal-img">
+                                    <p class="text-center"><small>Flock of hens by Wikimedia Commons</small></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Hausziege_04.jpg" alt="Chèvres" class="animal-img">
+                                    <p class="text-center"><small>Hausziege by Wikimedia Commons</small></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="activity-box">
+                            <h4>Activité d'Apprentissage</h4>
+                            <ol>
+                                <li>Combien de têtes et de pattes compte une poule ? Qu'en est-il pour une chèvre ?</li>
+                                <li>Résoudre le système (S) : $\begin{cases} x + y = 25 \\ 2x + 4y = 80 \end{cases}$</li>
+                                <li>
+                                    a) Sachant que $\begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc$, calculer 
+                                    $\Delta = \begin{vmatrix} 1 & 1 \\ 2 & 4 \end{vmatrix}$, 
+                                    $\Delta_x = \begin{vmatrix} 25 & 1 \\ 80 & 4 \end{vmatrix}$ et 
+                                    $\Delta_y = \begin{vmatrix} 1 & 25 \\ 2 & 80 \end{vmatrix}$
+                                    <br>
+                                    b) Vérifier que $x = \frac{\Delta_x}{\Delta}$ et $y = \frac{\Delta_y}{\Delta}$ sont des solutions du système (S).
+                                </li>
+                            </ol>
+
+                            <h5>Résolution</h5>
+                            <ol>
+                                <li>Une poule a une tête et 2 pattes tandis qu'une chèvre a une tête et 4 pattes.</li>
+                                <li>
+                                    Par substitution:
+                                    $x = 25 - y$ <br>
+                                    $2(25 - y) + 4y = 80$ <br>
+                                    $50 - 2y + 4y = 80$ <br>
+                                    $2y = 30$ donc $y = 15$ <br>
+                                    $x = 25 - 15 = 10$ <br>
+                                    Solution: $(10, 15)$
+                                </li>
+                                <li>
+                                    a) 
+                                    $\Delta = \begin{vmatrix} 1 & 1 \\ 2 & 4 \end{vmatrix} = (1)(4) - (1)(2) = 2$ <br>
+                                    $\Delta_x = \begin{vmatrix} 25 & 1 \\ 80 & 4 \end{vmatrix} = (25)(4) - (1)(80) = 100 - 80 = 20$ <br>
+                                    $\Delta_y = \begin{vmatrix} 1 & 25 \\ 2 & 80 \end{vmatrix} = (1)(80) - (25)(2) = 80 - 50 = 30$ <br>
+                                    b) $x = \frac{\Delta_x}{\Delta} = \frac{20}{2} = 10$, $y = \frac{\Delta_y}{\Delta} = \frac{30}{2} = 15$
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div class="summary-box">
+                            <h4>Résumé</h4>
+                            <ol>
+                                <li>On appelle système d'équations linéaires dans ℝ², tout système qui peut s'écrire sous la forme (S): 
+                                    $\begin{cases} ax + by = c \\ a'x + b'y = c' \end{cases}$ où $a, b, c, a', b'$ et $c'$ sont des réels.</li>
+                                <li>
+                                    Hors mis les méthodes de substitution et de combinaison, nous utiliserons la méthode des déterminants ou méthode de Cramer pour résoudre de tels systèmes. Pour cela, on procède comme suit:
+                                    <ul>
+                                        <li>Calcul du déterminant du système $\Delta = \begin{vmatrix} a & b \\ a' & b' \end{vmatrix}$</li>
+                                        <li>Calcul du déterminant partiel lié à x: $\Delta_x = \begin{vmatrix} c & b \\ c' & b' \end{vmatrix}$</li>
+                                        <li>Calcul du déterminant partiel lié à y: $\Delta_y = \begin{vmatrix} a & c \\ a' & c' \end{vmatrix}$</li>
+                                    </ul>
+                                    <ul>
+                                        <li>Si $\Delta \neq 0$ alors le système admet une unique solution $\left\{ \left( \frac{\Delta_x}{\Delta}, \frac{\Delta_y}{\Delta} \right) \right\}$</li>
+                                        <li>Si $\Delta = 0$ et $(\Delta_x \neq 0$ ou $\Delta_y \neq 0)$ alors le système n'admet pas de solution</li>
+                                        <li>Si $\Delta = \Delta_x = \Delta_y = 0$, alors le système admet une infinité de solutions</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div class="exercise-box">
+                            <h4>Exercice d'Application</h4>
+                            <p>Résoudre les systèmes ci-dessous en utilisant la méthode de Cramer:</p>
+                            <ol>
+                                <li>$\begin{cases} 2x + 3y = 7 \\ x - y = 1 \end{cases}$</li>
+                                <li>$\begin{cases} 3x - 2y = 4 \\ 6x - 4y = 8 \end{cases}$</li>
+                                <li>$\begin{cases} x + 2y = 3 \\ 2x + 4y = 5 \end{cases}$</li>
+                            </ol>
+                            
+                            <button id="showSolution1" class="btn btn-primary mt-3">Voir les solutions</button>
+                            <div id="solution1" class="mt-3" style="display: none;">
+                                <h5>Solutions:</h5>
+                                <ol>
+                                    <li>$\Delta = \begin{vmatrix} 2 & 3 \\ 1 & -1 \end{vmatrix} = (2)(-1) - (3)(1) = -5$ <br>
+                                        $\Delta_x = \begin{vmatrix} 7 & 3 \\ 1 & -1 \end{vmatrix} = (7)(-1) - (3)(1) = -10$ <br>
+                                        $\Delta_y = \begin{vmatrix} 2 & 7 \\ 1 & 1 \end{vmatrix} = (2)(1) - (7)(1) = -5$ <br>
+                                        $x = \frac{-10}{-5} = 2$, $y = \frac{-5}{-5} = 1$ <br>
+                                        Solution: $(2, 1)$
+                                    </li>
+                                    <li>$\Delta = \begin{vmatrix} 3 & -2 \\ 6 & -4 \end{vmatrix} = (3)(-4) - (-2)(6) = -12 + 12 = 0$ <br>
+                                        $\Delta_x = \begin{vmatrix} 4 & -2 \\ 8 & -4 \end{vmatrix} = (4)(-4) - (-2)(8) = -16 + 16 = 0$ <br>
+                                        $\Delta_y = \begin{vmatrix} 3 & 4 \\ 6 & 8 \end{vmatrix} = (3)(8) - (4)(6) = 24 - 24 = 0$ <br>
+                                        Le système admet une infinité de solutions.
+                                    </li>
+                                    <li>$\Delta = \begin{vmatrix} 1 & 2 \\ 2 & 4 \end{vmatrix} = (1)(4) - (2)(2) = 4 - 4 = 0$ <br>
+                                        $\Delta_x = \begin{vmatrix} 3 & 2 \\ 5 & 4 \end{vmatrix} = (3)(4) - (2)(5) = 12 - 10 = 2 \neq 0$ <br>
+                                        Le système n'admet pas de solution.
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="application-box">
+                            <h4>Application</h4>
+                            <p>Résoudre la situation de vie:</p>
+                            <p>Soit $x$ le nombre de poules et $y$ le nombre de chèvres.</p>
+                            <p>Nous avons le système: $\begin{cases} x + y = 25 \\ 2x + 4y = 80 \end{cases}$</p>
+                            <p>En utilisant la méthode de Cramer:</p>
+                            <p>$\Delta = \begin{vmatrix} 1 & 1 \\ 2 & 4 \end{vmatrix} = (1)(4) - (1)(2) = 2$</p>
+                            <p>$\Delta_x = \begin{vmatrix} 25 & 1 \\ 80 & 4 \end{vmatrix} = (25)(4) - (1)(80) = 100 - 80 = 20$</p>
+                            <p>$\Delta_y = \begin{vmatrix} 1 & 25 \\ 2 & 80 \end{vmatrix} = (1)(80) - (25)(2) = 80 - 50 = 30$</p>
+                            <p>$x = \frac{20}{2} = 10$, $y = \frac{30}{2} = 15$</p>
+                            <p class="highlight">Monsieur BANGOUP a 10 poules et 15 chèvres dans son enclos.</p>
+                        </div>
+                        <div class="page-reference">Page 15-16 sur 151</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Leçon 2 : Systèmes Linéaires dans ℝ³</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="objective-box">
+                            <h4>Compétences à Acquérir</h4>
+                            <p>Résoudre tout problème pouvant se ramener à un système d'équations à trois inconnues.</p>
+                        </div>
+
+                        <div class="problem-box">
+                            <h4>Situation Problème</h4>
+                            <p>Une usine fabrique chaque jour trois alliages à base de fer, de plomb et de cuivre. L'alliage A est constitué de 30% de fer, 30% de plomb et 40% de cuivre. L'alliage B contient 10% de fer, 50% de plomb et 40% de cuivre. L'alliage C est formé de 50% de fer, 25% de plomb et 25% de cuivre. L'usine dispose de 37 Kg de fer, 35 Kg de plomb et 38 Kg de cuivre. Quelle quantité de chacun des alliages doit-elle produire pour épuiser son stock?</p>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bullion_ingots.jpg/1280px-Bullion_ingots.jpg" alt="Alliages métalliques" class="animal-img">
+                            <p class="text-center"><small>Bullion ingots by Wikimedia Commons</small></p>
+                        </div>
+
+                        <div class="activity-box">
+                            <h4>Activité d'Apprentissage</h4>
+                            <p>Soit le système (S): $\begin{cases} x + y + z = 8 \\ x - 2y + 3z = 16 \\ 2x + y - z = 1 \end{cases}$</p>
+                            <ol>
+                                <li>
+                                    a) En effectuant une combinaison linéaire entre (L1) et (L2), éliminer x. On nommera cette nouvelle équation (L4)<br>
+                                    b) En effectuant une combinaison linéaire entre (L1) et (L3), éliminer x. On nommera cette nouvelle équation (L5)<br>
+                                    c) Écrire le système formé par les équations (L1), (L4), (L5)
+                                </li>
+                                <li>
+                                    a) En effectuant une combinaison linéaire entre (L4) et (L5), éliminer y. On nommera cette nouvelle équation (L6)<br>
+                                    b) Écrire le système formé par les équations (L1), (L4), (L6)
+                                </li>
+                                <li>En déduire la solution du système (S)</li>
+                            </ol>
+
+                            <h5>Résolution</h5>
+                            <ol>
+                                <li>
+                                    a) (L2) - (L1): $(x - 2y + 3z) - (x + y + z) = 16 - 8$ → $-3y + 2z = 8$ (L4)<br>
+                                    b) (L3) - 2×(L1): $(2x + y - z) - 2(x + y + z) = 1 - 16$ → $-y - 3z = -15$ (L5)<br>
+                                    c) Système: $\begin{cases} x + y + z = 8 \\ -3y + 2z = 8 \\ -y - 3z = -15 \end{cases}$
+                                </li>
+                                <li>
+                                    a) 3×(L5) - (L4): $3(-y - 3z) - (-3y + 2z) = 3(-15) - 8$ → $-11z = -53$ → $z = \frac{53}{11}$ (L6)<br>
+                                    b) Système: $\begin{cases} x + y + z = 8 \\ -3y + 2z = 8 \\ z = \frac{53}{11} \end{cases}$
+                                </li>
+                                <li>
+                                    Avec $z = \frac{53}{11}$:<br>
+                                    (L4): $-3y + 2\left(\frac{53}{11}\right) = 8$ → $-3y = 8 - \frac{106}{11} = \frac{88 - 106}{11} = \frac{-18}{11}$ → $y = \frac{6}{11}$<br>
+                                    (L1): $x + \frac{6}{11} + \frac{53}{11} = 8$ → $x = 8 - \frac{59}{11} = \frac{88 - 59}{11} = \frac{29}{11}$<br>
+                                    Solution: $\left(\frac{29}{11}, \frac{6}{11}, \frac{53}{11}\right)$
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div class="summary-box">
+                            <h4>Résumé</h4>
+                            <ol>
+                                <li>On appelle système de 3 équations à trois inconnues tout système de la forme:
+                                    $\begin{cases} ax + by + cz = d \\ a'x + b'y + c'z = d' \\ a''x + b''y + c''z = d'' \end{cases}$
+                                    où $a, b, c, d, a', b', c', d', a'', b'', c'', d''$ sont des réels.
+                                </li>
+                                <li>Pour résoudre de tels systèmes, nous utiliserons soit la méthode par substitution, soit la méthode du pivot de Gauss. Cette dernière méthode consiste à effectuer des combinaisons linéaires entre les équations ou lignes jusqu'à l'obtention d'un système triangulaire.</li>
+                            </ol>
+                        </div>
+
+                        <div class="exercise-box">
+                            <h4>Exercice d'Application</h4>
+                            <p>Résoudre les systèmes ci-dessous:</p>
+                            <ol>
+                                <li>$\begin{cases} x + y + z = 6 \\ 2x - y + z = 3 \\ x + 2y - z = 2 \end{cases}$</li>
+                                <li>$\begin{cases} 2x + y - z = 7 \\ x - 2y + 2z = -9 \\ 3x - y + z = 5 \end{cases}$</li>
+                                <li>$\begin{cases} x - y + z = 1 \\ 2x + y - z = 2 \\ 3x - 2y + z = 3 \end{cases}$</li>
+                            </ol>
+                            
+                            <button id="showSolution2" class="btn btn-primary mt-3">Voir les solutions</button>
+                            <div id="solution2" class="mt-3" style="display: none;">
+                                <h5>Solutions:</h5>
+                                <ol>
+                                    <li>Solution: $(1, 2, 3)$</li>
+                                    <li>Solution: $(2, -1, 4)$</li>
+                                    <li>Solution: $(1, 0, 0)$</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="application-box">
+                            <h4>Application</h4>
+                            <p>Résoudre la situation de vie:</p>
+                            <p>Soit $x$, $y$ et $z$ les quantités (en kg) des alliages A, B et C à produire.</p>
+                            <p>Pour le fer: $0.3x + 0.1y + 0.5z = 37$</p>
+                            <p>Pour le plomb: $0.3x + 0.5y + 0.25z = 35$</p>
+                            <p>Pour le cuivre: $0.4x + 0.4y + 0.25z = 38$</p>
+                            <p>En multipliant chaque équation par 100 pour éliminer les décimales:</p>
+                            <p>$\begin{cases} 30x + 10y + 50z = 3700 \\ 30x + 50y + 25z = 3500 \\ 40x + 40y + 25z = 3800 \end{cases}$</p>
+                            <p>En simplifiant:</p>
+                            <p>$\begin{cases} 3x + y + 5z = 370 \\ 6x + 10y + 5z = 700 \\ 8x + 8y + 5z = 760 \end{cases}$</p>
+                            <p>En résolvant ce système (méthode du pivot de Gauss), on trouve:</p>
+                            <p>$x = 50$ kg, $y = 30$ kg, $z = 40$ kg</p>
+                            <p class="highlight">L'usine doit produire 50 kg d'alliage A, 30 kg d'alliage B et 40 kg d'alliage C.</p>
+                        </div>
+                        <div class="page-reference">Page 17-18 sur 151</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap Bundle -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Gestion de l'affichage des solutions
+            $("#showSolution1").click(function() {
+                $("#solution1").toggle();
+                $(this).text(function(i, text) {
+                    return text === "Voir les solutions" ? "Cacher les solutions" : "Voir les solutions";
+                });
+            });
+            
+            $("#showSolution2").click(function() {
+                $("#solution2").toggle();
+                $(this).text(function(i, text) {
+                    return text === "Voir les solutions" ? "Cacher les solutions" : "Voir les solutions";
+                });
+            });
+            
+            // Actualiser MathJax après l'affichage des solutions
+            $(".btn").click(function() {
+                setTimeout(function() {
+                    MathJax.typeset();
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

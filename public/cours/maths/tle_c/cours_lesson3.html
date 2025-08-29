@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 3 : Divisibilité dans ℤ</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .objective-list li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+        }
+        .section-title {
+            border-bottom: 2px solid #6c757d;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .example-block {
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .property-block {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <header class="text-center mb-5">
+            <h1 class="display-4">Chapitre 3 : Divisibilité dans ℤ</h1>
+            <p class="lead">Division euclidienne, systèmes de numération et congruence modulo n</p>
+            <hr>
+        </header>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Leçon 1 : Division euclidienne dans ℤ et systèmes de numération
+                    </div>
+                    <div class="card-body">
+                        <h3 class="section-title">Introduction</h3>
+                        <p>Dans la vie quotidienne, nous sommes souvent confrontés à des problèmes de partage, de distribution ou de calcul de dates. Ces situations nécessitent une compréhension des concepts mathématiques liés à la divisibilité et aux systèmes de numération.</p>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Objectifs d'apprentissage</div>
+                                    <div class="card-body">
+                                        <ul class="objective-list">
+                                            <li>Convertir un entier d'une base à une autre</li>
+                                            <li>Déterminer le reste dans une division euclidienne</li>
+                                            <li>Exprimer un entier naturel en système binaire et décimal</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <img src="https://commons.wikimedia.org/wiki/File:Euclid%27s_algorithm_book_VII_proposition_2_3.jpg" alt="Illustration de la division euclidienne" class="img-fluid rounded" onerror="this.src='https://via.placeholder.com/400x200?text=Illustration+Division+Euclidienne'">
+                            </div>
+                        </div>
+
+                        <h3 class="section-title">Concepts fondamentaux</h3>
+                        
+                        <h4>Multiples et diviseurs d'un entier relatif</h4>
+                        <p>Soient $a$ et $b$ deux entiers tels que $b$ soit non nul. On dit que $b$ <strong>divise</strong> $a$ ou que $a$ est <strong>divisible par</strong> $b$ ou encore que $a$ est un <strong>multiple de</strong> $b$ s'il existe un entier $k$ tel que : $a = b \times k$.</p>
+                        
+                        <div class="example-block">
+                            <h5>Exemples :</h5>
+                            <ul>
+                                <li>11 divise 0 car $0 = 11 \times 0$</li>
+                                <li>-18 est un multiple de 9 car $-18 = 9 \times (-2)$</li>
+                            </ul>
+                        </div>
+
+                        <h4>Notation</h4>
+                        <ul>
+                            <li>L'ensemble des multiples de l'entier $a$ est noté $a\mathbb{Z}$.</li>
+                            <li>L'ensemble des diviseurs de l'entier $b$ est noté $D(b)$.</li>
+                        </ul>
+
+                        <div class="example-block">
+                            <h5>Exemples :</h5>
+                            <ul>
+                                <li>$3\mathbb{Z} = \{..., -6, -3, 0, 3, 6, ...\}$</li>
+                                <li>$D(12) = \{-12, -6, -4, -3, -2, -1, 1, 2, 3, 4, 6, 12\}$</li>
+                                <li>$D(1) = \{-1, 1\}$</li>
+                                <li>$D(0) = \mathbb{Z}^*$ (tous les entiers non nuls)</li>
+                            </ul>
+                        </div>
+
+                        <h4>Propriétés importantes</h4>
+                        <div class="property-block">
+                            <p><strong>P₁</strong> : Tout entier $a$ non nul divise $a$ lui-même (réflexivité).</p>
+                            <p><strong>P₂</strong> : Si $a$ divise $b$ et $b$ divise $c$, alors $a$ divise $c$ (transitivité).</p>
+                            <p><strong>P₃</strong> : Si $b$ divise $a$ et $a \neq 0$, alors $|b| \leq |a|$.</p>
+                            <p><strong>P₄</strong> : Si $b$ divise $a$ et $a$ divise $b$, alors $|a| = |b|$.</p>
+                            <p><strong>P₅</strong> : Si $a$ divise $b$ et $c$, alors pour tous entiers relatifs $p$ et $q$, $a$ divise $pb + qc$.</p>
+                        </div>
+
+                        <h3 class="section-title">Division euclidienne</h3>
+                        <p>Soient $a$ et $b$ deux entiers relatifs tels que $b$ soit non nul. Il existe un unique couple $(q; r) \in \mathbb{Z} \times \mathbb{N}$ tel que :</p>
+                        <p class="text-center">$a = b \times q + r$ avec $0 \leq r < |b|$</p>
+                        <p>Les entiers $q$ et $r$ sont appelés respectivement <strong>quotient</strong> et <strong>reste</strong> de la division euclidienne de $a$ par $b$.</p>
+
+                        <div class="example-block">
+                            <h5>Exemple : Division de -17 par 3</h5>
+                            <p>On cherche $q$ et $r$ tels que $-17 = 3 \times q + r$ avec $0 \leq r < 3$.</p>
+                            <p>Solution : $-17 = 3 \times (-6) + 1$, donc $q = -6$ et $r = 1$.</p>
+                        </div>
+
+                        <h3 class="section-title">Systèmes de numération</h3>
+                        <p>Soient $a$ et $b$ deux entiers naturels tel que $b > 1$. L'écriture de $a$ dans la base $b$ est :</p>
+                        <p class="text-center">$a = \sum_{i=0}^{p} a_i b^i$ avec $0 \leq a_i < b$ et $a_p \neq 0$</p>
+                        <p>Cette écriture se note $\overline{a_p a_{p-1} \ldots a_1 a_0}^b$.</p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Système décimal (base 10)</div>
+                                    <div class="card-body">
+                                        <p>Le système usuel utilise les chiffres de 0 à 9.</p>
+                                        <p>Exemple : $129 = 1 \times 10^2 + 2 \times 10^1 + 9 \times 10^0$</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Système binaire (base 2)</div>
+                                    <div class="card-body">
+                                        <p>Utilisé en informatique, avec seulement 0 et 1.</p>
+                                        <p>Exemple : $13 = 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0$</p>
+                                        <p>Soit $1101^2$ en notation binaire.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="section-title mt-4">Applications et exercices</h3>
+                        
+                        <div class="card">
+                            <div class="card-header">Problème pratique</div>
+                            <div class="card-body">
+                                <p>Lors d'une distribution de convocations, le surveillant général donne 50 convocations à chaque chef de classe. Il lui reste un certain nombre de convocations (inférieur au nombre de chefs de classe).</p>
+                                <p>La somme des convocations initiales, du nombre de chefs de classe et du reste de convocations est égale à 3025.</p>
+                                <p><strong>Question</strong> : Trouver le nombre initial de convocations, le nombre d'élèves ayant reçu des convocations et le nombre de chefs de classe.</p>
+                                <button class="btn btn-primary mt-2" id="showSolution">Voir la solution</button>
+                                <div id="solution" class="mt-3" style="display: none;">
+                                    <p>En notant $a$ le nombre initial de convocations, $b$ le nombre de chefs de classe, et $r$ le reste de convocations, on a :</p>
+                                    <ul>
+                                        <li>$a = 50b + r$ (division euclidienne)</li>
+                                        <li>$a + b + r = 3025$</li>
+                                        <li>$0 \leq r < b$</li>
+                                    </ul>
+                                    <p>En substituant, on obtient $51b + 2r = 3025$.</p>
+                                    <p>Par encadrement, on trouve $b = 59$ et $r = 8$, d'où $a = 50 \times 59 + 8 = 2958$.</p>
+                                    <p>Le nombre d'élèves ayant reçu des convocations est $50 \times 59 = 2950$.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-4">
+                            <div class="card-header">Exercices supplémentaires</div>
+                            <div class="card-body">
+                                <ol>
+                                    <li>Déterminer le quotient et le reste de la division euclidienne de -247 par 23.</li>
+                                    <li>Écrire 104 en base 2.</li>
+                                    <li>Convertir le nombre binaire $11001^2$ en base 10.</li>
+                                    <li>Déterminer les valeurs de l'entier $m$ pour que $\frac{m+17}{m-1}$ soit un entier.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Leçon 2 : Congruence modulo n et critères de divisibilité
+                    </div>
+                    <div class="card-body">
+                        <h3 class="section-title">Introduction</h3>
+                        <p>La notion de congruence permet de résoudre efficacement des problèmes de divisibilité, de détermination de chiffres finaux, et de calcul de restes dans les divisions euclidiennes.</p>
+
+                        <h3 class="section-title">Définition de la congruence</h3>
+                        <p>Soient $a$ et $b$ deux entiers relatifs et $n$ un entier naturel non nul. On dit que $a$ est <strong>congru à $b$ modulo $n$</strong> et on note $a \equiv b \pmod{n}$ si $n$ divise $(a - b)$.</p>
+
+                        <div class="example-block">
+                            <h5>Exemples :</h5>
+                            <ul>
+                                <li>$7 \equiv 1 \pmod{3}$ car $7 - 1 = 6$ est divisible par 3</li>
+                                <li>$-13 \equiv 3 \pmod{4}$ car $-13 - 3 = -16$ est divisible par 4</li>
+                                <li>$11 \equiv 0 \pmod{11}$ car $11 - 0 = 11$ est divisible par 11</li>
+                            </ul>
+                        </div>
+
+                        <h3 class="section-title">Propriétés des congruences</h3>
+                        <div class="property-block">
+                            <p><strong>P₁</strong> : Réflexivité : $a \equiv a \pmod{n}$</p>
+                            <p><strong>P₂</strong> : Symétrie : Si $a \equiv b \pmod{n}$ alors $b \equiv a \pmod{n}$</p>
+                            <p><strong>P₃</strong> : Transitivité : Si $a \equiv b \pmod{n}$ et $b \equiv c \pmod{n}$, alors $a \equiv c \pmod{n}$</p>
+                            <p><strong>P₄</strong> : Compatibilité avec l'addition : Si $a \equiv a' \pmod{n}$ et $b \equiv b' \pmod{n}$, alors $a + b \equiv a' + b' \pmod{n}$</p>
+                            <p><strong>P₅</strong> : Compatibilité avec la multiplication : Si $a \equiv a' \pmod{n}$ et $b \equiv b' \pmod{n}$, alors $a \times b \equiv a' \times b' \pmod{n}$</p>
+                            <p><strong>P₆</strong> : Compatibilité avec les puissances : Si $a \equiv a' \pmod{n}$, alors $a^k \equiv a'^k \pmod{n}$ pour tout entier naturel $k$</p>
+                        </div>
+
+                        <h3 class="section-title">Applications aux critères de divisibilité</h3>
+                        <p>Soit $x = \overline{a_p a_{p-1} \ldots a_1 a_0}$ un nombre écrit en base 10.</p>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Divisible par</th>
+                                        <th>Critère</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Le dernier chiffre $a_0$ est pair (0, 2, 4, 6, 8)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>La somme des chiffres $\sum_{i=0}^p a_i$ est divisible par 3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Le nombre formé par les deux derniers chiffres $a_0 + 10a_1$ est divisible par 4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Le dernier chiffre $a_0$ est 0 ou 5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>La somme des chiffres $\sum_{i=0}^p a_i$ est divisible par 9</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>La somme alternée des chiffres $\sum_{i=0}^p (-1)^i a_i$ est divisible par 11</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="example-block">
+                            <h5>Exemple : Vérifier si 341 est divisible par 11</h5>
+                            <p>Somme alternée : $3 - 4 + 1 = 0$</p>
+                            <p>Puisque 0 est divisible par 11, 341 est divisible par 11.</p>
+                        </div>
+
+                        <h3 class="section-title">Exercices d'application</h3>
+                        <ol>
+                            <li>Déterminer le chiffre des unités de $3^{12}$.</li>
+                            <li>Montrer que $2^{32} \equiv 1 \pmod{5}$.</li>
+                            <li>Trouver le reste de la division de $7^{32}$ par 45.</li>
+                            <li>Déterminer les valeurs des chiffres $a$ et $b$ pour que le nombre $\overline{26a85b}$ soit divisible par 3 et 11.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Afficher la solution du problème pratique
+            $("#showSolution").click(function() {
+                $("#solution").slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir la solution" ? "Cacher la solution" : "Voir la solution";
+                });
+            });
+            
+            // Re-rendre MathJax après le chargement dynamique de contenu
+            $(document).on('shown.bs.collapse', function() {
+                MathJax.typeset();
+            });
+        });
+    </script>
+</body>
+</html>

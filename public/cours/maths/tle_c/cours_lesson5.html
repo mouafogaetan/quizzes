@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nombres Complexes : Approche Algébrique</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .section-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #f1f8ff;
+            border-bottom: 1px solid #d0e7ff;
+            font-weight: 600;
+        }
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .objective-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        .objective-list li:before {
+            content: "•";
+            color: #2575fc;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .math-container {
+            background-color: #f8f9fa;
+            border-left: 4px solid #2575fc;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .example-box {
+            background-color: #e8f4f8;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .definition {
+            background-color: #f0f7ff;
+            border-left: 4px solid #4dabf7;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .property {
+            background-color: #e6f7ff;
+            border-left: 4px solid #36cfc9;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        .nav-tabs .nav-link {
+            color: #495057;
+            font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+        .interactive-btn {
+            transition: all 0.3s ease;
+        }
+        .interactive-btn:hover {
+            transform: scale(1.05);
+        }
+        .img-placeholder {
+            height: 200px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        .complex-hierarchy {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
+        }
+        .complex-hierarchy span {
+            padding: 0.5rem;
+            margin: 0 0.2rem;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">Chapitre 5 : Nombres Complexes - Approche Algébrique</h1>
+            <p class="lead">Extension des nombres réels pour résoudre des équations polynomiales</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group" id="chapter-toc">
+                    <a href="#intro" class="list-group-item list-group-item-action">Introduction</a>
+                    <a href="#motivation" class="list-group-item list-group-item-action">Motivation</a>
+                    <a href="#forme-algebrique" class="list-group-item list-group-item-action">Forme algébrique</a>
+                    <a href="#operations" class="list-group-item list-group-item-action">Opérations dans C</a>
+                    <a href="#conjugue" class="list-group-item list-group-item-action">Conjugué d'un complexe</a>
+                    <a href="#module" class="list-group-item list-group-item-action">Module d'un complexe</a>
+                    <a href="#equations" class="list-group-item list-group-item-action">Équations du 2nd degré</a>
+                </div>
+                
+                <div class="mt-4">
+                    <div class="card section-card">
+                        <div class="card-header">Représentation visuelle</div>
+                        <div class="card-body">
+                            <div class="img-placeholder">
+                                <span>Plan complexe</span>
+                            </div>
+                            <div class="img-placeholder">
+                                <span>Module et argument</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="card section-card">
+                    <div class="card-header" id="intro">Introduction aux nombres complexes</div>
+                    <div class="card-body">
+                        <p>Les nombres complexes constituent une extension des nombres réels qui permet de résoudre des équations polynomiales qui n'ont pas de solutions réelles, comme $x^2 + 1 = 0$.</p>
+                        
+                        <p>Ils sont définis comme des couples de nombres réels, notés $z = a + ib$, où :</p>
+                        <ul>
+                            <li>$a$ est la partie réelle (notée $\text{Re}(z)$)</li>
+                            <li>$b$ est la partie imaginaire (notée $\text{Im}(z)$)</li>
+                            <li>$i$ est l'unité imaginaire vérifiant $i^2 = -1$</li>
+                        </ul>
+                        
+                        <div class="complex-hierarchy">
+                            <span>$\mathbb{N}$</span> ⊂ <span>$\mathbb{Z}$</span> ⊂ <span>$\mathbb{D}$</span> ⊂ 
+                            <span>$\mathbb{Q}$</span> ⊂ <span>$\mathbb{R}$</span> ⊂ <span>$\mathbb{C}$</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card section-card">
+                    <div class="card-header" id="motivation">Motivation et applications</div>
+                    <div class="card-body">
+                        <p>Les nombres complexes ne sont pas qu'une abstraction mathématique. Ils ont de nombreuses applications pratiques :</p>
+                        
+                        <ul>
+                            <li><strong>Phénomènes ondulatoires</strong> : Les complexes permettent de modéliser facilement une grandeur angulaire (phase) et une grandeur scalaire (intensité)</li>
+                            <li><strong>Physique</strong> : Mécanique (oscillations), électronique (circuits résonnants)</li>
+                            <li><strong>Ondes et optique</strong> : Radars, laser, radio, interférences</li>
+                            <li><strong>Mécanique quantique</strong> : Fonction d'onde complexe</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <h5>Problème concret :</h5>
+                            <p>Un champ rectangulaire a un périmètre de 16 m et une superficie de 40 m². Quelles sont ses dimensions?</p>
+                            <p>En notant $x$ et $y$ les dimensions, on obtient le système :</p>
+                            <p>$\begin{cases} x + y = 8 \\ xy = 40 \end{cases}$</p>
+                            <p>L'équation du second degré correspondante $t^2 - 8t + 40 = 0$ a un discriminant négatif ($\Delta = -96$).</p>
+                            <p>Seuls les nombres complexes permettent de résoudre formellement cette équation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card section-card">
+                    <div class="card-header" id="forme-algebrique">Forme algébrique d'un nombre complexe</div>
+                    <div class="card-body">
+                        <div class="definition">
+                            <h5>Définition :</h5>
+                            <p>Un nombre complexe $z$ s'écrit sous forme algébrique $z = a + ib$, où :</p>
+                            <ul>
+                                <li>$a$ et $b$ sont des nombres réels</li>
+                                <li>$a$ est la partie réelle de $z$, notée $\text{Re}(z)$</li>
+                                <li>$b$ est la partie imaginaire de $z$, notée $\text{Im}(z)$</li>
+                                <li>$i$ est l'unité imaginaire vérifiant $i^2 = -1$</li>
+                            </ul>
+                        </div>
+
+                        <div class="property">
+                            <h5>Propriétés :</h5>
+                            <ul>
+                                <li>Un nombre complexe est réel si et seulement si sa partie imaginaire est nulle</li>
+                                <li>Un nombre complexe est imaginaire pur si et seulement si sa partie réelle est nulle</li>
+                                <li>Deux nombres complexes sont égaux si et seulement s'ils ont mêmes parties réelle et imaginaire</li>
+                            </ul>
+                        </div>
+
+                        <div class="example-box">
+                            <h5>Exemples :</h5>
+                            <p>$\text{Re}(3 + 2i) = 3$, $\text{Im}(3 + 2i) = 2$</p>
+                            <p>$\text{Re}(-5i) = 0$, $\text{Im}(-5i) = -5$ (imaginaire pur)</p>
+                            <p>$\text{Re}(7) = 7$, $\text{Im}(7) = 0$ (réel)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card section-card">
+                    <div class="card-header" id="operations">Opérations dans C</div>
+                    <div class="card-body">
+                        <p>Soient $z = a + ib$ et $z' = a' + ib'$ deux nombres complexes.</p>
+                        
+                        <div class="property">
+                            <h5>Addition et soustraction :</h5>
+                            <p>$z + z' = (a + a') + i(b + b')$</p>
+                            <p>$z - z' = (a - a') + i(b - b')$</p>
+                        </div>
+
+                        <div class="property">
+                            <h5>Multiplication :</h5>
+                            <p>$z \times z' = (aa' - bb') + i(ab' + a'b)$</p>
+                            <p>En particulier, pour tout réel $\lambda$ : $\lambda z = \lambda a + i\lambda b$</p>
+                        </div>
+
+                        <div class="property">
+                            <h5>Inverse et division :</h5>
+                            <p>Si $z \neq 0$, alors $\frac{1}{z} = \frac{a}{a^2 + b^2} - i\frac{b}{a^2 + b^2}$</p>
+                            <p>$\frac{z}{z'} = z \times \frac{1}{z'} = \frac{aa' + bb'}{a'^2 + b'^2} + i\frac{a'b - ab'}{a'^2 + b'^2}$ (pour $z' \neq 0$)</p>
+                        </div>
+
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Soient $z_1 = 2 + 5i$ et $z_2 = 1 - 3i$</p>
+                            <p>$z_1 + z_2 = (2 + 1) + i(5 - 3) = 3 + 2i$</p>
+                            <p>$z_1 \times z_2 = (2 \times 1 - 5 \times (-3)) + i(2 \times (-3) + 5 \times 1) = 17 - i$</p>
+                            <p>$\frac{z_1}{z_2} = \frac{2 + 5i}{1 - 3i} = \frac{(2 + 5i)(1 + 3i)}{(1 - 3i)(1 + 3i)} = \frac{-13 + 11i}{10} = -\frac{13}{10} + \frac{11}{10}i$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card section-card">
+                    <div class="card-header" id="conjugue">Conjugué d'un nombre complexe</div>
+                    <div class="card-body">
+                        <div class="definition">
+                            <h5>Définition :</h5>
+                            <p>Soit $z = a + ib$ un nombre complexe. On appelle conjugué de $z$ le nombre complexe $\bar{z} = a - ib$.</p>
+                        </div>
+
+                        <div class="property">
+                            <h5>Propriétés du conjugué :</h5>
+                            <ul>
+                                <li>$\overline{z + z'} = \bar{z} + \bar{z'}$</li>
+                                <li>$\overline{z \times z'} = \bar{z} \times \bar{z'}$</li>
+                                <li>$\overline{\left(\frac{z}{z'}\right)} = \frac{\bar{z}}{\bar{z'}}$ (pour $z' \neq 0$)</li>
+                                <li>$\overline{\alpha z} = \alpha \bar{z}$ (pour $\alpha$ réel)</li>
+                                <li>$\overline{(\bar{z})} = z$</li>
+                                <li>$z + \bar{z} = 2\text{Re}(z)$</li>
+                                <li>$z - \bar{z} = 2i\text{Im}(z)$</li>
+                                <li>$z \times \bar{z} = a^2 + b^2 = |z|^2$</li>
+                            </ul>
+                        </div>
+
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Soit $z = 3 + 4i$, alors $\bar{z} = 3 - 4i$</p>
+                            <p>$z + \bar{z} = 6 = 2 \times \text{Re}(z)$</p>
+                            <p>$z - \bar{z} = 8i = 2i \times \text{Im}(z)$</p>
+                            <p>$z \times \bar{z} = 9 + 16 = 25 = |z|^2$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card section-card">
+                    <div class="card-header" id="module">Module d'un nombre complexe</div>
+                    <div class="card-body">
+                        <div class="definition">
+                            <h5>Définition :</h5>
+                            <p>Soit $z = a + ib$ un nombre complexe. On appelle module de $z$ le nombre réel positif $|z| = \sqrt{a^2 + b^2}$.</p>
+                        </div>
+
+                        <div class="property">
+                            <h5>Propriétés du module :</h5>
+                            <ul>
+                                <li>$|z| = 0$ si et seulement si $z = 0$</li>
+                                <li>$|z| = |\bar{z}| = |-z|$</li>
+                                <li>$|z \times z'| = |z| \times |z'|$</li>
+                                <li>$\left|\frac{z}{z'}\right| = \frac{|z|}{|z'|}$ (pour $z' \neq 0$)</li>
+                                <li>$|z + z'| \leq |z| + |z'|$ (inégalité triangulaire)</li>
+                                <li>$||z| - |z'|| \leq |z - z'|$</li>
+                                <li>$|z|^2 = z \times \bar{z}$</li>
+                            </ul>
+                        </div>
+
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>$|3 + 4i| = \sqrt{9 + 16} = 5$</p>
+                            <p>$|1 - i| = \sqrt{1 + 1} = \sqrt{2}$</p>
+                            <p>$|5i| = \sqrt{0 + 25} = 5$</p>
+                            <p>$|-7| = \sqrt{49 + 0} = 7$</p>
+                        </div>
+
+                        <div class="property">
+                            <h5>Interprétation géométrique :</h5>
+                            <p>Si on représente le nombre complexe $z = a + ib$ par le point $M(a, b)$ dans le plan, alors $|z|$ représente la distance entre l'origine $O$ et le point $M$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card section-card">
+                    <div class="card-header" id="equations">Équations du second degré dans C</div>
+                    <div class="card-body">
+                        <div class="definition">
+                            <h5>Racines carrées d'un nombre complexe :</h5>
+                            <p>On appelle racine carrée d'un nombre complexe $z$ tout nombre complexe $\delta$ tel que $\delta^2 = z$.</p>
+                            <p>Tout nombre complexe non nul admet exactement deux racines carrées opposées.</p>
+                        </div>
+
+                        <div class="property">
+                            <h5>Résolution des équations du second degré :</h5>
+                            <p>Soit l'équation $az^2 + bz + c = 0$ avec $a \neq 0$.</p>
+                            <p>On calcule le discriminant $\Delta = b^2 - 4ac$.</p>
+                            <ul>
+                                <li>Si $\Delta \geq 0$ : solutions réelles $z = \frac{-b \pm \sqrt{\Delta}}{2a}$</li>
+                                <li>Si $\Delta < 0$ : solutions complexes conjuguées $z = \frac{-b \pm i\sqrt{-\Delta}}{2a}$</li>
+                            </ul>
+                        </div>
+
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Résoudre $z^2 - 6z + 13 = 0$</p>
+                            <p>$\Delta = (-6)^2 - 4 \times 1 \times 13 = 36 - 52 = -16$</p>
+                            <p>Les solutions sont : $z = \frac{6 \pm i\sqrt{16}}{2} = \frac{6 \pm 4i}{2} = 3 \pm 2i$</p>
+                        </div>
+
+                        <div class="property">
+                            <h5>Relations entre coefficients et racines :</h5>
+                            <p>Si $z_1$ et $z_2$ sont les racines de $az^2 + bz + c = 0$, alors :</p>
+                            <p>$z_1 + z_2 = -\frac{b}{a}$ et $z_1 \times z_2 = \frac{c}{a}$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer text-center">
+        <div class="container">
+            <p>Cours de mathématiques - Nombres complexes : approche algébrique</p>
+            <p>Réalisé avec Bootstrap, jQuery et MathJax</p>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            // Navigation smooth scroll
+            $('#chapter-toc a').on('click', function(e) {
+                e.preventDefault();
+                var target = this.hash;
+                $('html, body').animate({
+                    scrollTop: $(target).offset().top - 20
+                }, 800);
+            });
+            
+            // Exemple interactif pour la résolution d'équation
+            $('.example-box').each(function() {
+                if ($(this).text().includes('Résoudre')) {
+                    $(this).append('<button class="btn btn-sm btn-outline-primary interactive-btn mt-2">Voir les étapes de résolution</button>');
+                }
+            });
+            
+            $('.interactive-btn').click(function() {
+                alert("Cette fonctionnalité interactive peut être développée pour montrer les étapes détaillées de résolution.");
+            });
+        });
+    </script>
+</body>
+</html>

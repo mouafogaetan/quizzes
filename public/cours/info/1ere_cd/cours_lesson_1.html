@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation et Configuration d'un Système d'Exploitation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        .section-title {
+            border-bottom: 2px solid #0d6efd;
+            padding-bottom: 10px;
+            margin: 30px 0 20px 0;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .table-custom {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #0d6efd;
+            margin: 15px 0;
+        }
+        .img-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .img-container img {
+            max-width: 100%;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Installation d'un SE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#boot">Configuration du Boot</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#partition">Partitionnement</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#installation">Installation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#post-install">Post-installation</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="text-center mb-4">Installation et Configuration d'un Système d'Exploitation</h1>
+                
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h2>Problématique</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>L'ordinateur de votre père utilise actuellement Windows XP comme système d'exploitation. Il souhaite désormais migrer vers Windows 7 tout en conservant toutes ses fonctionnalités habituelles. Comment allez-vous procéder pour effectuer cette transition en garantissant le bon fonctionnement de tous les composants?</p>
+                    </div>
+                </div>
+
+                <h2 id="boot" class="section-title">I. Configuration de l'Ordre de Démarrage</h2>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3>A. Modification de l'ordre de démarrage via le BIOS</h3>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Démarrez votre ordinateur et appuyez sur la touche <kbd>F2</kbd> ou <kbd>Suppr</kbd> pour accéder au BIOS</li>
+                            <li>Utilisez les touches directionnelles pour sélectionner l'onglet "Boot"</li>
+                            <li>Sélectionnez "Boot Order" (Ordre de démarrage)</li>
+                            <li>Utilisez les touches <kbd>F5</kbd>/<kbd>F6</kbd> pour modifier l'ordre des périphériques</li>
+                            <li>Appuyez sur <kbd>F10</kbd> pour enregistrer les modifications et redémarrer</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>B. Modification via le menu de démarrage</h3>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Vérifiez que la fonction de menu de démarrage F12 est activée</li>
+                            <li>Au démarrage de l'ordinateur, appuyez plusieurs fois sur <kbd>F12</kbd></li>
+                            <li>Sélectionnez le périphérique de démarrage à l'aide des touches directionnelles</li>
+                            <li>Appuyez sur <kbd>Entrée</kbd> pour confirmer votre choix</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <h2 id="partition" class="section-title">II. Partitionnement du Disque Dur</h2>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <p>Avant d'installer un nouveau système d'exploitation, il est essentiel de préparer votre disque dur en créant des partitions adaptées. Nous recommandons la création d'au moins deux partitions :</p>
+                        <ul>
+                            <li><strong>Partition principale (C:)</strong> : Pour l'installation du système d'exploitation</li>
+                            <li><strong>Partition secondaire (D: ou E:)</strong> : Pour sauvegarder vos documents personnels</li>
+                        </ul>
+                        <p>Cette approche permet de réinstaller le système en cas de problème sans affecter vos données personnelles.</p>
+                        
+                        <div class="alert alert-warning">
+                            <strong>Important :</strong> Avant toute manipulation, effectuez une sauvegarde complète de vos données sur un support externe.
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="installation" class="section-title">III. Processus d'Installation de Windows 7</h2>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Préparation</h3>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Localisez votre clé produit Windows de 25 caractères</li>
+                            <li>Connectez votre ordinateur à Internet via un câble Ethernet</li>
+                            <li>Choisissez entre l'édition 32 bits ou 64 bits selon les capacités de votre processeur</li>
+                            <li>Insérez le DVD d'installation et redémarrez l'ordinateur</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Installation proprement dite</h3>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Au démarrage, appuyez sur une touche pour démarrer depuis le DVD</li>
+                            <li>Sélectionnez la langue et cliquez sur "Installer maintenant"</li>
+                            <li>Choisissez de télécharger les mises à jour (recommandé)</li>
+                            <li>Acceptez les termes du contrat de licence</li>
+                            <li>Sélectionnez "Installation personnalisée (options avancées)"</li>
+                            <li>Sélectionnez l'espace disque où installer Windows</li>
+                            <li>Formatez la partition système existante si nécessaire</li>
+                            <li>Suivez les instructions pour compléter l'installation</li>
+                        </ol>
+                        
+                        <div class="img-container">
+                            <img src="data:image/jpeg;base64,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" alt="Interface d'installation de Windows 7" class="img-fluid">
+                            <div class="caption">Interface d'installation de Windows 7 (Source: Wikimedia Commons)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="post-install" class="section-title">IV. Opérations Post-Installation</h2>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3>A. Création d'un point de restauration</h3>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Cliquez sur le bouton Démarrer</li>
+                            <li>Tapez "créer un point de restauration" dans le champ de recherche</li>
+                            <li>Sélectionnez "Créer un point de restauration" dans les résultats</li>
+                            <li>Dans la fenêtre qui s'ouvre, cliquez sur "Créer"</li>
+                            <li>Donnez un nom descriptif au point de restauration</li>
+                            <li>Cliquez à nouveau sur "Créer" puis sur "Fermer" une fois l'opération terminée</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>B. Restauration du système</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>La restauration système permet de revenir à une configuration antérieure en cas de problème :</p>
+                        <ul>
+                            <li><strong>Mode normal</strong> : Accédez via Démarrer > Tous les programmes > Accessoires > Outils système > Restauration du système</li>
+                            <li><strong>Mode sans échec</strong> : Appuyez sur <kbd>F8</kbd> au démarrage et sélectionnez "Dernière configuration valide connue"</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>C. Activation du système d'exploitation</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>L'activation de Windows s'effectue généralement pendant l'installation ou via :</p>
+                        <ol>
+                            <li>Panneau de configuration > Système et sécurité > Système</li>
+                            <li>Cliquez sur "Activation de Windows"</li>
+                            <li>Entrez votre clé produit de 25 caractères</li>
+                            <li>Suivez les instructions pour compléter l'activation</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>D. Gestion des pilotes</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Les pilotes sont essentiels au bon fonctionnement de votre matériel :</p>
+                        <ul>
+                            <li><strong>Installation automatique</strong> : Windows détecte et installe la plupart des pilotes automatiquement</li>
+                            <li><strong>Installation manuelle</strong> : Via le Gestionnaire de périphériques pour les composants non reconnus</li>
+                            <li><strong>Mise à jour</strong> : Utilisez Windows Update ou des outils spécialisés comme Driver Booster</li>
+                        </ul>
+                        
+                        <div class="img-container">
+                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITERITEw8TExAWGBQZFRIQFRsWGBYXGBsiGRYSFhgaKCghGRolGxoZIjEiJTUrLi8uFx8zRDMtQzQwLi8BCgoKDg0OGhAQGjclICYtLS4tLS0tNy0tKy4tLS0tLS0tLTAtMDctLS0tLS0tLS0rNy03LSstLS0tLS0tLTUtLf/AABEIAL0BCwMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAwQFAgEGB//EAEAQAAEDAgMEBQwCAQIGAwEAAAEAAhEDIQQSMQUTIkEUUWFikSMyM1JxcoGTobHB0gZC8OHxFiQ0NUOCkqLRFf/EABgBAQADAQAAAAAAAAAAAAAAAAABAgME/8QAKBEBAAECBQIFBQAAAAAAAAAAAAECERIhMWHBUYETIkFD8AMjgpHx/9oADAMBAAIRAxEAPwD9S29t11Ko1jKbjoXkDkeTbXPgrlfH1WvcBh3PbaC23ImSec6QBZd43ae7qZTScWZQS9t7kkBvV/WSSQBKr0Nvtc5jTRrNc6P6WFwLu0jiB9koOmbTrRfCPnmAR8QJ1+n5R2061/8Ak6hgciLmOR5/6/BW9o44Ug0lj3ZnAHdtLi0c3kNBsPyqI/kLJjc1uzK0OmdIIMfXtsgmq7SqNc+cM/I1riHjmWiY+PKJ/CidtaqLnCPAloF739nb+NLxfxWLyUjUDHOsCGNBzEnRsC8yQsyn/IZzThqo87JpxxfnZsiIBvfRBK3aVfnhH2AmCIJOsfT668+qW1qjssYSpBiXchcfHQyof+JqOYN3daSYA3fsk+wZhJ0HhOtiKpblhuaXNGsQDqfgglREQEREBERAREQEREBERAREQEREBERAREQRZ3Z4ycHr5vwpURBnYfE1TWLS3gl//jcIAjIc5OV09i0URBTw9aqar2uYBTE5Xx51/bwx/wDbWyuIiDEqbaY3EbgtqzLWhwEjMevqbpf2o3bbDiBQDasy5pcRbMOrrGt/YpqVWoSCBSzuAtvOKIkA8Pb9VA7aDs7x5LNSaS4ioTlbYu0bPIW7EE+Lx+7DeF7s2bRwAEe3s+y4x+0HU8PVrZTLKRqZHHmJ4SR7OShGJz5OGkZJDC4vAmJdBLOoGe22tkoYjfB1NraT2wWuaS/LFwWulkQb2OqmJiJzQ82Ttg1adV8ElhYIYYkuAMX9qt4LHGpPC9sFmrgZDuYj/LrjDbPdTaWsoUGNcZIY6AT1mGKRmGqjSnSEwTDzy0/oprmJnKMiL+qiza84o0t06AQ1tUkSdS8AcmjKL9o0W7u+87xVLd1tclKevOfHzF35f1WfMP6KJlK1u+87xTd953iqvl/VZ8w/onl/VZ8w/ooFrd953im77zvFVfL+qz5h/RPL+qz5h/RBa3fed4pu+87xVXy/qs+Yf0Ty/qs+Yf0QWt33neKbvvO8VV8v6rPmH9E8v6rPmH9EFrd953im77zvFVfL+qz5h/RPL+qz5h/RBa3fed4pu+87xVXy/qs+Yf0Ty/qs+Yf0QWt33neKbvvO8VV8v6rPmH9E8v6rPmH9EFrd953im77zvFVfL+qz5h/RPL+qz5h/RBa3fed4pu+87xVXy/qs+Yf0Ty/qs+Yf0QWt33neKbvvO8VV8v6rPmH9E8v6rPmH9EFrd953im77zvFVfL+qz5h/RPL+qz5h/RBa3fed4pu+87xVXy/qs+Yf0Ty/qs+Yf0QWt33neKbvvO8VQxFasxpc7dtaNSapAA6yS1dsq1IvlnsdI8YQcvAZSZUbTYapbSYHEQYc4CC4XgEzCwn7Pbhs9YgODQWPD3uIIfqND/ovpadJrqLA8cOVhMmNIIM8oIlZ2KojJU3OU1hekHVC4Ex6pMdeqvExhVnVk7M2zh6tJ9dmEFQU6jGtdEg5oksPFfSY1t1q9R23Qa6W4Ws2JaHNpxNyfNBmJmCevtUmx6GKZhyHspMqy05cOGgBpjNAIDc+uttFKcTjp/6ellkiM94zCHE+7NvryWcJjTNawG1m1XFgZUa4TOdsC0THitBY1TG4vM4NwzTDaZlzoBc7zmg84M+A1m0XTMdlL+jsNpDA7iFvNI5me3/8UpbyLMw2IxRqAPw7G0+bg+ToZMe0D4Hw00BERAREQEREBERAREQEREBERAREQEREBERAREQEREFDbNSGCwPELOEjrH1CiwjpY2wHYBAEWAAXW3fMb734KjwPo2/H7oJ61Evw2UCSaYAB520WfX2fUcHgMIzHhLt2BTF7DJc6+AHaTs4P0bPdb9lMr01zCs03fLYHZjsPQq72oymHPYRlzOba0OFiQbCymp0nua2qNpENeX5SWhrYBzFoDuYDXXN4Cu/yfL0c5s0S2MhAM9cmQsrBNwrsLRD2OLPKnifpB43EgjMewSYJ7Vaq9VOOdb65W/rH6fkrj6UaWvvq0X4Kq7K5uOIGUCzWkGzQXD4tcbz53ioNfRcDWxwcyCS1zWtmAGSCD6xk9pGizXHZuaRTcXZTBDal8vIHrufjKkbW2e8BpB4SQGO3mpdOUAWMkzHUQsnQ23bWoDWvTGv9hymfsVN0ynmy7xub1ZveeXwPgvnX1sC2czajXAvIbxkmHOYXiLCSHQmIxGBzv3lJzS0kOcQ4timcoJjlNKP90H0orNvxC1jfQxMeBHiuOmU5cN42W+dxC0Qb9Wo8V8u8bMaPRuFiAAyrJgGQLdUz7bqTHVNnmqd7TIeHOlzsx4mnJyJkkEweockH1FSq1oJLgABJJMQOtcuxLASC9oIyyCRbOYb4kGF80WbPLxTbSc9zrEQ8C82JdAmQR1gzolatgHFucPDiAYmpMNaCwkA+qJHxQfT75sxmE6xI0612vja1HZzKYO6dUbmeB5wggSBDiJHEAPatT/imiNWvAiZgaSRa/s/+QOiDeRYzP5JRgOOZrCHEvIkCC0Ccs6l7be3qXbf5FhyWgOdxTEscPZYibmw7bINZFlU9uMJIyPEOLZIAniyZmiZcJB00hXcDixVaXAEDM9t+64tJ8QgsIiICIiAiIgIiICIiAiIgIiIM3bvmN978FR4H0bfj91Jt3zG+9+Co8D6Nvx+6DQwfo2e637KZQ4P0bPdb9lMgy/5H6AjK10uaDnGYAE3JCoYCvWGGoGlh2uJJlhaWZb2MHzLEzrfkVf8A5Jn3Dsjsplt8wZz0zHTkqGz6Fd2GoxiQ1wL8zswfmaXaZuZGk+1Xt5L7/M2N/u2t6crlLHVi4NdgSGyBmztMA6kjsGoHb2TE3F4nM0dEbGYB7yY4ZILmC5sL36jYSFwMFiOKcc27XjhtlJD4eJJghx8KY6l6cLjAHluKpudJIBbbNyZrYTAH1lUbJH4vEB18G1zZMuDgDAkcIvJJuNLOXjcdiCHkYEi7IaS2XAyajtQNAAO0hS0sNi8zS7ENyg3a1o4rRBMaTe0SRy0FTDYTEZpGLa4i+QuJjhgAgecJvyQDtPEeb/8Az73LZcMtpgaG4GXq1Mdups+s+o0mph90QbNcQ4nvW0/3XmzqFVpfvH5gTa5MXMxOli23YVeQc5BMwJ64Q0x6o8F0iDksHUPBBTHqjw/zrPiukQc5B1DwXj6TTEtBggi3MXB8V2iDzKOoI1oGgj2L1EBERAREQEREBERAREQEREBERBm7d8xvvfgqPA+jb8fupNu+Y33vwVHgfRt+P3QaGD9Gz3W/ZTKHB+jZ7rfspkGT/J2g4cy4i7YIbnvy4SRP+iycLTwvRaAqVH5cz8py5SXZuJpAmL3jsWr/ACl7Rh3ZmhwlvnEgDtltws/ZuKAwtAtwge0lwytlwaZ8/ikwRJla+13+ZcufLx/x5QilgOPjqHydTNOY5mRUDxpxf+Qxfz+8JGhgSHhuLex0uGY1COL+z763uTzhWmY08UbOjheW8MSQ10MPDbM0MH/uRyvxXx9PJU3mzqgZeSKbfMHMmxBifZ1rJ0O8Ph8GKjIxDnvnhBfmg5bmItaRPLS0ACLZ9bBUnOe2o4OZBdmBBJIyhrR8dBzPYreGxlMvaG4Co2SJeabWgcNjMyeQUdPFBzGhmEYeZaQbS7dyDl4pYSZ6vag3cPXa9oc0y0z9DB+qkVDY1YuZBo7otI4JmJAd43ur6AiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiIM3bvmN978FR4H0bfj91Jt3zG+9+Co8D6Nvx+6DQwfo2e637KZQ4P0bPdb9lMgzP5Fn3Dt3OaRpAMc4mypYBmLOHo5XNa+XZ88HhmRcSJAsrX8oYDh3S8MEtu4EiZsLXWXgsNROFoB2KLQC8hzZbm4uJkG8Awtfb79OeGHvduu/TleFHHcU1aYlrwIvldDixw4RMEtBB9Qds+P6e0PI3Dzcht56wwG3svrOoVM4PDDPmxrjwVM8uHmEVA5xgDQ70z2LvoNOH5NoPD5dcvEZ5uSLTBj2RyWTdo0jjS5ubcBk8WUOJNtBJtf7fFVWN2gIh9EgwTvBxDiJLYbAmIE/7n2jhWB7CdoOcZGVhq2ccukTxcN4vyN9TnMwOC0OIc508WUG5zAmAAbGAPYJ5SA1ajseRbozXR3je9vty5rqozGioS11I07w1088sTHVDuf9+cBV9mbOpF+8pV82UiRlvE68jmdF3Gc119AgxR0+T/05sIs6AbydZva11qYTPkbn8+L/AImLTGsKZEBERAREQEREBERAREQEREBERAREQEREBERBm7d8xvvfgqPA+jb8fupNu+Y33vwVHgfRt+P3QaGD9Gz3W/ZTKHB+jZ7rfsua1V4bULaeZw8wAjit2kDXrIQUf5Q5ow5zAkS2MrspnrlZWCxGHGFoE4dz2lz8onOQ8OIJLra3PwWlvK9Wk8VMLlMtGV+7dmaTxEAPcJA6yFHSr4tjC1uCYMvmgVGtDgAOV8tzH/qexXxeXDv145ZYJ8THtbf9qNPGYXiy4N1mVCIbGaGvzMF7EtaNdd4O2OKuIwJa8OwzmN0nIRbk8RpaSPwvo8BWquzb2kKcREODpCtOaCCCJBsQeY6lRq+cwmIwe8aKdF2ckDMAbcMySToeq8l03mVHhsbQ0ZhWyIBlwLiHObJkAyZc1x+F7ED6heAIM3Yb2OaXNomkYaC02tGZtuXnE3g3utNeAL1AREQEREBERAREQEREBERAREQEREBERAREQEREGbt3zG+9+Co8D6Nvx+6k275jfe/BUeB9G34/dBoYP0bPdb9lzWpPLagFTKXA5HROS0TFpveF1g/Rs91v2UNetTpsrPc6GtBNTWwA6h2IKOEa44XjxDQQ45qoJa10O53BEjt5816/Z+IkHpxAkwBTbfXtvr9FS2NhaNHDGi0VeGpMEjPne7MyDOXmBfquo6jNnZxJJfJ9c9ZPwifGecoLlHAYiTk2gHaggsDocTr51udrKephMQAwDGgGTd1MHPIEN1HMONuvsvkMbs4k8bmkNNy5w4eZ7ARztPapMazZ+6Znc7dS+IziJYMxjqjL7S7nKDSweCrteXHGCo3NxMLYGkETJywLx1qrjqNSf+6MpxJghotOWDxfD2qPFU8BvKmd7mvsXmXhtxa+mgnw7FziXbPeXZ6jg4ufLSXAy1/EI6g6THKSeVg0zgcRNI9KLgyS5oYG7wzIk8hFl3szCYhhBq4kVGweHIGwZtDhyAt269iu4Wu17GvYZY4AtN7jkb3UqAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiIM3bvmN978FR4H0bfj91Jt3zG+9+Co8D6Nvx+6DQwfo2e637LirWytqHdkwdAJzTEmNT/ou8H6Nnut+yOD4fcA3yHqtz+KDEwGLpbutSoUABTc0PZu3FozmXHJALo6gpXY58gDAOIk3MC97xGsxft15qSgyv0dodUaKwe3O7PwuAfcB3KR7NYso9xjotXoEzM5TERpbtE89Sgjbjn/22c4iCRlaDzHDGszHZae1d18TUIZlwQuXZmvbMcI5jTNOXNoIU7aeMO68pSgOmplBlzczYDeq2cH2i4XD6ONM+VogSIgGTfQmLW6vEaoITiaxFM9EElrXPdu9HEw6mGkh0hma+lh1qKu+q5jf+QaHauBaCGvZxN0IzNLssR1SrjRjcsbzDmpmF4dGS821nzfr8VGljd4HOfRyS2WjMYGpi2vK/VNtEHmBxmILw04Xd0habCxJykAE/wBQ2RyJWykogIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiCtj6Ic0A9fJQU6YaABoFaxOg9qgQT4P0bPdb9lFiMKKjKrM54rGIOWw0B8VLg/Rs91v2VXHvZuq0skea8SWzmAHnC4seWimIuiZtF1OhsShSaRncWPfSMT/AHaeESL3Kq4WjhGA5doOhzSATWaWwYEt5AyRpzcotmPo06dQMwznMD6TnBtR9fUxnGYTLQ2YCkZjKOT/ALdUDgPMFMEAwOEHwHw6rqaomJtKKJiYvToVtmYWHHpjwKTGtOSo3yYAy5gALOJGupK7p0MKx1Op015kkia0h2SQQ4+qCTINpCNxuGylowVSOIFu6EQ0yTrEEt9pstg7MoENG5ZAByjKLA3IHVqqrMoYLC5Wt6WZGRmfetDyQXQwkRqXxHYFOP4+OKcTiIJBaBUIygEHL26eBVynsig12YUWB0yDGmmnVoNFeQY7dgDniMQeXnxNo5D/ACVp4ejlEZnO0u4ybAD8T8VKiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiIIcToPaoFPidB7VAg7oVcrWtjQAeAUeJqPcxwacrj5rhy/y69RImyJi6hg6OIaHh1ecxblIaJaBOaJtJtqphUxMg56WlxkdE9es6f4VZRWqqxTdFNMUxaFdlbEyZNEi8QHAiwyjW95nTUK5TxBgZgC6L5bCecdijRVWTdI7v1TpHd+qhRBN0ju/VOkd36qFEE3SO79U6R3fqoUQTdI7v1TpHd+qhRBN0ju/VOkd36qFEE3SO79U6R3fqoUQTdI7v1TpHd+qhRBN0ju/VOkd36qFEE3SO79UOJ7qhXjtEE/SO79U6R3fqoUQTdI7v1TpHd+qhRBN0ju/VOk936qFeFBP0ju/VOkd36qFEHmM8o0t4mzzY7KR2gjRctIAAva3X9Tqu1G4IP/Z" alt="Gestionnaire de périphériques Windows" class="img-fluid">
+                            <div class="caption">Gestionnaire de périphériques Windows (Source: Wikimedia Commons)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header bg-light">
+                        <h2>Conclusion</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>La migration d'un système d'exploitation nécessite une planification minutieuse et l'exécution de plusieurs étapes cruciales : configuration du BIOS, partitionnement du disque dur, installation proprement dite, et finalement les opérations post-installation essentielles comme l'activation du système et l'installation des pilotes. En suivant ces procédures, vous garantirez une transition réussie de Windows XP vers Windows 7 tout en préservant la fonctionnalité complète de l'ordinateur.</p>
+                        <p>Rappelons que le temps nécessaire pour ces opérations peut être estimé par la formule : $T = t_p + t_i + t_c$ où $t_p$ est le temps de préparation, $t_i$ le temps d'installation, et $t_c$ le temps de configuration post-installation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Référence: Cours d'installation de système d'exploitation</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Adapté pour HTML avec Bootstrap, jQuery et MathJax</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Animation pour le défilement vers les ancres
+            $('a[href^="#"]').on('click', function(event) {
+                var target = $(this.getAttribute('href'));
+                if(target.length) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 70
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

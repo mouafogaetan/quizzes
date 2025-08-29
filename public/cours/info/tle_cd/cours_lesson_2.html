@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Logicielle des Systèmes Informatiques</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Configuration MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+        }
+        .card-header {
+            background-color: #f1f8ff;
+            border-bottom: 1px solid #d0e7ff;
+            font-weight: 600;
+        }
+        .definition {
+            background-color: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .question {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            border-radius: 10px 10px 0 0;
+        }
+        .keyword {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .concept-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .bilingual-table {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <!-- En-tête -->
+        <div class="header text-center">
+            <h1>Architecture Logicielle des Systèmes Informatiques</h1>
+            <p class="lead">Comprendre les fondements du fonctionnement des ordinateurs</p>
+        </div>
+        
+        <!-- Introduction -->
+        <div class="card">
+            <div class="card-header">
+                Introduction
+            </div>
+            <div class="card-body">
+                <p>Lorsqu'on observe un ordinateur en fonctionnement, une question fondamentale se pose : comment une machine constituée de composants électroniques peut-elle comprendre et exécuter nos instructions ? La réponse réside dans l'architecture logicielle qui donne vie au matériel informatique.</p>
+                
+                <div class="question">
+                    <h5>Question 1 :</h5>
+                    <p>Qu'est-ce qui permet de donner des ordres à un ordinateur qui est à la base formé uniquement de composants électroniques ?</p>
+                    <p><strong>Réponse :</strong> Les programmes informatiques</p>
+                </div>
+                
+                <div class="text-center my-3">
+                    <img src="data:image/png;base64,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" alt="Placement du système d'exploitation" class="concept-img">
+                    <p class="text-muted">Schéma montrant la place du système d'exploitation dans l'architecture logicielle</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- I. Généralités -->
+        <div class="card">
+            <div class="card-header">
+                I. Concepts Fondamentaux
+            </div>
+            <div class="card-body">
+                <p>Un système informatique comprend deux parties essentielles :</p>
+                <ul>
+                    <li>Le <span class="keyword">matériel (Hardware)</span> : composants physiques de l'ordinateur</li>
+                    <li>Le <span class="keyword">logiciel (Software)</span> : ensemble des programmes qui permettent au système d'accomplir ses tâches</li>
+                </ul>
+                
+                <h5>Définitions importantes :</h5>
+                
+                <div class="definition">
+                    <p><strong>Information :</strong> Élément de connaissance susceptible d'être transformé pour être traité par un système informatique.</p>
+                </div>
+                
+                <div class="definition">
+                    <p><strong>Donnée :</strong> Information représentée sous une forme conventionnelle permettant un traitement automatique.</p>
+                </div>
+                
+                <div class="definition">
+                    <p><strong>Langage informatique :</strong> Ensemble de caractères, symboles, mots-clés et règles permettant de formuler des instructions pour un ordinateur.</p>
+                </div>
+                
+                <div class="definition">
+                    <p><strong>Instruction :</strong> Ordre donné à un processeur.</p>
+                </div>
+                
+                <div class="definition">
+                    <p><strong>Programme :</strong> Séquence d'instructions exécutable par l'ordinateur.</p>
+                </div>
+                
+                <div class="definition">
+                    <p><strong>Logiciel :</strong> Ensemble de programmes coordonnés.</p>
+                </div>
+                
+                <h5>Types de logiciels :</h5>
+                
+                <div class="definition">
+                    <p><strong>Progiciel :</strong> Ensemble complet de programmes conçus pour différents utilisateurs dans un domaine d'application spécifique, généralement commercialisé avec une documentation.</p>
+                </div>
+                
+                <div class="definition">
+                    <p><strong>Freeware (Gratuiciel) :</strong> Logiciel entièrement gratuit, pouvant être copié librement.</p>
+                </div>
+                
+                <div class="definition">
+                    <p><strong>Logiciel libre (Open Source) :</strong> Application livrée avec son code source, permettant sa modification et son adaptation. Attention : libre ne signifie pas nécessairement gratuit.</p>
+                </div>
+                
+                <div class="definition">
+                    <p><strong>Logiciel propriétaire :</strong> Logiciel dont l'utilisation est soumise à des restrictions définies par son éditeur.</p>
+                </div>
+                
+                <div class="definition">
+                    <p><strong>Ludiciel :</strong> Logiciel de divertissement (jeux vidéo).</p>
+                </div>
+                
+                <div class="definition">
+                    <p><strong>Didacticiel :</strong> Logiciel destiné à l'enseignement et à l'apprentissage.</p>
+                </div>
+                
+                <div class="question">
+                    <h5>Question 2 :</h5>
+                    <p>Tous les programmes sont-ils fournis avec l'ordinateur lors de l'achat ?</p>
+                    <p><strong>Réponse :</strong> Non, seuls certains logiciels de base sont préinstallés.</p>
+                </div>
+                
+                <div class="question">
+                    <h5>Question 3 :</h5>
+                    <p>Comment appelle-t-on le petit programme intégré par les constructeurs lors de la fabrication ?</p>
+                    <p><strong>Réponse :</strong> Le BIOS</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- II. Le BIOS -->
+        <div class="card">
+            <div class="card-header">
+                II. Le BIOS (Basic Input Output System)
+            </div>
+            <div class="card-body">
+                <p>Le BIOS, ou Système de Gestion de Base des Entrées/Sorties, est un programme fondamental installé par le constructeur lors de la fabrication de l'ordinateur.</p>
+                
+                <div class="text-center my-3">
+                    <img src="data:image/jpeg;base64,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" alt="Exemple de BIOS" class="concept-img">
+                    <p class="text-muted">Interface typique d'un BIOS</p>
+                </div>
+                
+                <h5>Rôles principaux du BIOS :</h5>
+                <ul>
+                    <li>Vérifier l'état du matériel au démarrage</li>
+                    <li>Permettre l'installation des premiers programmes</li>
+                    <li>Exécuter le POST (Power On Self Test) lors de la mise sous tension</li>
+                </ul>
+                
+                <p>Le POST est une procédure de test des différents composants matériels. Si un problème est détecté, des messages d'erreur sont affichés à l'écran.</p>
+                
+                <p>Le BIOS est stocké dans une mémoire de type ROM appelée CMOS (Complementary Metal-Oxide Semiconductor). Cette mémoire nécessite une alimentation constante par une pile pour conserver les informations de configuration du système (heure, taille de la mémoire vive, caractéristiques des disques, etc.).</p>
+                
+                <div class="question">
+                    <h5>Question 4 :</h5>
+                    <p>Comment appelle-t-on le premier programme qu'on installe sur un ordinateur ?</p>
+                    <p><strong>Réponse :</strong> Le système d'exploitation (SE)</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- III. Le système d'exploitation -->
+        <div class="card">
+            <div class="card-header">
+                III. Le Système d'Exploitation
+            </div>
+            <div class="card-body">
+                <h5>1. Définition</h5>
+                <p>Un système d'exploitation (SE) est un ensemble de programmes qui assurent le bon fonctionnement de l'ordinateur. Il sert d'interface entre l'utilisateur et le matériel, facilitant l'interaction entre ces deux éléments.</p>
+                
+                <div class="text-center my-3">
+                    <img src="data:image/png;base64,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" alt="Schéma d'un noyau de système d'exploitation" class="concept-img">
+                    <p class="text-muted">Architecture typique d'un noyau de système d'exploitation</p>
+                </div>
+                
+                <h5>Exemples de systèmes d'exploitation :</h5>
+                <ul>
+                    <li>Windows</li>
+                    <li>macOS</li>
+                    <li>Linux</li>
+                    <li>Unix</li>
+                    <li>Android</li>
+                    <li>iOS</li>
+                </ul>
+                
+                <h5>2. Fonctions principales d'un système d'exploitation</h5>
+                <ul>
+                    <li>Gestion du processeur</li>
+                    <li>Gestion de la mémoire</li>
+                    <li>Gestion des entrées/sorties</li>
+                    <li>Gestion des programmes</li>
+                    <li>Gestion des utilisateurs</li>
+                </ul>
+                
+                <h5>3. Classification des systèmes d'exploitation</h5>
+                
+                <p><strong>Selon la gestion des tâches :</strong></p>
+                <ul>
+                    <li>Systèmes monotâche : exécutent une seule tâche à la fois</li>
+                    <li>Systèmes multitâche : permettent l'exécution simultanée de plusieurs tâches</li>
+                </ul>
+                
+                <p><strong>Selon la gestion des postes :</strong></p>
+                <ul>
+                    <li>Systèmes monoposte : conçus pour un seul ordinateur à la fois</li>
+                    <li>Systèmes multipostes : permettent à plusieurs ordinateurs de partager des ressources</li>
+                </ul>
+                
+                <p><strong>Selon la gestion des utilisateurs :</strong></p>
+                <ul>
+                    <li>Systèmes mono-utilisateur : ne permettent qu'à un seul utilisateur de travailler à la fois</li>
+                    <li>Systèmes multi-utilisateurs : autorisent plusieurs utilisateurs à travailler simultanément</li>
+                </ul>
+                
+                <div class="question">
+                    <h5>Question 5 :</h5>
+                    <p>Comment appelle-t-on les logiciels utilisés pour exécuter des tâches spécifiques avec un ordinateur ?</p>
+                    <p><strong>Réponse :</strong> Les logiciels d'application</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- IV. Les logiciels d'application -->
+        <div class="card">
+            <div class="card-header">
+                IV. Les Logiciels d'Application
+            </div>
+            <div class="card-body">
+                <p>On distingue deux grandes catégories de logiciels :</p>
+                <ol>
+                    <li>Les logiciels de base (systèmes d'exploitation)</li>
+                    <li>Les logiciels d'application</li>
+                </ol>
+                
+                <p>Un logiciel d'application est un ensemble de programmes spécialement conçus pour exécuter une tâche précise sur l'ordinateur. Ils sont classés par catégories selon leur domaine d'application.</p>
+                
+                <h5>Exemples de logiciels d'application :</h5>
+                <ul>
+                    <li>Traitement de texte (Word, Google Docs)</li>
+                    <li>Tableurs (Excel, Sheets)</li>
+                    <li>Logiciels de conception graphique (Photoshop, GIMP)</li>
+                    <li>Navigateurs web (Chrome, Firefox)</li>
+                    <li>Logiciels de communication (Zoom, Skype)</li>
+                    <li>Ludiciels (jeux vidéo)</li>
+                    <li>Didacticiels (logiciels éducatifs)</li>
+                </ul>
+                
+                <h5>Les utilitaires</h5>
+                <p>Parmi les logiciels d'application, on trouve les utilitaires - des programmes qui exécutent des opérations annexes aux fonctions principales du système d'exploitation.</p>
+                
+                <p>Les pilotes (drivers) sont un type particulier d'utilitaires qui permettent au système d'exploitation de communiquer avec les périphériques matériels (imprimante, carte graphique, etc.).</p>
+                
+                <div class="text-center my-3">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Driver_Software.png/500px-Driver_Software.png" alt Schéma de fonctionnement d'un pilote" class="concept-img">
+                    <p class="text-muted">Fonctionnement d'un pilote matériel</p>
+                </div>
+                
+                <h5>Lexique bilingue</h5>
+                <table class="table table-striped bilingual-table">
+                    <thead>
+                        <tr>
+                            <th>Français</th>
+                            <th>Anglais</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Système informatique</td>
+                            <td>Computer system</td>
+                        </tr>
+                        <tr>
+                            <td>Logiciel</td>
+                            <td>Software</td>
+                        </tr>
+                        <tr>
+                            <td>Système d'exploitation</td>
+                            <td>Operating System</td>
+                        </tr>
+                        <tr>
+                            <td>Pilote</td>
+                            <td>Driver</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Conclusion -->
+        <div class="card">
+            <div class="card-header">
+                Conclusion
+            </div>
+            <div class="card-body">
+                <p>L'architecture logicielle d'un système informatique est une structure complexe et hiérarchisée qui permet à des composants matériels de comprendre et d'exécuter nos instructions. Du BIOS au système d'exploitation, puis aux applications spécialisées, chaque couche logicielle joue un rôle essentiel dans le fonctionnement global de l'ordinateur.</p>
+                
+                <p>Comprendre cette architecture est fondamental pour saisir comment les ordinateurs traitent l'information et exécutent les tâches qui leur sont confiées.</p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2023 - Adaptation pédagogique sur l'architecture logicielle des systèmes informatiques</p>
+        </div>
+    </div>
+    
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Script jQuery pour améliorer l'interactivité
+        $(document).ready(function() {
+            // Animation pour les cartes
+            $(".card").hover(
+                function() {
+                    $(this).css("transform", "translateY(-5px)");
+                    $(this).css("transition", "transform 0.3s ease");
+                },
+                function() {
+                    $(this).css("transform", "translateY(0)");
+                }
+            );
+            
+            // Animation pour les questions
+            $(".question").click(function() {
+                $(this).toggleClass("bg-warning");
+            });
+        });
+    </script>
+</body>
+</html>

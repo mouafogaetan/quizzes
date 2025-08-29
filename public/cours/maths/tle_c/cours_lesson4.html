@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPCM et PGCD de deux entiers non nuls</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            color: #333;
+            font-weight: 600;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .objective-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .example-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .definition {
+            background-color: #f0f7ff;
+            border-left: 4px solid #4e73df;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .property {
+            background-color: #f8f5ff;
+            border-left: 4px solid #6f42c1;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .solution {
+            background-color: #f0fff4;
+            border-left: 4px solid #28a745;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .exercise {
+            background-color: #fff8e6;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .img-container {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .img-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        .nav-tabs .nav-link {
+            color: #495057;
+            font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        .table-math {
+            width: 100%;
+            margin: 1rem 0;
+            border-collapse: collapse;
+        }
+        .table-math th, .table-math td {
+            border: 1px solid #dee2e6;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        .table-math th {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">PPCM et PGCD de deux entiers non nuls</h1>
+            <p class="lead">Comprendre les concepts fondamentaux de l'arithmétique et leurs applications</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card mb-4">
+                    <div class="card-header">Navigation</div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <a href="#section1" class="list-group-item list-group-item-action">PPCM de deux entiers</a>
+                            <a href="#section2" class="list-group-item list-group-item-action">PGCD de deux entiers</a>
+                            <a href="#section3" class="list-group-item list-group-item-action">Nombres premiers</a>
+                            <a href="#section4" class="list-group-item list-group-item-action">Théorèmes de Bézout et Gauss</a>
+                            <a href="#section5" class="list-group-item list-group-item-action">Équations diophantiennes</a>
+                            <a href="#section6" class="list-group-item list-group-item-action">Arithmétique modulaire</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">Ressources</div>
+                    <div class="card-body">
+                        <p>Concepts clés:</p>
+                        <ul class="list-unstyled small">
+                            <li>Multiples et diviseurs</li>
+                            <li>Nombres premiers</li>
+                            <li>Division euclidienne</li>
+                            <li>Congruences</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-9">
+                <div class="card mb-4">
+                    <div class="card-header">Introduction</div>
+                    <div class="card-body">
+                        <p>Ce chapitre explore les concepts fondamentaux de l'arithmétique des entiers, en mettant l'accent sur le Plus Petit Commun Multiple (PPCM) et le Plus Grand Commun Diviseur (PGCD). Ces outils mathématiques sont essentiels pour résoudre des problèmes de divisibilité, de périodicité et de partage.</p>
+                        
+                        <div class="objective-box">
+                            <h5>Objectifs d'apprentissage</h5>
+                            <ul>
+                                <li>Comprendre et calculer le PPCM et PGCD de deux entiers</li>
+                                <li>Maîtriser l'algorithme d'Euclide</li>
+                                <li>Utiliser la décomposition en facteurs premiers</li>
+                                <li>Résoudre des équations diophantiennes et des congruences</li>
+                                <li>Appliquer ces concepts à des problèmes concrets</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <section id="section1">
+                    <div class="card mb-4">
+                        <div class="card-header">PPCM de deux entiers relatifs</div>
+                        <div class="card-body">
+                            <h4>Définition du PPCM</h4>
+                            <div class="definition">
+                                <p>Soient $a$ et $b$ deux entiers naturels non nuls. L'ensemble $a\mathbb{Z} \cap b\mathbb{Z}$ des multiples communs à $a$ et $b$ est non vide (il contient $ab$) et admet donc un plus petit élément strictement positif.</p>
+                                <p>On appelle <strong>plus petit commun multiple</strong> de $a$ et $b$, noté $\text{PPCM}(a; b)$, le plus petit élément strictement positif de $a\mathbb{Z} \cap b\mathbb{Z}$.</p>
+                            </div>
+                            
+                            <h4>Exemple</h4>
+                            <div class="example-box">
+                                <p>Pour $a = 6$ et $b = 9$ :</p>
+                                <p>$6\mathbb{Z} = \{..., -18, -12, -6, 0, 6, 12, 18, ...\}$</p>
+                                <p>$9\mathbb{Z} = \{..., -18, -9, 0, 9, 18, ...\}$</p>
+                                <p>$6\mathbb{Z} \cap 9\mathbb{Z} = \{..., -36, -18, 0, 18, 36, ...\}$</p>
+                                <p>Le plus petit élément strictement positif est 18, donc $\text{PPCM}(6; 9) = 18$.</p>
+                            </div>
+                            
+                            <h4>Propriétés fondamentales</h4>
+                            <div class="property">
+                                <p>1. $\forall a, b \in \mathbb{Z}^*$, $\text{PPCM}(a; b) = \text{PPCM}(|a|; |b|)$</p>
+                                <p>2. $\forall a, b \in \mathbb{N}^*, \max(a; b) \leq \text{PPCM}(a; b) \leq ab$</p>
+                                <p>3. $\forall a, b \in \mathbb{N}^*, a \in b\mathbb{Z} \Leftrightarrow \text{PPCM}(a; b) = a$</p>
+                                <p>4. $\forall a, b, k \in \mathbb{N}^*, \text{PPCM}(ka; kb) = k \cdot \text{PPCM}(a; b)$</p>
+                                <p>5. Si $\mu = \text{PPCM}(a; b)$, alors $a\mathbb{Z} \cap b\mathbb{Z} = \mu\mathbb{Z}$</p>
+                            </div>
+                            
+                            <h4>Application : problème de périodicité</h4>
+                            <div class="example-box">
+                                <p>Deux voitures A et B partent en même temps de la ligne de départ d'un circuit. La voiture A fait un tour en 36 minutes et la voiture B en 30 minutes. Après combien de temps se retrouveront-elles ensemble à la ligne de départ ?</p>
+                                <div class="solution">
+                                    <p>Le temps de rencontre correspond au PPCM des temps de tour :</p>
+                                    <p>$\text{PPCM}(36; 30) = 180$ minutes</p>
+                                    <p>Les voitures se retrouveront donc après 3 heures.</p>
+                                </div>
+                            </div>
+                            
+                            <h4>Exercices d'application</h4>
+                            <div class="exercise">
+                                <p>1. Déterminer $\text{PPCM}(24; 56)$, $\text{PPCM}(180; 450)$, $\text{PPCM}(25; 10!)$</p>
+                                <p>2. Déterminer les 10 premiers éléments positifs de $180\mathbb{Z} \cap -450\mathbb{Z}$</p>
+                                <p>3. Soit $n$ un entier naturel non nul, déterminer $\text{PPCM}(4^n; 2^n)$</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="section2">
+                    <div class="card mb-4">
+                        <div class="card-header">PGCD de deux entiers relatifs</div>
+                        <div class="card-body">
+                            <h4>Définition du PGCD</h4>
+                            <div class="definition">
+                                <p>Soient $a$ et $b$ deux entiers naturels non nuls. L'ensemble $D(a; b)$ des diviseurs communs à $a$ et $b$ est non vide (il contient toujours 1) et admet donc un plus grand élément.</p>
+                                <p>On appelle <strong>plus grand commun diviseur</strong> de $a$ et $b$, noté $\text{PGCD}(a; b)$, le plus grand élément de $D(a; b)$.</p>
+                            </div>
+                            
+                            <h4>Exemple</h4>
+                            <div class="example-box">
+                                <p>Pour $a = 48$ et $b = 60$ :</p>
+                                <p>$D(48) = \{\pm1, \pm2, \pm3, \pm4, \pm6, \pm8, \pm12, \pm16, \pm24, \pm48\}$</p>
+                                <p>$D(60) = \{\pm1, \pm2, \pm3, \pm4, \pm5, \pm6, \pm10, \pm12, \pm15, \pm20, \pm30, \pm60\}$</p>
+                                <p>$D(48; 60) = \{\pm1, \pm2, \pm3, \pm4, \pm6, \pm12\}$</p>
+                                <p>Le plus grand élément est 12, donc $\text{PGCD}(48; 60) = 12$.</p>
+                            </div>
+                            
+                            <h4>Propriétés fondamentales</h4>
+                            <div class="property">
+                                <p>1. $\forall a, b \in \mathbb{Z}^*, \text{PGCD}(a; b) = \text{PGCD}(|a|; |b|)$</p>
+                                <p>2. $\forall a, b \in \mathbb{N}^*, 1 \leq \text{PGCD}(a; b) \leq \min(a; b)$</p>
+                                <p>3. $\forall a, b \in \mathbb{N}^*, a \in D(b) \Leftrightarrow \text{PGCD}(a; b) = a$</p>
+                                <p>4. $\forall a \in \mathbb{N}^*, \text{PGCD}(a; 0) = a$ et $\text{PGCD}(a; 1) = 1$</p>
+                                <p>5. $\forall a, b, k \in \mathbb{N}^*, \text{PGCD}(ka; kb) = k \cdot \text{PGCD}(a; b)$</p>
+                                <p>6. Si $\delta = \text{PGCD}(a; b)$, alors $D(a; b) = D(\delta)$</p>
+                            </div>
+                            
+                            <h4>Algorithme d'Euclide</h4>
+                            <div class="example-box">
+                                <p>Pour calculer le PGCD de deux nombres $a > b > 0$, on utilise l'algorithme d'Euclide :</p>
+                                <ol>
+                                    <li>On effectue la division euclidienne de $a$ par $b$ : $a = bq + r$ avec $0 \leq r < b$</li>
+                                    <li>Si $r = 0$, alors $\text{PGCD}(a; b) = b$</li>
+                                    <li>Si $r \neq 0$, alors $\text{PGCD}(a; b) = \text{PGCD}(b; r)$ et on recommence avec $b$ et $r$</li>
+                                </ol>
+                                <p><strong>Exemple :</strong> Calculons $\text{PGCD}(205; 82)$</p>
+                                <p>$205 = 2 \times 82 + 41$</p>
+                                <p>$82 = 2 \times 41 + 0$</p>
+                                <p>Donc $\text{PGCD}(205; 82) = 41$</p>
+                            </div>
+                            
+                            <h4>Application : problème de pavage</h4>
+                            <div class="example-box">
+                                <p>On veut carreler une pièce rectangulaire de 60 cm sur 48 cm avec des carreaux carrés tous identiques. Quelle est la dimension maximale possible pour le côté des carreaux ?</p>
+                                <div class="solution">
+                                    <p>La dimension maximale correspond au PGCD des dimensions :</p>
+                                    <p>$\text{PGCD}(60; 48) = 12$ cm</p>
+                                    <p>Les carreaux pourront avoir au maximum 12 cm de côté.</p>
+                                </div>
+                            </div>
+                            
+                            <h4>Exercices d'application</h4>
+                            <div class="exercise">
+                                <p>1. Calculer $\text{PGCD}(48; 32)$ et en déduire $\text{PGCD}(1440; 960)$; $\text{PGCD}(-2256; 1504)$</p>
+                                <p>2. Déterminer $\text{PGCD}(304939; 151097)$ par l'algorithme d'Euclide</p>
+                                <p>3. Soit $n \in \mathbb{Z}$, déterminer $\text{PGCD}(n^4 - n^2 + 16; n^2 + 3n + 4)$</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="section3">
+                    <div class="card mb-4">
+                        <div class="card-header">Nombres premiers</div>
+                        <div class="card-body">
+                            <h4>Définition et propriétés</h4>
+                            <div class="definition">
+                                <p>Un nombre premier est un entier naturel supérieur à 1 qui admet exactement deux diviseurs positifs distincts : 1 et lui-même.</p>
+                                <p>Un nombre qui n'est pas premier est dit composé.</p>
+                            </div>
+                            
+                            <h4>Théorème fondamental de l'arithmétique</h4>
+                            <div class="property">
+                                <p>Tout entier naturel $n \geq 2$ peut s'écrire de façon unique (à l'ordre près) comme produit de nombres premiers :</p>
+                                <p>$$n = p_1^{\alpha_1} \times p_2^{\alpha_2} \times \ldots \times p_k^{\alpha_k}$$</p>
+                                <p>avec $p_1 < p_2 < \ldots < p_k$ premiers et $\alpha_i \in \mathbb{N}^*$.</p>
+                            </div>
+                            
+                            <h4>Application de la décomposition en facteurs premiers</h4>
+                            <div class="example-box">
+                                <p>Soit $n = p_1^{\alpha_1} p_2^{\alpha_2} \ldots p_k^{\alpha_k}$ et $m = p_1^{\beta_1} p_2^{\beta_2} \ldots p_k^{\beta_k}$</p>
+                                <p>Alors :</p>
+                                <p>$\text{PGCD}(n; m) = p_1^{\min(\alpha_1, \beta_1)} p_2^{\min(\alpha_2, \beta_2)} \ldots p_k^{\min(\alpha_k, \beta_k)}$</p>
+                                <p>$\text{PPCM}(n; m) = p_1^{\max(\alpha_1, \beta_1)} p_2^{\max(\alpha_2, \beta_2)} \ldots p_k^{\max(\alpha_k, \beta_k)}$</p>
+                                <p>Le nombre de diviseurs positifs de $n$ est : $(\alpha_1 + 1)(\alpha_2 + 1)\ldots(\alpha_k + 1)$</p>
+                            </div>
+                            
+                            <h4>Exemple</h4>
+                            <div class="example-box">
+                                <p>Décomposons $14553$ en facteurs premiers :</p>
+                                <p>$14553 = 3^3 \times 7^2 \times 11$</p>
+                                <p>Le nombre de diviseurs positifs de $14553$ est : $(3+1)(2+1)(1+1) = 4 \times 3 \times 2 = 24$</p>
+                                <p>Les diviseurs positifs de $14553$ sont tous les nombres de la forme $3^a \times 7^b \times 11^c$ avec :</p>
+                                <p>$a \in \{0, 1, 2, 3\}$, $b \in \{0, 1, 2\}$, $c \in \{0, 1\}$</p>
+                            </div>
+                            
+                            <h4>Crible d'Ératosthène</h4>
+                            <div class="example-box">
+                                <p>Méthode pour trouver tous les nombres premiers inférieurs à un entier $n$ donné :</p>
+                                <ol>
+                                    <li>Écrire tous les nombres de 2 à $n$</li>
+                                    <li>Barrer 1 (qui n'est pas premier)</li>
+                                    <li>Prendre le premier nombre non barré (2) et barrer tous ses multiples</li>
+                                    <li>Répéter avec le prochain nombre non barré</li>
+                                    <li>Les nombres non barrés à la fin sont les nombres premiers</li>
+                                </ol>
+                            </div>
+                            
+                            <h4>Exercices d'application</h4>
+                            <div class="exercise">
+                                <p>1. Quel est le plus petit entier naturel ayant 15 diviseurs positifs ?</p>
+                                <p>2. Dresser la liste des nombres premiers inférieurs à 133</p>
+                                <p>3. 1001 est-il un nombre premier ?</p>
+                                <p>4. Montrer qu'il existe une infinité de nombres premiers</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="section4">
+                    <div class="card mb-4">
+                        <div class="card-header">Théorèmes de Bézout et de Gauss</div>
+                        <div class="card-body">
+                            <h4>Théorème de Bézout</h4>
+                            <div class="definition">
+                                <p>Soient $a$ et $b$ deux entiers relatifs non nuls et $\delta = \text{PGCD}(a; b)$.</p>
+                                <p>Il existe deux entiers relatifs $u$ et $v$ tels que $au + bv = \delta$.</p>
+                                <p>En particulier, $a$ et $b$ sont premiers entre eux si et seulement s'il existe $u, v \in \mathbb{Z}$ tels que $au + bv = 1$.</p>
+                            </div>
+                            
+                            <h4>Théorème de Gauss</h4>
+                            <div class="property">
+                                <p>Soient $a$, $b$ et $c$ trois entiers relatifs non nuls.</p>
+                                <p>Si $a$ divise $bc$ et si $a$ et $b$ sont premiers entre eux, alors $a$ divise $c$.</p>
+                            </div>
+                            
+                            <h4>Corollaires</h4>
+                            <div class="example-box">
+                                <p>1. Si $a$ et $b$ divisent $c$ et si $a$ et $b$ sont premiers entre eux, alors $ab$ divise $c$.</p>
+                                <p>2. Si $a$ et $b$ sont premiers entre eux, alors $\text{PPCM}(a; b) = ab$.</p>
+                                <p>3. Pour tous entiers naturels non nuls $a$ et $b$, $\text{PPCM}(a; b) \times \text{PGCD}(a; b) = ab$.</p>
+                            </div>
+                            
+                            <h4>Application : résolution d'équations diophantiennes</h4>
+                            <div class="example-box">
+                                <p>L'équation $ax + by = c$ admet des solutions dans $\mathbb{Z}^2$ si et seulement si $c$ est un multiple de $\text{PGCD}(a; b)$.</p>
+                                <p><strong>Exemple :</strong> L'équation $564x + 271y = 1$</p>
+                                <p>Comme $\text{PGCD}(564; 271) = 1$, cette équation admet des solutions.</p>
+                            </div>
+                            
+                            <h4>Exercices d'application</h4>
+                            <div class="exercise">
+                                <p>1. Déterminer deux entiers relatifs $x$ et $y$ tels que $38x + 35y = 1$</p>
+                                <p>2. Montrer que pour tout entier relatif $n$, $\frac{7n+3}{5n+2}$ est irréductible</p>
+                                <p>3. Résoudre dans $\mathbb{N}^2$ le système :</p>
+                                <p>$\begin{cases} x + y = 420 \\ \text{PGCD}(x; y) = 35 \end{cases}$</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="section5">
+                    <div class="card mb-4">
+                        <div class="card-header">Équations diophantiennes</div>
+                        <div class="card-body">
+                            <h4>Définition</h4>
+                            <div class="definition">
+                                <p>Une équation diophantienne est une équation polynomiale à coefficients entiers dont on cherche les solutions entières.</p>
+                                <p>La forme la plus simple est l'équation linéaire à deux inconnues : $ax + by = c$ avec $a, b, c \in \mathbb{Z}$.</p>
+                            </div>
+                            
+                            <h4>Méthode de résolution</h4>
+                            <div class="property">
+                                <p>Pour résoudre $ax + by = c$ dans $\mathbb{Z}^2$ :</p>
+                                <ol>
+                                    <li>Calculer $\delta = \text{PGCD}(a; b)$</li>
+                                    <li>Si $\delta$ ne divise pas $c$, il n'y a pas de solution</li>
+                                    <li>Si $\delta$ divise $c$, simplifier l'équation en divisant par $\delta$ : $a'x + b'y = c'$</li>
+                                    <li>Trouver une solution particulière $(x_0; y_0)$</li>
+                                    <li>Les solutions générales sont : $x = x_0 + b'k$, $y = y_0 - a'k$ pour $k \in \mathbb{Z}$</li>
+                                </ol>
+                            </div>
+                            
+                            <h4>Exemple</h4>
+                            <div class="example-box">
+                                <p>Résolvons $3x - 2y = 3$ dans $\mathbb{Z}^2$ :</p>
+                                <p>1. $\text{PGCD}(3; 2) = 1$ qui divise 3 → il y a des solutions</p>
+                                <p>2. Une solution particulière : $(3; 3)$</p>
+                                <p>3. L'équation devient : $3(x - 3) = 2(y - 3)$</p>
+                                <p>4. D'après le théorème de Gauss, $x - 3 = 2k$ et $y - 3 = 3k$ pour $k \in \mathbb{Z}$</p>
+                                <p>5. Solutions : $x = 3 + 2k$, $y = 3 + 3k$ pour $k \in \mathbb{Z}$</p>
+                            </div>
+                            
+                            <h4>Application : problème de jeu</h4>
+                            <div class="example-box">
+                                <p>Un jeu attribue +3 points pour une bonne réponse et -2 points pour une mauvaise réponse. Un candidat doit obtenir exactement 3 points pour gagner. Combien de combinaisons de bonnes et mauvaises réponses permettent de gagner ?</p>
+                                <div class="solution">
+                                    <p>Soit $x$ le nombre de bonnes réponses et $y$ le nombre de mauvaises réponses.</p>
+                                    <p>On a $3x - 2y = 3$</p>
+                                    <p>Les solutions dans $\mathbb{N}^2$ sont : $(3; 3), (5; 6), (7; 9), ...$</p>
+                                    <p>Il existe donc une infinité de combinaisons possibles.</p>
+                                </div>
+                            </div>
+                            
+                            <h4>Exercices d'application</h4>
+                            <div class="exercise">
+                                <p>1. Dans le plan muni d'un repère, déterminer les points à coordonnées entières sur la droite d'équation $12x - 7y = 1$</p>
+                                <p>2. Résoudre dans $\mathbb{Z}$ le système :</p>
+                                <p>$\begin{cases} x \equiv -1 \pmod{34} \\ x \equiv 1 \pmod{15} \end{cases}$</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="section6">
+                    <div class="card mb-4">
+                        <div class="card-header">Arithmétique modulaire</div>
+                        <div class="card-body">
+                            <h4>Définition de $\mathbb{Z}/n\mathbb{Z}$</h4>
+                            <div class="definition">
+                                <p>Soit $n \in \mathbb{N}^*$. On définit sur $\mathbb{Z}$ la relation de congruence modulo $n$ :</p>
+                                <p>$a \equiv b \pmod{n} \Leftrightarrow n \mid (a - b)$</p>
+                                <p>L'ensemble quotient $\mathbb{Z}/n\mathbb{Z} = \{\overline{0}, \overline{1}, \overline{2}, ..., \overline{n-1}\}$ est l'ensemble des classes d'équivalence modulo $n$.</p>
+                            </div>
+                            
+                            <h4>Opérations dans $\mathbb{Z}/n\mathbb{Z}$</h4>
+                            <div class="property">
+                                <p>On définit une addition et une multiplication dans $\mathbb{Z}/n\mathbb{Z}$ par :</p>
+                                <p>$\overline{a} + \overline{b} = \overline{a + b}$</p>
+                                <p>$\overline{a} \times \overline{b} = \overline{a \times b}$</p>
+                                <p>Ces opérations sont bien définies et héritent des propriétés usuelles de l'addition et de la multiplication.</p>
+                            </div>
+                            
+                            <h4>Éléments inversibles</h4>
+                            <div class="example-box">
+                                <p>Un élément $\overline{a} \in \mathbb{Z}/n\mathbb{Z}$ est inversible si et seulement si $\text{PGCD}(a; n) = 1$.</p>
+                                <p>Si $n$ est premier, tous les éléments non nuls de $\mathbb{Z}/n\mathbb{Z}$ sont inversibles.</p>
+                                <p><strong>Exemple :</strong> Dans $\mathbb{Z}/7\mathbb{Z}$, l'inverse de $\overline{3}$ est $\overline{5}$ car $3 \times 5 = 15 \equiv 1 \pmod{7}$</p>
+                            </div>
+                            
+                            <h4>Résolution d'équations dans $\mathbb{Z}/n\mathbb{Z}$</h4>
+                            <div class="example-box">
+                                <p>Pour résoudre $\overline{a} \cdot \overline{x} = \overline{b}$ dans $\mathbb{Z}/n\mathbb{Z}$ :</p>
+                                <ol>
+                                    <li>Calculer $\delta = \text{PGCD}(a; n)$</li>
+                                    <li>Si $\delta$ ne divise pas $b$, il n'y a pas de solution</li>
+                                    <li>Si $\delta$ divise $b$, l'équation a $\delta$ solutions</li>
+                                </ol>
+                                <p><strong>Exemple :</strong> Résolvons $\overline{4} \cdot \overline{x} = \overline{2}$ dans $\mathbb{Z}/10\mathbb{Z}$</p>
+                                <p>$\text{PGCD}(4; 10) = 2$ qui divise 2 → il y a 2 solutions</p>
+                                <p>Les solutions sont $\overline{3}$ et $\overline{8}$</p>
+                            </div>
+                            
+                            <h4>Application : problème de moyenne</h4>
+                            <div class="example-box">
+                                <p>Un élève cherche sa moyenne. On sait que le double de sa moyenne et 8 ont le même reste dans la division par 5. La moyenne est la moyenne arithmétique des 3 premiers entiers naturels vérifiant cette assertion.</p>
+                                <div class="solution">
+                                    <p>L'équation est : $2x \equiv 8 \pmod{5}$</p>
+                                    <p>Simplification : $2x \equiv 3 \pmod{5}$ (car $8 \equiv 3 \pmod{5}$)</p>
+                                    <p>L'inverse de 2 modulo 5 est 3, donc $x \equiv 3 \times 3 \equiv 9 \equiv 4 \pmod{5}$</p>
+                                    <p>Les solutions sont les nombres congrus à 4 modulo 5 : 4, 9, 14, ...</p>
+                                    <p>La moyenne est $\frac{4 + 9 + 14}{3} = 9$</p>
+                                </div>
+                            </div>
+                            
+                            <h4>Exercices d'application</h4>
+                            <div class="exercise">
+                                <p>1. Résoudre dans $\mathbb{Z}$ l'équation $x^2 \equiv -2 \pmod{6}$</p>
+                                <p>2. Établir les tables d'addition et de multiplication dans $\mathbb{Z}/12\mathbb{Z}$ et $\mathbb{Z}/5\mathbb{Z}$</p>
+                                <p>3. Déterminer tous les éléments inversibles de $\mathbb{Z}/12\mathbb{Z}$</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>Références : Arithmétique des entiers - Cours de mathématiques Terminale C</p>
+            <p>© 2023 - Adaptation HTML des concepts de PPCM et PGCD</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap and jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Animation for smooth scrolling
+            $('a.list-group-item').on('click', function(event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top - 20
+                    }, 800);
+                }
+            });
+            
+            // Highlight active section in navigation
+            $(window).scroll(function() {
+                var scrollDistance = $(window).scrollTop();
+                
+                $('section').each(function(i) {
+                    if ($(this).position().top - 50 <= scrollDistance) {
+                        $('a.list-group-item.active').removeClass('active');
+                        $('a.list-group-item').eq(i).addClass('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Séries Statistiques Regroupées en Classes</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .lesson-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .lesson-header {
+            background-color: #4e73df;
+            color: white;
+            padding: 1rem;
+        }
+        .lesson-body {
+            padding: 1.5rem;
+            background-color: white;
+        }
+        .table-custom {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .table-custom th {
+            background-color: #4e73df;
+            color: white;
+        }
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .objective-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .objective-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4e73df;
+        }
+        .formula-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #4e73df;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+        .img-container {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .img-container img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header text-center">
+            <h1 class="display-4">Séries Statistiques Regroupées en Classes</h1>
+            <p class="lead">Analyse et interprétation des données groupées par intervalles</p>
+        </div>
+
+        <!-- Lesson 1 -->
+        <div class="lesson-card">
+            <div class="lesson-header">
+                <h2>Leçon 1 : Généralités sur les séries statistiques groupées</h2>
+                <p>Durée : 50 minutes</p>
+            </div>
+            <div class="lesson-body">
+                <h3>Objectifs pédagogiques</h3>
+                <ul class="objective-list">
+                    <li>Calculer la moyenne, déterminer la classe modale, le mode et la médiane d'une série groupée en classes</li>
+                    <li>Calculer l'écart-moyen, la variance et l'écart-type d'une série groupée en classes</li>
+                    <li>Interpréter la signification des différents paramètres de position et de dispersion dans des contextes réels</li>
+                </ul>
+
+                <h3>Concepts fondamentaux</h3>
+                <p>Avant d'aborder les séries statistiques groupées, il est essentiel de maîtriser les notions de base suivantes :</p>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>Terme</th>
+                                <th>Définition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Population</td>
+                                <td>Ensemble sur lequel porte l'étude statistique</td>
+                            </tr>
+                            <tr>
+                                <td>Individu</td>
+                                <td>Élément particulier de la population étudiée</td>
+                            </tr>
+                            <tr>
+                                <td>Caractère</td>
+                                <td>Propriété commune aux individus de la population (continu dans notre cas)</td>
+                            </tr>
+                            <tr>
+                                <td>Effectif total</td>
+                                <td>Nombre total d'individus dans la population</td>
+                            </tr>
+                            <tr>
+                                <td>Effectif</td>
+                                <td>Nombre d'individus partageant une même valeur du caractère</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Étude de cas : Contrôle qualité pharmaceutique</h3>
+                <p>Un laboratoire d'analyse médicale effectue 36 dosages du calcium sérique selon différentes concentrations. Comment déterminer la concentration moyenne permettant la commercialisation du produit?</p>
+
+                <h3>Application pratique</h3>
+                <p>Considérons une étude sur la fluorescence de la chlorophylle (en millivolts) dans un océan, avec 80 mesures enregistrées :</p>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>Fluorescence [a;b] (mv)</th>
+                                <th>[15;20]</th>
+                                <th>[20;25]</th>
+                                <th>[25;30]</th>
+                                <th>[30;35]</th>
+                                <th>[35;40]</th>
+                                <th>[40;45]</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Effectifs $(n_i)$</td>
+                                <td>8</td>
+                                <td>13</td>
+                                <td>21</td>
+                                <td>20</td>
+                                <td>14</td>
+                                <td>4</td>
+                                <td>80</td>
+                            </tr>
+                            <tr>
+                                <td>Centre de classe $(c_i = \frac{a + b}{2})$</td>
+                                <td>17,5</td>
+                                <td>22,5</td>
+                                <td>27,5</td>
+                                <td>32,5</td>
+                                <td>37,5</td>
+                                <td>42,5</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>$n_i \times c_i$</td>
+                                <td>140</td>
+                                <td>292,5</td>
+                                <td>577,5</td>
+                                <td>650</td>
+                                <td>525</td>
+                                <td>170</td>
+                                <td>2355</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>Résolution</h4>
+                <p>1. La classe modale est l'intervalle [25;30] car il présente le plus grand effectif. Le mode correspond au centre de cette classe : 27,5</p>
+                
+                <p>2. Calcul de la moyenne :</p>
+                <div class="formula-box">
+                    $\overline{x} = \frac{1}{N} \sum_{i=1}^{k} n_i \times c_i = \frac{2355}{80} = 29,4375$
+                </div>
+                
+                <p>Calcul de l'écart-type :</p>
+                <div class="formula-box">
+                    $\sigma = \sqrt{V} = \sqrt{\frac{1}{N} \sum_{i=1}^{k} n_i (c_i - \overline{x})^2} \approx 6,73$
+                </div>
+                
+                <p>Calcul de l'écart-moyen :</p>
+                <div class="formula-box">
+                    $\sigma_m = \frac{1}{N} \sum_{i=1}^{k} n_i |c_i - \overline{x}| = \frac{452,75}{80} \approx 5,659$
+                </div>
+
+                <h3>Définitions importantes</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>Concept</th>
+                                <th>Définition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Centre de classe</td>
+                                <td>$C = \frac{a + b}{2}$</td>
+                            </tr>
+                            <tr>
+                                <td>Amplitude de classe</td>
+                                <td>$A = b - a$</td>
+                            </tr>
+                            <tr>
+                                <td>Classe modale</td>
+                                <td>Classe ayant le plus grand effectif</td>
+                            </tr>
+                            <tr>
+                                <td>Mode</td>
+                                <td>Centre de la classe modale</td>
+                            </tr>
+                            <tr>
+                                <td>Effectif cumulé croissant</td>
+                                <td>Nombre d'individus dont la valeur est inférieure ou égale à une modalité</td>
+                            </tr>
+                            <tr>
+                                <td>Effectif cumulé décroissant</td>
+                                <td>Nombre d'individus dont la valeur est supérieure ou égale à une modalité</td>
+                            </tr>
+                            <tr>
+                                <td>Médiane</td>
+                                <td>Valeur qui partage la série en deux parties égales</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Exercice d'application</h3>
+                <div class="exercise">
+                    <p>On considère une série statistique dont les fréquences sont données par le tableau suivant :</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Classes</th>
+                                    <th>[0;3[</th>
+                                    <th>[3;5[</th>
+                                    <th>[5;7[</th>
+                                    <th>[7;10[</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Fréquence</td>
+                                    <td>10%</td>
+                                    <td>25%</td>
+                                    <td>35%</td>
+                                    <td>30%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>1. Calculez la moyenne, la variance et l'écart-type de cette série.</p>
+                    <p>2. Sachant que l'effectif total est de 60, dressez le tableau des effectifs et déduisez la classe modale et son mode.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson 2 -->
+        <div class="lesson-card">
+            <div class="lesson-header">
+                <h2>Leçon 2 : Représentations graphiques et détermination de la médiane</h2>
+                <p>Durée : 50 minutes</p>
+            </div>
+            <div class="lesson-body">
+                <h3>Objectifs pédagogiques</h3>
+                <ul class="objective-list">
+                    <li>Construire et interpréter un histogramme</li>
+                    <li>Construire et interpréter les courbes des effectifs et fréquences cumulés</li>
+                    <li>Déterminer graphiquement et par interpolation linéaire la valeur exacte de la médiane</li>
+                </ul>
+
+                <h3>Étude de cas : Gestion scolaire</h3>
+                <p>Un enseignant nouvellement nommé surveillant général doit analyser l'état disciplinaire des élèves à partir d'un graphique fourni par son prédécesseur. Comment reconstituer le tableau des absences à partir de cette représentation graphique?</p>
+
+                <h3>Application pratique</h3>
+                <p>Considérons les résultats d'une compétition de saut en longueur regroupés en classes :</p>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>Longueur (m)</th>
+                                <th>[0;5[</th>
+                                <th>[5;7[</th>
+                                <th>[7;10[</th>
+                                <th>[10;12[</th>
+                                <th>[12;14[</th>
+                                <th>[14;16[</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Effectifs $(n_i)$</td>
+                                <td>6</td>
+                                <td>8</td>
+                                <td>10</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>29</td>
+                            </tr>
+                            <tr>
+                                <td>Amplitude</td>
+                                <td>5</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Densité</td>
+                                <td>1,2</td>
+                                <td>4</td>
+                                <td>3,33</td>
+                                <td>1,5</td>
+                                <td>0,5</td>
+                                <td>0,5</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4>Représentations graphiques</h4>
+                <p>L'histogramme est constitué de rectangles juxtaposés dont les bases représentent les amplitudes des classes et les hauteurs sont proportionnelles aux densités.</p>
+                
+                <div class="img-container">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARwAAACxCAMAAAAh3/JWAAABs1BMVEX////7tLn/t7ygfH6xsbG6honyrrK0gYX/tbuabnG5jpHfoKTDxcTsparbnaG+iIysl5i+vb3T19fal5zM0dG7lJejjpC8o6SqpKT3+/vzqq+jiIrh5eWwoaLIiY62lZipf4Ly8vL///jFrpcAAAD/+uGyzOPj+P/j4OP/+fX//vPc7vb0+P3m6/Hj2dLt5+GglJPl+/+hpbDU5uaZkZiVmpOZmZmck5nPvK3//+y0q6fSysGdkX/i7Pr78urd4+uvknJ7nb/BydNzXjqusr/w0bMQU4PRt5lScZZcNg+82exkPACvoJGWsb6QclGcqr5LKwAaACTw5M0fWXvG0uE7ITeqm3mKkqAqSG7kzrthjpqyqopqg510VDd3ZEwrCg2MZUNMfpbFp380GEE5EyCiiGfNurN8Uix0cnl0h5R1Y2abeV+ewNkAMVFbboIpMUYxR11EZIz128lySBMQAC2RrKYSB0lCKyBGQ1QbIkUkESeVcUQxJSxuf5ZdPCKuubAAPW5HKS4rLURQX4FTQDUAMFAvACY6HgBsSiQlABbGxaq9zb5sYlFqX19iTU6Gl7Fub3jUjl4AAAAJUUlEQVR4nO2d/3/SZh7An9Zs2sl0T8rtkom7ESwlNMnTYmGUlEAR14q0bBRFJnrTu6KnnFbn7ZtzzC87dztvvT/5ntDSa+F5IrwsQsrn/QOGfMLzfPI2yRPC8zxFCAAAABgmTKzvLi8mUSC4J2ZhnEIqxhl7O73jo4ee9BLyGp4Q3X+MtXPZFEkaOGVqHmRSI+c/a26zvIKQ/0JuwJkOgIvJ/OpaQTY/P/tFcX2tdOly+Urly2ulS1er14JIFa/XEQr/eZpu+NUIyklXl2+s5W4ufeX9S6V6LvlXKif+5Vrm0tUlS0fmzEb91MzGEqqtolvB1xd26DC8MtEUrxg+IyKihYhG8jdUr4gMj4YsTwqFZFFGRCeiVx50qgMk1FpQfYNMY5gw6KV4cXrnzaKnsLO0p9FSb+8/ZCpb9CW99wpk/Y1V8trMzoKZ2lm4I7cVbfNwa88bVZBVASeRKaTQEHC3fnPJ1DCO/92HsRm/h5UsEW9tGUlTkE1PCSGSuI88mWaLr2IPwaXzKwZOGj6csXDKslt5I7+Otls7FKZrPTgl0DczF2dqGSujZBdui/QtPTXxF7KZpV7rJt2SFjhDqyCCt0TLubmuG/bK5TN1a7P4YLmKMoMWY3O3/nD9a+E5friiPPJdEKrpf3xTubGRS5cfnL9xrfQMKd/q313eut74XtDQ5XtU0g/xqpV/8Di7SX5MbG48yaDw9+Te48JPjU1BRrcKFzLry0truTNTP38dW0qvPq0s3Vr9tvGcyrmQfHq1Slu/dN24u4SmHmHzs/P3XsydX3khfBevPrySryL0U+OKdT9f3agPWss2d1c3gheD5ktjPfwNuiBVaUMVv5GubxSeL29dS/0gKy+8z65u0cvxr0FkmJtrq08DT340nz/OPkcvkqIR/wWFn5nr6QLd4vMc2qgTc+Xm0lrpn7+tXMxWN4LLj+YeBw3RfDmNfi3967eqlUIbsZ8DVXqtPxehVbxKBVaul8TKSnHTL6LiL+Sl937xinmPZActxsYv6og0X3wheyGFiKgrItEsEflkepFWRR9dZQfoP5oqhvy6JerEryNFTBHakiGLbhES7TIQEkVZt3SinDmLCDJSqPLAXteMbRdETy+NhOgpKtLqRHuljuiiQevTkd/OJSRqdk2DFtNHWk0fOcw7CQAAAABDBNFVeoszgk/7uqBY1mJxb2R2lB9LcAkkY5GpaDAwh/yCIA06myGDSJmapEmR5hthwMkMNSDHAZDjAMhxAOQ4AHIcADkOgBwHQI4Db0GO38tB7H/db8ZbkIPf/4jNe/2v+814G3I+GmMy/of+1/1mgBwHQI4DIMcBkOMAyHEA5DgAcvbzsOxLzJ6dn2++ATn7sbLemP2Afdp+wB7rf32ukmPgLD1yPoUj57WAHAdAjgMgxwGQ4wDIcQDkOAByHAA5DoAcB0COAyDHAZDjwCDlfPIhh2H5GXaQct4Z5/BB/5PqisHKYQeOgRyQY+MWOWLNHjCmynYP9u2hYyCnxcJswh7LnM5Juz3Y34IcjyvkqMjw0eMl0CjEdnqwx6SDe8DuO3KKzZ133SCH/PtDbB85U6WapJ8+6B7s4iSnYX7HFXLoQVNuH6R6oHLYDo66Q46COwbwgpxdyKtY28QRIKeFkkGobZQVyNlFSiTb1oCcFuFIvNS2CuT8H7gg81CwB7cPewU5u0iCu685PpGD/83zD5fj7XeB7pIzMcnmY89B7IGstq1wl5xPOFW8fwByFMHl1xyOnLEDkTPvBTk8Fgodq0BOC8XtTXlf5Szi9llHQU4LJX3b3fc5/ZTDAOTssPOsy2hk+9GD3e1y4k+aM6ka2VYPdoy5D9hP/5HNB7xhqy6XYz/PSbV6sL/uyHlv/BgL/s2o6+V04iCnxzxAzmGWk/e0T8wMclos5KX2eflBzi6kY9JqkNNCiXSsGkY543ckDhP9lGN2/OQ5lHIm2LcRx471Vc6ncTdckMd5Dsb6KEfB5UDX38q5cgQfG4+75bDoWc7xicmPKc2XvUxOnHC3nLDU/cMurpyTnG44J10uR5n3HIQc9h65Xc5Cwd8+lS3I2cXEIIdHL70sRk5OL/1zRk8OUuG04mKWQQ6PfMRurYxGpot+yCMnh/hC9hdPK9NFD/aRk7ONUda6GPswonJUn97FqJkRlbMPkANyQA7IYQJyxkDOGMhpBkAOyBkDOU1ADsgBOSAH5IAckDMGcpqBYZSjvJrrYibtEZWDAnNdzMHuLjm3T7OZ7XVkrHI911UPdnYewynnJKe//aSvRzn7OCRyOEWBnDGQ0wTkgJwxkNMMgByQYzNScmQOIAehI+090VscBTnoFG/CZl7mIyXnGCcPOHJADsgBOcySJt9oprNDLufEqT+xOQVyxk8c5zwFOwpyqBxOFc5ypO0e7A73OWz4I/WO80oa432CV/dEr4F3eUWdeJ8TcJRTrNs92AX8nyMc7vQauDNxUCUd+b3nQM9J/e4kJ/y6Huy8Hzv83KHTvFbT0z4Y5XVV8JPiBWReUT5ea4V5VTQhunMevE/7eQEvb9Yh3HOCUq8BblLc/7GuZpzi3iRxbxB4AT830HMV3KR4AZlbN++oPYCZXgGAR4h93KkyCjEDoqYwA6po/wEbdlHsgCrqavso9yZKCoU6Zvy214dCnHTp9ZOdLdHYAQ0Zmsr+yB7imc5ZY2wu5+JmllWbbz5hts+HsR2ISBVWQFk8K8XbpzRqVl1SIvkZRmC2VMkwf8L3z5rMdKcKp00vK9tKRkqwdqNSqJRi7HT3kpfZPQkquTxjsh07UIoypn9F9vx60SlWIBBdjRRZaViJRqHCsDa1FYhNR1lVWNnAHCtgRWLs/Shm56PKauf6hcLydJSzH3sgUsdcTE0Cq4bUPgS9WV3Za0qss8TAGVNiHQeoOFOTWGeJKaQSEussSUhEYh0HKCFbzHQXIgJhZqvUSgYr20o5LPHSBQAAAACAh0pbdLKzbN+eKj6/X98To2s0i3nTfLiRcImIxaCpEyL6RXrzkyFeQyPRiG6JqldG1mLOoFoCT2Tu44rDSw2nrHwjZ8w3ov7b9EtDTc7HM9GoIAjz+UYQhSMVIULvcfMFVGPdMB5usEeI5RuNMpUj21PO1abzpjdKiUiYfvNSYosZIYOU/H/nRlDOvr9WR5ct9vcaK6myvwgDAAAAI8D/AEP734EwQmbHAAAAAElFTkSuQmCC" alt="Exemple d'histogramme">
+                    <p class="caption">Exemple d'histogramme de données groupées (Source: Wikimedia Commons)</p>
+                </div>
+
+                <p>Le polygone des effectifs cumulés croissants (ou décroissants) est une ligne brisée reliant les points d'abscisses correspondant aux bornes des classes et d'ordonnées correspondant aux effectifs cumulés.</p>
+
+                <div class="img-container">
+                    <img src="data:image/jpeg;base64,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" alt="Polygone des effectifs cumulés">
+                    <p class="caption">Comparaison entre histogramme et courbe cumulative (Source: Wikimedia Commons)</p>
+                </div>
+
+                <h3>Détermination de la médiane</h3>
+                <p>La médiane est l'abscisse du point d'ordonnée $\frac{N}{2}$ sur le polygone des effectifs cumulés. On peut la déterminer précisément par interpolation linéaire :</p>
+                
+                <div class="formula-box">
+                    Soient $A(x_A; y_A)$ et $B(x_B; y_B)$ deux points encadrant la médiane $M_e$ avec pour ordonnée $\frac{N}{2}$.<br>
+                    Par interpolation linéaire : $\frac{x_A - M_e}{y_A - \frac{N}{2}} = \frac{x_A - x_B}{y_A - y_B}$
+                </div>
+
+                <h3>Exercice d'application</h3>
+                <div class="exercise">
+                    <p>Une enquête sur le nombre de dents saines chez 40 personnes a donné les résultats suivants :</p>
+                    <p>30, 32, 0, 12, 30, 27, 30, 29, 18, 27, 30, 27, 29, 31, 17, 28, 29, 26, 25, 31, 32, 29, 24, 30, 31, 30, 15, 32, 25, 29, 31, 26, 18, 24, 13, 15, 10</p>
+                    
+                    <p>1. Complétez le tableau statistique groupant ces données en classes.</p>
+                    <p>2. Calculez la moyenne, la variance et l'écart-type.</p>
+                    <p>3. Construisez le tableau des effectifs cumulés croissants.</p>
+                    <p>4. Tracez le polygone des effectifs cumulés croissants.</p>
+                    <p>5 Déterminez la classe médiane et calculez la médiane par interpolation linéaire.</p>
+                </div>
+
+                <h4>Correction (partielle)</h4>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>Nombre de dents saines</th>
+                                <th>[0;15[</th>
+                                <th>[15;28[</th>
+                                <th>[28;35[</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Effectifs $(n_i)$</td>
+                                <td>4</td>
+                                <td>16</td>
+                                <td>20</td>
+                                <td>40</td>
+                            </tr>
+                            <tr>
+                                <td>Centre $(c_i)$</td>
+                                <td>7,5</td>
+                                <td>21,5</td>
+                                <td>31,5</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <p>Moyenne : $\overline{x} = \frac{1004}{40} = 25,1$</p>
+                <p>Variance : $V = \frac{27466}{40} - (25,1)^2 = 56,64$</p>
+                <p>Écart-type : $\sigma = \sqrt{56,64} \approx 7,52$</p>
+                <p>La classe médiane est [28;35]. Par interpolation linéaire, on trouve $M_e = 28$.</p>
+            </div>
+        </div>
+
+        <!-- Resources Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h3>Ressources supplémentaires</h3>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Images libres de droits : <a href="https://unsplash.com/">Unsplash</a>, <a href="https://commons.wikimedia.org/">Wikimedia Commons</a></li>
+                    <li>Documentation MathJax : <a href="https://www.mathjax.org/">Site officiel</a></li>
+                    <li>Référence Bootstrap : <a href="https://getbootstrap.com/">Documentation</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        $(document).ready(function() {
+            // Animation pour les formules mathématiques
+            $(".formula-box").hover(
+                function() {
+                    $(this).css("background-color", "#e3f2fd");
+                }, function() {
+                    $(this).css("background-color", "#f8f9fa");
+                }
+            );
+            
+            // Animation pour les en-têtes de leçons
+            $(".lesson-header").click(function() {
+                $(this).next(".lesson-body").slideToggle();
+            });
+        });
+    </script>
+</body>
+</html>

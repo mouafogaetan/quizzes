@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonométrie - Formules et Équations</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            border: none;
+            border-radius: 10px;
+        }
+        .card-header {
+            background-color: #f1f8ff;
+            font-weight: 600;
+            border-bottom: 1px solid #d0e7ff;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .objective-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .objective-list li:before {
+            content: "•";
+            color: #2575fc;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .formula-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #2575fc;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .example-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #6f42c1;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .circle-trigono {
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+        }
+        .table-trigono {
+            background-color: white;
+        }
+        .table-trigono th {
+            background-color: #2575fc;
+            color: white;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #f1f8ff;
+            border-bottom: 3px solid #2575fc;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">TRIGONOMÉTRIE</h1>
+            <p class="lead">Formules trigonométriques et résolution d'équations</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Motivation Section -->
+        <div class="card">
+            <div class="card-header">Motivation</div>
+            <div class="card-body">
+                <p>De nombreuses situations de la vie courante, telles que la détermination des dimensions d'un terrain, l'achat ou la vente de biens de consommation, ou les positions d'objets mobiles, font appel à la notion de trigonométrie. Ce chapitre nous donnera les outils nécessaires pour résoudre ces problèmes.</p>
+                <div class="text-center mt-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Circle-trig6.svg/600px-Circle-trig6.svg.png" alt="Cercle trigonométrique" class="img-fluid circle-trigono">
+                    <p class="text-muted mt-2">Cercle trigonométrique avec les angles remarquables</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-tabs mb-4" id="trigonoTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="formulas-tab" data-bs-toggle="tab" data-bs-target="#formulas" type="button" role="tab">Formules trigonométriques</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="equations-tab" data-bs-toggle="tab" data-bs-target="#equations" type="button" role="tab">Équations et inéquations</button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="trigonoTabsContent">
+            <!-- Formules Trigonométriques Tab -->
+            <div class="tab-pane fade show active" id="formulas" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">Objectifs pédagogiques</div>
+                    <div class="card-body">
+                        <ul class="objective-list">
+                            <li>Déterminer les lignes trigonométriques des angles orientés</li>
+                            <li>Reconnaître et utiliser les formules trigonométriques</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Situation problème</div>
+                    <div class="card-body">
+                        <p>Monsieur Adam est un jeune cultivateur. Il veut réparer les rayons des roues de son porte-tout (communément appelé "pousse-pousse") chez son mécanicien Kouam. Le mécanicien lui conseille qu'afin d'éviter les pertes de rayons en cas de surcharge, il devrait placer les rayons des roues de telle sorte que l'angle entre deux rayons consécutifs soit compris entre 5° et 10°. Les roues de monsieur Adam peuvent-elles supporter la surcharge ?</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Lignes trigonométriques d'angles orientés associés</div>
+                    <div class="card-body">
+                        <p>Soit $\theta$ un angle orienté. Les angles orientés $-\theta$, $\pi - \theta$, $\pi + \theta$, $\frac{\pi}{2} - \theta$ et $\frac{\pi}{2} + \theta$ sont dits associés à $\theta$ et on a les formules suivantes :</p>
+                        
+                        <div class="formula-box">
+                            <p>$\sin(-\theta) = -\sin\theta$</p>
+                            <p>$\cos(-\theta) = \cos\theta$</p>
+                            <p>$\tan(-\theta) = -\tan\theta$</p>
+                        </div>
+
+                        <div class="formula-box">
+                            <p>$\sin(\pi - \theta) = \sin\theta$</p>
+                            <p>$\cos(\pi - \theta) = -\cos\theta$</p>
+                            <p>$\tan(\pi - \theta) = -\tan\theta$</p>
+                        </div>
+
+                        <div class="formula-box">
+                            <p>$\sin(\pi + \theta) = -\sin\theta$</p>
+                            <p>$\cos(\pi + \theta) = -\cos\theta$</p>
+                            <p>$\tan(\pi + \theta) = \tan\theta$</p>
+                        </div>
+
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Simplifier l'expression : $\sin(\pi - \theta) + \cos\left(\frac{\pi}{2} + \theta\right) - \sin(-\theta) + \cos(\pi + \theta)$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Lignes trigonométriques d'angles remarquables</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-trigono">
+                                <thead>
+                                    <tr>
+                                        <th>Angle (degrés)</th>
+                                        <th>Angle (radians)</th>
+                                        <th>Sinus</th>
+                                        <th>Cosinus</th>
+                                        <th>Tangente</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0°</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30°</td>
+                                        <td>$\frac{\pi}{6}$</td>
+                                        <td>$\frac{1}{2}$</td>
+                                        <td>$\frac{\sqrt{3}}{2}$</td>
+                                        <td>$\frac{\sqrt{3}}{3}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>45°</td>
+                                        <td>$\frac{\pi}{4}$</td>
+                                        <td>$\frac{\sqrt{2}}{2}$</td>
+                                        <td>$\frac{\sqrt{2}}{2}$</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>60°</td>
+                                        <td>$\frac{\pi}{3}$</td>
+                                        <td>$\frac{\sqrt{3}}{2}$</td>
+                                        <td>$\frac{1}{2}$</td>
+                                        <td>$\sqrt{3}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>90°</td>
+                                        <td>$\frac{\pi}{2}$</td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td>Non définie</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Formules trigonométriques</div>
+                    <div class="card-body">
+                        <h5>Formules d'addition</h5>
+                        <div class="formula-box">
+                            <p>$\sin(a + b) = \sin a \cos b + \cos a \sin b$</p>
+                            <p>$\sin(a - b) = \sin a \cos b - \cos a \sin b$</p>
+                            <p>$\cos(a + b) = \cos a \cos b - \sin a \sin b$</p>
+                            <p>$\cos(a - b) = \cos a \cos b + \sin a \sin b$</p>
+                            <p>$\tan(a + b) = \frac{\tan a + \tan b}{1 - \tan a \tan b}$</p>
+                            <p>$\tan(a - b) = \frac{\tan a - \tan b}{1 + \tan a \tan b}$</p>
+                        </div>
+
+                        <h5>Formules de duplication</h5>
+                        <div class="formula-box">
+                            <p>$\sin(2a) = 2 \sin a \cos a$</p>
+                            <p>$\cos(2a) = \cos^2 a - \sin^2 a = 2\cos^2 a - 1 = 1 - 2\sin^2 a$</p>
+                            <p>$\tan(2a) = \frac{2\tan a}{1 - \tan^2 a}$</p>
+                        </div>
+
+                        <h5>Formules de linéarisation</h5>
+                        <div class="formula-box">
+                            <p>$\sin^2 a = \frac{1 - \cos(2a)}{2}$</p>
+                            <p>$\cos^2 a = \frac{1 + \cos(2a)}{2}$</p>
+                            <p>$\sin^3 a = \frac{3\sin a - \sin(3a)}{4}$</p>
+                            <p>$\cos^3 a = \frac{3\cos a + \cos(3a)}{4}$</p>
+                        </div>
+
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Calculer la valeur exacte de $\sin(75^\circ)$ et $\cos(15^\circ)$ en utilisant les formules d'addition.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Équations et Inéquations Tab -->
+            <div class="tab-pane fade" id="equations" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">Objectifs pédagogiques</div>
+                    <div class="card-body">
+                        <ul class="objective-list">
+                            <li>Résoudre des équations et inéquations trigonométriques</li>
+                            <li>Représenter les points images des solutions sur le cercle trigonométrique</li>
+                            <li>Résoudre graphiquement des équations et inéquations trigonométriques</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Situation problème</div>
+                    <div class="card-body">
+                        <p>Pour régler ses problèmes de pertes de rayons en cas de surcharge, Adam consulte un autre mécanicien qui lui conseille de placer les rayons des roues de son porte-tout de telle sorte que l'angle formé par deux rayons consécutifs soit dans l'intervalle $[5^\circ, 10^\circ]$ et vérifie la relation $\cos(2\theta) = \frac{\sqrt{3}}{2}$. Très embarrassé, Adam ignore comment procéder. Aidez Adam à déterminer l'angle entre deux rayons consécutifs de son porte-tout.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Résolution d'équations trigonométriques</div>
+                    <div class="card-body">
+                        <h5>Équations du type $\cos x = a$</h5>
+                        <p>Soit à résoudre l'équation $\cos x = a$ :</p>
+                        <ul>
+                            <li>Si $|a| > 1$, alors l'équation n'a pas de solution</li>
+                            <li>Si $|a| \leq 1$, alors on cherche un angle $\theta \in [0, \pi]$ tel que $\cos \theta = a$</li>
+                        </ul>
+                        <p>Les solutions sont alors : $x = \theta + 2k\pi$ ou $x = -\theta + 2k\pi$, $k \in \mathbb{Z}$</p>
+
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Résoudre $\cos x = \frac{1}{2}$</p>
+                            <p>Solution : $x = \frac{\pi}{3} + 2k\pi$ ou $x = -\frac{\pi}{3} + 2k\pi$, $k \in \mathbb{Z}$</p>
+                        </div>
+
+                        <h5>Équations du type $\sin x = a$</h5>
+                        <p>Soit à résoudre l'équation $\sin x = a$ :</p>
+                        <ul>
+                            <li>Si $|a| > 1$, alors l'équation n'a pas de solution</li>
+                            <li>Si $|a| \leq 1$, alors on cherche un angle $\theta \in [-\frac{\pi}{2}, \frac{\pi}{2}]$ tel que $\sin \theta = a$</li>
+                        </ul>
+                        <p>Les solutions sont alors : $x = \theta + 2k\pi$ ou $x = \pi - \theta + 2k\pi$, $k \in \mathbb{Z}$</p>
+
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Résoudre $\sin x = \frac{\sqrt{2}}{2}$</p>
+                            <p>Solution : $x = \frac{\pi}{4} + 2k\pi$ ou $x = \frac{3\pi}{4} + 2k\pi$, $k \in \mathbb{Z}$</p>
+                        </div>
+
+                        <h5>Équations du type $a \cos x + b \sin x = c$</h5>
+                        <p>Pour résoudre ce type d'équation, on peut :</p>
+                        <ol>
+                            <li>Calculer $R = \sqrt{a^2 + b^2}$</li>
+                            <li>Diviser l'équation par $R$ : $\frac{a}{R} \cos x + \frac{b}{R} \sin x = \frac{c}{R}$</li>
+                            <li>Identifier $\frac{a}{R} = \cos \phi$ et $\frac{b}{R} = \sin \phi$</li>
+                            <li>L'équation devient $\cos(x - \phi) = \frac{c}{R}$</li>
+                            <li>Résoudre cette dernière équation</li>
+                        </ol>
+
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Résoudre $\sqrt{3} \cos x + \sin x = 1$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Résolution d'inéquations trigonométriques</div>
+                    <div class="card-body">
+                        <p>Pour résoudre une inéquation trigonométrique :</p>
+                        <ol>
+                            <li>Résoudre l'équation trigonométrique associée</li>
+                            <li>Placer les solutions sur le cercle trigonométrique</li>
+                            <li>Déterminer les intervalles solutions en étudiant le signe</li>
+                        </ol>
+
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Résoudre $\sin x \geq \frac{1}{2}$ sur $[0, 2\pi]$</p>
+                            <p>Solution : $x \in \left[\frac{\pi}{6}, \frac{5\pi}{6}\right]$</p>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Trigonometric_functions.svg/600px-Trigonometric_functions.svg.png" alt="Fonctions trigonométriques" class="img-fluid">
+                            <p class="text-muted mt-2">Représentation graphique des fonctions sinus et cosinus</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Résolution graphique</div>
+                    <div class="card-body">
+                        <p>Pour résoudre graphiquement une équation ou inéquation trigonométrique :</p>
+                        <ul>
+                            <li>Tracer le cercle trigonométrique et les droites correspondantes</li>
+                            <li>Identifier les points d'intersection</li>
+                            <li>Déterminer les angles correspondants</li>
+                        </ul>
+
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Résoudre graphiquement $\cos x = \frac{1}{2}$ sur $[0, 2\pi]$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercises Section -->
+        <div class="card mt-4">
+            <div class="card-header">Exercices d'application</div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <h5>Exercice 1</h5>
+                    <p>Calculer $\cos\left(\frac{\pi}{3} + \frac{\pi}{4}\right)$ en utilisant les formules d'addition.</p>
+                </div>
+                <div class="mb-3">
+                    <h5>Exercice 2</h5>
+                    <p>Résoudre l'équation $2\sin^2 x - 3\sin x + 1 = 0$ sur $[0, 2\pi]$.</p>
+                </div>
+                <div class="mb-3">
+                    <h5>Exercice 3</h5>
+                    <p>Résoudre l'inéquation $\cos x > \frac{\sqrt{2}}{2}$ sur $[0, 2\pi]$.</p>
+                </div>
+                <div>
+                    <h5>Exercice 4</h5>
+                    <p>Simplifier l'expression $\frac{\sin(2x)}{1 + \cos(2x)}$.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5">
+        <div class="container">
+            <p>© 2023 - Trigonométrie - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Activation des tooltips Bootstrap
+            $('[data-bs-toggle="tooltip"]').tooltip();
+            
+            // Gestion du changement d'onglets
+            $('#trigonoTabs button').on('click', function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+        });
+    </script>
+</body>
+</html>

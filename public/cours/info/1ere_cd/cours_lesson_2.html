@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilisation de l'invite de commandes</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax pour le rendu LaTeX -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .header {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .command {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-left: 4px solid #0d6efd;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 15px;
+        }
+        .note {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 20px;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 25px 0;
+        }
+        .code-example {
+            background-color: #2b3035;
+            color: #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+        h2 {
+            border-bottom: 2px solid #6c757d;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        .img-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .img-container img {
+            max-width: 100%;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="header text-center mb-5">
+            <h1 class="display-4">Utilisation de l'invite de commandes</h1>
+            <p class="lead">Apprendre à maîtriser l'interface en ligne de commande sous Windows</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Introduction à l'invite de commandes</h2>
+                
+                <h3>Compétences visées</h3>
+                <ul>
+                    <li>Comprendre l'importance de l'utilisation de la ligne de commande</li>
+                    <li>Savoir accéder à la ligne de commande</li>
+                </ul>
+
+                <h3>Pourquoi utiliser la ligne de commande ?</h3>
+                <p>Avant l'avènement des interfaces graphiques, les ordinateurs fonctionnaient exclusivement en mode texte. L'apparition des premiers systèmes d'exploitation graphiques a progressivement transformé l'interaction "tout clavier" en interaction "tout souris" que nous connaissons aujourd'hui.</p>
+                
+                <p>Malgré les avantages évidents des interfaces graphiques, la ligne de commande offre des fonctionnalités puissantes pour :</p>
+                <ul>
+                    <li>Automatiser des tâches répétitives ou complexes</li>
+                    <li>Créer des sauvegardes ciblées de fichiers modifiés récemment</li>
+                    <li>Extraire spécifiquement des éléments de multiples fichiers (comme la première page de plusieurs PDF)</li>
+                    <li>Résoudre des problèmes système via le mode sans échec</li>
+                    <li>Créer des fichiers batch (.bat ou .cmd) pour automatiser des processus</li>
+                    <li>Renommer en masse des fichiers selon des règles précises</li>
+                </ul>
+                
+                <p>L'utilisation de la ligne de commande est particulièrement utile lors de connexions distantes, où les interfaces graphiques consomment plus de ressources réseau. Pour des connexions lentes, l'interaction en ligne de commande reste beaucoup plus fluide.</p>
+
+                <div class="img-container">
+                    <img src="data:image/png;base64,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" alt="Exemple d'invite de commandes Windows" class="img-fluid">
+                    <div class="caption">Exemple d'invite de commandes Windows (Source: Wikimedia Commons)</div>
+                </div>
+
+                <h3>Accéder à l'invite de commande</h3>
+                
+                <h4>L'invite (prompt)</h4>
+                <p>L'invite, aussi appelé <em>prompt</em>, est le message indiquant que le système est prêt à recevoir des commandes. Il se présente généralement sous la forme :</p>
+                
+                <div class="command">C:\></div>
+                
+                <p>Cette invite indique :</p>
+                <ul>
+                    <li>Le lecteur actif (ici C:)</li>
+                    <li>Le chemin du répertoire courant (après le backslash $\backslash$)</li>
+                    <li>Le caractère > qui marque la fin de l'invite</li>
+                    <li>Un curseur clignotant indiquant où taper les commandes</li>
+                </ul>
+
+                <h4>Structure d'une ligne de commande</h4>
+                <p>Une ligne de commande suit généralement cette structure :</p>
+                
+                <div class="command">commande [options] [arguments]</div>
+                
+                <p>Où :</p>
+                <ul>
+                    <li><strong>Commande</strong> : Le mot-clé principal indiquant l'action à exécuter</li>
+                    <li><strong>Options</strong> (facultatives) : Modificateurs précédés d'un slash (/), qui changent le comportement de la commande</li>
+                    <li><strong>Arguments</strong> (facultatifs) : Compléments précisant les cibles ou paramètres de la commande</li>
+                </ul>
+                
+                <p class="note">Note : Les éléments entre crochets [] sont optionnels. Les commandes, options et arguments sont séparés par des espaces, qu'il ne faut pas oublier.</p>
+
+                <h4>Exemples de commandes de base</h4>
+                
+                <div class="code-example">
+                    <div>C:\> CD \Documents\recherche</div>
+                    <div class="text-muted"># Se déplacer vers le répertoire \Documents\recherche</div>
+                </div>
+                
+                <div class="code-example">
+                    <div>C:\> TIME</div>
+                    <div class="text-muted"># Afficher l'heure système</div>
+                </div>
+                
+                <div class="code-example">
+                    <div>C:\> CLS</div>
+                    <div class="text-muted"># Effacer l'écran de l'invite de commande</div>
+                </div>
+                
+                <div class="code-example">
+                    <div>C:\> VER</div>
+                    <div class="text-muted"># Afficher la version du système d'exploitation</div>
+                </div>
+
+                <div class="exercise">
+                    <h4>Exercice 1</h4>
+                    <ol>
+                        <li>Donnez deux avantages de l'utilisation de la ligne de commande</li>
+                        <li>Décrivez la syntaxe de base d'une ligne de commande</li>
+                        <li>Expliquez comment accéder à l'invite de commande sous Windows</li>
+                    </ol>
+                </div>
+
+                <h2>Utilisation pratique de l'invite de commandes</h2>
+                
+                <h3>Compétences visées</h3>
+                <ul>
+                    <li>Utiliser les commandes de manipulation de répertoires et fichiers</li>
+                    <li>Savoir utiliser le système d'aide intégré</li>
+                </ul>
+
+                <h3>Scénario pratique</h3>
+                <p>Imaginons qu'un ami vous demande de lui envoyer sur une clé USB plusieurs fichiers (audio, vidéo, etc.) qui sont dispersés à différents endroits sur votre ordinateur. Il connaît seulement les noms des fichiers mais pas leurs emplacements exacts.</p>
+                
+                <p>Comment résoudre ce problème efficacement avec l'invite de commandes ?</p>
+
+                <h3>Lancer l'invite de commandes</h3>
+                <p>Windows propose plusieurs méthodes pour accéder à l'invite de commandes :</p>
+                
+                <h4>Méthode 1 : Via le menu Démarrer</h4>
+                <ol>
+                    <li>Ouvrir le menu Démarrer</li>
+                    <li>Aller dans "Programmes" → "Accessoires"</li>
+                    <li>Sélectionner "Invite de commandes"</li>
+                </ol>
+                
+                <h4>Méthode 2 : Via la commande Exécuter</h4>
+                <ol>
+                    <li>Appuyer sur ⊞ Win + R</li>
+                    <li>Taper "cmd" dans la zone de dialogue</li>
+                    <li>Appuyer sur Entrée</li>
+                </ol>
+                
+                <p>Une fenêtre d'invite de commandes s'ouvrira, affichant quelque chose comme :</p>
+                
+                <div class="code-example">
+                    <div>Microsoft Windows [version 10.0.14393]</div>
+                    <div>(c) 2016 Microsoft Corporation. Tous droits réservés.</div>
+                    <div>C:\Users\VotreNom></div>
+                </div>
+
+                <h3>Les commandes essentielles</h3>
+                
+                <h4>1. Création d'un répertoire</h4>
+                <p>La commande <code>MD</code> ou <code>MKDIR</code> (Make Directory) permet de créer un nouveau répertoire.</p>
+                
+                <div class="code-example">
+                    <div>C:\> MD CoursInfo</div>
+                    <div class="text-muted"># Crée un répertoire "CoursInfo" à l'emplacement courant</div>
+                </div>
+
+                <h4>2. Navigation entre répertoires</h4>
+                <p>La commande <code>CD</code> (Change Directory) permet de se déplacer dans l'arborescence.</p>
+                
+                <div class="code-example">
+                    <div>C:\> CD Ubuntu</div>
+                    <div class="text-muted"># Se déplace vers le répertoire Ubuntu</div>
+                </div>
+                
+                <div class="code-example">
+                    <div>C:\Ubuntu> CD ..</div>
+                    <div class="text-muted"># Remonte d'un niveau dans l'arborescence</div>
+                </div>
+                
+                <div class="code-example">
+                    <div>C:\Ubuntu> CD \</div>
+                    <div class="text-muted"># Retourne à la racine du lecteur</div>
+                </div>
+
+                <h4>3. Suppression de répertoires et fichiers</h4>
+                
+                <p><strong>Pour un répertoire :</strong> <code>RD</code> ou <code>RMDIR</code> (Remove Directory)</p>
+                <div class="code-example">
+                    <div>C:\Documents> RD CoursInfo</div>
+                    <div class="text-muted"># Supprime le répertoire CoursInfo (doit être vide)</div>
+                </div>
+                
+                <p><strong>Pour un fichier :</strong> <code>DEL</code> ou <code>ERASE</code></p>
+                <div class="code-example">
+                    <div>C:\Documents> DEL CoursInfo.txt</div>
+                    <div class="text-muted"># Supprime le fichier CoursInfo.txt</div>
+                </div>
+
+                <h4>4. Renommer répertoires et fichiers</h4>
+                <p>La commande <code>REN</code> ou <code>RENAME</code> permet de renommer éléments.</p>
+                
+                <div class="code-example">
+                    <div>C:\Documents> REN CoursInfo CoursMaths</div>
+                    <div class="text-muted"># Renomme le répertoire CoursInfo en CoursMaths</div>
+                </div>
+                
+                <div class="code-example">
+                    <div>C:\Documents> REN CoursInfo.txt CoursInformation.doc</div>
+                    <div class="text-muted"># Renomme et change l'extension du fichier</div>
+                </div>
+
+                <h4>5. Afficher le contenu d'un répertoire</h4>
+                <p>La commande <code>DIR</code> (Directory) liste le contenu d'un répertoire.</p>
+                
+                <div class="code-example">
+                    <div>C:\Documents> DIR</div>
+                    <div class="text-muted"># Affiche tous les fichiers et répertoires dans Documents</div>
+                </div>
+                
+                <p>On peut utiliser des caractères spéciaux pour filtrer les résultats :</p>
+                <ul>
+                    <li><code>?</code> représente un caractère unique</li>
+                    <li><code>*</code> représente une chaîne de caractères</li>
+                </ul>
+                
+                <div class="code-example">
+                    <div>DIR b??.*</div>
+                    <div class="text-muted"># Fichiers de 3 caractères commençant par b</div>
+                </div>
+                
+                <div class="code-example">
+                    <div>DIR *.com</div>
+                    <div class="text-muted"># Tous les fichiers avec l'extension .com</div>
+                </div>
+                
+                <div class="code-example">
+                    <div>DIR b*c*</div>
+                    <div class="text-muted"># Fichiers dont le nom commence par b et l'extension par c</div>
+                </div>
+
+                <h4>6. Copier et déplacer des fichiers</h4>
+                
+                <p><strong>Copier :</strong> <code>COPY</code></p>
+                <div class="code-example">
+                    <div>COPY Noel.pdf C:\Courrier</div>
+                    <div class="text-muted"># Copie Noel.pdf vers le répertoire Courrier</div>
+                </div>
+                
+                <p><strong>Déplacer :</strong> <code>MOVE</code></p>
+                <div class="code-example">
+                    <div>MODE Noel.pdf C:\Courrier</div>
+                    <div class="text-muted"># Déplace Noel.pdf vers le répertoire Courrier</div>
+                </div>
+                
+                <p><strong>Copier des répertoires :</strong> <code>XCOPY</code></p>
+                <div class="code-example">
+                    <div>XCOPY C:\Documents D:\Backup /E</div>
+                    <div class="text-muted"># Copie récursive de Documents vers Backup</div>
+                </div>
+
+                <h3>Obtenir de l'aide sur les commandes</h3>
+                <p>Pour obtenir des informations sur une commande spécifique, utilisez :</p>
+                
+                <div class="code-example">
+                    <div>HELP [commande]</div>
+                    <div class="text-muted"># Affiche l'aide générale ou spécifique à une commande</div>
+                </div>
+                
+                <div class="code-example">
+                    <div>DIR /?</div>
+                    <div class="text-muted"># Affiche l'aide pour la commande DIR</div>
+                </div>
+
+                <div class="img-container">
+                    <img src="data:image/png;base64,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" alt="Fenêtre d'invite de commandes Windows" class="img-fluid">
+                    <div class="caption">Fenêtre d'invite de commandes Windows (Source: Wikimedia Commons)</div>
+                </div>
+
+                <div class="exercise">
+                    <h4>Exercice final</h4>
+                    <ol>
+                        <li>Qu'est-ce que l'invite de commande et en quoi diffère-t-elle de la ligne de commande ?</li>
+                        <li>Décrivez la structure générale d'une ligne de commande</li>
+                        <li>Listez les commandes permettant de :
+                            <ul>
+                                <li>Naviguer entre répertoires</li>
+                                <li>Copier un fichier</li>
+                                <li>Créer un répertoire</li>
+                                <li>Renommer un fichier</li>
+                                <li>Supprimer un répertoire</li>
+                                <li>Afficher le contenu d'un répertoire</li>
+                            </ul>
+                        </li>
+                        <li>Comment obtenir de l'aide sur une commande spécifique ?</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS et jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

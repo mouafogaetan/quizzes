@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nombres Complexes - Cours Complet</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .lesson-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .card-header {
+            background-color: #4e73df;
+            color: white;
+            font-weight: 600;
+        }
+        .card-header.collapsed {
+            background-color: #4e73df;
+        }
+        .example-box {
+            background-color: #e9ecef;
+            border-left: 4px solid #4e73df;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .formula-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .complex-plane {
+            width: 100%;
+            height: 300px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #4e73df;
+        }
+        .sidebar {
+            position: sticky;
+            top: 20px;
+        }
+        footer {
+            background-color: #4e73df;
+            color: white;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        .math-container {
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">Nombres Complexes</h1>
+            <p class="lead">Découvrez le monde des nombres complexes et leurs applications</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar Navigation -->
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            Navigation du Chapitre
+                        </div>
+                        <div class="list-group list-group-flush">
+                            <a href="#intro" class="list-group-item list-group-item-action">Introduction</a>
+                            <a href="#lesson1" class="list-group-item list-group-item-action">Généralités sur les nombres complexes</a>
+                            <a href="#lesson2" class="list-group-item list-group-item-action">Calculs avec les nombres complexes</a>
+                            <a href="#lesson3" class="list-group-item list-group-item-action">Représentation géométrique</a>
+                            <a href="#lesson4" class="list-group-item list-group-item-action">Formes trigonométrique et exponentielle</a>
+                            <a href="#lesson5" class="list-group-item list-group-item-action">Équations du second degré</a>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header bg-info text-white">
+                            Ressources Visuelles
+                        </div>
+                        <div class="card-body">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Complex_number_illustration.svg/600px-Complex_number_illustration.svg.png" 
+                                 alt="Représentation d'un nombre complexe" class="img-fluid rounded mb-2">
+                            <p class="small">Représentation d'un nombre complexe dans le plan</p>
+                            
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Color_complex_plot.jpg/600px-Color_complex_plot.jpg" 
+                                 alt="Plot complexe" class="img-fluid rounded">
+                            <p class="small">Visualisation des fonctions complexes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <!-- Introduction -->
+                <section id="intro" class="mb-5">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            <h2>Introduction aux Nombres Complexes</h2>
+                        </div>
+                        <div class="card-body">
+                            <h5>Intérêt et Applications</h5>
+                            <p>Les nombres complexes constituent un outil fondamental en mathématiques et en sciences physiques. Ils permettent notamment :</p>
+                            <ul>
+                                <li>L'analyse des circuits électroniques en régime sinusoïdal</li>
+                                <li>La modélisation en théorie de la diffusion de la chaleur, de l'électricité et de la lumière</li>
+                                <li>La résolution d'équations polynomiales qui n'admettent pas de solutions réelles</li>
+                            </ul>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="example-box">
+                                        <h6>Exemple Historique</h6>
+                                        <p>Les nombres complexes ont été introduits pour résoudre des équations du type $x^2 + 1 = 0$ qui n'ont pas de solution dans l'ensemble des nombres réels $\mathbb{R}$.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="example-box">
+                                        <h6>Application en Physique</h6>
+                                        <p>En électricité, l'analyse des circuits en courant alternatif utilise intensivement les nombres complexes pour représenter les impédances.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Lesson 1 -->
+                <section id="lesson1" class="mb-5">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            <h2>Leçon 1 : Généralités sur les Nombres Complexes</h2>
+                        </div>
+                        <div class="card-body">
+                            <h5>Définition Fondamentale</h5>
+                            <p>Un nombre complexe $z$ s'écrit sous la forme $z = a + bi$, où :</p>
+                            <ul>
+                                <li>$a$ et $b$ sont des nombres réels</li>
+                                <li>$i$ est l'unité imaginaire définie par $i^2 = -1$</li>
+                            </ul>
+                            
+                            <div class="formula-box">
+                                <h6>Parties réelle et imaginaire</h6>
+                                <p>Pour $z = a + bi$ :</p>
+                                <ul>
+                                    <li>$\text{Re}(z) = a$ (partie réelle)</li>
+                                    <li>$\text{Im}(z) = b$ (partie imaginaire)</li>
+                                </ul>
+                            </div>
+                            
+                            <h5>Types de nombres complexes</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6>Nombres réels</h6>
+                                            <p>Si $\text{Im}(z) = 0$, alors $z$ est un nombre réel.</p>
+                                            <p>Exemple : $z = 5$ (car $z = 5 + 0i$)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <h6>Nombres imaginaires purs</h6>
+                                            <p>Si $\text{Re}(z) = 0$ et $\text{Im}(z) \neq 0$, alors $z$ est un imaginaire pur.</p>
+                                            <p>Exemple : $z = 3i$ (car $z = 0 + 3i$)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="example-box mt-4">
+                                <h6>Exemple : Identifier les parties réelle et imaginaire</h6>
+                                <p>Pour $z = 7 - 2i$ :</p>
+                                <ul>
+                                    <li>$\text{Re}(z) = 7$</li>
+                                    <li>$\text{Im}(z) = -2$</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Lesson 2 -->
+                <section id="lesson2" class="mb-5">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            <h2>Leçon 2 : Calculs avec les Nombres Complexes</h2>
+                        </div>
+                        <div class="card-body">
+                            <h5>Opérations fondamentales</h5>
+                            
+                            <div class="formula-box">
+                                <h6>Addition</h6>
+                                <p>Soient $z = a + bi$ et $z' = a' + b'i$ :</p>
+                                <p>$z + z' = (a + a') + (b + b')i$</p>
+                            </div>
+                            
+                            <div class="formula-box">
+                                <h6>Soustraction</h6>
+                                <p>$z - z' = (a - a') + (b - b')i$</p>
+                            </div>
+                            
+                            <div class="formula-box">
+                                <h6>Multiplication</h6>
+                                <p>$z \times z' = (a + bi)(a' + b'i) = (aa' - bb') + (ab' + a'b)i$</p>
+                            </div>
+                            
+                            <div class="example-box">
+                                <h6>Exemple : Multiplication</h6>
+                                <p>Soient $z = 1 - 2i$ et $z' = -3 + i$ :</p>
+                                <p>$z \times z' = (1)(-3) + (1)(i) + (-2i)(-3) + (-2i)(i)$</p>
+                                <p>$= -3 + i + 6i - 2i^2 = -3 + 7i + 2 = -1 + 7i$</p>
+                            </div>
+                            
+                            <h5>Conjugué et module</h5>
+                            
+                            <div class="formula-box">
+                                <h6>Conjugué</h6>
+                                <p>Le conjugué de $z = a + bi$ est $\overline{z} = a - bi$</p>
+                            </div>
+                            
+                            <div class="formula-box">
+                                <h6>Module</h6>
+                                <p>Le module de $z = a + bi$ est $|z| = \sqrt{a^2 + b^2}$</p>
+                            </div>
+                            
+                            <div class="example-box">
+                                <h6>Exemple : Conjugué et module</h6>
+                                <p>Pour $z = 3 + 2i$ :</p>
+                                <ul>
+                                    <li>$\overline{z} = 3 - 2i$</li>
+                                    <li>$|z| = \sqrt{3^2 + 2^2} = \sqrt{13}$</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Lesson 3 -->
+                <section id="lesson3" class="mb-5">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            <h2>Leçon 3 : Représentation Géométrique</h2>
+                        </div>
+                        <div class="card-body">
+                            <h5>Plan complexe</h5>
+                            <p>Un nombre complexe $z = a + bi$ peut être représenté dans le plan par le point $M$ de coordonnées $(a, b)$ :</p>
+                            
+                            <div class="text-center mb-4">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Complex_number_illustration_modarg.svg/600px-Complex_number_illustration_modarg.svg.png" 
+                                     alt="Représentation géométrique d'un nombre complexe" class="img-fluid rounded" style="max-height: 300px;">
+                                <p class="small mt-2">Représentation d'un nombre complexe dans le plan</p>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="formula-box">
+                                        <h6>Axe réel et axe imaginaire</h6>
+                                        <ul>
+                                            <li>Axe des abscisses : axe réel</li>
+                                            <li>Axe des ordonnées : axe imaginaire</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="formula-box">
+                                        <h6>Affixe d'un point</h6>
+                                        <p>Le nombre complexe $z$ associé au point $M$ est appelé affixe de $M$.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="example-box">
+                                <h6>Exemple : Placement de points</h6>
+                                <p>Placer les points d'affixes :</p>
+                                <ul>
+                                    <li>$z_A = 1 + i$ → point A(1, 1)</li>
+                                    <li>$z_B = 1 - i$ → point B(1, -1)</li>
+                                    <li>$z_C = -2i$ → point C(0, -2)</li>
+                                    <li>$z_D = -3$ → point D(-3, 0)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Lesson 4 -->
+                <section id="lesson4" class="mb-5">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            <h2>Leçon 4 : Formes Trigonométrique et Exponentielle</h2>
+                        </div>
+                        <div class="card-body">
+                            <h5>Forme trigonométrique</h5>
+                            <p>Tout nombre complexe $z = a + bi$ peut s'écrire sous la forme :</p>
+                            <div class="formula-box text-center">
+                                <p>$z = r(\cos\theta + i\sin\theta)$</p>
+                            </div>
+                            <p>Où :</p>
+                            <ul>
+                                <li>$r = |z| = \sqrt{a^2 + b^2}$ (module)</li>
+                                <li>$\theta = \arg(z)$ (argument)</li>
+                            </ul>
+                            
+                            <div class="example-box">
+                                <h6>Exemple : Forme trigonométrique</h6>
+                                <p>Pour $z = 1 + i$ :</p>
+                                <ul>
+                                    <li>$r = \sqrt{1^2 + 1^2} = \sqrt{2}$</li>
+                                    <li>$\theta = \arctan(1/1) = \frac{\pi}{4}$ (modulo $2\pi$)</li>
+                                    <li>Forme trigonométrique : $z = \sqrt{2}\left(\cos\frac{\pi}{4} + i\sin\frac{\pi}{4}\right)$</li>
+                                </ul>
+                            </div>
+                            
+                            <h5>Forme exponentielle</h5>
+                            <p>En utilisant la formule d'Euler $e^{i\theta} = \cos\theta + i\sin\theta$, on obtient :</p>
+                            <div class="formula-box text-center">
+                                <p>$z = re^{i\theta}$</p>
+                            </div>
+                            
+                            <h5>Formule de Moivre</h5>
+                            <div class="formula-box text-center">
+                                <p>$(\cos\theta + i\sin\theta)^n = \cos(n\theta) + i\sin(n\theta)$</p>
+                            </div>
+                            
+                            <div class="example-box">
+                                <h6>Exemple d'application</h6>
+                                <p>Calculons $\left(\frac{1}{2} + i\frac{\sqrt{3}}{2}\right)^{2007}$ :</p>
+                                <p>On reconnaît $\cos\frac{\pi}{3} + i\sin\frac{\pi}{3} = e^{i\pi/3}$</p>
+                                <p>Donc $\left(e^{i\pi/3}\right)^{2007} = e^{i\cdot 2007\pi/3} = e^{i\cdot 669\pi} = (e^{i\pi})^{669} = (-1)^{669} = -1$</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Lesson 5 -->
+                <section id="lesson5" class="mb-5">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            <h2>Leçon 5 : Équations du Second Degré dans $\mathbb{C}$</h2>
+                        </div>
+                        <div class="card-body">
+                            <h5>Résolution d'équations quadratiques</h5>
+                            <p>Pour résoudre $az^2 + bz + c = 0$ avec $a \neq 0$ :</p>
+                            
+                            <div class="formula-box">
+                                <h6>Discriminant</h6>
+                                <p>$\Delta = b^2 - 4ac$</p>
+                            </div>
+                            
+                            <div class="formula-box">
+                                <h6>Solutions</h6>
+                                <p>$z = \frac{-b \pm \sqrt{\Delta}}{2a}$</p>
+                            </div>
+                            
+                            <div class="example-box">
+                                <h6>Exemple : Résolution dans $\mathbb{C}$</h6>
+                                <p>Résoudre $x^2 + x + 1 = 0$ :</p>
+                                <p>$\Delta = 1^2 - 4(1)(1) = -3 = 3i^2$</p>
+                                <p>Donc $\sqrt{\Delta} = \pm i\sqrt{3}$</p>
+                                <p>Les solutions sont : $x = \frac{-1 \pm i\sqrt{3}}{2}$</p>
+                            </div>
+                            
+                            <h5>Racines carrées d'un nombre complexe</h5>
+                            <p>Pour trouver les racines carrées de $z = a + bi$, on cherche $u = x + yi$ tel que $u^2 = z$.</p>
+                            
+                            <div class="example-box">
+                                <h6>Exemple : Racines carrées</h6>
+                                <p>Trouver les racines carrées de $z = -5 + 12i$ :</p>
+                                <p>On pose $u = x + yi$ avec $u^2 = z$</p>
+                                <p>On obtient le système :</p>
+                                <ul>
+                                    <li>$x^2 - y^2 = -5$</li>
+                                    <li>$2xy = 12$</li>
+                                    <li>$x^2 + y^2 = 13$ (car $|u|^2 = |z|$)</li>
+                                </ul>
+                                <p>En résolvant, on trouve $u_1 = 2 + 3i$ et $u_2 = -2 - 3i$</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-5">
+        <div class="container">
+            <p>© 2023 - Cours de Mathématiques | Nombres Complexes</p>
+            <p>Ressources éducatives libres de droits</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        $(document).ready(function(){
+            $('a[href^="#"]').on('click', function(event) {
+                var target = $(this.getAttribute('href'));
+                if( target.length ) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 70
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

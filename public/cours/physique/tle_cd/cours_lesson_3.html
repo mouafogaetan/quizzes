@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forces et Champs Gravitationnels</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #4a6580);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            border-left: 5px solid #2c3e50;
+            padding-left: 15px;
+            margin: 2rem 0 1.5rem 0;
+            color: #2c3e50;
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            border: none;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .example-box {
+            background-color: #e9ecef;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .formula {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #2c3e50;
+        }
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 8px;
+        }
+        .exercise {
+            background-color: #e9f7ef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #28a745;
+        }
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            background-color: #f8f9fa;
+            border-bottom: 3px solid #2c3e50;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-4">Forces et Champs Gravitationnels</h1>
+            <p class="lead">Comprendre les interactions fondamentales qui régissent l'univers</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <section id="introduction">
+                    <h2 class="section-title">Introduction</h2>
+                    <p>Les astronautes, avec leur équipement, éprouvent des difficultés à se déplacer sur Terre en raison de la gravité. Cependant, sur la Lune, ils semblent bien plus légers et peuvent même se déplacer en sautillant. Comment expliquer cette différence de comportement?</p>
+                    
+                    <div class="image-container">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Astronaut_on_the_Moon.jpg/800px-Astronaut_on_the_Moon.jpg" alt="Astronaute sur la Lune" class="img-fluid">
+                        <div class="caption">Un astronaute sur la Lune, où la gravité est plus faible (Source: Wikimedia Commons)</div>
+                    </div>
+                    
+                    <h3>Objectifs d'apprentissage</h3>
+                    <ul>
+                        <li>Expliquer le comportement des systèmes matériels dans des champs de forces</li>
+                        <li>Introduire les concepts fondamentaux pour développer la mécanique des particules</li>
+                        <li>Comprendre la nature des forces gravitationnelles et leur influence</li>
+                    </ul>
+                </section>
+
+                <section id="gravitational-forces">
+                    <h2 class="section-title">Forces Gravitationnelles</h2>
+                    
+                    <h3>Loi de l'Attraction Universelle</h3>
+                    <p>La gravitation est le phénomène d'attraction mutuelle entre les corps matériels. Isaac Newton a formulé cette loi en 1684 après des années d'observation du mouvement des planètes.</p>
+                    
+                    <div class="formula">
+                        <p>Deux objets ponctuels de masses $m_A$ et $m_B$ séparés par une distance $AB$ s'attirent mutuellement avec des forces $\vec{F}_{A/B}$ et $\vec{F}_{B/A}$ de même direction (la droite AB), de sens opposés et d'intensité égale :</p>
+                        <p>$$F_{A/B} = F_{B/A} = G \frac{m_A m_B}{AB^2}$$</p>
+                        <p>Où $G = 6,67 \times 10^{-11} \, \text{N·m}^2 \cdot \text{kg}^{-2}$ est la constante de gravitation universelle.</p>
+                    </div>
+                    
+                    <h3>Expression vectorielle</h3>
+                    <p>En définissant le vecteur unitaire $\vec{u} = \frac{\vec{AB}}{AB}$ (de norme 1), nous pouvons exprimer la force sous forme vectorielle :</p>
+                    <div class="formula">
+                        <p>$$\vec{F}_{B/A} = -\vec{F}_{A/B} = G \frac{m_A m_B}{AB^2} \vec{u}$$</p>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Points importants à retenir</h5>
+                            <ul>
+                                <li>Pour des corps non ponctuels mais sphériques et homogènes, on considère que leur masse est concentrée en leur centre de gravité</li>
+                                <li>Tout corps agissant à une distance grande par rapport à ses dimensions peut être considéré comme ponctuel</li>
+                                <li>Les forces gravitationnelles sont des forces à distance qui diminuent avec le carré de la distance</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="example-box">
+                        <h4>Exemple pratique</h4>
+                        <p>Calculons la force d'attraction entre un électron et un proton dans un atome d'hydrogène, séparés de $10^{-10}$ m.</p>
+                        <p>Données : $m_p = 1,67 \times 10^{-27}$ kg, $m_e = 9,11 \times 10^{-31}$ kg</p>
+                        <p>Solution :</p>
+                        <p>$$F = G \frac{m_p m_e}{d^2} = \frac{6,67 \times 10^{-11} \times 1,67 \times 10^{-27} \times 9,11 \times 10^{-31}}{(10^{-10})^2} = 1,01 \times 10^{-47} \, \text{N}$$</p>
+                    </div>
+                </section>
+
+                <section id="gravitational-field">
+                    <h2 class="section-title">Champ Gravitationnel</h2>
+                    
+                    <h3>Définition</h3>
+                    <p>Le champ gravitationnel, noté $\vec{G}$, est une propriété de l'espace où tout corps massif subit une force gravitationnelle.</p>
+                    
+                    <h3>Expression du champ gravitationnel</h3>
+                    <p>Le champ gravitationnel créé par une masse $m_B$ en un point A est défini comme la force par unité de masse qu'exercerait $m_B$ sur une masse test placée en A :</p>
+                    <div class="formula">
+                        <p>$$\vec{G} = \frac{\vec{F}_{A/B}}{m_A} = -G \frac{m_B}{d^2} \vec{u}$$</p>
+                    </div>
+                    
+                    <div class="image-container">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Earth-G-force.png/800px-Earth-G-force.png" alt="Représentation du champ gravitationnel terrestre" class="img-fluid">
+                        <div class="caption">Représentation du champ gravitationnel terrestre (Source: Wikimedia Commons)</div>
+                    </div>
+                    
+                    <h3>Champ gravitationnel terrestre</h3>
+                    <p>En supposant la Terre sphérique et homogène, le champ gravitationnel à une distance $r$ de son centre est :</p>
+                    <div class="formula">
+                        <p>$$\vec{G} = -G \frac{M_T}{r^2} \vec{u}_r$$</p>
+                    </div>
+                    <p>Où $M_T$ est la masse de la Terre et $\vec{u}_r$ est le vecteur unitaire radial dirigé vers l'extérieur.</p>
+                    
+                    <h3>Lignes de champ</h3>
+                    <p>Les lignes de champ gravitationnel sont des droites radiales dirigées vers le centre du corps massif. Elles représentent la direction du champ en chaque point de l'espace.</p>
+                </section>
+
+                <section id="gravity-field">
+                    <h2 class="section-title">Champ de Pesanteur</h2>
+                    
+                    <p>Le champ de pesanteur $\vec{g}$ en un point est défini par la relation :</p>
+                    <div class="formula">
+                        <p>$$\vec{g} = \frac{\vec{P}}{m}$$</p>
+                    </div>
+                    <p>Où $\vec{P}$ est le poids d'un corps de masse $m$ placé en ce point.</p>
+                    
+                    <p>Si on néglige les effets de rotation terrestre, le champ de pesanteur est approximativement égal au champ gravitationnel :</p>
+                    <div class="formula">
+                        <p>$$\vec{g} \approx \vec{G}$$</p>
+                    </div>
+                    
+                    <p>L'intensité du champ de pesanteur à une altitude $h$ est donnée par :</p>
+                    <div class="formula">
+                        <p>$$g_h = g_0 \left( \frac{R}{R + h} \right)^2$$</p>
+                    </div>
+                    <p>Où $g_0$ est l'intensité du champ à la surface de la Terre et $R$ est le rayon terrestre.</p>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Approximation à basse altitude</h5>
+                            <p>Pour des altitudes faibles ($h \ll R$), on peut utiliser l'approximation :</p>
+                            <p>$$g_h = g_0 \left( 1 - \frac{2h}{R} \right)$$</p>
+                            <p>L'incertitude relative commise avec cette approximation est :</p>
+                            <p>$$\frac{\Delta g_h}{g_0} = 2 \frac{h}{R}$$</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="exercises">
+                    <h2 class="section-title">Exercices d'application</h2>
+                    
+                    <div class="exercise">
+                        <h4>Exercice 1 : Comparaison des forces gravitationnelles</h4>
+                        <p>Calculez le rapport entre la force d'attraction que Jupiter exerce sur une personne de 80 kg à sa surface et celle que Mars exerce sur la même personne.</p>
+                        <p>Données :<br>
+                        Jupiter : $M_J = 1,9 \times 10^{27}$ kg, $R_J = 7,72 \times 10^7$ m<br>
+                        Mars : $M_M = 6,4 \times 10^{23}$ kg, $R_M = 3,4 \times 10^6$ m</p>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Exercice 2 : Champ gravitationnel lunaire</h4>
+                        <p>La Lune a une masse $M_L = 7,34 \times 10^{22}$ kg et un rayon $R_L = 1,74 \times 10^6$ m.</p>
+                        <ol>
+                            <li>Calculez l'intensité du champ de gravitation à la surface de la Lune.</li>
+                            <li>Quel serait le poids d'une personne de 75 kg à la surface de la Lune?</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Exercice 3 : Variation du poids avec l'altitude</h4>
+                        <p>Calculez la variation du poids d'une personne de 70 kg qui passe du niveau de la mer au sommet du Mont Cameroun (altitude 4070 m).</p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="sticky-top" style="top: 20px;">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Navigation</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a href="#introduction" class="text-decoration-none">Introduction</a></li>
+                                <li class="list-group-item"><a href="#gravitational-forces" class="text-decoration-none">Forces Gravitationnelles</a></li>
+                                <li class="list-group-item"><a href="#gravitational-field" class="text-decoration-none">Champ Gravitationnel</a></li>
+                                <li class="list-group-item"><a href="#gravity-field" class="text-decoration-none">Champ de Pesanteur</a></li>
+                                <li class="list-group-item"><a href="#exercises" class="text-decoration-none">Exercices d'application</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Données importantes</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <li><strong>Constante gravitationnelle:</strong> $G = 6,67 \times 10^{-11} \, \text{N·m}^2/\text{kg}^2$</li>
+                                <li><strong>Masse de la Terre:</strong> $M_T = 5,98 \times 10^{24}$ kg</li>
+                                <li><strong>Rayon terrestre:</strong> $R_T = 6,38 \times 10^6$ m</li>
+                                <li><strong>Pesanteur terrestre:</strong> $g_0 = 9,8$ m/s²</li>
+                                <li><strong>Masse de la Lune:</strong> $M_L = 7,34 \times 10^{22}$ kg</li>
+                                <li><strong>Rayon lunaire:</strong> $R_L = 1,74 \times 10^6$ m</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">Ressources supplémentaires</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <a href="https://fr.wikipedia.org/wiki/Loi_universelle_de_la_gravitation" class="btn btn-outline-info" target="_blank">Loi de gravitation (Wikipedia)</a>
+                                <a href="https://commons.wikimedia.org/wiki/Category:Gravitation" class="btn btn-outline-info" target="_blank">Images sur la gravitation</a>
+                                <a href="https://www.khanacademy.org/science/physics/centripetal-force-and-gravitation/gravity-newtonian/v/newton-s-law-of-gravitation" class="btn btn-outline-info" target="_blank">Vidéos explicatives</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-5">
+        <div class="container text-center">
+            <p>Référence: Adapté de "Cours de Physique - Terminale CD - APC" par Bekongo Bertrand</p>
+            <p>© 2023 - Ressources éducatives de physique</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Smooth scrolling for navigation links
+            $('a[href^="#"]').on('click', function(event) {
+                var target = $(this.getAttribute('href'));
+                if(target.length) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 70
+                    }, 1000);
+                }
+            });
+            
+            // Highlight active section in navigation
+            $(window).scroll(function() {
+                var scrollDistance = $(window).scrollTop();
+                
+                $('section').each(function(i) {
+                    if ($(this).position().top - 100 <= scrollDistance) {
+                        $('.list-group-item a.active').removeClass('active');
+                        $('.list-group-item a[href="#' + $(this).attr('id') + '"]').addClass('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilisation d'une Feuille de Calcul - Tableaux Croisés Dynamiques</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #0c7b93 0%, #00a8cc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border: none;
+            border-radius: 10px;
+        }
+        .card-header {
+            background-color: #e3f2fd;
+            font-weight: 600;
+        }
+        .key-concept {
+            background-color: #e8f4f8;
+            border-left: 4px solid #00a8cc;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .exercise {
+            background-color: #f0f7ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .img-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .img-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dee2e6;
+        }
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 8px;
+        }
+        .bilingual-game {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .term {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .step {
+            background-color: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 3px solid #0dcaf0;
+        }
+        .excel-formula {
+            font-family: 'Courier New', monospace;
+            background-color: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px dashed #6c757d;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        .pivot-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .pivot-table th, .pivot-table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+        .pivot-table th {
+            background-color: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-4">Utilisation d'une Feuille de Calcul</h1>
+            <p class="lead">UE 7 - Tableaux croisés dynamiques, bulletins de notes et impression</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">Compétences visées</div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Créer et manipuler des tableaux croisés dynamiques</li>
+                            <li class="list-group-item">Reproduire des documents professionnels (factures, devis, bulletins)</li>
+                            <li class="list-group-item">Maîtriser les techniques d'impression de feuilles de calcul</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Situation problème</div>
+                    <div class="card-body">
+                        <p>Madame WANDA dirige un établissement privé d'enseignement secondaire. Pour optimiser la gestion de son établissement, elle souhaite automatiser certaines tâches comme la production des bulletins de notes et des devis. Elle prévoit d'utiliser des tableaux pour le stockage des données mais n'étant pas experte en tableurs, elle vous consulte pour obtenir des réponses à ses questions :</p>
+                        <ol>
+                            <li>Comment produire efficacement un bulletin de notes avec un tableur ?</li>
+                            <li>Quelle méthodologie adopter pour créer ces tableaux ?</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Contenu de la leçon</div>
+                    <div class="card-body">
+                        <h3>I. Les tableaux croisés dynamiques (TCD)</h3>
+                        
+                        <div class="key-concept">
+                            <h5>Qu'est-ce qu'un tableau croisé dynamique ?</h5>
+                            <p>Un tableau croisé dynamique (TCD) est un outil puissant permettant de calculer, synthétiser et analyser des données. Il facilite l'identification de comparaisons, de motifs et de tendances dans vos jeux de données.</p>
+                            <p>Comme son nom l'indique, un TCD est un tableau créé dynamiquement à partir de données existantes dans une feuille de calcul. Il permet de "croiser" les informations selon différentes perspectives sans nécessiter la saisie de formules complexes.</p>
+                            <p>Le TCD extrait et synthétise les données pour leur donner du sens, permettant une analyse rapide et efficace.</p>
+                        </div>
+
+                        <h4>I-2 Création d'un Tableau Croisé Dynamique</h4>
+                        <p>Pour créer un TCD à partir d'une liste de données :</p>
+                        
+                        <div class="step">
+                            <strong>Étape 1 :</strong> Sélectionnez l'ensemble des données, y compris les en-têtes de colonnes
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Étape 2 :</strong> Dans le menu « Insertion », cliquez sur « Tableau croisé dynamique »
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Étape 3 :</strong> Dans la boîte de dialogue, définissez la plage de données (ex: Feuil1!$A$1:$D$12) et l'emplacement du nouveau tableau
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Étape 4 :</strong> Cliquez sur OK et sélectionnez les champs à inclure dans votre rapport
+                        </div>
+                        
+                        <div class="img-container">
+                            <img src="data:image/jpeg;base64,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" alt="Exemple de tableau croisé dynamique">
+                            <div class="caption">Exemple de configuration d'un tableau croisé dynamique (Source: Wikimedia Commons)</div>
+                        </div>
+                        
+                        <p>Les champs typiques d'un TCD incluent :</p>
+                        <ul>
+                            <li>Filtres : Pour appliquer des critères de sélection</li>
+                            <li>Lignes : Définit la structure verticale du tableau</li>
+                            <li>Colonnes : Définit la structure horizontale du tableau</li>
+                            <li>Valeurs : Les données numériques à analyser (sommes, moyennes, etc.)</li>
+                        </ul>
+
+                        <h4>I-3 Modifier un tableau croisé dynamique</h4>
+                        <p>Le TCD généré par Excel n'est pas toujours optimal. Plusieurs modifications sont possibles :</p>
+                        
+                        <div class="step">
+                            <strong>Permuter lignes et colonnes :</strong> Sélectionnez le champ à déplacer, faites-le glisser à droite du champ en colonne, puis relâchez le bouton de la souris.
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Supprimer un champ :</strong> Sélectionnez le champ à supprimer et faites-le glisser en dehors de la zone du tableau.
+                        </div>
+
+                        <h3>II. Reproduire un bulletin de notes</h3>
+                        <p>Pour créer un bulletin de notes sous Excel :</p>
+                        <ol>
+                            <li>Saisir les notes par matière et leurs coefficients respectifs</li>
+                            <li>Calculer les notes pondérées (note × coefficient)</li>
+                            <li>Calculer la somme des coefficients</li>
+                            <li>Calculer la somme des notes pondérées</li>
+                            <li>Calculer la moyenne générale</li>
+                        </ol>
+                        
+                        <h5>Formules Excel essentielles :</h5>
+                        
+                        <p><strong>Note pondérée :</strong> <span class="excel-formula">=B6*C6</span> (à adapter selon l'emplacement des données)</p>
+                        
+                        <p><strong>Somme des coefficients :</strong> <span class="excel-formula">=SOMME(C6:C16)</span></p>
+                        
+                        <p><strong>Somme des notes pondérées :</strong> <span class="excel-formula">=SOMME(D6:D16)</span></p>
+                        
+                        <p><strong>Moyenne générale :</strong> <span class="excel-formula">=SOMME(D6:D16)/SOMME(C6:C16)</span> ou <span class="excel-formula">=MOYENNE.PONDEREE(B6:B16; C6:C16)</span></p>
+                        
+                        <div class="img-container">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Microsoft_Excel_%28cropped%29.png/800px-Microsoft_Excel_%28cropped%29.png" alt="Interface Microsoft Excel" style="max-height: 300px;">
+                            <div class="caption">Interface Microsoft Excel (Source: Wikimedia Commons)</div>
+                        </div>
+                        
+                        <h5>Calcul du rang d'un élève</h5>
+                        <p>La fonction RANG détermine la position d'une valeur dans un ensemble de valeurs :</p>
+                        <p class="excel-formula">=RANG(valeur; plage_de_valeurs; ordre)</p>
+                        <ul>
+                            <li>0 : pour l'ordre décroissant (meilleure note = rang 1)</li>
+                            <li>1 : pour l'ordre croissant</li>
+                        </ul>
+                        
+                        <p>Exemple pour classer un élève : <span class="excel-formula">=RANG(B9; B$9:B$12; 0)</span></p>
+                        <p>Les signes $ permettent de figer les références lors de la recopie de la formule.</p>
+
+                        <h3>III. Impression d'une feuille de calcul</h3>
+                        <p>Pour imprimer correctement une feuille de calcul :</p>
+                        
+                        <div class="step">
+                            <strong>Étape 1 :</strong> Cliquez sur l'onglet Fichier puis sur Imprimer
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Étape 2 :</strong> Cliquez sur Mise en page pour accéder aux options avancées
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Étape 3 :</strong> Dans la section Échelle, choisissez "Ajuster" et paramétrez sur 1 page en largeur et 1 page en hauteur
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Étape 4 :</strong> Sélectionnez l'orientation Paysage pour optimiser l'espace
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Étape 5 :</strong> Dans l'onglet Marges, cochez "Horizontalement" et "Verticalement" pour centrer le contenu
+                        </div>
+                        
+                        <div class="step">
+                            <strong>Étape 6 :</strong> Validez et visualisez l'aperçu avant impression
+                        </div>
+                        
+                        <p>L'onglet Mise en page du ruban offre des options supplémentaires : impression des en-têtes, du quadrillage, modification des marges, etc.</p>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3>Exercices d'évaluation</h3>
+                    <ol>
+                        <li>Définissez ce qu'est un tableau croisé dynamique</li>
+                        <li>Décrivez la procédure de création d'un TCD</li>
+                        <li>Reproduisez dans un fichier Excel le bulletin de notes présenté</li>
+                        <li>Indiquez les formules de calcul pour la somme, la moyenne et le rang d'un élève</li>
+                        <li>Expliquez la procédure d'impression d'un fichier Excel</li>
+                    </ol>
+                </div>
+
+                <div class="bilingual-game">
+                    <h3>Jeu bilingue - Vocabulaire technique</h3>
+                    <p><span class="term">Spreadsheet</span> : Tableur</p>
+                    <p><span class="term">Cells</span> : Cellule</p>
+                    <p><span class="term">Workbook</span> : Classeur</p>
+                    <p><span class="term">Range of cells</span> : Plage de cellules</p>
+                    <p><span class="term">Worksheet</span> : Feuille de calcul</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 - Cours sur l'Utilisation des Feuilles de Calcul</p>
+        </div>
+    </footer>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse Dimensionnelle - Physique Terminale</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #4a6580);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .section-title {
+            border-left: 5px solid #2c3e50;
+            padding-left: 15px;
+            margin: 2rem 0 1.5rem;
+            color: #2c3e50;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border: none;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #4a6580;
+            color: white;
+            font-weight: 600;
+        }
+        .table-custom {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .table-custom thead {
+            background-color: #2c3e50;
+            color: white;
+        }
+        .interactive-box {
+            background-color: #e9ecef;
+            border-left: 4px solid #4a6580;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .exercise {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .img-fluid {
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">Analyse Dimensionnelle et Homogénéité des Équations Physiques</h1>
+            <p class="lead">Comprendre la structure mathématique des lois physiques à travers l'analyse dimensionnelle</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="section-title">Introduction</h2>
+                <p>L'analyse dimensionnelle est une méthode puissante qui permet de vérifier la cohérence des équations physiques et de prédire la forme des relations entre différentes grandeurs. Contrairement aux mathématiques pures, la physique impose des contraintes supplémentaires : les termes d'une équation physique doivent avoir la même dimension pour que l'équation ait un sens.</p>
+                
+                <div class="interactive-box">
+                    <h5>À retenir</h5>
+                    <p>On ne peut additionner ou comparer que des grandeurs de mêmes dimensions. Une équation physique doit être <strong>homogène</strong> pour être valide.</p>
+                </div>
+
+                <h2 class="section-title">Unités fondamentales et dérivées</h2>
+                <p>Le Système International (SI) définit sept unités de base à partir desquelles toutes les autres unités sont dérivées :</p>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-custom">
+                        <thead>
+                            <tr>
+                                <th>Grandeur</th>
+                                <th>Unité</th>
+                                <th>Symbole</th>
+                                <th>Dimension</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Longueur</td>
+                                <td>mètre</td>
+                                <td>m</td>
+                                <td>L</td>
+                            </tr>
+                            <tr>
+                                <td>Masse</td>
+                                <td>kilogramme</td>
+                                <td>kg</td>
+                                <td>M</td>
+                            </tr>
+                            <tr>
+                                <td>Temps</td>
+                                <td>seconde</td>
+                                <td>s</td>
+                                <td>T</td>
+                            </tr>
+                            <tr>
+                                <td>Intensité électrique</td>
+                                <td>Ampère</td>
+                                <td>A</td>
+                                <td>I</td>
+                            </tr>
+                            <tr>
+                                <td>Température</td>
+                                <td>Kelvin</td>
+                                <td>K</td>
+                                <td>Θ</td>
+                            </tr>
+                            <tr>
+                                <td>Quantité de matière</td>
+                                <td>mole</td>
+                                <td>mol</td>
+                                <td>N</td>
+                            </tr>
+                            <tr>
+                                <td>Intensité lumineuse</td>
+                                <td>candela</td>
+                                <td>cd</td>
+                                <td>J</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>À partir de ces unités de base, on peut définir les unités dérivées. Par exemple :</p>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-custom">
+                        <thead>
+                            <tr>
+                                <th>Grandeur</th>
+                                <th>Unité</th>
+                                <th>Symbole</th>
+                                <th>Expression en unités de base</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Force</td>
+                                <td>Newton</td>
+                                <td>N</td>
+                                <td>kg·m·s⁻²</td>
+                            </tr>
+                            <tr>
+                                <td>Pression</td>
+                                <td>Pascal</td>
+                                <td>Pa</td>
+                                <td>kg·m⁻¹·s⁻²</td>
+                            </tr>
+                            <tr>
+                                <td>Énergie</td>
+                                <td>Joule</td>
+                                <td>J</td>
+                                <td>kg·m²·s⁻²</td>
+                            </tr>
+                            <tr>
+                                <td>Puissance</td>
+                                <td>Watt</td>
+                                <td>W</td>
+                                <td>kg·m²·s⁻³</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 class="section-title">Équations aux dimensions</h2>
+                <p>La dimension d'une grandeur physique exprime sa nature en fonction des grandeurs fondamentales. On la note entre crochets. Par exemple :</p>
+                <ul>
+                    <li>Pour la vitesse : $[v] = \frac{[L]}{[T]} = L \cdot T^{-1}$</li>
+                    <li>Pour la force : $[F] = [M][L][T^{-2}] = M \cdot L \cdot T^{-2}$</li>
+                    <li>Pour la pression : $[P] = \frac{[F]}{[S]} = M \cdot L^{-1} \cdot T^{-2}$</li>
+                </ul>
+
+                <div class="card">
+                    <div class="card-header">Règles des équations aux dimensions</div>
+                    <div class="card-body">
+                        <ol>
+                            <li>La dimension d'un produit est le produit des dimensions : $[A \cdot B] = [A] \cdot [B]$</li>
+                            <li>La dimension d'un quotient est le quotient des dimensions : $\left[\frac{A}{B}\right] = \frac{[A]}{[B]}$</li>
+                            <li>La dimension de $A^n$ est $[A]^n$ (où n est un nombre sans dimension)</li>
+                            <li>Les arguments des fonctions trigonométriques, exponentielles et logarithmiques doivent être sans dimension</li>
+                            <li>Une équation physique doit être homogène : tous ses termes doivent avoir la même dimension</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Homogénéité des équations physiques</h2>
+                <p>Vérifier l'homogénéité d'une équation est la première étape pour s'assurer de sa validité physique. Prenons l'exemple de l'équation donnant la période d'un pendule simple :</p>
+                <p>$$T = 2\pi\sqrt{\frac{\ell}{g}}$$</p>
+                <p>Analyse dimensionnelle :</p>
+                <p>$$[T] = T$$</p>
+                <p>$$\left[\sqrt{\frac{\ell}{g}}\right] = \sqrt{\frac{L}{L \cdot T^{-2}}} = \sqrt{T^2} = T$$</p>
+                <p>Les deux membres ont bien la même dimension (T), l'équation est homogène.</p>
+
+                <h2 class="section-title">Applications et exercices</h2>
+                
+                <div class="exercise">
+                    <h5>Exercice 1 : Analyse dimensionnelle de constantes physiques</h5>
+                    <p>Déterminez la dimension de la constante de Planck $h$ à partir de la relation $E = h \cdot \nu$, où $E$ est l'énergie et $\nu$ la fréquence.</p>
+                    <button class="btn btn-sm btn-outline-primary mt-2" onclick="$('#solution1').toggle()">Voir la solution</button>
+                    <div id="solution1" style="display: none;" class="mt-3">
+                        <p>Solution :</p>
+                        <p>$[E] = M \cdot L^2 \cdot T^{-2}$</p>
+                        <p>$[\nu] = T^{-1}$</p>
+                        <p>Donc $[h] = \frac{[E]}{[\nu]} = \frac{M \cdot L^2 \cdot T^{-2}}{T^{-1}} = M \cdot L^2 \cdot T^{-1}$</p>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h5>Exercice 2 : Vérification d'homogénéité</h5>
+                    <p>La relation suivante est-elle homogène? $$x = v_0 \cdot t + \frac{1}{2} a \cdot t^2$$ où $x$ est une distance, $v_0$ une vitesse, $t$ un temps et $a$ une accélération.</p>
+                    <button class="btn btn-sm btn-outline-primary mt-2" onclick="$('#solution2').toggle()">Voir la solution</button>
+                    <div id="solution2" style="display: none;" class="mt-3">
+                        <p>Solution :</p>
+                        <p>$[x] = L$</p>
+                        <p>$[v_0 \cdot t] = L \cdot T^{-1} \cdot T = L$</p>
+                        <p>$\left[\frac{1}{2} a \cdot t^2\right] = L \cdot T^{-2} \cdot T^2 = L$</p>
+                        <p>Tous les termes ont la dimension L, donc l'équation est homogène.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header">Illustration conceptuelle</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Physical_quantity_and_units.png/640px-Physical_quantity_and_units.png" class="card-img-top" alt="Représentation des grandeurs physiques et unités">
+                    <div class="card-body">
+                        <p class="card-text">Relation entre grandeurs physiques, dimensions et unités de mesure dans le système international.</p>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">Point historique</div>
+                    <div class="card-body">
+                        <h5>John Wheeler et l'analyse dimensionnelle</h5>
+                        <p>Le physicien américain John Wheeler disait : <em>"Ne jamais faire des calculs avant de connaître le résultat"</em>. Cette citation souligne l'importance de l'analyse dimensionnelle pour prévoir la forme des résultats avant même d'effectuer des calculs complexes.</p>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">À vous de jouer</div>
+                    <div class="card-body">
+                        <h5>Quiz rapide</h5>
+                        <p>Laquelle de ces équations est homogène?</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="quiz" id="quiz1">
+                            <label class="form-check-label" for="quiz1">$E = m + c^2$</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="quiz" id="quiz2">
+                            <label class="form-check-label" for="quiz2">$F = m \cdot a$</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="quiz" id="quiz3">
+                            <label class="form-check-label" for="quiz3">$v = d + t$</label>
+                        </div>
+                        <button class="btn btn-sm btn-primary mt-3" onclick="checkAnswer()">Vérifier</button>
+                        <div id="quiz-result" class="mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Résumé visuel</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Base_quantity.svg/640px-Base_quantity.svg.png" class="card-img-top" alt="Schéma des grandeurs de base">
+                    <div class="card-body">
+                        <p class="card-text">Les sept grandeurs de base du Système International et leurs relations avec les grandeurs dérivées.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>Chapitre 2: Analyse Dimensionnelle et Homogénéité des Équations Physiques</p>
+            <p>Réalisé dans le cadre du cours de Physique de Terminale</p>
+        </div>
+    </footer>
+
+    <script>
+        function checkAnswer() {
+            if ($('#quiz2').is(':checked')) {
+                $('#quiz-result').html('<div class="alert alert-success">Correct! F = m·a est une équation homogène.</div>');
+            } else {
+                $('#quiz-result').html('<div class="alert alert-danger">Incorrect. Seule F = m·a est homogène. Les autres ajoutent des grandeurs de dimensions différentes.</div>');
+            }
+        }
+
+        $(document).ready(function() {
+            // Animation pour les équations
+            $('mjx-container').css('opacity', 0).animate({opacity: 1}, 1000);
+        });
+    </script>
+</body>
+</html>

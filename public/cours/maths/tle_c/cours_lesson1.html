@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul Vectoriel et Produit Vectoriel</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            color: #333;
+            font-weight: 600;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .objective-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #2575fc;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .example-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .definition {
+            background-color: #f0f7ff;
+            border-left: 4px solid #4e73df;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .property {
+            background-color: #f8f5ff;
+            border-left: 4px solid #6f42c1;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .solution {
+            background-color: #f0fff4;
+            border-left: 4px solid #28a745;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .img-container {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .img-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        .nav-tabs .nav-link {
+            color: #495057;
+            font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+        .exercise {
+            background-color: #fff8e6;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">Calcul Vectoriel et Produit Vectoriel</h1>
+            <p class="lead">Comprendre les concepts fondamentaux de la géométrie vectorielle dans l'espace</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card mb-4">
+                    <div class="card-header">Navigation</div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <a href="#section1" class="list-group-item list-group-item-action">Barycentres dans l'espace</a>
+                            <a href="#section2" class="list-group-item list-group-item-action">Lignes et surfaces de niveau</a>
+                            <a href="#section3" class="list-group-item list-group-item-action">Orientation de l'espace</a>
+                            <a href="#section4" class="list-group-item list-group-item-action">Produit vectoriel</a>
+                            <a href="#section5" class="list-group-item list-group-item-action">Applications pratiques</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">Ressources</div>
+                    <div class="card-body">
+                        <p>Images utilisées:</p>
+                        <ul class="list-unstyled small">
+                            <li><a href="https://commons.wikimedia.org/wiki/File:3D_Vector.svg" target="_blank">Vecteur 3D</a></li>
+                            <li><a href="https://commons.wikimedia.org/wiki/File:Right_hand_rule_cross_product.svg" target="_blank">Règle de la main droite</a></li>
+                            <li><a href="https://commons.wikimedia.org/wiki/File:Parallelogram_area.svg" target="_blank">Aire d'un parallélogramme</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-9">
+                <div class="card mb-4">
+                    <div class="card-header">Introduction</div>
+                    <div class="card-body">
+                        <p>Ce chapitre explore les concepts fondamentaux du calcul vectoriel dans l'espace tridimensionnel, en mettant l'accent sur les barycentres et le produit vectoriel. Ces outils mathématiques sont essentiels pour résoudre des problèmes géométriques et physiques en trois dimensions.</p>
+                        
+                        <div class="objective-box">
+                            <h5>Objectifs d'apprentissage</h5>
+                            <ul>
+                                <li>Comprendre et appliquer le concept de barycentre dans l'espace</li>
+                                <li>Déterminer les lignes et surfaces de niveau de fonctions vectorielles</li>
+                                <li>Maîtriser l'orientation de l'espace et les bases directes</li>
+                                <li>Calculer le produit vectoriel et l'utiliser pour résoudre des problèmes pratiques</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <section id="section1">
+                    <div class="card mb-4">
+                        <div class="card-header">Barycentres dans l'espace</div>
+                        <div class="card-body">
+                            <h4>Définition du barycentre</h4>
+                            <div class="definition">
+                                <p>Soient $n \geq 2$ points pondérés $(A_i; \alpha_i)_{1 \leq i \leq n}$ de l'espace. Si $\sum_{i=1}^n \alpha_i \neq 0$, alors il existe un unique point $G$ de l'espace tel que :</p>
+                                <p>$$\sum_{i=1}^n \alpha_i \overrightarrow{GA_i} = \overrightarrow{0}$$</p>
+                                <p>Ce point $G$ est appelé <strong>barycentre</strong> des points pondérés $(A_i; \alpha_i)_{1 \leq i \leq n}$.</p>
+                            </div>
+                            
+                            <h4>Propriétés fondamentales</h4>
+                            <div class="property">
+                                <p>Pour tout point $O$ de l'espace, on a la relation :</p>
+                                <p>$$\overrightarrow{OG} = \frac{\sum_{i=1}^n \alpha_i \overrightarrow{OA_i}}{\sum_{i=1}^n \alpha_i}$$</p>
+                                <p>Cette relation permet de calculer les coordonnées du barycentre dans un repère donné.</p>
+                            </div>
+                            
+                            <h4>Exemple pratique</h4>
+                            <div class="example-box">
+                                <p>Considérons un tétraèdre $ABCD$ et $G = \text{bar}\{(A; 4); (B; -2); (C; 3); (D; 1)\}$.</p>
+                                <p>La somme vectorielle $4\overrightarrow{MA} - 2\overrightarrow{MB} + 3\overrightarrow{MC} + \overrightarrow{MD}$ peut se simplifier :</p>
+                                <p>$$4\overrightarrow{MA} - 2\overrightarrow{MB} + 3\overrightarrow{MC} + \overrightarrow{MD} = (4 - 2 + 3 + 1)\overrightarrow{MG} = 6\overrightarrow{MG}$$</p>
+                            </div>
+                            
+                            <h4>Application : problème d'équilibre</h4>
+                            <div class="example-box">
+                                <p>Deux enfants, Flora (20 kg) et Laure (30 kg), sont assis aux extrémités d'une balançoire de 6 mètres. Où doit être fixé le support central pour que le système soit en équilibre ?</p>
+                                <div class="solution">
+                                    <p>En utilisant le concept de barycentre avec les masses comme coefficients, on trouve :</p>
+                                    <p>$$AG = \frac{30}{20 + 30} \times 6 = 3.6 \text{ m}$$</p>
+                                    <p>Le support doit donc être placé à 3.6 m de Flora (ou à 2.4 m de Laure).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="section2">
+                    <div class="card mb-4">
+                        <div class="card-header">Lignes et surfaces de niveau</div>
+                        <div class="card-body">
+                            <h4>Surfaces de niveau de $f : M \mapsto MA^2 + MB^2$</h4>
+                            <div class="property">
+                                <p>Soient $A$ et $B$ deux points de l'espace, et $I$ le milieu de $[AB]$. On a la relation :</p>
+                                <p>$$MA^2 + MB^2 = 2MI^2 + \frac{AB^2}{2}$$</p>
+                                <p>Cette égalité est connue sous le nom de <strong>premier théorème de la médiane</strong>.</p>
+                            </div>
+                            
+                            <div class="example-box">
+                                <p>L'ensemble des points $M$ tels que $MA^2 + MB^2 = k$ est :</p>
+                                <ul>
+                                    <li>Vide si $k < \frac{AB^2}{2}$</li>
+                                    <li>Le singleton $\{I\}$ si $k = \frac{AB^2}{2}$</li>
+                                    <li>Une sphère de centre $I$ et de rayon $\sqrt{\frac{1}{2}\left(k - \frac{AB^2}{2}\right)}$ si $k > \frac{AB^2}{2}$</li>
+                                </ul>
+                            </div>
+                            
+                            <h4>Application : fabrication d'une balle de tennis</h4>
+                            <div class="example-box">
+                                <p>Un appareil avec deux repères $A$ et $B$ distants de 8 cm fabrique un objet correspondant à l'ensemble des points $M$ tels que $MA^2 + MB^2 = 50$.</p>
+                                <div class="solution">
+                                    <p>En appliquant le théorème de la médiane :</p>
+                                    <p>$$IM^2 = \frac{1}{2}\left(50 - \frac{64}{2}\right) = 9$$</p>
+                                    <p>Ainsi, $IM = 3$ cm. L'objet est une sphère de centre $I$ et de rayon 3 cm, c'est-à-dire une balle de tennis.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="img-container">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Sphere_%28parameters_theta%2C_phi%29.svg/800px-Sphere_%28parameters_theta%2C_phi%29.svg.png" alt="Représentation d'une sphère" class="img-fluid">
+                                <p class="caption">Représentation d'une sphère, surface de niveau dans plusieurs applications</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="section3">
+                    <div class="card mb-4">
+                        <div class="card-header">Orientation de l'espace</div>
+                        <div class="card-body">
+                            <h4>Repères directs et indirects</h4>
+                            <p>L'orientation de l'espace est une notion fondamentale pour comprendre le produit vectoriel. On distingue deux types de repères :</p>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="property">
+                                        <h5>Repère direct</h5>
+                                        <p>Un repère $(O; I; J; K)$ est dit <strong>direct</strong> lorsque le point $J$ est à gauche d'un observateur ayant les pieds en $O$, la tête sur $[OK]$ et regardant $I$.</p>
+                                        <p>Alternativement, si un tire-bouchon tournant de $\overrightarrow{OI}$ vers $\overrightarrow{OJ}$ progresse dans le sens de $\overrightarrow{OK}$, le repère est direct.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="property">
+                                        <h5>Repère indirect</h5>
+                                        <p>Un repère $(O; I; J; K)$ est dit <strong>indirect</strong> lorsque le point $J$ est à droite de l'observateur décrit ci-dessus.</p>
+                                        <p>Si un tire-bouchon tournant de $\overrightarrow{OI}$ vers $\overrightarrow{OJ}$ progresse dans le sens contraire de $\overrightarrow{OK}$, le repère est indirect.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="img-container">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Right_hand_rule_cross_product.svg/800px-Right_hand_rule_cross_product.svg.png" alt="Règle de la main droite" class="img-fluid">
+                                <p class="caption">La règle de la main droite pour déterminer l'orientation d'un repère</p>
+                            </div>
+                            
+                            <h4>Règle des trois doigts</h4>
+                            <div class="example-box">
+                                <p>Une méthode pratique pour déterminer l'orientation d'une base $(\vec{i}, \vec{j}, \vec{k})$ :</p>
+                                <ul>
+                                    <li><strong>Main droite</strong> : si $\vec{i}$ correspond à l'index, $\vec{j}$ au majeur et $\vec{k}$ au pouce, la base est directe</li>
+                                    <li><strong>Main gauche</strong> : la même configuration donne une base indirecte</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="section4">
+                    <div class="card mb-4">
+                        <div class="card-header">Produit vectoriel</div>
+                        <div class="card-body">
+                            <h4>Définition et propriétés</h4>
+                            <div class="definition">
+                                <p>Soient $\vec{u}$ et $\vec{v}$ deux vecteurs de l'espace. Le <strong>produit vectoriel</strong> de $\vec{u}$ et $\vec{v}$, noté $\vec{u} \land \vec{v}$, est défini par :</p>
+                                <ul>
+                                    <li>Si $\vec{u}$ et $\vec{v}$ sont colinéaires, alors $\vec{u} \land \vec{v} = \vec{0}$</li>
+                                    <li>Sinon :
+                                        <ul>
+                                            <li><strong>Direction</strong> : $\vec{u} \land \vec{v}$ est orthogonal à $\vec{u}$ et à $\vec{v}$</li>
+                                            <li><strong>Sens</strong> : la base $(\vec{u}, \vec{v}, \vec{u} \land \vec{v})$ est directe</li>
+                                            <li><strong>Norme</strong> : $\|\vec{u} \land \vec{v}\| = \|\vec{u}\| \cdot \|\vec{v}\| \cdot |\sin(\widehat{\vec{u}, \vec{v}})|$</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <h4>Propriétés algébriques</h4>
+                            <div class="property">
+                                <p>Le produit vectoriel possède les propriétés suivantes :</p>
+                                <ul>
+                                    <li>Anticommutativité : $\vec{u} \land \vec{v} = -\vec{v} \land \vec{u}$</li>
+                                    <li>Bilinéarité : 
+                                        <p>$(k\vec{u}) \land \vec{v} = \vec{u} \land (k\vec{v}) = k(\vec{u} \land \vec{v})$</p>
+                                        <p>$\vec{u} \land (\vec{v} + \vec{w}) = \vec{u} \land \vec{v} + \vec{u} \land \vec{w}$</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <h4>Expression en coordonnées</h4>
+                            <div class="example-box">
+                                <p>Dans une base orthonormée directe $(\vec{i}, \vec{j}, \vec{k})$, si $\vec{u} = (x, y, z)$ et $\vec{v} = (x', y', z')$, alors :</p>
+                                <p>$$\vec{u} \land \vec{v} = \begin{vmatrix}
+                                \vec{i} & \vec{j} & \vec{k} \\
+                                x & y & z \\
+                                x' & y' & z'
+                                \end{vmatrix} = (yz' - zy')\vec{i} + (zx' - xz')\vec{j} + (xy' - yx')\vec{k}$$</p>
+                            </div>
+                            
+                            <div class="img-container">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Parallelogram_area.svg/800px-Parallelogram_area.svg.png" alt="Aire d'un parallélogramme" class="img-fluid">
+                                <p class="caption">La norme du produit vectoriel représente l'aire du parallélogramme construit sur les deux vecteurs</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="section5">
+                    <div class="card mb-4">
+                        <div class="card-header">Applications pratiques du produit vectoriel</div>
+                        <div class="card-body">
+                            <h4>Calcul de distances</h4>
+                            <div class="property">
+                                <p>Le produit vectoriel permet de calculer :</p>
+                                <ul>
+                                    <li>La distance d'un point $M$ à une droite $\Delta$ passant par $A$ et dirigée par $\vec{u}$ :
+                                        <p>$$d(M, \Delta) = \frac{\|\overrightarrow{AM} \land \vec{u}\|}{\|\vec{u}\|}$$</p>
+                                    </li>
+                                    <li>La distance d'un point $M$ à un plan $\mathcal{P}$ passant par $A$ et dirigé par $\vec{u}$ et $\vec{v}$ :
+                                        <p>$$d(M, \mathcal{P}) = \frac{|\overrightarrow{AM} \cdot (\vec{u} \land \vec{v})|}{\|\vec{u} \land \vec{v}\|}$$</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <h4>Calcul d'aires et de volumes</h4>
+                            <div class="property">
+                                <p>Le produit vectoriel est également utile pour :</p>
+                                <ul>
+                                    <li>L'aire d'un triangle $ABC$ :
+                                        <p>$$\mathcal{A}_{ABC} = \frac{1}{2} \|\overrightarrow{AB} \land \overrightarrow{AC}\|$$</p>
+                                    </li>
+                                    <li>Le volume d'un tétraèdre $ABCD$ :
+                                        <p>$$V_{ABCD} = \frac{1}{6} |\overrightarrow{AD} \cdot (\overrightarrow{AB} \land \overrightarrow{AC})|$$</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <h4>Exemple concret : calcul de capacité</h4>
+                            <div class="exercise">
+                                <p>Un réservoir d'eau tétraédrique a pour sommets $A(1;0;-5)$, $B(-2;-1;0)$, $C(0;1;-2)$ et $D(4;0;-5)$ (coordonnées en mètres). Quelle est sa capacité en litres ?</p>
+                                <div class="solution">
+                                    <p>On calcule d'abord les vecteurs :</p>
+                                    <p>$\overrightarrow{AB} = (-3, -1, 5)$, $\overrightarrow{AC} = (-1, 1, 3)$, $\overrightarrow{AD} = (3, 0, 0)$</p>
+                                    <p>Ensuite, on détermine le produit vectoriel $\overrightarrow{AB} \land \overrightarrow{AC} = (-8, 4, -4)$</p>
+                                    <p>Puis le produit mixte : $\overrightarrow{AD} \cdot (\overrightarrow{AB} \land \overrightarrow{AC}) = (3)(-8) + (0)(4) + (0)(-4) = -24$</p>
+                                    <p>Le volume est donc : $V = \frac{1}{6} \times |{-24}| = 4$ m³ = 4000 litres</p>
+                                </div>
+                            </div>
+                            
+                            <h4>Exercices d'application</h4>
+                            <div class="exercise">
+                                <p>Dans un repère orthonormé direct, on donne les points $A(0; -1; 0)$, $B(1; -3; 0)$, $C(0; 1; 1)$ et $D(0; 0; 1)$.</p>
+                                <ol>
+                                    <li>Calculer la distance de $A$ à la droite $(BC)$</li>
+                                    <li>Calculer l'aire du triangle $ABC$</li>
+                                    <li>Calculer la distance de $D$ au plan $(ABC)$</li>
+                                    <li>Calculer le volume du tétraèdre $ABCD$</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>Références : Géométrie vectorielle dans l'espace - Cours de mathématiques Terminale C</p>
+            <p>© 2023 - Adaptation HTML des concepts de calcul vectoriel</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap and jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Animation for smooth scrolling
+            $('a.list-group-item').on('click', function(event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top - 20
+                    }, 800);
+                }
+            });
+            
+            // Highlight active section in navigation
+            $(window).scroll(function() {
+                var scrollDistance = $(window).scrollTop();
+                
+                $('section').each(function(i) {
+                    if ($(this).position().top - 50 <= scrollDistance) {
+                        $('a.list-group-item.active').removeClass('active');
+                        $('a.list-group-item').eq(i).addClass('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

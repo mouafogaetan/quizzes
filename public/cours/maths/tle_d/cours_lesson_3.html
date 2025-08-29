@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Théorie des Graphes - Cours Complet</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .chapter-title {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            background: linear-gradient(to right, #6c5ce7, #a29bfe);
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+            font-weight: 600;
+        }
+        
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .objective-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #dee2e6;
+        }
+        
+        .objective-list li:before {
+            content: "✓";
+            margin-right: 10px;
+            color: #6c5ce7;
+        }
+        
+        .graph-img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+            background: white;
+        }
+        
+        .table-custom {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .table-custom th {
+            background-color: #6c5ce7;
+            color: white;
+        }
+        
+        .algorithm-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #6c5ce7;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background-color: #6c5ce7;
+            color: white;
+            border: none;
+        }
+        
+        .nav-tabs .nav-link {
+            color: #6c5ce7;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">Théorie des Graphes</h1>
+            <p class="lead">Comprendre les structures relationnelles et leurs applications</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Introduction -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>Introduction à la Théorie des Graphes</h2>
+            </div>
+            <div class="card-body">
+                <p>La théorie des graphes est une branche des mathématiques discrètes qui étudie les structures relationnelles entre objets. Elle trouve des applications dans de nombreux domaines :</p>
+                <ul>
+                    <li>Informatique et algorithmique</li>
+                    <li>Réseaux de communication</li>
+                    <li>Recherche opérationnelle et optimisation</li>
+                    <li>Génie électrique et électronique</li>
+                    <li>Sciences sociales et économiques</li>
+                </ul>
+                <p>Un graphe est une structure composée de <strong>sommets</strong> (ou nœuds) reliés par des <strong>arêtes</strong> (ou liens).</p>
+                
+                <div class="text-center my-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/6n-graf.svg/500px-6n-graf.svg.png" alt="Exemple de graphe" class="graph-img">
+                    <p class="text-muted mt-2">Exemple de graphe avec 6 sommets et 7 arêtes</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson Navigation -->
+        <ul class="nav nav-tabs mb-4" id="lessonTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="lesson1-tab" data-bs-toggle="tab" data-bs-target="#lesson1" type="button" role="tab">Chaînes et Cycles</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lesson2-tab" data-bs-toggle="tab" data-bs-target="#lesson2" type="button" role="tab">Sous-graphes</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lesson3-tab" data-bs-toggle="tab" data-bs-target="#lesson3" type="button" role="tab">Graphes Pondérés</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lesson4-tab" data-bs-toggle="tab" data-bs-target="#lesson4" type="button" role="tab">Arbres</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="lessonTabsContent">
+            <!-- Lesson 1: Chains and Cycles -->
+            <div class="tab-pane fade show active" id="lesson1" role="tabpanel">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3>Leçon 1 : Chaînes et Cycles dans un Graphe</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4>Objectifs Pédagogiques</h4>
+                        <ul class="objective-list">
+                            <li>Définir et identifier une chaîne ou un cycle dans un graphe</li>
+                            <li>Calculer la longueur d'une chaîne</li>
+                            <li>Reconnaître une chaîne eulérienne ou un cycle eulérien</li>
+                            <li>Justifier qu'une chaîne forme un cycle</li>
+                        </ul>
+
+                        <h4>Concepts Clés</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Chaîne</h5>
+                                <p>Une <strong>chaîne</strong> (ou chemin) dans un graphe non orienté est une séquence d'arêtes connectées reliant deux sommets.</p>
+                                <p>Exemple : Dans le graphe $G = (V, E)$ avec $V = \{A, B, C, D\}$ et $E = \{(A,B), (B,C), (C,D)\}$, la séquence $A-B-C-D$ est une chaîne.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Cycle</h5>
+                                <p>Un <strong>cycle</strong> est une chaîne fermée où le sommet de départ et d'arrivée sont identiques, et toutes les arêtes sont distinctes.</p>
+                                <p>Exemple : $A-B-C-A$ forme un cycle si les arêtes $(A,B)$, $(B,C)$ et $(C,A)$ existent.</p>
+                            </div>
+                        </div>
+
+                        <h4>Problème des Ponts de Königsberg</h4>
+                        <p>Ce problème historique, résolu par Euler en 1736, est à l'origine de la théorie des graphes. La ville de Königsberg comptait sept ponts disposés comme suit :</p>
+                        
+                        <div class="text-center my-4">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Konigsberg_bridges.png/400px-Konigsberg_bridges.png" alt="Ponts de Königsberg" class="graph-img">
+                            <p class="text-muted mt-2">Représentation des sept ponts de Königsberg</p>
+                        </div>
+                        
+                        <p>Le problème consistait à déterminer s'il était possible de traverser chaque pont une et une seule fois et de revenir au point de départ. Euler a démontré que c'était impossible, donnant ainsi naissance à la théorie des graphes.</p>
+
+                        <h4>Chaînes Eulériennes</h4>
+                        <p>Une <strong>chaîne eulérienne</strong> est une chaîne qui utilise chaque arête du graphe exactement une fois.</p>
+                        <p>Un <strong>cycle eulérien</strong> est une chaîne eulérienne fermée (son point de départ et d'arrivée coïncident).</p>
+                        
+                        <div class="alert alert-info">
+                            <strong>Théorème :</strong> Un graphe connexe admet un cycle eulérien si et seulement si tous ses sommets sont de degré pair.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 2: Subgraphs -->
+            <div class="tab-pane fade" id="lesson2" role="tabpanel">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3>Leçon 2 : Sous-graphes et Graphes Connexes</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4>Objectifs Pédagogiques</h4>
+                        <ul class="objective-list">
+                            <li>Définir un sous-graphe et un graphe connexe</li>
+                            <li>Identifier des sous-graphes selon des conditions données</li>
+                            <li>Reconnaître un graphe connexe</li>
+                            <li>Distinguer sous-graphe et graphe partiel</li>
+                        </ul>
+
+                        <h4>Types de Sous-graphes</h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5>Sous-graphe</h5>
+                                <p>Un <strong>sous-graphe</strong> est obtenu en sélectionnant un sous-ensemble de sommets et toutes les arêtes les reliant.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h5>Graphe partiel</h5>
+                                <p>Un <strong>graphe partiel</strong> conserve tous les sommets du graphe original mais seulement un sous-ensemble de ses arêtes.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h5>Sous-graphe partiel</h5>
+                                <p>Un <strong>sous-graphe partiel</strong> est un graphe partiel d'un sous-graphe.</p>
+                            </div>
+                        </div>
+
+                        <h4>Connexité des Graphes</h4>
+                        <p>Un graphe est <strong>connexe</strong> s'il existe une chaîne entre toute paire de sommets distincts.</p>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="text-center">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Connected_and_disconnected_graphs.svg/400px-Connected_and_disconnected_graphs.svg.png" alt="Graphes connexe et non connexe" class="graph-img">
+                                    <p class="text-muted">Graphe connexe (gauche) et non connexe (droite)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Pour un graphe non connexe, on peut identifier des <strong>composantes connexes</strong> : sous-graphes connexes maximaux.</p>
+                                <p>Un <strong>point de coupure</strong> est un sommet dont la suppression augmente le nombre de composantes connexes.</p>
+                                <p>Un <strong>séparateur</strong> est une arête dont la suppression augmente le nombre de composantes connexes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 3: Weighted Graphs -->
+            <div class="tab-pane fade" id="lesson3" role="tabpanel">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3>Leçon 3 : Graphes Pondérés</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4>Objectifs Pédagogiques</h4>
+                        <ul class="objective-list">
+                            <li>Définir un graphe pondéré et le poids d'une arête</li>
+                            <li>Reconnaître un graphe pondéré</li>
+                            <li>Déterminer le chemin le plus court entre deux sommets</li>
+                            <li>Appliquer l'algorithme de Dijkstra</li>
+                        </ul>
+
+                        <h4>Graphes Pondérés</h4>
+                        <p>Un <strong>graphe pondéré</strong> est un graphe dont les arêtes sont associées à des valeurs numériques (poids).</p>
+                        <p>Le <strong>poids d'une chaîne</strong> est la somme des poids des arêtes qui la composent.</p>
+                        
+                        <div class="text-center my-4">
+                            <img src="data:image/png;base64,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" alt="Algorithme de Dijkstra" class="graph-img">
+                            <p class="text-muted">Animation de l'algorithme de Dijkstra pour trouver le chemin le plus court</p>
+                        </div>
+
+                        <h4>Algorithme de Dijkstra</h4>
+                        <p>L'algorithme de Dijkstra permet de trouver le chemin le plus court entre un sommet source et tous les autres sommets dans un graphe pondéré.</p>
+                        
+                        <div class="algorithm-box">
+                            <strong>Algorithme de Dijkstra :</strong><br>
+                            1. Initialiser les distances : 0 pour le sommet source, ∞ pour les autres<br>
+                            2. Marquer tous les sommets comme non visités<br>
+                            3. Tant qu'il reste des sommets non visités :<br>
+                            &nbsp;&nbsp;&nbsp;a. Choisir le sommet non visité avec la distance minimale<br>
+                            &nbsp;&nbsp;&nbsp;b. Marquer ce sommet comme visité<br>
+                            &nbsp;&nbsp;&nbsp;c. Mettre à jour les distances de ses voisins<br>
+                            4. Retourner les distances les plus courtes
+                        </div>
+
+                        <h4>Exemple d'Application</h4>
+                        <p>Considérons un réseau de transport avec différentes villes et les distances entre elles. L'algorithme de Dijkstra permet de déterminer l'itinéraire le plus court entre deux villes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 4: Trees -->
+            <div class="tab-pane fade" id="lesson4" role="tabpanel">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h3>Leçon 4 : Arbres et Arbres Couvrants</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4>Objectifs Pédagogiques</h4>
+                        <ul class="objective-list">
+                            <li>Définir un arbre et un arbre couvrant</li>
+                            <li>Identifier un arbre couvrant dans un graphe connexe</li>
+                            <li>Utiliser l'algorithme de parcours en largeur (BFS)</li>
+                            <li>Appliquer les algorithmes de Kruskal et Prim</li>
+                        </ul>
+
+                        <h4>Arbres</h4>
+                        <p>Un <strong>arbre</strong> est un graphe connexe sans cycle.</p>
+                        <p>Une <strong>forêt</strong> est une union d'arbres (graphe non connexe sans cycle).</p>
+                        <p>Une <strong>feuille</strong> (ou sommet pendant) est un sommet de degré 1.</p>
+                        
+                        <div class="text-center my-4">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Tree_graph.svg/400px-Tree_graph.svg.png" alt="Exemple d'arbre" class="graph-img">
+                            <p class="text-muted">Exemple d'arbre avec 6 sommets et 5 arêtes</p>
+                        </div>
+
+                        <h4>Arbres Couvrants</h4>
+                        <p>Un <strong>arbre couvrant</strong> d'un graphe connexe est un sous-graphe qui est un arbre et qui contient tous les sommets du graphe.</p>
+                        <p>Un <strong>arbre couvrant minimal</strong> est un arbre couvrant dont la somme des poids des arêtes est minimale.</p>
+
+                        <h4>Algorithmes pour Arbres Couvrants Minimaux</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Algorithme de Kruskal</h5>
+                                <p>1. Trier les arêtes par poids croissant</p>
+                                <p>2. Ajouter les arêtes une par une, en évitant de créer des cycles</p>
+                                <p>3. S'arrêter lorsqu'on a $n-1$ arêtes</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Algorithme de Prim</h5>
+                                <p>1. Choisir un sommet arbitraire comme point de départ</p>
+                                <p>2. Ajouter progressivement l'arête de poids minimal connectant l'arbre à un sommet externe</p>
+                                <p>3. Répéter jusqu'à inclure tous les sommets</p>
+                            </div>
+                        </div>
+
+                        <div class="text-center my-4">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Minimum_spanning_tree.svg/400px-Minimum_spanning_tree.svg.png" alt="Arbre couvrant minimal" class="graph-img">
+                            <p class="text-muted">Exemple d'arbre couvrant minimal (en vert)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Applications de la Théorie des Graphes</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Réseaux</h5>
+                        <p>Conception et optimisation de réseaux informatiques, routiers, de distribution d'énergie.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Algorithmique</h5>
+                        <p>Résolution de problèmes complexes par modélisation en graphes.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Sciences Sociales</h5>
+                        <p>Étude des relations interpersonnelles, des réseaux sociaux, de la diffusion d'information.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p>Cours de Théorie des Graphes - Adaptation HTML</p>
+            <p>Sources des images : Wikimedia Commons</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Activation des tooltips Bootstrap
+            $('[data-bs-toggle="tooltip"]').tooltip();
+            
+            // Animation pour les cartes
+            $('.card').hover(
+                function() {
+                    $(this).css('transform', 'translateY(-5px)');
+                },
+                function() {
+                    $(this).css('transform', 'translateY(0)');
+                }
+            );
+        });
+    </script>
+</body>
+</html>

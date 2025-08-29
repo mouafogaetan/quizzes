@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Énergie Potentielle Électrostatique - Physique 1ère D</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #4a6580);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            margin: 2rem 0;
+        }
+        .objective-box {
+            background-color: #e8f4fc;
+            border-left: 4px solid #3498db;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+        .content-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .figure-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .figure-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        .exercise {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin-bottom: 1.5rem;
+        }
+        .important-note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+        .formula {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <div class="container">
+            <h1 class="text-center">Physique - 1ère D</h1>
+            <p class="lead text-center">Comprendre les concepts fondamentaux de l'électrostatique</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Chapter Title -->
+        <div class="row">
+            <div class="col-12">
+                <h2 class="chapter-title">Énergie Potentielle Électrostatique</h2>
+            </div>
+        </div>
+
+        <!-- Objectives -->
+        <div class="row">
+            <div class="col-12">
+                <div class="objective-box">
+                    <h3>Objectifs d'apprentissage</h3>
+                    <ul>
+                        <li>Déterminer le travail effectué par une force électrostatique dans un champ uniforme</li>
+                        <li>Définir et calculer la différence de potentiel entre deux points dans un champ uniforme</li>
+                        <li>Comprendre le concept d'énergie potentielle électrostatique et ses applications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="row">
+            <div class="col-12">
+                <div class="content-section">
+                    <h3 id="travail-force-electrostatique">I. Travail de la force électrostatique dans un champ uniforme</h3>
+                    
+                    <p>Considérons une sphère chargée, de charge $q$, se déplaçant dans un champ électrostatique uniforme $\vec{E}$ généré entre les armatures d'un condensateur plan. Le travail effectué par la force électrostatique lors du déplacement de la charge d'un point A à un point B dépend de la nature de la charge et des caractéristiques du champ.</p>
+                    
+                    <div class="figure-container">
+                        <img src="data:image/png;base64,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" alt="Champ électrique entre les armatures d'un condensateur">
+                        <p class="caption">Représentation du champ électrique uniforme entre les armatures d'un condensateur</p>
+                    </div>
+                    
+                    <h4>1. Expression du travail</h4>
+                    <p>La force électrostatique s'exerçant sur une charge $q$ placée dans un champ électrostatique $\vec{E}$ est donnée par $\vec{F_e} = q\vec{E}$.</p>
+                    
+                    <p>Le travail de cette force lors d'un déplacement de A à B s'exprime par :</p>
+                    <div class="formula">
+                        $W_{A \to B}(\vec{F_e}) = \int_A^B \vec{F_e} \cdot d\vec{l} = q \int_A^B \vec{E} \cdot d\vec{l}$
+                    </div>
+                    
+                    <p>Dans un champ uniforme, cette expression se simplifie en :</p>
+                    <div class="formula">
+                        $W_{A \to B}(\vec{F_e}) = q\vec{E} \cdot \vec{AB}$
+                    </div>
+                    
+                    <p>Le signe de ce travail dépend à la fois du signe de la charge $q$ et de l'orientation du déplacement par rapport au champ $\vec{E}$.</p>
+                    
+                    <h4>2. Propriété fondamentale</h4>
+                    <p>Le travail de la force électrostatique ne dépend pas du chemin suivi mais uniquement des positions initiale et finale. Cette propriété caractérise les forces conservatives, dont fait partie la force électrostatique.</p>
+                    
+                    <div class="important-note">
+                        <p><strong>Remarque importante :</strong> La force électrostatique est une force conservative. Son travail est indépendant du trajet suivi entre les points A et B.</p>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h3 id="difference-potentiel">II. Différence de potentiel dans un champ électrostatique uniforme</h3>
+                    
+                    <h4>1. Définition</h4>
+                    <p>La différence de potentiel (ou tension électrique) entre deux points A et B est définie comme le travail que doit fournir la force électrostatique pour déplacer une charge unitaire positive de A vers B :</p>
+                    <div class="formula">
+                        $U_{AB} = V_A - V_B = \frac{W_{A \to B}(\vec{F_e})}{q} = \vec{E} \cdot \vec{AB}$
+                    </div>
+                    
+                    <p>Où $V_A$ et $V_B$ représentent les potentiels électriques aux points A et B respectivement.</p>
+                    
+                    <h4>2. Interprétation géométrique</h4>
+                    <p>La différence de potentiel entre deux points dépend de l'orientation relative du vecteur déplacement par rapport au champ électrique :</p>
+                    <ul>
+                        <li>Si $\vec{E}$ et $\vec{AB}$ sont perpendiculaires : $U_{AB} = 0$</li>
+                        <li>Si $\vec{E}$ et $\vec{AB}$ sont parallèles et de même sens : $U_{AB} > 0$</li>
+                        <li>Si $\vec{E}$ et $\vec{AB}$ sont parallèles et de sens opposés : $U_{AB} < 0$</li>
+                    </ul>
+                    
+                    <h4>3. Surfaces équipotentielles</h4>
+                    <p>Dans un champ électrostatique uniforme, les surfaces équipotentielles sont des plans perpendiculaires aux lignes de champ. Tous les points d'une même surface équipotentielle ont le même potentiel électrique.</p>
+                    
+                    <div class="figure-container">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFRUVFxgYGBYXFhgbIBkfHRgeGBoaGBcaHiogGx0mGxcYITIhJykrLi4uFx8zODMsNyktLisBCgoKDg0OGxAQGjglHyYtLS0tLy0tLS0tLS8tLS0tLS8tLzAtLS0tLS0vLS0tKy0tLS0tLS0tLy0tLS0tLTY1Nf/AABEIAOAA4QMBIgACEQEDEQH/xAAbAAEAAwEBAQEAAAAAAAAAAAAAAgMEBQEGB//EAEQQAAIBAgQCBwQHBQYGAwAAAAECEQADBBIhMUFRBRMiMmFxgQZCUpEjM2KSobHRFFNygsEVQ3OTovAHY7LC0uGz0/H/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QALhEBAQABAgMFCAIDAQAAAAAAAAERAjEhcfAyQWGRwQMSUYGhsdHhIvFCUsIT/9oADAMBAAIRAxEAPwD9vr0V5XoqD2lKVQpSlApSlApSlApSs17GAHKql3G6rGn8RJAHkTJ4A0GmlY+qut3rgQcrYk+rvM+iioXOibbBlY3GDAhpvXdZ30DQPQCguwGOt3lzW2DRAYAglTlDZWg6NDAx4itNfKeyHsnhsJYyWmuAXm68r1ziCyIrZcpEroN5Pa32rt3AyLnF8ZdPrQsa7Q65Ykkamak2a1zGqyOhSstvGahbim2SYBJBVjyVh+AME8q1VWSlKUClKUClKUClKUClKUClKUEa9FRqQqRXtKUqoUpSgUpSgUpWTEsXbqlJAiXI0IB0AB4E66jYA7Eg0BnNwwphBozjc81Q8PFvQa6jRZsqgyqAByHzJ8ydZqSKAAAIA0AHDyr2gUpSg5IwXW4eyJjsKD4qyZXX5GR4gVO/0c2bOrZjnzBWLRqrIRMmNHnQcI0mRf0RcBs2wCCVRAYOxyAweRgg+orZUmzftO3edU2sOBbFswwChTI3AEajxqnW1zNrxklPXin4r5d3ZSqw8Br2sdv6Jgn923c+y2pKeRGo5QR8IrZQKUpQKUpQKUpQKUpQKUpQRr0V4KkKkClKVQpSo27gYSDIkj1BKkehBHpQSpSlBXiLwRSxmAJgbnwA4k7AeNV4KyVXtd5iWbzPAHkBCjwUVXjO09u34m4fEJEDzzsh/lNbKBULtwKCzEADcml66FBZth/UwABxJJAA8aotWSxD3BqO6u+Tx8Xjc8NhxJCIvXH7ihF+K4DPpb0P3iCOVV4jozrFZbl66QwI7L9XE8Va0FYepNdClB8j7D+yS4Owy2sRdi/cN8zkJBe2gKnMpB1UnNAOsGYmvos11NwLi817LfdJhvmPI1Lov6m1/hp/0itVSbN+07d51XYvq4lTPA7gg8iDqD4HWrKz4jD650gOPkw+FvDkeHzBnh74cciDDKd1O8H0IPiCDsarBirIdSpMSNCNwdwR4gwR5VHBXi6yRDAlWHIgwY8OI5gg8avrGnZvsOFxc3qkKxPmGt/dNBspSlApSlApSlApSlApSlBEVKoipVIFKx9Kd1P8W1/1j+sVsqhWXov6pPKrrt4Lud9gNSfIDU1z+i+sKEaIFe4IIlgM5KjQwOyV+KamWpp73UpWf9kG5Z2P8bD8FgfhVV23h1MMLQP2ssn56mmVmmXhPt+3uH1vXD8IRPWC5/B1+VbK4uC6mbhllm4e6XUCFVRoNIhRodKtxWKYITZupcOiqDB1YhV7S7AE8QdqmWr7Ph+Y02/pLmb3LZIXxbZm9NVHjm8K2VlwbKoW3BUgQA25j7WobnvPOr7twKCWMAca052Wbp0rH9Jc2PVp5ds+OuieRBOvumn9mWj3lz/4hL/g5IHpRFXQWNt3LSrbuK5tqiuFYHKcgOVo2MEGPGujXzHsp7JYbDWibAe312W6wW48BigBIE7HkZFdvrHt9/6RPiC9ofxKO95qB5bmpNm/adu862VjxnYPWjYQLg+zPe/lknyLbmK1owIBBBBEgjj4g1TcvySqjOdjyH8R/oJPhVZkt2X1j6RYKbbkxluAHyYFPzZT6ViwTwDauXTNtioVMwOXRk2JdjlZQWnUjaadIpb6skWjIZGDFDMq4YSWE7jjWcun/n1h0v2y3+8T7w/WrgaznFINwV8WQgfeIj8aLhbREhV8GWAfRl1q5S6ZN5Z18mmoWboZQy7Gs91WtqWD9lRJD66AT39x5mar6KfLbtowKvlGh4mJJB46yY38BTLPu/Di30pXisDMEGDB8NJg+hB9arL2lKUClKUEalURUqkGfH2S1tgve0ZZ+JTmWf5gK8XFZlXJqWAOvug8WHz03JHDUizEXco01JMKOZ/TcnwBrLhk6lip7txswaPfPeB5ZjqPEkcpNSYma1WbIXXdjux3P6Dw2r5fEe07Wuk0wQwt5hfBuddoEGW2c2U65tVtqQcsZ5PCfqb13KOZJgDmf96+QNZMThDC3AM11Gzjx0KsonYZWYATuQTxlyXx1LupZu+0D4VJA9W3P4Dwq61aVRCqFHICKh+1LlDAyGjLzM6gAc6jldtzkHIQT6k6egHrReNnHhEOjzrdHEXGn1AYfgwPrVWPsLcu2VZQcue5qOIATTkfpJnwqGGwSC7dUrmnI/aJbdcnvE6/R/lULNm2cQ4Uxlt2yMjEAS1yeyDHuiZHKhMby3y/bXdsECO+vwsdRHwvvPHXjxFZMDezkOxJSYt5tCORuDmfdJ4EbE6yxpeRaPbVtWgdoIIkEDRpJA0gxmgEitdxAwzJB0jwYcVP4xyPqDGs5mLt8WmlZMFe93XaVneBoQ32lOh9PGp4rHWrf1lxE/jdV/M1ZcuerT7twj0X9Ta/w0/6RWquJ7MdO4bEWgtm8lw2sttwDswRSQPi7w1EiZG4NdLFXfdmBGZz8K/0Jgx5HlSbN65n2lnjWK/cyNIJFliQ0bhj8HEAnQxxMiNWrYlgkQZReCKY+8w1+R+deJYUqS6jLlIymIVYggjbbf5cKz4C87ApMdWYztqXXdWUHmNMx3ZW0iDUXbhOv31Ftq0EvQoAD29gIAKNy8et/wBNT6VP0R8SoHmWAA+ZFYukUtLcs52BJcgm406dU7bHQAlV0AGoHIVLF4ew/VhFtnNcXVQp7s3OH+HFMs3TN7ny/brVQ+FEkr2GO5WNfMbH1qP7MV7jEeDEsPkTI9CBU7V6TlYZW5TM+Knj+f4VeaTM46ax9IXCVFl97pCSNmB1eORyBtD+OtdC5bDCCJH+/wAa+S6F6ffF9IYiw2Ge1aw9kQ1yJcvcIzJlYgoer0YE6qdRtX1FhyDkYyRqD8Q5+YkA+h40N+M3eBymjmV4N/Rv147bxMOjBKlyINxi/psmnA5FT1qONHWnqd1P1h5L8M/E34CTppN2HcyUbcbH4hwPnwPjykULxmV9KUqsFKUoIipV4KhibuRGaJygmOcDaosmbiK7PactwWUX/uPzEfy+NWYi0GVlIBkEa/8ArWmGtZUVZmAATzPE+p1rzFXcqEjeNBzJ0A+cU2jV/lqxOUfM+y9nFWGvHHYgXw1w9VdC5FQQFZCnuCVgEkyZ1k9r6m5cCgk7ASajashVCbgADXjpGtYLthldVt9pV7ZtsdBwUKdYEyQDp2BEU7jhdXh11ze2UNt8zDs3D/lliOzyhjqT8R4giNt67EACWOwmPMk8B+oqpMXbeVbQwcyOIMcZB0K8JEjxrNhWNsZnHYaDmMkoPdV54AHvcCTPE0N/5V5icKBctvc7eabZkCBPaUxsACpUce3vUlwyNiLgZFI6qzEgb5ru3jWnHqGtkExMZSBMNMqQOJDAGPCufZxjlw5VUzW2DhmOhtNqJA07z85AB83BZdV45W4RGDXLi9pc2QLJkKmhyncnObmh8No1ni8WLZDIM2YSVHL94TsoHE8RtJABqwGJZbVpGQi6yjQ7EkS7EjgCSTtyG4rywy2na2g6xn1YiB2t2zsdBMghRJEnSKizx/tHFYJiZds2bUIsqucDY8WzJmUyY02BNbVwNh7eXqrZtuNVKLDA66qRB561j/Z7rI6l4Kd1UHIBll2ksJgSAux3rzD9F2biXEcNcVpEPcdpVxm0Bbs6NGnKk3XXM6eX2YfZDozA2sM4w4tG2z57yhg6rcNtM4IJOXQKSvCdq3WcDqAhNsmLjrErv2FKHaI1ykaprvXF9lvZfC4bD9XYLReuh3Aut2Wa2hdCVIOXKk5WnveVdoW7ioz27hlmgC4M472RNQQ2uh1YxJ0qN2Ytxvb16+TRZxJdyjjLkPmtwjcqeIHI6yDwAJhdlrqNJVLk2zBgvlDOhncKIuRG+Ya8KqxBUqli6mUGO0WkEDk+hDFio1gnNpJr3pDEMEyHW4hR52DKrgsx5CAQeU6DUVXPl8vz1svxVlVfDhVAHWnYf8m7vXtywty/qPq03GhlyNmGoICf66pxt24LilimVFe6QA2kAIBmniHb3eFaei5ynOMtxjmcTME7AHiAAFB45ec1WbmcZVqOVIVjIOzePJo0nkeP51Y8dZ9EpKkiWcb2xwK/bPD1JmIPuKuZ5tpqdmbWE5ajd9iANtyRpNeHxCW1AY9skgjUs7DQsFGpkQfAEcKeBn/KNODgLkgKUhYG2wjL4R+nCvmfaT2oa1i8PhLVh3uXnhb0r1a5QWuqSCSXFsE5SBuNa7N5LjMrNNtD2GAbtEHVczDu9rSFPv8Ae4V0FsqAoCgBe7oNNI05aE/M0Lws1RHBooQZTIPazH3p1LHzmajjBEON03/hPe/DXzUUwemZfhYgeRAcfLNHpWgim8Ozq62KVnwB7AHwkr90wCfMAH1rRVjOqYuClKUQrPjhKgc2QemcT+E1orn9IYC00M1q2SXSWKKSdQNSR5CpdmtHajoVnxmuRfidf9Pb/JDVf9lWP3Fr/LX9Kz4rouwDbPU2oz6/RrxRgJ0+Ij5ilXRu6ZMVz+h+kLWIDXrNxLqMQodGDAgCdxxlmqx+iLBBHU2tRH1afpXG9l/Y3BYRHtWrCQGALOA7N2QdWbxZjGgEnSlTTteu+O10rYV7ZVlBDFV1G2ZgsjkROh4U/ZnXuXCR8NztD0fva8yW8qz43ouxlEWbXft/3a/vF8Kr6rDN9Xh0u+KW0y/fMKfIEnwp3rezOd9FCNcR2YWyAhjIsukkAkoQM6nUDRCBB2kmqsW5vkiwIuQc6XJUKSjWwzEA7gkRqewu2U1FMEGZ0WzZBDQQttTEqGBN1hC7gRkY14LK4ZnBTrg6gXEVLagZczqAphT2c5OvuiAJAKGvdPGYghmW99GzDs5TPZGwt3GyhdZJJynWBwNenpI5LZS2EUMsEJdfVuydETKe8dn3+Rqx2CW6yk2xaWyCFUgEIHhi7ojAFDlgEEgFTMictJ6HItKerVwXVhlWzsbgbZ0BBg/GfE1K17P1n13b+tuG5Oa8MyaZLSLOU/Ddkjv8awXLZNq4HtYu4MgXLbu27btkdlIU27qRsBuJE+tlzCKLq9i2AEbvYMtuVjMUbKToeXlqKow1u1rLYRfrDDWADrcaDDODqNvCp3tzjo8vX9Plf+EZTqsQtqzfQLi7zBOtQlSLNlSTmK6yWIkHQxLRNfcWjcAsjNf4E5kskaIfgEnUjjMTxr86/wCGdm112Ny3MEbRcZMtpimbIuYItx844cSJmK+6t2EPVQtkzpAwTzqk6ktE6HU+e1J19F1XPHn/ANN649y7nL1ghVOa1ftgblt0YbEbxtw3rm38WGtlbety5m6tJVjJUwgZSQEyaENGXUjQQNNvooF3UWo2ILJh1EERwRmGqngP61lwuFW1lvhQwRSpySM2hV0WXhmWCSwCjst4lbHPVt5fZ0sRjFW71l+EQ5VQA5usZMzZQFmWBLtl3OQH3Wr3GYq7cGZbboqmdRkJHvhmOqjLPdDHQGQRVOIwaOUsRctqHNzM2Vu0wcKsNmEHt6ke6BuZqvGdH9UjB0sMpEZzaRRLdkSy/V7zqrD7QnS3ZnR2o7drCPAUsLaj3LQ/Auwn1AU+NUdC3rDPd6h0cSMzK2Y5hKEO0k5gU2OtQ6iwv1mGRPtdWjL55gOyPFgtc/2d9ksFh3vG1aRhdIuM7Q+ZmLMcs6BYKwFgaDzpTTteXrHf6RMWnPwqWHmvaH4itNcvpHoux1VyLNqcjR9GvI+FaP7KsfuLX+Wv6U7y9ic76J2/rX/gQ+suJ+QHyFaa5adF2OtcdTajIn92vxP4eFaP7KsfuLX+Wv6Uhr3+U+yzDCGufxAj1Rf6gn1rRXOwnR9kO5W1bBVhBCKIOUHTTTcV0aRNe/l9ilKVWSs3SH1bH4Yf7pDf0rTQilXTcWUrPj+4T8JVj5KwY/gKYEwuU7p2T6bH1WD61e5EGYjjP9am8a7Ork9rmtij1pFsBswAkkhQVJntQczQe6Ph1jh857Qez1/HCyLeLvYZbNwLcCXLiG9aMEyFYAErEEg7t5V9bdw/ZAQAFIKchAiPIgkeRoThbOvBnxHRvWIwuNnLAgAjsrIjROP80nxpZxDXwChyp7zA6kgwyrptIILeBjmJG71xyiQq/Wc5ier/ABBJ5acdLSOrM+4d/snn5HSeW/EmniSZnuqsSBZU3EWQqwUG7ayAs7vJMTuWM7yMNrqywV3E5Ha4CcvauEAaNB2DqOIAFdDF9q5aThJuHkQkQPPOyN/LUbeuJuTwtWY9Xu/oKJmd7FYZr1q066t1YDnYMCBnQaRMjcRBG+9Wi0C6mwcoEuyEdmdVgpoVaS23FTIJq/D3shuIdw5KjiwftCP5s48MvrVeIsuvatsOuc7GSrcpHAKNMw+RJAqVvT4dfFBceVNy5ctssALKA3F7MkwVGbdiJKju1DB4y0A83UkIiEFgDIBJkHUavHoancxiKFtP9Gd2DncL2jDbPmPLWCZA2rXbs/RnMJJDMQRMZpMekx6VO9vP8eePo4HRfTOA6xlsXbIdHQ4gplALPbKiW2ZpVZgkiBMV0Vxh6uER2a23wlQADI1aJm2RooMTVPQ3s1hcOt1sNaWy99UL5dBmUHKwSYXUzoBMVrHSCB9NWdRNtYLBhwI4SJEmB2N6GfpevVHEW5K3LzL1ZGVlUnLzXOx74mRsAc+1UY62QrOVOVyEVI1UOyqxyjWWGpG4A01zVps4Ut2LvdGttAdBy7W5deHLskSRIk90m7bttupLk8G0KoI5mSY52yeAqsXrkqx1621wAt30dCB3pEOnZ7wIAcgxofOtGAuNdAZxlKEjLt2hoWI4A7qOTAnXQSx5+kw/jdP/AMNz9K9Xs3yOFxM3qkKxPmrIP5KuGPek2jw2ja1TVOKT3Rzt6f6duURBpwmEVgbqE22uMWlIg8BmU6EkATIkEnUVpYi5oNU948G+yOY5nbhziN/6Im4O4e+OX2x/X58NS4xMd6jE4llKpdAALA9YsxC9olgdU1AG5Gu9dLMKow6yS5G+ijkviOZOvy5V8z0l7OPbxtvH2r7/AEatb/Zcq5CrgArbiCpzhXO85eAp4lm2mPpsLqXbm0A+CgKR94N8zWiqcHGRcpzCN+fMnxmvcVcyqSNzAHmTA9JNNoX+WrEQwWoZvidvwOQfgorRULNsKoUbKAB6CKnSJquaUpSqyUpSgz3uywfgdG/7W9NQfAzwqtvpXj+7Q6/abkfsrp6+RBsx93LbcwCYMA7EnQD1JA9arwVvqlW2TI4MeJJk5vtEyZ4zz3mzfanitvgghwJ4MBxHMDiRqfU+FYfaOx12Ha0l17bXgFS5acqwJ1DKw4AAsfAGurXMykXiQMyWwOyODNJYqPBcunK4Y5FsdqY72T2W6A/YsLasI2dkBNwmfpHYlneSZBLE+mh4R2bWIVjGzcVOh+XEeI0qVq6GEqZH+9DyPhS7ZVtGUHzE05Ge7U52Hw3011kYplyJlEESAXJg7fWDQRtPGlu1c/aLkuBNq1qqa967zJHH/fH3o/Ca3CHcTcM9qZgKo708FFL+GAvWyzMwYOmrESYDqCBAIhH+dTDXvT4/Tj180MSwtuHUl27lyTMAxBYxCQ0GNBDOYNbwuWXcyecbcgo8/Un0FLuRFykAKdAoG/gFG/HSsFl2Vltvq29oHl9syZZRHnuJ1ILvyXdVnJDDvQXBgjLrltngdSSd+PAipXOjbYByhl0OiO6D7qkCtVi1lEbk6k8zzNe3u6fI/lVkZ1as6ny/QPsXZs37uJ6y9cOIRAyXbjOFiTAk6rr3WmOHKu5+yqnYACo5kZQBlbfQDTUifMHnWrC9xf4R+VTuIGBB2NMcD3saqoBzAhtGXcjgeDLPD/2DxrFhGkM95RFyIaOzkE5M3wndtdAX34VHEr1rC0TGWczwIcfu42M7sOQ4TK9FMRrlcZWO2ujfwnj5b1GsfDrkw43DS9jLccDrCRqG/ubmxYE8alj8MB1bOzOBcUQ0Qc829QoAOrjccPGj4VGvgAZcqFjlJXV2AU9kidEffnTpTBL1ZMvoVYfSPuHDDjzAphPfnx+kz5t12+q7nXgBqT5KNTUAhfVhC8F5+Lfp/wDgstWFXuqBO5jU+Z417duhRLGP97DmavNnP+r5X9ux1rpCzhFsW/2Iq7ddLMwVUOVIgBCHyjiMsaya+ltdtg/uicvjO7fmB4E86x9IqWy3DKojarpLoeywfkuofLucgniK6lNzs82O99G2cdxiM45Hg/5A+EHSDM17bz7qSB4tsT6ar6tyFMQRcm2IIOjncAHdfEkcOAMngDLA22VFVt1lfMAwpPiVAPrTc7M8V9KUqsFKUoFKUoIXbYYQRIkH1BDA+hANeugIgiQeBqVKDN2k5uv+pf8AyH46cZqnoi6HV24m5cngdGKLI4dhVrfWHBYZWtpmXUCJ1BGvxDUVG8y7tF3DAmRKt8S6H14HyMio5bg2ZW/iEH1I0/AU6lx3bh8mAYfhB+ZrzJe+O3/lt/8AZUanOfX8MmAuXZuDJbkXDP0jaSAw/u9dGB9an0lauG2TmVSsOAo1lTMZm01AI241HDWnF26pcDNkuSqRuvV+8W4W/wARWxcIsyZY7yxmDzAOg9AKcTOmfDy/LPhmDANaE5gD1rTqDqMs6twjZdfStBwi5SDJnUsdyRsZGxHCNuFVYbsObZ2Ylk/7l8wxJ8m07prZVkZ1a7WPrXt98G4o99RLfzIBqfFd52FenHWmDBbiEgGRmEjzG49a11RjLCuhDqGEHQgHhVZm7Lh+lbIAXrULqqyisGYdkGMiy0xrEVbmuXNgbaczGc+S7KDzOu+gOtc32R9mMPgbbjDqyreYXGUsWAbKAcs6gabEmu9Ui6t6qGHXLkjs8v6zvM6zvNVPIBDrnTnEn+ZePp8q1Vkx5LRaG7948knteRI7I8TPA0wTVhk6LtBg1xLhAdpABDAAAKoOYEgEDNGkZ44VZ0oLgtntpqVUdg7s4UDv8yK2XMKh4QQIBGhA5AjWPCsWPw5+jQXG7VxYnKQMn0muknuc+NTDfvZ7/OerWbLne5H8Cgf9Wap2sOqmQJPMkk+UnYeFV5Lvxp/ln/zr04cne458BlH4gT+NC3x8v6MfkKMjmA6lY4mRBAA1J8BrVGBuvdtox7AZVJ17RkSQI7vnvvoN61WcOq7DXidyfNjqfWodH2ittVO4/WqzmTZciACAIAqVKVWClKUClKUClKUClKUClKUClKUGPFdm5bfgZtn+aCpP8yhf562VVirGdCsxOx5EagjxBAPpUcHfzqCRBEhhyYGCPKRpzEUEsRZDiDpxBG4I2IqGHvmcjiHA9G+0vMcxuJE8CdFVX7CuIYeIIJBB5gjUHxFBbUL3dPkfyrNN1P8AmjwhX/ojH7vrVeK6UtqjG5mtgKSS6MANNZeMv40WbteF7i/wj8qtrgdAe1WFxKsLDtd6ohGKI7DNlBgMBHHfaun1l19l6oc3hm9FUx5Et6VIurersRiMsADMx2UcfE8l5nxHEgV5hbGUEky7as3M8hyA2A/Mkk+4fDBJiSx7zHUnzP8AQQBwAq6qyVjHav8AhbSPVzPzCqPv1oxF4IrMdlBJj+g4mq8DZKrLd5iWbzPDyAhfJRQaKUpQKUpQKUpQKUpQKUpQKUpQKUpQKUpQKUpQKx4j6Nus9w/WeEDR/TY+EH3ddlKBSsWtnYE2vD+79OKeA1Xy7uxWBAIMg6gjjQe1C93T5H8qnUL3dPkfyos3YOg+ibFhSbNpLfWw7hBAZsoGaBpOldKqsL3F/hH5VbUi6t6UpWM3Td0SQnG4D3vBCNfNvlrqtZPrH/5ds/ecGPkpH3uWXXZUUQAAAAACABoAOQFSoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFKUoFZGwcEtaOQkyREqxO5KyIO+oInjNa6UGP8Aa2X6y2w+1blx8gM/+n1qF7pSzlM3UXQ6MwU7bENBB8K314yyCDxos3cXor2lwlzNbt4i272lTOFYHKSDAkaE9kyBtxit4xpb6u258XU2wPPOM3yU1T0T0BhsM1x7FlbRu5esyCAxWYOUaA9oyQNeNdKhbmsZwhf64hh+7Ahf5p1f108JrZSlEKUpQKUpQKUpQKUpQKUpQKUpQKzvjEDMpMFVVjOmjFlXU6bqavdZBB2NYcT0UjkklgGRUZQRDBSSsyCd2OxFBNelsOTAv2iddBcXgJPHkQfWrLWOtMQFuIxOoAdSTvsAddj8jXIw3sumR0usbnWZQYGUZVVVVQJJ2QazNbcL0NbtsrLIKgiAEUGZnMEUT3jptOsTrQW4fpaw7FVuoSGyd4anKrwvxaOu3Ol3pWyrBTdQEsV7w0Ye6ddD4eFZMN7OWUZXEkqRGbK2iqiqBK6QLa6iDzJq5uhrZBBLQTcMSNOsJLxpOpYnWd6C1ul8ON79oax9Ym+mm+/aX7w51bhsbauEi3cRyIkKwMTqJg6SK5+G9nLKEsC5JZWJJGpUowJ01M2lknU6zqas6L6ESzMMzAyFB91TEgRrrlWT4cKDqUrL/Z9vkfvv+tZh0BY6438h6w2xbLdZc7oYsBGaN2JnxoN1/EIgBdlUEwCxAk7xrx0PyqlOk7JVX61Ar90lgM2saT4kVDG9E27qorDRGLCYbcFTOcEGQxFV3ehrbKiktFuYggGCQcuYCQNANCJGhmgsxHTFhCFN1MzEAKGWdRIJE6CATPhVi9JWTtetnQnvrsDlJ32BBE8xWJPZ+0M3auEtEtmg6IyCCoEQrnbwqNr2bsqrIC2VzLDswWDm4GjLGjHbbmDQdG1jrTaLcQkDNoynSAZ0O0EGfEVVb6WsHL9LbBbugusnUjQTzU/I1Tb6CtAMIOV7ZtsoyqCCADIQCTA34SYiazXPZm3KQzLlbMwAQZiFcKYVQAwLzMQY1B3oOh/aljMV662CJ0zrOgzExPAa+leW+lrBJAvWyQQO8N22APGfCuePZa1mclnKuBmWRqYIzFhrOukRqONWn2bs5gxkmSZbKZLNmcwVgZiBtEZREayGhOm8OTC3rZ0zSHUiIJmZjYE/jXqdM2CzL1i9mNSQAZGYQx0Oh4Vjf2XsHQ5ohREj3bfVqdRwX0k6zQ+y+HmY1mdkju5T2MuXUE8OOkUHWs4hHnI6tBg5SDB5GNqtrHhejkthgJhjMTAHkFgDz3PEmrf2ROR+8361FmO9fWfHY23ZQ3LjBVAJkmNgTA5mAdK9/ZE5H7zfrVOP6NS6gQlgBMFTrqpQ6md1Zh60W47lxxtuCesSAAScw0BJAJM6SQR5g1ls9OYdlzC6nc6yMy5ssTOWZ2B+RrxOhbYDAM+pSDI7ORzcXLpwZjvPjWSx7L2lOjPlAt5VkaMmYK88T29ttNZ4Vl0ML0rZuQFdZMQCYJlFfsg79lxtW2uTh/Z6ylzrQCXmSTlMkDfUaayezGpPDSupbtgbc53J/OglSlKD/9k=" alt="Lignes de champ et surfaces équipotentielles">
+                        <p class="caption">Représentation des lignes de champ électrique et des surfaces équipotentielles</p>
+                    </div>
+                    
+                    <p>Pour deux points M et N situés sur une même surface équipotentielle, on a :</p>
+                    <div class="formula">
+                        $V_M = V_N \quad \text{et} \quad U_{MN} = 0$
+                    </div>
+                    
+                    <p>Le champ électrostatique $\vec{E}$ est toujours orienté vers les potentiels décroissants, perpendiculairement aux surfaces équipotentielles.</p>
+                </div>
+
+                <div class="content-section">
+                    <h3 id="energie-potentielle">III. Énergie potentielle électrostatique</h3>
+                    
+                    <h4>1. Définition</h4>
+                    <p>L'énergie potentielle électrostatique d'une charge ponctuelle $q$ placée en un point M de potentiel $V_M$ est définie par :</p>
+                    <div class="formula">
+                        $E_{pe} = qV_M + \text{constante}$
+                    </div>
+                    
+                    <p>En choisissant un état de référence où le potentiel est nul, l'expression se simplifie en :</p>
+                    <div class="formula">
+                        $E_{pe} = qV_M$
+                    </div>
+                    
+                    <p>Où :</p>
+                    <ul>
+                        <li>$E_{pe}$ est en joules (J)</li>
+                        <li>$q$ est en coulombs (C)</li>
+                        <li>$V_M$ est en volts (V)</li>
+                    </ul>
+                    
+                    <div class="important-note">
+                        <p><strong>Unité alternative :</strong> L'énergie en physique atomique et nucléaire est souvent exprimée en électron-volts (eV), où $1\text{eV} = 1,6 \times 10^{-19}\text{J}$.</p>
+                    </div>
+                    
+                    <h4>2. Variation d'énergie potentielle</h4>
+                    <p>Lorsqu'une charge $q$ se déplace d'un point A (potentiel $V_A$) à un point B (potentiel $V_B$) sous l'action de la force électrostatique, la variation de son énergie potentielle est :</p>
+                    <div class="formula">
+                        $\Delta E_{pe} = E_{pe}(B) - E_{pe}(A) = q(V_B - V_A) = -qU_{AB}$
+                    </div>
+                    
+                    <p>D'après le théorème de l'énergie cinétique, on a également :</p>
+                    <div class="formula">
+                        $W_{A \to B}(\vec{F_e}) = \Delta E_c = -\Delta E_{pe}$
+                    </div>
+                    
+                    <p>Ce qui confirme que l'énergie mécanique se conserve dans un champ électrostatique.</p>
+                </div>
+
+                <div class="content-section">
+                    <h3 id="conservation-energie">IV. Conservation de l'énergie mécanique</h3>
+                    
+                    <p>Pour une particule chargée se déplaçant uniquement sous l'action de la force électrostatique, l'énergie mécanique totale se conserve :</p>
+                    <div class="formula">
+                        $E_m = E_c + E_{pe} = \text{constante}$
+                    </div>
+                    
+                    <p>Cette conservation permet de résoudre de nombreux problèmes de dynamique sans avoir à intégrer les équations du mouvement.</p>
+                    
+                    <p>Si une particule se déplace d'un point A à un point B sous l'action exclusive de la force électrostatique, on a :</p>
+                    <div class="formula">
+                        $E_{c}(A) + E_{pe}(A) = E_{c}(B) + E_{pe}(B)$
+                    </div>
+                    <div class="formula">
+                        $\frac{1}{2}mv_A^2 + qV_A = \frac{1}{2}mv_B^2 + qV_B$
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h3 id="applications">Applications et exercices</h3>
+                    
+                    <div class="exercise">
+                        <h4>Application 1 : Charge entre deux plaques</h4>
+                        <p>On établit une différence de potentiel de $10^3\text{V}$ entre deux plaques conductrices parallèles distantes de $5\text{cm}$. Une charge $q = 10^{-12}\text{C}$ se déplace d'un point A situé à $1\text{cm}$ de la plaque positive à un point B situé à $2\text{cm}$ de la plaque négative.</p>
+                        <ol>
+                            <li>Représenter le champ $\vec{E}$ et calculer son intensité</li>
+                            <li>Calculer la tension $U_{AB}$</li>
+                            <li>Déterminer l'énergie potentielle aux points A et B</li>
+                            <li>Calculer le travail de la force électrostatique</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h4>Application 2 : Accélération de particules alpha</h4>
+                        <p>Une particule alpha ($^4_2\text{He}$) est émise avec une vitesse négligeable depuis une source radioactive. Elle est accélérée par un champ électrostatique uniforme entre deux plaques distantes de $20\text{cm}$.</p>
+                        <ol>
+                            <li>Déterminer la tension nécessaire pour que la particule atteigne une vitesse de $10^8\text{m/s}$</li>
+                            <li>Calculer sa vitesse à mi-parcours</li>
+                            <li>Déterminer les caractéristiques du champ électrique</li>
+                            <li>Calculer l'énergie cinétique finale</li>
+                        </ol>
+                    </div>
+                    
+                    <p>Les solutions détaillées à ces applications et aux exercices supplémentaires sont disponibles dans la version complète du cours.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 - Cours de Physique 1ère D - Adaptation basée sur les travaux de KANGA Henri</p>
+            <p>Ressources éducatives pour l'apprentissage de l'électrostatique</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap and jQuery Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Script pour améliorer l'interactivité
+        $(document).ready(function() {
+            // Ajout d'une animation de défilement fluide
+            $('a[href^="#"]').on('click', function(event) {
+                var target = $(this.getAttribute('href'));
+                if(target.length) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 70
+                    }, 1000);
+                }
+            });
+            
+            // Mise en évidence des formules au survol
+            $('.formula').hover(
+                function() {
+                    $(this).css('background-color', '#e9ecef');
+                },
+                function() {
+                    $(this).css('background-color', '#f8f9fa');
+                }
+            );
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chimie Organique - Les Alcanes</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Configuration MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 8px;
+        }
+        .card-header {
+            background-color: #f1f8ff;
+            font-weight: bold;
+        }
+        .chemical-formula {
+            font-style: italic;
+            color: #d63384;
+        }
+        .molecule-rep {
+            text-align: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .table-responsive {
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .table th {
+            background-color: #e9ecef;
+        }
+        .exercise {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .conformation-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-4">Chimie Organique</h1>
+            <p class="lead">Les hydrocarbures saturés : les alcanes</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">Introduction</div>
+                    <div class="card-body">
+                        <p>Les alcanes constituent une famille importante d'hydrocarbures saturés, caractérisés par des liaisons simples entre les atomes de carbone. Ils servent de base à la compréhension de la chimie organique et possèdent de nombreuses applications pratiques, notamment comme combustibles.</p>
+                        
+                        <div class="exercise">
+                            <h5>Situation problème</h5>
+                            <p>Après trois mois d'utilisation intensive, la bouteille de gaz de votre maison semble vide. Votre sœur n'arrive pas à allumer la plaque de cuisson.</p>
+                            <ol>
+                                <li>Quel est le problème évoqué dans cette situation ?</li>
+                                <li>Identifiez le gaz combustible utilisé et donnez sa formule chimique.</li>
+                                <li>À quelle famille d'hydrocarbures appartient ce gaz ? Citez une de ses propriétés.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Structure des alcanes</div>
+                    <div class="card-body">
+                        <h5>Le méthane (CH₄)</h5>
+                        <p>Le méthane est l'alcane le plus simple, constitué d'un atome de carbone et de quatre atomes d'hydrogène. L'atome de carbone possède une structure électronique $k^2L^4$ et forme quatre liaisons covalentes (il est tétravalent).</p>
+                        
+                        <div class="molecule-rep">
+                            <p>Formule développée :</p>
+                            <p>H<br>|<br>H-C-H<br>|<br>H</p>
+                        </div>
+                        
+                        <p>La molécule de méthane n'est pas plane. Les quatre atomes d'hydrogène occupent les sommets d'un tétraèdre régulier, avec l'atome de carbone au centre. Tous les angles H-C-H mesurent $109^\circ$ et la distance C-H est d'environ $110$ pm ($1$ pm = $10^{-12}$ m).</p>
+                        
+                        <h5>L'éthane (C₂H₆)</h5>
+                        <p>L'éthane possède deux atomes de carbone et six atomes d'hydrogène. Sa formule semi-développée est $CH_3-CH_3$.</p>
+                        
+                        <p>La liaison C-C présente une symétrie de révolution permettant une rotation libre des groupes méthyle. Cette propriété conduit à différentes conformations moléculaires.</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                <img src="data:image/png;base64,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" alt="Conformation décalée de l'éthane" class="conformation-img">
+                                <p class="small">Conformation décalée</p>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <img src="data:image/png;base64,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" alt="Conformation éclipsée de l'éthane" class="conformation-img">
+                                <p class="small">Conformation éclipsée</p>
+                            </div>
+                        </div>
+                        
+                        <h5>Cycloalcanes</h5>
+                        <p>Les cycloalcanes sont des hydrocarbures saturés à chaine fermée, de formule générale $C_nH_{2n}$ avec $n \geq 3$. Le cyclohexane ($C_6H_{12}$) existe principalement sous deux conformations : chaise et bateau.</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                <img src="data:image/png;base64,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" alt="Cyclohexane conformation chaise" class="conformation-img">
+                                <p class="small">Conformation chaise</p>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <img src="data:image/png;base64,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" alt="Cyclohexane conformation bateau" class="conformation-img">
+                                <p class="small">Conformation bateau</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Formules et isomérie</div>
+                    <div class="card-body">
+                        <h5>Formule générale</h5>
+                        <p>Les alcanes sont des hydrocarbures saturés de formule générale $C_nH_{2n+2}$, où $n$ est un entier naturel non nul.</p>
+                        
+                        <h5>Types de formules</h5>
+                        <ul>
+                            <li><strong>Formule développée</strong> : Représentation où tous les atomes et toutes les liaisons sont explicités.</li>
+                            <li><strong>Formule semi-développée</strong> : Représentation simplifiée où les liaisons avec les atomes d'hydrogène ne sont pas représentées.</li>
+                        </ul>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Molécule</th>
+                                        <th>Formule développée</th>
+                                        <th>Formule semi-développée</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Propane</td>
+                                        <td>H H H<br>| | |<br>H-C-C-C-H<br>| | |<br>H H H</td>
+                                        <td>$CH_3-CH_2-CH_3$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Butane</td>
+                                        <td>H H H H<br>| | | |<br>H-C-C-C-C-H<br>| | | |<br>H H H H</td>
+                                        <td>$CH_3-CH_2-CH_2-CH_3$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h5>Isomérie</h5>
+                        <p>Des isomères sont des molécules partageant la même formule brute mais ayant des formules développées différentes. Par exemple, le butane ($C_4H_{10}$) possède deux isomères : le butane linéaire et le 2-méthylpropane (isobutane).</p>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>n</th>
+                                        <th>Formule</th>
+                                        <th>Nom</th>
+                                        <th>Nombre d'isomères</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td>$CH_4$</td><td>Méthane</td><td>1</td></tr>
+                                    <tr><td>2</td><td>$C_2H_6$</td><td>Éthane</td><td>1</td></tr>
+                                    <tr><td>3</td><td>$C_3H_8$</td><td>Propane</td><td>1</td></tr>
+                                    <tr><td>4</td><td>$C_4H_{10}$</td><td>Butane</td><td>2</td></tr>
+                                    <tr><td>5</td><td>$C_5H_{12}$</td><td>Pentane</td><td>3</td></tr>
+                                    <tr><td>6</td><td>$C_6H_{14}$</td><td>Hexane</td><td>5</td></tr>
+                                    <tr><td>7</td><td>$C_7H_{16}$</td><td>Heptane</td><td>9</td></tr>
+                                    <tr><td>8</td><td>$C_8H_{18}$</td><td>Octane</td><td>18</td></tr>
+                                    <tr><td>9</td><td>$C_9H_{20}$</td><td>Nonane</td><td>35</td></tr>
+                                    <tr><td>10</td><td>$C_{10}H_{22}$</td><td>Décane</td><td>75</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Nomenclature</div>
+                    <div class="card-body">
+                        <p>La nomenclature des composés organiques suit les règles établies par l'Union Internationale de Chimie Pure et Appliquée (UICPA).</p>
+                        
+                        <h5>Alcanes à chaîne linéaire</h5>
+                        <p>Les quatre premiers alcanes portent des noms usuels : méthane, éthane, propane, butane. Au-delà, on utilise des préfixes numéraux (pent-, hex-, hept-, etc.) suivis du suffixe "-ane".</p>
+                        
+                        <h5>Alcanes à chaîne ramifiée</h5>
+                        <p>Pour nommer un alcane ramifié :</p>
+                        <ol>
+                            <li>Identifier la chaîne carbonée la plus longue (chaîne principale)</li>
+                            <li>Numéroter les atomes de carbone pour attribuer les indices les plus bas aux substituants</li>
+                            <li>Nommer les substituants (groupes alkyles) en les classant par ordre alphabétique</li>
+                            <li>Assembler le nom en indiquant les positions des substituants</li>
+                        </ol>
+                        
+                        <h6>Groupes alkyles</h6>
+                        <p>Les groupes alkyles sont des groupements monovalents dérivés des alcanes par perte d'un atome d'hydrogène. Leur formule générale est $C_nH_{2n+1}$.</p>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Formule</th>
+                                        <th>Nom</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>$CH_3$-$</td><td>Méthyle</td></tr>
+                                    <tr><td>$C_2H_5$-$</td><td>Éthyle</td></tr>
+                                    <tr><td>$C_3H_7$-$</td><td>Propyle</td></tr>
+                                    <tr><td>$C_4H_9$-$</td><td>Butyle</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h6>Exemples de nomenclature</h6>
+                        <ul>
+                            <li>$CH_3-CH(CH_3)-CH_2-CH_3$ : 2-méthylbutane</li>
+                            <li>$CH_3-CH(CH_3)-CH_2-CH_2-CH_3$ : 2-méthylpentane</li>
+                            <li>$CH_3-CH_2-C(CH_3)_2-CH_3$ : 2,2-diméthylbutane</li>
+                        </ul>
+                        
+                        <p>Pour les dérivés halogénés, on utilise les préfixes : chloro-, bromo-, iodo-, fluoro-.</p>
+                        
+                        <div class="exercise">
+                            <h5>Exercice d'application</h5>
+                            <p>Écrivez les formules semi-développées des composés suivants :</p>
+                            <ol>
+                                <li>1,2-dichloro-3-éthylhexane</li>
+                                <li>3,4,5-triéthyloctane</li>
+                                <li>1,2-dibromo-1,1,2,2-tétrachloroéthane</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Propriétés physiques</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Les alcanes sont moins denses que l'eau et y sont insolubles</li>
+                            <li>Ils sont solubles dans les solvants organiques</li>
+                            <li>État physique :
+                                <ul>
+                                    <li>Gazeux pour les 4 premiers ($CH_4$ à $C_4H_{10}$)</li>
+                                    <li>Liquides de $C_5H_{12}$ à $C_{15}H_{32}$</li>
+                                    <li>Solides au-delà de $C_{16}H_{34}$</li>
+                                </ul>
+                            </li>
+                            <li>Les alcanes ramifiés ont des températures d'ébullition inférieures à leurs isomères linéaires</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Propriétés chimiques</div>
+                    <div class="card-body">
+                        <h5>Combustion</h5>
+                        <p>La combustion des alcanes est une réaction exothermique qui libère une importante quantité de chaleur.</p>
+                        
+                        <h6>Combustion complète (excès de dioxygène)</h6>
+                        <p>$\ce{CH4 + 2O2 -> CO2 + 2H2O + énergie}$</p>
+                        
+                        <h6>Combustion incomplète (déficit de dioxygène)</h6>
+                        <p>$\ce{CH4 + O2 -> C + 2H2O + énergie}$</p>
+                        <p>ou</p>
+                        <p>$\ce{2CH4 + 3O2 -> 2CO + 4H2O + énergie}$</p>
+                        
+                        <p class="text-danger">Attention : Le monoxyde de carbone (CO) produit lors des combustions incomplètes est un gaz très toxique.</p>
+                        
+                        <h5>Réactions de substitution</h5>
+                        <p>Les réactions de substitution impliquent le remplacement d'atomes d'hydrogène par d'autres atomes ou groupes d'atomes, sans modification du squelette carboné.</p>
+                        
+                        <h6>Chloration du méthane</h6>
+                        <p>En présence de lumière, le méthane réagit avec le dichlore pour former des dérivés chlorés :</p>
+                        <p>$\ce{CH4 + Cl2 ->[\text{lumière}] CH3Cl + HCl}$</p>
+                        <p>$\ce{CH3Cl + Cl2 ->[\text{lumière}] CH2Cl2 + HCl}$</p>
+                        <p>$\ce{CH2Cl2 + Cl2 ->[\text{lumière}] CHCl3 + HCl}$</p>
+                        <p>$\ce{CHCl3 + Cl2 ->[\text{lumière}] CCl4 + HCl}$</p>
+                        
+                        <h6>Applications des dérivés halogénés</h6>
+                        <ul>
+                            <li>Chlorométhane : synthèse de résines</li>
+                            <li>Dichlorométhane : diluant de peintures, extraction de caféine</li>
+                            <li>Chloroforme et tétrachlorure de carbone : solvants, antiseptiques, fabrication de fréons</li>
+                        </ul>
+                        
+                        <p class="text-warning">Note : Les fréons, bien qu'utiles comme réfrigérants, sont nocifs pour la couche d'ozone.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Préparation du méthane</div>
+                    <div class="card-body">
+                        <p>Au laboratoire, le méthane peut être préparé par action de l'eau acidulée sur le carbure d'aluminium :</p>
+                        <p>$\ce{Al4C3 + 12H2O -> 4Al(OH)3 + 3CH4}$</p>
+                        
+                        <div class="exercise">
+                            <h5>Exercice synthèse</h5>
+                            <p>On fait réagir du dichlore avec un alcane de masse molaire 44 g/mol. On obtient un composé de masse molaire 115 g/mol.</p>
+                            <ol>
+                                <li>Déterminez les formules brutes des deux composés</li>
+                                <li>Proposez les formules développées possibles pour le composé chloré</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-5">
+        <div class="container">
+            <p>&copy; 2023 - Chimie Première C & D - Conforme au programme APC</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

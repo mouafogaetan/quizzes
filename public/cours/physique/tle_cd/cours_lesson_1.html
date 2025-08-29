@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesures et Incertitudes en Physique</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #4a6580);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            border-left: 5px solid #2c3e50;
+            padding-left: 15px;
+            margin: 2rem 0;
+        }
+        .content-card {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+        .example-box {
+            background-color: #e9ecef;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .definition {
+            background-color: #f8f9fa;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .table-of-contents {
+            background-color: #f1f8ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .exercise {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #fd7e14;
+        }
+        .keyword {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            border-bottom: 3px solid #007bff;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-4">Physique - Terminale</h1>
+            <p class="lead">Chapitre I: Mesures et Incertitudes</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sticky-top" style="top: 20px;">
+                    <div class="card content-card">
+                        <div class="card-header bg-primary text-white">
+                            <h5>Sommaire</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><a href="#section1" class="text-decoration-none">1. Rappels sur les incertitudes</a></li>
+                                <li class="list-group-item"><a href="#section1-1" class="text-decoration-none">1.1. Qualités métrologiques</a></li>
+                                <li class="list-group-item"><a href="#section1-2" class="text-decoration-none">1.2. Erreurs et incertitudes</a></li>
+                                <li class="list-group-item"><a href="#section1-3" class="text-decoration-none">1.3. Exercices d'application</a></li>
+                                <li class="list-group-item"><a href="#section2" class="text-decoration-none">2. Équations aux dimensions</a></li>
+                                <li class="list-group-item"><a href="#section2-1" class="text-decoration-none">2.1. Unités du SI</a></li>
+                                <li class="list-group-item"><a href="#section2-2" class="text-decoration-none">2.2. Analyse dimensionnelle</a></li>
+                                <li class="list-group-item"><a href="#exercices" class="text-decoration-none">Exercices complémentaires</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <!-- Introduction -->
+                <div class="card content-card mb-4">
+                    <div class="card-body">
+                        <h2 class="chapter-title">Mesures et Incertitudes</h2>
+                        <p class="lead">La précision des mesures est fondamentale en sciences expérimentales. Ce chapitre explore les concepts d'incertitudes, d'erreurs de mesure et d'analyse dimensionnelle.</p>
+                        
+                        <div class="text-center my-4">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Measuring_Tape_%28AM_2001.31.5-2%29.jpg/800px-Measuring_Tape_%28AM_2001.31.5-2%29.jpg" alt="Instruments de mesure" class="img-fluid">
+                            <p class="text-muted mt-2">Instruments de mesure variés - Source: Wikimedia Commons</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 1: Rappels sur les incertitudes -->
+                <section id="section1">
+                    <div class="card content-card mb-4">
+                        <div class="card-header bg-light">
+                            <h3>1. Rappels sur les incertitudes</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="example-box">
+                                <h5>Contexte pratique</h5>
+                                <p>Imaginons un vendeur d'essence qui doit évaluer la quantité de carburant qu'il peut vendre à partir d'un bidon de 35 litres, en utilisant une bouteille de 1 litre avec une précision de 2%. Comment déterminer son bénéfice potentiel et l'incertitude associée à ses mesures?</p>
+                            </div>
+
+                            <h4 id="section1-1" class="mt-4">1.1. Qualités métrologiques d'un instrument de mesure</h4>
+                            
+                            <div class="definition">
+                                <h5>Vocabulaire fondamental</h5>
+                                <ul>
+                                    <li><span class="keyword">Métrologie</span>: Science de la mesure et de l'évaluation de ses incertitudes.</li>
+                                    <li><span class="keyword">Mesurage</span>: Processus expérimental permettant de déterminer une valeur attribuable à une grandeur.</li>
+                                    <li><span class="keyword">Valeur mesurée</span>: Résultat obtenu après un mesurage.</li>
+                                    <li><span class="keyword">Valeur vraie</span>: Valeur idéale qu'on obtiendrait avec un mesurage parfait.</li>
+                                    <li><span class="keyword">Erreur de mesure</span>: Écart entre valeur mesurée et valeur vraie.</li>
+                                </ul>
+                            </div>
+
+                            <h5>Caractéristiques des instruments de mesure</h5>
+                            <ul class="list-group list-group-flush mb-4">
+                                <li class="list-group-item"><span class="keyword">Étendue de mesurage</span>: Domaine de variation possible de la grandeur à mesurer.</li>
+                                <li class="list-group-item"><span class="keyword">Justesse</span>: Aptitude à donner des indications exemptes d'erreurs systématiques.</li>
+                                <li class="list-group-item"><span class="keyword">Fidélité</span>: Capacité à fournir des mesures reproductibles avec de faibles erreurs aléatoires.</li>
+                                <li class="list-group-item"><span class="keyword">Exactitude</span>: Qualité d'un instrument à la fois juste et fidèle.</li>
+                                <li class="list-group-item"><span class="keyword">Sensibilité</span>: Plus petite variation détectable par l'appareil.</li>
+                                <li class="list-group-item"><span class="keyword">Résolution</span>: Plus petite variation produisant une indication perceptible.</li>
+                            </ul>
+
+                            <div class="text-center my-4">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vernier.scale.jpg/800px-Vernier.scale.jpg" alt="Exemple de vernier" class="img-fluid">
+                                <p class="text-muted mt-2">Exemple d'instrument de précision: un pied à coulisse - Source: Wikimedia Commons</p>
+                            </div>
+
+                            <h4 id="section1-2" class="mt-4">1.2. Erreurs et incertitudes</h4>
+                            
+                            <h5>1.2.1. Présentation des résultats de mesure</h5>
+                            <p>Un résultat de mesure complet s'exprime comme: $X = x \pm \Delta X$, où:</p>
+                            <ul>
+                                <li>$x$ est la valeur estimée de la mesure</li>
+                                <li>$\Delta X$ est l'incertitude absolue</li>
+                            </ul>
+                            <p>La valeur vraie a une forte probabilité de se trouver dans l'intervalle $[x - \Delta X; x + \Delta X]$, appelé <span class="keyword">intervalle de confiance</span>.</p>
+
+                            <div class="example-box">
+                                <h5>Exemple pratique</h5>
+                                <p>Pour un cylindre avec diamètre extérieur $D = 26,7 \pm 0,1$ mm et diamètre intérieur $d = 19,5 \pm 0,1$ mm, l'épaisseur $e = D - d$ vaut:</p>
+                                <p>$e_m = 26,7 - 19,5 = 7,2$ mm</p>
+                                <p>$\Delta e = 0,1 + 0,1 = 0,2$ mm (addition des incertitudes absolues)</p>
+                                <p>Ainsi: $e = 7,2 \pm 0,2$ mm avec une précision relative de $\frac{0,2}{7,2} \approx 3\%$.</p>
+                            </div>
+
+                            <h5>1.2.2. Types d'erreurs</h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card mb-3">
+                                        <div class="card-header bg-info text-white">Erreurs aléatoires</div>
+                                        <div class="card-body">
+                                            <p>Inévitables, liées à la précision de l'instrument et à l'expérimentateur. Produisent des variations autour de la valeur vraie.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card mb-3">
+                                        <div class="card-header bg-warning">Erreurs systématiques</div>
+                                        <div class="card-body">
+                                            <p>Appelées aussi biais, dues à des décalages constants (calibrage, modélisation). Répétables et directionnelles.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card mb-3">
+                                        <div class="card-header bg-danger text-white">Erreurs accidentelles</div>
+                                        <div class="card-body">
+                                            <p>Dues principalement à l'expérimentateur. Réductibles par un travail soigné et de multiples mesures.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h5>1.2.3. Types d'incertitudes</h5>
+                            
+                            <ul class="nav nav-tabs" id="uncertaintyTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="type-a-tab" data-bs-toggle="tab" data-bs-target="#type-a" type="button" role="tab">Type A</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="type-b-tab" data-bs-toggle="tab" data-bs-target="#type-b" type="button" role="tab">Type B</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="combined-tab" data-bs-toggle="tab" data-bs-target="#combined" type="button" role="tab">Composée</button>
+                                </li>
+                            </ul>
+                            
+                            <div class="tab-content p-3 border border-top-0 rounded-bottom" id="uncertaintyTabsContent">
+                                <div class="tab-pane fade show active" id="type-a" role="tabpanel">
+                                    <p>Évaluation par analyse statistique de séries de mesures:</p>
+                                    <p>Moyenne: $\bar{g} = \frac{1}{n} \sum_{i=1}^{n} g_i$</p>
+                                    <p>Écart-type: $\sigma = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (g_i - \bar{g})^2}$</p>
+                                    <p>Incertitude-type: $u = \frac{\sigma}{\sqrt{n}}$</p>
+                                    <p>Le résultat s'exprime alors: $G = \bar{g} \pm u$</p>
+                                </div>
+                                <div class="tab-pane fade" id="type-b" role="tabpanel">
+                                    <p>Évaluation par moyens non statistiques, basée sur:</p>
+                                    <ul>
+                                        <li>Spécifications du constructeur</li>
+                                        <li>Certificats d'étalonnage</li>
+                                        <li>Expérience antérieure</li>
+                                    </ul>
+                                    <p>Exemples:</p>
+                                    <p>Pour un instrument analogique: $u = \frac{a}{\sqrt{12}}$ (où $a$ est la plus petite graduation)</p>
+                                    <p>Pour un instrument numérique: $u = \frac{p}{\sqrt{3}}$ (où $p$ est la précision donnée)</p>
+                                </div>
+                                <div class="tab-pane fade" id="combined" role="tabpanel">
+                                    <p>Combinaison des incertitudes de type A et B:</p>
+                                    <p>$u^2 = u_A^2 + u_B^2$</p>
+                                    <p>Propagation des incertitudes pour une grandeur $X$ calculée à partir d'autres grandeurs:</p>
+                                    <ul>
+                                        <li>Somme/différence: $u^2(X) = \sum u^2(g_i)$</li>
+                                        <li>Produit/quotient: $\left( \frac{u(X)}{X} \right)^2 = \sum \left( \frac{u(g_i)}{g_i} \right)^2$</li>
+                                        <li>Puissance: $\frac{u(X)}{X} = n \times \frac{u(g)}{g}$ pour $X = g^n$</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h5 class="mt-4">Incertitude élargie et niveau de confiance</h5>
+                            <p>L'incertitude élargie $\Delta X$ est définie comme: $\Delta X = k \cdot u$, où $k$ est le facteur d'élargissement.</p>
+                            
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Niveau de confiance</th>
+                                        <th>68%</th>
+                                        <th>95%</th>
+                                        <th>99%</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Facteur d'élargissement $k$</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="alert alert-info mt-3">
+                                <strong>Note:</strong> En l'absence d'indication spécifique, on utilise généralement $k = 2$ (niveau de confiance de 95%).
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Équations aux dimensions -->
+                <section id="section2">
+                    <div class="card content-card mb-4">
+                        <div class="card-header bg-light">
+                            <h3>2. Équations aux dimensions</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4 id="section2-1">2.1. Unités du système international et unités dérivées</h4>
+                            <p>Le Système International (SI) définit sept grandeurs fondamentales:</p>
+                            
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Grandeur</th>
+                                            <th>Dimension</th>
+                                            <th>Unité SI</th>
+                                            <th>Symbole</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Longueur</td>
+                                            <td>L</td>
+                                            <td>mètre</td>
+                                            <td>m</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Masse</td>
+                                            <td>M</td>
+                                            <td>kilogramme</td>
+                                            <td>kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Temps</td>
+                                            <td>T</td>
+                                            <td>seconde</td>
+                                            <td>s</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Intensité électrique</td>
+                                            <td>I</td>
+                                            <td>ampère</td>
+                                            <td>A</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Température</td>
+                                            <td>Θ</td>
+                                            <td>kelvin</td>
+                                            <td>K</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Quantité de matière</td>
+                                            <td>N</td>
+                                            <td>mole</td>
+                                            <td>mol</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Intensité lumineuse</td>
+                                            <td>J</td>
+                                            <td>candela</td>
+                                            <td>cd</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h4 id="section2-2" class="mt-4">2.2. Analyse dimensionnelle</h4>
+                            <p>L'analyse dimensionnelle permet de vérifier l'homogénéité des équations physiques et de déterminer les dimensions des grandeurs dérivées.</p>
+                            
+                            <div class="example-box">
+                                <h5>Exemple: Dimension de la force</h5>
+                                <p>D'après la deuxième loi de Newton: $F = m \cdot a$</p>
+                                <p>Dimension de la masse: [M]</p>
+                                <p>Dimension de l'accélération: [L][T]⁻²</p>
+                                <p>Donc dimension de la force: [F] = [M][L][T]⁻²</p>
+                            </div>
+
+                            <h5>Règles des équations aux dimensions</h5>
+                            <ol>
+                                <li>Seules des grandeurs de même dimension peuvent être additionnées ou soustraites</li>
+                                <li>Les arguments des fonctions transcendantes (exponentielles, logarithmes, trigonométrie) doivent être sans dimension</li>
+                                <li>Les deux membres d'une équation physique doivent avoir la même dimension</li>
+                            </ol>
+
+                            <div class="alert alert-success">
+                                <strong>Application:</strong> L'analyse dimensionnelle permet de détecter des erreurs dans les équations et de retrouver des formules physiques.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Exercices -->
+                <section id="exercices">
+                    <div class="card content-card">
+                        <div class="card-header bg-light">
+                            <h3>Exercices d'application</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="exercise">
+                                <h5>Exercice 1: Calcul d'incertitude</h5>
+                                <p>On mesure le diamètre d'un cylindre avec un pied à coulisse et on obtient les valeurs suivantes (en mm): 12,35; 12,32; 12,38; 12,34; 12,36.</p>
+                                <p>a) Calculez la valeur moyenne et l'écart-type.</p>
+                                <p>b) Déterminez l'incertitude-type et l'incertitude élargie pour un niveau de confiance de 95%.</p>
+                                <p>c) Exprimez correctement le résultat final.</p>
+                            </div>
+
+                            <div class="exercise">
+                                <h5>Exercice 2: Propagation des incertitudes</h5>
+                                <p>On mesure la résistance $R$ et l'intensité $I$ dans un circuit:</p>
+                                <p>$R = 100 \pm 2\ \Omega$, $I = 2,0 \pm 0,1\ $A</p>
+                                <p>Calculez la tension $U = R \times I$ avec son incertitude.</p>
+                            </div>
+
+                            <div class="exercise">
+                                <h5>Exercice 3: Analyse dimensionnelle</h5>
+                                <p>Vérifiez l'homogénéité de l'équation suivante:</p>
+                                <p>$x = x_0 + v_0 t + \frac{1}{2} a t^2$</p>
+                                <p>où $x$ est une longueur, $v$ une vitesse et $a$ une accélération.</p>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <button id="showSolutions" class="btn btn-primary">Voir les corrections</button>
+                                <div id="solutions" class="mt-3" style="display: none;">
+                                    <div class="alert alert-info">
+                                        <h5>Corrections (extraits):</h5>
+                                        <p><strong>Exercice 1:</strong> Moyenne = 12,35 mm; Écart-type ≈ 0,02 mm; Incertitude élargie ≈ 0,04 mm</p>
+                                        <p><strong>Exercice 2:</strong> U = 200 V; ΔU/U = √((2/100)² + (0,1/2,0)²) ≈ 0,05; ΔU ≈ 10 V</p>
+                                        <p><strong>Exercice 3:</strong> Tous les termes ont la dimension d'une longueur [L]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="my-5 p-4 bg-light rounded">
+                    <h4>Pour aller plus loin</h4>
+                    <p>La maîtrise des concepts d'incertitude et de dimension est essentielle pour tout travail scientifique. Ces outils permettent non seulement d'évaluer la qualité des mesures mais aussi de vérifier la cohérence des équations physiques.</p>
+                    <div class="text-center mt-3">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Standard_deviation_diagram.svg/800px-Standard_deviation_diagram.svg.png" alt="Représentation de la distribution normale" class="img-fluid" style="max-width: 400px;">
+                        <p class="text-muted mt-2">Représentation d'une distribution normale - Source: Wikimedia Commons</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Afficher les solutions des exercices
+            $("#showSolutions").click(function() {
+                $("#solutions").toggle();
+                if ($("#solutions").is(":visible")) {
+                    $(this).text("Cacher les corrections");
+                } else {
+                    $(this).text("Voir les corrections");
+                }
+            });
+            
+            // Navigation fluide
+            $('a[href^="#"]').on('click', function(e) {
+                e.preventDefault();
+                var target = this.hash;
+                var $target = $(target);
+                $('html, body').animate({
+                    'scrollTop': $target.offset().top - 70
+                }, 800, 'swing');
+            });
+        });
+    </script>
+</body>
+</html>

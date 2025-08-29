@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limites et Continuité d'une Fonction Numérique</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .section-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .objective-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        .objective-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+        }
+        .table-custom {
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .table-custom th {
+            background-color: #6a11cb;
+            color: white;
+        }
+        .example-box {
+            background-color: #e9ecef;
+            border-left: 4px solid #6a11cb;
+            padding: 1rem;
+            border-radius: 0 5px 5px 0;
+            margin: 1rem 0;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        .math-block {
+            overflow-x: auto;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        .interactive-btn {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .interactive-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .img-container {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+        .img-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .caption {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <div class="container">
+            <h1 class="text-center chapter-title">Limites et Continuité d'une Fonction Numérique</h1>
+            <p class="text-center lead">Comprendre le comportement des fonctions aux frontières de leur domaine</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Introduction Section -->
+        <div class="card section-card">
+            <div class="card-body">
+                <h2 class="card-title">Introduction</h2>
+                <p>L'étude des limites et de la continuité des fonctions est fondamentale en analyse mathématique. Ces concepts nous permettent de décrire avec précision le comportement des fonctions dans différentes situations :</p>
+                <ul>
+                    <li>Lorsque la variable s'approche d'une valeur particulière sans jamais l'atteindre</li>
+                    <li>Lorsque la variable croît ou décroit indéfiniment (vers l'infini positif ou négatif)</li>
+                </ul>
+                <p>La notion de continuité, quant à elle, nous permet de résoudre des équations et, grâce au théorème des valeurs intermédiaires, de déterminer le nombre de solutions d'équations de la forme $f(x) = k$ (où $f$ est une fonction continue et $k$ un nombre réel).</p>
+                <p>Ces outils mathématiques sont essentiels pour l'étude complète et la représentation graphique des fonctions.</p>
+                
+                <div class="img-container">
+                    <img src="data:image/png;base64,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" alt="Représentation graphique d'une fonction avec asymptote" class="img-fluid">
+                    <p class="caption">Exemple de fonction avec asymptote horizontale et verticale</p>
+                </div>
+                
+                <h4>Applications dans le monde réel</h4>
+                <p>De nombreux phénomènes naturels peuvent être modélisés à l'aide de fonctions mathématiques :</p>
+                <ul>
+                    <li>L'évolution économique d'un pays</li>
+                    <li>La montée du niveau des océans due au changement climatique</li>
+                    <li>La croissance démographique</li>
+                </ul>
+                <p>Une fois ces modèles établis, l'étude de leur comportement grâce aux concepts de limites et de continuité nous permet de mieux comprendre ces phénomènes et d'effectuer des prédictions.</p>
+            </div>
+        </div>
+
+        <!-- Leçon 1 Section -->
+        <div class="card section-card">
+            <div class="card-body">
+                <h2 class="card-title">Leçon 1 : Approche intuitive de la notion de limite</h2>
+                
+                <h4>Objectifs d'apprentissage</h4>
+                <p>À la fin de cette leçon, vous serez capable de :</p>
+                <ul class="objective-list">
+                    <li>Estimer graphiquement ou algébriquement la limite d'une fonction</li>
+                    <li>Calculer les limites à gauche et à droite en un point</li>
+                    <li>Déterminer les limites à l'infini</li>
+                    <li>Faire le lien entre limite et comportement asymptotique</li>
+                </ul>
+                
+                <h4>Prérequis</h4>
+                <ul>
+                    <li>Calcul d'images par une fonction continue</li>
+                    <li>Représentation graphique des fonctions de référence : $\frac{1}{x}$, $\sqrt{x}$ et $x^2$</li>
+                </ul>
+                
+                <h4>Situation problème</h4>
+                <p>Imaginons qu'un étudiant doive démontrer que la fonction $f(x) = 2 - \frac{1}{x-1}$ :</p>
+                <ul>
+                    <li>N'admet pas de limites infinies en $+\infty$ et $-\infty$</li>
+                    <li>Admet une unique asymptote verticale</li>
+                </ul>
+                <p>Comment relever ce défi ?</p>
+                
+                <h4>Activité d'exploration</h4>
+                
+                <h5>1. Étude de la fonction $f(x) = 2 - \frac{1}{x-1}$</h5>
+                
+                <p><strong>a) Comportement en $+\infty$</strong></p>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>$x$</th>
+                                <th>10</th>
+                                <th>30</th>
+                                <th>50</th>
+                                <th>100</th>
+                                <th>1000</th>
+                                <th>3000</th>
+                                <th>10000</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$f(x)$</td>
+                                <td>1,888</td>
+                                <td>1,965</td>
+                                <td>1,979</td>
+                                <td>1,989</td>
+                                <td>1,999</td>
+                                <td>1,9996</td>
+                                <td>1,9999</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><strong>Observation</strong> : Lorsque $x$ augmente, $f(x)$ se rapproche de plus en plus de 2.</p>
+                <p><strong>Conclusion</strong> : $\lim_{x \to +\infty} f(x) = 2$</p>
+                
+                <p><strong>b) Comportement en $-\infty$</strong></p>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>$x$</th>
+                                <th>-10</th>
+                                <th>-30</th>
+                                <th>-50</th>
+                                <th>-100</th>
+                                <th>-1000</th>
+                                <th>-3000</th>
+                                <th>-10000</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$f(x)$</td>
+                                <td>2,090</td>
+                                <td>2,032</td>
+                                <td>2,019</td>
+                                <td>2,009</td>
+                                <td>2,0009</td>
+                                <td>2,0003</td>
+                                <td>2,00009</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><strong>Observation</strong> : Lorsque $x$ décroît vers $-\infty$, $f(x)$ se rapproche également de 2.</p>
+                <p><strong>Conclusion</strong> : $\lim_{x \to -\infty} f(x) = 2$</p>
+                
+                <p><strong>c) Comportement au voisinage de $x = 1$</strong></p>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>$x$</th>
+                                <th>0</th>
+                                <th>0,5</th>
+                                <th>0,8</th>
+                                <th>0,9</th>
+                                <th>0,99</th>
+                                <th>0,999</th>
+                                <th>0,9999</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$f(x)$</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>7</td>
+                                <td>12</td>
+                                <td>102</td>
+                                <td>1002</td>
+                                <td>10002</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><strong>Observation</strong> : Lorsque $x$ s'approche de 1 par la gauche, $f(x)$ croît indéfiniment.</p>
+                <p><strong>Conclusion</strong> : $\lim_{x \to 1^-} f(x) = +\infty$</p>
+                
+                <h5>2. Étude de la fonction $h(x) = x^2$</h5>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>$x$</th>
+                                <th>10</th>
+                                <th>100</th>
+                                <th>1000</th>
+                                <th>10000</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$h(x)$</td>
+                                <td>100</td>
+                                <td>10000</td>
+                                <td>1000000</td>
+                                <td>100000000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p><strong>Observation</strong> : Lorsque $x$ augmente, $h(x)$ croît très rapidement.</p>
+                <p><strong>Conclusion</strong> : $\lim_{x \to +\infty} x^2 = +\infty$</p>
+                
+                <button class="btn btn-primary interactive-btn" id="toggleSolution1">Voir les solutions détaillées</button>
+                
+                <div id="solution1" class="mt-3" style="display: none;">
+                    <div class="example-box">
+                        <h5>Solutions détaillées</h5>
+                        <p><strong>Pour la fonction $f(x) = 2 - \frac{1}{x-1}$ :</strong></p>
+                        <p>En $+\infty$ : $\lim_{x \to +\infty} \frac{1}{x-1} = 0$, donc $\lim_{x \to +\infty} f(x) = 2$</p>
+                        <p>En $-\infty$ : $\lim_{x \to -\infty} \frac{1}{x-1} = 0$, donc $\lim_{x \to -\infty} f(x) = 2$</p>
+                        <p>Au voisinage de 1 : $\lim_{x \to 1^-} \frac{1}{x-1} = -\infty$, donc $\lim_{x \to 1^-} f(x) = +\infty$</p>
+                        
+                        <p><strong>Pour la fonction $h(x) = x^2$ :</strong></p>
+                        <p>La fonction carré croît indéfiniment lorsque $x$ tend vers $+\infty$.</p>
+                    </div>
+                </div>
+                
+                <h4 class="mt-4">Résumé des concepts</h4>
+                
+                <div class="math-block">
+                    <p>Soit $f$ une fonction numérique d'une variable réelle.</p>
+                    <p>Si $f(x)$ prend des valeurs de plus en plus proches d'un nombre réel $l$ lorsque $x$ prend des valeurs de plus en plus grandes, on dit que $f$ a pour limite $l$ en $+\infty$.</p>
+                    <p>On note : $\lim_{x \to +\infty} f(x) = l$</p>
+                    <p>Dans ce cas, la droite d'équation $y = l$ est appelée <strong>asymptote horizontale</strong> à la courbe de $f$.</p>
+                </div>
+                
+                <div class="math-block">
+                    <p>Si $f(x)$ devient aussi proche de $l$ que l'on veut dès que $x$ prend des valeurs de plus en plus proches d'un nombre réel $a$, on dit que $f$ a pour limite $l$ en $a$.</p>
+                    <p>On note : $\lim_{x \to a} f(x) = l$</p>
+                </div>
+                
+                <div class="math-block">
+                    <p>On dit que la fonction $f$ tend vers $+\infty$ quand $x$ tend vers $a$ à droite et on note $\lim_{x \to a^+} f(x) = +\infty$ si $f(x)$ peut prendre des valeurs aussi grandes que l'on veut pour $x$ suffisamment proche de $a$.</p>
+                    <p>Dans ce cas, la droite d'équation $x = a$ est appelée <strong>asymptote verticale</strong> à la courbe de $f$.</p>
+                </div>
+                
+                <div class="img-container">
+                    <img src="data:image/png;base64,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" alt="Représentation graphique d'asymptotes" class="img-fluid">
+                    <p class="caption">Exemple de fonction avec asymptotes horizontale et verticale</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leçon 2 Section -->
+        <div class="card section-card">
+            <div class="card-body">
+                <h2 class="card-title">Leçon 2 : Opérations sur les limites</h2>
+                
+                <h4>Objectifs d'apprentissage</h4>
+                <p>À la fin de cette leçon, vous serez capable de :</p>
+                <ul class="objective-list">
+                    <li>Déterminer la limite de la somme, du produit, du quotient et de la composée de deux fonctions</li>
+                    <li>Déterminer les limites d'une fonction en l'infini en utilisant les techniques de comparaison</li>
+                </ul>
+                
+                <h4>Prérequis</h4>
+                <ul>
+                    <li>Déterminer l'ensemble de définition d'une fonction</li>
+                    <li>Calculer intuitivement la limite d'une fonction</li>
+                </ul>
+                
+                <h4>Situation problème</h4>
+                <p>Un patient a reçu un médicament dont la concentration $C$ (en g/ml) dans le sang au cours du temps $t$ (en heures) est donnée par : $C(t) = \frac{20t}{t+4}$.</p>
+                <p>Après combien de temps la concentration de ce médicament sera-t-elle nulle dans son corps ?</p>
+                
+                <h4>Règles de calcul des limites</h4>
+                
+                <h5>1. Limite d'une somme</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>Si $\lim f(x)$ vaut</th>
+                                <th>$l$</th>
+                                <th>$l$</th>
+                                <th>$+\infty$</th>
+                                <th>$-\infty$</th>
+                                <th>$+\infty$</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Et si $\lim g(x)$ vaut</th>
+                                <th>$l'$</th>
+                                <th>$+\infty$</th>
+                                <th>$+\infty$</th>
+                                <th>$-\infty$</th>
+                                <th>$-\infty$</th>
+                            </tr>
+                            <tr>
+                                <th>Alors $\lim (f(x)+g(x))$ vaut</th>
+                                <th>$l+l'$</th>
+                                <th>$+\infty$</th>
+                                <th>$+\infty$</th>
+                                <th>$-\infty$</th>
+                                <th>Forme indéterminée</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h5>2. Limite d'un produit</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>Si $\lim f(x)$ vaut</th>
+                                <th>$l$</th>
+                                <th>$l > 0$</th>
+                                <th>$l < 0$</th>
+                                <th>$+\infty$</th>
+                                <th>$-\infty$</th>
+                                <th>$+\infty$</th>
+                                <th>0</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Et si $\lim g(x)$ vaut</th>
+                                <th>$l'$</th>
+                                <th>$+\infty$</th>
+                                <th>$+\infty$</th>
+                                <th>$-\infty$</th>
+                                <th>$-\infty$</th>
+                                <th>$+\infty$</th>
+                                <th>$\pm\infty$</th>
+                            </tr>
+                            <tr>
+                                <th>Alors $\lim (f(x) \times g(x))$ vaut</th>
+                                <th>$l \times l'$</th>
+                                <th>$+\infty$</th>
+                                <th>$-\infty$</th>
+                                <th>$-\infty$</th>
+                                <th>$+\infty$</th>
+                                <th>$+\infty$</th>
+                                <th>Forme indéterminée</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h5>3. Limite d'un quotient</h5>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-custom">
+                        <thead>
+                            <tr>
+                                <th>Si $\lim f(x)$ vaut</th>
+                                <th>$l$</th>
+                                <th>$l$</th>
+                                <th>$+\infty$</th>
+                                <th>$-\infty$</th>
+                                <th>$\pm\infty$</th>
+                                <th>0</th>
+                                <th>$l \neq 0$</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Et si $\lim g(x)$ vaut</th>
+                                <th>$l' \neq 0$</th>
+                                <th>$\pm\infty$</th>
+                                <th>$l' > 0$</th>
+                                <th>$l' > 0$</th>
+                                <th>$\pm\infty$</th>
+                                <th>0</th>
+                                <th>0</th>
+                            </tr>
+                            <tr>
+                                <th>Alors $\lim \frac{f(x)}{g(x)}$ vaut</th>
+                                <th>$\frac{l}{l'}$</th>
+                                <th>0</th>
+                                <th>$+\infty$</th>
+                                <th>$-\infty$</th>
+                                <th>Forme indéterminée</th>
+                                <th>Forme indéterminée</th>
+                                <th>$\pm\infty$</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h5>4. Composition des limites</h5>
+                <div class="math-block">
+                    <p>Soient $f$ et $g$ deux fonctions et $a$, $b$ et $c$ des réels ou $\pm\infty$.</p>
+                    <p>Si $\lim_{x \to a} f(x) = b$ et $\lim_{x \to b} g(x) = c$, alors $\lim_{x \to a} g(f(x)) = c$.</p>
+                </div>
+                
+                <h4>Limites des fonctions usuelles</h4>
+                <div class="math-block">
+                    <p>$\lim_{x \to +\infty} k = k$ (où $k \in \mathbb{R}$)</p>
+                    <p>$\lim_{x \to +\infty} x^n = +\infty$</p>
+                    <p>$\lim_{x \to -\infty} x^n = \begin{cases} +\infty & \text{si } n \text{ est pair} \\ -\infty & \text{si } n \text{ est impair} \end{cases}$</p>
+                    <p>$\lim_{x \to +\infty} \frac{1}{x^n} = 0$</p>
+                    <p>$\lim_{x \to -\infty} \frac{1}{x^n} = 0$</p>
+                    <p>$\lim_{x \to +\infty} \sqrt{x} = +\infty$</p>
+                </div>
+                
+                <button class="btn btn-primary interactive-btn" id="toggleSolution2">Voir un exemple d'application</button>
+                
+                <div id="solution2" class="mt-3" style="display: none;">
+                    <div class="example-box">
+                        <h5>Application à la situation problème</h5>
+                        <p>Pour $C(t) = \frac{20t}{t+4}$ :</p>
+                        <p>$\lim_{t \to +\infty} C(t) = \lim_{t \to +\infty} \frac{20t}{t+4} = \lim_{t \to +\infty} \frac{20}{1+\frac{4}{t}} = \frac{20}{1+0} = 20$</p>
+                        <p>La concentration tend vers 20 g/ml mais ne devient jamais nulle. Le médicament reste donc toujours présent dans l'organisme, bien qu'à concentration faible.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leçon 3 Section -->
+        <div class="card section-card">
+            <div class="card-body">
+                <h2 class="card-title">Leçon 3 : Notion de continuité</h2>
+                
+                <h4>Objectifs d'apprentissage</h4>
+                <p>À la fin de cette leçon, vous serez capable de :</p>
+                <ul class="objective-list">
+                    <li>Reconnaître sur un graphique si une fonction est continue ou non</li>
+                    <li>Étudier la continuité d'une fonction en un réel et sur un intervalle</li>
+                    <li>Montrer qu'une fonction admet un prolongement par continuité et le définir</li>
+                </ul>
+                
+                <h4>Prérequis</h4>
+                <ul>
+                    <li>Déterminer l'ensemble de définition d'une fonction</li>
+                    <li>Déterminer l'image directe d'un point par une fonction</li>
+                    <li>Calculer les limites d'une fonction</li>
+                </ul>
+                
+                <h4>Définition intuitive</h4>
+                <p>Une fonction est continue si on peut tracer sa courbe représentative sans lever le crayon. Mathématiquement, une fonction $f$ est continue en un point $a$ si :</p>
+                <div class="math-block">
+                    <p>1. $f(a)$ existe</p>
+                    <p>2. $\lim_{x \to a} f(x)$ existe</p>
+                    <p>3. $\lim_{x \to a} f(x) = f(a)$</p>
+                </div>
+                
+                <div class="img-container">
+                    <img src="data:image/png;base64,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" alt="Fonction continue vs fonction discontinue" class="img-fluid">
+                    <p class="caption">Comparaison entre fonction continue et fonction discontinue</p>
+                </div>
+                
+                <h4>Prolongement par continuité</h4>
+                <p>Si une fonction $f$ n'est pas définie en un point $a$ mais admet une limite finie $l$ en ce point, on peut définir une nouvelle fonction $g$ continue en $a$ par :</p>
+                <div class="math-block">
+                    <p>$g(x) = \begin{cases} f(x) & \text{si } x \neq a \\ l & \text{si } x = a \end{cases}$</p>
+                </div>
+                <p>La fonction $g$ est appelée <strong>prolongement par continuité</strong> de $f$ en $a$.</p>
+                
+                <h4>Théorème des valeurs intermédiaires</h4>
+                <div class="math-block">
+                    <p>Si $f$ est une fonction continue sur un intervalle $[a, b]$, alors pour tout réel $k$ compris entre $f(a)$ et $f(b)$, il existe au moins un réel $c$ dans $[a, b]$ tel que $f(c) = k$.</p>
+                </div>
+                <p>En particulier, si $f(a)$ et $f(b)$ sont de signes opposés, alors l'équation $f(x) = 0$ admet au moins une solution dans $[a, b]$.</p>
+                
+                <div class="img-container">
+                    <img src="data:image/png;base64,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" alt="Illustration du théorème des valeurs intermédiaires" class="img-fluid">
+                    <p class="caption">Illustration du théorème des valeurs intermédiaires</p>
+                </div>
+                
+                <button class="btn btn-primary interactive-btn" id="toggleSolution3">Voir un exemple</button>
+                
+                <div id="solution3" class="mt-3" style="display: none;">
+                    <div class="example-box">
+                        <h5>Exemple d'application</h5>
+                        <p>Considérons la fonction $g(x) = \frac{x^2 + x - 2}{x - 1}$.</p>
+                        <p>Cette fonction n'est pas définie en $x = 1$.</p>
+                        <p>Cependant, $\lim_{x \to 1} g(x) = \lim_{x \to 1} \frac{(x+2)(x-1)}{x-1} = \lim_{x \to 1} (x+2) = 3$.</p>
+                        <p>On peut donc définir le prolongement par continuité $h$ de $g$ en $1$ par :</p>
+                        <p>$h(x) = \begin{cases} \frac{x^2 + x - 2}{x - 1} & \text{si } x \neq 1 \\ 3 & \text{si } x = 1 \end{cases}$</p>
+                        <p>La fonction $h$ est continue en $x = 1$.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercises Section -->
+        <div class="card section-card">
+            <div class="card-body">
+                <h2 class="card-title">Exercices d'application</h2>
+                
+                <div class="mb-4">
+                    <h5>Exercice 1 : Limites</h5>
+                    <p>En utilisant le graphique de la fonction $f(x) = 2 - \frac{1}{x-1}$, déterminez $\lim_{x \to -1} f(x)$.</p>
+                    <button class="btn btn-sm btn-outline-primary check-answer" data-answer="3">Vérifier la réponse</button>
+                    <div class="answer-feedback mt-2" style="display: none;"></div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5>Exercice 2 : Asymptotes</h5>
+                    <p>Pour chacune des limites suivantes, déduisez l'équation d'une éventuelle asymptote à la courbe de $f$ :</p>
+                    <ol type="a">
+                        <li>$\lim_{x \to +\infty} f(x) = 3$</li>
+                        <li>$\lim_{x \to 3} f(x) = -\infty$</li>
+                        <li>$\lim_{x \to -\infty} f(x) = +\infty$</li>
+                    </ol>
+                    <button class="btn btn-sm btn-outline-primary show-answers">Voir les réponses</button>
+                    <div class="answer-list mt-2" style="display: none;">
+                        <p>a) Asymptote horizontale : $y = 3$</p>
+                        <p>b) Asymptote verticale : $x = 3$</p>
+                        <p>c) Pas d'asymptote horizontale (la fonction tend vers $+\infty$)</p>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5>Exercice 3 : Continuité</h5>
+                    <p>Soit la fonction $f$ définie sur $\mathbb{R}$ par :</p>
+                    <p>$f(x) = \begin{cases} a & \text{si } x < 0 \\ x - 3 & \text{si } x \geq 0 \end{cases}$</p>
+                    <p>Déterminez la valeur de $a$ pour que $f$ soit continue sur $\mathbb{R}$.</p>
+                    <button class="btn btn-sm btn-outline-primary check-answer" data-answer="-3">Vérifier la réponse</button>
+                    <div class="answer-feedback mt-2" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <p>Chapitre : Limites et Continuité d'une Fonction Numérique</p>
+            <p>Révisé et adapté pour l'apprentissage en ligne</p>
+        </div>
+    </footer>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        $(document).ready(function() {
+            // Toggle solutions for lesson 1
+            $("#toggleSolution1").click(function() {
+                $("#solution1").slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir les solutions détaillées" ? "Masquer les solutions" : "Voir les solutions détaillées";
+                });
+            });
+            
+            // Toggle solutions for lesson 2
+            $("#toggleSolution2").click(function() {
+                $("#solution2").slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir un exemple d'application" ? "Masquer l'exemple" : "Voir un exemple d'application";
+                });
+            });
+            
+            // Toggle solutions for lesson 3
+            $("#toggleSolution3").click(function() {
+                $("#solution3").slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir un exemple" ? "Masquer l'exemple" : "Voir un exemple";
+                });
+            });
+            
+            // Check answers for exercises
+            $(".check-answer").click(function() {
+                const correctAnswer = $(this).data('answer');
+                const feedbackElement = $(this).siblings('.answer-feedback');
+                
+                const userAnswer = prompt("Entrez votre réponse :");
+                if (userAnswer !== null) {
+                    if (userAnswer.trim() === correctAnswer) {
+                        feedbackElement.html('<div class="alert alert-success">Correct! Bonne réponse.</div>').show();
+                    } else {
+                        feedbackElement.html('<div class="alert alert-danger">Incorrect. La bonne réponse est ' + correctAnswer + '.</div>').show();
+                    }
+                }
+            });
+            
+            // Show answers for exercise 2
+            $(".show-answers").click(function() {
+                $(this).siblings('.answer-list').slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir les réponses" ? "Masquer les réponses" : "Voir les réponses";
+                });
+            });
+        });
+    </script>
+</body>
+</html>
