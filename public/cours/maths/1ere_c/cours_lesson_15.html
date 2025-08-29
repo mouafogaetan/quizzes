@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Géométrie dans l'espace - Orthogonalité</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .definition {
+            border-left: 4px solid #0d6efd;
+            padding-left: 15px;
+            margin: 15px 0;
+            background-color: #f0f8ff;
+        }
+        .theorem {
+            border-left: 4px solid #198754;
+            padding-left: 15px;
+            margin: 15px 0;
+            background-color: #f0fff4;
+        }
+        .example {
+            border-left: 4px solid #ffc107;
+            padding-left: 15px;
+            margin: 15px 0;
+            background-color: #fffaf0;
+        }
+        .geometry-img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            margin: 10px 0;
+        }
+        .nav-link {
+            color: #495057;
+        }
+        .nav-link.active {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        h2 {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <header class="text-center mb-5">
+            <h1 class="display-4">Géométrie dans l'espace</h1>
+            <p class="lead">Orthogonalité et relations entre droites et plans</p>
+        </header>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sticky-top" style="top: 20px;">
+                    <div class="card">
+                        <div class="card-header">Navigation</div>
+                        <div class="card-body p-0">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#intro">Introduction</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#positions">Positions relatives</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#orthogonalite">Orthogonalité</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#applications">Applications</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#exercices">Exercices</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <section id="intro">
+                    <h2>Introduction à la géométrie dans l'espace</h2>
+                    
+                    <div class="card">
+                        <div class="card-header">Objectifs d'apprentissage</div>
+                        <div class="card-body">
+                            <ul>
+                                <li>Développer une vision spatiale en trois dimensions</li>
+                                <li>Maîtriser les positions relatives entre droites et plans</li>
+                                <li>Comprendre et appliquer le concept d'orthogonalité dans l'espace</li>
+                                <li>Résoudre des problèmes géométriques complexes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="definition">
+                        <h5>Notions fondamentales</h5>
+                        <p>En géométrie spatiale, les éléments de base sont les points, les droites et les plans.</p>
+                        <ul>
+                            <li>Par deux points distincts A et B passe une unique droite notée $(AB)$</li>
+                            <li>Trois points non alignés A, B et C définissent un unique plan noté $(ABC)$</li>
+                            <li>Un plan est généralement représenté par un parallélogramme</li>
+                        </ul>
+                    </div>
+
+                    <div class="example">
+                        <h5>Exemple pratique</h5>
+                        <p>Considérons une pyramide $ABCD$ où $I$ est le milieu de $[AB]$ et $J$ est le centre de gravité du triangle $ACD$. 
+                        La droite passant par $I$ et $J$ perce-t-elle le plan $(BCD)$?</p>
+                        <p>Pour résoudre ce problème, nous devons analyser les positions relatives des différents éléments géométriques.</p>
+                    </div>
+                </section>
+
+                <section id="positions">
+                    <h2>Positions relatives dans l'espace</h2>
+
+                    <h4>Positions de deux droites</h4>
+                    <p>Deux droites dans l'espace peuvent être :</p>
+                    <ul>
+                        <li><strong>Sécantes</strong> : elles se croisent en un point</li>
+                        <li><strong>Parallèles</strong> : elles sont dans un même plan et ne se rencontrent pas</li>
+                        <li><strong>Non coplanaires</strong> : elles ne sont pas contenues dans un même plan</li>
+                    </ul>
+
+                    <div class="card mb-4">
+                        <div class="card-header">Illustration des positions relatives de deux droites</div>
+                        <div class="card-body text-center">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOgAAADaCAMAAACbxf7sAAABdFBMVEX/////5b/v+uX/5eX/0qzz4az/AAD/6Oj1/O0AAAD/7e1xzRb/6cb/kQD/YGDt+Ob/wMD/68R70jj1+/H/goL/lAD147T/dGH64rP/nIDu/+7t4av/qqr/mgB71EH/27P/0tJYyQD/y8vH663/oir/Ozvy6rP/sVn/q0X/w3v/DQ3/2dn/ypP/eHj/05v/6dT/uWf/Hh7/3Kz/yIX/tLT/l5f/jo7W8cKI1k//VVX/+O//S0v/KCid3XD/8uP/amrc5tP0zJy/yLeu4o3/jXT3rISaioqAc3Py18Xmz6z8UD3p0dGJe2f/un71v5KlrZ7/Y1HKtbXMt5kvKiNQVE2hkXn0u6uw1mhqX1/2z4q2o6NXTkFwZVSHi4L2q5xwdWzOAAD3m45fMACCAABDPDLYqACTxR+nAADOh3sqNDcxAACQQzj/nGRNOTm0tLQyJhZwRkIuZRAiTQSvYQCWbVNYnzHIpXjdfQD/hSfXamrNUlIkAAC8LgGdAAANOklEQVR4nO2d6UPbRhrGY5vKlsIEHKyEYBwbarDBBswRUo7lcBMoC4Fw7bJJ2KRJ22132+59//M7l41sS3PomsHL70NKGrDm8csjPXo1M7537447NGJB9QDioVgAW6rHEAMLZVCwVQ8ierYqAFTtquphRM4yAOX5eVBXPY6IGbBBYXlwsAGKqkcSKdCcdiMxmBisgnXVY4mQdWjOSnEwAQEF1YOJEGxOLDMxD2ZUjyYyiDmxzMTgTN9atGVOKrTSp3EBXTkroy2ZUGifxoWZG3MSlkBF9ZgiYNdhTkq9D+MCMudMolMnjAv9du/SbU4qtAxUDyxkkDmXumVC7LLqkYUKMmedyMwSqM7+igtFhzkPji4vj46OLg+yfRcXtqod5jw4Nw8ODo7MS6QUJvq+iQs95jTfZhPZA/ObbF/FBYc5CdkzVMvspfku20dxoViA5hzsONdmj8wDeCo6P8cWXe6LuIDN2RUQEtlz8927d28v+ycurENzVnuvnAfm+c3lpR/iQr3bnG2LHmVv/nrrG4Au5qRp4cg8uxE6D5Y5L5Qaj2W8PlmA5mx0m5PU851pvj1r/VUgLmwaw7EM2Q/rDVdztrQ6vuY3AFcMYzaeUctTB6Aw7yWzC5vXADTGDeNZLMOWhZhTTCaMCw32q+We3ZsyjHhGLoWnOV2BcWGA+XIW1FgzjLmYRi8M25wuQiucuLCGTkRzhlGLZ/yiyJiTCC2zE31pE//HMKbiGL4oUuYkjAJ2XJgllXxmaHSJgea0xc1J4TwvHN+mXyxqc4mRNSeB97zQGC4RVnW5xNS7m9KCQtlxAcpzYMWmxhNkzmV5mQleXFiccrC5GpccL+SunB1w44JG+DMnASZ6dlzQCJ/mpEJvzfPCou3XnEToLWkAdj7O9cESJy7oQRBzUgSfF6ajlsJkOYg5CWINwNqGsc3/rqgY6H2c60NomT+9yJpDWSEOSW6sBzUnhf+88BmSuansHm03qDkJ3OeFw7NI50o8otxogDB08hqAtSkkU2nwK9gh6OQ8L7S2kcxtpUl+C1RDEcqKC/jGZUpxA6UIJPsI7jCeF67g+zLlTYVXYD4End7PC0ubSKYGN9plEIJOz7hgPVBvTsI6KIdiUffnhdicG1p0NxdAIwyhCbdEj805q9ychDoIHP4QLs8LtTEnoQKWQtDZGxfS2JwaPXywCyHFhc5En8PmTCkS5UJYcaGzATiOZC5OqhLlRmhxwdEAnMTm1OwR/kxYcWG39YrpNSQzp1KUG2U7BJ3O54XamZOwHlaip3FBQ3MSwo0Lk4sampNQB/UQZGbnbRgXUhtampNQBcXgMs/e/vHj2T3c93qgtpnpTQhxIXtpIj6hvpeG5iRsgUpgoQcm4YPKvhdihMEumHkUlCMq9E+sA1GilPl04r4nE9/a33n/qyB/pkL/wv3OifvR6fx84vOMNyNl+9FoIB6NvvgdFXo9wjgSPNbz+19GJnPk4RfJoSQDUH30WRCmX8Ibayp0h3Wgocwv7icj04nKyTp6chTMBJJ5jNP791hnk3WgzPOJaMvJ1jk2A34TQObSa3zl3BpLnlyfMMuZVFpOKLRq+5f52WPclP5qjHOQqMv5lONODCj7tGh++gnue/2KL1N5OSFZUPFZTmLOr5MalFNA59i8v3PR9O4vkczHQ7ejnFBoBcz7kEnMuSFgTi3KiYTaBWmZEubUpJwIUM3LlvMY31p/Paa8nNxr5w1jS7IWpeacEzAn1KlLOaXjQsucC0IydSknElqWiQvUnIsi5tTInRiZuDD9EpvztyIytSon5BFoCMsk5swJBARYziGtypkcWwbLgjKJOdeEzKlDsu0SWgVCMvN5bM5NkYCgnTuxULsgYtHpl7Pi5tQlCjkZyop0F6aPp8TNqZ07MSKJfnr0tYQ5dTvZtoQ2eHEhn38hYU49y4mEFjhxQc6cmpYTwY4LErfWCMVNPhajrLjg6HsJEXk5Za+dN8C44GnR/GcvRPteGA2vnQ6h3nEBNaUhQukdoa87MV5xQdKcepcziRuAbkKpObdFzZkc09edZHyucUHWnDBe2d/FUM6dJmbIR3Hd4oJM34uQef5tdJv6ONzZfG9enJxcm+99JPreuCBrTuxOgTU9PnG6M3NtNjPJkffsB3budDcApfpe5OjPJ349CCLaA7DzZJv5wUR/nvsQ2vW8UOKJEQWVMz/oaw/Acf587K6T7ZB5MZLMNH386nY2AOXNScrpaw/AFf7atJ5rZ9O8uL5+b55kpC+pHXFBpilNQDcq+UE/ewCSSdns7+m5dkKLnuzs7GQyzZNz2V9eu5zvNGdO3Jy0nImeSbpcLIFJ2S5thLY5d3ZkXdp+XijVlCYQd+IZRpKr9EXmfbpGIfO89f8khcK4sOwwp1hTmtIuZ+ckXT4i8z5dk23z2rxo0jdZVmgFW1SqKU2PdFNOgU19HAhNynZPtjgV0a8lhWYKhbwfczrLmXBM0uWSEpmULXCjIufRTPP6rxW5pjSho5wI0VX62JxrnEnZAjcqzZOTk6b4eC/QrKC/yfS9CJ3lTHA39WmBzcmb9xn8vrNnuBetuZhS5uwtJ3dTH4LYpGxYTvYEO3l26IS2369mpF66u5wiewAKT8r+YuLh04ch83cq1HwqxcOuciL4cQFPyl7jT8oeGQqbsbHvW0Kn81L0Tkhe4iV6shlBiSszCoZnDarTuYOqL3ib+gzjFpuaSdl4h4APWOd5QJm8TX1q2JxqNiNo7RBgfTTPLwPrZK7SJ4d6oGa9M3YM2iFgy65kg/7eJpir9NuHUoBjEfJAOOsLPTf1WVFozhJ+nEsXITfCWV/osUq/41Ax07VDQCGc9YWuDUClmxF07RAQ0vpC1129Ve4U0rNDQDGc9YUuDUCVO4W47BBQD8eiPQ1AlZsRkEXIXc2oKhgNQ2hXohfpe0WGezMKhLIdQaJQ6D2UGnN6NKMWQlhfmOhqAKpc7+zZjBoIZccQZwNQ5WYEjB0CGuHsGNJuAAr1vaKC1YwKaYOx1q7eQn2viGA2o0KKC6MkLgj1vSKC04wKZceQ7ME//llXuxkBtxm1HEZceAvv3H84VGlOfjOqGnyDsew3pBkzCw+lJr2LOAaUs0E5o12nT4rS+6THzpi1nIMXhX89Dsof2p3h1Zw7q7nojOvZjMoZ4w5+LPz4JCgtoT+tjLuzsmlEdSIm29a6NKNqxlzagVWxdwcCURx4/YEK3bPSblilxcjOUKQZVer9h5wxaaUcpAuFgDLRM7hPpGGaTrmQtnKGy0BCwbNTDMtpdY7mK1ANpBM/IDfG96DO/ZSbUGtyNqpbtZpnM6q7nPDtHrAbAWS+xOl9Ff52pmHl4i2n97a1veWEA2nYdd8yj/ED8gc1N4WRl3PcsxnVW04ktGz7lTlAppZN9rx5cZQTfeaP+86YNSPnOiK77FMnnt46O+4tM8py3kOnW9dmlGs5kUVBxZfMtjk9ZUZaTi+8yplKv7Jf+ZBJzLnNMGfKKinoi3mUEwmtylv0xpzeMhWVs/dk2x6QLR0XqDlXGOaM2J0eeJcz5SMuFMnUMpY59SsnHNKxXFwQMaeG5ZSNC9ScG+yX1Opk2x5VQeJcRMy5yDQnLKdWJ9sWNXGLFp9gcz5jytTQnWRcwom+SNY7z6WY75ym5RSPC/DWGrfYSsxX1NOdZGhicYGac5j9itqWEyESF4pPZvnm1LmckCI/0dP0nmObU+9yorjAsWjx+DXv1lr/csLxVdhxgQaETY45tYxCnULZDcBW34sjU9W1k5W2u2AmekFz6l9OdlwQNKf27iSDfOVlUYG+F0Hvk21bqFcDkAQErjlvRzkR7g1Agb4X4XaUM+URF4RurREqy5m2MKJX0XpvXBDpexFUljN9ur+3D9k7FJIK44K7OTm31vhnFbvz1LxKHR5emEJKexqArb4X/1cCljP+GRkOd6bfmG+slPXG3BMR2hUXhM2pvJzwjb5CtYR/ngoI7YwLQn0vehT1UcgyTXguOjX3LYEc2NEAFDanFl2h9KF5fgU5td7snfJ/AW/iQqvvJfD2aFBObNE9fH252ksJ2BSUW+YkfS++OTVwJ3m3qTnTe2+s/Z94aXzArhBz4vS+we570QPoEYXSyKJYehp+yTsf0QYgMeemgDl1KSes44VpXpErqHV1yCuOVS3sCva96E/oUc4UDYBkTFenh/vM5yOpfdP8eHYsdmtNXlyPcna+9/t4Dhdj1Iftxev8W2vykqrK6ToR7WZGGo72jH+/ojPajKlhzkvRH1BQzhK8tZgcDkhrTfe/BV9KxSqd3Pb2g6DMtYT+R+z710rx6wyFuf9SoaoHEi2rhkE/G2pf9VCiBK9zXNzrd5036xx//ln1WCKErnPU4BPRo0WjT0SPEjy9dVbbj44MCy0/dDl8NP3Q5dBRuc4xRlSuc4yR/xNzKl2EHCPEnLp+6HJoEHOWVA8jaob1/UT0MEkp3N8rTryWVPYZNfzUuqR6GNGz4r6ksg9ZVbOF0B133HHHHXdozP8AUaSFf8SM6YwAAAAASUVORK5CYII=" alt="Positions relatives de droites" class="geometry-img">
+                            <p class="mt-2">Figure 1: Différentes positions relatives entre deux droites dans l'espace</p>
+                        </div>
+                    </div>
+
+                    <h4>Position d'une droite et d'un plan</h4>
+                    <p>Une droite et un plan peuvent être :</p>
+                    <ul>
+                        <li><strong>Sécants</strong> : ils se rencontrent en un point</li>
+                        <li><strong>Parallèles</strong> : soit la droite est contenue dans le plan, soit elle ne le rencontre pas</li>
+                    </ul>
+
+                    <div class="theorem">
+                        <h5>Théorème important</h5>
+                        <p>Une droite $(d)$ est parallèle à un plan $(P)$ si et seulement si $(d)$ est parallèle à une droite contenue dans $(P)$.</p>
+                    </div>
+
+                    <h4>Positions de deux plans</h4>
+                    <p>Deux plans dans l'espace peuvent être :</p>
+                    <ul>
+                        <li><strong>Sécants</strong> : leur intersection est une droite</li>
+                        <li><strong>Parallèles</strong> : soit confondus, soit n'ayant aucun point commun</li>
+                    </ul>
+
+                    <div class="theorem">
+                        <h5>Théorème du toit</h5>
+                        <p>Si deux plans sécants contiennent respectivement deux droites parallèles, alors leur intersection est parallèle à ces droites.</p>
+                    </div>
+                </section>
+
+                <section id="orthogonalite">
+                    <h2>Orthogonalité dans l'espace</h2>
+
+                    <h4>Droites orthogonales</h4>
+                    <div class="definition">
+                        <p>Deux droites sont dites <strong>orthogonales</strong> si les parallèles à ces droites menées par un point quelconque de l'espace sont perpendiculaires.</p>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">Illustration de droites orthogonales</div>
+                        <div class="card-body text-center">
+                            <img src="data:image/jpeg;base64,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" alt="Droites orthogonales" class="geometry-img">
+                            <p class="mt-2">Figure 2: Exemple de droites orthogonales dans un cube</p>
+                        </div>
+                    </div>
+
+                    <h4>Droite perpendiculaire à un plan</h4>
+                    <div class="definition">
+                        <p>Une droite est <strong>perpendiculaire</strong> à un plan si elle est orthogonale à deux droites sécantes de ce plan.</p>
+                    </div>
+
+                    <div class="theorem">
+                        <h5>Propriétés importantes</h5>
+                        <ul>
+                            <li>Si une droite est perpendiculaire à un plan, elle est orthogonale à toute droite de ce plan</li>
+                            <li>Par un point donné, il passe une unique droite perpendiculaire à un plan donné</li>
+                            <li>Par un point d'une droite, il passe un unique plan perpendiculaire à cette droite</li>
+                        </ul>
+                    </div>
+
+                    <h4>Plans perpendiculaires</h4>
+                    <div class="definition">
+                        <p>Deux plans sont <strong>perpendiculaires</strong> si l'un contient une droite perpendiculaire à l'autre.</p>
+                    </div>
+
+                    <div class="example">
+                        <h5>Exemple dans un cube</h5>
+                        <p>Dans un cube $ABCDEFGH$, le plan $(EFG)$ est perpendiculaire au plan $(ADH)$ car la droite $(AE)$, contenue dans $(ADH)$, est perpendiculaire à $(EFG)$.</p>
+                    </div>
+                </section>
+
+                <section id="applications">
+                    <h2>Applications pratiques</h2>
+
+                    <h4>Section d'un solide par un plan</h4>
+                    <p>Pour déterminer la section d'un polyèdre par un plan, on cherche les intersections du plan avec chaque face du polyèdre.</p>
+
+                    <div class="card mb-4">
+                        <div class="card-header">Méthode de construction</div>
+                        <div class="card-body">
+                            <ol>
+                                <li>Identifier les points d'intersection du plan avec les arêtes du solide</li>
+                                <li>Relier ces points dans l'ordre pour former un polygone</li>
+                                <li>Vérifier la cohérence de la construction</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <h4>Projection orthogonale</h4>
+                    <div class="definition">
+                        <p>La <strong>projection orthogonale</strong> d'un point $A$ sur un plan $(P)$ est le point d'intersection de $(P)$ avec la droite perpendiculaire à $(P)$ passant par $A$.</p>
+                    </div>
+
+                    <div class="theorem">
+                        <h5>Plan médiateur</h5>
+                        <p>Le plan médiateur d'un segment $[AB]$ est l'ensemble des points équidistants de $A$ et de $B$. C'est le plan perpendiculaire à $(AB)$ passant par le milieu de $[AB]$.</p>
+                    </div>
+                </section>
+
+                <section id="exercices">
+                    <h2>Exercices d'application</h2>
+
+                    <div class="card">
+                        <div class="card-header">Exercice 1: Positions relatives</div>
+                        <div class="card-body">
+                            <p>Soit un cube $ABCDEFGH$. Déterminer les positions relatives des éléments suivants :</p>
+                            <ol>
+                                <li>Les droites $(DB)$ et $(EF)$</li>
+                                <li>Les plans $(DCG)$ et $(AEF)$</li>
+                                <li>La droite $(IJ)$ (où $I$ et $J$ sont des milieux d'arêtes) et le plan $(ABF)$</li>
+                            </ol>
+                            <button class="btn btn-primary mt-2" onclick="toggleSolution('sol1')">Voir la solution</button>
+                            <div id="sol1" class="mt-3" style="display: none;">
+                                <p><strong>Solution :</strong></p>
+                                <ol>
+                                    <li>Les droites $(DB)$ et $(EF)$ ne sont pas coplanaires</li>
+                                    <li>Les plans $(DCG)$ et $(AEF)$ sont parallèles</li>
+                                    <li>La droite $(IJ)$ est parallèle au plan $(ABF)$</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">Exercice 2: Orthogonalité</div>
+                        <div class="card-body">
+                            <p>Soit un tétraèdre $ABCD$ tel que $(AB) \perp (CD)$ et $(BC) \perp (AD)$. Soit $K$ le pied de la perpendiculaire issue de $A$ au plan $(BCD)$.</p>
+                            <p>Démontrer que $K$ est l'orthocentre du triangle $BCD$.</p>
+                            <button class="btn btn-primary mt-2" onclick="toggleSolution('sol2')">Voir la solution</button>
+                            <div id="sol2" class="mt-3" style="display: none;">
+                                <p><strong>Solution :</strong></p>
+                                <p>Comme $(AK) \perp (BCD)$, alors $(AK) \perp (CD)$. De plus, $(AB) \perp (CD)$, donc $(CD)$ est orthogonale à deux droites sécantes du plan $(ABK)$, ce qui implique $(CD) \perp (ABK)$. Ainsi, $(CD) \perp (BK)$.</p>
+                                <p>De même, on peut démontrer que $(BC) \perp (DK)$. Donc $K$ est bien l'orthocentre du triangle $BCD$.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">Exercice 3: Section plane</div>
+                        <div class="card-body">
+                            <p>Soit un cube $ABCDEFGH$. Les points $I$, $J$ et $K$ appartiennent respectivement aux segments $[AB]$, $[EF]$ et $[EH]$.</p>
+                            <p>Construire la section du cube par le plan $(IJK)$.</p>
+                            <button class="btn btn-primary mt-2" onclick="toggleSolution('sol3')">Voir la solution</button>
+                            <div id="sol3" class="mt-3" style="display: none;">
+                                <p><strong>Solution :</strong></p>
+                                <p>La section est un quadrilatère $IJKL$ où $L$ est le point d'intersection de la droite passant par $K$ et parallèle à $(IJ)$ avec l'arête $[AD]$.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function toggleSolution(id) {
+            $('#' + id).toggle();
+        }
+        
+        // Navigation active state
+        $('body').scrollspy({ target: '.col-md-3' });
+    </script>
+</body>
+</html>

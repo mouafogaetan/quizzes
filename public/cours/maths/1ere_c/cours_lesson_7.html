@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suites Numériques - Première C</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .chapter-title {
+            background-color: #3a506b;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .lesson-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            padding: 25px;
+            transition: transform 0.3s ease;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .lesson-header {
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .objective-list li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .objective-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+        }
+        
+        .math-example {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3a506b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .problem-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .summary-box {
+            background-color: #fef9e7;
+            border: 1px solid #f1c40f;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .exercise-box {
+            background-color: #eafaf1;
+            border: 1px solid #27ae60;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .bilingual-game {
+            background-color: #f4ecf7;
+            border: 1px solid #8e44ad;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .nav-tabs .nav-link {
+            color: #495057;
+            font-weight: 500;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: #3a506b;
+            font-weight: 600;
+        }
+        
+        .graph-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="chapter-title text-center">
+            <h1>Suites Numériques</h1>
+            <p class="lead">Comprendre et maîtriser les concepts fondamentaux des suites numériques</p>
+        </div>
+        
+        <ul class="nav nav-tabs mb-4" id="lessonTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="lesson1-tab" data-bs-toggle="tab" data-bs-target="#lesson1" type="button" role="tab">Généralités</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lesson2-tab" data-bs-toggle="tab" data-bs-target="#lesson2" type="button" role="tab">Suites Arithmétiques</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lesson3-tab" data-bs-toggle="tab" data-bs-target="#lesson3" type="button" role="tab">Suites Géométriques</button>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="lessonTabsContent">
+            <!-- Leçon 1: Généralités sur les suites numériques -->
+            <div class="tab-pane fade show active" id="lesson1" role="tabpanel">
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h2>Généralités sur les suites numériques</h2>
+                        <p class="text-muted">Durée : 100 minutes</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Objectifs pédagogiques</h4>
+                            <ul class="objective-list">
+                                <li>Reconnaître une suite numérique</li>
+                                <li>Calculer les termes d'une suite numérique</li>
+                                <li>Représenter graphiquement les termes d'une suite récurrente</li>
+                            </ul>
+                            
+                            <h4>Motivation</h4>
+                            <p>Les suites numériques sont omniprésentes dans la vie quotidienne. Elles interviennent dans des domaines variés comme la finance (calcul des intérêts), l'informatique (algorithmes) ou les sciences physiques (modélisation de phénomènes naturels). Cette leçon vous permettra de développer des outils pour résoudre ces types de problèmes.</p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h4>Pré-requis</h4>
+                            <p>Soient les fonctions $f : x \mapsto \sqrt{x} + 1$ et $g : x \mapsto f(x) + 1$. Soit l'expression littérale $A = x + \sqrt{x + 2}$.</p>
+                            <ol>
+                                <li>Déterminer la valeur numérique de $A$ lorsque $x = 2$, puis $x = 7$.</li>
+                                <li>Calculer $f(4)$, puis $g(4)$.</li>
+                            </ol>
+                            
+                            <div class="problem-box">
+                                <h4>Situation problème</h4>
+                                <p>Sandra, élève en première scientifique, souhaite déterminer le 502ème multiple de 3 positif non nul à partir de 12. Pouvez-vous l'aider à trouver ce nombre ?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mt-4">Activité d'apprentissage</h4>
+                    <p>On considère l'ensemble $A = \{3n ; n \in \mathbb{N}\}$.</p>
+                    <ol>
+                        <li>De quel ensemble s'agit-il ?</li>
+                        <li>Écrire cet ensemble en extension.</li>
+                        <li>Écrire en extension le sous-ensemble $B$ de $A$ ayant pour plus petit élément 12.</li>
+                        <li>Quel écart existe entre deux éléments consécutifs de l'ensemble $B$ ?</li>
+                        <li>En désignant par $p_1$ le premier élément de $B$, $p_2$ le second, etc.
+                            <ol type="a">
+                                <li>Compléter les égalités : 
+                                    $p_2 = \cdots + 3$, 
+                                    $p_3 = \cdots + 3$, 
+                                    $\cdots = p_3 + 3$, 
+                                    $\cdots = p_{n-2} + 3$, 
+                                    $p_n = p_{n-1} + 3$
+                                </li>
+                                <li>Justifier que pour tout entier naturel $n$ non nul, on a : $p_n = 12 + 3(n-1)$</li>
+                            </ol>
+                        </li>
+                        <li>Quelle réponse pouvez-vous donner à Sandra ?</li>
+                    </ol>
+                    
+                    <div class="summary-box">
+                        <h4>Résumé du cours</h4>
+                        <h5>Définition</h5>
+                        <p>Une suite numérique est une application $U$ d'une partie $I$ de $\mathbb{N}$ vers $\mathbb{N}$. On la note $(U_n)_{n \in I}$ ou simplement $(U_n)$ lorsque $I = \mathbb{N}$.</p>
+                        
+                        <h5>Types de suites</h5>
+                        <ul>
+                            <li>Si $I$ est une partie finie de $\mathbb{N}$, alors $(U_n)$ est une suite finie.</li>
+                            <li>Si $\forall n \in I$, $U_n = a$ avec $a \in \mathbb{N}$, alors $(U_n)$ est une suite constante.</li>
+                            <li>Si $\forall n \in I$, $U_n \geq 0$ (resp. $U_n \leq 0$), alors $(U_n)$ est une suite à termes positifs (resp. négatifs).</li>
+                        </ul>
+                        
+                        <h5>Opérations sur les suites</h5>
+                        <p>Soient $(U_n)$ et $(V_n)$ deux suites numériques définies sur $I \subseteq \mathbb{N}$, et $\alpha$ un nombre réel. Alors :</p>
+                        <ul>
+                            <li>Suite somme : $(U + V)_n = U_n + V_n$</li>
+                            <li>Suite produit : $(U \times V)_n = U_n \times V_n$</li>
+                            <li>Produit par un réel : $(\alpha U)_n = \alpha \times U_n$</li>
+                        </ul>
+                        
+                        <h5>Modes de définition</h5>
+                        <ul>
+                            <li><strong>Définition explicite</strong> : lorsqu'il existe une fonction $f$ telle que $\forall n \in I$, $U_n = f(n)$</li>
+                            <li><strong>Définition récurrente</strong> : lorsqu'il existe une fonction $f$ telle que $\forall n \in I$, $U_{n+1} = f(U_n)$</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Exercice d'application</h4>
+                        <p>On donne les suites $(U_n) : n \mapsto \sqrt{n-2} + 3$ et $(V_n) : n \mapsto \frac{n+3}{n-1}$.</p>
+                        <ol>
+                            <li>Sur quelle partie de $\mathbb{N}$ chacune de ces suites est-elle définie ?</li>
+                            <li>Calculer les cinq premiers termes de chacune de ces suites.</li>
+                            <li>Indiquer les fonctions associées à chacune de ces suites.</li>
+                            <li>On considère la fonction $g : x \mapsto \frac{x + 3}{x - 1}$ définie sur $]1 ; +\infty[$.
+                                <ol type="a">
+                                    <li>Préciser les variations de cette fonction.</li>
+                                    <li>Tracer sa courbe représentative dans un repère orthonormé.</li>
+                                    <li>Placer sur l'axe des abscisses les trois premiers termes de la suite $(W_n)$ telle que :
+                                        $W_0 = 2$ et $W_{n+1} = \frac{W_n + 3}{W_n - 1}$
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <div class="bilingual-game">
+                        <h4>Jeu bilingue</h4>
+                        <p>Traduire les termes suivants en français :</p>
+                        <ul>
+                            <li>Common ratio</li>
+                            <li>Sequence of number</li>
+                            <li>Successive terms</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Leçon 2: Suites arithmétiques -->
+            <div class="tab-pane fade" id="lesson2" role="tabpanel">
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h2>Suites Arithmétiques</h2>
+                        <p class="text-muted">Durée : 100 minutes</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Objectifs pédagogiques</h4>
+                            <ul class="objective-list">
+                                <li>Reconnaître une situation de progression arithmétique</li>
+                                <li>Déterminer le terme général d'une suite arithmétique</li>
+                                <li>Calculer la somme de n termes consécutifs d'une suite arithmétique</li>
+                            </ul>
+                            
+                            <h4>Motivation</h4>
+                            <p>Les suites arithmétiques modélisent de nombreuses situations réelles comme les placements financiers à intérêts simples, l'évolution de populations ou la résolution de problèmes algorithmiques. Leur étude systématique permet de résoudre efficacement ces problèmes.</p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h4>Pré-requis</h4>
+                            <p>Soit l'expression littérale $A = (n+1) + (n+2) + (n+3) + (n+4)$.</p>
+                            <ol>
+                                <li>Réduire l'expression $A$.</li>
+                                <li>Calculer $A$ pour $n = 5200$.</li>
+                                <li>Pour tout entier naturel $n$, comparer les nombres $3n + 1$ et $4n$.</li>
+                            </ol>
+                            
+                            <div class="problem-box">
+                                <h4>Situation problème</h4>
+                                <p>Elsa est née le 23 avril 2019. Son père, M. Ambroise, dispose de 50 000 FCFA dans son coffre-fort et décide qu'à partir du 1er janvier 2020, il ajoutera 20 000 FCFA chaque année. Tout cet argent servira à offrir à Elsa une bourse d'études de 5 190 000 FCFA. À partir de quelle date M. Ambroise pourra-t-il réaliser son projet ?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mt-4">Activité d'apprentissage</h4>
+                    <p>Désignons par $U_n$ la somme disponible dans le coffre-fort le 1er janvier de l'année $(2020+n)$.</p>
+                    <ol>
+                        <li>Que valent $U_0$ et $U_1$ ?</li>
+                        <li>Pour tout entier naturel $n$, que vaut la différence $U_{n+1} - U_n$ ?</li>
+                        <li>Compléter les égalités : 
+                            $U_1 = \cdots + 20000$, 
+                            $U_2 = \cdots + 20000$, 
+                            $\cdots = U_2 + 20000$, 
+                            $\cdots = U_{n-2} + 20000$, 
+                            $\cdots = U_n + 20000$, 
+                            $U_n = U_{n-1} + 20000$
+                        </li>
+                        <li>Justifier que pour tout entier naturel $n$ non nul, on a : $U_n = 50000 + 20000n$</li>
+                        <li>Résoudre dans $\mathbb{N}$ l'inéquation $50000 + 20000n \geq 5190000$.</li>
+                    </ol>
+                    
+                    <div class="summary-box">
+                        <h4>Résumé du cours</h4>
+                        <h5>Définition</h5>
+                        <p>Soit $r$ un nombre réel et $I$ une partie de $\mathbb{N}$. On appelle suite arithmétique de raison $r$ toute suite $(U_n)$ telle que pour tout $n \in I$, $U_{n+1} = U_n + r$.</p>
+                        
+                        <p><strong>Propriété</strong> : Si $I$ contient $n-1, n, n+1$, alors $U_n = \frac{U_{n-1} + U_{n+1}}{2}$ (moyenne arithmétique des termes adjacents).</p>
+                        
+                        <h5>Terme général</h5>
+                        <p>Si $(U_n)$ est une suite arithmétique de raison $r$ et de premier terme $U_p$, alors pour tout $n \in I$ :</p>
+                        <p>$$U_n = U_p + (n-p)r$$</p>
+                        
+                        <p>En particulier, si $p = 0$, alors $U_n = U_0 + nr$.</p>
+                        
+                        <h5>Somme des termes</h5>
+                        <p>La somme $S_n$ des $n$ premiers termes d'une suite arithmétique de premier terme $U_p$ est donnée par :</p>
+                        <p>$$S_n = U_p + U_{p+1} + \cdots + U_{p+n-1} = \frac{n(U_p + U_{p+n-1})}{2}$$</p>
+                        
+                        <p>Si $p = 0$, alors $S_n = U_0 + U_1 + \cdots + U_{n-1} = \frac{n(U_0 + U_{n-1})}{2}$.</p>
+                        
+                        <p>On peut aussi exprimer cette somme en fonction du premier terme et de la raison :</p>
+                        <p>$$S_n = \frac{n[2U_p + (n-1)r]}{2}$$</p>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Exercice d'application</h4>
+                        <p>On donne les suites $(U_n) : n \mapsto 2n$ et $(V_n) : n \mapsto 2n + 1$.</p>
+                        <ol>
+                            <li>Calculer les cinq premiers termes de chacune de ces suites.</li>
+                            <li>Indiquer la nature des éléments obtenus.</li>
+                            <li>Justifier que ces suites sont arithmétiques en précisant leur raison.</li>
+                            <li>On donne les sommes suivantes : 
+                                $S_1 = \sum_{k=0}^{n} 2k$ et 
+                                $S_2 = \sum_{k=0}^{n} (2k + 1)$
+                                <ol type="a">
+                                    <li>Préciser les valeurs de $S_1$ et $S_2$ lorsque $n = 5$, puis $n = 2000$.</li>
+                                    <li>Exprimer $S_1$ et $S_2$ en fonction de $n$.</li>
+                                    <li>Quelles propriétés pouvez-vous en tirer ?</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <div class="bilingual-game">
+                        <h4>Jeu bilingue</h4>
+                        <p>Traduire le paragraphe suivant en français :</p>
+                        <p><em>"In mathematics, an arithmetic progression (or arithmetic sequence) is a sequence of numbers such that the difference between the consecutive terms is constant. Difference here means each number minus the previous number. For instance, the sequence 5; 7; 9; 11; 13; 15; ... is an arithmetic progression with common difference of 2."</em></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Leçon 3: Suites géométriques -->
+            <div class="tab-pane fade" id="lesson3" role="tabpanel">
+                <div class="lesson-card">
+                    <div class="lesson-header">
+                        <h2>Suites Géométriques</h2>
+                        <p class="text-muted">Durée : 100 minutes</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Objectifs pédagogiques</h4>
+                            <ul class="objective-list">
+                                <li>Reconnaître une situation de progression géométrique</li>
+                                <li>Déterminer le terme général d'une suite géométrique</li>
+                                <li>Calculer la somme de n termes consécutifs d'une suite géométrique</li>
+                            </ul>
+                            
+                            <h4>Motivation</h4>
+                            <p>Les suites géométriques sont fondamentales pour modéliser les phénomènes à croissance ou décroissance exponentielle : intérêts composés, décroissance radioactive, croissance démographique, etc. Leur maîtrise est essentielle pour aborder ces problématiques.</p>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h4>Pré-requis</h4>
+                            <p>Soit l'expression littérale $B = \frac{2^7 \times 3 \times 2^{-3}}{2^2 \times 3^2}$.</p>
+                            <ol>
+                                <li>Réduire l'expression $B$.</li>
+                                <li>Comparer les nombres $4^3$ et $4^7$.</li>
+                                <li>Que valent les 20% de 10500 ?</li>
+                            </ol>
+                            
+                            <div class="problem-box">
+                                <h4>Situation problème</h4>
+                                <p>Douala-Nkap est une nouvelle ville créée près de Douala au Cameroun. Le 1er janvier 2010, elle comptait 15 000 habitants. Chaque année, la population augmente de 5% par rapport à l'année précédente. À partir de quelle date la population de cette ville aura-t-elle doublé ?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mt-4">Activité d'apprentissage</h4>
+                    <p>Désignons par $V_n$ la population de Douala-Nkap le 1er janvier de l'année $(2010+n)$.</p>
+                    <ol>
+                        <li>Que valent $V_0$, $V_1$ et $V_2$ ?</li>
+                        <li>Pour tout entier naturel $n$, que vaut le rapport $\frac{V_{n+1}}{V_n}$ ?</li>
+                        <li>Compléter les égalités : 
+                            $V_1 = 1.05 \times \cdots$, 
+                            $\cdots = 1.05 \times V_1$, 
+                            $\cdots = 1.05 \times V_2$, 
+                            $\cdots$, 
+                            $V_{n-1} = 1.05 \times \cdots$, 
+                            $V_n = 1.05 \times V_{n-1}$
+                        </li>
+                        <li>Justifier que pour tout entier naturel $n$ non nul, on a : $V_n = 15000 \times (1.05)^n$</li>
+                        <li>Que valent $V_{13}$, $V_{14}$ et $V_{15}$ ?</li>
+                    </ol>
+                    
+                    <div class="summary-box">
+                        <h4>Résumé du cours</h4>
+                        <h5>Définition</h5>
+                        <p>Soit $q$ un nombre réel et $I$ une partie de $\mathbb{N}$. On appelle suite géométrique de raison $q$ toute suite $(V_n)$ telle que pour tout $n \in I$, $V_{n+1} = q \times V_n$.</p>
+                        
+                        <p><strong>Propriété</strong> : Si $I$ contient $n-1, n, n+1$, alors $(V_n)^2 = V_{n-1} \times V_{n+1}$ (moyenne géométrique des termes adjacents).</p>
+                        
+                        <h5>Terme général</h5>
+                        <p>Si $(V_n)$ est une suite géométrique de raison $q$ et de premier terme $V_p$, alors pour tout $n \in I$ :</p>
+                        <p>$$V_n = V_p \times q^{n-p}$$</p>
+                        
+                        <p>En particulier, si $p = 0$, alors $V_n = V_0 \times q^n$.</p>
+                        
+                        <h5>Somme des termes</h5>
+                        <p>La somme $S_n$ des $n$ premiers termes d'une suite géométrique de premier terme $V_p$ et de raison $q \neq 1$ est donnée par :</p>
+                        <p>$$S_n = V_p + V_{p+1} + \cdots + V_{p+n-1} = V_p \times \frac{1 - q^n}{1 - q}$$</p>
+                        
+                        <p>Si $p = 0$, alors $S_n = V_0 + V_1 + \cdots + V_{n-1} = V_0 \times \frac{1 - q^n}{1 - q}$.</p>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Exercice d'application</h4>
+                        <p>On donne les suites $(U_n)$ et $(V_n)$ définies par : $U_0 = 3$ et pour tout $n \in \mathbb{N}$,</p>
+                        <p>$$U_{n+1} = \frac{1}{3}U_n + \frac{2}{3} \quad \text{avec} \quad V_n = U_n - 1$$</p>
+                        <ol>
+                            <li>Calculer les deux premiers termes de chacune de ces suites.</li>
+                            <li>Montrer que la suite $(V_n)$ est une suite géométrique et en déduire sa raison.</li>
+                            <li>Exprimer $V_n$, puis $U_n$ en fonction de $n$.</li>
+                            <li>Évaluer les sommes suivantes : 
+                                $S_1 = \sum_{i=0}^{n-1} V_i$ et 
+                                $S_2 = \sum_{i=0}^{n-1} U_i$
+                            </li>
+                        </ol>
+                        <p><strong>Note</strong> : La suite $(U_n)$ est appelée suite arithmético-géométrique.</p>
+                    </div>
+                    
+                    <div class="bilingual-game">
+                        <h4>Jeu bilingue</h4>
+                        <p>Traduire le paragraphe suivant en français :</p>
+                        <p><em>"In mathematics, a geometric progression (or geometric sequence) is a sequence of numbers such that each term is found by multiplying the previous term by a constant called common ratio. For instance, the sequence 2; 6; 18; 54; 162; 486; ... is a geometric progression with common ratio of 3."</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bibliographie</h5>
+                        <ul>
+                            <li>Livre de l'enseignant (programme officiel)</li>
+                            <li>Livre « L'excellence en Mathématiques » ; NMI ; Victor TEGNINKO et autres</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Activation des tooltips Bootstrap
+            $('[data-bs-toggle="tooltip"]').tooltip();
+            
+            // Animation pour les cartes de leçon
+            $('.lesson-card').hover(
+                function() {
+                    $(this).css('box-shadow', '0 8px 15px rgba(0, 0, 0, 0.2)');
+                },
+                function() {
+                    $(this).css('box-shadow', '0 4px 6px rgba(0, 0, 0, 0.1)');
+                }
+            );
+            
+            // Re-rendering MathJax après le changement d'onglet
+            $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function() {
+                MathJax.typeset();
+            });
+        });
+    </script>
+</body>
+</html>

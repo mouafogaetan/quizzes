@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 13 - Arcs Capables</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .chapter-header {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 20px 20px;
+        }
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        .lesson-card:hover {
+            transform: translateY(-5px);
+        }
+        .objective-box {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .example-box {
+            background-color: #f1f8e9;
+            border-left: 5px solid #7cb342;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .definition-box {
+            background-color: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .property-box {
+            background-color: #f3e5f5;
+            border-left: 5px solid #9c27b0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .exercise-box {
+            background-color: #e8f5e9;
+            border: 2px dashed #4caf50;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .math-expression {
+            font-size: 1.1rem;
+            padding: 0.5rem;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 0.3rem 0;
+        }
+        .figure-container {
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .figure-img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .caption {
+            font-style: italic;
+            margin-top: 0.5rem;
+            color: #666;
+        }
+        .nav-tabs .nav-link {
+            color: #6c5ce7;
+            font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+            color: #6c5ce7;
+            font-weight: 600;
+            border-bottom: 3px solid #6c5ce7;
+        }
+        .interet-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .interet-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        .interet-list li:before {
+            content: "➢";
+            position: absolute;
+            left: 0;
+            color: #6c5ce7;
+        }
+        h2, h3, h4 {
+            color: #6c5ce7;
+        }
+        .highlight {
+            background-color: #fffacd;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chapter-header">
+        <div class="container">
+            <h1 class="text-center">Chapitre 13 : Arcs Capables</h1>
+            <p class="lead text-center">Configurations et transformations élémentaires du plan</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="lesson-card">
+                    <h2>Leçon 1 : Ensemble des points M du plan tels que Mes(∠AMB) = x</h2>
+                    <p><strong>Durée estimée :</strong> 100 minutes</p>
+                    
+                    <h4>Intérêt et applications</h4>
+                    <ul class="interet-list">
+                        <li>Reconnaître et caractériser des formes d'arcs de cercle dans divers contextes</li>
+                        <li>Déterminer la position d'un navire en navigation côtière</li>
+                        <li>Décrire des motifs géométriques dans des œuvres artistiques ou techniques</li>
+                        <li>Concevoir des motifs pour tissus ou des pièces mécaniques</li>
+                        <li>Identifier des lieux géométriques dans l'aménagement urbain (ronds-points)</li>
+                    </ul>
+                    
+                    <div class="objective-box">
+                        <h4>Objectif principal</h4>
+                        <p>Déterminer et construire l'ensemble des points M du plan tels que :</p>
+                        <p class="math-expression">Mes(∠AMB) = x</p>
+                    </div>
+                    
+                    <h4>Prérequis</h4>
+                    <p>Quelles sont les relations entre un angle inscrit et l'angle au centre correspondant dans un cercle?</p>
+                    <p>On distingue deux cas :</p>
+                    <ul>
+                        <li>Si l'angle inscrit $ \angle AMB $ est aigu, alors $ \text{Mes}(\angle AMB) = \frac{1}{2} \text{Mes}(\angle AOB) $</li>
+                        <li>Si l'angle inscrit $ \angle ANB $ est obtus, alors $ \text{Mes}(\angle ANB) = 180^\circ - \frac{1}{2} \text{Mes}(\angle AOB) $</li>
+                    </ul>
+                    
+                    <div class="example-box">
+                        <h4>Situation problème</h4>
+                        <p>La mère de Jean possède un tissu avec des motifs identiques. Le concepteur a utilisé un segment [AB] de longueur 4 cm et a indiqué que les bordures d'un motif sont formées par les points M tels que Mes(∠AMB) = 40°. Aidez Jean à réaliser une maquette de ce motif.</p>
+                    </div>
+                    
+                    <h4>Activité d'apprentissage</h4>
+                    <p>Soient A et B deux points du plan tels que AB = 4 cm, I le milieu de [AB]. On prend α = 40°.</p>
+                    <ol>
+                        <li>Placer un point T tel que Mes(∠TAB) = α</li>
+                        <li>Soit O le point d'intersection de la médiatrice de [AB] et de la perpendiculaire à (AT) en A. Soit (C) le cercle de centre O passant par A, et M un point de (C) distinct de A et B tel que ∠AMB soit aigu.
+                            <ol type="a">
+                                <li>Réaliser une figure</li>
+                                <li>Exprimer Mes(∠AOB) et Mes(∠AMB) en fonction de α</li>
+                                <li>Déterminer l'ensemble des points M du plan tels que Mes(∠AMB) = α</li>
+                            </ol>
+                        </li>
+                        <li>Si ∠AMB est obtus, exprimer Mes(∠AMB) en fonction de α</li>
+                    </ol>
+                    
+                    <div class="figure-container">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPcAAADMCAMAAACY78UPAAABX1BMVEX/////hpz/9fb/5ep+4H7H8sf/6Oz/cor/+fp+1HL/xs//7PD/b4j/1dz/laf/5vD/rbr/nKz/fJL/jJ/39/f/p7X/fZL/0Nf/gZf/7/L/v8k1NTXk5OS2trbJycnq6ur/AECdnZ0nJycgICDb29v/zNT/w82ysrKOjo6np6c8PDz/aYP/s7/AwMD/orH/3eJGRkZhYWFxcXGBgYFXV1cAAAD/X3z/ADpa3lrOzs5ZWVkUFBTt++34/vhC2kL/E0p3AAD/Tm//X33c99zS9dKp7KmW6Zb/N1/NVmqon6CdAAB2fHwqNjbXgo/ddIb/Q2WeUVy5MEf/I1TTjJcAABSTY2vsh5lgbGoWLCq/h5BEUlCBKzw9AABhKS2177XqbH+leH2+l5uj66M21Tbcwck4NQsAkgCGjmbFimvH37jHnoCtvqkAaABm4GYdURQAoABIozN+nTV6skxmn2cAfgABWgfOAAAPn0lEQVR4nNWdi19ixxXHB1CgXCDABQVEEAQEQRBR1HWVuGZrGttssm3SV2qa3b7SZvvM///pfXJfM2dm7ovLbz+rKFzgy5k5c+acmRGhtSkWD/HFdlMhvhisMLl70cEOk7uXDe2l6AqPOxMl7PC4o9TIUXjcEcMOiztq2CFxR8qlKQqFOxM1a4fDHblGjkLhjqC1w+DOlIJ+BTcKnDuKjRwFzx1NawfO3YsodsDcUbV2wNzRxQ6UO8LYQXJHGTtA7khjB8cdbezAuCOOHRR3mNi5fkb6Wuv3BY6LguHu7wTxrATFHy97COUvRZ6LAuHuh9vIxbdZFM8vKzzXBMEdMna6UFrWMr3lhOeiALhDxkbpyvSgWKwdrJm7HrYnT0/QYplZN3fo2AhNUP0tql2utX+H3ciRXIhJpAtofF9d4zi2Bmu7k5j289nWYG1OlVvd5snRcPjpz4ZH+yfXjVbZhyethxmu8KrVbJ+d7u0dn58NBm2Ju90ezGfyL2aDo66nZ44sdrk5OD88nQ+vGyvrGu281d0fzDrHT/sNl88e0b7dbZ/unR3Zoex+rdUcSA9rumj1kbR2d945H+JaMc6ft07ODl/sc6JH0NqtQYeIQRrHuvPD2TXHa0QPu3m+N2wR7wXG7+as02Y1etQaeXnYgc0Gxi2t9s0Tk5eLmLXL7c6cbGpFtHht/3hGH9wiZe3r6+HFgNpO6XHqyd6M8tlFCrv52cdPDL2TJT4/OZxDzxQp7MbPP/uYxSmxzUuGN0fE+yLVt+ed7i8+zzM8kHE+Vj47Jji4KFn7ujNAKJsY9egPZZ6HKs/pVL3K8b4C1nxPdsH3QuKRDsUx/57vOU0eIWs3jhXDxEdCsndPfTRP3uH60N7LI2Ttk5um8j2REhJCkZpL58q3lF+cWX6OEPbgWPPimbyQSAijDOXxnHmmdsc0lkfIk58/6bcK42RC0psafAFvfq15sQp7o9O3W53h6raYkbmpXZw7r9jQO3l0sBsXTeOH0VQ2d0KYwH2QP59aPm3L36LTt7sX5hnEIqFKWIBd3E0e+XwuYcf4rwtG1xeW4VUavjXwxyRwlav8+dlThLBvLLMmYaRzJ3tvgMvc1Q2++NLNVUHIho16osqdFHIjERjFXXHX809P9EeFoe6FLYYsFJIytLBbHSXRpE680A33WGrkM2y0HrZaF/akiCgN37m6uIhN5Z+yCdKVLrjVvn06pD0ueJUPm/ZflWKlHbEw1X5KL0iX8nOPNZe2d8J7pe86d372I+uPU1JIyc1d151F2dHGwtZ87vydfQNPpYC/lpd7bAxg3Rs/aonutX/q/F3NEU2lps5HIW7usXncxr1weGpdYD72hCPHlF5gK9183GNruPK0TqfewXWzzFi7YWBNsXvXuLjH9ijt2OFPQ9Mc+5kXdpVvwiKfKS600buAW/DDwz12xD+NtXXx5jH216Iak9/fo8rjclf7ZSnnfCAHtxMboaMZ8+W+qnyIr2XsKJ15ejBC0+XbFdrCCcnOjcOWhtD1jOLzNv736vDdX6ZQb2lkHhIjxwOZufHYqHXDeL2v6uJbOUqrm9V6BylUXJrecN3h5lm5C6SJ53AdM5RjQsgkqKzp5Su0OBjnDLbqru2RjNwEa8vaCz9sOzoj3LGrRWe9N5O3hZS5dS9seUY2bgAbXRPaXHAiOTXpfeoVonQijtLmgCVp6+JM3AUwDT8L27W1ieFSnjjvRPWi5UcWbsjaSM6w0p/CT5XJQUMKWH0pWvKMDNywtSU9hTsVHxDGMEng3mPLKE7nplhbUitUg5fJI2caLODEzUkIKjfV2pLm5FUB/ovcu1ENzvJmTKM4jZsFGzU6DA/ySx3yapspZctBvr+6SeGmN3JFIbr0fdLYLaneJ9+naLRamg9zM1lbUje8DMQpECZNMBMvi+Kv9FsgN6O1JZFWv/iuBvQJxyjFXymg0/NQEDertSXtY1J8gQh0oQynAhW1ZATAzYGNyp2QEhDg67CchjRSQzoyNw82QmfheLYm4NVow5gqbRQncvNho+twEi/gxzstAneulFOCGxI3JzZCh6E0dPBV+mPgTkNKKYHAzY2N5mE0dLhVVWjDmCa5lIDn5seGe55fGoABsci4YTB9n8Zzu8CWPK2La3i1B3amEusewEQKy+0KG70IPt/U2gPvZj8BqzDOO7ndYaMheVrsl07A6CjNcfJX9d7RNlxiwxGkP4J9p8Dzxh1Llgssq9ZxKgffwU/BDR89Qqkbq5gtz+gaG6HzoDt4Ge7eY4bl9iuJ1mphxT02GvCn2fA1eZK6L8C7gWSqU7F01TTae7A2zetglWWMNFQdweV2rgMNpXHMyDN6sbY0yrhwbFzgg33wbmfxD5DEndSTEJ6sLclNWnXEAQ5HCHAy1S45bumrA4BXbHRM2V+HFYfFj8FoLcl/TpFSSqgwzeIgMeyoxGjE7Nzg9pRzcY7Joubd2tT+RxJrU6dEqXXalhKLVO5atuDZ2u4jVcam3j0H7y5yDYravESk77iiy8VAporN4tfwTJeeTEWm0rDKXZkUyUuWmUV5Y4CYLL7vdfiOl2JiSvt0FG553LYvCHChBtwQIbFYnNKN6MP3vTRg77xRTS5zK+FKnLhkmVluAhddDBZvg3FwnLq9KXM51r4ghXuiurRdzxuEWl5WfNDB22CSiZ5MLR5IHj93oA7zohGceu7ilPkSRdSmDg+Tfeq7r6jcyudT/uKXxuc04pnQYOSNG6Uo4DA3PZk6lU9oG18qK7qefmVazUzelcAmj9w0i8PcVbpfFh/T6F6tqXx1YU5R5rxtdPXKjbL21XUWwf2bpTaWEUW1N0wqX1vyTBW2igNBnrlhi8P+nGf2LXlyWx45y5cBsco7NxoBFh9C3HGOpioPYDZuwq4ENnkaxzQBzu0Iils4ZqHKuG2vG0w9/PkJL3HLSuRxHAz/2ZOparjiqJcUuKaxFlHyfoxKkZo6WBQsgC7RJC1Kc9aJcLsS2ORTaZCUiAALE6zJ1IkWpTm5066npH4tciE4N7AwUWJbT17UozRMXdC+ZJlZ8EDDIYJzg7jZ3vNkFZzi6qFjrpOGDflX+sc7N6BMxFYTNLDx9e+quy5+7t8iNqxzOyOfoJdkyQ4WTVM2/HoHd0kIuCrPJ1zkBvQjlmTqxDxTxXNjNh4xyNeCKCZWBwbwMT2ZWrRM0Anrepwbj+jyZ/heyencgIGMPoxN2PZZxHiKqqooZTtuOS1O7khV2jBmwyav2+Pv4r6v5HI4N3KBjObOi/YsFJFbeEW4gyhX5TFQ9uGM7Ngo3HZrQ+tTM5zrXIJY52Fr6sQIPQ7nRB3WBtcj5/nyjO6rBoCsFi+TKoNwMtVpbXj9+YjnDwZQ1hK6ldXipCU0YDIVY22Ym6+UgDl90Q9ZnBupZAJtsMBiw/ssdjm6uB/JFqzMTZ30IkBNEI9N2VfDUUrwe/Q2lDKFEnv4MYOcTC0S5liUfVRZ6AwziwJcvWayOGEkI3JPSFNLCjdzKSHQ1YqGc2tgG7rztBpNJGvT9wuylhKCa+ayDOd2ivOepGGsSJ6lUfeHMpYSAl6kubL4EPf59vDvkWxtlv3ATKUEfPvzUbpzw4YuBewwBlibhZuplOBibSqndOeG21Ek4mahIDbLvvccQ+4qhHN7sqrFcVtRcclUGJvpnAN6KeEojG2SmnM7dWbZMNkhCjbbuRa0inxQMar9bSjgTeekzMlNw2bjpnXxpr8ZJqJU5+b4kAXH8E3FZjy/JQFX1aE92b5KcW4ndoPn7OMVHZv5vB6olHDtft0arxTnZj8hyJ5MZcBmPp/JccCRSWGeVCT38abtc7YlU1mw2c/jIndxR7sLVHIfP7ce85e1vDUmbHZucp6xE9YZB6pKPdSwLiixvLM8W/2e/dw5UimhHdYRB7qkpj43h4dps9NlxOY5ZzCG7eLAaUlBSWrq5hO5zLNQVmyucyVf4bI5M3ebDDwplTsxRQymWSgzNopxrF8SMPHgSXhjmEmp3K+Nj7u+SoaxY6OdUlVXiXbaDeo5unj5xvciCZNKmd+sXniVTOXARikhrct5xq5DeXu5dRbmiVRmlX77O/2mdmYqFzZKGf2bZc2ArZSwv5ZWrqj6ez2Xrg3fIs92YF7umiXP2AjnEA+8St9o0YvqdfJc2Lzc1lJCh+cvbfqunW+ULq4u6eFq5Iif21xKmAV/sgGonT/IXxW3xGltF9zG30poh3FyCUHPytdvv5K+7I75re2GW68Wnnhfde1aL68elO/f/lFZmUpwabfSP5LI3MRr1FLC9TpP+X+++ql649PvUD5OaOS3V+iO+Axk7quXr5/x10zG8snn4c7CLLrdfnelmeXL7z4nDWC3d+g98SmyRszt5H5NuCj1p+aNmmt4KYncmILS9ifbd5pNyn/+y1+38Xp+v/2ecNf29t++X938/u+We+6et7YIF/3jhx+0ieDLq63tD6SPJzC9fnjY+qDd/ue//r31E7P+s6XrvfSPpP8S73m/dXVFuOt/P/6oVy2kjvZ8F7LFtz+R/t9tK7fFr5uvKsJHJq1m42A7J89Dr25J/Ruh5ipgkbi3tnjfuDfdvpaQt18/y5+2KPfNRUH/21uSjL9Q8/K9K+67l+8YGvDV1rsP21xv209V1an3orICT/aM2fgDeiBeSeZ+kJwW/ZUle7++Iz99sIrp2W0DPDlhO+7A3d9dM7RO7qqR1F+BCyM2II/cD1cfnj8Q3UCwKpmD05EGru0DS1fGqJcB2Dxy3wJxXcDascbkqnMTYmryZVFKFJdLYGmx13a+NolvrZnB/lICT+bUUax+MEaxJbQxalO5xXHt3vzW+yWULQjCQs05VZd1VFxCx8huKLcckwsm8IzcrUcFbZszSkncoyW0ImkzudWpiLA6SaynerORviJlIrXzx6UALDrcSG59BqaD5/TEfklb9VR7zOcuX+U9reOKnoyJp9rHp0Y9o6RFLfGJ1OQnwGabDeQWTf22Jll8ai7jlBj3A20etzXNUFv0rEtoS+HEqaFLtHlpIWur8LGBbxq3HRsjpqa+YdwM2GwW3yxuJmwmi28UNyM2i8U3iZsZW5qs0cA3iJsDm97UN4e7yneGEmX1xsZwx3iPjoItvincnNaWBVp8Q7i5rS2rCji3zeDmw65Np4lpLgkOZxvBzdnI8/nCZb4gZ9p2iE19E7h5G/kumh7UkeLWiBbfAG4XLk3mVkVybtHnduPSDG6Sc4s8twtrW7gJTT3q3FVXh9mauVEV19Qjzu3K2kiuGZi4cBaPNrdLbLswzi3S3D5h45xblLl9w8ZYPMLc7lwa6cls4NHljvmJ7Wjqa+X+P6EqJixiPclRAAAAAElFTkSuQmCC" alt="Figure géométrique illustrant les arcs capables" class="figure-img">
+                        <p class="caption">Figure 1 : Construction géométrique pour déterminer l'arc capable</p>
+                    </div>
+                    
+                    <div class="property-box">
+                        <h4>Propriété fondamentale</h4>
+                        <p>Soient A et B deux points distincts du plan, α un angle aigu, O le point de la médiatrice de [AB] tel que Mes(∠AOB) = 2α, et (C) le cercle de centre O et de rayon OA.</p>
+                        <p>L'ensemble des points M du plan tels que Mes(∠AMB) = α est constitué de l'un des deux arcs (privés des points A et B) définis sur (C) par la corde [AB], ainsi que du symétrique de cet arc par rapport à (AB).</p>
+                    </div>
+                    
+                    <div class="definition-box">
+                        <h4>Définition : Arc capable</h4>
+                        <p>Soient A et B deux points distincts du plan et α un angle.</p>
+                        <p>On appelle <strong>arc capable</strong> d'extrémités A et B et d'angle α l'un des arcs de cercle sur lesquels tout point M (distinct de A et B) vérifie Mes(∠AMB) = α.</p>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Exercice d'application</h4>
+                        <p>Soient A et B deux points du plan tels que AB = 3 cm. Déterminer et construire l'ensemble des points M du plan tels que Mes(∠AMB) = 45°.</p>
+                        <div class="figure-container">
+                            <img src="data:image/jpeg;base64,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" alt="Construction de l'arc capable d'angle 45°" class="figure-img">
+                            <p class="caption">Figure 2 : Construction de l'arc capable pour un angle de 45°</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lesson-card">
+                    <h2>Leçon 2 : Ensemble des points M du plan tels que Mes(MA, MB) = x + kπ</h2>
+                    <p><strong>Durée estimée :</strong> 100 minutes</p>
+                    
+                    <h4>Objectifs</h4>
+                    <ul>
+                        <li>Déterminer et construire l'ensemble des points M du plan tels que Mes(MA, MB) = x + 2kπ</li>
+                        <li>Déterminer et construire l'ensemble des points M du plan tels que Mes(MA, MB) = x + kπ</li>
+                    </ul>
+                    
+                    <div class="example-box">
+                        <h4>Situation problème</h4>
+                        <p>Après avoir construit l'ensemble des points M du plan tels que Mes(∠AMB) = α, Pierre et Paul discutent de l'ensemble des points M tels que Mes(MA, MB) = α. Pierre affirme qu'on obtiendra toujours une réunion de deux arcs de cercle, mais Paul n'est pas d'accord. Comment les réconcilier?</p>
+                    </div>
+                    
+                    <h4>Activité d'apprentissage 1</h4>
+                    <p>Soient A et B deux points distincts du plan.</p>
+                    <ol>
+                        <li>Soit M un point du plan tel que Mes(MA, MB) = 0.
+                            <ol type="a">
+                                <li>Quelle est la relation entre les vecteurs MA et MB?</li>
+                                <li>Quelle est la position de M sur la droite (AB)?</li>
+                                <li>Si M est dans cette position, que vaut Mes(MA, MB)?</li>
+                                <li>Déterminer et construire l'ensemble des points M tels que Mes(MA, MB) = 0</li>
+                            </ol>
+                        </li>
+                        <li>Déterminer et construire l'ensemble des points M tels que Mes(MA, MB) = π</li>
+                    </ol>
+                    
+                    <div class="property-box">
+                        <h4>Propriété 1</h4>
+                        <p>Soient A et B deux points distincts du plan.</p>
+                        <ul>
+                            <li>L'ensemble des points M tels que Mes(MA, MB) = 0 est la droite (AB) privée du segment [AB]</li>
+                            <li>L'ensemble des points M tels que Mes(MA, MB) = π est le segment [AB] privé des points A et B</li>
+                            <li>L'ensemble des points M tels que Mes(MA, MB) = 0 + kπ (k ∈ ℤ) est la droite (AB) privée des points A et B</li>
+                        </ul>
+                    </div>
+                    
+                    <h4>Activité d'apprentissage 2</h4>
+                    <p>Soient A et B deux points du plan tels que AB = 4 cm, I le milieu de [AB], et α ∈ [0, π/2].</p>
+                    <ol>
+                        <li>Placer un point T tel que Mes(AT, AB) = α</li>
+                        <li>Soit O le point d'intersection de la médiatrice de [AB] et de la perpendiculaire à (AT) en A. Soit (C) le cercle de centre O passant par A, et M un point de (C) distinct de A et B.
+                            <ol type="a">
+                                <li>Exprimer Mes(OA, OB) en fonction de α</li>
+                                <li>Déterminer l'ensemble des points M tels que Mes(MA, MB) = α</li>
+                            </ol>
+                        </li>
+                        <li>Répéter l'étude pour :
+                            <ol type="a">
+                                <li>α ∈ [-π/2, 0]</li>
+                                <li>α ∈ [π/2, π]</li>
+                                <li>α ∈ [-π, -π/2]</li>
+                            </ol>
+                        </li>
+                    </ol>
+                    
+                    <div class="property-box">
+                        <h4>Propriété 2</h4>
+                        <p>Soient A et B deux points distincts du plan, α ∈ ]-π, π[ - {0}, O le point de la médiatrice de [AB] tel que Mes(OA, OB) = 2α, et (C) le cercle de centre O et de rayon OA.</p>
+                        <ul>
+                            <li>Si α ∈ [-π/2, 0] ∪ [0, π/2], alors l'ensemble des points M tels que Mes(MA, MB) = α + 2kπ (k ∈ ℤ) est le grand arc AB (privé de A et B)</li>
+                            <li>Si α ∈ ]-π, -π/2] ∪ [π/2, π[, alors l'ensemble des points M tels que Mes(MA, MB) = α + 2kπ (k ∈ ℤ) est le petit arc AB (privé de A et B)</li>
+                            <li>L'ensemble des points M tels que Mes(MA, MB) = α + kπ (k ∈ ℤ) est le cercle (C) privé des points A et B</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="example-box">
+                        <h4>Exemple pratique</h4>
+                        <p>Soient A et B deux points du plan tels que AB = 3 cm. Construire l'ensemble des points M du plan tels que Mes(MA, MB) = π/6.</p>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Exercice 1</h4>
+                        <p>Soient A et B deux points du plan tels que AB = 4 cm.</p>
+                        <ol>
+                            <li>Construire sur des figures différentes les arcs capables d'extrémités A et B et d'angle α dans les cas suivants :
+                                <ul>
+                                    <li>α = 60°</li>
+                                    <li>α = 150°</li>
+                                    <li>α = 90°</li>
+                                </ul>
+                            </li>
+                            <li>Construire sur des figures différentes l'ensemble des points M du plan tels que Mes(MA, MB) = α dans les cas suivants :
+                                <ul>
+                                    <li>α = π/4</li>
+                                    <li>α = -π/3 + 2kπ</li>
+                                    <li>α = 2π/3 + 2kπ</li>
+                                    <li>α = -5π/6</li>
+                                    <li>α = π/4 + kπ</li>
+                                    <li>α = -5π/6 + kπ</li>
+                                    <li>α = 5π/2</li>
+                                    <li>α = -7π/2 + kπ</li>
+                                    <li>α = 3π</li>
+                                    <li>α = 6π + kπ (k ∈ ℤ)</li>
+                                    <li>α = π/2 + 2kπ et α = π/2 + kπ</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <div class="exercise-box">
+                        <h4>Exercice 2 (Application maritime)</h4>
+                        <p>Pour déterminer la position exacte de leur navire M, des marins utilisent trois repères fixes A, B et C sur la côte. Le navire émet des rayons lumineux permettant de mesurer les angles entre ces repères. Pour A et B, ils mesurent Mes(MA, MB) = π/6, et pour A et C, ils mesurent Mes(MC, MA) = -π/6.</p>
+                        <p>Refaire une figure et indiquer la position exacte du navire sachant que ABC est un triangle équilatéral de sens direct avec des côtés de 4 m, et que le point C est situé à 2 m de la rive, elle-même parallèle à (AB).</p>
+                        <p><strong>Échelle :</strong> 1 m représenté par 1 cm.</p>
+                        <div class="figure-container">
+                            <img src="https://i.imgur.com/vL2Xe1R.png" alt="Problème de navigation avec arcs capables" class="figure-img">
+                            <p class="caption">Figure 3 : Détermination de la position d'un navire par triangulation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Animation pour les cartes de leçon
+            $('.lesson-card').hover(
+                function() {
+                    $(this).css('box-shadow', '0 15px 40px rgba(0,0,0,0.2)');
+                },
+                function() {
+                    $(this).css('box-shadow', '0 10px 30px rgba(0,0,0,0.1)');
+                }
+            );
+            
+            // Fonctionnalité pour faire défiler jusqu'aux éléments
+            $('h4').click(function() {
+                $(this).next().slideToggle();
+            });
+        });
+    </script>
+</body>
+</html>

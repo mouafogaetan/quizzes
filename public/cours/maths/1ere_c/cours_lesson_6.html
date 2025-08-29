@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Représentation Graphique des Fonctions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #f1f8ff;
+            border-bottom: 1px solid #d0e7ff;
+            font-weight: 600;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .objective-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        .objective-list li:before {
+            content: "•";
+            color: #2575fc;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .math-container {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        .section-title {
+            border-left: 4px solid #2575fc;
+            padding-left: 1rem;
+            margin: 2rem 0 1rem 0;
+            color: #2575fc;
+        }
+        .graph-img {
+            width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 1rem 0;
+        }
+        .interactive-btn {
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .interactive-btn:hover {
+            background-color: #1c64e0;
+        }
+        .solution {
+            display: none;
+            background-color: #f1f8ff;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">Représentation Graphique d'une Fonction Numérique</h1>
+            <p class="lead">Comprendre et maîtriser les techniques de représentation graphique des fonctions</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        Introduction
+                    </div>
+                    <div class="card-body">
+                        <p>La représentation graphique des fonctions est un outil fondamental en mathématiques qui permet de visualiser le comportement d'une fonction et de résoudre des problèmes concrets. Cette compétence est essentielle pour interpréter des situations réelles à travers le langage mathématique.</p>
+                        
+                        <h5 class="section-title">Applications dans la vie courante</h5>
+                        <p>Les graphiques de fonctions sont utilisés dans de nombreux domaines :</p>
+                        <ul>
+                            <li>Détermination de vitesses maximales en physique</li>
+                            <li>Calcul de hauteurs optimales en architecture</li>
+                            <li>Analyse de fréquences cardiaques en médecine</li>
+                            <li>Optimisation de coûts en économie</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Asymptotes aux courbes de fonctions
+                    </div>
+                    <div class="card-body">
+                        <h5 class="section-title">Objectifs d'apprentissage</h5>
+                        <ul class="objective-list">
+                            <li>Déterminer les équations des asymptotes parallèles aux axes</li>
+                            <li>Démontrer qu'une droite est une asymptote oblique à une courbe</li>
+                            <li>Interpréter graphiquement le comportement asymptotique</li>
+                        </ul>
+
+                        <h5 class="section-title">Rappels prérequis</h5>
+                        <p>Le calcul des limites à l'infini d'une fonction rationnelle s'effectue en considérant le quotient des termes de plus haut degré du numérateur et du dénominateur.</p>
+                        
+                        <div class="math-container">
+                            <p>Pour une fonction $f: x \to \frac{2x+1}{-x+3}$ définie sur $]-\infty; 3[ \cup ]3; +\infty[$ :</p>
+                            <p>$\lim_{x \to -\infty} f(x) = -2$</p>
+                            <p>$\lim_{x \to +\infty} f(x) = -2$</p>
+                            <p>$\lim_{x \to 3^+} f(x) = -\infty$</p>
+                            <p>$\lim_{x \to 3^-} f(x) = +\infty$</p>
+                        </div>
+
+                        <h5 class="section-title">Problème contextualisé</h5>
+                        <p>Un planeur perd de l'altitude pendant son vol. Sa hauteur (en kilomètres) par rapport au sol est inversement proportionnelle au temps écoulé (en minutes) pendant la descente. Après une minute, il se trouve à 1 km du sol. Ce planeur atterrira-t-il un jour ?</p>
+
+                        <h5 class="section-title">Activité d'apprentissage</h5>
+                        <p>Considérons la fonction $h$ définie par $h(x) = \frac{1}{x}$ et sa représentation graphique $(C)$ dans un repère orthogonal.</p>
+                        <ol>
+                            <li>Calculer les limites de $h$ à gauche et à droite en 0, puis en $+\infty$ et $-\infty$</li>
+                            <li>Étudier les variations de $h$ et tracer sa courbe représentative</li>
+                            <li>En supposant que $h(x)$ représente l'altitude du planeur à l'instant $x$, déterminer si le planeur atterrira</li>
+                        </ol>
+
+                        <button class="interactive-btn" onclick="$('#solution1').toggle();">Voir la solution</button>
+                        
+                        <div id="solution1" class="solution">
+                            <h6>Solution :</h6>
+                            <p>1. Les limites de la fonction :</p>
+                            <div class="math-container">
+                                <p>$\lim_{x \to 0^-} h(x) = -\infty$</p>
+                                <p>$\lim_{x \to 0^+} h(x) = +\infty$</p>
+                                <p>$\lim_{x \to -\infty} h(x) = 0$</p>
+                                <p>$\lim_{x \to +\infty} h(x) = 0$</p>
+                            </div>
+                            <p>2. La fonction est décroissante sur $]-\infty, 0[$ et sur $]0, +\infty[$</p>
+                            <p>3. Le planeur n'atterrira jamais car la fonction ne atteint jamais zéro (l'altitude du sol)</p>
+                        </div>
+
+                        <h5 class="section-title">Types d'asymptotes</h5>
+                        <div class="math-container">
+                            <p><strong>Asymptote verticale</strong> : Si $\lim_{x \to a} f(x) = \pm\infty$, alors la droite d'équation $x = a$ est asymptote verticale à la courbe.</p>
+                            <p><strong>Asymptote horizontale</strong> : Si $\lim_{x \to \pm\infty} f(x) = b$, alors la droite d'équation $y = b$ est asymptote horizontale à la courbe.</p>
+                            <p><strong>Asymptote oblique</strong> : Si $\lim_{x \to \pm\infty} [f(x) - (ax + b)] = 0$, alors la droite d'équation $y = ax + b$ est asymptote oblique à la courbe.</p>
+                        </div>
+
+                        <div class="text-center">
+                            <img src="data:image/png;base64,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" alt="Graphique montrant différents types d'asymptotes" class="graph-img">
+                            <p class="text-muted">Exemple de courbes avec asymptotes horizontales et verticales</p>
+                        </div>
+
+                        <div class="text-center">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWYAAACNCAMAAACzDCDRAAABLFBMVEX////5+fna2dne3t7j4eHFxcXR0ND//v78///f39/4+PjY2NjJycnBwcHx8fG9vb369Onqp3vBAAD9+vbr6+vonGvEAAD7+PH56N/ssI311cX+/PjzyLPLlwDv37327tn67+njx37wwqnkiIXgbW7on5z44tftuLfy5cjwxMPixHT99PD56urtq4XgUQD0zLj44ODiZQDIkQDsoXqurq7o0Znr1aX37d3rrq3fvmfhdnXopaL009LmlJHkyobnoJ+enp7XsFTpkFvRXFzwu5qFhYXut6Hvv7vjgH7fvl/12dTZsjbXyqrm2cDOr1ncyqHSpQDQwcDctk7t3LDg1MzIxbq7oFi9rILng0XlcBjlfTPKNjfFJSbTpzvSpSTLRUXoilDjcgDFHx/NUVD+CHlqAAAURklEQVR4nO1dDVvayBYeBBIFRJZgwfAVoBBCYoFWEBVQWnex3r3ubr0f1lbb3f7//3AnIeSLZDITJtm99/Z9+lRMMgm8Ht4558yZGQC+AxfJwp/9Dv4fkGJ2QCxQyyLld/K/jcTBSTZIu3rD+lvsJOV96RHxzYU+/G/3B+J2f13sZX8M1K7e4Cy/xdI7e56X8sQ372hNEH+5/zrspTMBWpVH92PbgXjmwPPiDvHtebXJLvm34K+LeCBlvh/NHbdBdKXkX/5+CfyPiUYgmuu5Hms/soO4WiC+f1MmboIPJliXvx2C0Fyb98q2AyeAQVzeJ37AT+ofcfeYuB0OYpkEy/pfRhlBaM71cvYDV4U04nLyL/9KlcOhGfpW3t1IaCCnOdeYdx2HYkjRIEeonV+c2Q/z9h4PJaa5Nq9tHkTRTEwae63+v/uGtB0eEplAgcI2SGX3SL3T++7I5SiK5ibhE4Cs0QyuSdvhIR69Mp8wDCHN41HD7TCKZmK3odQP1g4HTCEdPc0ZZo9MNIq5M9d3iaKZuAtcBYG7h6TtcFD4M2gm1ebu/Mw9ZYSimTjY5kvajwppOxzE2D9BNIhp7p26n0DRTBxs69FJibQdHnb+6jRzo5HTlVuDqmhca1mpcETjT+kCyWgej8Zep6h2gboHSJ7Zw4Ldmm8n4TzFAQKa66euToYGFM3EGqt7cuSZPSzYrflWCucpzodi0zwa9bxP0gxPhJWjHZZo2K1ZugwzTWUAm2b21N2VW4FmsN3R1SISa+YG4TzF+VBMmk/njRziNE1rruguRrjaLC0VRZqyKSWSHhGX5lqjjjpNM9heORphexpSWy4tpbIgcD7X03koFs1cbeySL7KApqextn6BsB0mdJqnM+3H7TKcpzgfikXzeO7pyqlgafrN7Jpm4pQTHnTR4FY/Ju0IusAsi5XTyHXnyPMHWdS4LaHG6o5GaKJhH4KfziLQ5kwSJ0N330O4ciquaAbb/Pp6lJkpwvlUbBXV/+Tz20mr+HJw0VbOS/C/l8rscnAuzC4GL+XW5PZcaYm3L4ut5fRcvpGkm/K5tLyBDZdqQ7ElvIOt5fPBZAYbttul89IlvIXa+lyZTdSGk+k51xIl2Hop3XCBopnMPo5odJ0DrJugKBrX6z4phHxznGEK3gUloYHF0Obc6My/M6bYBRr+XwijJ0wmw6BGh0ODP82j9yiHWQe9YJs1jDgE0czuJbJbpY7KATtMX5q7I6TDrINeeLKOAdFVR0pbulXKiAu8EYzmsnwrTWatmRjomb40j/6Gdph1oGgm+1hGKQyyToNVpmJ7NptI5EEceb5Zvp20W21RGsiBvwh+NM/vsW5Dz5pJqjM4ZXoxm4kDok9PRrMiQYYlZVvnGk1z92/IsMQEtWCbM6QZt4aOgx5Ze4ovIASiMbiAFAvYl6MeiqT5zK1YwA0omomSBrzpZRN8CxSx1b7FvBbXmoWLmwtq6TsUzeW5dx7fAWp+s4VbMiFUJi289ASeNU9hjEP0fJ+HImg+O8O+DbUo0JRm8mB7eoMTo+FY8/RGpOtOImjuYtsyPZp5SwIkQOpoeuM/5uRvzYObgG4b4qGeNI8+ENyGlmhY9ThQ7768UXyu8LPm2OwimEOOgmeGrv6e5DaUukDZkscImKHj2j6m6GPNty2/vxM59jM/e1RedIlYphVsNwXLL+Tl5ytIM+RptDWLF4jTsYCzKP9+98v9mVsw3V2QdQF0whPWdqlA9A4sGLRQeoO05jbaW/kx4OS+AhQNl0CvRmbL6NET/D8Yb+0tt0jry6gvPorm2RR531gmHsCcubNVFzh2hnrjXzGSchacANToCb412wNt1KhLNplhDCSZjdc3vzGM5Qpm33x5YDmcsV9x81vaebXl3pkMk2YCTKiY53RPY2wL9tjGPWFXm0ZaM3Z6vm93/ZCO4J7VKk0TS+ljULEW7HjNb3iWTehdfTZmpvVjhaylJQtmekCSTZmHC8ZTUoVUVr2KFHWV3JVDd29xketnbrMefEAjrc/ajRktGsn41Xp4LZY9WR+NHcSuVuTKrd2YeXg/faUzd8AkDKbSmYz5LcxkJ9P1TdKmzTLGXyV7wCQxP4kNPbVUWfeb6x/0itr62QjgJeVsoOE3Nx2VtqjC29hVYn9trIXMms8YEy8c6HwOWvE1Q2z6gNnXD+8nzG/B3r5lim9BMhxBxnL4yvhKMAfxIBOCNWM2wpPyvHff7Y7fz7kcuS1TiQJlp4YjR8T9v7ySR0Do0QUqaDcwMDRjtkSBbPf+XvXtGkHKcCjQfOz4+FsXEHi4dR5+8yyc6qPcqvTCGWyzHuX4PtheNPobxrtttT7nbp/u1iyiXbnAmK98NifNDa96fDS27gKFTX9k6wICd9lwpVlpb/swD+hJTgfN5WDGvH2wvWnyFtFo8iwXJDHpWlHkKhphlXjd6yG2neZakO5PBYpm00/znpN+7PIxDbFk+WbzOIh0Dtzyz27WfEs986ljHU3bacYdk9oAVhl5/9BLbpsuXsWuIRpyk+eDFTu7GambNYdVSFdfxdfpgnUycTGYLqvASh3xfY9Pw7tl8KFo8H0gdDpbUKC4mLOLNU/DmoDSWM2iTCespYpnZJkMK5Aj2wIvczzv7Th0PDo7+acOKPE8x3VKpU4w8XSZWeJizSG5zKCoF9Jms5a0PreF54iiOcZfr2gulQS38yWP0oxj1ri+H3TGq4s5b1pzaMY8NnLMpjZvrJJBAmQXKAhq78eCTsXNJEseGTxrcZeLu4eJts12sgW3GrrQSpzNTJFJc1AnQwNWFFiuCJtnBc88qeXDN6/tJ/AnMw6sefpshjnY26gIHYTlZnTN5NCa5nq3Pr6HDl0NhoeYlUZWYNHcORQ2TgqexVzeVUfsjwRTc61xRyKzz8T3nLZ7Eda0iIaZT9ZpZhugPoc0Q6q7zpWMcIC11pHLd1M48v7CegpF9iSOvwqI5KxGcooGG1YAmLPMJFnRzMHgr67TmzvFXv4ztZfQcZAIhH+8QZyMe54p7OEPYsScLDo9DSmsCZgji7lqNLMqw+Xgi6tmApYqys6snA2Ian2SQQynJjitOSxvrmydsLOiObjDrCJ2socXbDvA/QBOEFMUftriLVngnPzusGa3CIYKalbPTaXZc5UMXDCB5mxDlkECIbJC0LfjgEM1HNY8CasDtM0+gzSXA3gWTgSwZs4nD01tXqCDSIc1h6UZXdtQXzx2ijO3xIEYE7cfINdm9ge/oDNo1ZETit0vtltzaE6zfRAqnjoLUpj3o6MshDytf+zb41Jb68iuGnZrngi0nmJH3S4Re4H8i1iSSdgOEA9SHfmSSG8ysV017NYcxGlO7ScPDpIGDvZdXt/903b8Xz9brkl6vM5sHM9krmxPJl0gzS3BjNMuEAY2X8NGMxU/w9qN665m0TbJnS3/7NXUEs+6egN21SCkmcfJuNFbtsTWzdlEYxm0yta6iHvSEizp67xqocnBusbj3z8nLHQylqY7J+brfcvxffewmkw0Nkoy3EBxBYJL6y82aw7oZ6QyJ0YFUmrfLKxLZa40friGWqWT1mnm/pW00py1xAr7ltfWlXg94gmyLhCvpIDecn9TM6/B2mgOtqCABitvltcFjdqRdeQ6l0uxtrFAa1OLKGT9E2JEDt01HoG0HDrI5oXxMpOw2sk0nOqMsnXWTvl9MegWBhsgCU8wc/Q0ly0x/IlkomC15pBCQJsxly2lituCJNjGLV0UArwPD1i9YwvNIeVAi9Y4e65FfxHQ7Ojv+rgT2CiudWR16SyehhJOCGg1Zr3wMwKa7c4bizv3neqi7xZfw2LN4aSarT5zV2ecCs07BBPWnFXMuO22g2V+lMWaL0KpAp2bxlxczxOmQHMB+o2oOnabFsewZ6Ls0lzraGnarUkze+F67ZY4NY3ZLMmgYs1Z/PpmfGOmulmSZYDbFA0llKX+zEU+y2Z9UQTabKWZJVi9gWr1hOlTmNYcijTXzTrE4lo9UinCLQy8gBts8wTz5KluMnNhfE7Tmi/ofHY7zH2k1kOubCyZyNDZlQ832CahjuoOa0tDrAxrDsVrrhmDJrl1xjmVSSQisGaLQydQ9IXJoBies2HNYUgza0Qmp7Zh7GjDE9vUdx/QXSPU9CoMaw5Dmo3V5Ir2NRKjDbZJluWi6tBZPGfDmkOQZqPQiHWU10ZqzSWi+lm6sYOewE+Z28tcel8cFL31kJ+zQC4Cmk09JtEM2gsL36o5z0T8pLBOhIaQ0Kite72NKawR0Gx6GmQuGl3RkKE4p3f2GGZtzSFI83pCT22jiisCmg3HTCbzM4SA78UDmvuWKhiiMaGe0Fhn5lz2h4mAZmPolCQ2ob8auaiPrq5ppu41r3d4L7rUZERJ8zWZ/VDekGM9IKU7dDL1EkW9roj74PIxoxQNwuiZ8g5ra17XO0XQHgYc6wWfObfy2gi7QI6sT6O+hYGuEro1i5SHAXO6ZMxdi5gjdOg6hCpAexcfPYmvWzPtXLPuMp+6rflSoJOhO4ihFqw39jEhtB/ae1Lp1Rq6NVMOTu5X9HZddJlNMRnSLXNdkN07QdK8BqE0UxcNPR5ZWfOA7pRLXTJybjuXZNNXewRzkrzBsDjBNuku8LStWU98rmimXKGxkgzWw5VKxaIb2eZIk6D0qo50rJZYXYkGXa95tWMX+95zwCcCmvU/cYmQNvqbJa3C6zh9mnXJQMx7iM5v7guE9yS93hcrcdasma40rwKTMaIiP7oh12vCyRe79EdatDJbzZpFmqsHr2ai1VFrvkRHM+kIagg7rEFxTqa1XeNpakZdy+XnkAPx0YkG8UA1/eUXpNvMvlbEzdL0mrX0p6srZyKyYJsw1AaUCwhW72QCGG09jVuKCY2elv7MoadKRRZsEw9qU6060qGKs0ozxVyzNmLC+i1FGdlYIGlGAxCsTYKNibKimZ40r8Si7jcdOwKaVxrbJ81rIrf+Cgi1NAM6dBSntmplcl1fJyoyayZNHIVCs6oa0Jon1Nw5Lcnss9Ottnh3VNpMv0MLAkgwtGZqmqH5cqyvLSeT6ahq6IhtM5SdieU2iNMbOCmrVeKc3zY82WTyYCcqv5m8HCCELXNhhKLE6a3toBW91P3XfEnh7bPtD98h1zI5aaFMJmNbv81oFWhoebkRVhRFpQu8Qm7IoQXb5NFJSNuZy21aLGvCjLlGMAWaszsnBd8F0kjToIDqhDUr9nbp3EfLLtcx82FUrDnm3wUGWBlYCPhufLDVBtAWqEF2fbO+yOOhEY2ekFUcqQhJNALsTOyKsTrGik7LWRDVnG3ipD79AgKIOMMU6FizKsxldFbO9uCIysh/Ik/WUK46glB3lkrjDML7oqxmP2v4i3FFFWwj1gL1QBiikWaY7MZSrEGgeswkmx1FlQgNkKAIQTRU0NDmEXTj7kmW74tqZDtASBcSzRS0uTsCoEh0m4gGqVjyBT//up6GOuH9FH9zbBUR1TezAayZdtWRju1pVktr3YrlPJFO79DJ0KGiQJVm8lg7hKqjFQJtx+oEyRLBbCpdSNBx1j23OGVljeZYiXwjCjrazLpmoOSwdi2ICpU3ALxdu7x9rvP7+sQbVaObD66fWk9f9Ckl5VoSmK3HoQYvbKek1cBJXs0fnZ+7NdanHbNikL9E7Zcu6KqyvcgtNsYH6+5pprLtByaEIVsaglJT4Hi+8/GoxINSRRAqPDhWfbrHxwrgKp2+zPKdTkWudABfqhT5V33Aw6s+HnGwIehUthx4/jYBLydgKioxSVIkeSIqQBSBMhVvU/kb+GMAXkCalU+fFTCdyOqZ6a0ow8PSVASt/BQsRXaav4B3EMge3FjUn0bdZ/iqWj/lzEqT1Yun13X1JWs5BH/Uq6vfqqdEpSmPfPO49JEfCq8e+McKP5SH/UqTf+RVmjvwEHh71Hx73X97+PZo2H8FHg6PH4RXneZDZSg8VjqwYWmIveqUB961pC/i5Msyr+S/SXnImPJt1no3zcMDn2bKhZTXaL6ctC6V/BT+m7W/nbfyYl7Ot7+1Lz4rNzeXnwZ5afoJXkkC9nURdJ/r1UUVVHPP3dHz01N9AV5zo8UzJDj3NJqDxWJU7Xaffvn16cOiWn7+8DwaVef158VZt3qXe+o9Yz+refi103988wbaNHgodX7vvIWC8fWxeQRpPn7DD3P870edh6/8YbPzCIanDzwYglfgDQ8+yg8CDxvKh49bxtnvWtMv4rsJyEOaUnnQvgF5IP8x/QReKF8k7tN5XlFp/mNy+Qe4yQ/El5/hYQleJOeB+E76Av8I7AvlBTv7dNMiem7uNXRBnqE133Wruadutdh9Or2DZlrtPc9hTDMuVsFzr3jfa9TGoxx8XX/qFqvwxV0NvAbPxVp1/ho7fheGH0Fn2LkWhhx4uIZWPew3P/Y/Xh9DbR5W+IfrPrThxyF42+R/B8PSV2jN4BV//bU51C6HDftft1xWH4rGu8mlZs0xGZInKZ/b5+fTz1CS37WW0GwVqM3TvCTlRfHljM1/AZ+Wy3OV5vaXCbT9l632FzYvSp+nhEVg1Xtw1uuqBKrWXK2PPtSfyq9z1VO1wLx616vWcqMnUK2Wx6O6RvN97fm0CnrjMqQ5V6sCgu0a1Zxnp9Lh+iyU5VIfvhZKFb7U6QAZ+mgCFOMSOD6Eoizz0Gl7OOpz8BKozTK8nIMN2b7XTmy4mELNhUIrxrgly0qKKA44UVL7tqUsi/JUktilDAZTeOFguWTBlwnsGZUpEOEfBPZ/S1Wby1CYgariRMidLeagPr9rgLtcr95dnD2BXqNXri0WOZC7UwP0BrTcswWo1YoL0Ms9LWBHedYoni1qYLwozhe4+WtMvDXU9zCkmBof3DdjSt03ypVOXVetrRoex6/bbh7xHSrcJ6OYVY2Btk79ju/4ju/4ju/4/8B/AGCozdG08el3AAAAAElFTkSuQmCC" alt="Graphique montrant une asymptote oblique" class="graph-img">
+                            <p class="text-muted">Exemple de courbe avec asymptote oblique</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Représentation graphique des fonctions polynômes
+                    </div>
+                    <div class="card-body">
+                        <h5 class="section-title">Problème contextualisé</h5>
+                        <p>Yatouma doit arroser son jardin situé en amont d'un château d'eau. Ce château a une capacité de 18750 litres, est plein à 8h, et vide à 4h et 20h. À quel moment Yatouma peut-il commencer l'arrosage ?</p>
+
+                        <h5 class="section-title">Méthodologie</h5>
+                        <p>Pour étudier une fonction polynôme, on suit généralement ces étapes :</p>
+                        <ol>
+                            <li>Déterminer son ensemble de définition</li>
+                            <li>Calculer les limites aux bornes de l'ensemble de définition</li>
+                            <li>Étudier sa dérivabilité et calculer sa dérivée</li>
+                            <li>Étudier le signe de la dérivée et les variations de la fonction</li>
+                            <li>Dresser le tableau de variations</li>
+                            <li>Rechercher les points particuliers (intersections avec les axes, symétries, etc.)</li>
+                            <li>Tracer la courbe représentative</li>
+                        </ol>
+
+                        <div class="text-center">
+                            <img src="data:image/jpeg;base64,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" alt="Représentation graphique d'une fonction polynôme du second degré" class="graph-img">
+                            <p class="text-muted">Exemple de représentation graphique d'une fonction polynôme</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        Exercices d'application
+                    </div>
+                    <div class="card-body">
+                        <h5 class="section-title">Exercice 1</h5>
+                        <p>Soient les fonctions $f(x) = \frac{x+3}{2-x}$ et $h(x) = \frac{-3x+1}{x-2}$.</p>
+                        <ol>
+                            <li>Calculer les limites aux bornes de leurs ensembles de définition</li>
+                            <li>En déduire les asymptotes à leurs courbes représentatives</li>
+                        </ol>
+
+                        <h5 class="section-title">Exercice 2</h5>
+                        <p>Soit la fonction $g$ définie par $g(x) = \frac{2x^2+3x-5}{x-2}$.</p>
+                        <ol>
+                            <li>Calculer les limites de $g$ à gauche et à droite de 2</li>
+                            <li>Démontrer que la droite d'équation $y = 2x + 7$ est asymptote à la courbe de $g$</li>
+                        </ol>
+
+                        <h5 class="section-title">Exercice 3</h5>
+                        <p>Après son succès au BEPC, Gayanima reçoit 5000 F de son père et veut placer cette somme avec un intérêt composé mensuel. Proposer une représentation graphique permettant de visualiser le bénéfice après deux mois en fonction du taux choisi.</p>
+
+                        <button class="interactive-btn" onclick="$('#hint').toggle();">Indications</button>
+                        
+                        <div id="hint" class="solution">
+                            <h6>Indications :</h6>
+                            <p>Pour l'exercice 1, n'oubliez pas de déterminer d'abord les ensembles de définition.</p>
+                            <p>Pour l'exercice 2, pensez à effectuer la division polynomiale pour faire apparaître l'asymptote oblique.</p>
+                            <p>Pour l'exercice 3, utilisez la formule des intérêts composés : $C_f = C_i(1+t)^n$ où $t$ est le taux et $n$ le nombre de périodes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Résumé des concepts clés
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Les asymptotes verticales correspondent aux valeurs qui annulent le dénominateur d'une fonction rationnelle</li>
+                            <li>Les asymptotes horizontales ou obliques se déterminent par l'étude des limites à l'infini</li>
+                            <li>La dérivée permet d'étudier les variations d'une fonction</li>
+                            <li>Le tableau de variations synthétise le comportement d'une fonction</li>
+                            <li>La représentation graphique visualise l'ensemble des caractéristiques d'une fonction</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Fonctions rationnelles
+                    </div>
+                    <div class="card-body">
+                        <p>Les fonctions rationnelles de la forme $x \to \frac{ax+b}{cx+d}$ et $x \to \frac{ax^2+bx+c}{dx+e}$ présentent souvent :</p>
+                        <ul>
+                            <li>Un ou plusieurs asymptotes verticales</li>
+                            <li>Une asymptote horizontale ou oblique</li>
+                            <li>Un centre de symétrie pour les fonctions homographiques</li>
+                        </ul>
+
+                        <div class="text-center">
+                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMPEBMQDxIVDw8PFRMQDxAPGBkQDw8PFRgaFhUVFRUYHCggGBolGxUVITEhJSorLi4vFx81ODcsNygtLjcBCgoKDg0OGhAQGjElHx0uLTcvLy0tLys3LTQrLis1LSstKzc3MS0wLSs3NS4vLTUtLTUtLy0vLTU2NSstNystLf/AABEIAOEA4AMBIgACEQEDEQH/xAAbAAADAQEBAQEAAAAAAAAAAAAAAgMBBAUGB//EAEYQAAECAwUDBwYMBwACAwAAAAEAAgMRIQQSMUFRIjKxE0JSYXGRoQVygZLC8BQVNGJzssHD0dLT4iMkM0NUY4Ki8QYWU//EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EACERAQEAAQQBBQEAAAAAAAAAAAABEQISITFRQXGRsfBh/9oADAMBAAIRAxEAPwD9xQhCAQhCAQhCAQhCAQhCAQhCAQhefZbVEfaIrCG8jDwcAZkkNk2c5XgREnTAs9IeghCEAhCEAhCEAhCEAhCEAhCEAhCEAoMc4gGbReAMpYTE9VdQgbjKZDgg3artNp839y2Tuk31f3LTnT3ktzwQSY55E7zcSN05GXSTyd0m+r+5LB3cOc76xVNaIE2uk31f3JWOeZ7TaEjdP5lQZUSQudTnHigaTuk31f3LBeptNr839yfPBYMqe8kE2ueb203ZMt01oD0utPJ3Sb6v7kjMYlM/Zaq54aoE2uk31f3LxPJvl9sa3Wqwsk11lbDeXXSGxXPmYl2tbpLATq9e7lhn9q8+ysHwqPsijIByxJizQdNmiPeJlzd6I3dODXlo52gVdrpN9X9ylYucJYPf4m97Sv6M1J01q7pAX3iLzaAHdOc/ndS3aptNr839yBvmnNbxKYZU95Ksl2q7TafN/csJfeAvNqCd05S+d1pznT3kldvinNdxagNrpN9X9y2Tuk31f3LfRn9q3WiCZLpgXm1nzTp5y3a6TfV/csdvMprwT5YZoMk7pN9X9yW84FsyCHGRkJZE69SpngpuxZTney5BdCEIBQgbjOwcFdc0EOusqMBKh07UFTn75Lc0hDq1b3HTtWydPFvcfxQLB3f+nfWKprVRgh13Fu87I9I9apJ1at7j+KDRkkhYO848VoDqVb3H8UkIO2qt3jkde1BbNYMvfJZJ08W9x/FYA6lW9x07UCsxidvstVc+9RYHTfUY6Hot61STp4tzyP4oNy9P2rgs3yq0fR2f7xJ5ds8WJBuwqxL7S0ibQ0gzBcREabtJTEyJzAMllkET4XaJuZLk7PKTTP8AuY7SDrsu/E88EdnJsH2FdHpzXLCDhFcJirIbsDjNw16guiTtW46H8VI1q7+PoDfPmt4lMMvfJTAdfNW7rcjqetMA6lW9x07VWTHP3ySu3x5ruLUEOrVvcdO1K4Ovird12R1b1oKfj9q3WqSTtW46HXtWydWre4/igV28z08E+Sk4OvMq3PI6dqeTtW9x/FA+am7Fnney5NJ08W9x/FIQ6bJkEXsgRzXdaDoQhCAUIG4ymQ4K6hAOwyuQ00QORjThotlXDgsJxrw0WzrjwQTg7uHOd9YqksacFOCdnHnO06RTzxrwQAGFEkLnU5x4pwcK8FOEaOrzjpqgrKuHBYBhThotnXHgsBwrw0QTZjEpn7LVWVcNdFJhrErn1dFqrOuOuiDJUwz6tVwWb5VaKf27P94u+dMc+rVcFmP81aK/27Pp/sQXcJRWUo5jx6QWkcXLol1Z9S57UZGE6eDwDhg5pbxLV0T68+pSNXqFG+ac1vEpgMKcNEoO2a81umpTA4V4aKsgjGnDRK7fFOa7TVqYnGvDRK47YrzXaatQNLqz6tVssacFk6Y59WqJ414IEdvMprwTy6uCR52mV100TzpjwQbKuHBTdiynO9lypOuPBTcasrPa9lyC6EIQC5oBddZQYCW0dPNXSoQNxmOA10QaS6uy31jp5q2bp7rfWP5Vpzx8dFuefigjBLruDd53OPSPzVSbq7LfWP5UsHdz3na9IqmuPigQF1KN9Y/lSQi6tG7x5x181VGWPikhYOx3jrqgabp7rfWP5VgLqbLfWOnmp88/FYMsfHRBFhdN9G49I9FvzVWbp7rc+cfypGYxMcevotVc889UHleXuVMICGx5eXC66zvLXQzU3zheAlumYJImJTW2R0T4XaJtZLk7PIh5J/uYi52r08s8evVcFm+VWjH+nZ9f9iC9sD3QyA1t4C83aO83abzdQFRkRzmhwDSHSIN44Go5qoMsfFc1i2Q6HX+G4tGO4dpkuoAhv/JU9Wu9PsqC6+aN3W846n5qYF1KN9Y6eagb5x3W66lMMsfHRVkpLq7LfWOnmpXF18Ubuu5x1b81UOePjoldvjHddrq1ATdo3HpHXzVs3dFvrH8q3vx69Ua4+KCTi682jc+cdPNTzdo31j+VY/eZjnron7/FBk3T3W+sfypCXTZMAC9kSea7qVc8/FTdizzvZcguhCEAoQNxlchwV1zQXG63ZyGYrRBU5195Lc8VMuNdjxGi28Z7niEGQd3HnO+sVTWqhBcbu7znZjpFUvGux4hA4yqpwsHV5x4oDjTY8QkhuNdnnHMaoL54rBlX3klvGe54hYHGmx4jRAMxiVz9lqoccdVBjjN+znqOi1UvGe5rmEDZY5/auGzfKrRX+3Z/vEvleLFbDYYTXXuWs4IYL5MMxmCJMAGTbhcScpKdkiP+F2gGHIcnZ5G8DP8AqZZIPVGVVzWjYcIk6bkTzZ7LvQSfQ46KocabHiEEkggsmDjUKVZcOK021zLVDgtbe5aGX3qya2G9ofM5UiCWpEk4tr+VEO5szlflF0+iuf8AkvAsnlC1QvKsSzvsYbYeRZctpNXO5kNzsDIl7QDWg1r9SHGmx4jRUsctjtRdFtDC4EQ3MugAAhpYCe2s11u3xXmu4tSRopa1ziwkNBMgQSZCcgNVyfGjS1sYNcYZDgC1rnk1bUBoJI60R3RIga0uc4NaKlzqACeJJTz68l5PlOO2NZItWwmRmPhB8ecMNL5smQ8A4n0rus0a8wOaGvBaJOY4OaesHMIKu3mV14Jssc1Jzjebs65jRNePQ8QgpnipvxZ53suXNYLW+IYocxv8KIYYunmhrXCc89pXJM2TbLaxnPmuQdKEIQChA3GY4DgrqMCdxnYOCBjnj46Lc8/FBnX3yW1mglB3c9531iqa4+KSDO7/ANO+sVStUCjLHxSQsHY7x4qgnRThTk7zjxQUzz8Vgyx8dE1ZrBOnvkgkzGJjj7LVXPPPVTZOcTt9lqrWfegXLPHr1XBZvlVo+js/3i9CsvT9q4LN8qtH0dn+8Qdwyx8Ud+PWtE6Ir4oJkAucDUFoBBqCJuxUWwXMlyZvN/8AzeTSnNdiOwz6pLoE7581vEphOnvkphZcOOLaWlpa5z7O44F0hI9TiC0+KVlmgN5OzhrLjIZEOCZEBjLoEmnIarucKHDu6l81av8A4XZn+UoXlHbZaIMJ0NghOuQsxeLQJzlEdnLUFOV4exbWNZAcGMfIYMs82OM3ZFki3GpFcVXyeCITA8uc8MaHOeLr3OAqSMicZI5CIN2LOuERocBX5t0+K2cUZQ39c3Q/CTuKZNviuKycobQ9znO5AEiE1wLSXXWh1CJ3QWGRzvnIBP5Os8dhJjxjFaRICTRIzx2YbV5Hlry/aoFtsdnh2F8eFaL3K2iGZsgSpUykJCu0RPAVX0BtUsWPH/N76pKZNtc3kmPefGaSCYbwx12Hye0RemTfdOYc3GRGeK7XYs872XLksphse94Ly+JK+57HAyE7o3QJCZ6+tWFpY5zAHAmeGB3XZJmG3V4diEIVZC+W/wDsEdtpZZh5OjmFcc4WicK7FLZABm3dE5k7bmukN01l9SuGDyl1tWESEhVplKk8UWTLnPlKJX+RtHrWbT6dHxlEn8htHrWb9ddJfFrssPY8g4eYktEaLIXGydmTdiCXZfZ1KZXbf1jjsvlSKW1sFoG28b1myeQMY4VvjKJ/g2j1rN+uuWG+Jy0J7mvaGcoIrgzYiXiZBrWOcQQQMaSJzkvV+HQ63ogZ9J/DPc4BMw2avDkHlKJT+RtHrWb9dRs3lSKQ6dgtAk9w3rNUA41jheo9xc0GE9oOTnDlG9dARxXmPhRDFhEi9ce5z4sMiG2s23CwuJuydMynMtb6Kyt8ZRP8G0etZv11g8pRKfyNo9azfrr051x4KcUEtkxwa7IuF5o7QCJ96DybP5Vil0YGwWgXXgA3rNUcmwzrG1JFJ4ehX+Mok/kNo9azfrqZs0QxIbnOa8wor3Pc0ckBDdALQLpcZ7TgccupevOuOuiDzPjKJ/g2jHpWbX6dcNm8oxPhMc/Ao9WQKXrNMf1Kn+PL/wBL6CdMc+rVcFm+VWiv9uz6f7ECfGUSn8jaPWs366PjKJ/g2j1rN+uvSBwrwRPrz6kHkN8qReVcPgFolcaZ3rNjN1P68stVX4yiU/kbR61m/XVWQSLW+JzTBY2cxMuD3nDsOK7QcK8NEHmnylEr/I2j1rN+upO8qReUaPgFokWPM71myLP98s/BeuTjXhovNtUNxtcFwabjGvJiBzQCSJXXNxLRQyljLCSA+Mon+DaMelZtfp0fGUT/AAbR61m/XXpT68+rVbPGvBB48XypFD4Y+AWiRvTN6zUp9Oq/GUT/AAbR61m/XR5SgOfGsxYSOTeXudMBpbdLSw1nUOmJCU2ia9KfXwQed8ZRP8G0etZv115/kDy7GtUQsjWGNZmw4j2sjvLORihocAQL1+ZFaBzaGTjQn6KdceCm7FlZ7XsuQc1it7okaLDLQGw5XXbX8RppOolRweMeavQQhAKMCdxnYOCsuWDEF1tHYDI6ILmdffJbWakYgrR3cdFvKCeDu4oCDO7/ANO+sVStVzwogu4O3nZHpFPyg0d3FAhsbCQbjQ7pAXX+sKqUKzOANyI4ScaPPKNxzvbXiugRBSju4pIcQVo7eOR1UxGt9Zyz2nbZeHShTPezHumqwoocAWkOGEwc5YdqOUE8HdxXPFhgycy8yJ0gCQZCgeOcPHQhOTi/xdk5xO32WqtZ964LLaZmI17S2ICCWiZEroAIOYoup0WVbrzIGgBmVUswpWXp+1cFm+VWj6Oz/eKHlLyoYcNrwww5xrPCPLCjmxYzYbrt128A4n0YFFktANrtAuvEodnqWkA/1MDniiPWE6Ir4qYiClHdxRyg0d3FAwnfPmt4lMJ098lARBfNHboyOpTiIKUd3HRBQzr75JXTvjzXcWpTEFaO7jolMQXxR267I6tQWrL0/aitVPlBo7HQ6o5QaO7ig187zPTwT1koOiCbaOzyOiflBo7uKCtZqT8Wed7LlvKCeDu4pL8yyhG1mDLdcg6UIQgFCAdhlchwV1GBuMpkOCBica+8ls64oOdPeS3PBBKCdnHnO+sVSeNVODu/9O+sVTWiDAcKpIRo6vOPFUGVFOFg7zjxQUnXFYDhX3kmzwWDKnvJByRoV6+WkCIx02E4bjZtPUcO45Logxg8BwMpg0OIIMiD1gzHoWMxidvstU4exFLcogMRvU4Sa/sxYe0uUanMx4WIBFZGufauGzH+atFf7dn+8XoZYZ/auCzfKrR9HZ/vFWXcDhVE+vNaMqI9GaBAds15reJTA4V95JRvmnNbxKcZU95IMJxr7ySuO2K813Fqc5095JXb4pzXcWoNn15/atnjVGWGf2o1ogm47TK68E86YpXbzKa8E+WGaAnXFTdiyvO9lyrngpPxZ53suQXQhCAXLBiC63ewGTtOxdSjA3Gdg4IMMUV3u52nYt5UT53c78E5nX3yW1mg54UUXedvOyd0j1J+VFd7ud+C2DO7/wBO+sVStUEhFFN7ud+CSFFFd7eOTtexXE6KcKcneceKDeVE+d3O/BYIopvdztOxVrNYJ098kHOyKJv3sdHdFvUp2+M1obE2v4bgTJribp2XYCZo6cuoLoZOcTzvZattMK+1zek1ze+ila03Fedb/Kt2Hehg3g4ANjMiwuUJmbrS5orQ1wABJolslqabXaGi/MQ7PPYeB/czlI4rtbDbHhsdEa14Ia8B7Q4Bx7c6lRs3yq0fR2f7xVLMcOsRRTe7nfgjlR87HR34KgnRFfFEREUXzvbrcnanqTCKKb3c7TsTCd8+a3iUwnT3yQTMUV3u52nYlMUXxvbrsnat6lYzr75JXTvt813FqBeVHzsdHa9iOVbXe7nfgqV8ftW1qg53RRebvZ5O07E/Kj53c78Fr53mengnrL0oE5UT53c78EheCWSnvZggbrtVes1N+LPO9lyCyEIQChAGwymQ00V1ywYrbrNoYDMaILEY04aLZVw4KZjNrtDvGi3lmz3x3hBkEbOHOdp0iqSxpwUIMVt3eG87MdIqnLNrtDvCBgMKcFOEKOpzjpqtEZtNod4SQ4rdraG8cxqgvKuHBYBhThol5Zs98d4WCM2m0O8aIMYKxKZ9XRaqyrhrooMitm/aGOo6LU747RUvEgCTUYIJWIbBEt1725YXzLwkoWYfzVop/bs+n+xccbywyEyNEYREayIxz5ktuw3BoLp3TQEEkmQABJIAV7JamG12gCI0kQ7PMAiY/qfiFJ01r7eoBhTgiXVn1JBGbTaHeEcs3pDHUKstA2zTmt01KYDCnDRSEVt87Q3W5jUphGbTaHeNEDkY04aJXDbFOa7TVqwxm12h3jRK6K2+Nobrsxq1BWXVn1aoljTgk5ZvSGOo1W8s2u2O8IMcNplNdNE8qYcFF0Vt5m0M8xon5ZvSHeEFJVw4KbhVlJbXsuW8s2e+O8JDEBLJOB2sP+XIOlCEIBRgTuM7BwVlCBuMpkOCChnX3yW1mlOdD7hbngUCQZ3f+nfWKpWqlB3cOc76xVNaFACdEkKcneceKYZUKSFg6nOPFBWs1gnT3yRngVgyp7yQIyc4nb7LVWs+9RZjE7fZaq54HNBxPgNfFcHta8AQ3NDhMB04gJ7jL0pbNP4VaPo7P94rOpFb85jv/F7fzKFm+VWj6Oz/AHika1elegJ0RXxWDKhR6DiqywTvnzW8SmE6e+SQb5pzW8SmGVD7hBpnX3ySunfHmu4tWnOh9wldvinNdxagevj9q2tUvoOP2rdaFAj53mengnrL0qbt5lNeCfLA4oGrNTfizzvZcnzwKm7Fnney5BdCEIBc0GKLrNoYDMUoulEkEDFbXaHeNFvKtnvjvCrJEkHNBitu7w3nZjpFU5Vtdsd4VpLJIJCK2m2O8KcKK3a2hvHMarpkiSCXKtnvjvCwRW02x3jRWkiSDmZFbN+0MdR0WqnKtnvjPMKskSQcMSI3lYZvDdiNxGbmH2V43kqPaD5Stgi8m2ytZA5CIN6NevEA1kLm2DrNppn9PJbJFtzhERW02x3hHKt6Yx1CrJEkRziK2+dobrcxqUwitptjvGitJEkEjFbXbHeNErorb42huuzGrVeSJIJcq3pjHUao5Vtdsd4VZIkg53RW3mbQzzGiflW9Md4VZIkglyrZ747wkLwSyTgdrAS6Ll0SWoBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIBCEIP/2Q==" alt="Représentation graphique d'une fonction rationnelle" class="graph-img">
+                            <p class="text-muted">Exemple de fonction rationnelle avec asymptotes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>© 2023 - Représentation Graphique des Fonctions - Ressource pédagogique</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

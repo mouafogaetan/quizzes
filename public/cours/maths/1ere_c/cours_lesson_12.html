@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barycentres et Lignes de Niveau</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border: none;
+            border-radius: 10px;
+        }
+        .card-header {
+            background-color: #f1f8ff;
+            font-weight: 600;
+            border-bottom: 1px solid #d0e7ff;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .objective-box {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .example-box {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .definition {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .important-note {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .exercise {
+            background-color: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+        .diagram-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        .nav-tabs .nav-link.active {
+            font-weight: 600;
+            background-color: #f1f8ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">Barycentres et Lignes de Niveau</h1>
+            <p class="lead">Applications géométriques et résolution de problèmes</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">Introduction</div>
+                    <div class="card-body">
+                        <p>Les concepts de barycentre et de lignes de niveau permettent de caractériser et de construire des figures géométriques planes, de calculer des aires et des périmètres, et de résoudre divers problèmes pratiques.</p>
+                        
+                        <div class="objective-box">
+                            <h5>Objectifs du chapitre</h5>
+                            <ul>
+                                <li>Comprendre et utiliser la notion de barycentre de points pondérés</li>
+                                <li>Déterminer des lignes de niveau dans le plan</li>
+                                <li>Résoudre des problèmes concrets à l'aide de ces concepts</li>
+                                <li>Appliquer ces notions à des situations d'équilibre et de localisation</li>
+                            </ul>
+                        </div>
+                        
+                        <p>Les barycentres nous aident à trouver le point d'équilibre d'un système, comme le centre de gravité d'un solide, tandis que les lignes de niveau permettent de caractériser des ensembles de points vérifiant certaines conditions.</p>
+                    </div>
+                </div>
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="lesson1-tab" data-bs-toggle="tab" data-bs-target="#lesson1" type="button" role="tab">Leçon 1</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="lesson2-tab" data-bs-toggle="tab" data-bs-target="#lesson2" type="button" role="tab">Leçon 2</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="lesson3-tab" data-bs-toggle="tab" data-bs-target="#lesson3" type="button" role="tab">Leçon 3</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="lesson4-tab" data-bs-toggle="tab" data-bs-target="#lesson4" type="button" role="tab">Leçon 4</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="myTabContent">
+                    <!-- Leçon 1 -->
+                    <div class="tab-pane fade show active" id="lesson1" role="tabpanel">
+                        <div class="card mt-3">
+                            <div class="card-header">Leçon 1 : Barycentre de deux points</div>
+                            <div class="card-body">
+                                <h5>Situation problème</h5>
+                                <p>Un commerçant utilise une balance constituée d'une barre homogène de masse $M = 50\text{kg}$ fixée à une extrémité $A$. Pour peser une masse $m$ placée à l'autre extrémité $B$, il place un crochet à une position précise $G$ qui maintient la barre en équilibre. Si le commerçant paye 30000 F pour un sac de mil à 300 F le kg, à quelle position $G$ obtient-il l'équilibre?</p>
+                                
+                                <img src="data:image/jpeg;base64,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" alt="Balance avec masses" class="diagram-img" style="max-width: 300px;">
+                                
+                                <div class="definition">
+                                    <h5>Définition</h5>
+                                    <p>Soient $A$ et $B$ deux points du plan, et $\alpha$, $\beta$ deux réels tels que $\alpha + \beta \neq 0$. Il existe un unique point $G$ vérifiant la relation vectorielle :</p>
+                                    <p class="text-center">$\alpha\overrightarrow{GA} + \beta\overrightarrow{GB} = \overrightarrow{0}$</p>
+                                    <p>On dit que $G$ est le barycentre des points $A$ et $B$ affectés des coefficients $\alpha$ et $\beta$. On note $G = \text{bar}\{(A, \alpha); (B, \beta)\}$.</p>
+                                </div>
+                                
+                                <h5>Propriétés importantes</h5>
+                                <ol>
+                                    <li><strong>Homogénéité</strong> : Le barycentre ne change pas si on multiplie tous les coefficients par un même réel non nul.</li>
+                                    <li><strong>Coordonnées</strong> : Dans un repère, si $A(x_A, y_A)$ et $B(x_B, y_B)$, alors les coordonnées de $G$ sont :
+                                        <p class="text-center">$G\left(\dfrac{\alpha x_A + \beta x_B}{\alpha + \beta}, \dfrac{\alpha y_A + \beta y_B}{\alpha + \beta}\right)$</p>
+                                    </li>
+                                    <li><strong>Isobarycentre</strong> : Si $\alpha = \beta$, alors $G$ est le milieu du segment $[AB]$.</li>
+                                </ol>
+                                
+                                <div class="example-box">
+                                    <h5>Exemple</h5>
+                                    <p>Dans un repère orthonormé, on considère les points $A(1, 4)$ et $B(-2, -4)$. Soit $G$ le barycentre de $\{(A, 2); (B, 1)\}$. Déterminons les coordonnées de $G$ :</p>
+                                    <p>$x_G = \dfrac{2 \times 1 + 1 \times (-2)}{2 + 1} = 0$</p>
+                                    <p>$y_G = \dfrac{2 \times 4 + 1 \times (-4)}{2 + 1} = \dfrac{4}{3}$</p>
+                                    <p>Ainsi, $G\left(0, \dfrac{4}{3}\right)$.</p>
+                                </div>
+                                
+                                <div class="exercise">
+                                    <h5>Exercice d'application</h5>
+                                    <p>Soient $A$ et $B$ deux points distincts du plan. Déterminez le barycentre $G$ de $\{(A, 3); (B, -1)\}$ et exprimez $\overrightarrow{AG}$ en fonction de $\overrightarrow{AB}$.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Leçon 2 -->
+                    <div class="tab-pane fade" id="lesson2" role="tabpanel">
+                        <div class="card mt-3">
+                            <div class="card-header">Leçon 2 : Barycentre de plusieurs points</div>
+                            <div class="card-body">
+                                <h5>Situation problème</h5>
+                                <p>Un trésor est enterré dans un champ triangulaire de sommets $ABC$. Le testament indique que le trésor est situé en un point $T$ vérifiant la relation vectorielle : $\overrightarrow{AT} + 2\overrightarrow{BT} + 3\overrightarrow{CT} = \overrightarrow{0}$. Comment localiser ce trésor?</p>
+                                
+                                <div class="definition">
+                                    <h5>Définition</h5>
+                                    <p>Soient $A_1, A_2, \ldots, A_n$ des points du plan et $\alpha_1, \alpha_2, \ldots, \alpha_n$ des réels tels que $\alpha_1 + \alpha_2 + \cdots + \alpha_n \neq 0$. Il existe un unique point $G$ vérifiant :</p>
+                                    <p class="text-center">$\alpha_1\overrightarrow{GA_1} + \alpha_2\overrightarrow{GA_2} + \cdots + \alpha_n\overrightarrow{GA_n} = \overrightarrow{0}$</p>
+                                    <p>On dit que $G$ est le barycentre des points $(A_i, \alpha_i)$ pour $i = 1, 2, \ldots, n$.</p>
+                                </div>
+                                
+                                <h5>Propriétés</h5>
+                                <ol>
+                                    <li><strong>Associativité</strong> : On peut regrouper des points pour former des barycentres partiels.</li>
+                                    <li><strong>Coordonnées</strong> : Dans un repère, les coordonnées de $G$ sont :
+                                        <p class="text-center">$x_G = \dfrac{\sum \alpha_i x_i}{\sum \alpha_i}, \quad y_G = \dfrac{\sum \alpha_i y_i}{\sum \alpha_i}$</p>
+                                    </li>
+                                    <li><strong>Isobarycentre</strong> : Si tous les coefficients sont égaux, $G$ est appelé isobarycentre. Pour trois points, c'est le centre de gravité du triangle.</li>
+                                </ol>
+                                
+                                <div class="example-box">
+                                    <h5>Exemple</h5>
+                                    <p>Dans un repère orthonormé, on donne $A(1, 1)$, $B(1, -2)$ et $C(3, 5)$. Soit $G$ le barycentre de $\{(A, 1); (B, 2); (C, 3)\}$. Déterminons les coordonnées de $G$ :</p>
+                                    <p>$x_G = \dfrac{1 \times 1 + 2 \times 1 + 3 \times 3}{1 + 2 + 3} = \dfrac{12}{6} = 2$</p>
+                                    <p>$y_G = \dfrac{1 \times 1 + 2 \times (-2) + 3 \times 5}{6} = \dfrac{12}{6} = 2$</p>
+                                    <p>Ainsi, $G(2, 2)$.</p>
+                                </div>
+                                
+                                <div class="exercise">
+                                    <h5>Exercice d'application</h5>
+                                    <p>Soit $ABC$ un triangle. Construire le barycentre $G$ de $\{(A, 1); (B, -1); (C, 3)\}$ en utilisant la méthode des barycentres partiels.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Leçon 3 -->
+                    <div class="tab-pane fade" id="lesson3" role="tabpanel">
+                        <div class="card mt-3">
+                            <div class="card-header">Leçon 3 : Applications des barycentres</div>
+                            <div class="card-body">
+                                <p>Les barycentres permettent de démontrer des alignements de points, des concours de droites, et de résoudre divers problèmes géométriques.</p>
+                                
+                                <h5>Applications pratiques</h5>
+                                <ul>
+                                    <li>Détermination de points d'équilibre</li>
+                                    <li>Localisation de centres de gravité</li>
+                                    <li>Résolution de problèmes d'alignement</li>
+                                    <li>Preuve de concours de droites</li>
+                                </ul>
+                                
+                                <div class="example-box">
+                                    <h5>Exemple : Alignement de points</h5>
+                                    <p>Soit $ABC$ un triangle. On définit les points $I$ et $J$ par $\overrightarrow{AI} = \frac{2}{3}\overrightarrow{AB}$ et $\overrightarrow{AJ} = \frac{3}{4}\overrightarrow{AC}$. Montrons que $I$, $J$ et le milieu de $[BC]$ sont alignés.</p>
+                                    <p>On peut exprimer $I$ et $J$ comme barycentres :</p>
+                                    <p>$I = \text{bar}\{(A, 1); (B, 2)\}$ et $J = \text{bar}\{(A, 1); (C, 3)\}$</p>
+                                    <p>Le milieu $M$ de $[BC]$ est $M = \text{bar}\{(B, 1); (C, 1)\}$.</p>
+                                    <p>En considérant le barycentre du système $\{(A, 1); (B, 2); (C, 3)\}$, on montre que $I$, $J$ et $M$ sont alignés.</p>
+                                </div>
+                                
+                                <div class="important-note">
+                                    <h5>Méthodes importantes</h5>
+                                    <ul>
+                                        <li>Pour montrer que trois points sont alignés, on peut chercher à exprimer l'un comme barycentre des deux autres.</li>
+                                        <li>Pour démontrer que des droites sont concourantes, on peut trouver un point qui appartient à toutes ces droites.</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="exercise">
+                                    <h5>Exercice d'application</h5>
+                                    <p>Soit $ABC$ un triangle équilatéral de côté 4 cm. On définit les points $P$, $Q$ et $R$ par :</p>
+                                    <p>$\overrightarrow{AQ} = \frac{2}{3}\overrightarrow{AB}$, $\overrightarrow{CP} = -\frac{1}{2}\overrightarrow{AC}$, $\overrightarrow{BR} = \frac{1}{3}\overrightarrow{BC}$</p>
+                                    <p>Démontrer que les droites $(AR)$, $(BP)$ et $(CQ)$ sont concourantes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Leçon 4 -->
+                    <div class="tab-pane fade" id="lesson4" role="tabpanel">
+                        <div class="card mt-3">
+                            <div class="card-header">Leçon 4 : Lignes de niveau</div>
+                            <div class="card-body">
+                                <p>Une ligne de niveau est l'ensemble des points $M$ du plan vérifiant une condition donnée, souvent de la forme $f(M) = k$ où $k$ est une constante.</p>
+                                
+                                <h5>Types de lignes de niveau</h5>
+                                <ol>
+                                    <li><strong>$MA^2 + MB^2 = k$</strong> : Cercle, point ou ensemble vide</li>
+                                    <li><strong>$MA^2 - MB^2 = k$</strong> : Droite perpendiculaire à $(AB)$</li>
+                                    <li><strong>$MA \cdot MB = k$</strong> : Cercle, point ou ensemble vide</li>
+                                    <li><strong>$\dfrac{MA}{MB} = k$</strong> : Cercle d'Apollonius</li>
+                                </ol>
+                                
+                                <div class="example-box">
+                                    <h5>Exemple : $MA^2 + MB^2 = k$</h5>
+                                    <p>Soit $[AB]$ un segment de longueur 8 cm et $I$ son milieu. Déterminons la nature de l'ensemble des points $M$ tels que $MA^2 + MB^2 = 50$ :</p>
+                                    <p>D'après le théorème de la médiane, $MA^2 + MB^2 = 2MI^2 + \dfrac{AB^2}{2}$</p>
+                                    <p>Donc $2MI^2 + 32 = 50 \Rightarrow MI^2 = 9 \Rightarrow MI = 3$</p>
+                                    <p>Ainsi, l'ensemble cherché est le cercle de centre $I$ et de rayon 3 cm.</p>
+                                </div>
+                                
+                                <div class="example-box">
+                                    <h5>Exemple : $MA^2 - MB^2 = k$</h5>
+                                    <p>Soit $[AB]$ un segment de longueur 8 cm. Déterminons l'ensemble des points $M$ tels que $MA^2 - MB^2 = 16$ :</p>
+                                    <p>On a $MA^2 - MB^2 = (\overrightarrow{MA} - \overrightarrow{MB}) \cdot (\overrightarrow{MA} + \overrightarrow{MB}) = 2\overrightarrow{AB} \cdot \overrightarrow{MI}$</p>
+                                    <p>Donc $2\overrightarrow{AB} \cdot \overrightarrow{MI} = 16$</p>
+                                    <p>Soit $H$ le projeté orthogonal de $M$ sur $(AB)$, alors $\overrightarrow{AB} \cdot \overrightarrow{MH} = 0$</p>
+                                    <p>On trouve que $H$ est fixe et que l'ensemble cherché est la droite perpendiculaire à $(AB)$ passant par $H$.</p>
+                                </div>
+                                
+                                <div class="exercise">
+                                    <h5>Exercice d'application</h5>
+                                    <p>Soit $ABC$ un triangle équilatéral de côté 6 cm et $G$ l'isobarycentre de $A$, $B$ et $C$. On considère la fonction $f(M) = MA^2 + MB^2 + MC^2$.</p>
+                                    <ol>
+                                        <li>Calculer $f(A)$, $f(B)$ et $f(C)$</li>
+                                        <li>Montrer que $f(M) = 3MG^2 + GA^2 + GB^2 + GC^2$</li>
+                                        <li>Déterminer l'ensemble des points $M$ tels que $f(M) = 72$</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mt-4">
+                    <div class="card-header">Conclusion</div>
+                    <div class="card-body">
+                        <p>Les concepts de barycentre et de lignes de niveau sont des outils puissants en géométrie plane. Ils permettent de résoudre des problèmes variés, allant de la localisation de points au tracé de figures géométriques complexes.</p>
+                        <p>La maîtrise de ces concepts ouvre la voie à la compréhension de notions plus avancées en mathématiques et en physique, comme les centres de gravité, les moments d'inertie, et les équilibres de forces.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Activation des tooltips Bootstrap
+        $(document).ready(function(){
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        });
+    </script>
+</body>
+</html>

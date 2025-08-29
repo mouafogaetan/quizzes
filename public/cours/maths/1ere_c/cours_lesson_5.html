@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre : Dérivation</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .chapter-header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .lesson-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background-color: #4e73df;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .objective-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .objective-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4e73df;
+        }
+        
+        .table-derivatives {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .table-derivatives th {
+            background-color: #4e73df;
+            color: white;
+        }
+        
+        .table-derivatives tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .interactive-element {
+            cursor: pointer;
+        }
+        
+        .hidden-content {
+            display: none;
+        }
+        
+        .graph-placeholder {
+            background-color: #e9ecef;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="chapter-header text-center">
+        <div class="container">
+            <h1 class="display-4">Chapitre : Dérivation</h1>
+            <p class="lead">Comprendre le taux de variation et l'analyse des fonctions</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Introduction -->
+        <section class="mb-5">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            Introduction à la Dérivation
+                        </div>
+                        <div class="card-body">
+                            <p>La dérivation est un concept fondamental en analyse mathématique qui permet d'étudier les variations d'une fonction. Elle trouve des applications dans divers domaines comme la physique, l'économie et les sciences de l'ingénieur.</p>
+                            <p>Ce chapitre abordera trois aspects principaux :</p>
+                            <ol>
+                                <li>La dérivabilité d'une fonction en un point</li>
+                                <li>Les opérations sur les fonctions dérivables</li>
+                                <li>Le lien entre dérivation et variations d'une fonction</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lesson 1 -->
+        <section class="mb-5">
+            <h2 class="mb-4">Leçon 1 : Dérivabilité d'une fonction en un point réel</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            Objectifs d'apprentissage
+                        </div>
+                        <div class="card-body">
+                            <ul class="objective-list">
+                                <li>Étudier la dérivabilité d'une fonction $f$ en un réel $\theta$ via la limite du taux d'accroissement</li>
+                                <li>Calculer le nombre dérivé d'une fonction en un point</li>
+                                <li>Déterminer l'équation de la tangente à une courbe</li>
+                                <li>Approximer une fonction par une fonction affine au voisinage d'un point</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            Contexte et applications
+                        </div>
+                        <div class="card-body">
+                            <p>La notion de dérivation est essentielle pour résoudre de nombreux problèmes concrets comme le calcul de vitesse instantanée, l'accélération d'un mobile, ou les problèmes d'optimisation.</p>
+                            <p>Par exemple, en utilisant un électrocardiographe, on peut modéliser le rythme cardiaque par une fonction et déterminer sa vitesse de variation à un instant donné.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card lesson-card mt-4">
+                <div class="card-header">
+                    Concepts clés et définitions
+                </div>
+                <div class="card-body">
+                    <h5>Définition de la dérivabilité</h5>
+                    <p>Soit $f$ une fonction définie sur un intervalle ouvert $]a, b[$, et soit $\theta$ un élément de $]a, b[$. On dit que $f$ est dérivable en $\theta$ si la limite suivante existe et est finie :</p>
+                    <p class="text-center">$\lim_{x \to \theta} \frac{f(x) - f(\theta)}{x - \theta}$</p>
+                    <p>Cette limite, lorsqu'elle existe, est appelée <strong>nombre dérivé</strong> de $f$ en $\theta$ et notée $f'(\theta)$.</p>
+                    
+                    <h5>Interprétation graphique</h5>
+                    <p>Si $f$ est dérivable en $\theta$, sa courbe représentative admet une tangente au point d'abscisse $\theta$, de pente $f'(\theta)$. L'équation de cette tangente est :</p>
+                    <p class="text-center">$y = f'(\theta)(x - \theta) + f(\theta)$</p>
+                    
+                    <div class="graph-placeholder">
+                        <p>Représentation graphique d'une fonction et de sa tangente</p>
+                    </div>
+                    
+                    <button class="btn btn-primary mt-3 interactive-element" id="showExample1">
+                        Voir un exemple d'application
+                    </button>
+                    
+                    <div class="hidden-content mt-3" id="example1">
+                        <h5>Exemple :</h5>
+                        <p>Soit la fonction $f(t) = t + \sin(2t)$ modélisant le rythme cardiaque d'une souris. Pour trouver la vitesse de battement à l'instant $t = \pi$ secondes, on calcule :</p>
+                        <p>$f'(\pi) = \lim_{t \to \pi} \frac{(t + \sin(2t)) - (\pi + \sin(2\pi))}{t - \pi} = \lim_{t \to \pi} \frac{t - \pi + \sin(2t)}{t - \pi}$</p>
+                        <p>En utilisant les propriétés trigonométriques et les limites usuelles, on trouve $f'(\pi) = 1 + 2\cos(2\pi) = 3$.</p>
+                        <p>Ainsi, la vitesse de battement du cœur à l'instant $\pi$ est de 3 unités par seconde.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lesson 2 -->
+        <section class="mb-5">
+            <h2 class="mb-4">Leçon 2 : Opérations sur les fonctions dérivables</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            Objectifs d'apprentissage
+                        </div>
+                        <div class="card-body">
+                            <ul class="objective-list">
+                                <li>Étudier la dérivabilité globale d'une fonction sur un intervalle</li>
+                                <li>Déterminer la fonction dérivée d'une fonction numérique</li>
+                                <li>Maîtriser les règles de dérivation des fonctions composées</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            Contexte et applications
+                        </div>
+                        <div class="card-body">
+                            <p>Les règles de dérivation sont essentielles pour manipuler efficacement les fonctions dérivables. Elles permettent de résoudre des problèmes d'optimisation et d'analyse de variations complexes.</p>
+                            <p>Par exemple, en physique, ces règles aident à calculer des vitesses et accélérations instantanées à partir de fonctions position complexes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card lesson-card mt-4">
+                <div class="card-header">
+                    Règles de dérivation
+                </div>
+                <div class="card-body">
+                    <h5>Dérivées des fonctions usuelles</h5>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-derivatives">
+                            <thead>
+                                <tr>
+                                    <th>Fonction $f(x)$</th>
+                                    <th>Dérivée $f'(x)$</th>
+                                    <th>Domaine de dérivabilité</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>$a$ (constante)</td>
+                                    <td>$0$</td>
+                                    <td>$\mathbb{R}$</td>
+                                </tr>
+                                <tr>
+                                    <td>$x$</td>
+                                    <td>$1$</td>
+                                    <td>$\mathbb{R}$</td>
+                                </tr>
+                                <tr>
+                                    <td>$x^n$ ($n \in \mathbb{N}^*$)</td>
+                                    <td>$nx^{n-1}$</td>
+                                    <td>$\mathbb{R}$</td>
+                                </tr>
+                                <tr>
+                                    <td>$\sqrt{x}$</td>
+                                    <td>$\frac{1}{2\sqrt{x}}$</td>
+                                    <td>$]0, +\infty[$</td>
+                                </tr>
+                                <tr>
+                                    <td>$\frac{1}{x}$</td>
+                                    <td>$-\frac{1}{x^2}$</td>
+                                    <td>$\mathbb{R}^*$</td>
+                                </tr>
+                                <tr>
+                                    <td>$\sin(x)$</td>
+                                    <td>$\cos(x)$</td>
+                                    <td>$\mathbb{R}$</td>
+                                </tr>
+                                <tr>
+                                    <td>$\cos(x)$</td>
+                                    <td>$-\sin(x)$</td>
+                                    <td>$\mathbb{R}$</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h5 class="mt-4">Opérations sur les fonctions dérivables</h5>
+                    <p>Soient $u$ et $v$ deux fonctions dérivables sur un intervalle $I$, et soit $\alpha$ un réel.</p>
+                    <ul>
+                        <li>Dérivée d'une somme : $(u + v)' = u' + v'$</li>
+                        <li>Dérivée d'un produit : $(uv)' = u'v + uv'$</li>
+                        <li>Dérivée d'un quotient : $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$ (pour $v(x) \neq 0$)</li>
+                        <li>Dérivée d'une composée : $(u \circ v)' = v' \times (u' \circ v)$</li>
+                    </ul>
+                    
+                    <button class="btn btn-primary mt-3 interactive-element" id="showExample2">
+                        Voir un exemple de calcul
+                    </button>
+                    
+                    <div class="hidden-content mt-3" id="example2">
+                        <h5>Exemple :</h5>
+                        <p>Soit $f(x) = \frac{x^2 + 2x}{x + 3}$. Calculons sa dérivée.</p>
+                        <p>On reconnaît une forme $\frac{u}{v}$ avec $u(x) = x^2 + 2x$ et $v(x) = x + 3$.</p>
+                        <p>Ainsi, $u'(x) = 2x + 2$ et $v'(x) = 1$.</p>
+                        <p>Appliquons la formule : $f'(x) = \frac{(2x+2)(x+3) - (x^2+2x)(1)}{(x+3)^2} = \frac{2x^2+6x+2x+6 - x^2 - 2x}{(x+3)^2} = \frac{x^2+6x+6}{(x+3)^2}$</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lesson 3 -->
+        <section class="mb-5">
+            <h2 class="mb-4">Leçon 3 : Dérivation et variations d'une fonction</h2>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            Objectifs d'apprentissage
+                        </div>
+                        <div class="card-body">
+                            <ul class="objective-list">
+                                <li>Déterminer les extrema d'une fonction sur un intervalle</li>
+                                <li>Étudier les variations d'une fonction à partir de sa dérivée</li>
+                                <li>Construire un tableau de variations</li>
+                                <li>Résoudre des problèmes d'optimisation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card lesson-card">
+                        <div class="card-header">
+                            Contexte et applications
+                        </div>
+                        <div class="card-body">
+                            <p>L'étude des variations d'une fonction grâce à sa dérivée est fondamentale pour résoudre des problèmes d'optimisation comme la maximisation de bénéfices, la minimisation de coûts, ou l'analyse de performances.</p>
+                            <p>Par exemple, dans une course automobile, on peut utiliser ces concepts pour déterminer les moments où la vitesse est maximale ou minimale.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card lesson-card mt-4">
+                <div class="card-header">
+                    Lien entre dérivée et variations
+                </div>
+                <div class="card-body">
+                    <h5>Théorème fondamental</h5>
+                    <p>Soit $f$ une fonction dérivable sur un intervalle $I$.</p>
+                    <ul>
+                        <li>Si $f'(x) > 0$ pour tout $x$ dans $I$, alors $f$ est strictement croissante sur $I$</li>
+                        <li>Si $f'(x) < 0$ pour tout $x$ dans $I$, alors $f$ est strictement décroissante sur $I$</li>
+                        <li>Si $f'(x) = 0$ pour tout $x$ dans $I$, alors $f$ est constante sur $I$</li>
+                    </ul>
+                    
+                    <h5>Extrema d'une fonction</h5>
+                    <p>Un extremum (minimum ou maximum) d'une fonction dérivable se trouve aux points où la dérivée s'annule en changeant de signe. Ces points sont appelés points critiques.</p>
+                    
+                    <div class="graph-placeholder">
+                        <p>Représentation graphique des extrema d'une fonction</p>
+                    </div>
+                    
+                    <button class="btn btn-primary mt-3 interactive-element" id="showExample3">
+                        Voir un exemple d'étude complète
+                    </button>
+                    
+                    <div class="hidden-content mt-3" id="example3">
+                        <h5>Exemple :</h5>
+                        <p>Étudions la fonction $h(x) = \frac{4x^2 + 4x + 9}{x + 1}$ définie sur $\mathbb{R} \setminus \{-1\}$.</p>
+                        
+                        <p><strong>1. Calcul de la dérivée :</strong></p>
+                        <p>En appliquant la formule de dérivation d'un quotient, on trouve :</p>
+                        <p>$h'(x) = \frac{(8x+4)(x+1) - (4x^2+4x+9)(1)}{(x+1)^2} = \frac{8x^2+8x+4x+4 - 4x^2-4x-9}{(x+1)^2} = \frac{4x^2+8x-5}{(x+1)^2}$</p>
+                        <p>Le numérateur se factorise : $4x^2+8x-5 = (2x-1)(2x+5)$</p>
+                        <p>Ainsi, $h'(x) = \frac{(2x-1)(2x+5)}{(x+1)^2}$</p>
+                        
+                        <p><strong>2. Étude du signe de la dérivée :</strong></p>
+                        <p>Le dénominateur $(x+1)^2$ est toujours positif pour $x \neq -1$.</p>
+                        <p>Le numérateur $(2x-1)(2x+5)$ s'annule en $x = \frac{1}{2}$ et $x = -\frac{5}{2}$.</p>
+                        
+                        <p><strong>3. Tableau de variations :</strong></p>
+                        <div class="graph-placeholder">
+                            <p>Tableau de variations de la fonction h(x)</p>
+                        </div>
+                        
+                        <p><strong>4. Extrema :</strong></p>
+                        <p>La fonction présente un maximum local en $x = -\frac{5}{2}$ et un minimum local en $x = \frac{1}{2}$.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercises Section -->
+        <section class="mb-5">
+            <h2 class="mb-4">Exercices d'application</h2>
+            
+            <div class="card lesson-card">
+                <div class="card-header">
+                    Problèmes à résoudre
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="exercisesAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#exercise1">
+                                    Exercice 1 : Vitesse instantanée
+                                </button>
+                            </h2>
+                            <div id="exercise1" class="accordion-collapse collapse show" data-bs-parent="#exercisesAccordion">
+                                <div class="accordion-body">
+                                    <p>Mme Aicha conduit sur une pente inclinée de 15%. La distance parcourue (en mètres) en fonction du temps $t$ (en secondes) est donnée par $d(t) = -0.5gt^2 + 5t$, où $g = 9.8 m/s^2$.</p>
+                                    <p>1. Montrez que la vitesse initiale est de $5 m/s$.</p>
+                                    <p>2. Calculez la vitesse après 10 secondes.</p>
+                                    <p>3. Exprimez la fonction vitesse $V(t)$.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exercise2">
+                                    Exercice 2 : Étude de fonction
+                                </button>
+                            </h2>
+                            <div id="exercise2" class="accordion-collapse collapse" data-bs-parent="#exercisesAccordion">
+                                <div class="accordion-body">
+                                    <p>Soit la fonction $f(x) = |2x - 3|$ définie sur $[0, 10]$.</p>
+                                    <p>1. Exprimez $f(x)$ sans valeur absolue.</p>
+                                    <p>2. Montrez que $f$ est dérivable en $x = 2$ et donnez l'équation de la tangente à la courbe en ce point.</p>
+                                    <p>3. Donnez une approximation de $f(1.9998)$.</p>
+                                    <p>4. Justifiez que $f$ n'est pas dérivable en $x = 1.5$.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="mb-5">
+            <div class="card lesson-card">
+                <div class="card-header">
+                    Conclusion et perspectives
+                </div>
+                <div class="card-body">
+                    <p>La dérivation est un outil puissant pour analyser le comportement des fonctions et résoudre des problèmes concrets. Maîtriser les concepts de dérivabilité, les règles de dérivation et le lien entre dérivée et variations ouvre la voie à l'étude de domaines plus avancés comme l'intégration et les équations différentielles.</p>
+                    <p>Pour approfondir vos connaissances, nous vous recommandons de consulter des ouvrages spécialisés et de pratiquer régulièrement avec des exercices variés.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>© 2023 - Cours de Mathématiques - Dérivation</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Gestion des exemples interactifs
+            $("#showExample1").click(function() {
+                $("#example1").slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir un exemple d'application" ? "Masquer l'exemple" : "Voir un exemple d'application";
+                });
+            });
+            
+            $("#showExample2").click(function() {
+                $("#example2").slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir un exemple de calcul" ? "Masquer l'exemple" : "Voir un exemple de calcul";
+                });
+            });
+            
+            $("#showExample3").click(function() {
+                $("#example3").slideToggle();
+                $(this).text(function(_, text) {
+                    return text === "Voir un exemple d'étude complète" ? "Masquer l'exemple" : "Voir un exemple d'étude complète";
+                });
+            });
+            
+            // Actualisation de MathJax après affichage de contenu caché
+            $('.interactive-element').click(function() {
+                setTimeout(function() {
+                    MathJax.typeset();
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>

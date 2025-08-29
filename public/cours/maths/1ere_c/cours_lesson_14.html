@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformations Élémentaires du Plan</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .lesson-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background-color: #4e73df;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .definition {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .property {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .example {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .interactive-element {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border: 1px dashed #ccc;
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: #4e73df;
+        }
+        
+        .figure-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .figure-caption {
+            font-style: italic;
+            margin-top: 10px;
+            color: #666;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-4">Transformations Élémentaires du Plan</h1>
+            <p class="lead">Découvrez les translations, symétries, rotations et homothéties à travers des explications claires et des visualisations interactives</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Introduction -->
+        <div class="row mb-5">
+            <div class="col-lg-12">
+                <div class="card lesson-card">
+                    <div class="card-header">Introduction</div>
+                    <div class="card-body">
+                        <p>Les transformations géométriques permettent de modifier la position, l'orientation ou la taille des figures dans le plan tout en préservant certaines propriétés. Ce chapitre explore les transformations fondamentales et leurs applications.</p>
+                        
+                        <div class="definition">
+                            <h5>Qu'est-ce qu'une transformation du plan ?</h5>
+                            <p>Une transformation du plan est une application bijective qui associe à chaque point du plan un autre point du plan. Elle peut préserver les distances, les angles, ou les rapports de distances.</p>
+                        </div>
+                        
+                        <div class="figure-container">
+                            <img src="data:image/png;base64,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" alt="Illustration des transformations du plan" class="img-fluid">
+                            <div class="figure-caption">Illustration des différentes transformations géométriques</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Pills -->
+        <ul class="nav nav-pills mb-4 justify-content-center" id="lessonsTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="translation-tab" data-bs-toggle="pill" data-bs-target="#translation" type="button" role="tab">Translations</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="symmetry-tab" data-bs-toggle="pill" data-bs-target="#symmetry" type="button" role="tab">Symétries</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="rotation-tab" data-bs-toggle="pill" data-bs-target="#rotation" type="button" role="tab">Rotations</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="homothety-tab" data-bs-toggle="pill" data-bs-target="#homothety" type="button" role="tab">Homothéties</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="composed-tab" data-bs-toggle="pill" data-bs-target="#composed" type="button" role="tab">Transformations composées</button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="lessonsTabContent">
+            <!-- Translation Section -->
+            <div class="tab-pane fade show active" id="translation" role="tabpanel">
+                <div class="card lesson-card">
+                    <div class="card-header">Leçon 1 : Translations</div>
+                    <div class="card-body">
+                        <h5>Définition et propriétés</h5>
+                        <p>Une translation est une transformation qui déplace tous les points d'une même distance selon une direction donnée.</p>
+                        
+                        <div class="definition">
+                            <p>Soit $\vec{u}$ un vecteur du plan. La translation de vecteur $\vec{u}$, notée $t_{\vec{u}}$, est l'application qui à tout point $M$ associe le point $M'$ tel que $\overrightarrow{MM'} = \vec{u}$.</p>
+                        </div>
+                        
+                        <div class="property">
+                            <h5>Propriétés caractéristiques :</h5>
+                            <ul>
+                                <li>Conserve les distances : si $M' = t_{\vec{u}}(M)$ et $N' = t_{\vec{u}}(N)$, alors $M'N' = MN$</li>
+                                <li>Conserve les angles et le parallélisme</li>
+                                <li>Si $\vec{u} = \vec{0}$, la translation est l'application identité</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example">
+                            <h5>Expression analytique</h5>
+                            <p>Dans un repère orthonormé, si $\vec{u} \begin{pmatrix} a \\ b \end{pmatrix}$, alors la translation $t_{\vec{u}}$ transforme le point $M(x, y)$ en $M'(x', y')$ avec :</p>
+                            <p>$
+                                \begin{cases}
+                                x' = x + a \\
+                                y' = y + b
+                                \end{cases}
+                            $</p>
+                        </div>
+                        
+                        <div class="interactive-element">
+                            <h5>Visualisation interactive</h5>
+                            <p>Expérimentez avec différentes valeurs pour observer l'effet d'une translation :</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="translationX" class="form-label">Déplacement en x :</label>
+                                        <input type="range" class="form-range" id="translationX" min="-100" max="100" value="0">
+                                        <span id="translationXValue">0</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="translationY" class="form-label">Déplacement en y :</label>
+                                        <input type="range" class="form-range" id="translationY" min="-100" max="100" value="0">
+                                        <span id="translationYValue">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="figure-container">
+                                <canvas id="translationCanvas" width="400" height="300" style="border:1px solid #ddd;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Symmetry Section -->
+            <div class="tab-pane fade" id="symmetry" role="tabpanel">
+                <div class="card lesson-card">
+                    <div class="card-header">Leçon 2 : Symétries Orthogonales</div>
+                    <div class="card-body">
+                        <h5>Définition et propriétés</h5>
+                        <p>Une symétrie orthogonale par rapport à une droite (appelée axe de symétrie) associe à chaque point son symétrique par rapport à cette droite.</p>
+                        
+                        <div class="definition">
+                            <p>Soit $(D)$ une droite du plan. La symétrie orthogonale d'axe $(D)$, notée $s_D$, est l'application qui à tout point $M$ associe le point $M'$ tel que :</p>
+                            <ul>
+                                <li>Si $M \in (D)$, alors $M' = M$</li>
+                                <li>Si $M \notin (D)$, alors $(D)$ est la médiatrice du segment $[MM']$</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="property">
+                            <h5>Propriétés caractéristiques :</h5>
+                            <ul>
+                                <li>Conserve les distances</li>
+                                <li>Les points de l'axe sont invariants</li>
+                                <li>L'application est involutive : $s_D \circ s_D = Id$</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example">
+                            <h5>Expressions analytiques particulières</h5>
+                            <p>1. Axe parallèle à l'axe des abscisses $(D): y = b$ :</p>
+                            <p>$
+                                \begin{cases}
+                                x' = x \\
+                                y' = -y + 2b
+                                \end{cases}
+                            $</p>
+                            
+                            <p>2. Axe parallèle à l'axe des ordonnées $(D): x = a$ :</p>
+                            <p>$
+                                \begin{cases}
+                                x' = -x + 2a \\
+                                y' = y
+                                \end{cases}
+                            $</p>
+                            
+                            <p>3. Première bissectrice $(D): y = x$ :</p>
+                            <p>$
+                                \begin{cases}
+                                x' = y \\
+                                y' = x
+                                \end{cases}
+                            $</p>
+                        </div>
+                        
+                        <div class="interactive-element">
+                            <h5>Composée de deux symétries</h5>
+                            <p>La composée de deux symétries orthogonales d'axes parallèles est une translation. Plus précisément, si $(D)$ et $(D')$ sont parallèles, et si $O$ est un point de $(D)$ et $O'$ son projeté orthogonal sur $(D')$, alors :</p>
+                            <p>$s_{D'} \circ s_D = t_{2\overrightarrow{OO'}}$</p>
+                            
+                            <div class="figure-container">
+                                <img src="data:image/png;base64,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" alt="Composée de symétries orthogonales" class="img-fluid">
+                                <div class="figure-caption">Composition de deux symétries d'axes parallèles</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rotation Section -->
+            <div class="tab-pane fade" id="rotation" role="tabpanel">
+                <div class="card lesson-card">
+                    <div class="card-header">Leçon 3 : Rotations</div>
+                    <div class="card-body">
+                        <h5>Définition et propriétés</h5>
+                        <p>Une rotation est une transformation qui fait tourner les points autour d'un centre fixe selon un angle donné.</p>
+                        
+                        <div class="definition">
+                            <p>Soit $O$ un point du plan et $\alpha$ un angle. La rotation de centre $O$ et d'angle $\alpha$, notée $r(O, \alpha)$, est l'application qui à tout point $M$ associe le point $M'$ tel que :</p>
+                            <ul>
+                                <li>$OM = OM'$</li>
+                                <li>$\text{mes}(\overrightarrow{OM}, \overrightarrow{OM'}) = \alpha$</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="property">
+                            <h5>Propriétés caractéristiques :</h5>
+                            <ul>
+                                <li>Conserve les distances et les angles</li>
+                                <li>Le centre $O$ est le seul point invariant (si $\alpha \neq 0$)</li>
+                                <li>Si $\alpha = \pi$, la rotation est une symétrie centrale</li>
+                                <li>La rotation réciproque est $r(O, -\alpha)$</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example">
+                            <h5>Composée de symétries axiales</h5>
+                            <p>La composée de deux symétries orthogonales d'axes sécants est une rotation. Si $(D)$ et $(D')$ sont sécantes en $O$ et forment un angle $\theta$, alors :</p>
+                            <p>$s_{D'} \circ s_D = r(O, 2\theta)$</p>
+                            
+                            <div class="figure-container">
+                                <img src="data:image/png;base64,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" alt="Rotation comme composée de symétries" class="img-fluid">
+                                <div class="figure-caption">Une rotation peut s'exprimer comme composée de deux symétries axiales</div>
+                            </div>
+                        </div>
+                        
+                        <div class="interactive-element">
+                            <h5>Expérimentation avec les rotations</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="rotationAngle" class="form-label">Angle de rotation :</label>
+                                        <input type="range" class="form-range" id="rotationAngle" min="0" max="360" value="0">
+                                        <span id="rotationAngleValue">0°</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="rotationCenterX" class="form-label">Centre de rotation (x) :</label>
+                                        <input type="range" class="form-range" id="rotationCenterX" min="50" max="350" value="200">
+                                        <span id="rotationCenterXValue">200</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="figure-container">
+                                <canvas id="rotationCanvas" width="400" height="300" style="border:1px solid #ddd;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Homothety Section -->
+            <div class="tab-pane fade" id="homothety" role="tabpanel">
+                <div class="card lesson-card">
+                    <div class="card-header">Leçon 4 : Homothéties</div>
+                    <div class="card-body">
+                        <h5>Définition et propriétés</h5>
+                        <p>Une homothétie est une transformation qui agrandit ou réduit les figures à partir d'un centre fixe, en conservant leur forme.</p>
+                        
+                        <div class="definition">
+                            <p>Soit $O$ un point du plan et $k$ un nombre réel non nul. L'homothétie de centre $O$ et de rapport $k$, notée $h(O, k)$, est l'application qui à tout point $M$ associe le point $M'$ tel que $\overrightarrow{OM'} = k \overrightarrow{OM}$.</p>
+                        </div>
+                        
+                        <div class="property">
+                            <h5>Propriétés caractéristiques :</h5>
+                            <ul>
+                                <li>Multiplie les distances par $|k|$</li>
+                                <li>Conserve les angles et le parallélisme</li>
+                                <li>Le centre $O$ est le seul point invariant (si $k \neq 1$)</li>
+                                <li>Si $k > 0$, l'homothétie conserve l'orientation</li>
+                                <li>Si $k < 0$, l'homothétie inverse l'orientation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example">
+                            <h5>Expression analytique</h5>
+                            <p>Dans un repère orthonormé, si le centre $\Omega$ a pour coordonnées $(x_0, y_0)$, alors l'homothétie $h(\Omega, k)$ transforme le point $M(x, y)$ en $M'(x', y')$ avec :</p>
+                            <p>$
+                                \begin{cases}
+                                x' = kx + (1 - k)x_0 \\
+                                y' = ky + (1 - k)y_0
+                                \end{cases}
+                            $</p>
+                        </div>
+                        
+                        <div class="interactive-element">
+                            <h5>Visualisation des homothéties</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="homothetyRatio" class="form-label">Rapport d'homothétie :</label>
+                                        <input type="range" class="form-range" id="homothetyRatio" min="-30" max="30" value="10" step="1">
+                                        <span id="homothetyRatioValue">1.0</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="homothetyCenterX" class="form-label">Centre d'homothétie (x) :</label>
+                                        <input type="range" class="form-range" id="homothetyCenterX" min="50" max="350" value="200">
+                                        <span id="homothetyCenterXValue">200</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="figure-container">
+                                <canvas id="homothetyCanvas" width="400" height="300" style="border:1px solid #ddd;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Composed Transformations Section -->
+            <div class="tab-pane fade" id="composed" role="tabpanel">
+                <div class="card lesson-card">
+                    <div class="card-header">Leçon 5 : Transformations Composées</div>
+                    <div class="card-body">
+                        <h5>Composition de transformations</h5>
+                        <p>La composition de transformations permet de créer de nouvelles transformations aux propriétés intéressantes.</p>
+                        
+                        <div class="property">
+                            <h5>Composée de deux homothéties</h5>
+                            <p>Soient $h(O, k)$ et $h'(O', k')$ deux homothéties :</p>
+                            <ul>
+                                <li>Si $O = O'$, alors $h' \circ h$ est l'homothétie de centre $O$ et de rapport $k \cdot k'$</li>
+                                <li>Si $O \neq O'$ et $k \cdot k' \neq 1$, alors $h' \circ h$ est une homothétie de rapport $k \cdot k'$</li>
+                                <li>Si $O \neq O'$ et $k \cdot k' = 1$, alors $h' \circ h$ est une translation</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="property">
+                            <h5>Composée d'homothétie et translation</h5>
+                            <p>Soit $h(O, k)$ une homothétie et $t_{\vec{u}}$ une translation :</p>
+                            <ul>
+                                <li>Si $k = 1$, alors $t_{\vec{u}} \circ h$ est la translation $t_{\vec{u}}$</li>
+                                <li>Si $k \neq 1$, alors $t_{\vec{u}} \circ h$ est une homothétie de rapport $k$</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="property">
+                            <h5>Composée d'homothétie et rotation</h5>
+                            <p>Soit $h(O, k)$ une homothétie et $r(O, \alpha)$ une rotation de même centre :</p>
+                            <ul>
+                                <li>$r \circ h = h \circ r$ (elles commutent)</li>
+                                <li>Si $k > 0$, alors $r \circ h$ multiplie les distances par $k$ et effectue une rotation d'angle $\alpha$</li>
+                                <li>Si $k < 0$, alors $r \circ h$ multiplie les distances par $|k|$ et effectue une rotation d'angle $\alpha - \pi$</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="example">
+                            <h5>Application : similitude</h5>
+                            <p>La composée d'une homothétie et d'une rotation (de même centre) est une similitude directe. Elle conserve les angles et multiplie les distances par le rapport d'homothétie.</p>
+                            
+                            <div class="figure-container">
+                                <img src="https://i.imgur.com/9QzK4jW.png" alt="Similitude directe" class="img-fluid">
+                                <div class="figure-caption">Une similitude directe combine homothétie et rotation</div>
+                            </div>
+                        </div>
+                        
+                        <div class="interactive-element">
+                            <h5>Explorez les transformations composées</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <select class="form-select" id="firstTransformation">
+                                        <option value="translation">Translation</option>
+                                        <option value="rotation">Rotation</option>
+                                        <option value="homothety">Homothétie</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <span class="fs-4">∘</span>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-select" id="secondTransformation">
+                                        <option value="translation">Translation</option>
+                                        <option value="rotation">Rotation</option>
+                                        <option value="homothety">Homothétie</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" id="applyComposition">Appliquer la composition</button>
+                            
+                            <div class="figure-container mt-3">
+                                <canvas id="compositionCanvas" width="400" height="300" style="border:1px solid #ddd;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>© 2023 - Transformations Élémentaires du Plan - Cours Interactif</p>
+            <p>Les images utilisées proviennent de dépôts en ligne et servent à des fins éducatives.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Translation interaction
+            const translationCanvas = document.getElementById('translationCanvas');
+            const translationCtx = translationCanvas.getContext('2d');
+            
+            function drawTranslation() {
+                const dx = parseInt($('#translationX').val());
+                const dy = parseInt($('#translationY').val());
+                
+                $('#translationXValue').text(dx);
+                $('#translationYValue').text(dy);
+                
+                translationCtx.clearRect(0, 0, translationCanvas.width, translationCanvas.height);
+                
+                // Draw original shape (triangle)
+                translationCtx.beginPath();
+                translationCtx.moveTo(100, 100);
+                translationCtx.lineTo(150, 50);
+                translationCtx.lineTo(200, 100);
+                translationCtx.closePath();
+                translationCtx.strokeStyle = '#3498db';
+                translationCtx.lineWidth = 2;
+                translationCtx.stroke();
+                
+                // Draw translated shape
+                translationCtx.beginPath();
+                translationCtx.moveTo(100 + dx, 100 + dy);
+                translationCtx.lineTo(150 + dx, 50 + dy);
+                translationCtx.lineTo(200 + dx, 100 + dy);
+                translationCtx.closePath();
+                translationCtx.strokeStyle = '#e74c3c';
+                translationCtx.lineWidth = 2;
+                translationCtx.stroke();
+                
+                // Draw translation vector
+                translationCtx.beginPath();
+                translationCtx.moveTo(150, 75);
+                translationCtx.lineTo(150 + dx, 75 + dy);
+                translationCtx.strokeStyle = '#2ecc71';
+                translationCtx.lineWidth = 2;
+                translationCtx.stroke();
+                
+                translationCtx.beginPath();
+                translationCtx.arc(150 + dx, 75 + dy, 5, 0, 2 * Math.PI);
+                translationCtx.fillStyle = '#2ecc71';
+                translationCtx.fill();
+            }
+            
+            $('#translationX, #translationY').on('input', drawTranslation);
+            drawTranslation();
+            
+            // Rotation interaction
+            const rotationCanvas = document.getElementById('rotationCanvas');
+            const rotationCtx = rotationCanvas.getContext('2d');
+            
+            function drawRotation() {
+                const angle = parseInt($('#rotationAngle').val()) * Math.PI / 180;
+                const centerX = parseInt($('#rotationCenterX').val());
+                const centerY = 150;
+                
+                $('#rotationAngleValue').text($('#rotationAngle').val() + '°');
+                $('#rotationCenterXValue').text(centerX);
+                
+                rotationCtx.clearRect(0, 0, rotationCanvas.width, rotationCanvas.height);
+                
+                // Draw center of rotation
+                rotationCtx.beginPath();
+                rotationCtx.arc(centerX, centerY, 5, 0, 2 * Math.PI);
+                rotationCtx.fillStyle = '#e74c3c';
+                rotationCtx.fill();
+                
+                // Draw original shape (triangle)
+                rotationCtx.beginPath();
+                rotationCtx.moveTo(centerX - 50, centerY);
+                rotationCtx.lineTo(centerX, centerY - 50);
+                rotationCtx.lineTo(centerX + 50, centerY);
+                rotationCtx.closePath();
+                rotationCtx.strokeStyle = '#3498db';
+                rotationCtx.lineWidth = 2;
+                rotationCtx.stroke();
+                
+                // Draw rotated shape
+                rotationCtx.save();
+                rotationCtx.translate(centerX, centerY);
+                rotationCtx.rotate(angle);
+                
+                rotationCtx.beginPath();
+                rotationCtx.moveTo(-50, 0);
+                rotationCtx.lineTo(0, -50);
+                rotationCtx.lineTo(50, 0);
+                rotationCtx.closePath();
+                rotationCtx.strokeStyle = '#2ecc71';
+                rotationCtx.lineWidth = 2;
+                rotationCtx.stroke();
+                
+                rotationCtx.restore();
+                
+                // Draw angle arc
+                rotationCtx.beginPath();
+                rotationCtx.arc(centerX, centerY, 30, 0, angle, false);
+                rotationCtx.strokeStyle = '#f39c12';
+                rotationCtx.lineWidth = 2;
+                rotationCtx.stroke();
+            }
+            
+            $('#rotationAngle, #rotationCenterX').on('input', drawRotation);
+            drawRotation();
+            
+            // Homothety interaction
+            const homothetyCanvas = document.getElementById('homothetyCanvas');
+            const homothetyCtx = homothetyCanvas.getContext('2d');
+            
+            function drawHomothety() {
+                const ratio = parseInt($('#homothetyRatio').val()) / 10;
+                const centerX = parseInt($('#homothetyCenterX').val());
+                const centerY = 150;
+                
+                $('#homothetyRatioValue').text(ratio.toFixed(1));
+                $('#homothetyCenterXValue').text(centerX);
+                
+                homothetyCtx.clearRect(0, 0, homothetyCanvas.width, homothetyCanvas.height);
+                
+                // Draw center of homothety
+                homothetyCtx.beginPath();
+                homothetyCtx.arc(centerX, centerY, 5, 0, 2 * Math.PI);
+                homothetyCtx.fillStyle = '#e74c3c';
+                homothetyCtx.fill();
+                
+                // Draw original shape (triangle)
+                homothetyCtx.beginPath();
+                homothetyCtx.moveTo(centerX - 30, centerY);
+                homothetyCtx.lineTo(centerX, centerY - 30);
+                homothetyCtx.lineTo(centerX + 30, centerY);
+                homothetyCtx.closePath();
+                homothetyCtx.strokeStyle = '#3498db';
+                homothetyCtx.lineWidth = 2;
+                homothetyCtx.stroke();
+                
+                // Draw transformed shape
+                homothetyCtx.beginPath();
+                homothetyCtx.moveTo(centerX + ratio * (-30), centerY + ratio * 0);
+                homothetyCtx.lineTo(centerX + ratio * 0, centerY + ratio * (-30));
+                homothetyCtx.lineTo(centerX + ratio * 30, centerY + ratio * 0);
+                homothetyCtx.closePath();
+                homothetyCtx.strokeStyle = '#2ecc71';
+                homothetyCtx.lineWidth = 2;
+                homothetyCtx.stroke();
+                
+                // Draw lines from center to vertices
+                homothetyCtx.beginPath();
+                homothetyCtx.moveTo(centerX, centerY);
+                homothetyCtx.lineTo(centerX - 30, centerY);
+                homothetyCtx.moveTo(centerX, centerY);
+                homothetyCtx.lineTo(centerX, centerY - 30);
+                homothetyCtx.moveTo(centerX, centerY);
+                homothetyCtx.lineTo(centerX + 30, centerY);
+                homothetyCtx.strokeStyle = '#7f8c8d';
+                homothetyCtx.setLineDash([5, 5]);
+                homothetyCtx.stroke();
+                homothetyCtx.setLineDash([]);
+            }
+            
+            $('#homothetyRatio, #homothetyCenterX').on('input', drawHomothety);
+            drawHomothety();
+            
+            // Composition interaction
+            const compositionCanvas = document.getElementById('compositionCanvas');
+            const compositionCtx = compositionCanvas.getContext('2d');
+            
+            $('#applyComposition').click(function() {
+                const firstTrans = $('#firstTransformation').val();
+                const secondTrans = $('#secondTransformation').val();
+                
+                compositionCtx.clearRect(0, 0, compositionCanvas.width, compositionCanvas.height);
+                
+                // Draw original shape
+                compositionCtx.beginPath();
+                compositionCtx.rect(100, 100, 50, 50);
+                compositionCtx.strokeStyle = '#3498db';
+                compositionCtx.lineWidth = 2;
+                compositionCtx.stroke();
+                
+                // Draw intermediate transformation
+                compositionCtx.beginPath();
+                if (firstTrans === 'translation') {
+                    compositionCtx.rect(150, 150, 50, 50);
+                } else if (firstTrans === 'rotation') {
+                    compositionCtx.save();
+                    compositionCtx.translate(125, 125);
+                    compositionCtx.rotate(Math.PI/4);
+                    compositionCtx.rect(-25, -25, 50, 50);
+                    compositionCtx.restore();
+                } else if (firstTrans === 'homothety') {
+                    compositionCtx.rect(75, 75, 100, 100);
+                }
+                compositionCtx.strokeStyle = '#f39c12';
+                compositionCtx.lineWidth = 2;
+                compositionCtx.stroke();
+                
+                // Draw final transformation
+                compositionCtx.beginPath();
+                if (secondTrans === 'translation') {
+                    compositionCtx.rect(200, 200, 50, 50);
+                } else if (secondTrans === 'rotation') {
+                    compositionCtx.save();
+                    compositionCtx.translate(175, 175);
+                    compositionCtx.rotate(Math.PI/2);
+                    compositionCtx.rect(-25, -25, 50, 50);
+                    compositionCtx.restore();
+                } else if (secondTrans === 'homothety') {
+                    compositionCtx.rect(150, 150, 100, 100);
+                }
+                compositionCtx.strokeStyle = '#e74c3c';
+                compositionCtx.lineWidth = 2;
+                compositionCtx.stroke();
+                
+                // Add labels
+                compositionCtx.font = '14px Arial';
+                compositionCtx.fillStyle = '#3498db';
+                compositionCtx.fillText('Original', 105, 95);
+                
+                compositionCtx.fillStyle = '#f39c12';
+                compositionCtx.fillText('1ère transformation', 
+                    firstTrans === 'translation' ? 155 : 
+                    firstTrans === 'rotation' ? 50 : 80, 
+                    firstTrans === 'translation' ? 145 : 
+                    firstTrans === 'rotation' ? 50 : 70);
+                
+                compositionCtx.fillStyle = '#e74c3c';
+                compositionCtx.fillText('Résultat final', 
+                    secondTrans === 'translation' ? 205 : 
+                    secondTrans === 'rotation' ? 100 : 155, 
+                    secondTrans === 'translation' ? 195 : 
+                    secondTrans === 'rotation' ? 100 : 145);
+            });
+            
+            // Initial draw for composition
+            $('#applyComposition').click();
+        });
+    </script>
+</body>
+</html>

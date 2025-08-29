@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications Linéaires et Matrices</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .chapter-title {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section-card {
+            margin-bottom: 2rem;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #6c5ce7;
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .definition {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .example {
+            background-color: #f1f8e9;
+            border-left: 4px solid #7cb342;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .property {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .math-container {
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+        .interactive-btn {
+            background-color: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .interactive-btn:hover {
+            background-color: #5b4dca;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        .navbar {
+            background-color: #6c5ce7 !important;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Algèbre Linéaire</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#intro">Introduction</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#applications">Applications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#noyau-image">Noyau & Image</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#matrices">Matrices</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#exercices">Exercices</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="chapter-title text-center">
+            <h1 class="display-4">Chapitre 6 : Applications Linéaires et Matrices</h1>
+            <p class="lead">Découvrez les concepts fondamentaux des applications linéaires et leur représentation matricielle</p>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="card section-card" id="intro">
+            <div class="card-header">
+                <h2>Introduction et Objectifs</h2>
+            </div>
+            <div class="card-body">
+                <h4>Intérêt du chapitre</h4>
+                <p>Ce chapitre permet d'exprimer commodément les opérations d'algèbre linéaire avec une certaine universalité, en utilisant le formalisme des applications linéaires et des matrices.</p>
+                
+                <h4>Objectifs d'apprentissage</h4>
+                <ul>
+                    <li>Maîtriser le vocabulaire introductif du chapitre</li>
+                    <li>Démontrer qu'une application est linéaire</li>
+                    <li>Comprendre l'utilité du noyau et de l'image d'une application linéaire</li>
+                    <li>Déterminer la matrice d'une application linéaire d'un plan vectoriel dans lui-même</li>
+                </ul>
+                
+                <h4>Prérequis : Espaces Vectoriels</h4>
+                <div class="definition">
+                    <h5>Définition</h5>
+                    <p>Soit $(E, +, \cdot)$ un espace vectoriel sur $\mathbb{R}$, et $\overrightarrow{O_E}$ l'élément neutre de l'addition dans $E$.</p>
+                </div>
+                
+                <div class="property">
+                    <h5>Propriété fondamentale</h5>
+                    <div class="math-container">
+                        $\forall \alpha \in \mathbb{R}, \overrightarrow{u} \in E, \alpha \overrightarrow{u} = \overrightarrow{O_E} \iff \alpha = 0 \text{ ou } \overrightarrow{u} = \overrightarrow{O_E}$
+                    </div>
+                </div>
+                
+                <h5>Caractérisation des sous-espaces vectoriels</h5>
+                <p>Un sous-ensemble $F$ de $E$ est un sous-espace vectoriel si et seulement si :</p>
+                <ol>
+                    <li>$F$ est non vide</li>
+                    <li>$\forall \overrightarrow{u}, \overrightarrow{v} \in F, \overrightarrow{u} + \overrightarrow{v} \in F$ (stabilité pour l'addition)</li>
+                    <li>$\forall \overrightarrow{u} \in F, \alpha \in \mathbb{R}, \alpha \overrightarrow{u} \in F$ (stabilité pour la multiplication scalaire)</li>
+                </ol>
+                
+                <p>Ou de manière équivalente :</p>
+                <ol>
+                    <li>$F$ est non vide</li>
+                    <li>$\forall \overrightarrow{u}, \overrightarrow{v} \in F, \alpha, \beta \in \mathbb{R}, \alpha \overrightarrow{u} + \beta \overrightarrow{v} \in F$ (stabilité par combinaison linéaire)</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Applications Linéaires Section -->
+        <div class="card section-card" id="applications">
+            <div class="card-header">
+                <h2>Applications Linéaires</h2>
+            </div>
+            <div class="card-body">
+                <div class="definition">
+                    <h4>Définition formelle</h4>
+                    <p>Soient $E$ et $F$ deux $\mathbb{R}$-espaces vectoriels. Une application $f : E \to F$ est dite linéaire si elle satisfait aux deux conditions suivantes :</p>
+                    <ol>
+                        <li>$\forall \overrightarrow{u}, \overrightarrow{v} \in E, f(\overrightarrow{u} + \overrightarrow{v}) = f(\overrightarrow{u}) + f(\overrightarrow{v})$</li>
+                        <li>$\forall \overrightarrow{u} \in E, \forall \lambda \in \mathbb{R}, f(\lambda \overrightarrow{u}) = \lambda f(\overrightarrow{u})$</li>
+                    </ol>
+                    <p>Ces deux conditions peuvent être condensées en une seule :</p>
+                    <div class="math-container">
+                        $\forall \overrightarrow{u}, \overrightarrow{v} \in E, \forall \alpha, \beta \in \mathbb{R}, f(\alpha \overrightarrow{u} + \beta \overrightarrow{v}) = \alpha f(\overrightarrow{u}) + \beta f(\overrightarrow{v})$
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <h4>Exemple illustratif</h4>
+                    <p>Considérons l'application $f : \mathbb{R}^3 \to \mathbb{R}^2$ définie par :</p>
+                    <div class="math-container">
+                        $f(x, y, z) = (-2x, y + 3z)$
+                    </div>
+                    <p>Pour vérifier la linéarité, prenons deux vecteurs $\overrightarrow{u}(x, y, z)$ et $\overrightarrow{v}(a, b, c)$ de $\mathbb{R}^3$, et deux scalaires $\alpha, \beta \in \mathbb{R}$.</p>
+                    <p>On a :</p>
+                    <div class="math-container">
+                        $\alpha \overrightarrow{u} + \beta \overrightarrow{v} = (\alpha x + \beta a, \alpha y + \beta b, \alpha z + \beta c)$
+                    </div>
+                    <p>Donc :</p>
+                    <div class="math-container">
+                        $f(\alpha \overrightarrow{u} + \beta \overrightarrow{v}) = (-2(\alpha x + \beta a), (\alpha y + \beta b) + 3(\alpha z + \beta c))$
+                    </div>
+                    <div class="math-container">
+                        $= (\alpha(-2x) + \beta(-2a), \alpha(y + 3z) + \beta(b + 3c))$
+                    </div>
+                    <div class="math-container">
+                        $= \alpha(-2x, y + 3z) + \beta(-2a, b + 3c) = \alpha f(\overrightarrow{u}) + \beta f(\overrightarrow{v})$
+                    </div>
+                    <p>Ainsi, $f$ est bien une application linéaire.</p>
+                    <button class="interactive-btn" onclick="toggleProof()">Voir les détails du calcul</button>
+                    <div id="proofDetails" style="display: none; margin-top: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
+                        <p>Le calcul détaillé montre comment on décompose l'application de la combinaison linéaire pour retrouver la combinaison linéaire des images.</p>
+                    </div>
+                </div>
+                
+                <h4>Vocabulaire spécifique</h4>
+                <ul>
+                    <li><strong>Morphisme ou homomorphisme</strong> : Application linéaire entre deux espaces vectoriels</li>
+                    <li><strong>Endomorphisme</strong> : Application linéaire d'un espace vectoriel dans lui-même</li>
+                    <li><strong>Isomorphisme</strong> : Morphisme bijectif</li>
+                    <li><strong>Automorphisme</strong> : Endomorphisme bijectif</li>
+                </ul>
+                
+                <div class="property">
+                    <h4>Propriétés importantes</h4>
+                    <p>Soit $f : E \to F$ une application linéaire :</p>
+                    <ol>
+                        <li>$f(\overrightarrow{O_E}) = \overrightarrow{O_F}$</li>
+                        <li>$f(-\overrightarrow{u}) = -f(\overrightarrow{u})$ pour tout $\overrightarrow{u} \in E$</li>
+                        <li>$f(\overrightarrow{u} - \overrightarrow{v}) = f(\overrightarrow{u}) - f(\overrightarrow{v})$ pour tous $\overrightarrow{u}, \overrightarrow{v} \in E$</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Noyau et Image Section -->
+        <div class="card section-card" id="noyau-image">
+            <div class="card-header">
+                <h2>Noyau et Image d'une Application Linéaire</h2>
+            </div>
+            <div class="card-body">
+                <div class="definition">
+                    <h4>Définition du noyau</h4>
+                    <p>Soit $f : E \to F$ une application linéaire. On appelle <strong>noyau</strong> de $f$, noté $\text{Ker } f$ ou $N_f$, l'ensemble des vecteurs de $E$ dont l'image par $f$ est le vecteur nul de $F$ :</p>
+                    <div class="math-container">
+                        $\text{Ker } f = \{\overrightarrow{u} \in E \mid f(\overrightarrow{u}) = \overrightarrow{O_F}\}$
+                    </div>
+                </div>
+                
+                <div class="definition">
+                    <h4>Définition de l'image</h4>
+                    <p>On appelle <strong>image</strong> de $f$, notée $\text{Im } f$, le sous-ensemble de $F$ constitué des images des vecteurs de $E$ par $f$ :</p>
+                    <div class="math-container">
+                        $\text{Im } f = f(E) = \{\overrightarrow{v} \in F \mid \exists \overrightarrow{u} \in E, f(\overrightarrow{u}) = \overrightarrow{v}\}$
+                    </div>
+                </div>
+                
+                <div class="property">
+                    <h4>Propriétés fondamentales</h4>
+                    <p>Soit $f : E \to F$ une application linéaire :</p>
+                    <ol>
+                        <li>$\text{Ker } f$ et $\text{Im } f$ sont des sous-espaces vectoriels de $E$ et $F$ respectivement</li>
+                        <li>$f$ est injective $\iff \text{Ker } f = \{\overrightarrow{O_E}\}$</li>
+                        <li>$f$ est surjective $\iff \text{Im } f = F$</li>
+                        <li>Si $f$ est injective, l'image d'une famille libre de $E$ est une famille libre de $F$</li>
+                        <li>Si $f$ est surjective, l'image d'une famille génératrice de $E$ est une famille génératrice de $F$</li>
+                    </ol>
+                </div>
+                
+                <div class="example">
+                    <h4>Exemple d'application</h4>
+                    <p>Considérons l'application $f : \mathbb{R}^2 \to \mathbb{R}^2$ définie par :</p>
+                    <div class="math-container">
+                        $f(x, y) = (2x - y, -4x + 2y)$
+                    </div>
+                    <p>Déterminons son noyau :</p>
+                    <div class="math-container">
+                        $f(x, y) = (0, 0) \iff \begin{cases} 2x - y = 0 \\ -4x + 2y = 0 \end{cases} \iff 2x - y = 0$
+                    </div>
+                    <p>Ainsi, $\text{Ker } f = \{(x, y) \in \mathbb{R}^2 \mid y = 2x\} = \{(x, 2x) \mid x \in \mathbb{R}\}$</p>
+                    <p>Ce noyau est une droite vectorielle engendrée par le vecteur $(1, 2)$.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Matrices Section -->
+        <div class="card section-card" id="matrices">
+            <div class="card-header">
+                <h2>Matrices et Applications Linéaires</h2>
+            </div>
+            <div class="card-body">
+                <div class="definition">
+                    <h4>Matrice d'une application linéaire</h4>
+                    <p>Soit $E$ un espace vectoriel de dimension 2 muni d'une base $B = (\overrightarrow{i}, \overrightarrow{j})$. Soit $f$ un endomorphisme de $E$ tel que :</p>
+                    <div class="math-container">
+                        $f(\overrightarrow{i}) = a\overrightarrow{i} + b\overrightarrow{j} \quad \text{et} \quad f(\overrightarrow{j}) = c\overrightarrow{i} + d\overrightarrow{j}$
+                    </div>
+                    <p>On appelle <strong>matrice de $f$ dans la base $B$</strong> le tableau :</p>
+                    <div class="math-container">
+                        $M_f = \begin{pmatrix} a & c \\ b & d \end{pmatrix}$
+                    </div>
+                    <p>Les colonnes de cette matrice sont les coordonnées des images des vecteurs de base.</p>
+                </div>
+                
+                <h4>Opérations sur les matrices</h4>
+                <p>Soient $f$ et $g$ deux endomorphismes de $E$, avec les matrices respectives :</p>
+                <div class="math-container">
+                    $M(f) = \begin{pmatrix} a & c \\ b & d \end{pmatrix}, \quad M(g) = \begin{pmatrix} a' & c' \\ b' & d' \end{pmatrix}$
+                </div>
+                
+                <p>La matrice de la somme $f + g$ est :</p>
+                <div class="math-container">
+                    $M(f + g) = \begin{pmatrix} a+a' & c+c' \\ b+b' & d+d' \end{pmatrix}$
+                </div>
+                
+                <p>La matrice de la composée $f \circ g$ est :</p>
+                <div class="math-container">
+                    $M(f \circ g) = M(f) \times M(g) = \begin{pmatrix} aa' + cb' & ac' + cd' \\ ba' + db' & bc' + dd' \end{pmatrix}$
+                </div>
+                
+                <div class="property">
+                    <h4>Lien entre bijectivité et déterminant</h4>
+                    <p>Soit $f$ un endomorphisme de $E$ de matrice $M(f)$ dans une base donnée.</p>
+                    <ul>
+                        <li>$f$ est bijective $\iff \det(M(f)) \neq 0$</li>
+                        <li>Si $f$ est bijective, la matrice de $f^{-1}$ est :</li>
+                    </ul>
+                    <div class="math-container">
+                        $M_{f^{-1}} = \frac{1}{\det(M_f)} \begin{pmatrix} d & -c \\ -b & a \end{pmatrix}$
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <h4>Exemple pratique</h4>
+                    <p>Soit $f$ l'endomorphisme de $\mathbb{R}^2$ défini par :</p>
+                    <div class="math-container">
+                        $f(\overrightarrow{i}) = 3\overrightarrow{i} + 4\overrightarrow{j}, \quad f(\overrightarrow{j}) = 2\overrightarrow{i} + \overrightarrow{j}$
+                    </div>
+                    <p>Sa matrice dans la base $(\overrightarrow{i}, \overrightarrow{j})$ est :</p>
+                    <div class="math-container">
+                        $M_f = \begin{pmatrix} 3 & 2 \\ 4 & 1 \end{pmatrix}$
+                    </div>
+                    <p>Le déterminant de cette matrice est :</p>
+                    <div class="math-container">
+                        $\det(M_f) = 3 \times 1 - 2 \times 4 = 3 - 8 = -5 \neq 0$
+                    </div>
+                    <p>Ainsi, $f$ est bijective.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercices Section -->
+        <div class="card section-card" id="exercices">
+            <div class="card-header">
+                <h2>Exercices d'application</h2>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h4>Exercice 1</h4>
+                    <p>Soit $\varphi$ un endomorphisme de $E$ rapporté à la base $B = (\overrightarrow{i}, \overrightarrow{j})$ qui, à tout vecteur $\overrightarrow{u} = x\overrightarrow{i} + y\overrightarrow{j}$ associe le vecteur $\overrightarrow{u}' = (x - 2y)\overrightarrow{i} + (-3x + 2y)\overrightarrow{j}$.</p>
+                    <p>On pose $\overrightarrow{e_1} = \overrightarrow{i} - 2\overrightarrow{j}$ et $\overrightarrow{e_2} = -3\overrightarrow{i} + 4\overrightarrow{j}$.</p>
+                    <ol>
+                        <li>Écrire la matrice de $\varphi$ dans la base $B$.</li>
+                        <li>Soit $g$ l'endomorphisme de $E$ déterminé par $g(\overrightarrow{e_1}) = \overrightarrow{e_1}$ et $g(\overrightarrow{e_2}) = -\overrightarrow{e_2}$.
+                            <ol type="a">
+                                <li>Montrer que $(\overrightarrow{e_1}, \overrightarrow{e_2})$ est une base de $E$.</li>
+                                <li>Écrire la matrice de $g$ dans la base $(\overrightarrow{e_1}, \overrightarrow{e_2})$.</li>
+                                <li>Déterminer la matrice de $g$ dans la base $(\overrightarrow{i}, \overrightarrow{j})$.</li>
+                            </ol>
+                        </li>
+                    </ol>
+                    <button class="interactive-btn" onclick="showSolution(1)">Voir la solution</button>
+                    <div id="solution1" style="display: none; margin-top: 15px; padding: 15px; background-color: #e8f5e9; border-radius: 5px;">
+                        <h5>Solution de l'exercice 1</h5>
+                        <ol>
+                            <li>Matrice de $\varphi$ dans la base $B$ : 
+                                <div class="math-container">$M_{\varphi} = \begin{pmatrix} 1 & -2 \\ -3 & 2 \end{pmatrix}$</div>
+                            </li>
+                            <li>
+                                <ol type="a">
+                                    <li>Le déterminant de $(\overrightarrow{e_1}, \overrightarrow{e_2})$ vaut :
+                                        <div class="math-container">$\det(\overrightarrow{e_1}, \overrightarrow{e_2}) = \begin{vmatrix} 1 & -3 \\ -2 & 4 \end{vmatrix} = 1 \times 4 - (-3) \times (-2) = 4 - 6 = -2 \neq 0$</div>
+                                        Donc $(\overrightarrow{e_1}, \overrightarrow{e_2})$ est une base de $E$.
+                                    </li>
+                                    <li>Matrice de $g$ dans la base $(\overrightarrow{e_1}, \overrightarrow{e_2})$ :
+                                        <div class="math-container">$M_g = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$</div>
+                                    </li>
+                                    <li>Matrice de $g$ dans la base $(\overrightarrow{i}, \overrightarrow{j})$ nécessite un changement de base.</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4>Exercice 2</h4>
+                    <p>$E$ est un plan vectoriel de base $B = (\overrightarrow{i}, \overrightarrow{j})$. On considère deux réels $a$ et $b$ et $\varphi$ l'endomorphisme de $E$ défini par :</p>
+                    <div class="math-container">
+                        $\varphi(\overrightarrow{i}) = a\overrightarrow{i} + b\overrightarrow{j} \quad \text{et} \quad \varphi(\overrightarrow{j}) = (1 - a)\overrightarrow{i} + (1 - b)\overrightarrow{j}$
+                    </div>
+                    <ol>
+                        <li>Donner la matrice $M$ de $\varphi$ dans la base $B$.</li>
+                        <li>À quelle condition sur les réels $a$ et $b$ a-t-on $\varphi$ bijective ?</li>
+                        <li>On suppose que $a = b = \frac{1}{2}$. Déterminer $\text{Ker } \varphi$ et $\text{Im } \varphi$. En préciser les bases.</li>
+                    </ol>
+                    <button class="interactive-btn" onclick="showSolution(2)">Voir la solution</button>
+                    <div id="solution2" style="display: none; margin-top: 15px; padding: 15px; background-color: #e8f5e9; border-radius: 5px;">
+                        <h5>Solution de l'exercice 2</h5>
+                        <ol>
+                            <li>Matrice de $\varphi$ dans la base $B$ :
+                                <div class="math-container">$M = \begin{pmatrix} a & 1-a \\ b & 1-b \end{pmatrix}$</div>
+                            </li>
+                            <li>$\varphi$ est bijective si et seulement si $\det(M) \neq 0$ :
+                                <div class="math-container">$\det(M) = a(1-b) - (1-a)b = a - ab - b + ab = a - b$</div>
+                                Donc $\varphi$ est bijective si et seulement si $a \neq b$.
+                            </li>
+                            <li>Pour $a = b = \frac{1}{2}$ :
+                                <div class="math-container">$M = \begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & \frac{1}{2} \end{pmatrix}$</div>
+                                Le noyau de $\varphi$ est l'ensemble des vecteurs $\overrightarrow{u} = x\overrightarrow{i} + y\overrightarrow{j}$ tels que :
+                                <div class="math-container">$\begin{pmatrix} \frac{1}{2} & \frac{1}{2} \\ \frac{1}{2} & \frac{1}{2} \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} \Rightarrow \frac{1}{2}x + \frac{1}{2}y = 0 \Rightarrow x + y = 0$</div>
+                                Ainsi, $\text{Ker } \varphi = \{(x, y) \mid x + y = 0\}$ est une droite vectorielle de base $\overrightarrow{i} - \overrightarrow{j}$.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 - Cours d'Algèbre Linéaire | Applications Linéaires et Matrices</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Function to toggle proof details
+        function toggleProof() {
+            $('#proofDetails').slideToggle();
+        }
+        
+        // Function to show solution for exercises
+        function showSolution(exNumber) {
+            $('#solution' + exNumber).slideToggle();
+        }
+        
+        // Initialize MathJax after page load
+        $(document).ready(function() {
+            MathJax.typeset();
+        });
+    </script>
+</body>
+</html>

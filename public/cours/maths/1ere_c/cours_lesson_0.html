@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Équations et Inéquations Polynômiales</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .lesson-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .card-header {
+            background-color: #4e73df;
+            color: white;
+            font-weight: 600;
+        }
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .objective-list li:before {
+            content: "✓";
+            margin-right: 10px;
+            color: #4e73df;
+        }
+        .example-box {
+            background-color: #e9ecef;
+            border-left: 4px solid #4e73df;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .solution-box {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .table-sign {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        .table-sign th, .table-sign td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: center;
+        }
+        .table-sign th {
+            background-color: #4e73df;
+            color: white;
+        }
+        .math-container {
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #4e73df;
+            color: white;
+            border: none;
+        }
+        .nav-tabs .nav-link {
+            color: #4e73df;
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">Équations et Inéquations Polynômiales</h1>
+            <p class="lead">Outils mathématiques pour résoudre des problèmes de la vie courante</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Introduction -->
+        <div class="row mb-5">
+            <div class="col-lg-12">
+                <div class="card lesson-card">
+                    <div class="card-body">
+                        <h2 class="card-title">Introduction</h2>
+                        <p class="card-text">
+                            Dans la vie quotidienne, nous sommes souvent confrontés à des problèmes de partage, 
+                            de répartition de superficies, de calculs d'intérêts, d'optimisation et bien d'autres. 
+                            Ce chapitre présente les outils mathématiques nécessaires pour résoudre ce type de problèmes 
+                            à travers l'étude des équations et inéquations polynômiales.
+                        </p>
+                        <div class="text-center">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                                 alt="Mathématiques appliquées" class="img-fluid rounded" style="max-height: 300px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson Navigation -->
+        <ul class="nav nav-tabs mb-4" id="lessonTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="lesson1-tab" data-bs-toggle="tab" data-bs-target="#lesson1" type="button" role="tab">Leçon 1</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lesson2-tab" data-bs-toggle="tab" data-bs-target="#lesson2" type="button" role="tab">Leçon 2</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lesson3-tab" data-bs-toggle="tab" data-bs-target="#lesson3" type="button" role="tab">Leçon 3</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lesson4-tab" data-bs-toggle="tab" data-bs-target="#lesson4" type="button" role="tab">Leçon 4</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lesson5-tab" data-bs-toggle="tab" data-bs-target="#lesson5" type="button" role="tab">Leçon 5</button>
+            </li>
+        </ul>
+
+        <!-- Lesson Contents -->
+        <div class="tab-content" id="lessonTabContent">
+            <!-- Lesson 1 Content -->
+            <div class="tab-pane fade show active" id="lesson1" role="tabpanel">
+                <div class="card lesson-card">
+                    <div class="card-header">
+                        <h2>Leçon 1 : Équations du second degré dans ℝ</h2>
+                        <p class="mb-0">Durée : 100 minutes</p>
+                    </div>
+                    <div class="card-body">
+                        <h3>Objectifs pédagogiques</h3>
+                        <ul class="objective-list">
+                            <li>Résoudre une équation du second degré</li>
+                            <li>Factoriser un trinôme du second degré</li>
+                            <li>Résoudre un problème concret utilisant une équation du second degré</li>
+                        </ul>
+
+                        <h3>Mise en situation</h3>
+                        <p>
+                            Pour confectionner des rideaux, Marie a acheté du tissu pour 11520 F. 
+                            Si le vendeur lui avait fait une remise de 320 F par mètre, elle aurait pu obtenir 
+                            6 mètres de plus pour la même somme. Quel est le nombre de mètres de tissu achetés par Marie?
+                        </p>
+
+                        <h3>Notion fondamentale : Le discriminant</h3>
+                        <p>
+                            Une équation du second degré est une équation de la forme :
+                            <div class="math-container">\[ax^2 + bx + c = 0 \quad \text{avec} \quad a \neq 0\]</div>
+                        </p>
+                        <p>
+                            On appelle <strong>discriminant</strong> le réel défini par :
+                            <div class="math-container">\[\Delta = b^2 - 4ac\]</div>
+                        </p>
+                        <p>Le signe de Δ determine la nature des solutions :</p>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sign">
+                                <thead>
+                                    <tr>
+                                        <th>Cas</th>
+                                        <th>Δ > 0</th>
+                                        <th>Δ = 0</th>
+                                        <th>Δ < 0</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Nombre de solutions</td>
+                                        <td>Deux solutions distinctes</td>
+                                        <td>Une solution double</td>
+                                        <td>Aucune solution réelle</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Solutions</td>
+                                        <td>$x_1 = \frac{-b - \sqrt{\Delta}}{2a}$<br>$x_2 = \frac{-b + \sqrt{\Delta}}{2a}$</td>
+                                        <td>$x_0 = -\frac{b}{2a}$</td>
+                                        <td>-</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Forme factorisée</td>
+                                        <td>$a(x - x_1)(x - x_2)$</td>
+                                        <td>$a(x - x_0)^2$</td>
+                                        <td>Non factorisable dans ℝ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Exemple résolu</h3>
+                        <div class="example-box">
+                            <p>Résoudre l'équation : $2x^2 - 3x - 2 = 0$</p>
+                        </div>
+                        <div class="solution-box">
+                            <p><strong>Solution :</strong></p>
+                            <p>On identifie les coefficients : $a = 2$, $b = -3$, $c = -2$</p>
+                            <p>Calcul du discriminant : $\Delta = (-3)^2 - 4 \times 2 \times (-2) = 9 + 16 = 25$</p>
+                            <p>Δ > 0, donc l'équation admet deux solutions réelles distinctes :</p>
+                            <p>$x_1 = \frac{3 - \sqrt{25}}{4} = \frac{3 - 5}{4} = -\frac{1}{2}$</p>
+                            <p>$x_2 = \frac{3 + \sqrt{25}}{4} = \frac{3 + 5}{4} = 2$</p>
+                            <p>L'ensemble des solutions est donc $S = \left\{-\frac{1}{2}, 2\right\}$</p>
+                        </div>
+
+                        <h3>Cas particulier : discriminant réduit</h3>
+                        <p>
+                            Lorsque le coefficient $b$ est pair, on peut utiliser le discriminant réduit pour simplifier les calculs.
+                            Si $b = 2b'$, alors :
+                            <div class="math-container">\[\Delta' = b'^2 - ac\]</div>
+                            Et les solutions s'écrivent :
+                            <div class="math-container">\[x = \frac{-b' \pm \sqrt{\Delta'}}{a}\]</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 2 Content -->
+            <div class="tab-pane fade" id="lesson2" role="tabpanel">
+                <div class="card lesson-card">
+                    <div class="card-header">
+                        <h2>Leçon 2 : Somme et produit des racines</h2>
+                        <p class="mb-0">Durée : 100 minutes</p>
+                    </div>
+                    <div class="card-body">
+                        <h3>Objectifs pédagogiques</h3>
+                        <ul class="objective-list">
+                            <li>Déterminer deux nombres connaissant leur somme et leur produit</li>
+                            <li>Utiliser les relations entre coefficients et racines</li>
+                            <li>Résoudre des systèmes et problèmes utilisant ces relations</li>
+                            <li>Résoudre des équations paramétriques</li>
+                        </ul>
+
+                        <h3>Relations entre coefficients et racines</h3>
+                        <p>
+                            Si l'équation $ax^2 + bx + c = 0$ (avec $a \neq 0$) admet deux racines $x_1$ et $x_2$ 
+                            (distinctes ou confondues), alors :
+                            <div class="math-container">\[x_1 + x_2 = -\frac{b}{a} \quad \text{et} \quad x_1 \times x_2 = \frac{c}{a}\]</div>
+                        </p>
+
+                        <h3>Propriétés des racines</h3>
+                        <p>Le signe des racines peut être déterminé à partir des signes de S (somme) et P (produit) :</p>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sign">
+                                <thead>
+                                    <tr>
+                                        <th>Condition</th>
+                                        <th>Signe des racines</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>P < 0</td>
+                                        <td>Racines de signes contraires</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P > 0 et S > 0</td>
+                                        <td>Deux racines positives</td>
+                                    </tr>
+                                    <tr>
+                                        <td>P > 0 et S < 0</td>
+                                        <td>Deux racines négatives</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Application à la résolution de systèmes</h3>
+                        <p>
+                            Si deux nombres $x$ et $y$ ont pour somme $S$ et pour produit $P$, 
+                            alors ils sont solutions de l'équation : $X^2 - SX + P = 0$
+                        </p>
+
+                        <div class="example-box">
+                            <p>Résoudre le système : 
+                                $\begin{cases} x + y = 5 \\ xy = 6 \end{cases}$
+                            </p>
+                        </div>
+                        <div class="solution-box">
+                            <p><strong>Solution :</strong></p>
+                            <p>Les deux nombres $x$ et $y$ ont pour somme 5 et pour produit 6.</p>
+                            <p>Ils sont donc solutions de l'équation : $X^2 - 5X + 6 = 0$</p>
+                            <p>Δ = 25 - 24 = 1 > 0, donc deux solutions réelles :</p>
+                            <p>$X_1 = \frac{5 - 1}{2} = 2$ et $X_2 = \frac{5 + 1}{2} = 3$</p>
+                            <p>Les solutions du système sont donc : $(2, 3)$ et $(3, 2)$</p>
+                        </div>
+
+                        <h3>Équations paramétriques</h3>
+                        <p>
+                            Pour résoudre une équation du second degré dépendant d'un paramètre $m$, 
+                            on étudie le signe du discriminant $\Delta_m$ en fonction de $m$.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 3 Content -->
+            <div class="tab-pane fade" id="lesson3" role="tabpanel">
+                <div class="card lesson-card">
+                    <div class="card-header">
+                        <h2>Leçon 3 : Inéquations du second degré dans ℝ</h2>
+                        <p class="mb-0">Durée : 100 minutes</p>
+                    </div>
+                    <div class="card-body">
+                        <h3>Objectifs pédagogiques</h3>
+                        <ul class="objective-list">
+                            <li>Résoudre une inéquation du second degré</li>
+                            <li>Résoudre un problème d'optimisation</li>
+                        </ul>
+
+                        <h3>Signe d'un trinôme du second degré</h3>
+                        <p>Soit le trinôme $P(x) = ax^2 + bx + c$ avec $a \neq 0$</p>
+                        
+                        <h4>Cas 1 : Δ < 0</h4>
+                        <p>Le trinôme ne s'annule pas et garde le signe de $a$</p>
+                        
+                        <h4>Cas 2 : Δ = 0</h4>
+                        <p>Le trinôme s'annule en $x_0 = -\frac{b}{2a}$ et garde le signe de $a$ ailleurs</p>
+                        
+                        <h4>Cas 3 : Δ > 0</h4>
+                        <p>Le trinôme s'annule en $x_1$ et $x_2$ (avec $x_1 < x_2$) et :</p>
+                        <ul>
+                            <li>Est du signe de $a$ à l'extérieur des racines</li>
+                            <li>Est du signe contraire de $a$ entre les racines</li>
+                        </ul>
+
+                        <div class="text-center mb-4">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAABt9SM9AAAA3lBMVEX////29vb9/f37+/v+/v74+Pj6+vr19fXx8fHg4OHk5OXe3t/m5ubOzs66urqampqvr697e3vr6+sAAACpqanHx8eFhYXV1dWfn5/Dw8Ojo6OUlJR2dnbGxsZ/f3+Kiorwr6n65OLvo5zyubT+9vVqamr419RVVVX2zMjunJT0wr741dLwqKJiYmL53tz87etJSUkiIiIvLy/slYw4ODhQUFDhqaTfsa7n19XovrrfnJcUFBR/Y2CZNiu0XlWgU0y4aWGSOzHXkIrr4N/agXnBsbHSwsLKp6S3e3W+h4M7ew56AAAU+klEQVR4nO1dC3+jOJIXAoEw+BH8wK+2HdtJ7MSJM0l376Tnbu+ue+/29vt/odUTI1kY/CLdadf8pisUqFT8LRVCVRIAXOhCF7rQhS50oQtd6EIfgMIabr+3DWYKelH1vW3Q6SqqvbcJGTTEP51l3YH73iZk0Kj+3hZsUeuna+uS6v57W6BTp/HeFmQQ7PTe24Qt+ln7IAD2extwIRD4nAKF+X9+rbDDWBVrPDafDuRpxit/88115LgVTZlex27LqhmlpGVmsby6kmGSkEPRcGXPslaMOSE/REDl4rK6eD5bQOEQch5yvhSHjqsqCXaDJbC0odEEC2sGq5ZdVY2lpGW+JtbuPutnFGDZ8kaENncyZ1okWI5ikiMqebnj3AMKl8pCZgOciEOIVGXFwHJtpWrJvUg12FMsc/+4MRps24puedqVd88tc/YEC91fU5aABRXl4rbjZjNMW2oG62lRPli9ZhOmr5ZguWcBy3paULYbrG6/30hbagZrNkdKqTLAqtd7jfTVZwZrPqFsN1igVlUsNYO11EuVABZoeMrV5wXLA8zD5/isLLCESRKss7YsR6k6AQsbDS7mszIdvO9ASi5iDFo25wQsKnEr/LQnxZzZnFOw0mLJEVfmVFzyz3oGZClLucrJA8tJK9Pr8CKzZbwOApZjMBgiV1TtmAxO7j4TLBcRcj1PcMTIxfb9tYtcS5zGUsw5wkwMa23IxS5K8USZT7i9uLWFWJRKlOWAFajK1KpdHGqWuYplrchYSioLzAbzq12U0w2haIhu0qqv70Hhbii7iKkbTuytbijR2A2WHGdldEO80zLZDZEqzuiGUpzXDTN9FpiCkzj46VapUhy82Wedy8ETx3wKsOzJbwEW6T8nAOt68VuA9fBwCrAW1x8PrG0HD5zJKRw8fcc8apz1Mzl433YpWR5jZOjAOXZduHRcVLF1MSXEr3bI0CEtltyyGLN9wldQL+UKZucNHUTVlmuqA0c7LWuJ01KsWSZ0JwZrd58JFrQJQWRx7rk24xjazsQmg1JV7DFmux4T05bFxTApxZQhzisIrieObYvTopRUAvNalqpMlBLKII62DE5b1sBKKVm1VBYIgzWxUGbv77PA4un4bvj0AI7shse97hTshgVfd3aAtb4/3sHP1tulfnkHbwJrvjoerJWh1IcECxwPlvP7gDVbO8eBBdf3hlK/PFj6OItpId75OAfv8Mnpk7xIy1KiLuuwcZYWsNhznBVYHiWMPc458yLyv7WeWPK05xm42/iEkqtTXCizAm/pGkoLZuWNs8yWCR5VVMsi5bTbCo2GC2UoQCZxcnWWZbtaFlg5x7Us9jK+9fP+ui1rl88i7yrH+az1zFTql/dZZrAWT8eBxV3WbwLWeqaZtB9Y0dJY6oOCBZbHgTU1lvqoYE0zwfLGIBesP2d6qbRJRcCKM8FKHPxBYMnMj22wUMCrxiEOt0zKSAwRyhd/GsXkuPVIWC9WxRIVcQNv13opRVlOFk2I+y/x5hCqPBSpv452WlADqWJHPT0wl6LUfa5BAgocNbbBiivGdCDOK8G30JjY49erd2El/vLIi5vzfirff1SMeT8iryfetjRNrb+azfFVQkOV39yNTGLCR6P/+M+//9d///1/hqPt05xGLyOTmB6Ohs3mM+0wY0PD392ywKtZ7LQGf1RyW9Y3rdR+LasC4mEqD1NrWVhUvd2y5tN71rLmk1lmy2pslUroahBSUMafhthgEqMMnwW+Q0Wc8j40NWu3z1p/dbZKMWXFfZbn7Ouz4GISu8JnrafX4rZ0nyV72LbPon9SB28lN5WiHLD+dquI93oaPryZS53maYh5ed3gyaJRvUoc/OqBS3WwZH7uSZ+Gzo+JIt4LrMkP21jqJGBZuNXqbBs8WYCh2w2Sp+Hqid+HClatrua6nQYsGK4U8T5gOavoXGBBCHFEHlhbBt8vILhy+xuw7Oma2aJ3w6Gi9ERgRWxe+KAX6fksUt+BTwdWbzAYV0ELppSxqp9mpK5GtZN+kX6FKYPlG3NLHYYVnYPfiu7AdJzGDW8fnJSYB0tgkeiOQ14sedBEBmROF92h94U7rTpNGpKWQXLpq0Nzi3wPbqI7cL4Em6q5MtAatlhwaDu6w6SZ0R0RN0R63FCIK+uJswn1JcE7NW5oi6slZ9E5Z+r4lhIo1OKGeWAFMB3q0+KGNo7If/YmCEn+dpZzmx5D0lA2cUO4uHeSy7gyG8dYCStaqqGZcUNtPmvLZ7FkmoO64VJk/pUTkSZVLxbm+azV/PwpR5QIWMxpHeDgr+8TsMp5kbbpHIfp3XA+LedFmoDF0pYPAGs2LxmsCf1VjS/S90+gJLDABBwE1isoFSxrTe3MmHV4LQ2sJTgErPmsXLDcKVsSYgbr6V6+lp4r5YiJQ55htb+Df3gCmQ5eXH1SB/80UyzTAhZLzZMfmnLE83Y9kabsWSK7VxyS0+uJjbAqFhzW2rZBTJXB1ZxmKytiCyuHxbKVE8vUOmS2shQ7r4qFMltZXv00s9PKZLZyymCljkywgJIHj2RaOU8Ut0MASY+X2eaOTEa3lDx4R1wtORlk2StSsOKqyqx0YZjfspTU9SQP3uGHIg9eWHI9AYplIg9elnKWtsMtk1WrBqN04ew8+HyfRZ9re66wcHli+EnGWcVSjl61uRhtWhk8LLhlx62wKAAWufG9HTwbnZXn4Nez3WA59lJRdranIXCm+4IlUo3KA2syz4hIS7G7uE0rOx9YxJR9wZpPKC8NrPkqP7rzmlZ2RrAebl0VrDyfBRdszq00sGbX+WAxx3D2cRb54Sb2fuMsh0dXyxpn0ZS5jG6YSgxZgqPHWQGyKHmYMQt7gnPm+fS0u4o0Medu45ObFienvSWVowCbSsk6UN44C5ksEhxFYXIa3b4hrQ67FSGtaneFU1UjRSlWLTss5UimSfJeBYq2LId709O2rB0pR1OnSMuio5lzT9FQWn9Vlec4eEdEG0vyWfNVquod4ftpKQ4eiKS0wk9DHuUoCyzmuguAdX9dDlgi0aogWA+8F5YDlsMHBQXAIuOZ8+zroIHFx03p22a1ZoC1EhaXAhafnUyBxa43ZtFMYSlgQTUtzXGrXRq0M4M1Xwk0Snk3pFPsGxMcu1qnyVBGsBa3sBBYOxy8Q4lcThkBix2SuhmH/DRwyfOQiR0uRgiMMQMrfTXnYPFgc3HIlTqWUIbUOnLB4lULy0TVjicOI6HMnQBZNS1lI/BoM7DYaUsYTE0AcOoIZX7a4E0dwrLMlhVXGPm+4JxVAsGT09/DtNgPq/2oEjwOA+VqxsNvUlnsq8q0OnJSjjTLlDoIk6ff3qRlYW/U6fSjXi2qxHejaLvq8LtUVlWVbd19ZstilJFyJFO7XbBKi4GNx9UwI+WI+Dd1l6ODU464ZeZdjpDoZ5DvMJScBpVBD22S2dRST/da1dJByLnpHMuK+SzEFgFvXLVd7fe9DJ+1eJIj3DIcPJ4oJjj2p34XZKZJvmpO6SwOHjlz05IlI1hLbS+a84IlhynFckr5w+DcYEG22LkIWOtZqWCt9krAlf3w3GCxieICYBFQSwRLzG8UzlaeKrrPMUUjXle36za9SC/1XY7OOkUj5taLvEgzLh4Hh4bCMlffs8QXP1njDmfXdv7qe5sMsqQy21cTYE68+p5ZMN1v9T26Xdju9up7b6/V9zayRPaTWH8uF7OnVt+7U2d79b2TXvpOuLOkyhA/rKD0gnlSylYWzBfKz0qUGVffO0ukr75nLGP1vY08uhuAvvpe1iHvPi/lKPdpCNijJLcbMs+W1w1P57NuF5rfyFtC5/Dnod4NTxcKk2LynMt18MwnlOfgJ/aey1Gch6eU7rM9DQF18TlgWXw0Vh5Yq73X7vD5kxLAutU30dTBQrPrtLKzg5UK/xZe6LRM6T4nWGCV1w2XirKzg3W/3h8sNq962nGWGrCQWhbaggXdwb/xwEYZ4ywWsFhlJkNlb69CE8cOHmexoBDyMOfYE1yIfVW8lIEzxu1G201dbbmvkJcSVweeiEdpdVh7hMISZUkoTByGCK0nrmZwYpkIhaEkFJYos1/tJBSGsFYHC4Uha/fkH+05YvqLTaXJWTHSslJiB9zfstNyGk+d/KO5m8pcGp/8A2LyLylFfr8DJv8sR1FGuyGdCZGWeWodyeQf4AZbiTL2wM6c/ON1nGCcRcjlQS5z+B4uZWPXfNa5xllsI7Pd4yytd9L+Rufsy3DwAPF3MbODn11rY7xzO/h0tmvxZb9wVRJYFo87GcHapLKUBBbbNeKANdLlgXVNLTSCtVqXDBYLZh4AFil35pnSRDkdd5p8FkUxA6wz+aylweAiG1Gv70sDy341g/UKygZLWVW0B1jEaR0IVpGUI0WMbmf2dsqRvVpbem7RiVKOVCWSR9HtAhkMFpZtpxxtqnZX85yUo5OM4Ll4cg20lmWBBZvcVlaFnTvlaGJvWVZkBA/oMghtE4yTphxpCbiva3G1BAtdr9KlSnHweGoyuNCOIetZ9o4h7OpTguUs1/xQgrV+VUqVAZb1Y2YyuNj2KqsSwQLzJZ/3F2CtX9VSZYCF3tRNFPYDS1ZdBlhgvWQTVxys22k6ugPKAcv9NjcZTFGhte8Ga/GmKSsOFm5k5jqAyCy2wYr2AgbWZJa1vUp2roPdQgwNvxZmfvVv9xQN+qbcXwoVuvg++TqK0cGD+XdVWeFs5dpds4ejMIwYCRb5nAV1zHhFiDcc//mPr0//+39P377/iROxKCWU4U6glgqTQ1xr3vRoy+rUUIZhIFDDVFoo7MdXEYVLhcJsmtbkdQekpXQDYyhMKHP+4RhDYUJZ5qqwauelOa7X64M6I8EkHz92TWLGu91//v+//tntGk5z6j6blRLW7TQ/D2ibGvTsLLBiBXn993p7E4ep0+3OeNwatx79yL/pKr9yKLm4+puqNKmD8zDLQYTAbrc2h6IdJh8IFBhrWwxJLp+G8mrZW2XbcIylKKvHNKMM9CPDXkKCdqccTX6oVcpeCivtIZE1LGOpZGevW6P4RClH22t3epX8bewyN+5hKB7l4JeZO7OxSHfOzmzBRDl9qqehRVPDDGC14jHOAQs2Ir1U2qSjwJp/O2obO3+qnD7RLkdhu30DTGANYauaA1Zce9ZLpU06Cqzbt+P2/BMJIqcDC2Ec+cCrAxNYHdSNc7vhlV4qbdJRYM3WR+0mWeGB6ROFwmjdcb/frfIRy/ZoJh6MYd52wS3M/zhDKGxpH/fBD3Vv3uKr741JN3LYEnZu7mBqNIPksMV2oQszPvjBlcHWly+eku+DFSX5q++NYyCmxJ56oapMTTmiq+93jLPcAK3gAeOsrK/QcebSpyHc9yt0QhkZ/qufglO/Qrff6nulDvC0sOTq+72+QrdZfT+ZO3D7K3THr74HmY290McgzzFTOptbR37fcHGdOn3C1ffA5OAZFQTr9A5+efR2wdfpbyCcddbh3cFaHQ2WPUmd/tBgkWZx9EbUdPnrbwHW/fXxYM1Sef1nSTnKcvAZ46yzBSxoduuxn2W4fdiUKr76Xnzygn0gw0o+kMG/l+H5KC3WTssPfljiaitSvtFBQ2GKMrWO/FBYWlm6arRCVhQqyiy1DvnBD/1+Nh/8sPAEJaX0Oo5aff+TtSw6/D7+gx9LsHfL+hV9Fu1Bx39pILVi5CM7eJoWejxYNK/kNwBrAk4BFuvMQvxxwWLbRpzggx/Lc4H1M70bsumVgh+DzHw3BOkvXBcHS0vAVTJT5ep7S4rl6ntTAu5WPuuZVt/TnQA2q++17QL0BFxhsKUqo7qp69tz9b2acoSSDB6UTjmSYi1T2tVSu5P8aplTpCnDqrK9djnapHa7E7zZ5WhjWZHU7o1l5BA9PMhSWL37jzTOYhl/B46z0t1wnizc+sDjLBaZOYGDh6syn4bVXjVOX10KWIjPRO0EC8YN8amZXWCBiV0iWK3nl1766lLAcvmOS7tbVv35uQBYs7UUlwCW03xx01eXAxaPj+4GK2z+pZQyg/X0cBhYBR285i+HY/VGNH+ppRw5J3HwYnvWHAd/1zJWrX45M9kKtvAUjfpV0khyIQ7MYs6tWttKi7VvsnqBsVSiLG/ooFkm6vgxYXVGlV2WoYZvrFoqizlbaWKhDGdZRi48nI4qjK0Mk3Is+3FUpQpFGfLMnLELXehCF7rQhS50oQtd6EIX+l0Ix341Z3NanuAedlIiN+NSQZmZh/uRFwdx5sooTjU2UeJ3dl+VKNz+DPle9AhaQRVjEMLQwy5526RRGpf8BXzgkvd3or4esPmVJvbodAb9TLz9jIGDQwhCzwndEGAKp28DEHDcO9XWzkr3si0CFUfaFlkAMtsc14tw6IBWTG2LmrYFIgzIPZDzFbo0hr6YI3JfRMZnZNrkTka99lEGjYYQxI1W8AUMgzFsDPu16sglZnYbwfjTqFavWaDrt+IuAWv0B/xcG9Seq58rzTaAd41htTcIruw7dFeDoN57JJb1Oj67yyHMrTmfBjcW8Lu16h0YxmOnddXvtUceuIH9WtCpXtXGPUzAasR14DW7n9uDu+Cu1gDBTb/fiK/8QbUbDwk2ndaAqIo7pIm2G3h0nEXxI6hXgv4NGIDHHuzAeq/ngkY/eIyr1QYYjwEglVZJVU3wOarf3ASfwYvdJAWHoDP0PjVIMXBFWngH0PUGIHqpngws4H8B/TgcDInqmxoYu/1azwK9bnxTbcd9UB85oPGJ2uY1QTMev8TjZgCiOrgjtsSDqB82iA+pxj3SW5/p7OHRYA2jDohrDf+q+og+jcFN1LtquMC7A/1BrTdwa0MMxvFNqw3cZvBXu1l/iZv1v3CTtLQ7v95ud6NO+9kjbcp77JJ/o0GfTj9e0ZZ4PBHb3KBVi8ftR9wmtlWqwwYC9he7Ma5Vx7A2ikC9PSS2ec142Lj5PBoM6yAaxrVW0HFvGmPS5ugXtwlkwOvWSQ8d9Xq5le6iICaeKIqAFYQW8GCAQUAdEPkhYi8izor0dD9yYwhwUAmiMAycCq5An4hviLMIMZGHOEBEEXVvYiItb4VAQfJjYgZRi+LIczyHGJbYhjG3rcJsA5UA2EFU8cnf0YiajEAYViIfAnJHfEraI/eJK7srPBvhQfRONe+moJvzqL7QhS50oQtd6EIXutCFfn76N0Fuvc/j31s5AAAAAElFTkSuQmCC" 
+                                 alt="Représentation graphique d'un trinôme" class="img-fluid rounded" style="max-height: 300px;">
+                        </div>
+
+                        <h3>Méthode de résolution</h3>
+                        <p>Pour résoudre une inéquation du second degré :</p>
+                        <ol>
+                            <li>Se ramener à une inéquation du type $P(x) \geq 0$ ou $P(x) \leq 0$</li>
+                            <li>Calculer le discriminant Δ et déterminer les racines éventuelles</li>
+                            <li>Étudier le signe du trinôme à l'aide d'un tableau de signes</li>
+                            <li>Conclure sur l'ensemble solution</li>
+                        </ol>
+
+                        <div class="example-box">
+                            <p>Résoudre l'inéquation : $-2x^2 + 3x + 2 > 0$</p>
+                        </div>
+                        <div class="solution-box">
+                            <p><strong>Solution :</strong></p>
+                            <p>On cherche les racines de $-2x^2 + 3x + 2 = 0$</p>
+                            <p>Δ = $3^2 - 4 \times (-2) \times 2 = 9 + 16 = 25$</p>
+                            <p>$x_1 = \frac{-3 - 5}{-4} = 2$ et $x_2 = \frac{-3 + 5}{-4} = -\frac{1}{2}$</p>
+                            <p>Le coefficient $a = -2$ est négatif</p>
+                            <p>Tableau de signes :</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sign">
+                                    <tr>
+                                        <th>$x$</th>
+                                        <td>$-∞$</td>
+                                        <td>$-\frac{1}{2}$</td>
+                                        <td>$2$</td>
+                                        <td>$+∞$</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Signe de $-2x^2 + 3x + 2$</th>
+                                        <td>$-$</td>
+                                        <td>$0$</td>
+                                        <td>$+$</td>
+                                        <td>$0$</td>
+                                        <td>$-$</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <p>L'inéquation $-2x^2 + 3x + 2 > 0$ est vérifiée lorsque $-2x^2 + 3x + 2$ est positif,</p>
+                            <p>soit pour $x \in \left]-\frac{1}{2}, 2\right[$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 4 Content -->
+            <div class="tab-pane fade" id="lesson4" role="tabpanel">
+                <div class="card lesson-card">
+                    <div class="card-header">
+                        <h2>Leçon 4 : Équations et inéquations de degré supérieur</h2>
+                        <p class="mb-0">Durée : 100 minutes</p>
+                    </div>
+                    <div class="card-body">
+                        <h3>Objectifs pédagogiques</h3>
+                        <ul class="objective-list">
+                            <li>Résoudre des équations et inéquations avec des polynômes de degré ≥ 3</li>
+                            <li>Résoudre des équations/inéquations bicarrées</li>
+                        </ul>
+
+                        <h3>Méthode de résolution pour les polynômes de degré 3</h3>
+                        <p>Pour résoudre une équation avec un polynôme de degré 3 :</p>
+                        <ol>
+                            <li>Déterminer une racine évidente α</li>
+                            <li>Effectuer la division euclidienne du polynôme par (x - α)</li>
+                            <li>Factoriser le polynôme sous la forme (x - α)(ax² + bx + c)</li>
+                            <li>Résoudre l'équation du second degré obtenue</li>
+                        </ol>
+
+                        <div class="example-box">
+                            <p>Résoudre l'équation : $x^3 - 2x^2 - 5x + 6 = 0$</p>
+                        </div>
+                        <div class="solution-box">
+                            <p><strong>Solution :</strong></p>
+                            <p>On cherche une racine évidente :</p>
+                            <p>Pour x = 1 : $1 - 2 - 5 + 6 = 0$ ⇒ 1 est une racine</p>
+                            <p>On factorise : $(x - 1)(x^2 - x - 6) = 0$</p>
+                            <p>On résout $x^2 - x - 6 = 0$ : Δ = 1 + 24 = 25</p>
+                            <p>$x = \frac{1 ± 5}{2}$ ⇒ x = 3 ou x = -2</p>
+                            <p>Les solutions sont donc : x = -2, x = 1, x = 3</p>
+                        </div>
+
+                        <h3>Étude du signe d'un polynôme de degré supérieur</h3>
+                        <p>Pour étudier le signe d'un polynôme factorisé :</p>
+                        <ol>
+                            <li>Identifier toutes les racines et les placer dans l'ordre croissant</li>
+                            <li>Construire un tableau de signes avec une ligne pour chaque facteur</li>
+                            <li>Déterminer le signe de chaque facteur sur chaque intervalle</li>
+                            <li>Déduire le signe du produit en appliquant la règle des signes</li>
+                        </ol>
+
+                        <h3>Équations bicarrées</h3>
+                        <p>
+                            Une équation bicarrée est une équation de la forme $ax^4 + bx^2 + c = 0$.
+                            Pour la résoudre, on pose $X = x^2$ et on résout d'abord $aX^2 + bX + c = 0$.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson 5 Content -->
+            <div class="tab-pane fade" id="lesson5" role="tabpanel">
+                <div class="card lesson-card">
+                    <div class="card-header">
+                        <h2>Leçon 5 : Équations et inéquations irrationnelles</h2>
+                        <p class="mb-0">Durée : 100 minutes</p>
+                    </div>
+                    <div class="card-body">
+                        <h3>Objectifs pédagogiques</h3>
+                        <ul class="objective-list">
+                            <li>Résoudre une équation irrationnelle</li>
+                            <li>Résoudre une inéquation irrationnelle</li>
+                        </ul>
+
+                        <h3>Équations irrationnelles</h3>
+                        <p>Une équation irrationnelle est une équation contenant un radical.</p>
+                        <p>Pour résoudre $\sqrt{ax + b} = cx + d$ :</p>
+                        <ol>
+                            <li>Déterminer le domaine de définition : $ax + b \geq 0$ et $cx + d \geq 0$</li>
+                            <li>Élever les deux membres au carré : $ax + b = (cx + d)^2$</li>
+                            <li>Résoudre l'équation obtenue</li>
+                            <li>Vérifier que les solutions appartiennent au domaine de définition</li>
+                        </ol>
+
+                        <div class="example-box">
+                            <p>Résoudre l'équation : $\sqrt{2x + 3} = x - 1$</p>
+                        </div>
+                        <div class="solution-box">
+                            <p><strong>Solution :</strong></p>
+                            <p>Contraintes : $2x + 3 \geq 0$ ⇒ $x \geq -\frac{3}{2}$ et $x - 1 \geq 0$ ⇒ $x \geq 1$</p>
+                            <p>Donc domaine : $x \geq 1$</p>
+                            <p>On élève au carré : $2x + 3 = (x - 1)^2$</p>
+                            <p>⇒ $2x + 3 = x^2 - 2x + 1$</p>
+                            <p>⇒ $x^2 - 4x - 2 = 0$</p>
+                            <p>Δ = 16 + 8 = 24</p>
+                            <p>$x = \frac{4 \pm \sqrt{24}}{2} = \frac{4 \pm 2\sqrt{6}}{2} = 2 \pm \sqrt{6}$</p>
+                            <p>Seule $x = 2 + \sqrt{6}$ (≈ 4.45) vérifie $x \geq 1$</p>
+                            <p>Solution : $x = 2 + \sqrt{6}$</p>
+                        </div>
+
+                        <h3>Inéquations irrationnelles</h3>
+                        <p>Pour résoudre $\sqrt{ax + b} \leq cx + d$ :</p>
+                        <ol>
+                            <li>Déterminer le domaine de définition : $ax + b \geq 0$</li>
+                            <li>Distinguer deux cas selon le signe de $cx + d$ :
+                                <ul>
+                                    <li>Si $cx + d < 0$ : l'inéquation n'a pas de solution</li>
+                                    <li>Si $cx + d \geq 0$ : on élève au carré</li>
+                                </ul>
+                            </li>
+                            <li>Résoudre le système obtenu</li>
+                        </ol>
+
+                        <div class="text-center mt-4">
+                            <img src="data:image/png;base64,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" 
+                                 alt="Représentation graphique d'une inéquation irrationnelle" class="img-fluid rounded" style="max-height: 300px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercises Section -->
+        <div class="row mt-5">
+            <div class="col-lg-12">
+                <div class="card lesson-card">
+                    <div class="card-header">
+                        <h2>Exercices d'application</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="accordion" id="exercisesAccordion">
+                            <!-- Exercise 1 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="exercise1Heading">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#exercise1">
+                                        Exercice 1 : Résolution d'équations du second degré
+                                    </button>
+                                </h2>
+                                <div id="exercise1" class="accordion-collapse collapse show" data-bs-parent="#exercisesAccordion">
+                                    <div class="accordion-body">
+                                        <p>Résoudre dans ℝ les équations suivantes :</p>
+                                        <ol type="a">
+                                            <li>$-2x^2 - \sqrt{5}x + 2 = 0$</li>
+                                            <li>$3x^2 - 6x + 3 = 0$</li>
+                                            <li>$6x^2 - 5x + 7 = 0$</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Exercise 2 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="exercise2Heading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exercise2">
+                                        Exercice 2 : Problème de réductions successives
+                                    </button>
+                                </h2>
+                                <div id="exercise2" class="accordion-collapse collapse" data-bs-parent="#exercisesAccordion">
+                                    <div class="accordion-body">
+                                        <p>Une marchandise qui coûtait 51840 FCFA subit deux réductions successives de x% 
+                                        et est vendue au prix de 36000 FCFA. Déterminer la valeur de x.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Exercise 3 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="exercise3Heading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exercise3">
+                                        Exercice 3 : Systèmes d'équations
+                                    </button>
+                                </h2>
+                                <div id="exercise3" class="accordion-collapse collapse" data-bs-parent="#exercisesAccordion">
+                                    <div class="accordion-body">
+                                        <p>Résoudre dans ℝ² les systèmes suivants :</p>
+                                        <ol>
+                                            <li>$\begin{cases} x + y = -13 \\ xy = -30 \end{cases}$</li>
+                                            <li>$\begin{cases} x^2 + y^2 = 5 \\ xy = -2 \end{cases}$</li>
+                                            <li>$\begin{cases} \frac{x}{y} + \frac{y}{x} = \frac{5}{2} \\ x + y = 6 \end{cases}$</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Exercise 4 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="exercise4Heading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exercise4">
+                                        Exercice 4 : Inéquations du second degré
+                                    </button>
+                                </h2>
+                                <div id="exercise4" class="accordion-collapse collapse" data-bs-parent="#exercisesAccordion">
+                                    <div class="accordion-body">
+                                        <p>Résoudre dans ℝ les inéquations suivantes :</p>
+                                        <ol type="a">
+                                            <li>$3x^2 - 6x + 3 < 0$</li>
+                                            <li>$-3x^2 + 3x - 7 \leq 0$</li>
+                                            <li>$5x^2 - x + 3 < 0$</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Exercise 5 -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="exercise5Heading">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exercise5">
+                                        Exercice 5 : Équations irrationnelles
+                                    </button>
+                                </h2>
+                                <div id="exercise5" class="accordion-collapse collapse" data-bs-parent="#exercisesAccordion">
+                                    <div class="accordion-body">
+                                        <p>Résoudre dans ℝ les équations suivantes :</p>
+                                        <ol type="a">
+                                            <li>$\sqrt{4 - x} = x - 2$</li>
+                                            <li>$\sqrt{7 - 2x} = x + 4$</li>
+                                            <li>$\sqrt{2 - x} = x + 10$</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <p>© 2023 - Mathématiques Première C - Équations et Inéquations Polynômiales</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        $(document).ready(function() {
+            // Activation des tooltips Bootstrap
+            $('[data-bs-toggle="tooltip"]').tooltip();
+            
+            // Animation pour les cartes de leçons
+            $('.lesson-card').hover(
+                function() {
+                    $(this).css('transform', 'translateY(-5px)');
+                },
+                function() {
+                    $(this).css('transform', 'translateY(0)');
+                }
+            );
+            
+            // Fonction pour afficher/masquer les solutions
+            $('.solution-toggle').click(function() {
+                $(this).next('.solution-box').slideToggle();
+            });
+        });
+    </script>
+</body>
+</html>

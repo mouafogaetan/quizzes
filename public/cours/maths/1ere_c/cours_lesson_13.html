@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Généralités sur les Fonctions Numériques</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .chapter-title {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .section-card {
+            margin-bottom: 2rem;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .section-card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #6c5ce7;
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .definition {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .example {
+            background-color: #f1f8e9;
+            border-left: 4px solid #7cb342;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .property {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .math-container {
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+        .interactive-btn {
+            background-color: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .interactive-btn:hover {
+            background-color: #5b4dca;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        .navbar {
+            background-color: #6c5ce7 !important;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .graph-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .graph-placeholder {
+            background-color: #f0f0f0;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Fonctions Numériques</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#intro">Introduction</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#applications">Applications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#composition">Composition</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#operations">Opérations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#proprietes">Propriétés</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#courbes">Courbes</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="chapter-title text-center">
+            <h1 class="display-4">Chapitre 4 : Généralités sur les Fonctions Numériques</h1>
+            <p class="lead">Comprendre les concepts fondamentaux des fonctions et leurs applications</p>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="card section-card" id="intro">
+            <div class="card-header">
+                <h2>Introduction</h2>
+            </div>
+            <div class="card-body">
+                <h4>Intérêt des fonctions</h4>
+                <p>Les fonctions permettent de :</p>
+                <ul>
+                    <li>Représenter l'évolution d'une grandeur dans le temps</li>
+                    <li>Décrire une grandeur qui dépend de la position de mesure dans un espace (température, pression)</li>
+                    <li>Modéliser l'influence de paramètres sur un résultat (chiffre d'affaires d'une entreprise)</li>
+                </ul>
+                
+                <h4>Objectifs d'apprentissage</h4>
+                <ul>
+                    <li>Déterminer l'ensemble de définition d'une fonction numérique</li>
+                    <li>Déterminer la restriction d'une fonction sur un intervalle</li>
+                    <li>Justifier qu'une application est injective, surjective ou bijective</li>
+                </ul>
+                
+                <div class="definition">
+                    <h4>Définition d'une fonction</h4>
+                    <p>Une fonction $f$ est une relation qui associe à chaque élément $x$ d'un ensemble de départ $E$ un unique élément $y$ d'un ensemble d'arrivée $F$. On note $f: E \rightarrow F$.</p>
+                </div>
+                
+                <div class="example">
+                    <h4>Exemple</h4>
+                    <p>Considérons les fonctions suivantes :</p>
+                    <div class="math-container">
+                        $f: \mathbb{R} \rightarrow \mathbb{R}; x \mapsto x^2 - 4$
+                    </div>
+                    <div class="math-container">
+                        $g: \mathbb{R}\setminus\{-1, 1\} \rightarrow \mathbb{R}; x \mapsto \frac{2x^2 - 4}{x^2 - 1}$
+                    </div>
+                    <div class="math-container">
+                        $h: \mathbb{R} \rightarrow \mathbb{R}; x \mapsto \sqrt{3x^2 - 9}$
+                    </div>
+                    <p>Pour déterminer l'ensemble de définition de $h$, on doit résoudre $3x^2 - 9 \geq 0$, ce qui donne $x \in ]-\infty, -\sqrt{3}] \cup [\sqrt{3}, +\infty[$.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications Section -->
+        <div class="card section-card" id="applications">
+            <div class="card-header">
+                <h2>Applications et leurs propriétés</h2>
+            </div>
+            <div class="card-body">
+                <div class="definition">
+                    <h4>Application</h4>
+                    <p>On appelle <strong>application</strong> toute fonction dont l'ensemble de définition est égal à l'ensemble de départ.</p>
+                </div>
+                
+                <div class="property">
+                    <h4>Types d'applications</h4>
+                    <p>Soit $f: E \rightarrow F$ une application :</p>
+                    <ul>
+                        <li><strong>Injective</strong> : Deux éléments distincts de $E$ ont toujours des images distinctes dans $F$</li>
+                        <li><strong>Surjective</strong> : Tout élément de $F$ a au moins un antécédent dans $E$</li>
+                        <li><strong>Bijective</strong> : À la fois injective et surjective (chaque élément de $F$ a exactement un antécédent dans $E$)</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h4>Exemple d'application bijective</h4>
+                    <p>Considérons l'application $f: \mathbb{R}\setminus\{2\} \rightarrow \mathbb{R}\setminus\{3\}$ définie par :</p>
+                    <div class="math-container">
+                        $f(x) = \frac{3x + 1}{x - 2}$
+                    </div>
+                    <p>Pour montrer qu'elle est injective : si $f(a) = f(b)$, alors $\frac{3a+1}{a-2} = \frac{3b+1}{b-2}$, ce qui implique $a = b$.</p>
+                    <p>Pour montrer qu'elle est surjective : pour tout $y \in \mathbb{R}\setminus\{3\}$, on résout $y = \frac{3x+1}{x-2}$, ce qui donne $x = \frac{2y+1}{y-3} \in \mathbb{R}\setminus\{2\}$.</p>
+                    <p>Ainsi, $f$ est bijective.</p>
+                </div>
+                
+                <h4>Restriction et prolongement</h4>
+                <p>Soit $E$ et $E'$ deux parties de $\mathbb{R}$ telles que $E' \subseteq E$.</p>
+                <p>Si $f: E \rightarrow F$ et $g: E' \rightarrow F$ vérifient $f(x) = g(x)$ pour tout $x \in E'$, alors :</p>
+                <ul>
+                    <li>$f$ est un <strong>prolongement</strong> de $g$ à $E$</li>
+                    <li>$g$ est la <strong>restriction</strong> de $f$ à $E'$</li>
+                </ul>
+                
+                <div class="example">
+                    <h4>Exemple</h4>
+                    <p>Soit $f: \mathbb{R} \rightarrow \mathbb{R}, x \mapsto \sqrt{|x| - 2}$ et $g: \mathbb{R} \rightarrow \mathbb{R}, x \mapsto \sqrt{x - 2}$.</p>
+                    <p>On a $D_f = ]-\infty, -2] \cup [2, +\infty[$ et $D_g = [2, +\infty[$, donc $D_g \subseteq D_f$.</p>
+                    <p>De plus, pour tout $x \in D_g$, $f(x) = g(x)$. Ainsi, $g$ est la restriction de $f$ à $[2, +\infty[$.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Composition Section -->
+        <div class="card section-card" id="composition">
+            <div class="card-header">
+                <h2>Composition des applications</h2>
+            </div>
+            <div class="card-body">
+                <div class="definition">
+                    <h4>Composition</h4>
+                    <p>Soit $f: E \rightarrow F$ et $g: F \rightarrow G$ deux applications. On appelle <strong>composée</strong> de $f$ par $g$ l'application notée $g \circ f$ définie de $E$ vers $G$ par :</p>
+                    <div class="math-container">
+                        $(g \circ f)(x) = g(f(x)) \quad \text{pour tout } x \in E$
+                    </div>
+                </div>
+                
+                <div class="definition">
+                    <h4>Bijection réciproque</h4>
+                    <p>Soit $f: E \rightarrow F$ une bijection. On appelle <strong>bijection réciproque</strong> de $f$ et on note $f^{-1}$ l'application de $F$ dans $E$ qui à tout élément $y \in F$ associe l'unique antécédent de $y$ par $f$.</p>
+                </div>
+                
+                <div class="property">
+                    <h4>Propriétés</h4>
+                    <p>Soient $f: E \rightarrow F$ et $g: F \rightarrow G$ deux bijections, alors :</p>
+                    <ol>
+                        <li>$f^{-1} \circ f = Id_E$ et $f \circ f^{-1} = Id_F$</li>
+                        <li>$(f^{-1})^{-1} = f$</li>
+                        <li>$g \circ f$ est une bijection et $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$</li>
+                    </ol>
+                </div>
+                
+                <div class="example">
+                    <h4>Exemple</h4>
+                    <p>Soit $f: [-1, +\infty[ \rightarrow \mathbb{R}$ définie par $f(x) = \sqrt{x+1}$ et $g: \mathbb{R} \rightarrow [-1, +\infty[$ définie par $g(x) = x^2 - 1$.</p>
+                    <p>On peut vérifier que :</p>
+                    <div class="math-container">
+                        $(f \circ g)(x) = \sqrt{x^2} = |x|$
+                    </div>
+                    <div class="math-container">
+                        $(g \circ f)(x) = (\sqrt{x+1})^2 - 1 = x$
+                    </div>
+                    <p>Ainsi, $g \circ f = Id_{[-1, +\infty[}$, ce qui montre que $g$ est la bijection réciproque de $f$.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Opérations Section -->
+        <div class="card section-card" id="operations">
+            <div class="card-header">
+                <h2>Opérations sur les fonctions</h2>
+            </div>
+            <div class="card-body">
+                <div class="definition">
+                    <h4>Opérations élémentaires</h4>
+                    <p>Soit $f$ et $g$ deux fonctions de domaines de définition respectifs $D_f$ et $D_g$. On définit :</p>
+                    <ol>
+                        <li><strong>Somme</strong> : $(f + g)(x) = f(x) + g(x)$ pour tout $x \in D_f \cap D_g$</li>
+                        <li><strong>Produit</strong> : $(f \cdot g)(x) = f(x) \cdot g(x)$ pour tout $x \in D_f \cap D_g$</li>
+                        <li><strong>Quotient</strong> : $\left(\frac{f}{g}\right)(x) = \frac{f(x)}{g(x)}$ pour tout $x \in D_f \cap D_g$ tel que $g(x) \neq 0$</li>
+                    </ol>
+                </div>
+                
+                <div class="example">
+                    <h4>Exemple pratique</h4>
+                    <p>Un gérant de pharmacie étudie l'achalandage :</p>
+                    <ul>
+                        <li>Mercredi : $f(x) = 3x - 10$ clients à l'heure $x$</li>
+                        <li>Samedi : $g(x) = 9x - 65$ clients à l'heure $x$</li>
+                    </ul>
+                    <p>On cherche à quelle heure il y a deux fois plus de clients le samedi que le mercredi, c'est-à-dire résoudre :</p>
+                    <div class="math-container">
+                        $g(x) = 2f(x) \Rightarrow 9x - 65 = 2(3x - 10) \Rightarrow 9x - 65 = 6x - 20 \Rightarrow 3x = 45 \Rightarrow x = 15$
+                    </div>
+                    <p>Ainsi, à 15h, il y a deux fois plus de clients le samedi que le mercredi.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Propriétés Section -->
+        <div class="card section-card" id="proprietes">
+            <div class="card-header">
+                <h2>Propriétés des fonctions</h2>
+            </div>
+            <div class="card-body">
+                <h4>Parité</h4>
+                <div class="definition">
+                    <p>Soit $f$ une fonction numérique :</p>
+                    <ul>
+                        <li><strong>Paire</strong> : si pour tout $x \in D_f$, $-x \in D_f$ et $f(-x) = f(x)$</li>
+                        <li><strong>Impaire</strong> : si pour tout $x \in D_f$, $-x \in D_f$ et $f(-x) = -f(x)$</li>
+                    </ul>
+                </div>
+                
+                <h4>Périodicité</h4>
+                <div class="definition">
+                    <p>Une fonction $f$ est <strong>périodique</strong> de période $p$ (avec $p \neq 0$) si pour tout $x \in D_f$, $x + p \in D_f$ et $f(x + p) = f(x)$.</p>
+                </div>
+                
+                <h4>Éléments de symétrie</h4>
+                <div class="property">
+                    <p>Soit $C_f$ la courbe représentative d'une fonction $f$ :</p>
+                    <ul>
+                        <li>La droite d'équation $x = a$ est un <strong>axe de symétrie</strong> de $C_f$ si pour tout $h$, $f(a - h) = f(a + h)$</li>
+                        <li>Le point $O'(a, b)$ est un <strong>centre de symétrie</strong> de $C_f$ si pour tout $h$, $f(a + h) + f(a - h) = 2b$</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h4>Exemple</h4>
+                    <p>Montrons que le point $I(0, 1)$ est un centre de symétrie de la courbe de $f(x) = x^3 + 2x - 1$.</p>
+                    <p>Pour tout $h$, on a :</p>
+                    <div class="math-container">
+                        $f(h) + f(-h) = (h^3 + 2h - 1) + (-h^3 - 2h - 1) = -2$
+                    </div>
+                    <p>On cherche $b$ tel que $f(h) + f(-h) = 2b$, donc $2b = -2 \Rightarrow b = -1$.</p>
+                    <p>Ainsi, le centre de symétrie est $(0, -1)$ et non $(0, 1)$.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courbes Section -->
+        <div class="card section-card" id="courbes">
+            <div class="card-header">
+                <h2>Courbes représentatives</h2>
+            </div>
+            <div class="card-body">
+                <div class="definition">
+                    <h4>Courbe représentative</h4>
+                    <p>On appelle <strong>courbe représentative</strong> d'une fonction $f$ l'ensemble des points de coordonnées $(x, f(x))$ avec $x \in D_f$.</p>
+                    <p>L'équation $y = f(x)$ est l'équation de cette courbe.</p>
+                </div>
+                
+                <h4>Transformations de courbes</h4>
+                <p>À partir de la courbe $C_f$ d'une fonction $f$, on peut obtenir les courbes de :</p>
+                <ul>
+                    <li>$x \mapsto f(x) + k$ : translation verticale de vecteur $(0, k)$</li>
+                    <li>$x \mapsto f(x + \lambda)$ : translation horizontale de vecteur $(-\lambda, 0)$</li>
+                    <li>$x \mapsto -f(x)$ : symétrie par rapport à l'axe des abscisses</li>
+                    <li>$x \mapsto f(-x)$ : symétrie par rapport à l'axe des ordonnées</li>
+                    <li>$x \mapsto |f(x)|$ : partie positive conservée, partie négative symétrisée</li>
+                    <li>$x \mapsto f(|x|)$ : partie droite conservée, symétrisée pour $x < 0$</li>
+                </ul>
+                
+                <div class="graph-container">
+                    <h5>Exemple de transformations</h5>
+                    <div class="graph-placeholder">
+                        <p>Représentation graphique de $f(x) = (x-1)^2 - 4$ et ses transformations</p>
+                    </div>
+                    <p class="text-center"><em>Image illustrative des transformations de fonctions</em></p>
+                </div>
+                
+                <h4>Sens de variation</h4>
+                <div class="definition">
+                    <p>Soit $f$ une fonction définie sur un intervalle $I$ :</p>
+                    <ul>
+                        <li>$f$ est <strong>croissante</strong> sur $I$ si pour tous $x_1, x_2 \in I$, $x_1 \leq x_2 \Rightarrow f(x_1) \leq f(x_2)$</li>
+                        <li>$f$ est <strong>décroissante</strong> sur $I$ si pour tous $x_1, x_2 \in I$, $x_1 \leq x_2 \Rightarrow f(x_1) \geq f(x_2)$</li>
+                        <li>$f$ est <strong>constante</strong> sur $I$ si pour tous $x_1, x_2 \in I$, $f(x_1) = f(x_2)$</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h4>Exercice d'application</h4>
+                    <p>Soit $f(x) = -x^2$ et $g(x) = |x|$ définies sur $[-2, 2]$.</p>
+                    <p>Étudions leurs variations :</p>
+                    <ul>
+                        <li>$f(x) = -x^2$ est croissante sur $[-2, 0]$ et décroissante sur $[0, 2]$</li>
+                        <li>$g(x) = |x|$ est décroissante sur $[-2, 0]$ et croissante sur $[0, 2]$</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 - Cours de Mathématiques | Généralités sur les Fonctions Numériques</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Function to show solution for exercises
+        function showSolution(exNumber) {
+            $('#solution' + exNumber).slideToggle();
+        }
+        
+        // Initialize MathJax after page load
+        $(document).ready(function() {
+            MathJax.typeset();
+        });
+    </script>
+</body>
+</html>

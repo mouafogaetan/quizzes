@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction à la Théorie des Graphes</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .chapter-title {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border: none;
+            border-radius: 10px;
+        }
+        .card-header {
+            background-color: #f1f8ff;
+            font-weight: 600;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .objective-item {
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .objective-item:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2575fc;
+            font-weight: bold;
+        }
+        .graph-img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+            background-color: white;
+        }
+        .keyword-card {
+            transition: transform 0.3s;
+        }
+        .keyword-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .exercise {
+            background-color: #f8f9fa;
+            border-left: 4px solid #6a11cb;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+        .solution {
+            background-color: #e8f4f8;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+        .table-custom {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .table-custom th {
+            background-color: #6a11cb;
+            color: white;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="chapter-title">Introduction à la Théorie des Graphes</h1>
+            <p class="lead">Première C - Mathématiques</p>
+            <p class="duration"><strong>Durée estimée:</strong> 100 minutes</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Introduction -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">Introduction</div>
+                    <div class="card-body">
+                        <p>La théorie des graphes est une branche des mathématiques qui trouve des applications dans de nombreux domaines de la vie quotidienne. Elle nous aide à résoudre des problèmes concrets comme :</p>
+                        <ul>
+                            <li>L'optimisation des réseaux routiers</li>
+                            <li>La recherche du plus court chemin entre deux points</li>
+                            <li>Le coloriage de cartes avec des contraintes spécifiques</li>
+                            <li>L'organisation de réseaux de transport</li>
+                        </ul>
+                        <p>Ce chapitre vous initiera aux concepts fondamentaux des graphes et vous montrera comment les utiliser pour modéliser et résoudre des problèmes pratiques.</p>
+                    </div>
+                </div>
+
+                <!-- Objectifs -->
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">Objectifs Pédagogiques</div>
+                    <div class="card-body">
+                        <p>À la fin de ce chapitre, vous serez capable de :</p>
+                        <div class="objective-item">Identifier et justifier qu'une représentation est un graphe</div>
+                        <div class="objective-item">Différencier les types de graphes (simple, complet, orienté)</div>
+                        <div class="objective-item">Déterminer l'ordre d'un graphe et le degré de ses sommets</div>
+                        <div class="objective-item">Reconnaître des sommets adjacents</div>
+                        <div class="objective-item">Utiliser les relations entre le nombre d'arêtes et les degrés des sommets</div>
+                    </div>
+                </div>
+
+                <!-- Situation Problème -->
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">Situation Problème</div>
+                    <div class="card-body">
+                        <p>Landry doit effectuer plusieurs déplacements dans sa ville :</p>
+                        <ul>
+                            <li>De sa maison (M) au collège (C)</li>
+                            <li>À la boulangerie (B)</li>
+                            <li>À la boutique (b)</li>
+                            <li>Au terrain de foot (T)</li>
+                        </ul>
+                        <p>Il existe une route unique entre chaque paire de destinations. Landry souhaite représenter l'ensemble de ces connexions pour aider la mairie dans son projet de bitumage des routes.</p>
+                        <p><strong>Votre mission :</strong> Aider Landry à modéliser cette situation et déterminer le nombre total de routes nécessaires.</p>
+                    </div>
+                </div>
+
+                <!-- Définitions -->
+                <div class="card mb-4">
+                    <div class="card-header bg-warning text-dark">Définitions et Vocabulaire</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-custom">
+                                <thead>
+                                    <tr>
+                                        <th>Terme</th>
+                                        <th>Définition</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Graphe</strong></td>
+                                        <td>Ensemble de points (sommets) reliés par des lignes (arêtes)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Ordre d'un graphe</strong></td>
+                                        <td>Nombre total de sommets du graphe</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Degré d'un sommet</strong></td>
+                                        <td>Nombre d'arêtes incidentes à ce sommet, noté $deg(S)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Boucle</strong></td>
+                                        <td>Arête qui relie un sommet à lui-même</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sommet isolé</strong></td>
+                                        <td>Sommet de degré 0 (non relié à d'autres sommets)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Graphe orienté</strong></td>
+                                        <td>Graphe dont les arêtes (arcs) ont une orientation</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Graphe simple</strong></td>
+                                        <td>Graphe sans boucle et sans arêtes multiples entre deux sommets</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Graphe complet</strong></td>
+                                        <td>Graphe simple où chaque paire de sommets distincts est reliée par une arête</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3">
+                            <p><strong>Notation :</strong> Un graphe $G$ peut être noté $G = (S, A)$ où :</p>
+                            <ul>
+                                <li>$S = \{s_1, s_2, ..., s_n\}$ est l'ensemble des sommets</li>
+                                <li>$A = \{a_1, a_2, ..., a_p\}$ est l'ensemble des arêtes</li>
+                            </ul>
+                            <p>L'ordre de $G$ est $Card(S)$ et le nombre total d'arêtes est $Card(A)$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Propriétés -->
+                <div class="card mb-4">
+                    <div class="card-header bg-danger text-white">Propriétés Fondamentales</div>
+                    <div class="card-body">
+                        <h5>Propriété 1 (Lemme des poignées de main)</h5>
+                        <p>Dans tout graphe, la somme des degrés des sommets est égale au double du nombre d'arêtes :</p>
+                        <p class="text-center">$\sum_{i=1}^{p} \deg(s_i) = 2 \times Card(A)$</p>
+                        
+                        <h5>Corollaire</h5>
+                        <p>Le nombre total d'arêtes d'un graphe $G = (S, A)$ est donné par :</p>
+                        <p class="text-center">$Card(A) = \frac{1}{2} \sum_{i=1}^{p} \deg(s_i)$</p>
+                        
+                        <h5>Propriété 2 (Graphe complet)</h5>
+                        <p>Dans un graphe complet d'ordre $n$ :</p>
+                        <ul>
+                            <li>Chaque sommet a un degré de $n-1$</li>
+                            <li>Le nombre total d'arêtes est $C_n^2 = \frac{n(n-1)}{2}$</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Exemples -->
+                <div class="card mb-4">
+                    <div class="card-header bg-secondary text-white">Exemples de Graphes</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="data:image/jpeg;base64,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" alt="Graphe non orienté avec boucle" class="graph-img">
+                                <p class="mt-2"><strong>Figure 1:</strong> Graphe non orienté avec une boucle au sommet D</p>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="data:image/png;base64,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" alt="Graphe orienté" class="graph-img">
+                                <p class="mt-2"><strong>Figure 2:</strong> Graphe orienté avec arêtes multiples</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="https://i.imgur.com/3qN9cYF.png" alt="Graphe discret" class="graph-img">
+                                <p class="mt-2"><strong>Figure 3:</strong> Graphe discret (sommets isolés)</p>
+                            </div>
+                            <div class="col-md-6 text-center mb-3">
+                                <img src="data:image/png;base64,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" alt="Graphe complet" class="graph-img">
+                                <p class="mt-2"><strong>Figure 4:</strong> Graphe complet d'ordre 5</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercices -->
+                <div class="card mb-4">
+                    <div class="card-header bg-dark text-white">Exercices d'Application</div>
+                    <div class="card-body">
+                        <div class="exercise">
+                            <h5>Exercice 1</h5>
+                            <ol>
+                                <li>Représentez un graphe orienté d'ordre 7 avec 9 arêtes, une boucle et 2 sommets isolés.</li>
+                                <li>Un graphe simple d'ordre 5 possède 6 arêtes. Les degrés des 4 premiers sommets sont 4, 2, 1 et 2. Quel est le degré du 5ème sommet? Dessinez ce graphe.</li>
+                                <li>
+                                    <p>a) Construisez un graphe complet d'ordre 8.</p>
+                                    <p>b) Déterminez le degré de chaque sommet et le nombre total d'arêtes.</p>
+                                </li>
+                                <li>Soit $G = (S, A)$ un graphe avec $S = \{s_1, s_2, ..., s_p, s_q\}$ tel que $deg(s_i) = i^2$. Exprimez le nombre d'arêtes en fonction de $p$ et $q$, et donnez la condition nécessaire pour l'existence d'un tel graphe.</li>
+                            </ol>
+                        </div>
+
+                        <div class="exercise">
+                            <h5>Exercice 2</h5>
+                            <p>Une compagnie aérienne dessert les capitales de six pays : Cameroun (C), Tchad (T), France (F), Bénin (B), Gabon (G) et Nigeria (N). Le tableau suivant indique les vols directs disponibles :</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sm">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Départ</th>
+                                            <th>Destinations directes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>B</td><td>C</td></tr>
+                                        <tr><td>C</td><td>T, G, F</td></tr>
+                                        <tr><td>N</td><td>C</td></tr>
+                                        <tr><td>G</td><td>B</td></tr>
+                                        <tr><td>T</td><td>N</td></tr>
+                                        <tr><td>F</td><td>G, T</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <ol>
+                                <li>Représentez ce réseau par un graphe.</li>
+                                <li>Complétez un tableau des degrés de chaque sommet et calculez le nombre total de vols directs.</li>
+                                <li>Décrivez tous les itinéraires possibles pour aller de Paris (F) à Yaoundé (C).</li>
+                                <li>En utilisant les distances fournies, déterminez l'itinéraire le plus court pour des diplomates devant se rendre au Gabon et au Tchad.</li>
+                                <li>Si la compagnie souhaite établir des vols aller-retour hebdomadaires entre toutes les capitales, quel serait le nombre maximal de ces vols?</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <!-- Prérequis -->
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">Prérequis</div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Dessinez un cube ABCDEFGH</li>
+                            <li>Citez tous les sommets de ce cube</li>
+                            <li>Combien d'arêtes compte ce cube?</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Activité -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">Activité d'Apprentissage</div>
+                    <div class="card-body">
+                        <p>En reprenant la situation de Landry :</p>
+                        <ol>
+                            <li>Modélisez son parcours par un graphe. Combien de sommets comporte-t-il?</li>
+                            <li>Nommez toutes les arêtes de ce graphe</li>
+                            <li>À combien de points le sommet M est-il connecté?</li>
+                            <li>Déterminez le degré de chaque sommet et calculez la somme de ces degrés</li>
+                            <li>Quelle relation observez-vous entre le nombre d'arêtes et la somme des degrés?</li>
+                            <li>Aidez Landry à déterminer le nombre total de routes nécessaires</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Solution -->
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">Solution de l'Activité</div>
+                    <div class="card-body">
+                        <div class="solution">
+                            <ol>
+                                <li>Le graphe comporte 6 sommets : M, C, B, b, T, R</li>
+                                <li>Les arêtes sont : [MC], [MB], [Mb], [MT], [TC], [TB], [Tb], [BC], [Bb], [Cb]</li>
+                                <li>Le sommet M est connecté à 4 points (degré 4)</li>
+                                <li>Degrés : M=4, C=4, B=4, b=4, T=4, R=0. Somme = 20</li>
+                                <li>La somme des degrés (20) égale le double du nombre d'arêtes (10)</li>
+                                <li>Il y a 10 routes au total</li>
+                            </ol>
+                        </div>
+                        <div class="text-center mt-3">
+                            <img src="https://i.imgur.com/xKj3k7L.png" alt="Solution graphe de Landry" class="graph-img">
+                            <p class="mt-2"><strong>Graphe représentant le parcours de Landry</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lexique -->
+                <div class="card mb-4">
+                    <div class="card-header bg-warning text-dark">Lexique Bilingue</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card keyword-card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Théorie des graphes</h6>
+                                        <p class="card-text">Graph theory</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card keyword-card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Graphe simple</h6>
+                                        <p class="card-text">Simple graph</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card keyword-card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Graphe orienté</h6>
+                                        <p class="card-text">Directed graph</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card keyword-card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Graphe complet</h6>
+                                        <p class="card-text">Complete graph</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card keyword-card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Ordre d'un graphe</h6>
+                                        <p class="card-text">Order of a graph</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card keyword-card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Degré d'un sommet</h6>
+                                        <p class="card-text">Degree of a vertex</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card keyword-card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Sommet isolé</h6>
+                                        <p class="card-text">Isolated vertex</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card keyword-card h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Graphe discret</h6>
+                                        <p class="card-text">Discrete graph</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resources -->
+                <div class="card mb-4">
+                    <div class="card-header bg-secondary text-white">Ressources</div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="#" class="text-decoration-none">Fiche de révision</a></li>
+                            <li class="list-group-item"><a href="#" class="text-decoration-none">Exercices supplémentaires</a></li>
+                            <li class="list-group-item"><a href="#" class="text-decoration-none">QCM d'auto-évaluation</a></li>
+                            <li class="list-group-item"><a href="#" class="text-decoration-none">Applications pratiques</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>© 2023 - Cours de Mathématiques Première C - Théorie des Graphes</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Animation pour les cartes de lexique
+            $('.keyword-card').hover(
+                function() {
+                    $(this).addClass('shadow');
+                }, 
+                function() {
+                    $(this).removeClass('shadow');
+                }
+            );
+            
+            // Smooth scrolling pour les ancres
+            $('a[href^="#"]').on('click', function(event) {
+                var target = $(this.getAttribute('href'));
+                if(target.length) {
+                    event.preventDefault();
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 70
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
