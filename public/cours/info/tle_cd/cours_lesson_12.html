@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commandes Réseaux et Simulation d'un Réseau</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .objective-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .objective-list li:before {
+            content: "•";
+            margin-right: 10px;
+            color: #0d6efd;
+        }
+        .command-example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        .network-image {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <header class="text-center mb-5">
+            <h1 class="display-4">UE 13 : Commandes Réseaux et Simulation d'un Réseau</h1>
+            <p class="lead">Cours de 2 heures pour les classes de Terminale C/D</p>
+        </header>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Compétences visées</h2>
+            </div>
+            <div class="card-body">
+                <p>À la fin de cette leçon, l'élève doit être capable de :</p>
+                <ul class="objective-list">
+                    <li>Utiliser les commandes réseaux ipconfig et ping</li>
+                    <li>Simuler un réseau informatique</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Situation problème</h2>
+            </div>
+            <div class="card-body">
+                <p>Dans le cadre des travaux pratiques au laboratoire informatique, il vous est demandé de concevoir un réseau local constitué de 4 postes de travail dans le but de prédire son comportement avant son fonctionnement. Votre conception doit être représentée sur support papier et support numérique.</p>
+                
+                <h5>Consignes :</h5>
+                <ol>
+                    <li>Énumérer les équipements matériels ainsi que les supports d'interconnexion et de transmission</li>
+                    <li>Proposer un exemple de logiciel permettant de produire le support numérique</li>
+                    <li>Préciser la commande qui permettra de tester les connexions de tous les postes de travail</li>
+                    <li>Donner la commande qui affiche les paramètres réseaux d'un ordinateur</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Introduction</h2>
+            </div>
+            <div class="card-body">
+                <p>De nos jours, la mise en place d'un réseau informatique nécessite de faire des simulations avant le lancement en production. Cette bonne pratique est indispensable car elle permet d'avoir une idée sur le comportement futur du réseau et d'éviter de nombreuses erreurs.</p>
+                <p>Ainsi, les tests de connexion et la vérification des paramètres réseaux des équipements peuvent être effectués à l'aide des commandes réseaux. Dans la suite de notre leçon, nous décrirons quelques commandes réseaux et comment simuler un réseau informatique.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>I. Les commandes réseaux</h2>
+            </div>
+            <div class="card-body">
+                <p>Une commande réseau représente une instruction donnée au système d'exploitation pour exécuter une action dans le domaine des réseaux informatiques. Chaque commande répond à une syntaxe spécifique et doit être entrée dans l'invite de commande (pour les systèmes Windows) ou dans un Terminal (pour les systèmes UNIX) pour s'exécuter.</p>
+                
+                <h4>1. La commande Ipconfig</h4>
+                <p>Cette commande affiche ou rafraîchit la configuration réseau d'un ordinateur.</p>
+                <p>Sa syntaxe est la suivante : <code>Ipconfig [option]</code>. Pour l'utiliser, il suffit d'ouvrir l'invite de commande, de saisir la commande et de valider en tapant la touche <strong>Entrée</strong>.</p>
+                
+                <div class="command-example">
+                    <p>Exemple : <code>Ipconfig /all</code></p>
+                    <p>Avec l'option <code>/all</code>, cette commande affiche les informations détaillées sur la configuration réseau d'un ordinateur :</p>
+                    <ul>
+                        <li>Nom de l'hôte</li>
+                        <li>Adresse IP en cours</li>
+                        <li>Masque de sous-réseau</li>
+                        <li>Passerelle par défaut</li>
+                        <li>Adresses MAC des cartes réseaux</li>
+                        <li>État des serveurs DHCP, etc.</li>
+                    </ul>
+                </div>
+                
+                <p>L'exécution de la commande <code>Ipconfig</code> sans option affiche l'adresse IP, le masque réseau et la passerelle par défaut d'une machine.</p>
+                
+                <h4>2. La commande Ping</h4>
+                <p>La commande Ping permet de tester la connectivité d'une machine à travers un réseau. Pour vérifier la disponibilité d'un ordinateur, la commande Ping envoie des requêtes (4 par défaut) vers l'adresse IP de cet ordinateur grâce au protocole ICMP (Internet Control Message Protocol).</p>
+                
+                <p>Sa syntaxe est : <code>ping [adresse_machine]</code> où <code>adresse_machine</code> représente l'adresse IP, le nom de la machine ou un nom de domaine.</p>
+                
+                <div class="command-example">
+                    <p>Exemples :</p>
+                    <ul>
+                        <li><code>ping www.google.fr</code> : teste l'accessibilité du site web Google</li>
+                        <li><code>ping www.facebook.com</code> : teste l'accessibilité du site web Facebook</li>
+                        <li><code>ping /?</code> : affiche toutes les informations sur l'utilisation de la commande Ping</li>
+                    </ul>
+                </div>
+                
+                <p>Le résultat de la commande Ping permet de connaître :</p>
+                <ul>
+                    <li>L'adresse IP correspondant au nom de la machine distante</li>
+                    <li>La durée de vie des paquets ou TTL (Time To Live)</li>
+                    <li>Le temps de propagation des paquets (en millisecondes)</li>
+                    <li>Le nombre de paquets perdus</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>II. La simulation réseau</h2>
+            </div>
+            <div class="card-body">
+                <p>La simulation réseau représente une technique permettant de créer et de configurer un réseau informatique virtuel à l'aide d'un logiciel spécialisé (appelé simulateur).</p>
+                
+                <p>L'utilisation d'un simulateur réseau présente plusieurs avantages :</p>
+                <ul>
+                    <li>Connaissance de l'ensemble des équipements réseaux disponibles dans le simulateur</li>
+                    <li>Possibilité de visualiser le fonctionnement de tous les équipements à chaque échange d'informations</li>
+                    <li>Possibilité d'animer le déplacement d'un message d'une machine à une autre</li>
+                </ul>
+                
+                <p>Il existe plusieurs logiciels de simulation réseau parmi lesquels :</p>
+                <ul>
+                    <li>Cisco Packet Tracer</li>
+                    <li>GNS3</li>
+                    <li>Netsim</li>
+                    <li>NS2</li>
+                </ul>
+                
+                <div class="text-center my-4">
+                    <img src="data:image/png;base64,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" alt="Exemple d'interface Cisco Packet Tracer" class="network-image">
+                    <p class="mt-2"><small>Exemple d'interface du logiciel Cisco Packet Tracer</small></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Conclusion</h2>
+            </div>
+            <div class="card-body">
+                <p>Il est important de simuler un réseau informatique avant de le réaliser car cela permet d'avoir une idée sur son comportement et d'éviter de nombreuses erreurs. De plus, cette simulation fait appel aux commandes réseaux pour effectuer les tests de connectivité.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Jeu bilingue</h2>
+            </div>
+            <div class="card-body">
+                <p>Traduire en français ou en anglais les mots ou expressions contenus dans le tableau suivant :</p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Français</th>
+                            <th>Anglais</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Réseau</td>
+                            <td>Network</td>
+                        </tr>
+                        <tr>
+                            <td>Commande réseau</td>
+                            <td>Network command</td>
+                        </tr>
+                        <tr>
+                            <td>Simulateur réseau</td>
+                            <td>Network simulator</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Exercices pratiques</h2>
+            </div>
+            <div class="card-body">
+                <h4>Exercice 1 : Utilisation des commandes Ping et Ipconfig</h4>
+                <p>Lors d'une séance de TP au laboratoire informatique, utilisez les commandes réseaux dans l'invite de commandes pour afficher les paramètres réseaux des postes et effectuer les tests de connexion.</p>
+                
+                <ol>
+                    <li>Accéder à l'invite de commande de votre ordinateur :
+                        <ul>
+                            <li>Cliquer sur le « Menu Démarrer »</li>
+                            <li>Saisir la commande « cmd » dans la zone de recherche</li>
+                            <li>Valider avec la touche Entrée</li>
+                        </ul>
+                    </li>
+                    <li>Pour avoir plus de détails sur la commande Ping, entrer la commande <code>ping /?</code></li>
+                    <li>Pour avoir plus de détails sur la commande Ipconfig, entrer la commande <code>ipconfig /?</code></li>
+                    <li>Activer votre connexion Internet et entrer les commandes suivantes :
+                        <ul>
+                            <li><code>ipconfig</code></li>
+                            <li><code>ipconfig /all</code></li>
+                        </ul>
+                        <p><strong>Question :</strong> Quelles différences pouvez-vous observer entre les résultats obtenus avec ces deux commandes ?</p>
+                    </li>
+                    <li>Tester la connectivité avec les commandes :
+                        <ul>
+                            <li><code>ping www.yahoo.fr</code></li>
+                            <li><code>ping www.google.fr</code></li>
+                        </ul>
+                        <p><strong>Questions :</strong></p>
+                        <ul>
+                            <li>Décrire l'état de la connexion dans chacun des résultats obtenus</li>
+                            <li>Les temps de réponse des paquets sont-ils identiques ? Pourquoi ?</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <h4>Exercice 2 : Simulation d'un réseau local avec Cisco Packet Tracer</h4>
+                <p>Simulez un réseau local dont la topologie est présentée ci-dessous :</p>
+                
+                <div class="text-center my-4">
+                    <img src="https://i.imgur.com/7GJ9K3t.png" alt="Topologie réseau à simuler" class="network-image">
+                    <p class="mt-2"><small>Topologie réseau à simuler avec adresse réseau : 192.168.1.0 et masque : 255.255.255.0</small></p>
+                </div>
+                
+                <p>Consignes détaillées :</p>
+                <ol>
+                    <li>Démarrer l'application Cisco Packet Tracer</li>
+                    <li>Identifier les différentes parties de l'interface</li>
+                    <li>Ajouter 4 ordinateurs dans l'espace de travail (PC0, PC1, PC2, PC3)</li>
+                    <li>Ajouter un commutateur (Switch)</li>
+                    <li>Connecter les postes au switch à l'aide de câbles droits</li>
+                    <li>Attribuer les adresses IP aux ordinateurs :
+                        <ul>
+                            <li>PC0 : 192.168.1.1</li>
+                            <li>PC1 : 192.168.1.2</li>
+                            <li>PC2 : 192.168.1.3</li>
+                            <li>PC3 : 192.168.1.4</li>
+                        </ul>
+                        Masque de sous-réseau : 255.255.255.0
+                    </li>
+                    <li>Consulter les configurations réseaux des ordinateurs et tester les connexions avec les commandes ipconfig et ping</li>
+                    <li>Visualiser les échanges d'informations en mode simulation</li>
+                    <li>Enregistrer votre travail et fermer l'application</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Script jQuery pour améliorer l'interactivité
+        $(document).ready(function() {
+            // Ajouter une animation pour les cartes
+            $('.card').hover(
+                function() {
+                    $(this).css('transform', 'translateY(-5px)');
+                },
+                function() {
+                    $(this).css('transform', 'translateY(0)');
+                }
+            );
+            
+            // Ajouter la fonctionnalité d'impression
+            $('#printBtn').click(function() {
+                window.print();
+            });
+        });
+    </script>
+</body>
+</html>

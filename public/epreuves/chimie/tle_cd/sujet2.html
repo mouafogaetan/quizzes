@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contrôle de Chimie — Acide/Base, pH, Dilutions</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- MathJax config (fourni par l'utilisateur) -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]]
+      }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body { background: #f8fafc; }
+    .exercise h5 { margin-top: 1rem; }
+    .points { font-weight: 600; color: #0d6efd; }
+    .stamp { font-variant: small-caps; letter-spacing: .05em; color: #6c757d; }
+    .figure-caption { font-size: .9rem; }
+    .paper { background: #fff; border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,.06); }
+    .watermark { position: fixed; bottom: 1rem; right: 1rem; opacity: .25; font-weight: 700; }
+    .fw-600 { font-weight: 600; }
+    @media print { .no-print { display: none !important; } body { background: #fff; } .paper { box-shadow: none; } }
+  </style>
+</head>
+<body>
+  <div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <div class="stamp">Département de Chimie</div>
+        <h1 class="h3 m-0">Contrôle de Chimie — Acides/Bases, pH, Titrage & Dilutions</h1>
+        <div class="text-muted">Durée : 2 h &middot; Coefficient : 2 &middot; Température de référence : $25\,^{\circ}\mathrm{C}$</div>
+      </div>
+      <button class="btn btn-primary no-print" id="btnPrint">🖨️ Imprimer</button>
+    </div>
+
+    <div class="paper p-4">
+      <p class="mb-4"><span class="fw-600">Consignes :</span> La calculatrice est autorisée. Justifiez clairement toutes vos réponses, indiquez les unités. Les ions issus de l’autoprotolyse de l’eau peuvent être négligés sauf mention contraire. On rappelle que $\mathrm{pH} = -\log [\mathrm{H_3O^+}]$ et $K_e = [\mathrm{H_3O^+}][\mathrm{HO^-}]$.</p>
+
+      <!-- EXERCICE 1 -->
+      <section class="exercise">
+        <h4>Exercice 1 — Vérification des savoirs <span class="points">4 pts</span></h4>
+        <ol>
+          <li>(Définitions) Donner une définition d’un <em>acide de Brønsted</em> et d’un <em>couple acide/base</em>. <span class="points">1 pt</span></li>
+          <li>(Couples avec l’eau) Citer les couples acide/base impliquant l’eau et écrire les demi-équations acide–base correspondantes. <span class="points">0,5 pt</span></li>
+          <li>(Mesures de pH) Nommer l’opération qui consiste à régler un pH‑mètre avant des mesures et préciser, en une phrase, le principe. <span class="points">0,5 pt</span></li>
+          <li>(Vrai/Faux) Justifier brièvement : <span class="points">1 pt</span>
+            <ol type="a">
+              <li>À $25\,^{\circ}\mathrm{C}$, une solution de pH $=7{,}10$ est basique.</li>
+              <li>Pour préparer précisément $100\,\mathrm{mL}$ d’une solution par dilution, une éprouvette graduée suffit.</li>
+              <li>Le produit ionique de l’eau $K_e$ augmente lorsque la température augmente.</li>
+              <li>La relation $\mathrm{pH} = -\log[\mathrm{H_3O^+}]$ est valable pour toutes les solutions aqueuses diluées.</li>
+            </ol>
+          </li>
+          <li>(QCM) Cocher la bonne réponse. Aucune justification n’est requise ici. <span class="points">1 pt</span>
+            <ol type="a">
+              <li>À $25\,^{\circ}\mathrm{C}$, le pourcentage de molécules d’eau ionisées par autoprotolyse est de l’ordre de :
+                <ul>
+                  <li>A) $1{,}0\times10^{-7}\,\%$</li>
+                  <li>B) $5{,}6\times10^{-8}\,\%$</li>
+                  <li>C) $1{,}0\times10^{-14}\,\%$</li>
+                  <li>D) $5{,}6\times10^{-7}\,\%$</li>
+                </ul>
+              </li>
+              <li>À $80\,^{\circ}\mathrm{C}$, on a $K_e=25,0\times10^{-14}$. Une solution de pH $=7{,}0$ à $80\,^{\circ}\mathrm{C}$ est :
+                <ul>
+                  <li>A) acide</li><li>B) basique</li><li>C) neutre</li><li>D) aucune des réponses</li>
+                </ul>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </section>
+
+      <hr/>
+
+      <!-- EXERCICE 2 -->
+      <section class="exercise">
+        <h4>Exercice 2 — Application des savoirs <span class="points">4 pts</span></h4>
+        <p>On considère, à $25\,^{\circ}\mathrm{C}$, une solution décimolaire d’<strong>acide éthanoïque</strong> $\mathrm{CH_3COOH}$ de pH mesuré $\mathrm{pH}=2{,}87$.</p>
+        <ol>
+          <li>Qualifier (acide fort/faible) l’acide éthanoïque en vous appuyant sur l’ordre de grandeur des concentrations en espèces. <span class="points">0,5 pt</span></li>
+          <li>Écrire l’équation de mise en solution et dégager le couple acide/base mis en jeu. <span class="points">0,75 pt</span></li>
+          <li>Déterminer les concentrations molaires à l’équilibre de toutes les espèces en solution : $[\mathrm{CH_3COOH}]$, $[\mathrm{CH_3COO^-}]$, $[\mathrm{H_3O^+}]$. <span class="points">1,5 pt</span></li>
+          <li>Calculer la constante d’acidité $K_a$ puis le $\mathrm{p}K_a$ de $\mathrm{CH_3COOH}$. <span class="points">0,75 pt</span></li>
+          <li>À la même température, une solution d’<strong>acide propanoïque</strong> possède $\mathrm{p}K_a=4{,}87$. Lequel des deux acides est le plus fort ? Justifier. <span class="points">0,5 pt</span></li>
+        </ol>
+      </section>
+
+      <hr/>
+
+      <!-- EXERCICE 3 -->
+      <section class="exercise">
+        <h4>Exercice 3 — Utilisation des savoirs <span class="points">4 pts</span></h4>
+        <p>On dispose d’une solution <strong>B</strong> d’<em>acide benzoïque</em> $\mathrm{C_6H_5COOH}$ de concentration $C_0 = 2{,}0\times10^{-2}\;\mathrm{mol\,L^{-1}}$ et d’une solution <strong>C</strong> d’acide chlorhydrique de concentration $C = 1{,}5\times10^{-3}\;\mathrm{mol\,L^{-1}}$.</p>
+        <ol>
+          <li>Le pH de la solution B est $\mathrm{pH}_B = 2{,}95$. Calculer le <em>coefficient d’ionisation</em> $\alpha_1$ de l’acide benzoïque dans l’eau et conclure sur le caractère fort/faible. <span class="points">0,5 pt</span></li>
+          <li>On prélève $10\,\mathrm{mL}$ de B que l’on place dans une fiole jaugée d’un litre, puis on complète à l’eau distillée. La solution obtenue $B_1$ a pour pH $=4{,}05$. Déterminer le coefficient d’ionisation $\alpha_2$ de l’acide benzoïque dans $B_1$ et conclure. <span class="points">1,5 pt</span></li>
+          <li>On mélange $100\,\mathrm{mL}$ de B avec $100\,\mathrm{mL}$ de C. Le pH du mélange est $3{,}18$. Calculer le coefficient d’ionisation $\alpha_3$ de l’acide benzoïque <em>dans ce milieu acide</em> et commenter l’influence de l’ion commun $\mathrm{H_3O^+}$. <span class="points">2 pts</span></li>
+        </ol>
+      </section>
+
+      <hr/>
+
+      <!-- EXERCICE 4 -->
+      <section class="exercise">
+        <h4>Exercice 4 — Situations expérimentales <span class="points">4 pts</span></h4>
+        <div class="row g-3 align-items-center">
+          <div class="col-md-7">
+            <p><strong>A)</strong> À $25\,^{\circ}\mathrm{C}$, on dispose d’un flacon d’<em>acide chlorhydrique commercial</em> noté : densité $d = 1{,}18$ ; pourcentage massique en $\mathrm{HCl}$ : $P = 37\,\%$. On souhaite préparer, dans une fiole jaugée de volume $V_s$ connu, une solution $S$ de concentration $c_S = 0{,}50\;\mathrm{mol\,L^{-1}}$. On ajoute d’abord $200\,\mathrm{mL}$ d’eau distillée dans la fiole.</p>
+            <p><em>Décrire</em> de manière claire et détaillée, en précisant la verrerie (nommer chaque pièce) et les étapes, la procédure correcte pour préparer la solution $S$ <u>en toute sécurité</u>. Un schéma est attendu. <span class="points">4 pts</span></p>
+          </div>
+          <div class="col-md-5">
+            <figure class="text-center">
+              <img class="img-fluid rounded" alt="Fiole jaugée" src="https://commons.wikimedia.org/wiki/Special:FilePath/Volumetric%20flask.PNG" />
+              <figcaption class="figure-caption">Fiole jaugée (Wikimedia Commons).</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="row g-3 mt-2 align-items-center">
+          <div class="col-md-6">
+            <figure class="text-center">
+              <img class="img-fluid rounded" alt="Pipette jaugée graduée" src="https://commons.wikimedia.org/wiki/Special:FilePath/10%20ml%20graduated%20pipette.jpg" />
+              <figcaption class="figure-caption">Pipette graduée (Wikimedia Commons).</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-6">
+            <figure class="text-center">
+              <img class="img-fluid rounded" alt="pH-mètre de paillasse" src="https://commons.wikimedia.org/wiki/Special:FilePath/PH%20Meter%2001.jpg" />
+              <figcaption class="figure-caption">pH‑mètre (Wikimedia Commons).</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <p class="mt-3"><strong>B)</strong> À $25\,^{\circ}\mathrm{C}$, on prépare $S_4$ en mélangeant : $S_1$ (20 mL d’une solution décimolaire d’acide chlorhydrique), $S_2$ (25 mL d’une solution contenant $7{,}46\,\mathrm{g}$ de chlorure de potassium), $S_3$ (30 mL d’une solution d’acide sulfurique de pH $=1{,}70$). Un camarade affirme que $S_4$ ne sera pas électriquement neutre ; un autre pense le contraire. <em>Départagez</em>‑les par un raisonnement quantitatif (compte des charges) et une conclusion claire. <span class="points">4 pts</span></p>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <figure class="text-center">
+              <img class="img-fluid rounded" alt="Burette de titrage" src="https://commons.wikimedia.org/wiki/Special:FilePath/Burette.png" />
+              <figcaption class="figure-caption">Burette (Wikimedia Commons).</figcaption>
+            </figure>
+          </div>
+          <div class="col-md-6">
+            <figure class="text-center">
+              <img class="img-fluid rounded" alt="Lecture de ménisque dans une burette" src="https://commons.wikimedia.org/wiki/Special:FilePath/Meniscus%20of%20water%20in%20burette.JPG" />
+              <figcaption class="figure-caption">Lecture du ménisque (Wikimedia Commons).</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <hr/>
+
+      <!-- COURBE (Chart.js) -->
+      <section class="exercise">
+        <h4>Annexe — Exemple de courbe de titrage d’un acide faible par une base forte (indicative)</h4>
+        <p>Le graphique ci‑dessous (simulé) illustre l’allure générale d’une courbe de titrage de $\mathrm{HA}$ (faible) par $\mathrm{OH^-}$ (forte) : zone tampon, point à mi‑équivalence ($\mathrm{pH} = \mathrm{p}K_a$), saut de pH à l’équivalence.</p>
+        <canvas id="titrage" height="180"></canvas>
+      </section>
+
+      <div class="watermark">Séance : Acide–Base &middot; pH &middot; Dilutions</div>
+    </div>
+
+    <footer class="text-center text-muted mt-3 mb-5">
+      <small>Document HTML généré avec Bootstrap, jQuery, MathJax et Chart.js.</small>
+    </footer>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Impression
+    $("#btnPrint").on("click", function(){ window.print(); });
+
+    // Courbe de titrage (simulation qualitative)
+    (function(){
+      const ctx = document.getElementById('titrage');
+      if(!ctx) return;
+      // Volumes (mL)
+      const V = Array.from({length: 41}, (_,i)=> i); // 0..40 mL
+      // pH stylisé : acide faible (pKa ~ 4.8), C = 0.1 M, V0 = 25 mL, base 0.1 M
+      const pKa = 4.8, V0 = 25, Veq = 25;
+      const pH = V.map(v=>{
+        if(v === 0) return 2.9;
+        const ratio = (v)/(V0);
+        if(v === Veq) return 8.9; // pH au voisinage de l'équivalence (>7)
+        if(v < Veq){ // Henderson-Hasselbalch
+          return pKa + Math.log10(ratio > 0 ? ratio : 1e-6);
+        } else {
+          // Excès de base forte
+          const C = 0.1, CB = 0.1;
+          const nOH = (v - Veq)/1000*CB; // mol
+          const Vtot = (V0 + v)/1000;    // L
+          const cOH = nOH / Vtot;
+          const pOH = -Math.log10(Math.max(cOH,1e-12));
+          return 14 - pOH;
+        }
+      });
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: V,
+          datasets: [{
+            label: 'pH en fonction du volume de base ajouté (mL)',
+            data: pH,
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0.15
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: true },
+            tooltip: { enabled: true }
+          },
+          scales: {
+            x: { title: { display: true, text: 'Volume de base ajouté (mL)'} },
+            y: { title: { display: true, text: 'pH'}, min: 0, max: 14 }
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

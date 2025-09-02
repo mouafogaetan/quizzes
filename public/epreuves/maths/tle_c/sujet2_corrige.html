@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Corrigé — Épreuve de Mathématiques (Tle C)</title>
+
+  <!-- Bootstrap & jQuery -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- Chart.js (optionnel pour illustrations) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Librairies de dessin (optionnelles) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.17/paper-full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+
+  <!-- MathJax (LaTeX inline: $...$) -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\(', '\)']] }
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body { background: #f7f7fb; }
+    .card { border-radius: 1rem; }
+    .sol { border-left: 4px solid #0d6efd; padding-left: .9rem; }
+    code.k { background:#f0f3f9; padding:.1rem .35rem; border-radius:.35rem; }
+  </style>
+</head>
+<body class="text-dark">
+
+<div class="container my-5">
+  <div class="card shadow">
+    <div class="card-body p-4">
+      <h2 class="text-center mb-1">Corrigé – Épreuve de Mathématiques</h2>
+      <p class="text-center text-muted">Classe : Terminale C – Durée : 4h – Coef. 7</p>
+      <hr>
+
+      <h4 class="mt-4">PARTIE A : Évaluation des ressources (15 points)</h4>
+
+      <h5 class="mt-3">Exercice 1 (3 pts)</h5>
+      <ol class="mt-2">
+        <li class="mb-3">
+          <b>Question 1 (remarque d’ambiguïté & résolution cohérente)</b><br>
+          L’énoncé « $N$ s’écrit $200\overline{a}$ et $44\overline{b}$ » est ambigu (longueurs différentes).
+          Nous adoptons l’interprétation <i>cohérente à 3 chiffres</i> : $20\overline{a}$ et $44\overline{b}$, c.-à-d.
+          $N=200+a=440+b$ avec $a,b\in\{2,\dots,9\}$. Alors $a-b=240$ impossible. <br>
+          <span class="sol">
+            <b>Conclusion :</b> sous cette lecture, <b>aucune solution</b>. <br>
+            <u>Version corrigée possible</u> : chercher le plus petit $N$ s’écrivant $2\overline{a}4$ et $1\overline{b}8$ (nombres à 3 chiffres).<br>
+            On résout $200+10a+4=100+10b+8\ \Leftrightarrow\ 10a-10b=-96\ \Rightarrow\ a-b=-9.6$ impossible.<br>
+            Pour assurer l’existence, on peut choisir par exemple « $2\overline{a}5$ et $2\overline{b}5$ », ce qui impose $a=b$ et donne
+            le plus petit $N=225$ pour $a=b=2$.
+          </span>
+        </li>
+
+        <li>
+          Soit $n\in\mathbb{N}^*$ et $N=9^n=3^{2n}$.
+          <ol type="a">
+            <li class="mb-2">
+              <b>Diviseurs de $9^n$</b> : tout diviseur est de la forme $3^k$ avec $0\le k\le 2n$.<br>
+              <span class="sol">$\mathcal{D}(9^n)=\{\,3^k\mid k=0,1,\dots,2n\,\}$.</span>
+            </li>
+            <li class="mb-2">
+              <b>Somme $S_n$ des diviseurs</b> : suite géométrique de raison $3$ :
+              $$S_n=\sum_{k=0}^{2n}3^k=\frac{3^{2n+1}-1}{3-1}=\boxed{\dfrac{3^{2n+1}-1}{2}}.$$
+            </li>
+            <li class="mb-2">
+              <b>Chiffre des unités de $9^n$</b> : $9^n\equiv\begin{cases}9\ (n\text{ impair})\\1\ (n\text{ pair})\end{cases}\pmod{10}$.<br>
+              <span class="sol">Unité $=9$ si $n$ impair, $=1$ si $n$ pair.</span>
+            </li>
+            <li class="mb-2">
+              <b>Chiffre des unités de $S_n$</b> : utiliser $S_n=\dfrac{3^{2n+1}-1}{2}$. On travaille $\bmod 20$ pour gérer la division par 2. <br>
+              Or $9^n\equiv\begin{cases}1 & (n\text{ pair})\\9&(n\text{ impair})\end{cases}\pmod{20}$, donc
+              $3^{2n+1}=3\cdot9^n\equiv\begin{cases}3&(n\text{ pair})\\27\equiv7&(n\text{ impair})\end{cases}\pmod{20}$.<br>
+              Ainsi $3^{2n+1}-1\equiv\begin{cases}2\\6\end{cases}\pmod{20}$ et
+              $$S_n\equiv\begin{cases}1 & (n\text{ pair})\\3&(n\text{ impair})\end{cases}\pmod{10}.$$
+              <span class="sol">Unité de $S_n$: $1$ si $n$ pair, $3$ si $n$ impair.</span>
+            </li>
+          </ol>
+        </li>
+      </ol>
+
+      <h5 class="mt-4">Exercice 2 (4,5 pts) — Triplets pythagoriciens</h5>
+      <ol>
+        <li class="mb-2">
+          Si $(x,y,z)$ satisfait $x^2+y^2=z^2$ et $k\in\mathbb{N}^*$, alors
+          $(kx)^2+(ky)^2=k^2(x^2+y^2)=k^2z^2=(kz)^2$. <span class="sol">Donc $(kx,ky,kz)$ est aussi un TP.</span>
+        </li>
+        <li class="mb-2">
+          Supposons $x,y,z$ tous pairs : $x=2x',y=2y',z=2z'$ ; alors $4(x'^2+y'^2)=4z'^2\Rightarrow x'^2+y'^2=z'^2$,
+          contredisant la primalité par descente infinie. <span class="sol">Ils ne peuvent pas être tous pairs.</span>
+        </li>
+        <li class="mb-2">
+          $144=2^4\cdot3^2$. <span class="sol">Décomposition en facteurs premiers : $2^4\times3^2$.</span>
+        </li>
+        <li class="mb-2">
+          $3x^2=z^2$ \;$\Rightarrow\;\left(\dfrac{z}{x}\right)^2=3$ \;$\Rightarrow\;\dfrac{z}{x}=\sqrt3\notin\mathbb{Q}$ si $x\ne0$.
+          <span class="sol">Aucun couple d’entiers non nuls $(x,z)$.</span>
+        </li>
+        <li class="mb-2">
+          <b>TP avec hypoténuse $2021$ ?</b> On sait qu’un entier $z$ est hypoténuse d’un TP ssi
+          dans sa décomposition en facteurs premiers, tout facteur $\equiv3\pmod4$ apparaît avec
+          <i>exposant pair</i>. Or $2021=43\cdot47$ avec $43\equiv47\equiv3\pmod4$.
+          <span class="sol">Aucun TP de la forme $(x,y,2021)$ n’existe.</span>
+        </li>
+      </ol>
+
+      <h5 class="mt-4">Exercice 3 (7,5 pts) — Nombres complexes & trigonométrie</h5>
+      <ol>
+        <li class="mb-2">
+          Soit $z=\sqrt3+i(\sqrt2-1)$.
+          <ul>
+            <li>
+              <b>Forme algébrique de $z^2$</b> : avec $a=\sqrt3$, $b=\sqrt2-1$,
+              $$z^2=(a+ib)^2=(a^2-b^2)+2abi=\underbrace{2\sqrt2}_{\Re}\; +\; i\,\underbrace{(2\sqrt6-2\sqrt3)}_{\Im}.$$
+            </li>
+            <li>
+              <b>Forme trigonométrique de $z^2$ et forme exponentielle de $z$</b> :
+              $|z|^2=|z^2|=a^2+b^2=3+(3-2\sqrt2)=6-2\sqrt2$. Posons $r=|z|=\sqrt{6-2\sqrt2}$.<br>
+              Soit $\theta=\arg(z)\in(0,\frac\pi2)$, alors $z=r(\cos\theta+i\sin\theta)=r e^{i\theta}$.<br>
+              <span class="sol"><b>Exponentialement</b> : $\boxed{z=re^{i\theta}}$ avec $\tan\theta=\dfrac{\sqrt2-1}{\sqrt3}$.
+              <br><b>Pour $z^2$</b> : $z^2=r^2e^{i2\theta}$, donc $\cos(2\theta)=\dfrac{2\sqrt2}{r^2}$,
+              $\sin(2\theta)=\dfrac{2\sqrt6-2\sqrt3}{r^2}$.</span>
+            </li>
+            <li>
+              <b>Valeurs exactes de $\cos\dfrac\pi{12}$ et $\sin\dfrac\pi{12}$</b> (méthode standard) : <br>
+              $$\cos\frac\pi{12}=\cos15^\circ=\sqrt{\frac{1+\cos30^\circ}{2}}
+              =\sqrt{\frac{1+\frac{\sqrt3}{2}}{2}}
+              =\boxed{\frac{\sqrt{2+\sqrt3}}{2}},$$
+              $$\sin\frac\pi{12}=\sin15^\circ=\sqrt{\frac{1-\cos30^\circ}{2}}
+              =\sqrt{\frac{1-\frac{\sqrt3}{2}}{2}}
+              =\boxed{\frac{\sqrt{2-\sqrt3}}{2}}.$$
+            </li>
+          </ul>
+        </li>
+
+        <li class="mb-2">
+          <b>Linéariser $\sin^4x$ et exprimer $\cos4x$ en fonction de $\cos x$.</b><br>
+          $\sin^2x=\dfrac{1-\cos2x}{2}\ \Rightarrow\ \sin^4x=\left(\dfrac{1-\cos2x}{2}\right)^2
+          =\dfrac{3-4\cos2x+\cos4x}{8}$.<br>
+          $\cos2x=2\cos^2x-1\ \Rightarrow\ \cos4x=2\cos^2(2x)-1=2(2\cos^2x-1)^2-1
+          =\boxed{8\cos^4x-8\cos^2x+1}.$
+        </li>
+
+        <li class="mb-2">
+          <b>Équation</b> $\;z^4+(3-i)z^3+(2+5i)z^2+(10+12i)z+20=0$.<br>
+          Les racines « propres » ne sont pas rationnelles/gaussiennes simples ; une factorisation élémentaire
+          n’apparaît pas. On donne ci-dessous une <i>résolution numérique</i> (méthode de Durand–Kerner/Newton, par ex.) :
+          <div class="sol">
+            $$\begin{aligned}
+            z_1&\approx -2.789819563\ +\ 1.860782292\,i,\\
+            z_2&\approx -1.819275070\ -\ 0.079580595\,i,\\
+            z_3&\approx\phantom{-}0.108689795\ +\ 1.280013000\,i,\\
+            z_4&\approx\phantom{-}1.500404837\ -\ 2.061214697\,i.\
+            \end{aligned}$$
+          </div>
+          <small class="text-muted">Remarque : pour un sujet de Tle, on choisit en général des coefficients admettant
+          une factorisation polynomiale accessible à la main. Ici, la résolution exacte par radicaux est possible
+          mais hors programme ; la lecture numérique est acceptable.</small>
+        </li>
+
+        <li class="mb-2">
+          <b>Géométrie complexe</b> : $A(2-i)$, $B(-1+3i)$, $C(3+2i)$.<br>
+          <span class="sol">
+            $\overrightarrow{AB}=B-A=-3+4i$, $\overrightarrow{BC}=C-B=4- i$, $\overrightarrow{CA}=A-C=-1-3i$.<br>
+            $|AB|^2=25$, $|BC|^2=17$, $|CA|^2=10$. La plus grande est $|AB|^2=25$ et $10+17=27>25$ :
+            <b>triangle acutangle (aucun angle droit), non isocèle</b>.<br>
+            Le centre du cercle circonscrit $K(x,y)$ vérifie $KA=KB$ et $KA=KC$. On obtient
+            $$\boxed{K\;:\;x=\tfrac{17}{26},\ y=\tfrac{29}{26}}\quad\text{(affixe }\;\boxed{\tfrac{17}{26}+\tfrac{29}{26}i}).$$
+          </span>
+        </li>
+      </ol>
+
+      <hr>
+      <h4 class="mt-4">PARTIE B : Évaluation des compétences (5 points)</h4>
+
+      <p><b>Procédé de codage</b> : alphabet $A\mapsto0,\dots,Z\mapsto25$ et $r\equiv (7n+3)\pmod{26}$.</p>
+      <ol>
+        <li class="mb-3">
+          <b>Coder « MATHS »</b>.<br>
+          $M\to12\Rightarrow r\equiv(7\cdot12+3)=87\equiv9\Rightarrow J$ ; 
+          $A\to0\Rightarrow r=3\Rightarrow D$ ;
+          $T\to19\Rightarrow r\equiv(133+3)=136\equiv6\Rightarrow G$ ;
+          $H\to7\Rightarrow r\equiv52\equiv0\Rightarrow A$ ;
+          $S\to18\Rightarrow r\equiv129\equiv25\Rightarrow Z$.<br>
+          <span class="sol"><b>Réponse</b> : <code class="k">JDGAZ</code>.</span>
+        </li>
+
+        <li class="mb-3">
+          <b>Remarque sur la question de caserne (version libre de l’énoncé initial)</b> :<br>
+          si l’on interprète « Quand on forme des groupes de 13, il reste 8 soldats » alors
+          $$\boxed{N\equiv8\pmod{13}}.$$
+          Si, de plus, « chaque régiment a moins de 400 soldats » signifie que la taille $r$ d’un régiment
+          vérifie $r<400$ et $r\mid N$, il faut un <i>complément d’information</i> pour déterminer $N$ univoquement.
+          <span class="sol">Sans donnée supplémentaire, on se contente de la congruence $N\equiv8\ (13)$.</span>
+        </li>
+
+        <li class="mb-1">
+          <b>Billet (remarque d’ambiguïté)</b> : les notations $122\overline{x}$ et $211\overline{x}$ (concaténation de
+          chiffres) rendent la somme $x+y+z=60$ incohérente si $y,z$ sont des entiers à 4 chiffres.
+          <span class="sol">Pour un exercice exploitable, on peut poser par exemple $y=12x+2$ et $z=21x+1$,
+          $x>4$, d’où $x+(12x+2)+(21x+1)=60\Rightarrow34x=57\Rightarrow x=\tfrac{57}{34}$ (pas entier) ;
+          on ajusterait les coefficients pour obtenir un entier (p. ex. $y=10x+2$, $z=19x+1\Rightarrow30x=57\Rightarrow x=1.9$,
+          etc.).</span><br>
+          <small class="text-muted">Je te propose, si tu le souhaites, une version recalibrée donnant un entier et la solution chiffrée correspondante.</small>
+        </li>
+      </ol>
+
+      <hr>
+      
+      <script>
+        const labels = Array.from({length: 21}, (_,i)=> (i*0.5).toFixed(1));
+        const data = Array.from({length: 21}, (_,i)=> Math.sin(i*0.5));
+        new Chart(document.getElementById('myChart'), {
+          type: 'line',
+          data: { labels,
+            datasets: [{ label: 'f(x)=sin(x)', data, borderWidth:2, fill:false }]
+          },
+          options: { responsive:true, scales:{ y:{ beginAtZero:false } } }
+        });
+      </script>
+
+      <div class="alert alert-info mt-4">
+        <b>Transparence</b> — Deux sous-questions de l’énoncé initial que j’ai proposé se prêtaient mal à une
+        correction « propre » (Ex.1-1 et Ex.3-3, ainsi que la Q3 de la Partie B). Je les ai traitées en indiquant clairement
+        la difficulté et en donnant une alternative correcte. Si tu veux, je peux te fournir <u>une version révisée de l’énoncé</u>
+        parfaitement cohérente, avec ce corrigé déjà intégré.
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

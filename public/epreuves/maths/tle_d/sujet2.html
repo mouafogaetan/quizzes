@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Épreuve de Mathématiques - Terminale D</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+        .exam-header {
+            border-bottom: 2px solid #000;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .exercise {
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+        .part-title {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .point-value {
+            float: right;
+            font-weight: bold;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            background-color: white;
+        }
+        @media print {
+            body {
+                background-color: white;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4 mb-4">
+        <div class="exam-header text-center">
+            <h3>2024 – 2025</h3>
+            <h4>DÉPARTEMENT DE MATHÉMATIQUES</h4>
+            <h4>ÉPREUVE DE MATHÉMATIQUES</h4>
+            <h5>CLASSE: Terminale D | COEF: 4 | DURÉE: 4 Heures</h5>
+            <h5>RÉPUBLIQUE FRANÇAIS</h5>
+        </div>
+
+        <div class="part-title">
+            <h4>PARTIE A : ÉVALUATION DES RESSOURCES (15,5 points)</h4>
+        </div>
+
+        <div class="exercise">
+            <h5>EXERCICE 1 (5 points)</h5>
+            
+            <div class="question">
+                <p><strong>A- Questions de cours</strong></p>
+                <p>(1) Énoncer le théorème des valeurs intermédiaires pour une fonction d'une variable réelle continue. <span class="point-value">0,5 pt</span></p>
+                <p>(2) Donner une formulation de l'inégalité des accroissements finis pour une fonction numérique d'une variable réelle dérivable. <span class="point-value">0,5 pt</span></p>
+            </div>
+            
+            <div class="question">
+                <p><strong>B-</strong> Soit le polynôme $Q(z) = z^3 + 8iz^2 + (12i - 20)z - 4(3i + 8)$ où $z \in \mathbb{C}$.</p>
+                <p>(1) Soit $z_0 = \alpha - 4i$, où $\alpha$ est un réel. Déterminer $\alpha$ pour que $z_0$ soit une racine de $Q(z)$. <span class="point-value">0,75 pt</span></p>
+                <p>(2) Trouver les nombres complexes $a$, $b$ et $c$ tels que $Q(z) = (z - 3 + 4i)(az^2 + bz + c)$. <span class="point-value">0,75 pt</span></p>
+                <p>(3) Déterminer les racines carrées de $-7 - 24i$. <span class="point-value">0,75 pt</span></p>
+                <p>(4) Résoudre dans $\mathbb{C}$ l'équation $z^2 + (3 + 2i)z + 4i = 0$. <span class="point-value">0,5 pt</span></p>
+                <p>(5) En déduire les solutions dans $\mathbb{C}$ de l'équation $Q(z) = 0$. <span class="point-value">0,25 pt</span></p>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <h5>EXERCICE 2 (3 points)</h5>
+            <p>La municipalité de Lyon souhaite construire des logements sociaux pour ses employés. Après appel d'offres, l'entreprise B2C est sélectionnée. Pour fixer les prix, le comptable a relevé les salaires $x_i$ et les propositions de loyers $y_i$ d'un échantillon de huit agents (en milliers d'euros) :</p>
+            
+            <table class="table table-bordered text-center">
+                <tr>
+                    <th>Salaire ($x_i$)</th>
+                    <td>55</td>
+                    <td>95</td>
+                    <td>65</td>
+                    <td>125</td>
+                    <td>115</td>
+                    <td>105</td>
+                </tr>
+                <tr>
+                    <th>Loyer ($y_i$)</th>
+                    <td>16</td>
+                    <td>22</td>
+                    <td>17</td>
+                    <td>32</td>
+                    <td>27</td>
+                    <td>26</td>
+                </tr>
+            </table>
+            
+            <div class="question">
+                <p>(1) <strong>a-</strong> Dans un repère orthogonal, représenter le nuage de points de cette série statistique. <span class="point-value">0,75 pt</span></p>
+                <p><strong>b-</strong> Déterminer les coordonnées du point moyen $G$ et le placer dans le repère. <span class="point-value">0,5 pt</span></p>
+            </div>
+            
+            <div class="question">
+                <p>(2) <strong>a-</strong> Calculer le coefficient de corrélation linéaire $r$ de cette série. <span class="point-value">0,75 pt</span></p>
+                <p><strong>b-</strong> Le salaire permet-il d'expliquer la proposition de loyer ? <span class="point-value">0,25 pt</span></p>
+            </div>
+            
+            <div class="question">
+                <p>(3) <strong>a-</strong> Déterminer une équation de la droite de régression de $y$ en $x$. <span class="point-value">0,5 pt</span></p>
+                <p><strong>b-</strong> Estimer le salaire d'un agent dont le loyer est de 3500€. <span class="point-value">0,25 pt</span></p>
+            </div>
+            
+            <div class="text-center no-print">
+                <canvas id="statChart" width="400" height="300"></canvas>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <h5>EXERCICE 3 (1,25 point)</h5>
+            <p>On considère la fonction $k$ définie par $k(x) = x + \sqrt{x^2 + 1}$.</p>
+            
+            <div class="question">
+                <p>(1) Montrer que $k$ est dérivable sur $[1, 4]$ et que pour tout $t \in [1, 4]$, on a :</p>
+                <p>$\frac{1}{2\sqrt{2}} \leq k'(t) \leq \frac{5}{2\sqrt{5}}$ <span class="point-value">0,75 pt</span></p>
+            </div>
+            
+            <div class="question">
+                <p>(2) En déduire un encadrement de $k(4) - k(1)$. <span class="point-value">0,5 pt</span></p>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <h5>EXERCICE 4 (6,25 points)</h5>
+            
+            <div class="question">
+                <p><strong>SECTION 1</strong></p>
+                <p>Soit $g$ la fonction définie sur $D = ]-\infty; -3[ \cup ]0; +\infty[$ par $g(x) = \frac{x+2}{\sqrt{x^2 + 3x}} - 1$.</p>
+                <p>(1) Montrer que $g'(x) = \frac{-3}{(x^2+3x)\sqrt{x^2+3x}}$ <span class="point-value">0,5 pt</span></p>
+                <p>(2) Dresser le tableau de variation de $g$ pour tout $x \in D$. <span class="point-value">0,5 pt</span></p>
+                <p>(3) En déduire le signe de $g(x)$ pour tout $x \in D$. <span class="point-value">0,25 pt</span></p>
+            </div>
+            
+            <div class="question">
+                <p><strong>SECTION 2</strong></p>
+                <p>Soit $f$ la fonction définie sur $]-\infty; -3[ \cup ]0; +\infty[$ par $f(x) = \sqrt{x^2 + 3x} - x$ et $(C_f)$ sa courbe représentative.</p>
+                <p>(1) Étudier la dérivabilité de $f$ à droite de $0$ et à gauche de $-3$, puis interpréter. <span class="point-value">1 pt</span></p>
+                <p>(2) Montrer que $f'(x) = g(x)$ et dresser le tableau de variations de $f$. <span class="point-value">0,75 pt</span></p>
+                <p>(3) Étudier les branches infinies de $f$. <span class="point-value">0,75 pt</span></p>
+                <p>(4) Construire soigneusement $(C_f)$ et ses asymptotes. <span class="point-value">1 pt</span></p>
+                <p>(5) Soit $h$ la restriction de $f$ sur $[0; +\infty[$.</p>
+                <p><strong>a)</strong> Montrer que $h$ réalise une bijection de $]0; +\infty[$ vers un intervalle $J$ à préciser. <span class="point-value">0,5 pt</span></p>
+                <p><strong>b)</strong> Expliciter $h^{-1}(x)$ pour tout $x \in J$. <span class="point-value">0,5 pt</span></p>
+                <p><strong>c)</strong> Construire soigneusement la courbe $(C')$ de $h^{-1}$ dans le repère précédent. <span class="point-value">0,5 pt</span></p>
+            </div>
+            
+            <div class="text-center no-print">
+                <div id="functionPlot"></div>
+            </div>
+        </div>
+
+        <div class="part-title">
+            <h4>PARTIE B : ÉVALUATION DES COMPÉTENCES (4,5 points)</h4>
+        </div>
+
+        <div class="exercise">
+            <p>Pour les fêtes de fin d'année, MARTIN, promoteur immobilier, a placé 45 000€ en bourse le 1<sup>er</sup> mars 2024. Cette somme évolue mensuellement suivant une suite géométrique $V$ définie par $V_2 - \frac{1}{3}V_1 - V_0 = 12 000$.</p>
+            
+            <p>Il espère obtenir de ce placement, au 1<sup>er</sup> janvier 2025, environ 280 000€ pour carreler son salon et construire une terrasse. Il souhaite carreler son salon avec des carreaux de 25cm × 25cm coûtant 22€ le paquet de 10.</p>
+            
+            <p>Les 4 coins de son salon sont matérialisés dans le plan par les images des solutions de l'équation complexe $(E)$ :</p>
+            <p>$[z^2 - (3 + 5i)z - 4 - 5i][z^2 - (9 - 5i)z + 20 - 35i] = 0$.</p>
+            
+            <p>Il désire changer le logo de son entreprise et fait appel à un designer qui réalise son logo dans un espace carré à l'aide de la représentation graphique de la fonction $f$ définie sur $[0;1]$ par $f(x) = \sqrt{6x}$, de sa bijection réciproque $f^{-1}$, et de leurs symétriques par rapport aux axes et à l'origine du repère (unité graphique: 6cm).</p>
+            
+            <div class="question">
+                <p><strong>TÂCHES</strong></p>
+                <p>(1) La somme que MARTIN va retirer de la bourse le 1<sup>er</sup> janvier suffira-t-elle pour ses travaux ? <span class="point-value">1,5 pt</span></p>
+                <p>(2) Combien doit prévoir MARTIN pour carreler son sol ? <span class="point-value">1,5 pt</span></p>
+                <p>(3) Aider MARTIN à visualiser son logo en le réalisant soigneusement. <span class="point-value">1,5 pt</span></p>
+            </div>
+            
+            <div class="text-center no-print">
+                <div id="logoDesign"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Script pour le graphique de l'exercice 2
+        $(document).ready(function() {
+            var ctx = document.getElementById('statChart').getContext('2d');
+            var statChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Salaire vs Loyer',
+                        data: [
+                            {x: 55, y: 16},
+                            {x: 95, y: 22},
+                            {x: 65, y: 17},
+                            {x: 125, y: 32},
+                            {x: 115, y: 27},
+                            {x: 105, y: 26}
+                        ],
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Salaire (milliers €)'
+                            },
+                            beginAtZero: true
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Loyer (milliers €)'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // Point moyen G
+            var meanX = (55+95+65+125+115+105)/6;
+            var meanY = (16+22+17+32+27+26)/6;
+            
+            statChart.data.datasets.push({
+                label: 'Point moyen G',
+                data: [{x: meanX, y: meanY}],
+                backgroundColor: 'rgba(255, 99, 132, 1)',
+                pointRadius: 7,
+                pointStyle: 'rectRot'
+            });
+            
+            statChart.update();
+        });
+        
+        // Script pour le dessin du logo (espace réservé)
+        function setup() {
+            var canvas = createCanvas(400, 400);
+            canvas.parent('logoDesign');
+            background(255);
+            
+            // Dessin simplifié du logo
+            stroke(0);
+            strokeWeight(2);
+            noFill();
+            
+            // Repère centré
+            translate(width/2, height/2);
+            scale(1, -1);
+            
+            // Axes
+            stroke(200);
+            line(-width/2, 0, width/2, 0);
+            line(0, -height/2, 0, height/2);
+            
+            // Fonction f(x) = sqrt(6x)
+            stroke(0, 0, 255);
+            beginShape();
+            for (var x = 0; x <= 1; x += 0.01) {
+                var y = Math.sqrt(6 * x);
+                vertex(x * 100, y * 100);
+            }
+            endShape();
+            
+            // Symétries
+            stroke(255, 0, 0);
+            beginShape();
+            for (var x = 0; x <= 1; x += 0.01) {
+                var y = Math.sqrt(6 * x);
+                vertex(-x * 100, y * 100);
+            }
+            endShape();
+            
+            stroke(0, 255, 0);
+            beginShape();
+            for (var x = 0; x <= 1; x += 0.01) {
+                var y = Math.sqrt(6 * x);
+                vertex(x * 100, -y * 100);
+            }
+            endShape();
+            
+            stroke(255, 128, 0);
+            beginShape();
+            for (var x = 0; x <= 1; x += 0.01) {
+                var y = Math.sqrt(6 * x);
+                vertex(-x * 100, -y * 100);
+            }
+            endShape();
+        }
+    </script>
+</body>
+</html>

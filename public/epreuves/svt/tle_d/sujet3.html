@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation de SVT - Théorique</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    
+    <!-- Configuration MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+        }
+        .header {
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .points {
+            float: right;
+            font-weight: bold;
+        }
+        .section-title {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-left: 4px solid #0d6efd;
+            margin: 20px 0;
+        }
+        canvas {
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <div class="header row">
+            <div class="col-md-8">
+                <h4>ÉTABLISSEMENT PRIVÉ D'ENSEIGNEMENT SECONDAIRE</h4>
+                <h5>Année scolaire 2024/2025 - Évaluation n°1</h5>
+                <h5>SCIENCES DE LA VIE ET DE LA TERRE - Épreuve théorique</h5>
+                <h5>Classe : Terminale D - Durée : 2 heures - Coefficient : 4</h5>
+            </div>
+            <div class="col-md-4 text-end">
+                <p>Examinateur : Dr. KONE MOUSSA</p>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h4>PARTIE A : ÉVALUATION DES RESSOURCES (10 points)</h4>
+        </div>
+
+        <div class="mb-4">
+            <h5>I - Évaluation des savoirs (4 points)</h5>
+            
+            <div class="question">
+                <h6>Exercice 1 : Question à Choix Multiple (2 points)</h6>
+                <p>Chaque série de propositions comporte une seule réponse correcte. Indiquez le numéro de la question suivi de la lettre correspondant à la bonne réponse.</p>
+                
+                <ol>
+                    <li>Le schéma suivant présente de manière désordonnée les étapes de la contraction musculaire. L'ordre chronologique correct est :
+                        <br>a/ ABCD &nbsp;&nbsp; b/ BDAC &nbsp;&nbsp; c/ CDAB &nbsp;&nbsp; d/ BADC <span class="points">0,5 pt</span></li>
+                    <li>La diffusion simple est un processus par lequel :
+                        <br>a/ les molécules utilisent des canaux protéiques pour traverser la membrane ;
+                        <br>b/ les substances lipophiles traversent la bicouche lipidique suivant leur gradient de concentration ;
+                        <br>c/ les molécules hydrophiles diffusent à travers la membrane selon un gradient décroissant ;
+                        <br>d/ certaines cellules forment des invaginations membranaires créant des vésicules. <span class="points">0,5 pt</span></li>
+                    <li>Le substrat utilisé pour la régénération de l'ATP dans la voie anaérobie alactique est :
+                        <br>a/ le glycogène ; &nbsp;&nbsp; b/ la phosphocréatine ; &nbsp;&nbsp; c/ les acides gras ; &nbsp;&nbsp; d/ le glucose plasmatique. <span class="points">0,5 pt</span></li>
+                    <li>La chaleur initiale produite lors de la contraction musculaire :
+                        <br>a/ apparaît après la contraction ;
+                        <br>b/ n'est pas produite par les fibres de type I ;
+                        <br>c/ résulte de la dégradation de la phosphocréatine ;
+                        <br>d/ est liée à la respiration cellulaire. <span class="points">0,5 pt</span></li>
+                </ol>
+            </div>
+            
+            <div class="question">
+                <h6>Exercice 2 : Description et explication des mécanismes (2 points)</h6>
+                <p>Un étudiant prépare trois tubes contenant respectivement : de l'eau distillée, une solution saline à 30% et une solution saline à 8,8%. Il ajoute à chaque tube quelques gouttes de sang non coagulé et observe après 15 minutes :</p>
+                <ul>
+                    <li>Tube 1 : globules rouges crénelés</li>
+                    <li>Tube 2 : absence d'éléments figurés</li>
+                    <li>Tube 3 : hématies de forme normale</li>
+                </ul>
+                
+                <ol>
+                    <li>Associez chaque observation au tube correspondant. <span class="points">0,75 pt</span></li>
+                    <li>Expliquez les phénomènes observés dans chaque tube. <span class="points">0,75 pt</span></li>
+                    <li>Calculez la pression osmotique du plasma sanguin à 37°C pour la solution de NaCl à 8,8%. 
+                        <br>Données : Na = 23 g/mol ; Cl = 35,5 g/mol. <span class="points">0,5 pt</span></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <h5>II - Évaluation des savoir-faire (6 points)</h5>
+            
+            <div class="question">
+                <h6>Exercice 1 : Analyse graphique de la diffusion facilitée (3 points)</h6>
+                <p>L'étude de la perméabilité membranaire des hématies au glucose a donné les résultats suivants :</p>
+                
+                <table class="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>Concentration extracellulaire de glucose (g/L)</th>
+                            <th>0,2</th>
+                            <th>0,4</th>
+                            <th>0,6</th>
+                            <th>0,8</th>
+                            <th>1,0</th>
+                            <th>1,2</th>
+                            <th>1,4</th>
+                            <th>1,6</th>
+                            <th>1,8</th>
+                            <th>2,0</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Flux mesuré (UA)</td>
+                            <td>10</td>
+                            <td>60</td>
+                            <td>80</td>
+                            <td>90</td>
+                            <td>95</td>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>100</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>Flux théorique (UA)</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>8</td>
+                            <td>10</td>
+                            <td>12</td>
+                            <td>14</td>
+                            <td>16</td>
+                            <td>18</td>
+                            <td>20</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <ol>
+                    <li>Tracez la courbe représentant le flux de glucose en fonction de sa concentration extracellulaire. <span class="points">1 pt</span></li>
+                    <li>Analysez et interprétez ces résultats. <span class="points">2 pts</span></li>
+                </ol>
+                
+                <div class="chart-container">
+                    <canvas id="glucoseChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h6>Exercice 2 : Mécanisme de la contraction musculaire (3 points)</h6>
+                <p>Le document 1 présente une micrographie électronique d'une jonction neuromusculaire. Une stimulation efficace du neurone moteur (A) provoque le passage de l'élément contractile (W) de l'état 1 à l'état 2 (document 2).</p>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-center"><strong>Document 1</strong><br>Jonction neuromusculaire</p>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Synapse_diagram3.png/800px-Synapse_diagram3.png" alt="Jonction neuromusculaire" class="img-fluid">
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-center"><strong>Document 2</strong><br>États de contraction</p>
+                        <div id="muscleSketch"></div>
+                    </div>
+                </div>
+                
+                <ol>
+                    <li>Réalisez un schéma interprétatif légendé montrant le passage de l'état 1 à l'état 2. <span class="points">1 pt</span></li>
+                    <li>Interprétez les variations de consommation d'O₂ et de production d'acide lactique en fonction de l'intensité de l'effort musculaire. <span class="points">1 pt</span></li>
+                    <li>Schématisez l'effet des ions Ca²⁺ et de l'ATP sur la contraction et le relâchement musculaire. <span class="points">1 pt</span></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <h4>PARTIE B : ÉVALUATION DES COMPÉTENCES (10 points)</h4>
+        </div>
+        
+        <div class="mb-4">
+            <h5>Compétence ciblée :</h5>
+            <p>Expliquer l'importance du renouvellement de l'ATP lors des activités musculaires et la signification biologique des échanges cellulaires.</p>
+            
+            <div class="scenario">
+                <h5>Situation problème :</h5>
+                <p>Un élève de Terminale D constate que son camarade présente une intolérance à l'exercice musculaire se manifestant par une faible endurance et une fatigue précoce. Les analyses médicales montrent pourtant une glycémie normale, indiquant un apport énergétique suffisant pour la régénération de l'ATP. Vous devez expliquer à cet élève l'importance des échanges cellulaires et l'origine du problème de son camarade.</p>
+                
+                <h6>Tâche 1 : (4 points)</h6>
+                <p>En vous appuyant sur le document 3, indiquez le type de transport membranaire utilisé par le glucose et le dioxygène. Expliquez le sens de circulation de ces molécules au repos et pendant l'exercice. Précisez la voie métabolique musculaire qui utilise ces deux molécules et l'importance de ces échanges pour la cellule musculaire lors de l'effort.</p>
+                
+                <h6>Tâche 2 : (3 points)</h6>
+                <p>Sous forme d'un texte argumenté, expliquez l'origine probable de la pathologie du camarade et établissez un lien entre cette origine et la nécessité du renouvellement de l'ATP lors des exercices musculaires. Utilisez les documents 4 et 5.</p>
+                
+                <h6>Tâche 3 : (3 points)</h6>
+                <p>Préparez un exposé destiné aux élèves montrant que les fibres musculaires de type I présentent un avantage dans la régénération de l'ATP pour les efforts de longue durée. Expliquez l'importance du renouvellement de l'ATP pour ces types d'efforts.</p>
+            </div>
+            
+            <div class="documents mt-4">
+                <h5>Documents supports :</h5>
+                
+                <div class="card mb-3">
+                    <div class="card-header">Document 3 : Échanges gazeux et nutritifs d'un muscle</div>
+                    <div class="card-body">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Gas_exchange_in_the_aveolus.svg/800px-Gas_exchange_in_the_aveolus.svg.png" alt="Échanges gazeux" class="img-fluid">
+                    </div>
+                </div>
+                
+                <div class="card mb-3">
+                    <div class="card-header">Document 4 : Synthèse du glycogène (simplifiée)</div>
+                    <div class="card-body">
+                        <p>Glucose → Glucose-6-phosphate (hexokinase) → Glucose-1-phosphate (phosphoglucomutase) → Glycogène (glycogène synthase)</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">Document 5 : Données métaboliques musculaires</div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>État musculaire</th>
+                                    <th>Paramètre</th>
+                                    <th>Sang artériel (entrant)</th>
+                                    <th>Sang veineux (sortant)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="2">Repos</td>
+                                    <td>O₂ (ml/100ml)</td>
+                                    <td>20</td>
+                                    <td>15</td>
+                                </tr>
+                                <tr>
+                                    <td>Glucose (mg/100ml)</td>
+                                    <td>90</td>
+                                    <td>80</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">Activité modérée</td>
+                                    <td>O₂ (ml/100ml)</td>
+                                    <td>20</td>
+                                    <td>11</td>
+                                </tr>
+                                <tr>
+                                    <td>Glucose (mg/100ml)</td>
+                                    <td>90</td>
+                                    <td>50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Graphique pour l'exercice sur la diffusion facilitée
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('glucoseChart').getContext('2d');
+            const glucoseChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0],
+                    datasets: [
+                        {
+                            label: 'Flux mesuré (UA)',
+                            data: [10, 60, 80, 90, 95, 100, 100, 100, 100, 100],
+                            borderColor: 'blue',
+                            backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                            tension: 0.3
+                        },
+                        {
+                            label: 'Flux théorique (UA)',
+                            data: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20],
+                            borderColor: 'red',
+                            backgroundColor: 'rgba(255, 0, 0, 0.1)',
+                            borderDash: [5, 5],
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Concentration extracellulaire de glucose (g/L)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Flux de glucose (UA)'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+
+        // Schéma de la contraction musculaire avec p5.js
+        const muscleSketch = (p) => {
+            p.setup = () => {
+                p.createCanvas(300, 200);
+                p.background(240);
+                
+                // État 1: Muscle au repos
+                p.stroke(0);
+                p.strokeWeight(1);
+                for (let i = 0; i < 10; i++) {
+                    p.line(50, 50 + i * 10, 250, 50 + i * 10);
+                }
+                p.text("État 1: Muscle au repos", 100, 30);
+                
+                // État 2: Muscle contracté
+                p.push();
+                p.translate(0, 100);
+                for (let i = 0; i < 10; i++) {
+                    p.line(50, 50 + i * 10, 250, 40 + i * 10);
+                }
+                p.text("État 2: Muscle contracté", 100, 30);
+                p.pop();
+            };
+        };
+        
+        new p5(muscleSketch, 'muscleSketch');
+    </script>
+</body>
+</html>

@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Installation et Configuration d'un Système d'Exploitation</title>
+    <title>Séquence 1: Installation d'un SE Windows</title>
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- MathJax Configuration -->
     <script>
         window.MathJax = {
             tex: {
@@ -14,25 +17,37 @@
         };
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
     <style>
-        .section-title {
-            border-bottom: 2px solid #0d6efd;
-            padding-bottom: 10px;
-            margin: 30px 0 20px 0;
-        }
-        .card {
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .table-custom {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .code-block {
+        .problem-box {
             background-color: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .learning-activity {
+            background-color: #e9ecef;
             padding: 15px;
             border-radius: 5px;
-            border-left: 4px solid #0d6efd;
             margin: 15px 0;
+        }
+        .summary-box {
+            background-color: #d1e7dd;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 30px 0;
+        }
+        .exercise-box {
+            background-color: #cfe2ff;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 30px 0;
+        }
+        .solution-box {
+            background-color: #fff3cd;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 30px 0;
         }
         .img-container {
             text-align: center;
@@ -40,238 +55,387 @@
         }
         .img-container img {
             max-width: 100%;
-            border: 1px solid #dee2e6;
-            border-radius: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
         }
-        .caption {
-            font-style: italic;
-            color: #6c757d;
-            margin-top: 8px;
+        .step-card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .step-header {
+            background-color: #0d6efd;
+            color: white;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+        .step-body {
+            padding: 15px;
+        }
+        .requirements-table {
+            width: 100%;
+            margin: 20px 0;
+        }
+        .requirements-table th {
+            background-color: #0d6efd;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="#">Installation d'un SE</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#boot">Configuration du Boot</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#partition">Partitionnement</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#installation">Installation</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#post-install">Post-installation</a></li>
-                </ul>
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Séquence 1: Installation d'un système d'exploitation Windows</h1>
+        
+        <!-- Situation Problème -->
+        <div class="problem-box">
+            <h2>Situation Problème</h2>
+            <p>Le lycée technique de Douala a reçu un don de 15 ordinateurs de la part d'une entreprise locale. Ces ordinateurs sont équipés de disques durs vierges et doivent être configurés avec Windows 10 pour équiper le nouveau laboratoire d'informatique. Le proviseur a désigné une équipe d'élèves pour effectuer cette installation.</p>
+            
+            <p><strong>Problèmes à résoudre :</strong></p>
+            <ul>
+                <li>Comment accéder au BIOS/UEFI pour configurer l'ordre de démarrage?</li>
+                <li>Comment partitionner correctement le disque dur pour un usage éducatif?</li>
+                <li>Quelle clé produit utiliser pour une installation légale dans le contexte scolaire camerounais?</li>
+                <li>Comment créer des comptes utilisateurs adaptés aux besoins des élèves et professeurs?</li>
+                <li>Quelles configurations spécifiques appliquer pour un environnement scolaire?</li>
+            </ul>
+            
+            <p><strong>Comment procéder pour installer et configurer Windows 10 sur ces postes en respectant le contexte camerounais ?</strong></p>
+        </div>
+
+        <h2>Activités d'apprentissage</h2>
+        
+        <!-- Activité 1 -->
+        <div class="learning-activity">
+            <h3>Activité 1: Préparation et accès au BIOS/UEFI</h3>
+            <div class="img-container">
+                <img src="data:image/jpeg;base64,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" alt="Interface UEFI" class="img-fluid">
+                <p class="text-muted">Interface UEFI moderne</p>
+            </div>
+            <p><strong>Objectif:</strong> Accéder au BIOS/UEFI et configurer l'ordre de démarrage.</p>
+            <p><strong>Mise en situation:</strong> Vous devez installer Windows 10 à partir d'une clé USB sur un ordinateur neuf.</p>
+            <p><strong>Tâche:</strong></p>
+            <ol>
+                <li>Redémarrez l'ordinateur et appuyez sur la touche d'accès au BIOS/UEFI (F2, F10, Del, Échap selon le fabricant)</li>
+                <li>Repérez l'onglet "Boot" ou "Démarrage"</li>
+                <li>Modifiez l'ordre de priorité pour que l'ordinateur démarre d'abord sur la clé USB</li>
+                <li>Activez le mode UEFI (si disponible) et sécurisez le boot</li>
+                <li>Sauvegardez les modifications et quittez</li>
+            </ol>
+            <p><strong>Astuce:</strong> Sur les ordinateurs récents, vous pouvez accéder aux options de démarrage en maintenant la touche Maj enfoncée tout en cliquant sur "Redémarrer" dans Windows.</p>
+        </div>
+
+        <!-- Activité 2 -->
+        <div class="learning-activity">
+            <h3>Activité 2: Processus d'installation de Windows</h3>
+            <div class="img-container">
+                <img src="data:image/png;base64,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" alt="Processus d'installation de Windows" class="img-fluid">
+                <p class="text-muted">Écran d'installation de Windows 10</p>
+            </div>
+            <p><strong>Objectif:</strong> Installer Windows 10 étape par étape.</p>
+            <p><strong>Mise en situation:</strong> Installation de Windows 10 sur un poste du lycée technique de Douala.</p>
+            <p><strong>Tâche:</strong></p>
+            <ol>
+                <li>Démarrez sur le support d'installation (DVD ou clé USB)</li>
+                <li>Sélectionnez la langue, le format horaire et le clavier (français, Cameroun)</li>
+                <li>Cliquez sur "Installer maintenant"</li>
+                <li>Entrez la clé produit (pour le contexte éducatif, utilisez une licence Education)</li>
+                <li>Acceptez les termes du contrat de licence</li>
+                <li>Choisissez "Installation personnalisée"</li>
+            </ol>
+        </div>
+
+        <!-- Activité 3 -->
+        <div class="learning-activity">
+            <h3>Activité 3: Partitionnement du disque dur</h3>
+            <div class="img-container">
+                <img src="data:image/png;base64,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" alt="Partitionnement sous Windows" class="img-fluid">
+                <p class="text-muted">Interface de partitionnement durant l'installation</p>
+            </div>
+            <p><strong>Objectif:</strong> Partitionner le disque dur selon les besoins éducatifs.</p>
+            <p><strong>Mise en situation:</strong> Préparer les partitions pour un usage scolaire avec séparation du système et des données.</p>
+            <p><strong>Tâche:</strong></p>
+            <ol>
+                <li>Dans l'écran de choix de partition, sélectionnez "Nouveau" pour créer des partitions</li>
+                <li>Créez une partition système d'au moins 100 Go pour Windows et les programmes</li>
+                <li>Créez une partition données d'au moins 200 Go pour les documents des utilisateurs</li>
+                <li>Optionnellement, créez une petite partition de recovery (10-15 Go)</li>
+                <li>Sélectionnez la partition système pour l'installation</li>
+                <li>Formatez les partitions en NTFS</li>
+            </ol>
+            <p><strong>Calcul d'espace:</strong> Pour un disque de 500 Go, on peut prévoir:
+                $E_{\text{système}} = 100\text{Go}$, $E_{\text{données}} = 385\text{Go}$, $E_{\text{recovery}} = 15\text{Go}$</p>
+        </div>
+
+        <!-- Activité 4 -->
+        <div class="learning-activity">
+            <h3>Activité 4: Configuration et création de comptes</h3>
+            <div class="img-container">
+                <img src="data:image/jpeg;base64,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" alt="Création de comptes Windows" class="img-fluid">
+                <p class="text-muted">Interface de création de comptes utilisateurs</p>
+            </div>
+            <p><strong>Objectif:</strong> Configurer les paramètres initiaux et créer des comptes utilisateurs.</p>
+            <p><strong>Mise en situation:</strong> Configuration finale d'un poste pour le laboratoire d'informatique.</p>
+            <p><strong>Tâche:</strong></p>
+            <ol>
+                <li>Personnalisez les paramètres de base (région: Cameroun, clavier: français)</li>
+                <li>Pour un environnement scolaire, choisissez "Configurer pour un établissement scolaire"</li>
+                <li>Créez un compte administrateur "AdminLabo" avec un mot de passe robuste</li>
+                <li>Créez un compte standard "Eleve" sans mot de passe pour un usage général</li>
+                <li>Configurez les paramètres de confidentialité selon la politique de l'établissement</li>
+                <li>Attendez la fin de l'installation et des mises à jour initiales</li>
+            </ol>
+        </div>
+
+        <!-- Activité 5 -->
+        <div class="learning-activity">
+            <h3>Activité 5: Post-installation et configuration</h3>
+            <div class="img-container">
+                <img src="data:image/jpeg;base64,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" alt="Post-installation Windows" class="img-fluid">
+                <p class="text-muted">Post-installation et configuration</p>
+            </div>
+            <p><strong>Objectif:</strong> Finaliser l'installation et configurer les paramètres essentiels.</p>
+            <p><strong>Mise en situation:</strong> Préparer le poste pour une utilisation en laboratoire scolaire.</p>
+            <p><strong>Tâche:</strong></p>
+            <ol>
+                <li>Installez les pilotes manquants (carte graphique, son, réseau)</li>
+                <li>Activez Windows Update et installez les dernières mises à jour</li>
+                <li>Installez les logiciels éducatifs nécessaires (suite bureautique, outils pédagogiques)</li>
+                <li>Configurez les paramètres de sécurité (pare-feu Windows, contrôle de compte utilisateur)</li>
+                <li>Créez un point de restauration système</li>
+                <li>Testez tous les périphériques (imprimante, scanner, etc.)</li>
+            </ol>
+        </div>
+
+        <!-- Résumé -->
+        <div class="summary-box">
+            <h2>Résumé</h2>
+            <p>L'installation d'un système d'exploitation Windows suit un processus structuré qui nécessite une préparation et une configuration minutieuses.</p>
+            
+            <h4>Étapes clés de l'installation de Windows :</h4>
+            
+            <div class="step-card">
+                <div class="step-header">Étape 1: Préparation</div>
+                <div class="step-body">
+                    <ul>
+                        <li>Vérifier les exigences système : processeur 1 GHz, 2 Go de RAM (4 Go recommandés), 20 Go d'espace disque</li>
+                        <li>Préparer le support d'installation (DVD ou clé USB bootable)</li>
+                        <li>Sauvegarder les données importantes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-header">Étape 2: Configuration du BIOS/UEFI</div>
+                <div class="step-body">
+                    <ul>
+                        <li>Accéder au BIOS/UEFI avec les touches F2, F10, Del ou Échap</li>
+                        <li>Configurer l'ordre de démarrage (boot order) pour prioriser le support d'installation</li>
+                        <li>Activer le mode UEFI pour les systèmes récents (offre plus de sécurité)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-header">Étape 3: Installation proprement dite</div>
+                <div class="step-body">
+                    <ul>
+                        <li>Choisir la langue et les préférences régionales (Cameroun, français)</li>
+                        <li>Entrer la clé produit (pour établissements scolaires, utiliser des licences Education)</li>
+                        <li>Accepter les termes du contrat de licence</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-header">Étape 4: Partitionnement</div>
+                <div class="step-body">
+                    <ul>
+                        <li>Créer des partitions selon les besoins : système, données, recovery</li>
+                        <li>Formater les partitions en NTFS ( système de fichiers standard pour Windows)</li>
+                        <li>Calculer les tailles de partitions : $E_{\text{système}} = 100\text{Go}$, $E_{\text{données}} = \text{reste} - 15\text{Go}$, $E_{\text{recovery}} = 15\text{Go}$</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-header">Étape 5: Configuration finale</div>
+                <div class="step-body">
+                    <ul>
+                        <li>Créer les comptes utilisateurs (administrateur et standard)</li>
+                        <li>Configurer les paramètres de confidentialité</li>
+                        <li>Attendre la fin de l'installation et des mises à jour</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h4>Considerations pour le contexte camerounais :</h4>
+            <ul>
+                <li>Utiliser des versions Education de Windows pour les établissements scolaires</li>
+                <li>Configurer les paramètres régionaux pour le Cameroun</li>
+                <li>Prévoir une connexion internet stable pour les activations et mises à jour</li>
+                <li>Adapter les configurations aux contraintes électriques (onduleurs pour pallier les coupures)</li>
+            </ul>
+        </div>
+
+        <!-- Exercice d'application -->
+        <div class="exercise-box">
+            <h2>Exercice d'application</h2>
+            <p>Vous êtes technicien informatique au collège Saint Michel de Yaoundé. On vous demande d'installer Windows 10 Education sur 10 postes informatiques qui serviront aux élèves de première.</p>
+            
+            <p><strong>Caractéristiques techniques des ordinateurs :</strong></p>
+            <ul>
+                <li>Processeur : Intel Core i3 2.4 GHz</li>
+                <li>Mémoire RAM : 8 Go</li>
+                <li>Disque dur : 1 To (1000 Go)</li>
+                <li>Cartes réseau sans fil et Ethernet intégrées</li>
+            </ul>
+            
+            <p><strong>Questions :</strong></p>
+            <ol>
+                <li>Quelle est la procédure pour accéder au BIOS/UEFI sur ces machines si la touche standard est F2?</li>
+                <li>Proposez un schéma de partitionnement pour un disque de 1 To avec justification des tailles.</li>
+                <li>Quels types de comptes utilisateurs devez-vous créer et avec quels privilèges?</li>
+                <li>Quelles configurations spécifiques devez-vous appliquer pour un environnement scolaire?</li>
+                <li>Listez les étapes post-installation essentielles pour ces postes.</li>
+            </ol>
+            
+            <button id="show-solution" class="btn btn-primary mt-3">Voir la correction</button>
+            
+            <div id="solution" class="mt-3" style="display: none;">
+                <h4>Correction proposée :</h4>
+                <ol>
+                    <li>Pour accéder au BIOS/UEFI :
+                        <ul>
+                            <li>Redémarrer l'ordinateur</li>
+                            <li>Appuyer plusieurs fois sur F2 dès l'allumage</li>
+                            <li>Si cela ne fonctionne pas, essayer les touches F10, Del ou Échap selon le fabricant</li>
+                            <li>Dans le BIOS, naviguer jusqu'à l'onglet "Boot" et configurer l'ordre de démarrage</li>
+                        </ul>
+                    </li>
+                    <li>Schéma de partitionnement pour 1 To :
+                        <ul>
+                            <li>Partition système (C:): 150 Go - Pour Windows et programmes</li>
+                            <li>Partition données (D:): 800 Go - Pour documents des utilisateurs</li>
+                            <li>Partition recovery: 50 Go - Pour sauvegardes et récupération</li>
+                            <li>Calcul: $150 + 800 + 50 = 1000$ Go (1 To)</li>
+                        </ul>
+                    </li>
+                    <li>Comptes utilisateurs à créer :
+                        <ul>
+                            <li><strong>Compte administrateur</strong> : "AdminCollege" avec tous les privilèges, mot de passe robuste</li>
+                            <li><strong>Comptes élèves</strong> : Comptes standards avec limitations, pas de mot de passe pour faciliter l'accès</li>
+                            <li><strong>Compte professeur</strong> : Compte avec privilèges étendus mais sans accès administrateur complet</li>
+                        </ul>
+                    </li>
+                    <li>Configurations spécifiques pour environnement scolaire :
+                        <ul>
+                            <li>Configurer les paramètres régionaux pour Cameroun</li>
+                            <li>Désactiver les jeux et applications non éducatives</li>
+                            <li>Configurer le navigateur avec une page d'accueil éducative</li>
+                            <li>Configurer des restrictions d'accès à certains sites web</li>
+                            <li>Installer les logiciels éducatifs nécessaires</li>
+                        </ul>
+                    </li>
+                    <li>Étapes post-installation :
+                        <ol>
+                            <li>Installer tous les pilotes manquants</li>
+                            <li>Mettre à jour Windows avec les derniers correctifs</li>
+                            <li>Installer les logiciels éducatifs (suite bureautique, outils pédagogiques)</li>
+                            <li>Configurer les imprimantes et périphériques partagés</li>
+                            <li>Créer un point de restauration système</li>
+                            <li>Test complet du poste et des périphériques</li>
+                        </ol>
+                    </li>
+                </ol>
             </div>
         </div>
-    </nav>
 
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="text-center mb-4">Installation et Configuration d'un Système d'Exploitation</h1>
+        <!-- Réponse à la situation problème -->
+        <div class="solution-box">
+            <h2>Réponse à la situation problème</h2>
+            <p>Pour installer et configurer Windows 10 sur les 15 ordinateurs du lycée technique de Douala, l'équipe d'élèves pourrait procéder comme suit :</p>
+            
+            <ol>
+                <li><strong>Préparation des supports d'installation</strong> : 
+                    <ul>
+                        <li>Télécharger l'image ISO de Windows 10 Education depuis le site Microsoft</li>
+                        <li>Créer des clés USB bootables avec l'outil Media Creation Tool</li>
+                        <li>Vérifier que les clés produits Education sont valides pour l'activation</li>
+                    </ul>
+                </li>
                 
-                <div class="card mb-4">
-                    <div class="card-header bg-light">
-                        <h2>Problématique</h2>
-                    </div>
-                    <div class="card-body">
-                        <p>L'ordinateur de votre père utilise actuellement Windows XP comme système d'exploitation. Il souhaite désormais migrer vers Windows 7 tout en conservant toutes ses fonctionnalités habituelles. Comment allez-vous procéder pour effectuer cette transition en garantissant le bon fonctionnement de tous les composants?</p>
-                    </div>
-                </div>
-
-                <h2 id="boot" class="section-title">I. Configuration de l'Ordre de Démarrage</h2>
+                <li><strong>Accès et configuration du BIOS/UEFI</strong> :
+                    <ul>
+                        <li>Redémarrer chaque ordinateur et accéder au BIOS/UEFI avec la touche appropriée (F2, F10, Del ou Échap)</li>
+                        <li>Configurer l'ordre de démarrage pour prioriser le boot sur USB</li>
+                        <li>Vérifier que le mode UEFI est activé pour une meilleure sécurité</li>
+                        <li>Sauvegarder les paramètres et quitter</li>
+                    </ul>
+                </li>
                 
-                <div class="card">
-                    <div class="card-header">
-                        <h3>A. Modification de l'ordre de démarrage via le BIOS</h3>
-                    </div>
-                    <div class="card-body">
-                        <ol>
-                            <li>Démarrez votre ordinateur et appuyez sur la touche <kbd>F2</kbd> ou <kbd>Suppr</kbd> pour accéder au BIOS</li>
-                            <li>Utilisez les touches directionnelles pour sélectionner l'onglet "Boot"</li>
-                            <li>Sélectionnez "Boot Order" (Ordre de démarrage)</li>
-                            <li>Utilisez les touches <kbd>F5</kbd>/<kbd>F6</kbd> pour modifier l'ordre des périphériques</li>
-                            <li>Appuyez sur <kbd>F10</kbd> pour enregistrer les modifications et redémarrer</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3>B. Modification via le menu de démarrage</h3>
-                    </div>
-                    <div class="card-body">
-                        <ol>
-                            <li>Vérifiez que la fonction de menu de démarrage F12 est activée</li>
-                            <li>Au démarrage de l'ordinateur, appuyez plusieurs fois sur <kbd>F12</kbd></li>
-                            <li>Sélectionnez le périphérique de démarrage à l'aide des touches directionnelles</li>
-                            <li>Appuyez sur <kbd>Entrée</kbd> pour confirmer votre choix</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <h2 id="partition" class="section-title">II. Partitionnement du Disque Dur</h2>
+                <li><strong>Processus d'installation</strong> :
+                    <ul>
+                        <li>Démarrer sur la clé USB d'installation</li>
+                        <li>Sélectionner la langue française et les paramètres régionaux pour le Cameroun</li>
+                        <li>Entrer la clé produit Windows 10 Education</li>
+                        <li>Accepter les termes du contrat de licence</li>
+                        <li>Choisir "Installation personnalisée"</li>
+                    </ul>
+                </li>
                 
-                <div class="card">
-                    <div class="card-body">
-                        <p>Avant d'installer un nouveau système d'exploitation, il est essentiel de préparer votre disque dur en créant des partitions adaptées. Nous recommandons la création d'au moins deux partitions :</p>
-                        <ul>
-                            <li><strong>Partition principale (C:)</strong> : Pour l'installation du système d'exploitation</li>
-                            <li><strong>Partition secondaire (D: ou E:)</strong> : Pour sauvegarder vos documents personnels</li>
-                        </ul>
-                        <p>Cette approche permet de réinstaller le système en cas de problème sans affecter vos données personnelles.</p>
-                        
-                        <div class="alert alert-warning">
-                            <strong>Important :</strong> Avant toute manipulation, effectuez une sauvegarde complète de vos données sur un support externe.
-                        </div>
-                    </div>
-                </div>
-
-                <h2 id="installation" class="section-title">III. Processus d'Installation de Windows 7</h2>
+                <li><strong>Partitionnement des disques durs</strong> :
+                    <ul>
+                        <li>Pour des disques de 500 Go, créer :
+                            <ul>
+                                <li>Partition système (C:): 100 Go - Pour le système et les programmes</li>
+                                <li>Partition données (D:): 385 Go - Pour les documents des utilisateurs</li>
+                                <li>Partition recovery: 15 Go - Pour les outils de récupération</li>
+                            </ul>
+                        </li>
+                        <li>Formater les partitions en NTFS</li>
+                        <li>Sélectionner la partition système pour l'installation</li>
+                    </ul>
+                </li>
                 
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Préparation</h3>
-                    </div>
-                    <div class="card-body">
-                        <ol>
-                            <li>Localisez votre clé produit Windows de 25 caractères</li>
-                            <li>Connectez votre ordinateur à Internet via un câble Ethernet</li>
-                            <li>Choisissez entre l'édition 32 bits ou 64 bits selon les capacités de votre processeur</li>
-                            <li>Insérez le DVD d'installation et redémarrez l'ordinateur</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Installation proprement dite</h3>
-                    </div>
-                    <div class="card-body">
-                        <ol>
-                            <li>Au démarrage, appuyez sur une touche pour démarrer depuis le DVD</li>
-                            <li>Sélectionnez la langue et cliquez sur "Installer maintenant"</li>
-                            <li>Choisissez de télécharger les mises à jour (recommandé)</li>
-                            <li>Acceptez les termes du contrat de licence</li>
-                            <li>Sélectionnez "Installation personnalisée (options avancées)"</li>
-                            <li>Sélectionnez l'espace disque où installer Windows</li>
-                            <li>Formatez la partition système existante si nécessaire</li>
-                            <li>Suivez les instructions pour compléter l'installation</li>
-                        </ol>
-                        
-                        <div class="img-container">
-                            <img src="data:image/jpeg;base64,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" alt="Interface d'installation de Windows 7" class="img-fluid">
-                            <div class="caption">Interface d'installation de Windows 7 (Source: Wikimedia Commons)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <h2 id="post-install" class="section-title">IV. Opérations Post-Installation</h2>
+                <li><strong>Configuration et création de comptes</strong> :
+                    <ul>
+                        <li>Personnaliser les paramètres pour un usage scolaire</li>
+                        <li>Créer un compte administrateur "AdminLycée" avec mot de passe robuste</li>
+                        <li>Créer un compte standard "Élève" sans mot de passe pour un accès facile</li>
+                        <li>Configurer les paramètres de confidentialité adaptés à un environnement éducatif</li>
+                    </ul>
+                </li>
                 
-                <div class="card">
-                    <div class="card-header">
-                        <h3>A. Création d'un point de restauration</h3>
-                    </div>
-                    <div class="card-body">
-                        <ol>
-                            <li>Cliquez sur le bouton Démarrer</li>
-                            <li>Tapez "créer un point de restauration" dans le champ de recherche</li>
-                            <li>Sélectionnez "Créer un point de restauration" dans les résultats</li>
-                            <li>Dans la fenêtre qui s'ouvre, cliquez sur "Créer"</li>
-                            <li>Donnez un nom descriptif au point de restauration</li>
-                            <li>Cliquez à nouveau sur "Créer" puis sur "Fermer" une fois l'opération terminée</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3>B. Restauration du système</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>La restauration système permet de revenir à une configuration antérieure en cas de problème :</p>
-                        <ul>
-                            <li><strong>Mode normal</strong> : Accédez via Démarrer > Tous les programmes > Accessoires > Outils système > Restauration du système</li>
-                            <li><strong>Mode sans échec</strong> : Appuyez sur <kbd>F8</kbd> au démarrage et sélectionnez "Dernière configuration valide connue"</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3>C. Activation du système d'exploitation</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>L'activation de Windows s'effectue généralement pendant l'installation ou via :</p>
-                        <ol>
-                            <li>Panneau de configuration > Système et sécurité > Système</li>
-                            <li>Cliquez sur "Activation de Windows"</li>
-                            <li>Entrez votre clé produit de 25 caractères</li>
-                            <li>Suivez les instructions pour compléter l'activation</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3>D. Gestion des pilotes</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Les pilotes sont essentiels au bon fonctionnement de votre matériel :</p>
-                        <ul>
-                            <li><strong>Installation automatique</strong> : Windows détecte et installe la plupart des pilotes automatiquement</li>
-                            <li><strong>Installation manuelle</strong> : Via le Gestionnaire de périphériques pour les composants non reconnus</li>
-                            <li><strong>Mise à jour</strong> : Utilisez Windows Update ou des outils spécialisés comme Driver Booster</li>
-                        </ul>
-                        
-                        <div class="img-container">
-                            <img src="data:image/jpeg;base64,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" alt="Gestionnaire de périphériques Windows" class="img-fluid">
-                            <div class="caption">Gestionnaire de périphériques Windows (Source: Wikimedia Commons)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mt-4">
-                    <div class="card-header bg-light">
-                        <h2>Conclusion</h2>
-                    </div>
-                    <div class="card-body">
-                        <p>La migration d'un système d'exploitation nécessite une planification minutieuse et l'exécution de plusieurs étapes cruciales : configuration du BIOS, partitionnement du disque dur, installation proprement dite, et finalement les opérations post-installation essentielles comme l'activation du système et l'installation des pilotes. En suivant ces procédures, vous garantirez une transition réussie de Windows XP vers Windows 7 tout en préservant la fonctionnalité complète de l'ordinateur.</p>
-                        <p>Rappelons que le temps nécessaire pour ces opérations peut être estimé par la formule : $T = t_p + t_i + t_c$ où $t_p$ est le temps de préparation, $t_i$ le temps d'installation, et $t_c$ le temps de configuration post-installation.</p>
-                    </div>
-                </div>
-            </div>
+                <li><strong>Post-installation</strong> :
+                    <ul>
+                        <li>Installer les pilotes manquants (à partir du site du fabricant si nécessaire)</li>
+                        <li>Activer Windows Update et installer toutes les mises à jour disponibles</li>
+                        <li>Installer les logiciels éducatifs requis (suite Office, logiciels techniques)</li>
+                        <li>Configurer les périphériques partagés (imprimantes, scanner)</li>
+                        <li>Créer un point de restauration système pour chaque poste</li>
+                        <li>Documenter la configuration de chaque machine</li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <p>Cette approche permettra d'installer Windows 10 de manière standardisée sur tous les postes, avec une configuration adaptée au contexte éducatif camerounais et aux ressources disponibles.</p>
         </div>
     </div>
 
-    <footer class="bg-dark text-light py-4 mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p>Référence: Cours d'installation de système d'exploitation</p>
-                </div>
-                <div class="col-md-6 text-end">
-                    <p>Adapté pour HTML avec Bootstrap, jQuery et MathJax</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+    <!-- jQuery and Bootstrap Bundle -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
         $(document).ready(function() {
-            // Animation pour le défilement vers les ancres
-            $('a[href^="#"]').on('click', function(event) {
-                var target = $(this.getAttribute('href'));
-                if(target.length) {
-                    event.preventDefault();
-                    $('html, body').stop().animate({
-                        scrollTop: target.offset().top - 70
-                    }, 1000);
-                }
+            // Afficher/masquer la solution de l'exercice
+            $("#show-solution").click(function() {
+                $("#solution").slideToggle();
+                var text = $(this).text();
+                $(this).text(text === "Voir la correction" ? "Masquer la correction" : "Voir la correction");
             });
         });
     </script>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Évaluation de SVT - Biologie Cellulaire</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Configuration MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Bibliothèques pour les graphiques -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    
+    <style>
+        .header-info {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 25px;
+        }
+        .cell-canvas {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+        }
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .custom-table th, .custom-table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+        .custom-table th {
+            background-color: #f8f9fa;
+        }
+        .section-title {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="text-center mb-4">
+            <h1>COLLÈGE PRIVÉ BILINGUE LAROUSSE</h1>
+            <p>BP: 11700 TEL: (+237) 242 23 11 67/675 46 05 17/664 64 88 83</p>
+        </div>
+
+        <div class="header-info">
+            <table class="table table-bordered">
+                <tr>
+                    <th>ANNÉE SCOLAIRE</th>
+                    <th>ÉVALUATION</th>
+                    <th>ÉPREUVE</th>
+                    <th>CLASSE</th>
+                    <th>DURÉE</th>
+                    <th>COEF</th>
+                </tr>
+                <tr>
+                    <td>2024-2025</td>
+                    <td>N° 1</td>
+                    <td>SVTEEHB</td>
+                    <td>TLE C</td>
+                    <td>2h</td>
+                    <td>2</td>
+                </tr>
+            </table>
+            <p><strong>EXAMINATEUR :</strong> MENGUE ONDOA<br>
+            <strong>DATE :</strong> 💬🐣🐣🐣🐣🐣</p>
+        </div>
+
+        <div class="section-title">
+            <h2>I- ÉVALUATION DES RESSOURCES (10 points)</h2>
+        </div>
+
+        <div class="section-title">
+            <h3>PARTIE A : ÉVALUATION DES SAVOIRS (4 points)</h3>
+        </div>
+
+        <div class="question">
+            <h4>Exercice 1 : Questions à Choix Multiples (QCM) (2 points)</h4>
+            <p><strong>Instructions :</strong> Pour chaque question, relevez le numéro suivi de la lettre correspondant à la réponse correcte.</p>
+            
+            <ol>
+                <li>Parmi les structures cellulaires suivantes, laquelle ne peut être observée qu'au microscope électronique ?
+                    <ol type="a">
+                        <li>La membrane plasmique</li>
+                        <li>Le nucléole</li>
+                        <li>Le cytosol</li>
+                        <li>L'appareil de Golgi</li>
+                    </ol>
+                </li>
+                
+                <li>Les centrioles sont des organites cellulaires :
+                    <ol type="a">
+                        <li>Exclusivement présents dans les cellules animales</li>
+                        <li>Exclusivement présents dans les cellules végétales</li>
+                        <li>Présents à la fois dans les cellules animales et végétales</li>
+                        <li>Impliqués dans le processus de photosynthèse</li>
+                    </ol>
+                </li>
+                
+                <li>La membrane plasmique :
+                    <ol type="a">
+                        <li>Est constituée uniquement de phospholipides</li>
+                        <li>Présente une structure trilaminaire (deux feuillets clairs et un sombre)</li>
+                        <li>Est composée principalement de lipides et de protéines</li>
+                        <li>Est formée d'un feuillet sombre et d'un feuillet clair</li>
+                    </ol>
+                </li>
+                
+                <li>Lors du phénomène d'osmose :
+                    <ol type="a">
+                        <li>L'eau se déplace du milieu hypertonique vers le milieu hypotonique</li>
+                        <li>Le soluté et l'eau migrent dans la même direction</li>
+                        <li>L'eau se déplace du milieu hypotonique vers le milieu hypertonique</li>
+                        <li>La cellule perd toujours de l'eau, indépendamment de la concentration du milieu</li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+
+        <div class="question">
+            <h4>Exercice 2 : Questions à Réponses Ouvertes (QRO) (8 points)</h4>
+            
+            <ol>
+                <li>Définir les termes suivants : cellule, milieux isotoniques, turgescence, hémolyse, déplasmolyse, osmose. (0,5 × 6 = 3 points)</li>
+                
+                <li>À l'aide d'un tableau comparatif, présentez quatre différences entre une cellule animale et une cellule végétale. (3 points)
+                    <div id="comparisonTable"></div>
+                </li>
+                
+                <li>Représentez schématiquement et annotez une cellule animale et une cellule végétale telles qu'observées au microscope optique. (2 points)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Cellule animale</h5>
+                            <div id="animalCellSketch"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Cellule végétale</h5>
+                            <div id="plantCellSketch"></div>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="section-title">
+            <h2>II. ÉVALUATION DES SAVOIR-FAIRE (10 points)</h2>
+        </div>
+
+        <div class="question">
+            <h4>Exercice 1 : Exploitation de documents (5 points)</h4>
+            
+            <p>Les documents ci-dessous représentent une cellule végétale (Document A) et une cellule animale (Document B).</p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Document A : Cellule végétale</h5>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Plant_cell_structure-en.svg/800px-Plant_cell_structure-en.svg.png" alt="Cellule végétale" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <h5>Document B : Cellule animale</h5>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Animal_cell_structure_fr.svg/800px-Animal_cell_structure_fr.svg.png" alt="Cellule animale" class="img-fluid">
+                </div>
+            </div>
+            
+            <ol>
+                <li>Comparez ces deux types cellulaires en complétant le tableau suivant : (0,25 × 6 = 1,5 point)
+                    <table class="custom-table">
+                        <tr>
+                            <th>Éléments propres à la cellule animale</th>
+                            <th>Éléments propres à la cellule végétale</th>
+                            <th>Éléments communs aux deux types cellulaires</th>
+                        </tr>
+                        <tr>
+                            <td>1) <input type="text" class="form-control"></td>
+                            <td>1) <input type="text" class="form-control"></td>
+                            <td>1) <input type="text" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <td>2) <input type="text" class="form-control"></td>
+                            <td>2) <input type="text" class="form-control"></td>
+                            <td>2) <input type="text" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>3) <input type="text" class="form-control"></td>
+                        </tr>
+                    </table>
+                </li>
+                
+                <li>Identifiez les structures constitutives du noyau dans le cas de la cellule végétale. (0,25 × 4 = 1 point)
+                    <div class="mt-2">
+                        <input type="text" class="form-control" placeholder="Structure 1">
+                        <input type="text" class="form-control mt-1" placeholder="Structure 2">
+                        <input type="text" class="form-control mt-1" placeholder="Structure 3">
+                        <input type="text" class="form-control mt-1" placeholder="Structure 4">
+                    </div>
+                </li>
+                
+                <li>Certains organites peuvent être libres dans le cytoplasme ou fixés sur le réticulum endoplasmique. Nommez ces organites et précisez leur fonction. (0,5 × 2 = 1 point)
+                    <div class="mt-2">
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </li>
+                
+                <li>Représentez schématiquement une mitochondrie et annotez ses principales structures. (2 points)
+                    <div id="mitochondriaSketch" class="cell-canvas"></div>
+                </li>
+            </ol>
+        </div>
+
+        <div class="question">
+            <h4>Exercice 2 : Étude de l'osmose (5 points)</h4>
+            
+            <p>Une cellule végétale est placée dans trois solutions de concentrations différentes :</p>
+            <ul>
+                <li>Solution 1 : NaCl à 20 g/L</li>
+                <li>Solution 2 : NaCl à 6 g/L</li>
+                <li>Solution 3 : Eau distillée</li>
+            </ul>
+            <p>Toutes les expériences sont réalisées à une température de 20°C.</p>
+            
+            <ol>
+                <li>Schématisez et annotez l'aspect de la cellule dans la solution 1, sachant que le milieu extérieur est hypertonique. (1 point)
+                    <div id="osmosisSketch1" class="cell-canvas"></div>
+                </li>
+                
+                <li>Quel phénomène cellulaire observe-t-on dans la solution 1 ? (0,5 point)
+                    <input type="text" class="form-control mt-2">
+                </li>
+                
+                <li>Si la cellule reste intacte dans la solution 2, quelle conclusion pouvez-vous en tirer ? (0,5 point)
+                    <input type="text" class="form-control mt-2">
+                </li>
+                
+                <li>Décrivez le comportement de la cellule dans la solution 3. (0,5 point)
+                    <textarea class="form-control mt-2" rows="2"></textarea>
+                </li>
+                
+                <li>Calculez les pressions osmotiques $P_1$ et $P_2$ des solutions 1 et 2. Comparez les résultats et tirez une conclusion. (2 points)
+                    <p class="mt-2"><em>Données :</em> Masse molaire de Na = 23 g/mol, Cl = 35,5 g/mol</p>
+                    <textarea class="form-control mt-2" rows="4" placeholder="Vos calculs et conclusions..."></textarea>
+                </li>
+            </ol>
+        </div>
+
+        <div class="d-grid gap-2 col-md-6 mx-auto my-4">
+            <button class="btn btn-primary" type="button" id="submitBtn">Soumettre l'épreuve</button>
+        </div>
+    </div>
+
+    <script>
+        // Script pour les schémas avec p5.js
+        const animalCellSketch = (p) => {
+            p.setup = () => {
+                p.createCanvas(250, 200);
+                p.background(255);
+                
+                // Dessin de la cellule animale
+                p.stroke(0);
+                p.noFill();
+                p.ellipse(125, 100, 150, 120); // Membrane cellulaire
+                
+                p.fill(255, 200, 200);
+                p.ellipse(125, 100, 40, 40); // Noyau
+                
+                p.fill(200);
+                p.ellipse(125, 100, 15, 15); // Nucléole
+                
+                p.fill(200, 255, 200);
+                p.ellipse(80, 70, 25, 25); // Mitochondrie
+                
+                p.fill(255, 255, 200);
+                p.ellipse(160, 130, 30, 20); // Appareil de Golgi
+            };
+        };
+        
+        const plantCellSketch = (p) => {
+            p.setup = () => {
+                p.createCanvas(250, 200);
+                p.background(255);
+                
+                // Dessin de la cellule végétale
+                p.stroke(0);
+                p.noFill();
+                p.rect(50, 50, 150, 100); // Paroi cellulaire
+                
+                p.ellipse(125, 100, 130, 80); // Membrane cellulaire
+                
+                p.fill(255, 200, 200);
+                p.ellipse(125, 100, 35, 35); // Noyau
+                
+                p.fill(200);
+                p.ellipse(125, 100, 12, 12); // Nucléole
+                
+                p.fill(150, 255, 150);
+                p.rect(100, 70, 50, 20); // Chloroplaste
+                
+                p.fill(200, 200, 255);
+                p.ellipse(160, 120, 40, 40); // Vacuole
+            };
+        };
+        
+        const mitochondriaSketch = (p) => {
+            p.setup = () => {
+                p.createCanvas(300, 150);
+                p.background(255);
+                
+                // Dessin d'une mitochondrie
+                p.stroke(0);
+                p.noFill();
+                p.beginShape();
+                p.vertex(50, 75);
+                p.bezierVertex(70, 40, 130, 40, 150, 75);
+                p.bezierVertex(170, 110, 230, 110, 250, 75);
+                p.bezierVertex(230, 40, 170, 40, 150, 75);
+                p.bezierVertex(130, 110, 70, 110, 50, 75);
+                p.endShape();
+                
+                // Crêtes mitochondriales
+                for (let x = 80; x <= 220; x += 20) {
+                    p.line(x, 50, x, 100);
+                }
+            };
+        };
+        
+        const osmosisSketch1 = (p) => {
+            p.setup = () => {
+                p.createCanvas(300, 150);
+                p.background(255);
+                
+                // Dessin d'une cellule plasmolisée
+                p.stroke(0);
+                p.noFill();
+                p.rect(70, 40, 160, 70); // Paroi cellulaire
+                
+                p.fill(255);
+                p.stroke(0);
+                p.beginShape(); // Membrane cytoplasmique rétrécie
+                p.vertex(90, 55);
+                p.bezierVertex(100, 50, 200, 50, 210, 55);
+                p.bezierVertex(220, 60, 220, 95, 210, 100);
+                p.bezierVertex(200, 105, 100, 105, 90, 100);
+                p.bezierVertex(80, 95, 80, 60, 90, 55);
+                p.endShape();
+            };
+        };
+        
+        new p5(animalCellSketch, 'animalCellSketch');
+        new p5(plantCellSketch, 'plantCellSketch');
+        new p5(mitochondriaSketch, 'mitochondriaSketch');
+        new p5(osmosisSketch1, 'osmosisSketch1');
+        
+        // Gestion de la soumission du formulaire
+        $('#submitBtn').click(function() {
+            alert('Épreuve soumise avec succès!');
+        });
+    </script>
+</body>
+</html>
