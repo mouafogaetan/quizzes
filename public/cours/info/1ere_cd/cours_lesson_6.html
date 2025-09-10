@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condensé - Programmer en HTML</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Configuration MathJax pour LaTeX -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 1rem 1rem;
+        }
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+        }
+        .card-header {
+            background-color: #f1f8ff;
+            font-weight: 600;
+        }
+        .code-example {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-left: 4px solid #0d6efd;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        .exercise {
+            background-color: #e8f4f8;
+            border-left: 4px solid #20c997;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        .solution {
+            display: none;
+            background-color: #f8f9fa;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-left: 4px solid #6f42c1;
+        }
+        .btn-solution {
+            margin-top: 0.5rem;
+            background-color: #6f42c1;
+            color: white;
+        }
+        .table-demo {
+            width: 100%;
+            margin: 1rem 0;
+        }
+        .table-demo th, .table-demo td {
+            border: 1px solid #dee2e6;
+            padding: 0.5rem;
+        }
+        .img-placeholder {
+            background-color: #e9ecef;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-5">Condensé des notions essentielles</h1>
+            <p class="lead">Programmer en HTML - Insertion de médias, tableaux et formulaires</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Section 1: Insertion de médias -->
+        <div class="card">
+            <div class="card-header">
+                <h2>1. Insertion de fichiers multimédias</h2>
+            </div>
+            <div class="card-body">
+                <h3>Images</h3>
+                <p>Utilisation de la balise <code>&lt;img&gt;</code> avec les attributs obligatoires :</p>
+                <ul>
+                    <li><strong>src</strong> : chemin vers l'image</li>
+                    <li><strong>alt</strong> : texte alternatif descriptif</li>
+                </ul>
+                
+                <div class="code-example">
+                    &lt;img src="mon-image.jpg" alt="Description de l'image"&gt;
+                </div>
+                
+                
+                <h3>Audio</h3>
+                <p>Utilisation de la balise <code>&lt;audio&gt;</code> avec l'attribut <code>controls</code> :</p>
+                
+                <div class="code-example">
+                    &lt;audio controls&gt;<br>
+                    &nbsp;&nbsp;&lt;source src="musique.mp3" type="audio/mpeg"&gt;<br>
+                    &nbsp;&nbsp;&lt;source src="musique.ogg" type="audio/ogg"&gt;<br>
+                    &lt;/audio&gt;
+                </div>
+                
+                <h3>Vidéo</h3>
+                <p>Utilisation de la balise <code>&lt;video&gt;</code> avec l'attribut <code>controls</code> :</p>
+                
+                <div class="code-example">
+                    &lt;video controls width="600"&gt;<br>
+                    &nbsp;&nbsp;&lt;source src="video.mp4" type="video/mp4"&gt;<br>
+                    &nbsp;&nbsp;&lt;source src="video.webm" type="video/webm"&gt;<br>
+                    &lt;/video&gt;
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Créez une page HTML qui affiche :</p>
+                    <ol>
+                        <li>Une image nommée "logo.png" avec le texte alternatif "Logo de l'école"</li>
+                        <li>Un lecteur audio pour le fichier "presentation.mp3"</li>
+                        <li>Un lecteur vidéo pour le fichier "tutoriel.mp4"</li>
+                    </ol>
+                    <button class="btn btn-solution" onclick="toggleSolution('solution1')">Voir la solution</button>
+                    <div id="solution1" class="solution">
+                        <div class="code-example">
+                            &lt;!DOCTYPE html&gt;<br>
+                            &lt;html&gt;<br>
+                            &lt;head&gt;<br>
+                            &nbsp;&nbsp;&lt;title&gt;Exercice Multimédia&lt;/title&gt;<br>
+                            &lt;/head&gt;<br>
+                            &lt;body&gt;<br>
+                            &nbsp;&nbsp;&lt;img src="logo.png" alt="Logo de l'école"&gt;<br>
+                            &nbsp;&nbsp;&lt;audio controls&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;source src="presentation.mp3" type="audio/mpeg"&gt;<br>
+                            &nbsp;&nbsp;&lt;/audio&gt;<br>
+                            &nbsp;&nbsp;&lt;video controls width="600"&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;source src="tutoriel.mp4" type="video/mp4"&gt;<br>
+                            &nbsp;&nbsp;&lt;/video&gt;<br>
+                            &lt;/body&gt;<br>
+                            &lt;/html&gt;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Tableaux -->
+        <div class="card">
+            <div class="card-header">
+                <h2>2. Création de tableaux</h2>
+            </div>
+            <div class="card-body">
+                <p>Structure de base d'un tableau HTML :</p>
+                
+                <div class="code-example">
+                    &lt;table border="1"&gt;<br>
+                    &nbsp;&nbsp;&lt;caption&gt;Titre du tableau&lt;/caption&gt;<br>
+                    &nbsp;&nbsp;&lt;tr&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;En-tête 1&lt;/th&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;En-tête 2&lt;/th&gt;<br>
+                    &nbsp;&nbsp;&lt;/tr&gt;<br>
+                    &nbsp;&nbsp;&lt;tr&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Donnée 1&lt;/td&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Donnée 2&lt;/td&gt;<br>
+                    &nbsp;&nbsp;&lt;/tr&gt;<br>
+                    &lt;/table&gt;
+                </div>
+                
+                <p>Attributs utiles :</p>
+                <ul>
+                    <li><strong>border</strong> : épaisseur de la bordure</li>
+                    <li><strong>colspan</strong> : fusion de colonnes</li>
+                    <li><strong>rowspan</strong> : fusion de lignes</li>
+                </ul>
+                
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Créez un tableau HTML représentant un emploi du temps scolaire avec les colonnes : Heure, Lundi, Mardi, Mercredi, Jeudi, Vendredi.</p>
+                    <p>Utilisez rowspan pour les heures qui couvrent plusieurs créneaux (ex: 8h-10h).</p>
+                    <button class="btn btn-solution" onclick="toggleSolution('solution2')">Voir la solution</button>
+                    <div id="solution2" class="solution">
+                        <div class="code-example">
+                            &lt;table border="1"&gt;<br>
+                            &nbsp;&nbsp;&lt;caption&gt;Emploi du temps&lt;/caption&gt;<br>
+                            &nbsp;&nbsp;&lt;tr&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Heure&lt;/th&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Lundi&lt;/th&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Mardi&lt;/th&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Mercredi&lt;/th&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Jeudi&lt;/th&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Vendredi&lt;/th&gt;<br>
+                            &nbsp;&nbsp;&lt;/tr&gt;<br>
+                            &nbsp;&nbsp;&lt;tr&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;td rowspan="2"&gt;8h-10h&lt;/td&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Maths&lt;/td&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Français&lt;/td&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Sport&lt;/td&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Histoire&lt;/td&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Anglais&lt;/td&gt;<br>
+                            &nbsp;&nbsp;&lt;/tr&gt;<br>
+                            &nbsp;&nbsp;&lt;tr&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Physique&lt;/td&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;SVT&lt;/td&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Musique&lt;/td&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Géographie&lt;/td&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Arts&lt;/td&gt;<br>
+                            &nbsp;&nbsp;&lt;/tr&gt;<br>
+                            &lt;/table&gt;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Formulaires -->
+        <div class="card">
+            <div class="card-header">
+                <h2>3. Création de formulaires</h2>
+            </div>
+            <div class="card-body">
+                <p>Structure de base d'un formulaire :</p>
+                
+                <div class="code-example">
+                    &lt;form method="post" action="traitement.php"&gt;<br>
+                    &nbsp;&nbsp;&lt;!-- Éléments du formulaire --&gt;<br>
+                    &nbsp;&nbsp;&lt;input type="text" name="nom" placeholder="Votre nom"&gt;<br>
+                    &nbsp;&nbsp;&lt;input type="submit" value="Envoyer"&gt;<br>
+                    &lt;/form&gt;
+                </div>
+                
+                <h3>Éléments de formulaire courants</h3>
+                
+                <table class="table table-bordered table-demo">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Balise</th>
+                            <th>Exemple</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Texte</td>
+                            <td><code>&lt;input type="text"&gt;</code></td>
+                            <td><input type="text" class="form-control" placeholder="Saisissez du texte"></td>
+                        </tr>
+                        <tr>
+                            <td>Mot de passe</td>
+                            <td><code>&lt;input type="password"&gt;</code></td>
+                            <td><input type="password" class="form-control" placeholder="Mot de passe"></td>
+                        </tr>
+                        <tr>
+                            <td>Case à cocher</td>
+                            <td><code>&lt;input type="checkbox"&gt;</code></td>
+                            <td><input type="checkbox"> Option 1</td>
+                        </tr>
+                        <tr>
+                            <td>Bouton radio</td>
+                            <td><code>&lt;input type="radio"&gt;</code></td>
+                            <td><input type="radio" name="groupe"> Option A<br><input type="radio" name="groupe"> Option B</td>
+                        </tr>
+                        <tr>
+                            <td>Liste déroulante</td>
+                            <td><code>&lt;select&gt;</code></td>
+                            <td>
+                                <select class="form-control">
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Zone de texte</td>
+                            <td><code>&lt;textarea&gt;</code></td>
+                            <td><textarea class="form-control" rows="2" placeholder="Saisissez du texte"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Créez un formulaire d'inscription avec les champs suivants :</p>
+                    <ul>
+                        <li>Nom (texte)</li>
+                        <li>Email (email)</li>
+                        <li>Mot de passe (password)</li>
+                        <li>Date de naissance (date)</li>
+                        <li>Niveau d'étude (liste déroulante avec options: Bac, Bac+2, Bac+3, Bac+5)</li>
+                        <li>Acceptation des conditions (case à cocher)</li>
+                        <li>Bouton de soumission</li>
+                    </ul>
+                    <button class="btn btn-solution" onclick="toggleSolution('solution3')">Voir la solution</button>
+                    <div id="solution3" class="solution">
+                        <div class="code-example">
+                            &lt;form method="post" action="inscription.php"&gt;<br>
+                            &nbsp;&nbsp;&lt;label&gt;Nom:&lt;/label&gt;<br>
+                            &nbsp;&nbsp;&lt;input type="text" name="nom" required&gt;&lt;br&gt;&lt;br&gt;<br>
+                            <br>
+                            &nbsp;&nbsp;&lt;label&gt;Email:&lt;/label&gt;<br>
+                            &nbsp;&nbsp;&lt;input type="email" name="email" required&gt;&lt;br&gt;&lt;br&gt;<br>
+                            <br>
+                            &nbsp;&nbsp;&lt;label&gt;Mot de passe:&lt;/label&gt;<br>
+                            &nbsp;&nbsp;&lt;input type="password" name="password" required&gt;&lt;br&gt;&lt;br&gt;<br>
+                            <br>
+                            &nbsp;&nbsp;&lt;label&gt;Date de naissance:&lt;/label&gt;<br>
+                            &nbsp;&nbsp;&lt;input type="date" name="birthdate"&gt;&lt;br&gt;&lt;br&gt;<br>
+                            <br>
+                            &nbsp;&nbsp;&lt;label&gt;Niveau d'étude:&lt;/label&gt;<br>
+                            &nbsp;&nbsp;&lt;select name="niveau"&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="bac"&gt;Bac&lt;/option&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="bac2"&gt;Bac+2&lt;/option&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="bac3"&gt;Bac+3&lt;/option&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;option value="bac5"&gt;Bac+5&lt;/option&gt;<br>
+                            &nbsp;&nbsp;&lt;/select&gt;&lt;br&gt;&lt;br&gt;<br>
+                            <br>
+                            &nbsp;&nbsp;&lt;input type="checkbox" name="conditions" required&gt;<br>
+                            &nbsp;&nbsp;&lt;label&gt;J'accepte les conditions d'utilisation&lt;/label&gt;&lt;br&gt;&lt;br&gt;<br>
+                            <br>
+                            &nbsp;&nbsp;&lt;input type="submit" value="S'inscrire"&gt;<br>
+                            &lt;/form&gt;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Organisation des dossiers et CSS -->
+        <div class="card">
+            <div class="card-header">
+                <h2>4. Organisation des dossiers et CSS</h2>
+            </div>
+            <div class="card-body">
+                <h3>Structure recommandée pour un site web</h3>
+                
+                <div class="code-example">
+                    site-web/<br>
+                    ├── index.html<br>
+                    ├── styles/<br>
+                    │   └── style.css<br>
+                    ├── images/<br>
+                    │   ├── logo.png<br>
+                    │   └── banner.jpg<br>
+                    ├── scripts/<br>
+                    │   └── script.js<br>
+                    └── pages/<br>
+                        ├── apropos.html<br>
+                        └── contact.html
+                </div>
+                
+                
+                <h3>Intégration du CSS</h3>
+                <p>Trois méthodes pour intégrer CSS dans HTML :</p>
+                
+                <ol>
+                    <li><strong>Inline</strong> : directement dans la balise HTML
+                        <div class="code-example">
+                            &lt;p style="color: blue; font-size: 16px;"&gt;Texte en bleu&lt;/p&gt;
+                        </div>
+                    </li>
+                    <li><strong>Interne</strong> : dans l'en-tête du document
+                        <div class="code-example">
+                            &lt;head&gt;<br>
+                            &nbsp;&nbsp;&lt;style&gt;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;p {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color: blue;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 16px;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;&lt;/style&gt;<br>
+                            &lt;/head&gt;
+                        </div>
+                    </li>
+                    <li><strong>Externe</strong> : lien vers un fichier CSS séparé (méthode recommandée)
+                        <div class="code-example">
+                            &lt;head&gt;<br>
+                            &nbsp;&nbsp;&lt;link rel="stylesheet" href="styles/style.css"&gt;<br>
+                            &lt;/head&gt;
+                        </div>
+                    </li>
+                </ol>
+                
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Créez la structure de dossiers d'un site web pour un lycée avec les sections suivantes :</p>
+                    <ul>
+                        <li>Page d'accueil</li>
+                        <li>Section pour le club journal</li>
+                        <li>Section pour le club anglais</li>
+                        <li>Section pour le club santé</li>
+                    </ul>
+                    <p>Chaque section doit avoir son propre dossier avec sous-dossiers pour images, documents et médias.</p>
+                    <button class="btn btn-solution" onclick="toggleSolution('solution4')">Voir la solution</button>
+                    <div id="solution4" class="solution">
+                        <div class="code-example">
+                            lycee-site/<br>
+                            ├── index.html<br>
+                            ├── styles/<br>
+                            │   └── main.css<br>
+                            ├── images/<br>
+                            │   ├── logo.png<br>
+                            │   └── banner.jpg<br>
+                            ├── club-journal/<br>
+                            │   ├── index.html<br>
+                            │   ├── images/<br>
+                            │   ├── documents/<br>
+                            │   └── medias/<br>
+                            ├── club-anglais/<br>
+                            │   ├── index.html<br>
+                            │   ├── images/<br>
+                            │   ├── documents/<br>
+                            │   └── medias/<br>
+                            └── club-sante/<br>
+                                ├── index.html<br>
+                                ├── images/<br>
+                                ├── documents/<br>
+                                └── medias/<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Notions avancées -->
+        <div class="card">
+            <div class="card-body">
+                
+                <div class="exercise">
+                    <h4>Exercice final</h4>
+                    <p>Créez une page web complète qui intègre :</p>
+                    <ol>
+                        <li>Un en-tête avec le nom de votre école</li>
+                        <li>Un menu de navigation vers les sections</li>
+                        <li>Un tableau avec des données</li>
+                        <li>Un formulaire de contact</li>
+                        <li>Un pied de page</li>
+                        <li>Un design responsive qui s'adapte aux mobiles</li>
+                    </ol>
+                    <button class="btn btn-solution" onclick="toggleSolution('solution5')">Voir des conseils</button>
+                    <div id="solution5" class="solution">
+                        <p>Conseils pour réussir cet exercice :</p>
+                        <ul>
+                            <li>Utilisez des balises sémantiques HTML5 (header, nav, main, section, footer)</li>
+                            <li>Structurez votre CSS avec des media queries pour le responsive</li>
+                            <li>Testez votre site sur différentes tailles d'écran</li>
+                            <li>Validez votre code HTML avec le validateur W3C</li>
+                            <li>Optimisez les images pour le web</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p>Condensé de cours HTML - Programmer en HTML</p>
+            <p>Référence : Document "cours info 1ere cd-99-110.pdf"</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS et dépendances -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Fonction pour afficher/masquer les solutions
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+            } else {
+                solution.style.display = "block";
+            }
+        }
+        
+        // Initialisation pour les tooltips Bootstrap
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+</body>
+</html>

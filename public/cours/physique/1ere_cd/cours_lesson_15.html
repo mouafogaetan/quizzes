@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Induction Électromagnétique et Alternateurs</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .exercise {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .solution {
+            display: none;
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .formula {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .canvas-container {
+            width: 100%;
+            height: 250px;
+            margin: 15px 0;
+        }
+        .nav-link {
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <header class="text-center mb-5">
+            <h1 class="display-4">Induction Électromagnétique et Alternateurs</h1>
+            <p class="lead">Condensé des notions essentielles avec exemples et exercices</p>
+        </header>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="list-flux-list" data-bs-toggle="list" href="#list-flux" role="tab">Flux Magnétique</a>
+                    <a class="list-group-item list-group-item-action" id="list-lenz-list" data-bs-toggle="list" href="#list-lenz" role="tab">Loi de Lenz</a>
+                    <a class="list-group-item list-group-item-action" id="list-induction-list" data-bs-toggle="list" href="#list-induction" role="tab">Induction Électromagnétique</a>
+                    <a class="list-group-item list-group-item-action" id="list-alternateur-list" data-bs-toggle="list" href="#list-alternateur" role="tab">Alternateurs</a>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+                <div class="tab-content" id="nav-tabContent">
+                    <!-- Flux Magnétique -->
+                    <div class="tab-pane fade show active" id="list-flux" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Flux Magnétique</h2>
+                                <p class="card-text">Le flux magnétique $\Phi$ à travers une surface est une mesure du nombre de lignes de champ magnétique qui traversent cette surface.</p>
+                                
+                                <p class="formula">$\Phi = \vec{B} \cdot \vec{S} = B \cdot S \cdot \cos(\theta)$</p>
+                                
+                                <p>Où:</p>
+                                <ul>
+                                    <li>$\Phi$ est le flux magnétique (en Weber, Wb)</li>
+                                    <li>$\vec{B}$ est le vecteur champ magnétique (en Tesla, T)</li>
+                                    <li>$\vec{S}$ est le vecteur surface (en m²)</li>
+                                    <li>$\theta$ est l'angle entre $\vec{B}$ et la normale à la surface</li>
+                                </ul>
+                                
+                                <div class="exercise">
+                                    <h4>Exercice d'application</h4>
+                                    <p>Une bobine circulaire de rayon 10 cm est placée dans un champ magnétique uniforme de 0,5 T. 
+                                    La normale à la surface de la bobine fait un angle de 30° avec les lignes de champ. 
+                                    Calculez le flux magnétique à travers la bobine.</p>
+                                    <button class="btn btn-primary" onclick="toggleSolution('solution1')">Voir la solution</button>
+                                    
+                                    <div id="solution1" class="solution">
+                                        <p>Données:</p>
+                                        <ul>
+                                            <li>Rayon r = 10 cm = 0,1 m</li>
+                                            <li>Surface S = πr² = π × (0,1)² ≈ 0,0314 m²</li>
+                                            <li>Champ magnétique B = 0,5 T</li>
+                                            <li>Angle θ = 30°</li>
+                                        </ul>
+                                        <p>Application de la formule:</p>
+                                        <p>$\Phi = B \cdot S \cdot \cos(\theta) = 0,5 \times 0,0314 \times \cos(30°)$</p>
+                                        <p>$\cos(30°) = \frac{\sqrt{3}}{2} ≈ 0,866$</p>
+                                        <p>$\Phi = 0,5 \times 0,0314 \times 0,866 ≈ 0,0136$ Wb</p>
+                                        <p><strong>Réponse:</strong> Le flux magnétique est d'environ 0,0136 Weber.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Espace pour illustration flux magnétique -->
+                                <div class="text-center my-3">
+                                    <img src="data:image/jpeg;base64,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" alt="Représentation du flux magnétique à travers une surface" class="img-fluid">
+                                    <p class="text-muted">Représentation schématique du flux magnétique à travers une surface. Les flèches rouges représentent le champ magnétique, la surface bleue est traversée par les lignes de champ.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Loi de Lenz -->
+                    <div class="tab-pane fade" id="list-lenz" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Loi de Lenz</h2>
+                                <p class="card-text">La loi de Lenz énonce que le sens du courant induit dans un circuit est tel qu'il s'oppose à la variation du flux magnétique qui lui donne naissance.</p>
+                                
+                                <p class="formula">$\mathcal{E} = -\frac{d\Phi}{dt}$</p>
+                                
+                                <p>Où:</p>
+                                <ul>
+                                    <li>$\mathcal{E}$ est la force électromotrice induite (en volts)</li>
+                                    <li>$\frac{d\Phi}{dt}$ est la variation temporelle du flux magnétique</li>
+                                    <li>Le signe négatif exprime l'opposition à la variation du flux</li>
+                                </ul>
+                                
+                                <div class="exercise">
+                                    <h4>Exercice d'application</h4>
+                                    <p>Un aimant est approché rapidement vers une bobine comportant 100 spires. 
+                                    Le flux magnétique à travers la bobine augmente de 0 à 0,02 Wb en 0,1 seconde. 
+                                    Déterminez la force électromotrice moyenne induite dans la bobine et précisez le sens du courant induit.</p>
+                                    <button class="btn btn-primary" onclick="toggleSolution('solution2')">Voir la solution</button>
+                                    
+                                    <div id="solution2" class="solution">
+                                        <p>Données:</p>
+                                        <ul>
+                                            <li>Nombre de spires N = 100</li>
+                                            <li>Variation de flux ΔΦ = 0,02 Wb</li>
+                                            <li>Intervalle de temps Δt = 0,1 s</li>
+                                        </ul>
+                                        <p>Application de la formule:</p>
+                                        <p>$\mathcal{E} = -N \frac{\Delta\Phi}{\Delta t} = -100 \times \frac{0,02}{0,1} = -100 \times 0,2 = -20$ V</p>
+                                        <p>La valeur absolue de la f.é.m. induite est de 20 V.</p>
+                                        <p><strong>Sens du courant:</strong> Le signe négatif indique que le courant induit s'oppose à l'augmentation du flux. 
+                                        Puisqu'un pôle nord d'aimant s'approche, le courant induit créera un champ magnétique qui repousse l'aimant 
+                                        (un pôle nord face à l'aimant).</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Espace pour illustration loi de Lenz -->
+                                <div class="text-center my-3">
+                                    <img src="data:image/png;base64,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" alt="Illustration de la loi de Lenz avec un aimant approchant une bobine" class="img-fluid">
+                                    <p class="text-muted">Schéma illustrant la loi de Lenz: lorsqu'un aimant est approché d'une bobine, le courant induit crée un champ magnétique qui s'oppose au mouvement de l'aimant.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Induction Électromagnétique -->
+                    <div class="tab-pane fade" id="list-induction" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Induction Électromagnétique</h2>
+                                <p class="card-text">L'induction électromagnétique est le phénomène par lequel une force électromotrice (f.é.m.) est induite dans un circuit électrique par variation du flux magnétique à travers ce circuit.</p>
+                                
+                                <p>Ce phénomène fut découvert par Michael Faraday en 1831 et constitue la base du fonctionnement des générateurs électriques, transformateurs et nombreux autres dispositifs.</p>
+                                
+                                <p class="formula">$\mathcal{E} = -\frac{d\Phi_B}{dt}$</p>
+                                
+                                <p>Pour un conducteur de longueur l se déplaçant à une vitesse v perpendiculairement à un champ magnétique B:</p>
+                                <p class="formula">$\mathcal{E} = B \cdot l \cdot v$</p>
+                                
+                                <div class="exercise">
+                                    <h4>Exercice d'application</h4>
+                                    <p>Une tige métallique de 0,5 m de longueur se déplace perpendiculairement à un champ magnétique uniforme de 0,2 T à une vitesse de 3 m/s. 
+                                    Calculez la force électromotrice induite aux extrémités de la tige.</p>
+                                    <button class="btn btn-primary" onclick="toggleSolution('solution3')">Voir la solution</button>
+                                    
+                                    <div id="solution3" class="solution">
+                                        <p>Données:</p>
+                                        <ul>
+                                            <li>Longueur l = 0,5 m</li>
+                                            <li>Champ magnétique B = 0,2 T</li>
+                                            <li>Vitesse v = 3 m/s</li>
+                                        </ul>
+                                        <p>Application de la formule:</p>
+                                        <p>$\mathcal{E} = B \cdot l \cdot v = 0,2 \times 0,5 \times 3 = 0,3$ V</p>
+                                        <p><strong>Réponse:</strong> La force électromotrice induite est de 0,3 V.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Graphique de la f.é.m. induite en fonction du temps -->
+                                <div class="canvas-container">
+                                    <canvas id="inductionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Alternateurs -->
+                    <div class="tab-pane fade" id="list-alternateur" role="tabpanel">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title">Alternateurs</h2>
+                                <p class="card-text">Un alternateur est un générateur électrique qui convertit l'énergie mécanique en énergie électrique alternative.</p>
+                                
+                                <h4>Constitution principale:</h4>
+                                <ul>
+                                    <li>Un stator: partie fixe comportant les enroulements inducteurs ou induits</li>
+                                    <li>Un rotor: partie mobile tournante</li>
+                                    <li>Des bagues collectrices et balais (pour alternateur à rotor bobiné)</li>
+                                </ul>
+                                
+                                <h4>Principe de fonctionnement:</h4>
+                                <p>La rotation du rotor (aimant ou électroaimant) crée une variation du flux magnétique à travers les bobines du stator, induisant ainsi une force électromotrice alternative selon la loi de Faraday.</p>
+                                
+                                <p>La f.é.m. produite suit une loi sinusoïdale:</p>
+                                <p class="formula">$\mathcal{E} = \mathcal{E}_{max} \cdot \sin(\omega t)$</p>
+                                <p>Avec $\mathcal{E}_{max} = N \cdot B \cdot S \cdot \omega$</p>
+                                
+                                <div class="exercise">
+                                    <h4>Exercice d'application</h4>
+                                    <p>Un alternateur produit une tension sinusoïdale de fréquence 50 Hz avec une amplitude de 311 V. 
+                                    Exprimez la force électromotrice en fonction du temps et calculez sa valeur efficace.</p>
+                                    <button class="btn btn-primary" onclick="toggleSolution('solution4')">Voir la solution</button>
+                                    
+                                    <div id="solution4" class="solution">
+                                        <p>Données:</p>
+                                        <ul>
+                                            <li>Amplitude $\mathcal{E}_{max} = 311$ V</li>
+                                            <li>Fréquence f = 50 Hz</li>
+                                        </ul>
+                                        <p>Pulsation $\omega = 2\pi f = 2\pi \times 50 = 100\pi$ rad/s</p>
+                                        <p>Expression de la f.é.m.:</p>
+                                        <p>$\mathcal{E}(t) = 311 \cdot \sin(100\pi t)$</p>
+                                        <p>Valeur efficace:</p>
+                                        <p>$\mathcal{E}_{eff} = \frac{\mathcal{E}_{max}}{\sqrt{2}} = \frac{311}{\sqrt{2}} ≈ 220$ V</p>
+                                        <p><strong>Réponse:</strong> La tension efficace est d'environ 220 V.</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Espace pour illustration alternateur -->
+                                <div class="text-center my-3">
+                                    <img src="data:image/png;base64,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" alt="Schéma de principe d'un alternateur avec stator et rotor" class="img-fluid">
+                                    <p class="text-muted">Schéma de principe d'un alternateur montrant le stator fixe et le rotor mobile. Les bobines du stator sont traversées par le champ magnétique variable créé par la rotation du rotor.</p>
+                                </div>
+                                
+                                <!-- Graphique de la tension alternative produite -->
+                                <div class="canvas-container">
+                                    <canvas id="alternatorChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Fonction pour afficher/masquer les solutions
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.style.display = solution.style.display === 'none' || solution.style.display === '' ? 'block' : 'none';
+        }
+        
+        // Graphique pour l'induction électromagnétique
+        document.addEventListener('DOMContentLoaded', function() {
+            const inductionCtx = document.getElementById('inductionChart').getContext('2d');
+            const inductionChart = new Chart(inductionCtx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: 100}, (_, i) => i * 0.1),
+                    datasets: [{
+                        label: 'Variation du flux magnétique',
+                        data: Array.from({length: 100}, (_, i) => Math.sin(i * 0.3) * 2),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        tension: 0.4,
+                        fill: false
+                    }, {
+                        label: 'Force électromotrice induite',
+                        data: Array.from({length: 100}, (_, i) => Math.cos(i * 0.3) * 0.6),
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        tension: 0.4,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Temps (s)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Φ (Wb) / ε (V)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Graphique pour l'alternateur
+            const alternatorCtx = document.getElementById('alternatorChart').getContext('2d');
+            const alternatorChart = new Chart(alternatorCtx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: 100}, (_, i) => i * 0.01),
+                    datasets: [{
+                        label: 'Tension alternative',
+                        data: Array.from({length: 100}, (_, i) => 311 * Math.sin(i * 0.314)),
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        tension: 0.4,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Temps (s)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Tension (V)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

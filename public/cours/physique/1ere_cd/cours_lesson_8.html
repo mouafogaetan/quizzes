@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lentilles minces et formation des images</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Configuration MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 1rem 1rem;
+        }
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border: none;
+        }
+        .card-header {
+            background-color: #f1f8ff;
+            border-bottom: 1px solid #d0e7ff;
+            font-weight: 600;
+            border-radius: 1rem 1rem 0 0 !important;
+        }
+        .exercise {
+            background-color: #e8f4f8;
+            border-left: 4px solid #2575fc;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+        }
+        .solution {
+            display: none;
+            background-color: #f0f9f0;
+            border-left: 4px solid #28a745;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+        }
+        .btn-solution {
+            background-color: #6a11cb;
+            color: white;
+            border: none;
+            margin-bottom: 1rem;
+        }
+        .btn-solution:hover {
+            background-color: #2575fc;
+        }
+        .illustration {
+            text-align: center;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+        }
+        .illustration img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+        }
+        .illustration-desc {
+            font-style: italic;
+            color: #6c757d;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .definition {
+            background-color: #f0f7ff;
+            border-left: 4px solid #4dabf7;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+        }
+        .important {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+        }
+        .formula {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        .nav-tabs .nav-link.active {
+            background-color: #f1f8ff;
+            border-bottom: 3px solid #6a11cb;
+            font-weight: 600;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1>Lentilles minces et formation des images</h1>
+            <p class="lead">Condensé des notions essentielles avec exemples et exercices</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="intro-tab" data-bs-toggle="tab" data-bs-target="#intro" type="button" role="tab" aria-controls="intro" aria-selected="true">Introduction</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="convergentes-tab" data-bs-toggle="tab" data-bs-target="#convergentes" type="button" role="tab" aria-controls="convergentes" aria-selected="false">Lentilles convergentes</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="divergentes-tab" data-bs-toggle="tab" data-bs-target="#divergentes" type="button" role="tab" aria-controls="divergentes" aria-selected="false">Lentilles divergentes</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="formations-tab" data-bs-toggle="tab" data-bs-target="#formations" type="button" role="tab" aria-controls="formations" aria-selected="false">Formation d'images</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="exercices-tab" data-bs-toggle="tab" data-bs-target="#exercices" type="button" role="tab" aria-controls="exercices" aria-selected="false">Exercices</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+                            <!-- Introduction -->
+                            <div class="tab-pane fade show active" id="intro" role="tabpanel" aria-labelledby="intro-tab">
+                                <h3>Qu'est-ce qu'une lentille mince ?</h3>
+                                <p>Une lentille mince est un milieu transparent limité par deux dioptres sphériques (ou un dioptre sphérique et un dioptre plan) dont l'épaisseur est faible devant les rayons de courbure des dioptres.</p>
+                                
+                                <div class="illustration">
+                                    <!-- Placeholder pour une image de lentilles minces -->
+                                    <img src="data:image/png;base64,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" alt="Différents types de lentilles minces" class="img-fluid">
+                                    <div class="illustration-desc">Fig. 1 - Différents types de lentilles minces : convergentes (biconvexe, plan-convexe, ménisque convergent) et divergentes (biconcave, plan-concave, ménisque divergent)</div>
+                                </div>
+                                
+                                <div class="definition">
+                                    <h5>Vergence d'une lentille</h5>
+                                    <p>La vergence $C$ d'une lentille mesure son pouvoir à faire converger les rayons lumineux. Elle s'exprime en dioptries ($\delta$) et est définie par :</p>
+                                    <div class="formula">
+                                        $C = \frac{1}{f'}$
+                                    </div>
+                                    <p>où $f'$ est la distance focale image de la lentille exprimée en mètres (m).</p>
+                                </div>
+                                
+                                <div class="important">
+                                    <h5>À retenir</h5>
+                                    <ul>
+                                        <li>Une lentille convergente a une vergence positive ($C > 0$)</li>
+                                        <li>Une lentille divergente a une vergence négative ($C < 0$)</li>
+                                        <li>Plus la vergence est grande, plus la lentille dévie les rayons lumineux</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Lentilles convergentes -->
+                            <div class="tab-pane fade" id="convergentes" role="tabpanel" aria-labelledby="convergentes-tab">
+                                <h3>Lentilles convergentes</h3>
+                                <p>Une lentille convergente est plus épaisse au centre qu'au bord. Elle fait converger les rayons lumineux parallèles à l'axe optique vers un point appelé foyer image.</p>
+                                
+                                <div class="illustration">
+                                    <!-- Placeholder pour une image de lentille convergente -->
+                                    <img src="data:image/png;base64,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" alt="Lentille convergente et ses caractéristiques" class="img-fluid">
+                                    <div class="illustration-desc">Fig. 2 - Lentille convergente : F' est le foyer image, F le foyer objet, O le centre optique, et f' la distance focale image</div>
+                                </div>
+                                
+                                <div class="definition">
+                                    <h5>Caractéristiques principales</h5>
+                                    <ul>
+                                        <li><strong>Centre optique (O)</strong> : Point de la lentille où les rayons ne sont pas déviés</li>
+                                        <li><strong>Axe optique</strong> : Droite passant par O et perpendiculaire au plan de la lentille</li>
+                                        <li><strong>Foyer image (F')</strong> : Point où convergent les rayons incidents parallèles à l'axe optique</li>
+                                        <li><strong>Foyer objet (F)</strong> : Point dont les rayons émergents sont parallèles à l'axe optique</li>
+                                        <li><strong>Distance focale image (f')</strong> : Distance OF'</li>
+                                        <li><strong>Plan focal image</strong> : Plan perpendiculaire à l'axe optique passant par F'</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="exercise">
+                                    <h5>Exercice d'application</h5>
+                                    <p>Une lentille convergente a une distance focale de 20 cm. Calculez sa vergence.</p>
+                                    <button class="btn btn-solution" onclick="$('#solution1').toggle();">Voir la solution</button>
+                                    <div id="solution1" class="solution">
+                                        <p>La vergence est donnée par $C = \frac{1}{f'}$.</p>
+                                        <p>Ici, $f' = 20$ cm $= 0,2$ m.</p>
+                                        <p>Donc $C = \frac{1}{0,2} = 5$ δ.</p>
+                                        <p>La lentille a une vergence de 5 dioptries.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Lentilles divergentes -->
+                            <div class="tab-pane fade" id="divergentes" role="tabpanel" aria-labelledby="divergentes-tab">
+                                <h3>Lentilles divergentes</h3>
+                                <p>Une lentille divergente est plus mince au centre qu'au bord. Elle fait diverger les rayons lumineux parallèles à l'axe optique, qui semblent provenir d'un point appelé foyer image.</p>
+                                
+                                <div class="illustration">
+                                    <!-- Placeholder pour une image de lentille divergente -->
+                                    <img src="data:image/png;base64,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" alt="Lentille divergente et ses caractéristiques" class="img-fluid">
+                                    <div class="illustration-desc">Fig. 3 - Lentille divergente : F' est le foyer image virtuel, F le foyer objet, O le centre optique, et f' la distance focale image (négative)</div>
+                                </div>
+                                
+                                <div class="definition">
+                                    <h5>Caractéristiques principales</h5>
+                                    <ul>
+                                        <li><strong>Centre optique (O)</strong> : Point de la lentille où les rayons ne sont pas déviés</li>
+                                        <li><strong>Foyer image (F')</strong> : Point virtuel d'où semblent provenir les rayons émergents lorsque les rayons incidents sont parallèles à l'axe optique</li>
+                                        <li><strong>Foyer objet (F)</strong> : Point réel dont les rayons émergents sont parallèles à l'axe optique</li>
+                                        <li><strong>Distance focale image (f')</strong> : Distance OF' (négative)</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="exercise">
+                                    <h5>Exercice d'application</h5>
+                                    <p>Une lentille divergente a une distance focale de -25 cm. Calculez sa vergence.</p>
+                                    <button class="btn btn-solution" onclick="$('#solution2').toggle();">Voir la solution</button>
+                                    <div id="solution2" class="solution">
+                                        <p>La vergence est donnée par $C = \frac{1}{f'}$.</p>
+                                        <p>Ici, $f' = -25$ cm $= -0,25$ m.</p>
+                                        <p>Donc $C = \frac{1}{-0,25} = -4$ δ.</p>
+                                        <p>La lentille a une vergence de -4 dioptries.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Formation d'images -->
+                            <div class="tab-pane fade" id="formations" role="tabpanel" aria-labelledby="formations-tab">
+                                <h3>Formation des images par les lentilles minces</h3>
+                                <p>Les lentilles minces forment des images réelles ou virtuelles d'objets placés devant elles. La position et la taille de l'image peuvent être déterminées par construction géométrique ou par calcul.</p>
+                                
+                                <div class="illustration">
+                                    <!-- Placeholder pour une image de construction géométrique -->
+                                    <img src="data:image/png;base64,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" alt="Construction géométrique de l'image par une lentille convergente" class="img-fluid">
+                                    <div class="illustration-desc">Fig. 4 - Construction de l'image AB' d'un objet AB à travers une lentille convergente. Les trois rayons principaux sont tracés : rayon parallèle à l'axe, rayon passant par F, et rayon passant par O.</div>
+                                </div>
+                                
+                                <div class="definition">
+                                    <h5>Formules de conjugaison</h5>
+                                    <p>Pour une lentille mince, les positions de l'objet (A) et de l'image (A') sont reliées par la relation de conjugaison (formule de Descartes) :</p>
+                                    <div class="formula">
+                                        $\frac{1}{\overline{OA'}} - \frac{1}{\overline{OA}} = \frac{1}{f'} = C$
+                                    </div>
+                                    <p>où $\overline{OA}$ et $\overline{OA'}$ sont des distances algébriques mesurées à partir du centre optique O.</p>
+                                    
+                                    <p>Le grandissement transversal $\gamma$ est donné par :</p>
+                                    <div class="formula">
+                                        $\gamma = \frac{\overline{A'B'}}{\overline{AB}} = \frac{\overline{OA'}}{\overline{OA}}$
+                                    </div>
+                                </div>
+                                
+                                <div class="important">
+                                    <h5>Conventions de signes</h5>
+                                    <ul>
+                                        <li>Origine au centre optique O</li>
+                                        <li>Sens de la lumière incidente comme sens positif</li>
+                                        <li>$\overline{OA} < 0$ si l'objet est devant la lentille (réel)</li>
+                                        <li>$\overline{OA'} > 0$ si l'image est derrière la lentille (réelle)</li>
+                                        <li>$\overline{OA'} < 0$ si l'image est devant la lentille (virtuelle)</li>
+                                        <li>$f' > 0$ pour une lentille convergente, $f' < 0$ pour une lentille divergente</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="exercise">
+                                    <h5>Exercice d'application</h5>
+                                    <p>Un objet de hauteur 2 cm est placé perpendiculairement à l'axe optique d'une lentille convergente de distance focale 10 cm, à 15 cm du centre optique.</p>
+                                    <p>a) Déterminez la position de l'image.</p>
+                                    <p>b) Calculez la taille de l'image.</p>
+                                    <button class="btn btn-solution" onclick="$('#solution3').toggle();">Voir la solution</button>
+                                    <div id="solution3" class="solution">
+                                        <p>a) Utilisons la formule de conjugaison : $\frac{1}{\overline{OA'}} - \frac{1}{\overline{OA}} = \frac{1}{f'}$</p>
+                                        <p>Avec $\overline{OA} = -15$ cm (objet réel) et $f' = 10$ cm</p>
+                                        <p>$\frac{1}{\overline{OA'}} - \frac{1}{-15} = \frac{1}{10}$</p>
+                                        <p>$\frac{1}{\overline{OA'}} + \frac{1}{15} = \frac{1}{10}$</p>
+                                        <p>$\frac{1}{\overline{OA'}} = \frac{1}{10} - \frac{1}{15} = \frac{3}{30} - \frac{2}{30} = \frac{1}{30}$</p>
+                                        <p>Donc $\overline{OA'} = 30$ cm</p>
+                                        <p>L'image est réelle et située à 30 cm derrière la lentille.</p>
+                                        
+                                        <p>b) Le grandissement est : $\gamma = \frac{\overline{OA'}}{\overline{OA}} = \frac{30}{-15} = -2$</p>
+                                        <p>La taille de l'image est : $\overline{A'B'} = \gamma \times \overline{AB} = -2 \times 2 = -4$ cm</p>
+                                        <p>L'image mesure 4 cm et est inversée (signe négatif).</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Exercices -->
+                            <div class="tab-pane fade" id="exercices" role="tabpanel" aria-labelledby="exercices-tab">
+                                <h3>Exercices supplémentaires</h3>
+                                
+                                <div class="exercise">
+                                    <h5>Exercice 1 : Identification de lentilles</h5>
+                                    <p>Parmi les lentilles suivantes, lesquelles sont convergentes et lesquelles sont divergentes ?</p>
+                                    <ol type="a">
+                                        <li>Lentille biconvexe</li>
+                                        <li>Lentille plan-concave</li>
+                                        <li>Lentille ménisque convergent</li>
+                                        <li>Lentille biconcave</li>
+                                    </ol>
+                                    <button class="btn btn-solution" onclick="$('#solution4').toggle();">Voir la solution</button>
+                                    <div id="solution4" class="solution">
+                                        <p>a) Lentille biconvexe : convergente</p>
+                                        <p>b) Lentille plan-concave : divergente</p>
+                                        <p>c) Lentille ménisque convergent : convergente</p>
+                                        <p>d) Lentille biconcave : divergente</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="exercise">
+                                    <h5>Exercice 2 : Calcul de distance focale</h5>
+                                    <p>Une lentille convergente donne d'un objet réel situé à 30 cm de son centre optique une image réelle située à 60 cm de ce centre.</p>
+                                    <p>a) Quelle est la distance focale de cette lentille ?</p>
+                                    <p>b) Quelle est sa vergence ?</p>
+                                    <button class="btn btn-solution" onclick="$('#solution5').toggle();">Voir la solution</button>
+                                    <div id="solution5" class="solution">
+                                        <p>a) Utilisons la formule de conjugaison : $\frac{1}{\overline{OA'}} - \frac{1}{\overline{OA}} = \frac{1}{f'}$</p>
+                                        <p>Avec $\overline{OA} = -30$ cm et $\overline{OA'} = 60$ cm</p>
+                                        <p>$\frac{1}{60} - \frac{1}{-30} = \frac{1}{f'}$</p>
+                                        <p>$\frac{1}{60} + \frac{1}{30} = \frac{1}{f'}$</p>
+                                        <p>$\frac{1}{60} + \frac{2}{60} = \frac{3}{60} = \frac{1}{20} = \frac{1}{f'}$</p>
+                                        <p>Donc $f' = 20$ cm</p>
+                                        <p>La distance focale est de 20 cm.</p>
+                                        
+                                        <p>b) La vergence est $C = \frac{1}{f'} = \frac{1}{0,2} = 5$ δ</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="exercise">
+                                    <h5>Exercice 3 : Lentille divergente</h5>
+                                    <p>Un objet de 3 cm de hauteur est placé à 20 cm d'une lentille divergente de distance focale -30 cm.</p>
+                                    <p>a) Déterminez la position de l'image.</p>
+                                    <p>b) Calculez la taille de l'image.</p>
+                                    <p>c) Caractérisez l'image (réelle/virtuelle, droite/inversée).</p>
+                                    <button class="btn btn-solution" onclick="$('#solution6').toggle();">Voir la solution</button>
+                                    <div id="solution6" class="solution">
+                                        <p>a) Formule de conjugaison : $\frac{1}{\overline{OA'}} - \frac{1}{\overline{OA}} = \frac{1}{f'}$</p>
+                                        <p>Avec $\overline{OA} = -20$ cm et $f' = -30$ cm</p>
+                                        <p>$\frac{1}{\overline{OA'}} - \frac{1}{-20} = \frac{1}{-30}$</p>
+                                        <p>$\frac{1}{\overline{OA'}} + \frac{1}{20} = -\frac{1}{30}$</p>
+                                        <p>$\frac{1}{\overline{OA'}} = -\frac{1}{30} - \frac{1}{20} = -\frac{2}{60} - \frac{3}{60} = -\frac{5}{60} = -\frac{1}{12}$</p>
+                                        <p>Donc $\overline{OA'} = -12$ cm</p>
+                                        <p>L'image est virtuelle et située à 12 cm devant la lentille.</p>
+                                        
+                                        <p>b) Grandissement : $\gamma = \frac{\overline{OA'}}{\overline{OA}} = \frac{-12}{-20} = 0,6$</p>
+                                        <p>Taille de l'image : $\overline{A'B'} = \gamma \times \overline{AB} = 0,6 \times 3 = 1,8$ cm</p>
+                                        
+                                        <p>c) L'image est virtuelle (car $\overline{OA'} < 0$), droite (car $\gamma > 0$) et réduite.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center">
+        <div class="container">
+            <p>Résumé sur les lentilles minces et formation des images - Physique-Chimie</p>
+            <p>© 2023 - Conçu pour l'apprentissage mobile</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script pour gérer l'affichage des solutions
+        $(document).ready(function() {
+            $('.btn-solution').click(function() {
+                $(this).text(function(i, text) {
+                    return text === "Voir la solution" ? "Cacher la solution" : "Voir la solution";
+                });
+            });
+        });
+    </script>
+</body>
+</html>

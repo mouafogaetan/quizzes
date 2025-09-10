@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Énergie et Puissance Électriques - Rendement</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .solution {
+            display: none;
+            background-color: #d1ecf1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .canvas-container {
+            width: 100%;
+            height: 250px;
+            margin: 15px 0;
+        }
+        .formula {
+            font-weight: bold;
+            color: #0d6efd;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <h1 class="text-center mb-4">Énergie et Puissance Électriques - Rendement</h1>
+        
+        <!-- Section 1: Définitions -->
+        <div class="card">
+            <div class="card-header">
+                1. Définitions de l'énergie et de la puissance électrique
+            </div>
+            <div class="card-body">
+                <h5>Énergie électrique (E)</h5>
+                <p>L'énergie électrique consommée par un appareil est donnée par la formule :</p>
+                <div class="formula">
+                    $E = P \times t = U \times I \times t$
+                </div>
+                <p>Où :</p>
+                <ul>
+                    <li>$E$ : énergie en joules (J)</li>
+                    <li>$P$ : puissance en watts (W)</li>
+                    <li>$t$ : temps en secondes (s)</li>
+                    <li>$U$ : tension en volts (V)</li>
+                    <li>$I$ : intensité en ampères (A)</li>
+                </ul>
+                
+                <h5>Puissance électrique (P)</h5>
+                <p>La puissance électrique est la quantité d'énergie consommée par unité de temps :</p>
+                <div class="formula">
+                    $P = \frac{E}{t} = U \times I$
+                </div>
+                
+                <div class="exercise">
+                    <p><strong>Exercice d'application :</strong> Une lampe de 60 W fonctionne pendant 2 heures. Quelle énergie consomme-t-elle en joules et en kilowattheures (kWh) ?</p>
+                    <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution1')">Afficher la correction</button>
+                    <div id="solution1" class="solution">
+                        <p><strong>Correction :</strong></p>
+                        <p>Données : P = 60 W, t = 2 h = 7200 s</p>
+                        <p>En joules : E = P × t = 60 × 7200 = 432 000 J</p>
+                        <p>En kWh : E = 0,060 kW × 2 h = 0,12 kWh</p>
+                        <p>(Note : 1 kWh = 3 600 000 J)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 2: Loi de Joule -->
+        <div class="card">
+            <div class="card-header">
+                2. Loi de Joule
+            </div>
+            <div class="card-body">
+                <p>Pour un conducteur ohmique de résistance R, l'énergie dissipée par effet Joule est :</p>
+                <div class="formula">
+                    $E = R \times I^2 \times t$
+                </div>
+                <p>Et la puissance dissipée par effet Joule est :</p>
+                <div class="formula">
+                    $P = R \times I^2 = \frac{U^2}{R}$
+                </div>
+                
+                <p>L'effet Joule représente la conversion de l'énergie électrique en énergie thermique.</p>
+                
+                <!-- Espace pour un schéma d'effet Joule -->
+                <!-- Description pour recherche d'image: Schéma montrant un résistor avec des flèches représentant la chaleur dissipée -->
+                <div class="text-center my-3">
+                    <img src="data:image/png;base64,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" alt="Schéma effet Joule" class="img-fluid" style="max-height: 200px;">
+                    <p class="text-muted">Schéma montrant l'effet Joule: conversion électricité en chaleur</p>
+                </div>
+                
+                <div class="exercise">
+                    <p><strong>Exercice d'application :</strong> Un radiateur électrique a une résistance de 40 Ω et est traversé par un courant de 5 A. Calculer la puissance dissipée et l'énergie dissipée en 30 minutes.</p>
+                    <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution2')">Afficher la correction</button>
+                    <div id="solution2" class="solution">
+                        <p><strong>Correction :</strong></p>
+                        <p>Données : R = 40 Ω, I = 5 A, t = 30 min = 1800 s</p>
+                        <p>Puissance dissipée : P = R × I² = 40 × 5² = 40 × 25 = 1000 W</p>
+                        <p>Énergie dissipée : E = P × t = 1000 × 1800 = 1 800 000 J (ou 0,5 kWh)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 3: Rendement -->
+        <div class="card">
+            <div class="card-header">
+                3. Rendement d'un montage
+            </div>
+            <div class="card-body">
+                <p>Le rendement η (éta) d'un système est le rapport entre l'énergie utile et l'énergie consommée (ou entre les puissances correspondantes) :</p>
+                <div class="formula">
+                    $\eta = \frac{E_{\text{utile}}}{E_{\text{consommée}}} = \frac{P_{\text{utile}}}{P_{\text{consommée}}}$
+                </div>
+                <p>Le rendement est toujours inférieur à 1 (ou 100%) à cause des pertes inévitables.</p>
+                
+                <!-- Graphique de rendement avec Chart.js -->
+                <div class="canvas-container">
+                    <canvas id="efficiencyChart"></canvas>
+                </div>
+                
+                <div class="exercise">
+                    <p><strong>Exercice d'application :</strong> Un moteur électrique consomme une puissance de 800 W et fournit une puissance mécanique de 600 W. Calculer son rendement.</p>
+                    <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution3')">Afficher la correction</button>
+                    <div id="solution3" class="solution">
+                        <p><strong>Correction :</strong></p>
+                        <p>Données : P_consommée = 800 W, P_utile = 600 W</p>
+                        <p>Rendement : η = P_utile / P_consommée = 600 / 800 = 0,75 (soit 75%)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 4: Pertes énergétiques -->
+        <div class="card">
+            <div class="card-header">
+                4. Pertes énergétiques et solutions pour les réduire
+            </div>
+            <div class="card-body">
+                <p>Les pertes énergétiques dans les systèmes électriques proviennent principalement de :</p>
+                <ul>
+                    <li>L'effet Joule (résistance des fils)</li>
+                    <li>Les frottements mécaniques</li>
+                    <li>Les courants de Foucault (dans les matériaux magnétiques)</li>
+                    <li>Les pertes fer (hystérésis)</li>
+                </ul>
+                
+                <p><strong>Solutions pour réduire les pertes :</strong></p>
+                <ul>
+                    <li>Utiliser des matériaux supraconducteurs (quand c'est possible)</li>
+                    <li>Augmenter la section des câbles pour réduire la résistance</li>
+                    <li>Utiliser des matériaux à faible réluctance magnétique</li>
+                    <li>Optimiser la conception pour réduire les frottements</li>
+                    <li>Utiliser des transformateurs à haut rendement</li>
+                </ul>
+                
+                <!-- Visualisation des pertes avec D3.js -->
+                <div id="energyLossChart" class="canvas-container"></div>
+                
+                <div class="exercise">
+                    <p><strong>Exercice d'application :</strong> Une ligne électrique a une résistance de 0,5 Ω et est traversée par un courant de 20 A. Calculer la puissance perdue par effet Joule. Proposer une solution pour réduire ces pertes.</p>
+                    <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution4')">Afficher la correction</button>
+                    <div id="solution4" class="solution">
+                        <p><strong>Correction :</strong></p>
+                        <p>Données : R = 0,5 Ω, I = 20 A</p>
+                        <p>Puissance perdue : P = R × I² = 0,5 × 400 = 200 W</p>
+                        <p>Solutions pour réduire ces pertes :</p>
+                        <ul>
+                            <li>Augmenter la section du câble pour réduire sa résistance</li>
+                            <li>Utiliser un matériau meilleur conducteur</li>
+                            <li>Augmenter la tension pour réduire l'intensité (P = U×I)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 5: Exercice de synthèse -->
+        <div class="card">
+            <div class="card-header">
+                5. Exercice de synthèse
+            </div>
+            <div class="card-body">
+                <div class="exercise">
+                    <p><strong>Problème complet :</strong> Un moteur électrique alimenté sous 230 V est traversé par un courant de 4 A. Sa force contre-électromotrice est de 210 V et sa résistance interne de 1,5 Ω. Calculer :</p>
+                    <ol>
+                        <li>La puissance électrique consommée</li>
+                        <li>Les pertes par effet Joule</li>
+                        <li>La puissance utile</li>
+                        <li>Le rendement du moteur</li>
+                    </ol>
+                    <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution5')">Afficher la correction</button>
+                    <div id="solution5" class="solution">
+                        <p><strong>Correction :</strong></p>
+                        <p>Données : U = 230 V, I = 4 A, E' = 210 V, r = 1,5 Ω</p>
+                        <ol>
+                            <li>Puissance consommée : P_cons = U × I = 230 × 4 = 920 W</li>
+                            <li>Pertes Joule : P_j = r × I² = 1,5 × 16 = 24 W</li>
+                            <li>Puissance utile : P_u = E' × I = 210 × 4 = 840 W</li>
+                            <li>Rendement : η = P_u / P_cons = 840 / 920 ≈ 0,913 (91,3%)</li>
+                        </ol>
+                        <p>Vérification : P_cons = P_u + P_j = 840 + 24 = 864 W ≠ 920 W. Il manque 56 W qui correspondent aux autres pertes (frottements, pertes fer).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <script>
+        // Fonction pour afficher/masquer les solutions
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.style.display = solution.style.display === 'none' || solution.style.display === '' ? 'block' : 'none';
+        }
+        
+        // Attendre que le document soit chargé
+        $(document).ready(function() {
+            // Configuration du graphique de rendement avec Chart.js
+            const ctx = document.getElementById('efficiencyChart').getContext('2d');
+            const efficiencyChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Énergie utile', 'Pertes'],
+                    datasets: [{
+                        data: [75, 25],
+                        backgroundColor: ['#4bc0c0', '#ff6384'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Répartition énergie utile/pertes (rendement 75%)'
+                        }
+                    }
+                }
+            });
+            
+            // Configuration de la visualisation des pertes avec D3.js
+            const energyData = [
+                {source: 'Effet Joule', value: 45},
+                {source: 'Frottements', value: 25},
+                {source: 'Pertes fer', value: 20},
+                {source: 'Autres', value: 10}
+            ];
+            
+            const width = 300;
+            const height = 250;
+            const radius = Math.min(width, height) / 2;
+            
+            const svg = d3.select("#energyLossChart")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .append("g")
+                .attr("transform", `translate(${width/2}, ${height/2})`);
+            
+            const color = d3.scaleOrdinal()
+                .domain(energyData.map(d => d.source))
+                .range(d3.schemeCategory10);
+            
+            const pie = d3.pie()
+                .value(d => d.value);
+            
+            const arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius);
+            
+            const arcs = svg.selectAll("arc")
+                .data(pie(energyData))
+                .enter()
+                .append("g")
+                .attr("class", "arc");
+            
+            arcs.append("path")
+                .attr("d", arc)
+                .attr("fill", d => color(d.data.source));
+            
+            arcs.append("text")
+                .attr("transform", d => `translate(${arc.centroid(d)})`)
+                .attr("text-anchor", "middle")
+                .text(d => d.data.source.substring(0, 3))
+                .style("fill", "white")
+                .style("font-size", "12px");
+                
+            // Légende
+            const legend = svg.selectAll(".legend")
+                .data(energyData)
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", (d, i) => `translate(-${width/2 - 20}, -${height/2 - 20 + i * 20})`);
+            
+            legend.append("rect")
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", d => color(d.source));
+            
+            legend.append("text")
+                .attr("x", 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .text(d => d.source + " (" + d.value + "%)")
+                .style("font-size", "10px");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformations Affines du Plan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .solution {
+            display: none;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .exercise {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-left: 4px solid #0d6efd;
+            background-color: #f0f8ff;
+        }
+        .diagram-placeholder {
+            background-color: #e9ecef;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Transformations Affines du Plan</h1>
+        <p class="lead text-center">Résumé des notions essentielles avec exemples et exercices</p>
+
+        <!-- Section 1: Composée de deux symétries orthogonales -->
+        <div class="card">
+            <div class="card-header">
+                Composée de deux symétries orthogonales
+            </div>
+            <div class="card-body">
+                <h5>Notions essentielles</h5>
+                <ul>
+                    <li>La composée de deux réflexions d'axes sécants en $O$ est une rotation de centre $O$</li>
+                    <li>Si $(\vec{u})$ et $(\vec{v})$ sont les vecteurs directeurs des axes, l'angle de rotation est $2(\vec{u}, \vec{v}) = 2\theta$</li>
+                    <li>La composée de deux symétries axiales d'axes parallèles est une translation</li>
+                    <li>Si la distance entre les axes est $d$, le vecteur de translation a pour norme $2d$ et est perpendiculaire aux axes</li>
+                </ul>
+
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Soit ABCD un carré de centre O et de sens direct. Déterminer la nature et les éléments caractéristiques des transformations $S_{(AB)} \circ S_{(AC)}$ et $S_{(AB)} \circ S_{(CD)}$.</p>
+                    <button class="btn btn-primary btn-sm" onclick="$('#solution1').toggle()">Voir la solution</button>
+                    <div id="solution1" class="solution">
+                        <p><strong>Solution :</strong></p>
+                        <p>1. $S_{(AB)} \circ S_{(AC)}$ :</p>
+                        <p>Les axes (AB) et (AC) sont sécants en A. L'angle entre (AB) et (AC) est de $45^\circ$ (ou $\pi/4$ rad).</p>
+                        <p>Donc $S_{(AB)} \circ S_{(AC)}$ est une rotation de centre A et d'angle $2 \times 45^\circ = 90^\circ$ (ou $\pi/2$ rad).</p>
+                        
+                        <p>2. $S_{(AB)} \circ S_{(CD)}$ :</p>
+                        <p>Les axes (AB) et (CD) sont parallèles. La distance entre ces droites est égale au côté du carré.</p>
+                        <p>Donc $S_{(AB)} \circ S_{(CD)}$ est une translation de vecteur perpendiculaire à (AB) et (CD), dont la norme est égale au double de la distance entre les droites, soit $2 \times$ côté du carré.</p>
+                    </div>
+                </div>
+
+                <div class="diagram-placeholder">
+                    [Image: Diagramme montrant deux axes sécants et leur rotation résultante]
+                    <p class="mt-2">Description: Diagramme illustrant la composition de deux symétries orthogonales d'axes sécants formant une rotation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Composée de deux rotations -->
+        <div class="card">
+            <div class="card-header">
+                Composée de deux rotations
+            </div>
+            <div class="card-body">
+                <h5>Notions essentielles</h5>
+                <ul>
+                    <li>La composée de deux rotations de même centre $O$ et d'angles $\theta$ et $\theta'$ est une rotation de centre $O$ d'angle $\theta + \theta'$</li>
+                    <li>Si $\theta + \theta' = 2k\pi$ ($k \in \mathbb{Z}$), la composée est l'identité du plan</li>
+                </ul>
+
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Soit A un point du plan ; $r_1 = R_{(A, -\frac{\pi}{4})}$, $r_2 = R_{(A, \frac{2\pi}{3})}$ et $r_3 = R_{(A, \frac{4\pi}{3})}$. Déterminer la nature et les éléments caractéristiques de $r_1 \circ r_2$ ; $r_2 \circ r_3$ et $r_1 \circ r_3$.</p>
+                    <button class="btn btn-primary btn-sm" onclick="$('#solution2').toggle()">Voir la solution</button>
+                    <div id="solution2" class="solution">
+                        <p><strong>Solution :</strong></p>
+                        <p>1. $r_1 \circ r_2 = R_{(A, -\frac{\pi}{4} + \frac{2\pi}{3})} = R_{(A, \frac{5\pi}{12})}$</p>
+                        <p>2. $r_2 \circ r_3 = R_{(A, \frac{2\pi}{3} + \frac{4\pi}{3})} = R_{(A, 2\pi)} = R_{(A, 0)}$ (identité)</p>
+                        <p>3. $r_1 \circ r_3 = R_{(A, -\frac{\pi}{4} + \frac{4\pi}{3})} = R_{(A, \frac{13\pi}{12})}$</p>
+                    </div>
+                </div>
+
+                <div class="diagram-placeholder">
+					<img src="data:image/png;base64,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">
+                    [Image: Diagramme montrant la composition de deux rotations de même centre]
+                    <p class="mt-2">Description: Diagramme illustrant comment deux rotations successives autour du même point équivalent à une seule rotation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Composée d'homothéties et translations -->
+        <div class="card">
+            <div class="card-header">
+                Composée d'homothéties et translations
+            </div>
+            <div class="card-body">
+                <h5>Notions essentielles</h5>
+                <ul>
+                    <li>La composée de deux homothéties de même centre $O$ et de rapports $k$ et $k'$ est une homothétie de même centre $O$ et de rapport $k \times k'$</li>
+                    <li>La composée d'une homothétie de rapport $k$ ($k \neq 1$) et d'une translation est une homothétie de rapport $k$</li>
+                    <li>Le centre de l'homothétie résultante peut être déterminé par les expressions analytiques ou en cherchant un point fixe</li>
+                </ul>
+
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Soit $h$ l'homothétie de centre $A(-3;2)$ et rapport $4$ ; $h'$ l'homothétie de centre $A$ et de rapport $\frac{1}{2}$ et $t$ la translation du vecteur $\vec{u}(1; -1)$.</p>
+                    <ol>
+                        <li>Déterminer la nature et les éléments caractéristiques de $h \circ h'$.</li>
+                        <li>Déterminer les expressions analytiques de $h$, $t$, $t \circ h$ et $h \circ t$.</li>
+                        <li>En déduire la nature et les éléments caractéristiques de $t \circ h$ et $h \circ t$.</li>
+                    </ol>
+                    <button class="btn btn-primary btn-sm" onclick="$('#solution3').toggle()">Voir la solution</button>
+                    <div id="solution3" class="solution">
+                        <p><strong>Solution :</strong></p>
+                        <p>1. $h \circ h'$ : Les deux homothéties ont le même centre A, donc leur composée est une homothétie de centre A et de rapport $4 \times \frac{1}{2} = 2$.</p>
+                        
+                        <p>2. Expressions analytiques :</p>
+                        <p>Pour $h$ (centre A(-3;2), rapport 4) :</p>
+                        <p>$\begin{cases} x' = 4x + (1-4)(-3) = 4x + 9 \\ y' = 4y + (1-4)(2) = 4y - 6 \end{cases}$</p>
+                        
+                        <p>Pour $t$ (vecteur $\vec{u}(1; -1)$) :</p>
+                        <p>$\begin{cases} x' = x + 1 \\ y' = y - 1 \end{cases}$</p>
+                        
+                        <p>Pour $t \circ h$ :</p>
+                        <p>$\begin{cases} x' = 4x + 9 + 1 = 4x + 10 \\ y' = 4y - 6 - 1 = 4y - 7 \end{cases}$</p>
+                        
+                        <p>Pour $h \circ t$ :</p>
+                        <p>D'abord la translation : $\begin{cases} x_1 = x + 1 \\ y_1 = y - 1 \end{cases}$</p>
+                        <p>Puis l'homothétie : $\begin{cases} x' = 4(x+1) + 9 = 4x + 4 + 9 = 4x + 13 \\ y' = 4(y-1) - 6 = 4y - 4 - 6 = 4y - 10 \end{cases}$</p>
+                        
+                        <p>3. Nature des transformations :</p>
+                        <p>$t \circ h$ et $h \circ t$ sont des homothéties de rapport 4 (le rapport de h).</p>
+                        <p>Pour trouver le centre de $t \circ h$, on résout le système :</p>
+                        <p>$\begin{cases} x = 4x + 10 \\ y = 4y - 7 \end{cases}$ ⇒ $\begin{cases} -3x = 10 \\ -3y = -7 \end{cases}$ ⇒ $\begin{cases} x = -\frac{10}{3} \\ y = \frac{7}{3} \end{cases}$</p>
+                        <p>Donc $t \circ h$ est une homothétie de centre $(-\frac{10}{3}, \frac{7}{3})$ et de rapport 4.</p>
+                        
+                        <p>Pour $h \circ t$, on résout :</p>
+                        <p>$\begin{cases} x = 4x + 13 \\ y = 4y - 10 \end{cases}$ ⇒ $\begin{cases} -3x = 13 \\ -3y = -10 \end{cases}$ ⇒ $\begin{cases} x = -\frac{13}{3} \\ y = \frac{10}{3} \end{cases}$</p>
+                        <p>Donc $h \circ t$ est une homothétie de centre $(-\frac{13}{3}, \frac{10}{3})$ et de rapport 4.</p>
+                    </div>
+                </div>
+
+                <div class="diagram-placeholder">
+                    [Image: Diagramme montrant la composition d'une homothétie et d'une translation]
+                    <p class="mt-2">Description: Diagramme illustrant comment une homothétie et une translation se composent pour former une nouvelle homothétie.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

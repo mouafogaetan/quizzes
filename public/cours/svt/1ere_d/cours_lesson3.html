@@ -3,70 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Renouvellement Moléculaire et Code Génétique</title>
-    <!-- Bootstrap CSS -->
+    <title>Condensé SVT - Renouvellement Moléculaire</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-        }
-        .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            color: white;
-            padding: 2rem 0;
-            margin-bottom: 2rem;
-            border-radius: 0 0 10px 10px;
-        }
-        .section-title {
-            border-left: 5px solid #3498db;
-            padding-left: 15px;
-            margin: 2rem 0 1.5rem 0;
-            color: #2c3e50;
-        }
-        .card {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            border: none;
-            transition: transform 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .card-header {
-            background-color: #3498db;
-            color: white;
-            font-weight: bold;
-        }
-        .table-custom {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .table-custom thead {
-            background-color: #2c3e50;
-            color: white;
-        }
-        .img-fluid {
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .interactive-element {
-            cursor: pointer;
-        }
-        .code-table {
-            font-family: monospace;
-            font-size: 0.9rem;
-        }
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
-        }
-    </style>
-    <!-- MathJax Configuration -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         window.MathJax = {
             tex: {
@@ -75,472 +15,302 @@
         };
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 20px 20px;
+        }
+        .concept-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            background: white;
+        }
+        .concept-header {
+            background-color: #4e73df;
+            color: white;
+            padding: 1rem;
+            font-weight: bold;
+        }
+        .concept-body {
+            padding: 1.5rem;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            border-left: 4px solid #4e73df;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .solution {
+            display: none;
+            background-color: #d4edda;
+            padding: 1rem;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+        }
+        .btn-solution {
+            margin-top: 0.5rem;
+            background-color: #4e73df;
+            border: none;
+        }
+        .molecule-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .concept-body {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
     <div class="header text-center">
         <div class="container">
-            <h1 class="display-4">Structure et Renouvellement Moléculaire</h1>
-            <p class="lead">De l'ADN aux protéines : comprendre les mécanismes du renouvellement cellulaire</p>
+            <h1 class="display-5">Renouvellement Moléculaire et Code Génétique</h1>
+            <p class="lead">Condensé des notions essentielles - Sciences de la Vie et de la Terre</p>
         </div>
     </div>
 
     <div class="container">
-        <!-- Introduction -->
-        <section id="introduction">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="section-title">Introduction</h2>
-                    <p>L'ADN constitue le support universel de l'information génétique chez tous les êtres vivants. Cette molécule extraordinaire, décrite pour la première fois par Watson et Crick en 1953, se compose de deux brins polynucléotidiques associés par des liaisons hydrogène entre bases complémentaires (A=T et C≡G), formant une double hélice caractéristique.</p>
-                    <p>L'information génétique portée par l'ADN est dupliquée lors de l'interphase grâce à un mécanisme de réplication semi-conservative. Les propriétés remarquables de l'ADN découlent directement de sa structure :</p>
-                    <ul>
-                        <li>Le codage de l'information génétique réside dans sa séquence nucléotidique</li>
-                        <li>La duplication de cette information repose sur la complémentarité des bases azotées</li>
-                    </ul>
-                    <p>Si le renouvellement cellulaire s'effectue par mitose, comment se produit le renouvellement des molécules au sein d'une cellule ?</p>
+        <!-- Concept 1 -->
+        <div class="concept-card">
+            <div class="concept-header">1. Renouvellement moléculaire des cellules</div>
+            <div class="concept-body">
+                <p>Les molécules constitutives des cellules sont en renouvellement permanent. Ce processus implique à la fois la dégradation (catabolisme) et la synthèse (anabolisme) des molécules.</p>
+                
+                <h5>Exemple avec les protéines :</h5>
+                <p>Un adulte perd quotidiennement 5-7 g d'azote sous forme d'urée, provenant du catabolisme des protéines. Cette perte est compensée par la synthèse de nouvelles protéines.</p>
+                
+                <div class="exercise">
+                    <p><strong>Exercice 1 :</strong> Sur le graphique suivant, déterminez la demi-vie des protéines marquées.</p>
+                    <div class="chart-container">
+                        <canvas id="proteinTurnoverChart"></canvas>
+                    </div>
+                    <button class="btn btn-primary btn-solution" onclick="$('#solution1').toggle()">Voir la correction</button>
+                    <div id="solution1" class="solution">
+                        <p>La demi-vie correspond au temps nécessaire pour que la radioactivité diminue de moitié. Sur ce graphique, on observe qu'à t=0, la radioactivité est à 100%. Elle diminue à 50% vers le jour 5. La demi-vie est donc d'environ <strong>5 jours</strong>.</p>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <!-- Renouvellement moléculaire -->
-        <section id="renouvellement">
-            <h2 class="section-title">Le Renouvellement Moléculaire des Cellules</h2>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Équilibre Dynamique Cellulaire</div>
-                        <div class="card-body">
-                            <p>Les molécules organiques constitutives de la matière vivante sont soumises à un renouvellement permanent. Ce processus désigne le remplacement continu de molécules par de nouvelles molécules identiques (renouvellement moléculaire) ou de cellules mortes par de nouvelles cellules (renouvellement cellulaire).</p>
-                            <p>Dans une cellule en équilibre, la plupart des espèces chimiques sont constamment dégradées et resynthétisées, à l'exception notable de l'ADN qui demeure inchangé tout au long de la vie cellulaire.</p>
-                        </div>
+        <!-- Concept 2 -->
+        <div class="concept-card">
+            <div class="concept-header">2. Structure des molécules organiques</div>
+            <div class="concept-body">
+                <h5>2.1 Les glucides</h5>
+                <p>Formule générale : $C_x(H_2O)_y$</p>
+                <ul>
+                    <li><strong>Oses</strong> (monosaccharides) : Glucose $C_6H_{12}O_6$</li>
+                    <li><strong>Diosides</strong> : Saccharose (glucose + fructose)</li>
+                    <li><strong>Polyosides</strong> : Amidon, glycogène $(C_6H_{10}O_5)_n$</li>
+                </ul>
+                
+                <h5>2.2 Les lipides</h5>
+                <p>Composés hydrophobes, solubles dans les solvants organiques.</p>
+                <ul>
+                    <li><strong>Glycérides</strong> : Esters du glycérol (mono-, di- et triglycérides)</li>
+                    <li><strong>Stérides</strong> : Esters du cholestérol</li>
+                </ul>
+                
+                <h5>2.3 Les protides</h5>
+                <p>Composés de C, H, O, N (et parfois S, P)</p>
+                <ul>
+                    <li><strong>Acides aminés</strong> : 20 types différents, formule générale $R-CH(NH_2)-COOH$</li>
+                    <li><strong>Peptides</strong> : Chaînes courtes d'acides aminés (liaison peptidique)</li>
+                    <li><strong>Protéines</strong> : Longues chaînes polypeptidiques (>50 aa)</li>
+                </ul>
+                
+                <div class="exercise">
+                    <p><strong>Exercice 2 :</strong> Combien de molécules d'eau sont libérées lors de la formation d'un décapeptide (10 acides aminés) ?</p>
+                    <button class="btn btn-primary btn-solution" onclick="$('#solution2').toggle()">Voir la correction</button>
+                    <div id="solution2" class="solution">
+                        <p>Chaque liaison peptidique libère une molécule d'eau. Pour n acides aminés, le nombre de liaisons peptidiques est (n-1).</p>
+                        <p>Pour un décapeptide (10 acides aminés) : 10 - 1 = <strong>9 molécules d'eau</strong> sont libérées.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Concept 3 -->
+        <div class="concept-card">
+            <div class="concept-header">3. Origine des molécules de renouvellement</div>
+            <div class="concept-body">
+                <p>Les molécules nécessaires au renouvellement proviennent de :</p>
+                <ol>
+                    <li><strong>Apports alimentaires</strong> : Nutriments absorbés après digestion</li>
+                    <li><strong>Recyclage</strong> : Réutilisation des molécules issues de la dégradation</li>
+                </ol>
+                
+                <h5>Acides aminés indispensables :</h5>
+                <p>Certains acides aminés ne peuvent être synthétisés par l'organisme et doivent être apportés par l'alimentation.</p>
+                <p>Chez l'homme : Valine, Leucine, Isoleucine, Phénylalanine, Tryptophane, Thréonine, Lysine, Méthionine.</p>
+                
+                <div class="exercise">
+                    <p><strong>Exercice 3 :</strong> Expliquez pourquoi seulement 5-7 g d'azote sont éliminés quotidiennement alors que l'hydrolyse des protéines libère 25-35 g d'azote.</p>
+                    <button class="btn btn-primary btn-solution" onclick="$('#solution3').toggle()">Voir la correction</button>
+                    <div id="solution3" class="solution">
+                        <p>Cette différence s'explique par le <strong>recyclage</strong> des acides aminés. La majeure partie des acides aminés libérés par l'hydrolyse des protéines est réutilisée pour synthétiser de nouvelles protéines. Seule la fraction non recyclée est éliminée et doit être remplacée par des apports alimentaires.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Concept 4 -->
+        <div class="concept-card">
+            <div class="concept-header">4. Biosynthèse des protéines</div>
+            <div class="concept-body">
+                <p>La synthèse des protéines se déroule en deux étapes principales :</p>
+                
+                <h5>4.1 Transcription</h5>
+                <p>Synthèse d'ARN messager (ARNm) à partir de l'ADN, dans le noyau.</p>
+                <p>Brins d'ADN :</p>
+                <ul>
+                    <li>Brin transcrit (non codant, 3'-5') : sert de matrice</li>
+                    <li>Brin codant (non transcrit, 5'-3') : même séquence que l'ARNm (T remplacé par U)</li>
+                </ul>
+                
+                <h5>4.2 Traduction</h5>
+                <p>Synthèse de la protéine à partir de l'ARNm, dans le cytoplasme.</p>
+                <p>Acteurs : ARNm, ribosomes, ARN de transfert (ARNt), acides aminés, enzymes, ATP.</p>
+                
+                <h5>Code génétique</h5>
+                <p>Correspondance entre les codons (triplets de nucléotides de l'ARNm) et les acides aminés.</p>
+                <p>Caractéristiques :</p>
+                <ul>
+                    <li>Redondant (plusieurs codons pour un même acide aminé)</li>
+                    <li>Non chevauchant</li>
+                    <li>Univoque</li>
+                    <li>Universel</li>
+                </ul>
+                
+                <div class="exercise">
+                    <p><strong>Exercice 4 :</strong> Le codon initiateur de la traduction est AUG, qui code pour la méthionine. Quel est l'anticodon de l'ARNt correspondant ?</p>
+                    <button class="btn btn-primary btn-solution" onclick="$('#solution4').toggle()">Voir la correction</button>
+                    <div id="solution4" class="solution">
+                        <p>L'anticodon est complémentaire au codon. Pour AUG (ARNm), l'anticodon est <strong>UAC</strong> (ARNt).</p>
                     </div>
                 </div>
                 
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Démonstration Expérimentale</div>
-                        <div class="card-body">
-                            <p>Des études ont montré qu'un adulte en bonne santé élimine quotidiennement 5 à 7 grammes d'azote sous forme d'urée, provenant du catabolisme des protéines. Pourtant, la masse protéique totale reste stable, indiquant un remplacement constant par anabolisme.</p>
-                            <p>Pour mesurer la durée de vie des protéines, on utilise des acides aminés marqués avec des isotopes radioactifs (comme le carbone 14). Ces acides aminés sont incorporés dans les nouvelles protéines synthétisées, permettant de suivre leur devenir.</p>
-                        </div>
+                <div class="exercise">
+                    <p><strong>Exercice 5 :</strong> Combien de codons différents existent-ils ? Combien codent pour des acides aminés ?</p>
+                    <button class="btn btn-primary btn-solution" onclick="$('#solution5').toggle()">Voir la correction</button>
+                    <div id="solution5" class="solution">
+                        <p>Avec 4 nucléotides pris 3 par 3, il existe $4^3 = 64$ codons différents.</p>
+                        <p>Parmi eux, 61 codent pour des acides aminés et 3 sont des codons stop (UAA, UAG, UGA) qui signalent la fin de la traduction.</p>
                     </div>
                 </div>
             </div>
-            
-            <div class="row mt-4">
-                <div class="col-md-8 mx-auto">
-                    <div class="card">
-                        <div class="card-header">Demi-vie des Protéines</div>
-                        <div class="card-body text-center">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Exponential_decay.svg/800px-Exponential_decay.svg.png" alt="Courbe de décroissance radioactive montrant la demi-vie" class="img-fluid mb-3">
-                            <p class="text-muted">Figure 1 : Courbe de décroissance radioactive illustrant le concept de demi-vie protéique</p>
-                            <p>La vitesse de renouvellement (ou "turn-over") d'une protéine correspond à sa vitesse de dégradation et est définie par sa <strong>demi-vie</strong> : le temps nécessaire pour que la moitié des molécules formées à un instant donné soient dégradées.</p>
-                            <p>Chez l'humain adulte en bonne santé, le turn-over protéique quotidien représente 1 à 2% des protéines corporelles totales.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <!-- Molécules organiques -->
-        <section id="molecules">
-            <h2 class="section-title">Les Molécules Organiques des Cellules</h2>
-            
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="card-header">Glucides</div>
-                        <div class="card-body">
-                            <p>Les glucides, ou sucres, sont des hydrates de carbone de formule générale $C_x(H_2O)_y$. Ils sont composés de carbone, d'hydrogène et d'oxygène (corps ternaires).</p>
-                            <h5>Classification :</h5>
-                            <ul>
-                                <li><strong>Oses</strong> : sucres simples (ex: glucose $C_6H_{12}O_6$)</li>
-                                <li><strong>Diosides</strong> : association de deux oses (ex: saccharose $C_{12}H_{22}O_{11}$)</li>
-                                <li><strong>Polyosides</strong> : polymères d'oses (ex: amidon $(C_6H_{10}O_5)_n$)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        <!-- Concept 5 -->
+        <div class="concept-card">
+            <div class="concept-header">5. Génie génétique et OGM</div>
+            <div class="concept-body">
+                <p><strong>Définition :</strong> Introduction de changements dans l'ADN d'un organisme sans reproduction naturelle.</p>
+                <p><strong>Transgenèse :</strong> Introduction d'un gène étranger (transgène) dans un organisme.</p>
+                <p><strong>OGM :</strong> Organisme Génétiquement Modifié ayant reçu des gènes étrangers.</p>
                 
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="card-header">Lipides</div>
-                        <div class="card-body">
-                            <p>Les lipides, ou corps gras, présentent une structure variée composée principalement de carbone et d'hydrogène, avec une faible proportion d'oxygène.</p>
-                            <p>Ils se caractérisent par une extrémité hydrophobe et une extrémité hydrophile, déterminant leur orientation dans un environnement aqueux.</p>
-                            <h5>Principales catégories :</h5>
-                            <ul>
-                                <li><strong>Glycérides</strong> : esters du glycérol ($CH_2OH-CHOH-CH_2OH$)</li>
-                                <li><strong>Stérides</strong> : esters du cholestérol</li>
-                                <li>Phospholipides, stéroïdes, etc.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <h5>Applications :</h5>
+                <ul>
+                    <li>Agronomie : plantes résistantes aux herbicides, parasites, virus</li>
+                    <li>Médical : production d'insuline, hormone de croissance</li>
+                </ul>
                 
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <div class="card-header">Protéines</div>
-                        <div class="card-body">
-                            <p>Les protéines sont des macromolécules contenant du carbone, de l'hydrogène, de l'oxygène et de l'azote (corps quaternaires), auxquels peuvent s'ajouter le phosphore et le soufre.</p>
-                            <h5>Structure :</h5>
-                            <ul>
-                                <li><strong>Acides aminés</strong> : unités de base avec fonction amine ($NH_2$) et acide carboxylique ($COOH$)</li>
-                                <li><strong>Peptides</strong> : chaînes courtes d'acides aminés (2-20 unités)</li>
-                                <li><strong>Protéines</strong> : chaînes longues (>50 acides aminés) avec structure tridimensionnelle spécifique</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Mise en Évidence des Molécules Organiques</div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-custom">
-                                    <thead>
-                                        <tr>
-                                            <th>Type de Molécule</th>
-                                            <th>Tests de Mise en Évidence</th>
-                                            <th>Résultats</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Glucides réducteurs</td>
-                                            <td>Test de Fehling</td>
-                                            <td>Précipité rouge brique (réduction des ions $Cu^{2+}$ en $Cu_2O$)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Amidon</td>
-                                            <td>Eau iodée</td>
-                                            <td>Coloration bleu-violacé</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lipides</td>
-                                            <td>Rouge Soudan / Acide osmique</td>
-                                            <td>Coloration rouge / noire</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Protéines</td>
-                                            <td>Test de Biuret</td>
-                                            <td>Coloration violette (liaisons peptidiques)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Acides aminés aromatiques</td>
-                                            <td>Réaction xanthoprotéique</td>
-                                            <td>Coloration jaune</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Origine des molécules -->
-        <section id="origine">
-            <h2 class="section-title">Origine des Molécules de Renouvellement</h2>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Apports Nutritionnels</div>
-                        <div class="card-body">
-                            <p>Les molécules nécessaires au renouvellement cellulaire proviennent en partie de l'alimentation. Après digestion, les nutriments absorbés au niveau intestinal comprennent :</p>
-                            <ul>
-                                <li>Eau et ions minéraux</li>
-                                <li>Oses (glucose, fructose, etc.)</li>
-                                <li>Acides aminés</li>
-                                <li>Acides gras</li>
-                                <li>Vitamines</li>
-                            </ul>
-                            <p>Certains de ces nutriments servent de source d'énergie (rôle énergétique), tandis que d'autres ont une fonction structural (rôle bâtisseur).</p>
-                        </div>
-                    </div>
-                </div>
+                <h5>Avantages et inconvénients :</h5>
+                <p>Avantages : production accrue, résistance, production de molécules thérapeutiques.</p>
+                <p>Inconvénients : risques environnementaux, transmission de gènes, impacts économiques.</p>
                 
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Recyclage Cellulaire</div>
-                        <div class="card-body">
-                            <p>Une partie importante des molécules nécessaires au renouvellement provient du recyclage des anciennes molécules. Ce phénomène est particulièrement marqué pour les protéines.</p>
-                            <p>Des études utilisant des acides aminés marqués à l'azote 15 ont montré que :</p>
-                            <ul>
-                                <li>L'hydrolyse des protéines libère 25-35 g d'azote par jour</li>
-                                <li>Seulement 5-7 g d'azote sont éliminés quotidiennement</li>
-                            </ul>
-                            <p>Cela indique qu'une grande partie des acides aminés issus de la dégradation protéique est réutilisée pour synthétiser de nouvelles protéines.</p>
-                        </div>
+                <div class="exercise">
+                    <p><strong>Exercice 6 :</strong> Pourquoi le génie génétique est-il possible malgré les différences entre espèces ?</p>
+                    <button class="btn btn-primary btn-solution" onclick="$('#solution6').toggle()">Voir la correction</button>
+                    <div id="solution6" class="solution">
+                        <p>Le génie génétique est possible grâce à <strong>l'universalité du code génétique</strong>. Un gène d'une espèce donnée, une fois isolé et incorporé dans le génome d'une autre espèce, peut fonctionner et induire la synthèse de la protéine correspondante car le code génétique est le même pour presque tous les êtres vivants.</p>
                     </div>
                 </div>
             </div>
-            
-            <div class="row mt-4">
-                <div class="col-md-8 mx-auto">
-                    <div class="card">
-                        <div class="card-header">Acides Aminés Indispensables</div>
-                        <div class="card-body">
-                            <p>Certains acides aminés ne peuvent être synthétisés par l'organisme et doivent être apportés par l'alimentation. On les appelle acides aminés indispensables.</p>
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead class="table-dark">
-                                        <tr>
-                                            <th>Acides Aminés Indispensables chez le Rat</th>
-                                            <th>Acides Aminés Indispensables chez l'Humain</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Valine, Leucine, Isoleucine</td>
-                                            <td>Valine, Leucine, Isoleucine</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Phénylalanine, Tryptophane</td>
-                                            <td>Phénylalanine, Tryptophane</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Histidine, Thréonine</td>
-                                            <td>Thréonine</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Arginine, Lysine, Méthionine</td>
-                                            <td>Lysine, Méthionine</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Biosynthèse des protéines -->
-        <section id="biosynthese">
-            <h2 class="section-title">Biosynthèse des Protéines</h2>
-            
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header">Transcription</div>
-                        <div class="card-body">
-                            <p>La transcription est le processus de synthèse d'ARN à partir de l'ADN. Elle se déroule dans le noyau des cellules eucaryotes et nécessite :</p>
-                            <ul>
-                                <li>L'enzyme ARN polymérase</li>
-                                <li>Des nucléotides libres (A, U, C, G)</li>
-                                <li>De l'énergie sous forme d'ATP</li>
-                            </ul>
-                            <p>Le brin d'ADN servant de matrice est appelé brin transcrit (ou brin non codant). La transcription débute au niveau d'une région promotrice spécifique.</p>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Transcription_%28biology%29_diagram.svg/800px-Transcription_%28biology%29_diagram.svg.png" alt="Schéma de la transcription" class="img-fluid mt-3">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header">Traduction</div>
-                        <div class="card-body">
-                            <p>La traduction est le décodage du message de l'ARNm en une chaîne polypeptidique. Ce processus se déroule dans le cytoplasme et fait intervenir :</p>
-                            <ul>
-                                <li>L'ARNm (matrice)</li>
-                                <li>Les ribosomes (système de lecture)</li>
-                                <li>Les ARNt (adaptateurs)</li>
-                                <li>Les acides aminés</li>
-                                <li>De l'énergie (ATP)</li>
-                            </ul>
-                            <p>La traduction comprend trois phases : initiation, élongation et terminaison.</p>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Peptide_syn.png/800px-Peptide_syn.png" alt="Schéma de la traduction" class="img-fluid mt-3">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Comparaison ADN-ARN</div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-custom">
-                                    <thead>
-                                        <tr>
-                                            <th>Critère</th>
-                                            <th>ADN</th>
-                                            <th>ARN</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Sucre</td>
-                                            <td>Désoxyribose ($C_5H_{10}O_4$)</td>
-                                            <td>Ribose ($C_5H_{10}O_5$)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bases azotées</td>
-                                            <td>A, T, G, C</td>
-                                            <td>A, U, G, C</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Structure</td>
-                                            <td>Double brin</td>
-                                            <td>Simple brin</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Localisation</td>
-                                            <td>Noyau</td>
-                                            <td>Noyau et cytoplasme</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Code génétique -->
-        <section id="code-genetique">
-            <h2 class="section-title">Le Code Génétique</h2>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Nature du Code Génétique</div>
-                        <div class="card-body">
-                            <p>Le code génétique est un système de correspondance entre la séquence de nucléotides de l'ARNm et la séquence d'acides aminés de la protéine.</p>
-                            <p>Comme il existe 4 nucléotides différents (A, U, G, C) pour coder 20 acides aminés, le code utilise des combinaisons de trois nucléotides appelées <strong>codons</strong>.</p>
-                            <p>Le nombre de combinaisons possibles est de $4^3 = 64$ codons, ce qui est suffisant pour coder les 20 acides aminés.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header">Caractéristiques du Code Génétique</div>
-                        <div class="card-body">
-                            <ul>
-                                <li><strong>Redondant</strong> : plusieurs codons peuvent coder le même acide aminé</li>
-                                <li><strong>Non chevauchant</strong> : chaque nucléotide n'appartient qu'à un seul codon</li>
-                                <li><strong>Univoque</strong> : un codon donné code toujours le même acide aminé</li>
-                                <li><strong>Universel</strong> : presque identique chez tous les êtres vivants</li>
-                            </ul>
-                            <p>Parmi les 64 codons, 61 codent pour des acides aminés et 3 sont des codons stop (UAA, UAG, UGA) qui signalent la fin de la traduction.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row mt-4">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">Tableau du Code Génétique</div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-custom code-table">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="5" class="text-center">Deuxième nucleotide</th>
-                                        </tr>
-                                        <tr>
-                                            <th></th>
-                                            <th>U</th>
-                                            <th>C</th>
-                                            <th>A</th>
-                                            <th>G</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td rowspan="4">U</td>
-                                            <td>UUU Phénylalanine<br>UUC Phénylalanine</td>
-                                            <td>UCU Sérine<br>UCC Sérine</td>
-                                            <td>UAU Tyrosine<br>UAC Tyrosine</td>
-                                            <td>UGU Cystéine<br>UGC Cystéine</td>
-                                        </tr>
-                                        <tr>
-                                            <td>UUA Leucine</td>
-                                            <td>UCA Sérine</td>
-                                            <td>UAA Stop</td>
-                                            <td>UGA Stop</td>
-                                        </tr>
-                                        <tr>
-                                            <td>UUG Leucine</td>
-                                            <td>UCG Sérine</td>
-                                            <td>UAG Stop</td>
-                                            <td>UGG Tryptophane</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4">...</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="5" class="text-center">... (tableau partiel à titre d'exemple)</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Conclusion -->
-        <section id="conclusion" class="my-5">
-            <div class="card">
-                <div class="card-header">Conclusion</div>
-                <div class="card-body">
-                    <p>L'activité d'une protéine est intimement liée à sa structure spatiale, elle-même déterminée par la séquence de ses acides aminés. Cette information est codée dans l'ADN sous forme de gènes.</p>
-                    <p>La synthèse protéique s'effectue en deux étapes majeures : la transcription (production d'ARNm) et la traduction (décodage de l'ARNm en polypeptide). Ce processus complexe met en jeu de nombreux acteurs moléculaires (ribosomes, ARNt, enzymes) et nécessite un apport énergétique constant.</p>
-                    <p>La compréhension de ces mécanismes fondamentaux ouvre la voie à des applications biotechnologiques importantes, comme le génie génétique et la production de protéines thérapeutiques.</p>
-                </div>
-            </div>
-        </section>
+        </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="container">
-            <p>Document adapté à partir de ressources pédagogiques de Sciences de la Vie et de la Terre</p>
-            <p>© 2023 - Structure et Renouvellement Moléculaire</p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap & jQuery JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JavaScript -->
     <script>
-        $(document).ready(function() {
-            // Animation pour les cartes
-            $('.card').hover(
-                function() {
-                    $(this).css('box-shadow', '0 8px 16px rgba(0, 0, 0, 0.2)');
+        // Graphique pour l'exercice 1
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('proteinTurnoverChart').getContext('2d');
+            const proteinTurnoverChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['0', '2', '4', '6', '8', '10', '12', '14'],
+                    datasets: [{
+                        label: 'Radioactivité des protéines (%)',
+                        data: [100, 85, 70, 50, 30, 20, 10, 5],
+                        borderColor: '#4e73df',
+                        backgroundColor: 'rgba(78, 115, 223, 0.1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#4e73df',
+                        pointRadius: 4,
+                        fill: true,
+                        tension: 0.3
+                    }]
                 },
-                function() {
-                    $(this).css('box-shadow', '0 4px 6px rgba(0, 0, 0, 0.1)');
-                }
-            );
-            
-            // Smooth scrolling pour les ancres
-            $('a[href^="#"]').on('click', function(event) {
-                var target = $(this.getAttribute('href'));
-                if(target.length) {
-                    event.preventDefault();
-                    $('html, body').stop().animate({
-                        scrollTop: target.offset().top - 70
-                    }, 1000);
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Radioactivité (%)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Temps (jours)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Décroissance de la radioactivité des protéines marquées'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Radioactivité: ${context.parsed.y}%`;
+                                }
+                            }
+                        }
+                    }
                 }
             });
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

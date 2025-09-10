@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condition de Gauss et Expériences de Lentilles</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .solution {
+            display: none;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .canvas-container {
+            width: 100%;
+            height: 200px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h2 {
+            color: #0d6efd;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #0d6efd;
+        }
+        .btn-solution {
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Condition de Gauss et Expériences de Lentilles</h1>
+        
+        <div class="card">
+            <div class="card-header">
+                Objectifs du chapitre
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>Énoncer et utiliser la condition de Gauss</li>
+                    <li>Réaliser des expériences de détermination de la vergence</li>
+                    <li>Exploiter graphiquement la relation de conjugaison</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>1. Condition de Gauss</h2>
+        
+        <div class="card">
+            <div class="card-header">
+                Notion essentielle
+            </div>
+            <div class="card-body">
+                <p>La condition de Gauss, aussi appelée approximation de Gauss ou approximation des petits angles, suppose que:</p>
+                <ol>
+                    <li>Les rayons lumineux sont <strong>paraxiaux</strong> (proches de l'axe optique)</li>
+                    <li>Les angles d'incidence sont <strong>faibles</strong></li>
+                </ol>
+                <p>Dans ces conditions, les formules de conjugaison deviennent linéaires et on peut utiliser les relations:</p>
+                <ul>
+                    <li>Relation de conjugaison: $\frac{1}{\overline{OA'}} - \frac{1}{\overline{OA}} = \frac{1}{f'} = C$</li>
+                    <li>Relation de grandissement: $\gamma = \frac{\overline{A'B'}}{\overline{AB}} = \frac{\overline{OA'}}{\overline{OA}}$</li>
+                </ul>
+                <p>Où $O$ est le centre optique, $A$ le point objet, $A'$ le point image, $f'$ la distance focale et $C$ la vergence.</p>
+                
+            </div>
+        </div>
+        
+        <div class="exercise">
+            <h5>Exercice d'application</h5>
+            <p>Un objet AB de hauteur 2 cm est placé à 20 cm d'une lentille convergente de distance focale f' = 10 cm.</p>
+            <ol>
+                <li>Vérifiez que les conditions de Gauss sont respectées.</li>
+                <li>Calculez la position de l'image A'B'.</li>
+                <li>Calculez le grandissement et la taille de l'image.</li>
+            </ol>
+            <button class="btn btn-primary btn-solution" onclick="toggleSolution('solution1')">Voir la correction</button>
+            <div id="solution1" class="solution">
+                <h5>Correction</h5>
+                <ol>
+                    <li>Les conditions de Gauss sont respectées car l'objet est proche de l'axe optique et les angles des rayons lumineux sont faibles.</li>
+                    <li>On utilise la relation de conjugaison: 
+                        $\frac{1}{\overline{OA'}} - \frac{1}{-0,2} = \frac{1}{0,1}$<br>
+                        $\frac{1}{\overline{OA'}} + 5 = 10$<br>
+                        $\frac{1}{\overline{OA'}} = 5$<br>
+                        $\overline{OA'} = 0,2$ m = 20 cm
+                    </li>
+                    <li>Le grandissement: 
+                        $\gamma = \frac{\overline{OA'}}{\overline{OA}} = \frac{0,2}{-0,2} = -1$<br>
+                        La taille de l'image: 
+                        $\overline{A'B'} = \gamma \times \overline{AB} = -1 \times 2 = -2$ cm<br>
+                        L'image est renversée et de même taille que l'objet.
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <h2>2. Détermination expérimentale de la vergence</h2>
+        
+        <div class="card">
+            <div class="card-header">
+                Notion essentielle
+            </div>
+            <div class="card-body">
+                <p>La vergence $C$ d'une lentille, exprimée en dioptries (δ), est l'inverse de sa distance focale $f'$ exprimée en mètres:</p>
+                <p class="text-center">$C = \frac{1}{f'}$</p>
+                <p>Pour déterminer expérimentalement la vergence d'une lentille, on peut utiliser plusieurs méthodes:</p>
+                <ul>
+                    <li><strong>Méthode autocollimation</strong>: On place un objet devant la lentille et on cherche la position où l'image se forme sur l'objet lui-même.</li>
+                    <li><strong>Méthode de Silbermann</strong>: On cherche la position où l'image a la même taille que l'objet.</li>
+                    <li><strong>Méthode de Bessel</strong>: Pour une distance D entre objet et écran fixée, on trouve deux positions de la lentille qui donnent une image nette.</li>
+                </ul>
+                
+                <!-- Espace pour schéma méthode autocollimation -->
+                <div class="canvas-container bg-light d-flex align-items-center justify-content-center">
+                    <img src="data:image/png;base64,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">
+                    <br><small>Description: Schéma montrant un objet, un miroir plan et une lentille avec le trajet des rayons lumineux en autocollimation</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="exercise">
+            <h5>Exercice d'application</h5>
+            <p>Pour déterminer la distance focale d'une lentille convergente, on utilise la méthode d'autocollimation. On observe que l'image se forme sur l'objet lorsque la lentille est placée à 15 cm de l'objet.</p>
+            <ol>
+                <li>Quelle est la distance focale de cette lentille?</li>
+                <li>Calculez sa vergence.</li>
+            </ol>
+            <button class="btn btn-primary btn-solution" onclick="toggleSolution('solution2')">Voir la correction</button>
+            <div id="solution2" class="solution">
+                <h5>Correction</h5>
+                <ol>
+                    <li>En autocollimation, la distance entre l'objet et la lentille est égale à la distance focale. Donc $f' = 15$ cm = 0,15 m.</li>
+                    <li>La vergence est $C = \frac{1}{f'} = \frac{1}{0,15} ≈ 6,67$ δ.</li>
+                </ol>
+            </div>
+        </div>
+
+        <h2>3. Exploitation graphique de la relation de conjugaison</h2>
+        
+        <div class="card">
+            <div class="card-header">
+                Notion essentielle
+            </div>
+            <div class="card-body">
+                <p>La relation de conjugaison peut être représentée graphiquement pour déterminer les caractéristiques d'une lentille:</p>
+                <ul>
+                    <li><strong>Représentation de Descartes</strong>: On trace $\frac{1}{\overline{OA'}}$ en fonction de $\frac{1}{\overline{OA}}$</li>
+                    <li>La courbe obtenue est une droite de pente 1 et d'ordonnée à l'origine $\frac{1}{f'}$</li>
+                </ul>
+                
+                <!-- Espace pour graphique relation de conjugaison -->
+                <div class="canvas-container bg-light d-flex align-items-center justify-content-center">
+                    <img src="data:image/png;base64,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">
+                    <small>Description: Graphique montrant 1/OA' en fonction de 1/OA avec une droite de pente 1</small>
+                </div>
+                
+                <p>On peut également utiliser une <strong>construction géométrique</strong> pour trouver l'image d'un objet à travers une lentille:</p>
+                <ol>
+                    <li>Rayon parallèle à l'axe optique qui émerge en passant par le foyer image</li>
+                    <li>Rayon passant par le centre optique qui n'est pas dévié</li>
+                    <li>Rayon passant par le foyer objet qui émerge parallèlement à l'axe optique</li>
+                </ol>
+                
+                <!-- Espace pour schéma construction géométrique -->
+                <div class="canvas-container bg-light d-flex align-items-center justify-content-center">
+                    <img src="data:image/png;base64,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">
+                    <small>Description: Schéma montrant la construction des trois rayons principaux pour une lentille convergente</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="exercise">
+            <h5>Exercice d'application</h5>
+            <p>On a mesuré pour une lentille convergente les positions d'objet (OA) et d'image (OA') suivantes:</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>OA (cm)</th>
+                        <td>-30</td>
+                        <td>-25</td>
+                        <td>-20</td>
+                        <td>-15</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>OA' (cm)</th>
+                        <td>15,0</td>
+                        <td>16,7</td>
+                        <td>20,0</td>
+                        <td>30,0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <ol>
+                <li>Tracer la courbe $\frac{1}{\overline{OA'}} = f\left(\frac{1}{\overline{OA}}\right)$</li>
+                <li>En déduire la distance focale de la lentille</li>
+            </ol>
+            <button class="btn btn-primary btn-solution" onclick="toggleSolution('solution3')">Voir la correction</button>
+            <div id="solution3" class="solution">
+                <h5>Correction</h5>
+                <ol>
+                    <li>On calcule les valeurs:
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>1/OA (cm⁻¹)</th>
+                                    <td>-0,033</td>
+                                    <td>-0,040</td>
+                                    <td>-0,050</td>
+                                    <td>-0,067</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>1/OA' (cm⁻¹)</th>
+                                    <td>0,067</td>
+                                    <td>0,060</td>
+                                    <td>0,050</td>
+                                    <td>0,033</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        La courbe est une droite de pente 1.
+                    </li>
+                    <li>L'ordonnée à l'origine de cette droite donne 1/f' = 0,1 cm⁻¹, donc f' = 10 cm.</li>
+                </ol>
+                
+                <!-- Espace pour graphique avec points -->
+                <div class="canvas-container bg-light d-flex align-items-center justify-content-center">
+                    <p class="text-center">[Graphique à insérer: Points expérimentaux et droite de régression]<br>
+                    <small>Description: Graphique montrant les points expérimentaux et la droite de pente 1 passant par ces points</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === 'block') {
+                solution.style.display = 'none';
+            } else {
+                solution.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
+</html>

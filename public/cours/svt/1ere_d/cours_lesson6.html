@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 5 - Flux d'énergie et cycles biogéochimiques</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .exercise {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .solution {
+            display: none;
+            margin-top: 10px;
+        }
+        .canvas-container {
+            width: 100%;
+            height: 300px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Chapitre 5 : Flux d'énergie et cycles biogéochimiques</h1>
+        
+        <!-- Section 1 : Écosystèmes et niveaux trophiques -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2>1. Écosystèmes et niveaux trophiques</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Notion clé :</strong> Un écosystème est formé du biotope (milieu physico-chimique) et de la biocénose (êtres vivants). Les relations alimentaires créent des chaînes trophiques avec différents niveaux :</p>
+                <ul>
+                    <li>Producteurs primaires (P) - Autotrophes (végétaux)</li>
+                    <li>Consommateurs primaires (C1) - Herbivores</li>
+                    <li>Consommateurs secondaires (C2) - Carnivores</li>
+                    <li>Décomposeurs - Recyclent la matière organique</li>
+                </ul>
+                
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Dans une prairie, on trouve : herbes → sauterelles → mulots → renards. Identifiez les niveaux trophiques.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la correction</button>
+                    <div class="solution">
+                        <p>Herbes = Producteurs primaires (P)<br>
+                        Sauterelles = Consommateurs primaires (C1)<br>
+                        Mulots = Consommateurs secondaires (C2)<br>
+                        Renards = Consommateurs tertiaires (C3)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 2 : Flux d'énergie et productivité -->
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h2>2. Flux d'énergie et productivité</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Notion clé :</strong> L'énergie diminue à chaque niveau trophique à cause des pertes :</p>
+                <ul>
+                    <li>Production primaire brute (PB) = Toute la matière organique produite par photosynthèse</li>
+                    <li>Production primaire nette (PN) = PB - Respiration des producteurs</li>
+                    <li>Rendement d'assimilation : $RA = \frac{A}{I} \times 100$</li>
+                    <li>Rendement de production : $RP = \frac{P}{A} \times 100$</li>
+                    <li>Rendement écologique : $REC = \frac{P}{I} \times 100$</li>
+                </ul>
+                <p>Seulement environ 10% de l'énergie est transférée d'un niveau trophique au suivant.</p>
+                
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Un herbivore consomme 1000 kJ de nourriture. 300 kJ sont excrétés non assimilés, 600 kJ sont utilisés pour la respiration. Calculez la production nette et le rendement écologique.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la correction</button>
+                    <div class="solution">
+                        <p>Matière assimilée A = 1000 - 300 = 700 kJ<br>
+                        Production nette P = A - respiration = 700 - 600 = 100 kJ<br>
+                        Rendement écologique REC = (P/I) × 100 = (100/1000) × 100 = 10%</p>
+                    </div>
+                </div>
+                
+                <!-- Image à insérer : Bilan énergétique d'une plante -->
+                <div class="text-center my-3">
+                    <img src="placeholder_bilan_energetique_plante.png" alt="Bilan énergétique d'une plante verte" class="img-fluid" style="max-width: 100%;">
+                    <p class="fst-italic">Figure : Bilan énergétique d'une plante verte (rechercher image avec ces termes)</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 3 : Pyramides écologiques -->
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h2>3. Pyramides écologiques</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Notion clé :</strong> Représentations graphiques des relations quantitatives entre niveaux trophiques :</p>
+                <ul>
+                    <li>Pyramide des biomasses : Masse de matière sèche à un moment donné</li>
+                    <li>Pyramide des productivités : Biomasse produite par unité de temps et de surface</li>
+                    <li>Pyramide des énergies : Quantité d'énergie correspondante (la plus précise)</li>
+                </ul>
+                
+                <div class="canvas-container">
+                    <canvas id="pyramidChart"></canvas>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Pourquoi une pyramide des énergies est-elle plus représentative du flux d'énergie qu'une pyramide des biomasses?</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la correction</button>
+                    <div class="solution">
+                        <p>La pyramide des énergies tient compte de la vitesse de renouvellement de la biomasse. Par exemple, le phytoplancton a une biomasse faible mais une productivité très élevée, ce qui n'apparaît pas dans une pyramide des biomasses.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 4 : Cycle du carbone -->
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h2>4. Cycle biogéochimique du carbone</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Notion clé :</strong> Le carbone circule entre différents réservoirs :</p>
+                <ul>
+                    <li>Réservoirs minéraux : Atmosphère (CO₂), hydrosphère (HCO₃⁻), lithosphère (carbonates)</li>
+                    <li>Réservoirs organiques : Êtres vivants, combustibles fossiles</li>
+                    <li>Passage CO₂ minéral → organique : Photosynthèse, chimiosynthèse</li>
+                    <li>Passage organique → minéral : Respiration, fermentation, combustion</li>
+                </ul>
+                
+                <!-- Image à insérer : Cycle du carbone -->
+                <div class="text-center my-3">
+                    <img src="data:image/jpeg;base64,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" alt="Cycle biogéochimique du carbone" class="img-fluid" style="max-width: 100%;">
+                    <p class="fst-italic">Figure : Cycle simplifié du carbone (rechercher image avec ces termes)</p>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Expliquez comment les activités humaines perturbent le cycle du carbone.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la correction</button>
+                    <div class="solution">
+                        <p>Les activités humaines (industrie, transports, déforestation) libèrent d'énormes quantités de CO₂ en brûlant des combustibles fossiles. Cela augmente la concentration atmosphérique en CO₂, renforçant l'effet de serre et contribuant au réchauffement climatique.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 5 : Cycle de l'azote -->
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                <h2>5. Cycle biogéochimique de l'azote</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Notion clé :</strong> L'azote circule entre différentes formes :</p>
+                <ul>
+                    <li>Azote minéral : N₂ atmosphérique, ions ammonium (NH₄⁺), nitrates (NO₃⁻)</li>
+                    <li>Azote organique : Acides aminés, protéines des êtres vivants</li>
+                    <li>Processus clés : Fixation, ammonification, nitrification, dénitrification</li>
+                </ul>
+                
+                <!-- Image à insérer : Cycle de l'azote -->
+                <div class="text-center my-3">
+                    <img src="placeholder_cycle_azote.png" alt="Cycle biogéochimique de l'azote" class="img-fluid" style="max-width: 100%;">
+                    <p class="fst-italic">Figure : Cycle simplifié de l'azote (rechercher image avec ces termes)</p>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Nommez les bactéries responsables de la nitrification et écrivez les équations des réactions.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la correction</button>
+                    <div class="solution">
+                        <p>Nitrosomonas : $NH_4^+ + 3/2 O_2 \rightarrow NO_2^- + H_2O + 2H^+ + Energie$<br>
+                        Nitrobacter : $NO_2^- + 1/2 O_2 \rightarrow NO_3^- + Energie$</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 6 : Effet de serre -->
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h2>6. Effet de serre et perturbations humaines</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Notion clé :</strong> L'effet de serre naturel est essentiel à la vie, mais son augmentation cause des problèmes :</p>
+                <ul>
+                    <li>Gaz à effet de serre : CO₂, CH₄, N₂O, vapeur d'eau, CFC</li>
+                    <li>Importance naturelle : Maintient la température terrestre à ~15°C au lieu de -20°C</li>
+                    <li>Conséquences de l'augmentation : Réchauffement climatique, fonte des glaces, montée des eaux, désertification</li>
+                </ul>
+                
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Proposez trois actions pour réduire les émissions de gaz à effet de serre.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la correction</button>
+                    <div class="solution">
+                        <p>1. Utiliser les transports en commun ou les véhicules électriques<br>
+                        2. Réduire la consommation d'énergie (isolation des bâtiments, appareils économes)<br>
+                        3. Privilégier les énergies renouvelables (solaire, éolien) plutôt que les combustibles fossiles</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Affichage des solutions
+        $(document).ready(function() {
+            $('.show-solution').click(function() {
+                $(this).next('.solution').toggle();
+            });
+            
+            // Graphique pour la pyramide des énergies
+            const ctx = document.getElementById('pyramidChart').getContext('2d');
+            const pyramidChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Producteurs (P)', 'Consommateurs 1 (C1)', 'Consommateurs 2 (C2)'],
+                    datasets: [{
+                        label: 'Énergie (kJ/m²/an)',
+                        data: [3675, 433.7, 54.2],
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 99, 132, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Énergie (kJ/m²/an)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Pyramide des énergies dans un lac (exemple)'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

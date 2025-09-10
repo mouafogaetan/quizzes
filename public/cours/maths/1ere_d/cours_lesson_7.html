@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suites Numériques - Résumé</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .solution {
+            background-color: #d4edda;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+        .graph-container {
+            width: 100%;
+            height: 300px;
+            margin: 20px 0;
+        }
+        body {
+            padding: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h1, h2, h3 {
+            color: #0d6efd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Suites Numériques - Notions Essentielles</h1>
+        
+        <div class="card">
+            <div class="card-header">
+                1. Définition et généralités
+            </div>
+            <div class="card-body">
+                <p>Une suite numérique est une fonction $U$ de $\mathbb{N}$ (ou d'une partie $I$ de $\mathbb{N}$) dans $\mathbb{R}$.</p>
+                
+                <h5>Notation :</h5>
+                <p>On note $(U_n)_{n \in I}$ ou simplement $(U_n)$</p>
+                
+                <h5>Types de suites :</h5>
+                <ul>
+                    <li><strong>Formule explicite</strong> : $U_n = f(n)$ où $f$ est une fonction numérique</li>
+                    <li><strong>Formule de récurrence</strong> : $U_{n+1} = f(U_n)$ avec $U_0$ connu</li>
+                </ul>
+                
+                <div class="exercise">
+                    <p><strong>Exercice :</strong> On donne $f(x) = \frac{2x+3}{x+1}$. Calcule $f(2)$, $f(5)$, $f(x+1)$.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <p>$f(2) = \frac{2(2)+3}{2+1} = \frac{7}{3}$</p>
+                        <p>$f(5) = \frac{2(5)+3}{5+1} = \frac{13}{6}$</p>
+                        <p>$f(x+1) = \frac{2(x+1)+3}{(x+1)+1} = \frac{2x+5}{x+2}$</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                2. Limite d'une suite
+            </div>
+            <div class="card-body">
+                <p>Si $(U_n)$ est définie par $U_n = f(n)$ où $f$ est une fonction numérique, et si $\lim_{x \to +\infty} f(x) = l$, alors $\lim_{n \to +\infty} U_n = l$.</p>
+                
+                <div class="exercise">
+                    <p><strong>Exercice :</strong> On donne la suite $(U_n)$ définie par $U_n = \frac{3n+5}{n+1}$. Calcule sa limite.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <p>On a $f(x) = \frac{3x+5}{x+1}$ et $\lim_{x \to +\infty} f(x) = 3$, donc $\lim_{n \to +\infty} U_n = 3$.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                3. Monotonie d'une suite
+            </div>
+            <div class="card-body">
+                <p>Une suite $(U_n)$ est dite :</p>
+                <ul>
+                    <li><strong>Croissante</strong> si pour tout $n \in I$, $U_{n+1} \geq U_n$</li>
+                    <li><strong>Décroissante</strong> si pour tout $n \in I$, $U_{n+1} \leq U_n$</li>
+                    <li><strong>Constante</strong> si pour tout $n \in I$, $U_{n+1} = U_n$</li>
+                </ul>
+                
+                <h5>Propriétés :</h5>
+                <ol>
+                    <li>Si $(U_n)$ est définie par $U_n = f(n)$, alors $(U_n)$ et $f$ ont les mêmes variations sur $[0; +\infty[$</li>
+                    <li>Pour une suite à termes strictement positifs :
+                        <ul>
+                            <li>Si $\frac{U_{n+1}}{U_n} \geq 1$, la suite est croissante</li>
+                            <li>Si $\frac{U_{n+1}}{U_n} \leq 1$, la suite est décroissante</li>
+                            <li>Si $\frac{U_{n+1}}{U_n} = 1$, la suite est constante</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <div class="exercise">
+                    <p><strong>Exercice :</strong> Montre que la suite $(U_n)$ définie par $U_n = \frac{n+2}{n+1}$ est strictement décroissante.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <p>Calculons $\frac{U_{n+1}}{U_n} = \frac{(n+3)/(n+2)}{(n+2)/(n+1)} = \frac{(n+3)(n+1)}{(n+2)^2}$</p>
+                        <p>Or $(n+3)(n+1) = n^2 + 4n + 3$ et $(n+2)^2 = n^2 + 4n + 4$</p>
+                        <p>Donc $\frac{U_{n+1}}{U_n} = \frac{n^2+4n+3}{n^2+4n+4} < 1$ pour tout $n \in \mathbb{N}$</p>
+                        <p>La suite est donc strictement décroissante.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                4. Représentation graphique
+            </div>
+            <div class="card-body">
+                <p>Pour représenter graphiquement une suite définie par récurrence $U_{n+1} = f(U_n)$ :</p>
+                <ol>
+                    <li>Représenter la fonction $f$ et la droite $y = x$</li>
+                    <li>Placer $U_0$ sur l'axe des abscisses</li>
+                    <li>Tracer la verticale jusqu'à la courbe de $f$ pour obtenir $f(U_0) = U_1$</li>
+                    <li>Tracer l'horizontale jusqu'à la droite $y = x$ pour reporter $U_1$ sur l'axe des abscisses</li>
+                    <li>Répéter le processus</li>
+                </ol>
+                
+                <div class="exercise">
+                    <p><strong>Exemple :</strong> Représente les premiers termes de la suite $(U_n)$ définie par $U_0 = 0$ et $U_{n+1} = \sqrt{2U_n + 1}$.</p>
+                    <!-- Image à insérer : représentation graphique d'une suite récurrente avec la méthode en escalier -->
+                    <img src="representation_suite_recurrente.png" alt="Représentation graphique d'une suite récurrente" class="img-fluid mt-3" style="display: block; margin: 0 auto;">
+                    <p class="text-center mt-2"><em>Représentation graphique d'une suite récurrente avec la méthode en escalier</em></p>
+                </div>
+                
+                <div class="graph-container">
+                    <canvas id="sequenceGraph"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                5. Suites arithmétiques
+            </div>
+            <div class="card-body">
+                <p><strong>Définition :</strong> Une suite $(U_n)$ est arithmétique s'il existe un réel $r$ (la raison) tel que pour tout $n$, $U_{n+1} - U_n = r$.</p>
+                
+                <h5>Propriétés :</h5>
+                <ul>
+                    <li>Terme général : $U_n = U_p + (n-p)r$ (en particulier $U_n = U_0 + nr$)</li>
+                    <li>Somme des termes : $S_n = U_p + U_{p+1} + \cdots + U_n = \frac{(n-p+1)(U_p + U_n)}{2}$</li>
+                    <li>Monotonie :
+                        <ul>
+                            <li>Si $r > 0$, la suite est croissante</li>
+                            <li>Si $r < 0$, la suite est décroissante</li>
+                            <li>Si $r = 0$, la suite est constante</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="exercise">
+                    <p><strong>Exercice :</strong> On considère la suite $(U_n)$ définie par $U_n = \frac{2n+1}{3}$.</p>
+                    <ol>
+                        <li>Calcule $U_0$, $U_1$, $U_2$</li>
+                        <li>Démontre que $(U_n)$ est arithmétique et exprime $U_n$ en fonction de $n$</li>
+                        <li>Calcule $S_{10} = U_0 + U_1 + \cdots + U_{10}$</li>
+                        <li>Étudie la monotonie de $(U_n)$</li>
+                    </ol>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <p>1. $U_0 = \frac{1}{3}$, $U_1 = 1$, $U_2 = \frac{5}{3}$</p>
+                        <p>2. $U_{n+1} - U_n = \frac{2(n+1)+1}{3} - \frac{2n+1}{3} = \frac{2}{3}$ constante, donc suite arithmétique de raison $r = \frac{2}{3}$.</p>
+                        <p>$U_n = U_0 + n \times r = \frac{1}{3} + n \times \frac{2}{3} = \frac{2n+1}{3}$</p>
+                        <p>3. $S_{10} = \frac{(10+1)(U_0 + U_{10})}{2} = \frac{11 \times (\frac{1}{3} + \frac{21}{3})}{2} = \frac{11 \times \frac{22}{3}}{2} = \frac{242}{6} = \frac{121}{3}$</p>
+                        <p>4. Comme $r = \frac{2}{3} > 0$, la suite est croissante.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                6. Suites géométriques
+            </div>
+            <div class="card-body">
+                <p><strong>Définition :</strong> Une suite $(V_n)$ est géométrique s'il existe un réel $q$ (la raison) tel que pour tout $n$, $V_{n+1} = q \times V_n$.</p>
+                
+                <h5>Propriétés :</h5>
+                <ul>
+                    <li>Terme général : $V_n = V_p \times q^{n-p}$ (en particulier $V_n = V_0 \times q^n$)</li>
+                    <li>Somme des termes : $S_n = V_p + V_{p+1} + \cdots + V_n = V_p \times \frac{1-q^{n-p+1}}{1-q}$ (si $q \neq 1$)</li>
+                    <li>Monotonie :
+                        <ul>
+                            <li>Si $V_0 > 0$ et $q > 1$, la suite est croissante</li>
+                            <li>Si $V_0 > 0$ et $0 < q < 1$, la suite est décroissante</li>
+                            <li>Si $V_0 < 0$ et $q > 1$, la suite est décroissante</li>
+                            <li>Si $V_0 < 0$ et $0 < q < 1$, la suite est croissante</li>
+                            <li>Si $q < 0$, la suite n'est pas monotone</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="exercise">
+                    <p><strong>Exercice :</strong> On considère les suites $(U_n)$ et $(V_n)$ définies par :</p>
+                    <p>$\begin{cases} U_0 = 1 \\ U_{n+1} = 2U_n - 3 \end{cases}$ et $V_n = U_n - 3$</p>
+                    <ol>
+                        <li>Calcule $U_1$, $U_2$, $U_3$</li>
+                        <li>Démontre que $(V_n)$ est géométrique et précise son premier terme et sa raison</li>
+                        <li>Donne l'expression de $V_n$ en fonction de $n$</li>
+                        <li>On pose $S_n = V_0 + V_1 + \cdots + V_n$. Donne l'expression de $S_n$ en fonction de $n$</li>
+                        <li>Étudie la monotonie de $(V_n)$</li>
+                    </ol>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <p>1. $U_1 = 2 \times 1 - 3 = -1$, $U_2 = 2 \times (-1) - 3 = -5$, $U_3 = 2 \times (-5) - 3 = -13$</p>
+                        <p>2. $V_{n+1} = U_{n+1} - 3 = (2U_n - 3) - 3 = 2U_n - 6 = 2(U_n - 3) = 2V_n$</p>
+                        <p>Donc $(V_n)$ est géométrique de raison $q = 2$ et de premier terme $V_0 = U_0 - 3 = -2$</p>
+                        <p>3. $V_n = V_0 \times q^n = -2 \times 2^n$</p>
+                        <p>4. $S_n = V_0 \times \frac{1-q^{n+1}}{1-q} = -2 \times \frac{1-2^{n+1}}{1-2} = -2 \times \frac{1-2^{n+1}}{-1} = 2(1-2^{n+1})$</p>
+                        <p>5. Comme $V_0 = -2 < 0$ et $q = 2 > 1$, la suite $(V_n)$ est décroissante.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                7. Problème concret - Comparaison de suites
+            </div>
+            <div class="card-body">
+                <div class="exercise">
+                    <p><strong>Problème :</strong> Gervais lance une balle jusqu'à 20m. Après chaque rebond, elle perd 1/4 de sa hauteur. Après le cinquième rebond, le ballon pourra-t-il encore s'élever de 30cm?</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <p>Soit $U_n$ la hauteur après le n-ième rebond, avec $U_0 = 20$.</p>
+                        <p>Après chaque rebond, la balle perd 1/4 de sa hauteur, donc elle conserve 3/4 de sa hauteur.</p>
+                        <p>Ainsi, $U_{n+1} = \frac{3}{4}U_n$</p>
+                        <p>La suite $(U_n)$ est géométrique de raison $q = \frac{3}{4}$ et de premier terme $U_0 = 20$.</p>
+                        <p>Donc $U_n = 20 \times \left(\frac{3}{4}\right)^n$</p>
+                        <p>Après le 5ème rebond : $U_5 = 20 \times \left(\frac{3}{4}\right)^5 = 20 \times \frac{243}{1024} = \frac{4860}{1024} \approx 4.75$ m</p>
+                        <p>4.75 m > 0.3 m, donc le ballon pourra encore s'élever de 30 cm après le 5ème rebond.</p>
+                        <p>Le petit-frère de Gervais a tort.</p>
+                    </div>
+                </div>
+
+                <div class="exercise mt-4">
+                    <p><strong>Problème :</strong> Une entreprise propose deux types de rémunération :</p>
+                    <ul>
+                        <li>Type 1 : 120 000 F/mois avec augmentation annuelle de 10 000 F</li>
+                        <li>Type 2 : 110 000 F/mois avec augmentation annuelle de 8%</li>
+                    </ul>
+                    <p>Quelle est la rémunération la plus avantageuse sur 5 ans?</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <p><strong>Type 1 (suite arithmétique) :</strong></p>
+                        <p>$U_0 = 120000$, raison $r = 10000$</p>
+                        <p>$U_n = 120000 + 10000n$</p>
+                        <p>Au bout de 5 ans (n=4) : $U_4 = 120000 + 10000 \times 4 = 160000$ F/mois</p>
+                        <p>Masse salariale sur 5 ans : $S = 12 \times (U_0 + U_1 + U_2 + U_3 + U_4)$</p>
+                        <p>$= 12 \times (5 \times 120000 + 10000 \times (0+1+2+3+4))$</p>
+                        <p>$= 12 \times (600000 + 100000) = 12 \times 700000 = 8400000$ F</p>
+
+                        <p><strong>Type 2 (suite géométrique) :</strong></p>
+                        <p>$V_0 = 110000$, raison $q = 1.08$</p>
+                        <p>$V_n = 110000 \times (1.08)^n$</p>
+                        <p>Au bout de 5 ans (n=4) : $V_4 = 110000 \times (1.08)^4 \approx 110000 \times 1.3605 \approx 149655$ F/mois</p>
+                        <p>Masse salariale sur 5 ans : $S = 12 \times (V_0 + V_1 + V_2 + V_3 + V_4)$</p>
+                        <p>$= 12 \times 110000 \times (1 + 1.08 + 1.08^2 + 1.08^3 + 1.08^4)$</p>
+                        <p>$= 1320000 \times \frac{1-1.08^5}{1-1.08} \approx 1320000 \times 5.8666 \approx 7740000$ F</p>
+
+                        <p>Le type 1 est plus avantageux avec 8 400 000 F contre 7 740 000 F pour le type 2.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.show-solution').click(function() {
+                $(this).next('.solution').slideToggle();
+            });
+
+            // Graphique pour la représentation des suites
+            const ctx = document.getElementById('sequenceGraph').getContext('2d');
+            const graph = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Suite récurrente',
+                        data: [
+                            {x: 0, y: 0},
+                            {x: 0, y: 1},
+                            {x: 1, y: 1},
+                            {x: 1, y: 1.732},
+                            {x: 1.732, y: 1.732},
+                            {x: 1.732, y: 2.095},
+                            {x: 2.095, y: 2.095},
+                            {x: 2.095, y: 2.295}
+                        ],
+                        showLine: true,
+                        borderColor: 'blue',
+                        backgroundColor: 'blue',
+                        pointRadius: 5
+                    }, {
+                        label: 'Droite y=x',
+                        data: [
+                            {x: -0.5, y: -0.5},
+                            {x: 2.5, y: 2.5}
+                        ],
+                        showLine: true,
+                        borderColor: 'red',
+                        backgroundColor: 'rgba(0,0,0,0)',
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'x'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'y'
+                            }
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+</body>
+</html>

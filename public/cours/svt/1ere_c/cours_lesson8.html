@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Écosystèmes et Interactions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #2c6e49;
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .exercise {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .solution {
+            display: none;
+            margin-top: 10px;
+        }
+        .ecosystem-img {
+            width: 100%;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .nav-link {
+            color: #2c6e49;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <header class="pb-3 mb-4 border-bottom">
+            <h1 class="display-5 fw-bold">Écosystèmes et Interactions</h1>
+            <p class="lead">Séquence 1 - Durée estimée: 5 heures</p>
+        </header>
+
+        <div class="alert alert-info">
+            <strong>Objectifs spécifiques:</strong> Définir un écosystème et ses composantes, expliquer les relations trophiques, illustrer les cycles biogéochimiques.
+        </div>
+
+        <nav class="nav nav-pills flex-column flex-sm-row mb-4">
+            <a class="flex-sm-fill text-sm-center nav-link" href="#ecosysteme">Écosystème</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#relations">Relations trophiques</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#cycles">Cycles biogéochimiques</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#tache">Tâche finale</a>
+        </nav>
+
+        <div class="card mb-4" id="ecosysteme">
+            <div class="card-header">
+                <h2>1. Définition d'un écosystème</h2>
+            </div>
+            <div class="card-body">
+                <h3>Notions essentielles</h3>
+                <p>Un <strong>écosystème</strong> est l'ensemble formé par une communauté d'êtres vivants (la <strong>biocénose</strong>) et son environnement physique (le <strong>biotope</strong>), avec lesquels ils interagissent.</p>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Biocénose</h4>
+                        <p>Communauté des êtres vivants (plantes, animaux, micro-organismes) qui peuplent un écosystème.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Biotope</h4>
+                        <p>Milieu de vie caractérisé par des facteurs physico-chimiques spécifiques (température, lumière, humidité, pH, etc.).</p>
+                    </div>
+                </div>
+                
+                <div class="text-center my-3">
+                    <!-- Espace pour une image d'écosystème -->
+                    <img src="data:image/png;base64,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" alt="Schéma d'un écosystème montrant les interactions entre biocénose et biotope" class="ecosystem-img">
+                    <p class="text-muted">Schéma d'un écosystème montrant les interactions entre biocénose et biotope</p>
+                </div>
+
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Pour une forêt tempérée, identifiez 5 éléments de la biocénose et 5 caractéristiques du biotope.</p>
+                    <button class="btn btn-sm btn-success solution-btn">Voir la correction</button>
+                    <div class="solution">
+                        <p><strong>Correction:</strong></p>
+                        <p><strong>Biocénose:</strong> chênes, hêtres, fougères, sangliers, pics verts, vers de terre, champignons...</p>
+                        <p><strong>Biotope:</strong> sol acide, température moyenne 10°C, précipitations abondantes, relief vallonné, ensoleillement modéré...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4" id="relations">
+            <div class="card-header">
+                <h2>2. Relations trophiques</h2>
+            </div>
+            <div class="card-body">
+                <h3>Notions essentielles</h3>
+                <p>Les relations trophiques représentent les transferts de matière et d'énergie entre les êtres vivants à travers l'alimentation.</p>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <h4>Producteurs</h4>
+                        <p>Organismes autotrophes (végétaux chlorophylliens) qui produisent de la matière organique à partir de matière minérale et d'énergie lumineuse via la photosynthèse.</p>
+                        <p>Équation de la photosynthèse: $6CO_2 + 6H_2O + énergie \rightarrow C_6H_{12}O_6 + 6O_2$</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Consommateurs</h4>
+                        <p>Organismes hétérotrophes qui se nourrissent de matière organique:</p>
+                        <ul>
+                            <li>Consommateurs primaires (herbivores)</li>
+                            <li>Consommateurs secondaires (carnivores)</li>
+                            <li>Consommateurs tertiaires (superprédateurs)</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h4>Décomposeurs</h4>
+                        <p>Organismes (bactéries, champignons) qui dégradent la matière organique morte en matière minérale, refermant ainsi le cycle de la matière.</p>
+                    </div>
+                </div>
+                
+                <h4>Chaînes et réseaux alimentaires</h4>
+                <p>Une <strong>chaîne alimentaire</strong> représente une suite linéaire d'êtres vivants qui se mangent entre eux.</p>
+                <p>Un <strong>réseau trophique</strong> est l'ensemble des chaînes alimentaires interconnectées dans un écosystème.</p>
+                
+                <div class="text-center my-3">
+                    <!-- Espace pour une image de réseau trophique -->
+                    <img src="data:image/jpeg;base64,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" alt="Réseau trophique montrant les interconnections alimentaires dans un écosystème" class="ecosystem-img">
+                    <p class="text-muted">Réseau trophique montrant les interconnections alimentaires dans un écosystème</p>
+                </div>
+
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Construisez une chaîne alimentaire comprenant 4 maillons à partir des organismes suivants: renard, carotte, lapin, faucon, serpent, herbe, sauterelle, grenouille.</p>
+                    <button class="btn btn-sm btn-success solution-btn">Voir la correction</button>
+                    <div class="solution">
+                        <p><strong>Correction:</strong></p>
+                        <p>Plusieurs chaînes sont possibles, par exemple:</p>
+                        <p>Herbe → Lapin → Renard</p>
+                        <p>Herbe → Sauterelle → Grenouille → Serpent → Faucon</p>
+                        <p>Carotte → Lapin → Renard</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4" id="cycles">
+            <div class="card-header">
+                <h2>3. Cycles biogéochimiques</h2>
+            </div>
+            <div class="card-body">
+                <h3>Notions essentielles</h3>
+                <p>Les cycles biogéochimiques décrivent le parcours des éléments chimiques (carbone, azote, etc.) entre les compartiments biologiques (êtres vivants) et géologiques (sol, atmosphère, eau).</p>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Cycle du carbone</h4>
+                        <p>Le carbone circule entre l'atmosphère (sous forme de $CO_2$), les êtres vivants et les réservoirs géologiques (combustibles fossiles, roches carbonatées).</p>
+                        <p>Processus clés: photosynthèse, respiration, combustion, décomposition.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Cycle de l'azote</h4>
+                        <p>L'azote atmosphérique ($N_2$) est transformé en formes assimilables par les plantes (nitrates $NO_3^-$, ammonium $NH_4^+$) grâce à des bactéries spécialisées.</p>
+                        <p>Processus clés: fixation, nitrification, assimilation, dénitrification.</p>
+                    </div>
+                </div>
+                
+                <div class="text-center my-3">
+                    <!-- Espace pour une image des cycles -->
+                    <img src="data:image/png;base64,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" alt="Représentation schématique des cycles du carbone et de l'azote" class="ecosystem-img">
+                    <p class="text-muted">Représentation schématique des cycles du carbone et de l'azote</p>
+                </div>
+
+                <div class="exercise">
+                    <h4>Exercice d'application</h4>
+                    <p>Expliquez le parcours d'un atome de carbone depuis l'atmosphère jusqu'à un prédateur, puis son retour à l'atmosphère.</p>
+                    <button class="btn btn-sm btn-success solution-btn">Voir la correction</button>
+                    <div class="solution">
+                        <p><strong>Correction:</strong></p>
+                        <p>1. Le carbone est absorbé sous forme de $CO_2$ par une plante lors de la photosynthèse.</p>
+                        <p>2. Il est incorporé dans les molécules organiques de la plante (glucides).</p>
+                        <p>3. Un herbivore mange la plante et assimile le carbone.</p>
+                        <p>4. Un carnivore mange l'herbivore et assimile à son tour le carbone.</p>
+                        <p>5. Le carbone retourne à l'atmosphère sous forme de $CO_2$ par la respiration du carnivore ou après sa mort et décomposition.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4" id="tache">
+            <div class="card-header">
+                <h2>Tâche finale</h2>
+            </div>
+            <div class="card-body">
+                <h3>Construire un schéma de réseau trophique</h3>
+                <p>Pour un milieu donné (forêt, étang, prairie), identifiez les principaux organismes et représentez leurs relations trophiques sous forme d'un réseau complet.</p>
+                
+                <h4>Étapes à suivre:</h4>
+                <ol>
+                    <li>Identifier les producteurs principaux du milieu</li>
+                    <li>Lister les consommateurs (primaires, secondaires, tertiaires)</li>
+                    <li>Identifier les décomposeurs</li>
+                    <li>Représenter les relations alimentaires par des flèches (direction: mangeur → mangé)</li>
+                    <li>Intégrer les processus des cycles biogéochimiques</li>
+                </ol>
+                
+                <div class="exercise">
+                    <h4>Exemple pour un étang</h4>
+                    <p>Producteurs: algues, phytoplancton, plantes aquatiques</p>
+                    <p>Consommateurs primaires: zooplancton, insectes aquatiques, petits crustacés</p>
+                    <p>Consommateurs secondaires: petits poissons, grenouilles</p>
+                    <p>Consommateurs tertiaires: grands poissons, hérons</p>
+                    <p>Décomposeurs: bactéries, champignons aquatiques</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2>Quiz de vérification</h2>
+            </div>
+            <div class="card-body">
+                <div id="quiz-container">
+                    <div class="quiz-question">
+                        <p><strong>1. Quelle est la différence entre biocénose et biotope?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1a" value="a">
+                            <label class="form-check-label" for="q1a">A. La biocénose est le milieu physique, le biotope est l'ensemble des êtres vivants</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1b" value="b">
+                            <label class="form-check-label" for="q1b">B. La biocénose est l'ensemble des êtres vivants, le biotope est le milieu physique</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" id="q1c" value="c">
+                            <label class="form-check-label" for="q1c">C. Ce sont deux termes synonymes</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question mt-3">
+                        <p><strong>2. Quel processus permet aux producteurs de fabriquer leur propre matière organique?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2a" value="a">
+                            <label class="form-check-label" for="q2a">A. La respiration</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2b" value="b">
+                            <label class="form-check-label" for="q2b">B. La photosynthèse</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q2" id="q2c" value="c">
+                            <label class="form-check-label" for="q2c">C. La décomposition</label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question mt-3">
+                        <p><strong>3. Dans une chaîne alimentaire, quel est le rôle des décomposeurs?</strong></p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3a" value="a">
+                            <label class="form-check-label" for="q3a">A. Ils produisent de la matière organique à partir de matière minérale</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3b" value="b">
+                            <label class="form-check-label" for="q3b">B. Ils consomment les producteurs</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q3" id="q3c" value="c">
+                            <label class="form-check-label" for="q3c">C. Ils transforment la matière organique morte en matière minérale</label>
+                        </div>
+                    </div>
+
+                    <button id="check-quiz" class="btn btn-primary mt-3">Vérifier les réponses</button>
+                    <div id="quiz-results" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Afficher/masquer les solutions
+            $('.solution-btn').click(function() {
+                $(this).next('.solution').slideToggle();
+            });
+
+            // Correction du quiz
+            $('#check-quiz').click(function() {
+                let score = 0;
+                const answers = {
+                    q1: 'b',
+                    q2: 'b',
+                    q3: 'c'
+                };
+
+                for (let question in answers) {
+                    const selected = $(`input[name=${question}]:checked`).val();
+                    if (selected === answers[question]) {
+                        score++;
+                    }
+                }
+
+                let message = '';
+                if (score === 3) {
+                    message = '<div class="alert alert-success">Excellent! Vous avez obtenu 3/3. Vous maîtrisez bien les concepts.</div>';
+                } else if (score === 2) {
+                    message = '<div class="alert alert-warning">Bien! Vous avez obtenu 2/3. Revoyez les notions manquantes.</div>';
+                } else {
+                    message = '<div class="alert alert-danger">Vous avez obtenu ' + score + '/3. Il serait utile de revoir cette leçon.</div>';
+                }
+
+                $('#quiz-results').html(message);
+            });
+        });
+    </script>
+</body>
+</html>

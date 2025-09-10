@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Séquence 5 : Lumière et spectres</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .solution {
+            display: none;
+            background-color: #d1ecf1;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .canvas-container {
+            width: 100%;
+            height: 250px;
+            margin: 15px 0;
+        }
+        .spectrum-img {
+            width: 100%;
+            height: auto;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Séquence 5 : Lumière et spectres</h1>
+        
+        <!-- Introduction -->
+        <div class="card">
+            <div class="card-header">Introduction</div>
+            <div class="card-body">
+                <p>Ce chapitre explore la nature de la lumière, son interaction avec la matière et les informations que nous pouvons en tirer grâce à l'analyse spectrale.</p>
+            </div>
+        </div>
+        
+        <!-- Dispersion de la lumière -->
+        <div class="card">
+            <div class="card-header">1. Dispersion de la lumière</div>
+            <div class="card-body">
+                <h5>Notion essentielle</h5>
+                <p>La dispersion est le phénomène où la lumière blanche se décompose en différentes couleurs (longueurs d'onde) en traversant un milieu réfringent. Cela est dû à la variation de l'indice de réfraction en fonction de la longueur d'onde ($n = f(\lambda)$).</p>
+                
+                <p>La relation fondamentale :</p>
+                <p>$n = \frac{c}{v}$ où $n$ est l'indice de réfraction, $c$ la vitesse de la lumière dans le vide, et $v$ la vitesse de la lumière dans le milieu.</p>
+                
+                <h5>Exemple : le prisme</h5>
+                <p>Un prisme décompose la lumière blanche en un spectre continu allant du violet au rouge. Le violet est le plus dévié car l'indice de réfraction est plus élevé pour les courtes longueurs d'onde.</p>
+                
+                <!-- Espace pour image de dispersion -->
+                <div class="text-center">
+                    <img src="data:image/jpeg;base64,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" alt="Dispersion de la lumière par un prisme" class="spectrum-img">
+                    <p class="text-muted">Dispersion de la lumière blanche par un prisme - À remplacer par une image appropriée</p>
+                </div>
+                
+                <div class="exercise">
+                    <p><strong>Exercice :</strong> La lumière violette a une longueur d'onde d'environ 400 nm et la lumière rouge d'environ 700 nm. Sachant que l'indice de réfraction du verre pour la lumière violette est de 1,53 et pour la lumière rouge de 1,51, calculez la vitesse de ces deux lumières dans le verre.</p>
+                    <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution1')">Voir la solution</button>
+                    <div id="solution1" class="solution">
+                        <p>On utilise la relation $v = \frac{c}{n}$</p>
+                        <p>Pour la lumière violette : $v_{violet} = \frac{3,00 \times 10^8}{1,53} = 1,96 \times 10^8 m/s$</p>
+                        <p>Pour la lumière rouge : $v_{rouge} = \frac{3,00 \times 10^8}{1,51} = 1,99 \times 10^8 m/s$</p>
+                        <p>La lumière violette se propage donc plus lentement que la lumière rouge dans le verre, ce qui explique pourquoi elle est plus déviée.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Spectres lumineux -->
+        <div class="card">
+            <div class="card-header">2. Spectres lumineux</div>
+            <div class="card-body">
+                <h5>Notion essentielle</h5>
+                <p>Il existe deux types principaux de spectres :</p>
+                <ul>
+                    <li><strong>Spectre d'émission</strong>: Produit par une source chaude (spectre continu) ou par des gaz excités (spectre de raies)</li>
+                    <li><strong>Spectre d'absorption</strong>: Obtenu quand une lumière blanche traverse un gaz froid, qui absorbe certaines longueurs d'onde spécifiques</li>
+                </ul>
+                
+                <h5>Exemple : spectre de l'hydrogène</h5>
+                <p>L'hydrogène excite émet des raies caractéristiques à 656 nm (rouge), 486 nm (bleu-vert), 434 nm (bleu-violet) et 410 nm (violet). Ces raies correspondent à des transitions électroniques spécifiques.</p>
+                
+                <!-- Espace pour image des spectres -->
+                <div class="text-center">
+                    <img src="data:image/jpeg;base64,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" alt="Spectres d'émission et d'absorption" class="spectrum-img">
+                    <p class="text-muted">Comparaison entre spectre d'émission et d'absorption - À remplacer par une image appropriée</p>
+                </div>
+                
+                <div class="exercise">
+                    <p><strong>Exercice :</strong> Une lampe à vapeur de sodium émet une lumière jaune caractéristique à 589 nm. Calculez la fréquence de cette radiation.</p>
+                    <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution2')">Voir la solution</button>
+                    <div id="solution2" class="solution">
+                        <p>On utilise la relation $c = \lambda \nu$ donc $\nu = \frac{c}{\lambda}$</p>
+                        <p>$\nu = \frac{3,00 \times 10^8}{589 \times 10^{-9}} = 5,09 \times 10^{14} Hz$</p>
+                        <p>La fréquence de cette radiation est d'environ 509 THz.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loi de Wien et corps noir -->
+        <div class="card">
+            <div class="card-header">3. Loi de Wien et corps noir</div>
+            <div class="card-body">
+                <h5>Notion essentielle</h5>
+                <p>Un corps noir est un objet idéal qui absorbe toute radiation incidente. Son spectre d'émission ne dépend que de sa température.</p>
+                <p>La <strong>loi de Wien</strong> établit que la longueur d'onde où l'émission est maximale ($\lambda_{max}$) est inversement proportionnelle à la température absolue $T$ :</p>
+                <p>$\lambda_{max} \times T = constante = 2,898 \times 10^{-3} m \cdot K$</p>
+                
+                <h5>Exemple : étoiles de différentes températures</h5>
+                <p>Une étoile bleue comme Rigel (T ≈ 11 000 K) a son maximum d'émission dans l'ultraviolet, tandis qu'une étoile rouge comme Bételgeuse (T ≈ 3 500 K) émet surtout dans l'infrarouge.</p>
+                
+                <!-- Canvas pour courbe du corps noir -->
+                <div class="canvas-container">
+                    <canvas id="blackbodyChart"></canvas>
+                </div>
+                
+                <div class="exercise">
+                    <p><strong>Exercice :</strong> Le Soleil a une température de surface d'environ 5800 K. À quelle longueur d'onde émet-il le plus de rayonnement? Dans quel domaine spectral se situe cette longueur d'onde?</p>
+                    <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution3')">Voir la solution</button>
+                    <div id="solution3" class="solution">
+                        <p>On utilise la loi de Wien : $\lambda_{max} = \frac{2,898 \times 10^{-3}}{T}$</p>
+                        <p>$\lambda_{max} = \frac{2,898 \times 10^{-3}}{5800} = 5,00 \times 10^{-7} m = 500 nm$</p>
+                        <p>Cette longueur d'onde correspond à la lumière verte, dans le domaine visible.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modèle corpusculaire -->
+        <div class="card">
+            <div class="card-header">4. Modèle corpusculaire : photon</div>
+            <div class="card-body">
+                <h5>Notion essentielle</h5>
+                <p>La lumière présente une dualité onde-particule. En tant que particule, elle est constituée de photons, chacun possédant une énergie quantifiée :</p>
+                <p>$E = h \nu = \frac{h c}{\lambda}$</p>
+                <p>où $h$ est la constante de Planck ($h = 6,626 \times 10^{-34} J \cdot s$), $\nu$ la fréquence, $c$ la vitesse de la lumière, et $\lambda$ la longueur d'onde.</p>
+                
+                <h5>Exemple : énergie des photons</h5>
+                <p>Un photon de lumière rouge ($\lambda = 700 nm$) possède une énergie d'environ $2,84 \times 10^{-19} J$, tandis qu'un photon de lumière violette ($\lambda = 400 nm$) a une énergie d'environ $4,97 \times 10^{-19} J$.</p>
+                
+                <div class="exercise">
+                    <p><strong>Exercice :</strong> Un laser hélium-néon émet une lumière rouge à 632,8 nm. Calculez l'énergie d'un photon de cette lumière en joules puis en électronvolts (1 eV = 1,602 × 10⁻¹⁹ J).</p>
+                    <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution4')">Voir la solution</button>
+                    <div id="solution4" class="solution">
+                        <p>On utilise la relation $E = \frac{h c}{\lambda}$</p>
+                        <p>$E = \frac{(6,626 \times 10^{-34}) \times (3,00 \times 10^8)}{632,8 \times 10^{-9}} = 3,14 \times 10^{-19} J$</p>
+                        <p>Conversion en eV : $E = \frac{3,14 \times 10^{-19}}{1,602 \times 10^{-19}} = 1,96 eV$</p>
+                        <p>Chaque photon a une énergie d'environ 3,14 × 10⁻¹⁹ J ou 1,96 eV.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Spectre solaire -->
+        <div class="card">
+            <div class="card-header">5. Interprétation du spectre solaire</div>
+            <div class="card-body">
+                <h5>Notion essentielle</h5>
+                <p>Le spectre solaire est un spectre continu (corps noir à ~5800 K) parsemé de raies d'absorption (raies de Fraunhofer). Ces raies correspondent à l'absorption de certaines longueurs d'onde par les éléments présents dans l'atmosphère solaire.</p>
+                
+                <h5>Exemple : raies du sodium</h5>
+                <p>Les raies sombres à 589 nm dans le spectre solaire indiquent la présence de sodium dans l'atmosphère du Soleil.</p>
+                
+                <!-- Espace pour image du spectre solaire -->
+                <div class="text-center">
+                    <img src="data:image/png;base64,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" alt="Spectre solaire avec raies de Fraunhofer" class="spectrum-img">
+                    <p class="text-muted">Spectre solaire montrant les raies d'absorption de Fraunhofer - À remplacer par une image appropriée</p>
+                </div>
+                
+                <div class="exercise">
+                    <p><strong>Exercice :</strong> Une raie d'absorption à 434,0 nm est observée dans le spectre solaire. Cette raie correspond à une transition de l'atome d'hydrogène. Calculez l'énergie absorbée par atome d'hydrogène lors de cette transition.</p>
+                    <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution5')">Voir la solution</button>
+                    <div id="solution5" class="solution">
+                        <p>On utilise la relation $E = \frac{h c}{\lambda}$</p>
+                        <p>$E = \frac{(6,626 \times 10^{-34}) \times (3,00 \times 10^8)}{434,0 \times 10^{-9}} = 4,58 \times 10^{-19} J$</p>
+                        <p>Conversion en eV : $E = \frac{4,58 \times 10^{-19}}{1,602 \times 10^{-19}} = 2,86 eV$</p>
+                        <p>Chaque atome d'hydrogène absorbe une énergie de 4,58 × 10⁻¹⁹ J (2,86 eV) lors de cette transition.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Conclusion -->
+        <div class="card">
+            <div class="card-header">Conclusion</div>
+            <div class="card-body">
+                <p>L'étude de la lumière et des spectres nous permet de comprendre la nature de la lumière (onde et particule) et d'analyser la composition et les propriétés des objets célestes comme le Soleil.</p>
+                <p>Les concepts clés à retenir sont : dispersion, spectres d'émission/absorption, loi de Wien, relation photonique E=hν, et interprétation des spectres astronomiques.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // Fonction pour afficher/masquer les solutions
+        function toggleSolution(id) {
+            var solution = document.getElementById(id);
+            if (solution.style.display === "block") {
+                solution.style.display = "none";
+            } else {
+                solution.style.display = "block";
+            }
+        }
+        
+        // Courbe du corps noir
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('blackbodyChart').getContext('2d');
+            
+            // Données simulées pour différentes températures (en K)
+            const data3000 = [];
+            const data5000 = [];
+            const data7000 = [];
+            
+            // Génération des données (longueurs d'onde de 100 à 2500 nm)
+            for (let lambda = 100; lambda <= 2500; lambda += 50) {
+                // Formule simplifiée du corps noir (loi de Planck simplifiée)
+                const intensity3000 = 1e10 * Math.pow(lambda, -5) / (Math.exp(14400 / (lambda * 3000)) - 1);
+                const intensity5000 = 1e10 * Math.pow(lambda, -5) / (Math.exp(14400 / (lambda * 5000)) - 1);
+                const intensity7000 = 1e10 * Math.pow(lambda, -5) / (Math.exp(14400 / (lambda * 7000)) - 1);
+                
+                data3000.push({x: lambda, y: intensity3000});
+                data5000.push({x: lambda, y: intensity5000});
+                data7000.push({x: lambda, y: intensity7000});
+            }
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [
+                        {
+                            label: '3000 K',
+                            data: data3000,
+                            borderColor: 'rgb(255, 100, 100)',
+                            tension: 0.3,
+                            pointRadius: 0
+                        },
+                        {
+                            label: '5000 K',
+                            data: data5000,
+                            borderColor: 'rgb(255, 200, 50)',
+                            tension: 0.3,
+                            pointRadius: 0
+                        },
+                        {
+                            label: '7000 K',
+                            data: data7000,
+                            borderColor: 'rgb(100, 150, 255)',
+                            tension: 0.3,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: 'Longueur d\'onde (nm)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Intensité (u.a.)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Spectre de corps noir à différentes températures'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

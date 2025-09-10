@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Récepteurs et Point de Fonctionnement</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax pour LaTeX -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Chart.js pour les graphiques -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .solution {
+            display: none;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        canvas {
+            max-width: 100%;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <h1 class="text-center mb-4">Récepteurs et Point de Fonctionnement</h1>
+        
+        <div class="card">
+            <div class="card-header">
+                Caractéristique d'un récepteur (U-I)
+            </div>
+            <div class="card-body">
+                <p>La caractéristique tension-courant (U-I) d'un récepteur représente la tension à ses bornes en fonction du courant qui le traverse.</p>
+                
+                <p>Pour un récepteur linéaire, la relation est généralement de la forme :</p>
+                <p class="text-center">$U = E' + r'I$</p>
+                <p>où :</p>
+                <ul>
+                    <li>$U$ : tension aux bornes du récepteur (V)</li>
+                    <li>$I$ : courant traversant le récepteur (A)</li>
+                    <li>$E'$ : force contre-électromotrice (V)</li>
+                    <li>$r'$ : résistance interne du récepteur (Ω)</li>
+                </ul>
+                
+                <div class="exercise">
+                    <h5>Exercice 1</h5>
+                    <p>Un moteur électrique a une force contre-électromotrice de 12 V et une résistance interne de 2 Ω. Tracez sa caractéristique U-I pour des courants de 0 à 5 A.</p>
+                    <button class="btn btn-primary btn-sm" onclick="toggleSolution('solution1')">Voir la solution</button>
+                    
+                    <div id="solution1" class="solution">
+                        <p>La caractéristique est donnée par l'équation : $U = 12 + 2I$</p>
+                        <p>Pour I = 0 A → U = 12 V</p>
+                        <p>Pour I = 1 A → U = 14 V</p>
+                        <p>Pour I = 2 A → U = 16 V</p>
+                        <p>Pour I = 3 A → U = 18 V</p>
+                        <p>Pour I = 4 A → U = 20 V</p>
+                        <p>Pour I = 5 A → U = 22 V</p>
+                        
+                        <canvas id="receiverChart" width="400" height="200"></canvas>
+                        <p class="text-center"><em>Caractéristique U-I d'un récepteur (moteur)</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                Point de fonctionnement d'un circuit
+            </div>
+            <div class="card-body">
+                <p>Le point de fonctionnement est le point d'intersection entre la caractéristique du générateur et celle du récepteur. Il représente les valeurs de tension et de courant pour lesquelles le générateur et le récepteur fonctionnent ensemble.</p>
+                
+                <p>Pour un générateur de tension : $U = E - rI$</p>
+                <p>Pour un récepteur : $U = E' + r'I$</p>
+                
+                <p>Au point de fonctionnement, ces deux équations sont simultanément vérifiées.</p>
+                
+                <div class="exercise">
+                    <h5>Exercice 2</h5>
+                    <p>Un générateur (E = 24 V, r = 1 Ω) alimente un moteur (E' = 12 V, r' = 2 Ω). Déterminez le point de fonctionnement graphiquement et par calcul.</p>
+                    <button class="btn btn-primary btn-sm" onclick="toggleSolution('solution2')">Voir la solution</button>
+                    
+                    <div id="solution2" class="solution">
+                        <p>Par calcul :</p>
+                        <p>Au point de fonctionnement, on a :</p>
+                        <p>$U = E - rI = 24 - I$</p>
+                        <p>$U = E' + r'I = 12 + 2I$</p>
+                        <p>Donc : $24 - I = 12 + 2I$</p>
+                        <p>$24 - 12 = 2I + I$</p>
+                        <p>$12 = 3I$ → $I = 4 A$</p>
+                        <p>Et $U = 24 - 4 = 20 V$ (ou $U = 12 + 2×4 = 20 V$)</p>
+                        
+                        <p>Graphiquement :</p>
+                        <canvas id="operatingPointChart" width="400" height="200"></canvas>
+                        <p class="text-center"><em>Détermination graphique du point de fonctionnement</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                Adaptation générateur-récepteur
+            </div>
+            <div class="card-body">
+                <p>L'adaptation entre un générateur et un récepteur est optimale lorsque la puissance transférée est maximale.</p>
+                
+                <p>Pour un générateur de tension E avec résistance interne r, la puissance maximale est transférée lorsque la résistance du récepteur est égale à r (théorème de transfert de puissance maximum).</p>
+                
+                <p>La puissance utile reçue par le récepteur est : $P_u = U×I = E'×I + r'×I^2$</p>
+                
+                <div class="exercise">
+                    <h5>Exercice 3</h5>
+                    <p>Un générateur (E = 15 V, r = 3 Ω) alimente un récepteur résistif de résistance R. Pour quelle valeur de R la puissance transférée est-elle maximale? Calculez cette puissance.</p>
+                    <button class="btn btn-primary btn-sm" onclick="toggleSolution('solution3')">Voir la solution</button>
+                    
+                    <div id="solution3" class="solution">
+                        <p>La puissance est maximale lorsque R = r = 3 Ω (adaptation d'impédance).</p>
+                        <p>Dans ce cas, le courant débité est :</p>
+                        <p>$I = \frac{E}{r + R} = \frac{15}{3 + 3} = 2,5 A$</p>
+                        <p>La tension aux bornes du récepteur est :</p>
+                        <p>$U = R×I = 3×2,5 = 7,5 V$</p>
+                        <p>La puissance transférée est :</p>
+                        <p>$P = U×I = 7,5×2,5 = 18,75 W$</p>
+                        <p>Ou $P = R×I^2 = 3×(2,5)^2 = 18,75 W$</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Fonction pour afficher/masquer les solutions
+        function toggleSolution(id) {
+            $('#' + id).toggle();
+        }
+        
+        // Graphique pour l'exercice 1
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx1 = document.getElementById('receiverChart').getContext('2d');
+            const receiverChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: [0, 1, 2, 3, 4, 5],
+                    datasets: [{
+                        label: 'Tension U (V)',
+                        data: [12, 14, 16, 18, 20, 22],
+                        borderColor: 'blue',
+                        backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                        fill: true,
+                        tension: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Tension U (V)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Courant I (A)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Graphique pour l'exercice 2
+            const ctx2 = document.getElementById('operatingPointChart').getContext('2d');
+            const operatingPointChart = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: [0, 1, 2, 3, 4, 5, 6],
+                    datasets: [
+                        {
+                            label: 'Générateur: U = 24 - I',
+                            data: [24, 23, 22, 21, 20, 19, 18],
+                            borderColor: 'red',
+                            tension: 0,
+                            borderDash: [5, 5]
+                        },
+                        {
+                            label: 'Récepteur: U = 12 + 2I',
+                            data: [12, 14, 16, 18, 20, 22, 24],
+                            borderColor: 'blue',
+                            tension: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Tension U (V)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Courant I (A)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        annotation: {
+                            annotations: {
+                                point: {
+                                    type: 'point',
+                                    xValue: 4,
+                                    yValue: 20,
+                                    backgroundColor: 'rgba(255, 99, 132, 0.25)',
+                                    radius: 5,
+                                    label: {
+                                        enabled: true,
+                                        content: 'Point de fonctionnement (4A, 20V)'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

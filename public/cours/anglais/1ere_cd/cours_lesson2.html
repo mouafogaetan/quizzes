@@ -1,739 +1,414 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Different Types of Regimes</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
+    <title>Structures de Phrases Complexes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        .section-title {
+            border-bottom: 2px solid #0d6efd;
+            padding-bottom: 10px;
+            margin: 30px 0 20px;
+        }
+        .example-table {
             background-color: #f8f9fa;
-            color: #343a40;
         }
-        .chapter-header {
-            background: linear-gradient(135deg, #2c3e50, #4a6580);
-            color: white;
-            padding: 3rem 0;
-            margin-bottom: 2rem;
-            border-radius: 0 0 20px 20px;
-        }
-        .objective-card {
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.3s;
+        .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            height: 100%;
         }
-        .objective-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-        .card-header {
-            color: white;
-        }
-        .democracy {
-            background-color: #3498db;
-        }
-        .monarchy {
-            background-color: #9b59b6;
-        }
-        .dictatorship {
-            background-color: #e74c3c;
-        }
-        .vocab-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .vocab-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid #e9ecef;
-        }
-        .activity-box {
-            background-color: #e8f4f8;
-            border-left: 5px solid #3498db;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        .comparison-table {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .highlight {
-            background-color: #fff8e1;
+        .tip-box {
+            background-color: #d1ecf1;
+            border-left: 4px solid #0dcaf0;
             padding: 15px;
-            border-radius: 5px;
-            border-left: 4px solid #ffd54f;
-        }
-        .governance-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-        .debate-container {
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 10px;
-            padding: 20px;
             margin: 20px 0;
         }
-        .footer {
-            background-color: #343a40;
-            color: white;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-        .interactive-element {
+        .answer-toggle {
             cursor: pointer;
+            color: #0d6efd;
+            font-weight: bold;
         }
-        .system-image {
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-            transition: transform 0.3s;
-        }
-        .system-image:hover {
-            transform: scale(1.02);
-        }
-        .modal-example {
-            background-color: #f0f7ff;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px 0;
-        }
-        .timeline {
-            position: relative;
-            padding: 20px 0;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            width: 4px;
-            height: 100%;
-            background-color: #3498db;
-            transform: translateX(-50%);
-        }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 30px;
-            width: 50%;
-            padding: 0 40px;
-            box-sizing: border-box;
-        }
-        .timeline-item:nth-child(odd) {
-            left: 0;
-        }
-        .timeline-item:nth-child(even) {
-            left: 50%;
-        }
-        .timeline-content {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            top: 20px;
-            width: 20px;
-            height: 20px;
-            background-color: #3498db;
-            border-radius: 50%;
-        }
-        .timeline-item:nth-child(odd)::after {
-            right: -10px;
-        }
-        .timeline-item:nth-child(even)::after {
-            left: -10px;
-        }
-        @media (max-width: 768px) {
-            .timeline::before {
-                left: 30px;
-            }
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 20px;
-                left: 0 !important;
-            }
-            .timeline-item:nth-child(odd)::after,
-            .timeline-item:nth-child(even)::after {
-                left: 20px;
-            }
+        .hidden-answer {
+            display: none;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
         }
     </style>
-    <!-- MathJax Configuration -->
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']]
-            }
-        };
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <!-- Header Section -->
-    <header class="chapter-header text-center">
-        <div class="container">
-            <h1 class="display-4">Different Types of Regimes</h1>
-            <p class="lead">Understanding political systems and their impact on society</p>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Chapitre 2: Structures de Phrases Complexes</h1>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h2>Objectifs d'Apprentissage</h2>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Maîtriser l'utilisation des propositions relatives (définies et non-définies)</li>
+                            <li>Comprendre et appliquer correctement les trois types de phrases conditionnelles</li>
+                            <li>Utiliser diverses conjonctions pour créer des phrases complexes</li>
+                            <li>Combiner des phrases simples en structures complexes et sophistiquées</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Introduction -->
-        <section class="mb-5">
-            <h2 class="mb-3">Introduction to Political Systems</h2>
-            <p>Political systems define how a country is governed and how power is distributed. In this chapter, we will explore three primary forms of government: democracy, monarchy, and dictatorship. Understanding these systems helps us comprehend global politics and the rights of citizens in different countries.</p>
-            <div class="row">
-                <div class="col-md-4 text-center">
-                    <div class="governance-icon">
-                        <i class="fas fa-vote-yea"></i>
-                    </div>
-                    <h4>Democracy</h4>
-                    <p>Rule by the people, for the people</p>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="governance-icon">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <h4>Monarchy</h4>
-                    <p>Rule by a royal family</p>
-                </div>
-                <div class="col-md-4 text-center">
-                    <div class="governance-icon">
-                        <i class="fas fa-gavel"></i>
-                    </div>
-                    <h4>Dictatorship</h4>
-                    <p>Rule by a single powerful leader</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Objectives Overview -->
-        <section class="mb-5">
-            <h2 class="mb-3">Chapter Objectives</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card objective-card">
-                        <div class="card-header democracy">
-                            <h5 class="card-title mb-0">Distinguish Systems</h5>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">Learn to differentiate between democracy, monarchy, and dictatorship based on their characteristics.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card objective-card">
-                        <div class="card-header monarchy">
-                            <h5 class="card-title mb-0">Analyze Pros & Cons</h5>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">Evaluate the advantages and disadvantages of each governance model.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card objective-card">
-                        <div class="card-header dictatorship">
-                            <h5 class="card-title mb-0">Debate Models</h5>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">Develop arguments and participate in a structured debate about governance systems.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 1: Democracy -->
-        <section class="mb-5">
-            <h2 class="mb-3">Democracy: Rule by the People</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Voting in a democracy" class="img-fluid system-image">
-                </div>
-                <div class="col-md-6">
-                    <p>Democracy is a system of government where power is vested in the people, who exercise it directly or through elected representatives. Key features include:</p>
-                    <ul>
-                        <li>Free and fair elections</li>
-                        <li>Protection of human rights</li>
-                        <li>Rule of law</li>
-                        <li>Citizen participation</li>
-                        <li>Accountability of leaders</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0">Advantages</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul>
-                                <li>Protects individual freedoms and rights</li>
-                                <li>Promotes equality and prevents discrimination</li>
-                                <li>Creates accountability through regular elections</li>
-                                <li>Encourages political participation</li>
-                                <li>Peaceful transfer of power</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-danger text-white">
-                            <h5 class="mb-0">Disadvantages</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul>
-                                <li>Decision-making can be slow due to bureaucratic processes</li>
-                                <li>May lead to tyranny of the majority</li>
-                                <li>Elections can be influenced by money and media</li>
-                                <li>Short-term focus due to election cycles</li>
-                                <li>Voter apathy can undermine legitimacy</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="modal-example mt-4">
-                <h4>Language Focus: Modals in Democracy</h4>
-                <p>In democratic systems, we often use modals to express rights, permissions, and obligations:</p>
-                <ul>
-                    <li>"Citizens <strong>can</strong> vote in elections." (permission/ability)</li>
-                    <li>"Everyone <strong>should</strong> participate in the democratic process." (advice)</li>
-                    <li>"The government <strong>must</strong> respect human rights." (obligation)</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 2: Monarchy -->
-        <section class="mb-5">
-            <h2 class="mb-3">Monarchy: Rule by a Sovereign</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <p>A monarchy is a form of government where a single person, the monarch, rules until death or abdication. Monarchies can be:</p>
-                    <ul>
-                        <li><strong>Absolute:</strong> The monarch has unlimited power</li>
-                        <li><strong>Constitutional:</strong> The monarch's powers are limited by a constitution</li>
-                        <li><strong>Elective:</strong> The monarch is elected rather than inheriting the position</li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Buckingham_Palace_%285765825035%29.jpg/800px-Buckingham_Palace_%285765825035%29.jpg" alt="Buckingham Palace" class="img-fluid system-image">
-                </div>
-            </div>
-            
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0">Advantages</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul>
-                                <li>Provides continuity and stability</li>
-                                <li>Monarch can serve as a unifying figure</li>
-                                <li>Quick decision-making in absolute monarchies</li>
-                                <li>Reduces costs of elections and political campaigns</li>
-                                <li>Maintains historical and cultural traditions</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-danger text-white">
-                            <h5 class="mb-0">Disadvantages</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul>
-                                <li>Power is not based on merit but birthright</li>
-                                <li>Lack of accountability to the people</li>
-                                <li>Potential for abuse of power in absolute monarchies</li>
-                                <li>Limited political participation for citizens</li>
-                                <li>Cost of maintaining royal families</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="modal-example mt-4">
-                <h4>Language Focus: Modals in Monarchy</h4>
-                <p>In monarchical systems, modals often express different relationships with authority:</p>
-                <ul>
-                    <li>"Subjects <strong>must</strong> obey the monarch's decrees." (obligation)</li>
-                    <li>"The royal family <strong>may</strong> exercise certain privileges." (permission)</li>
-                    <li>"The prince <strong>will</strong> become king one day." (certainty)</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 3: Dictatorship -->
-        <section class="mb-5">
-            <h2 class="mb-3">Dictatorship: Rule by a Single Leader</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mussolini_storia_d%27Italia.jpg/800px-Mussolini_storia_d%27Italia.jpg" alt="Dictatorship example" class="img-fluid system-image">
-                </div>
-                <div class="col-md-6">
-                    <p>A dictatorship is a form of government where a single person or small group holds absolute power without constitutional limitations. Characteristics include:</p>
-                    <ul>
-                        <li>Concentration of power in one person or party</li>
-                        <li>Lack of political pluralism</li>
-                        <li>Suppression of opposition</li>
-                        <li>Control of media and information</li>
-                        <li>Use of force to maintain power</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0">Advantages</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul>
-                                <li>Quick decision-making without bureaucratic delays</li>
-                                <li>Can implement policies efficiently</li>
-                                <li>Stability if the dictator is strong and popular</li>
-                                <li>Can focus on long-term goals without election pressures</li>
-                                <li>Potential for rapid economic development</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-danger text-white">
-                            <h5 class="mb-0">Disadvantages</h5>
-                        </div>
-                        <div class="card-body">
-                            <ul>
-                                <li>No protection of individual rights</li>
-                                <li>Lack of accountability and checks on power</li>
-                                <li>High potential for corruption and abuse of power</li>
-                                <li>No peaceful transfer of power mechanism</li>
-                                <li>Suppression of dissent and free expression</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="modal-example mt-4">
-                <h4>Language Focus: Modals in Dictatorship</h4>
-                <p>In dictatorial systems, modals often express prohibitions and strong obligations:</p>
-                <ul>
-                    <li>"People <strong>cannot</strong> criticize the government." (prohibition)</li>
-                    <li>"Everyone <strong>must</strong> show loyalty to the leader." (strong obligation)</li>
-                    <li>"Citizens <strong>may not</strong> assemble without permission." (prohibition)</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Section 4: Comparative Structures -->
-        <section class="mb-5">
-            <h2 class="mb-3">Comparing Governance Systems</h2>
-            <p>We can compare political systems using comparative structures to highlight their similarities and differences:</p>
-            
-            <div class="comparison-table">
-                <table class="table table-striped">
-                    <thead class="table-dark">
+        <!-- Relative Clauses Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="section-title">1. Propositions Relatives</h2>
+                
+                <p>Les propositions relatives fournissent des informations supplémentaires sur un nom. Elles peuvent être définies (essentielles) ou non-définies (non-essentielles).</p>
+                
+                <h4>Pronoms relatifs et leur usage</h4>
+                <table class="table table-striped example-table">
+                    <thead>
                         <tr>
-                            <th>Aspect</th>
-                            <th>Democracy</th>
-                            <th>Monarchy</th>
-                            <th>Dictatorship</th>
+                            <th>Pronom</th>
+                            <th>Usage</th>
+                            <th>Exemple</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Power Source</td>
-                            <td>The people</td>
-                            <td>Hereditary right</td>
-                            <td>Force/control</td>
+                            <td>Who</td>
+                            <td>Personnes (sujet)</td>
+                            <td>The woman <strong>who</strong> called you is my boss.</td>
                         </tr>
                         <tr>
-                            <td>Decision Making</td>
-                            <td>Participatory</td>
-                            <td>Royal decree</td>
-                            <td>Single ruler</td>
+                            <td>Whom</td>
+                            <td>Personnes (objet - formel)</td>
+                            <td>The man <strong>whom</strong> you met is our director.</td>
                         </tr>
                         <tr>
-                            <td>Citizen Rights</td>
-                            <td>Protected</td>
-                            <td>Varies</td>
-                            <td>Limited</td>
+                            <td>Which</td>
+                            <td>Choses et animaux</td>
+                            <td>The book, <strong>which</strong> is on the table, is mine.</td>
                         </tr>
                         <tr>
-                            <td>Transfer of Power</td>
-                            <td>Elections</td>
-                            <td>Hereditary</td>
-                            <td>Force/instability</td>
+                            <td>That</td>
+                            <td>Personnes ou choses (dans les relatives définies)</td>
+                            <td>The car <strong>that</strong> I bought is very efficient.</td>
                         </tr>
                         <tr>
-                            <td>Accountability</td>
-                            <td>High</td>
-                            <td>Low to none</td>
-                            <td>None</td>
+                            <td>Whose</td>
+                            <td>Possession (personnes ou choses)</td>
+                            <td>The student <strong>whose</strong> project won is very talented.</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            
-            <div class="highlight mt-4">
-                <h4>Comparative Language Structures</h4>
-                <p>When comparing political systems, we use specific grammatical structures:</p>
-                <ul>
-                    <li><strong>Comparative adjectives:</strong> "Democracy is <em>more participatory</em> than dictatorship."</li>
-                    <li><strong>Superlative adjectives:</strong> "Dictatorship is <em>the least accountable</em> system."</li>
-                    <li><strong>Equality comparisons:</strong> "Constitutional monarchy is <em>as stable as</em> democracy."</li>
-                    <li><strong>Contrast structures:</strong> "<em>While</em> democracy values freedom, dictatorship values control."</li>
-                </ul>
-            </div>
-            
-            <div class="activity-box">
-                <h4>Practice Activity: Create Comparisons</h4>
-                <p>Complete these sentences comparing political systems:</p>
-                <ol>
-                    <li>Democracy is __________ (good) dictatorship at protecting human rights.</li>
-                    <li>A monarchy can be __________ (stable) a dictatorship.</li>
-                    <li>Decision-making in dictatorship is __________ (fast) in democracy.</li>
-                    <li>Citizens in democracy have __________ (many) rights than in dictatorship.</li>
-                </ol>
-                <button class="btn btn-primary mt-2 check-answers">Check Answers</button>
-                <div class="answers mt-3" style="display: none;">
-                    <h5>Suggested Answers:</h5>
-                    <ol>
-                        <li>Democracy is <strong>better than</strong> dictatorship at protecting human rights.</li>
-                        <li>A monarchy can be <strong>more stable than</strong> a dictatorship.</li>
-                        <li>Decision-making in dictatorship is <strong>faster than</strong> in democracy.</li>
-                        <li>Citizens in democracy have <strong>more</strong> rights than in dictatorship.</li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 5: Historical Context -->
-        <section class="mb-5">
-            <h2 class="mb-3">Historical Development of Political Systems</h2>
-            <p>Political systems have evolved throughout human history. Understanding this evolution helps us appreciate the strengths and weaknesses of different governance models.</p>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h5>Ancient Times</h5>
-                        <p>Early civilizations often developed monarchical systems with divine-right rulers, such as pharaohs in Egypt and emperors in Rome.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h5>Classical Era</h5>
-                        <p>Athenian democracy emerged as an early form of direct democracy, while Rome experimented with republican forms of government.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h5>Middle Ages</h5>
-                        <p>Feudal systems dominated Europe, with power distributed between monarchs and nobility, creating limited forms of power-sharing.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h5>Enlightenment</h5>
-                        <p>Thinkers like Locke, Montesquieu, and Rousseau developed ideas about separation of powers, social contracts, and natural rights that influenced modern democracies.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h5>Modern Era</h5>
-                        <p>The 20th century saw the rise of totalitarian dictatorships (fascism, communism) alongside the expansion of democratic systems and constitutional monarchies.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="highlight mt-4">
-                <h4>Mathematical Representation: Power Distribution</h4>
-                <p>We can mathematically model power distribution in different systems using simple equations:</p>
-                <p>• In democracy: $P_d = \frac{1}{n}\sum_{i=1}^{n} V_i$ where $P_d$ is distributed power among $n$ citizens</p>
-                <p>• In monarchy: $P_m = R + \varepsilon$ where $P_m$ is power concentrated in the ruler with limited constraints $\varepsilon$</p>
-                <p>• In dictatorship: $P_{dict} = D$ where $D$ represents absolute power of the dictator</p>
-            </div>
-        </section>
-
-        <!-- Final Task: Debate -->
-        <section class="mb-5">
-            <h2 class="mb-3">Final Task: Classroom Debate</h2>
-            <p>Now it's time to apply what you've learned! Participate in a structured debate on the topic: <strong>"The best form of government"</strong>.</p>
-            
-            <div class="debate-container">
-                <h4>Debate Format</h4>
-                <p>Work in teams to prepare arguments for different forms of government. The debate will follow this structure:</p>
                 
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header democracy text-white">
-                                <h5 class="mb-0">Team Democracy</h5>
-                            </div>
-                            <div class="card-body">
-                                <p>Argue for democracy as the best form of government.</p>
-                                <p><strong>Key points:</strong> freedom, accountability, human rights</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header monarchy text-white">
-                                <h5 class="mb-0">Team Monarchy</h5>
-                            </div>
-                            <div class="card-body">
-                                <p>Argue for monarchy as the best form of government.</p>
-                                <p><strong>Key points:</strong> stability, tradition, efficiency</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header dictatorship text-white">
-                                <h5 class="mb-0">Team Dictatorship</h5>
-                            </div>
-                            <div class="card-body">
-                                <p>Argue for dictatorship as the best form of government.</p>
-                                <p><strong>Key points:</strong> decisive action, order, efficiency</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h4>Relatives Définies vs Non-Définies</h4>
+                <table class="table table-striped example-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Fonction</th>
+                            <th>Exemple</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Définie</td>
+                            <td>Essentielle au sens de la phrase, pas de virgules</td>
+                            <td>Students <strong>who study hard</strong> usually succeed.</td>
+                        </tr>
+                        <tr>
+                            <td>Non-définie</td>
+                            <td>Information supplémentaire, entre virgules</td>
+                            <td>My brother, <strong>who lives in Paris</strong>, is visiting us.</td>
+                        </tr>
+                    </tbody>
+                </table>
                 
-                <div class="mt-4">
-                    <h5>Debate Structure:</h5>
+                <div class="exercise">
+                    <h4>Exercice: Propositions Relatives</h4>
+                    <p>Combine les paires de phrases en utilisant une proposition relative.</p>
                     <ol>
-                        <li>Opening statements (3 minutes per team)</li>
-                        <li>Rebuttal round (2 minutes per team)</li>
-                        <li>Free debate (10 minutes)</li>
-                        <li>Closing statements (2 minutes per team)</li>
+                        <li>I talked to the woman. She owns the hotel.<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                        <li>The book is very interesting. You lent it to me.<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                        <li>That's the artist. His paintings are famous worldwide.<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
                     </ol>
-                </div>
-                
-                <div class="activity-box mt-4">
-                    <h4>Prepare Your Arguments</h4>
-                    <div class="mb-3">
-                        <label for="teamSelect" class="form-label">Select your team:</label>
-                        <select class="form-select" id="teamSelect">
-                            <option value="democracy">Team Democracy</option>
-                            <option value="monarchy">Team Monarchy</option>
-                            <option value="dictatorship">Team Dictatorship</option>
-                        </select>
-                    </div>
-                    <textarea class="form-control" rows="6" placeholder="Prepare your arguments here..."></textarea>
-                    <button class="btn btn-success mt-3">Save Arguments</button>
-                    <button class="btn btn-primary mt-3">Practice with Team</button>
-                </div>
-            </div>
-            
-            <div class="modal-example mt-4">
-                <h4>Debate Language Tips</h4>
-                <p>Use these expressions during the debate:</p>
-                <ul>
-                    <li><strong>Stating your position:</strong> "We believe that...", "Our position is that..."</li>
-                    <li><strong>Presenting arguments:</strong> "Firstly...", "Furthermore...", "Most importantly..."</li>
-                    <li><strong>Responding to opponents:</strong> "We acknowledge their point, but...", "That's an interesting perspective, however..."</li>
-                    <li><strong>Concluding:</strong> "In conclusion...", "To summarize our position..."</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Review Section -->
-        <section class="mb-5">
-            <h2 class="mb-3">Chapter Review</h2>
-            <div class="card">
-                <div class="card-header bg-warning">
-                    <h4 class="mb-0">Check Your Understanding</h4>
-                </div>
-                <div class="card-body">
-                    <ol>
-                        <li>What are the three main types of regimes discussed in this chapter?</li>
-                        <li>Name two advantages of democratic systems.</li>
-                        <li>How does power typically transfer in a monarchy?</li>
-                        <li>What is a key characteristic of dictatorship?</li>
-                        <li>Give an example of a modal verb used to express prohibition.</li>
-                    </ol>
-                    <button class="btn btn-primary" id="showReviewAnswers">Show Answers</button>
-                    <div id="reviewAnswers" class="mt-3" style="display: none;">
-                        <h5>Answers:</h5>
+                    <p class="answer-toggle" onclick="$('#relative-answers').toggle();">Voir les réponses suggérées</p>
+                    <div id="relative-answers" class="hidden-answer">
                         <ol>
-                            <li>Democracy, monarchy, and dictatorship</li>
-                            <li>Any two: protects individual freedoms, promotes equality, creates accountability, encourages participation, peaceful transfer of power</li>
-                            <li>Through hereditary right (typically from parent to child)</li>
-                            <li>Concentration of power in one person or group without constitutional limitations</li>
-                            <li>Cannot or must not</li>
+                            <li>I talked to the woman who owns the hotel.</li>
+                            <li>The book that you lent to me is very interesting.</li>
+                            <li>That's the artist whose paintings are famous worldwide.</li>
                         </ol>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
+        <!-- Conditional Sentences Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="section-title">2. Phrases Conditionnelles</h2>
+                
+                <p>Les phrases conditionnelles expriment une condition et son résultat. Elles sont divisées en trois types principaux.</p>
+                
+                <h4>Types de conditionnelles</h4>
+                <table class="table table-striped example-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Usage</th>
+                            <th>Structure</th>
+                            <th>Exemple</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Type 1</td>
+                            <td>Situations réelles ou possibles</td>
+                            <td>If + Present Simple, will + base verb</td>
+                            <td>If it rains, we will cancel the picnic.</td>
+                        </tr>
+                        <tr>
+                            <td>Type 2</td>
+                            <td>Situations hypothétiques ou improbables</td>
+                            <td>If + Past Simple, would + base verb</td>
+                            <td>If I won the lottery, I would travel the world.</td>
+                        </tr>
+                        <tr>
+                            <td>Type 3</td>
+                            <td>Situations passées et hypothétiques</td>
+                            <td>If + Past Perfect, would have + past participle</td>
+                            <td>If I had studied harder, I would have passed the exam.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4>Alternatives à "if"</h4>
+                <table class="table table-striped example-table">
+                    <thead>
+                        <tr>
+                            <th>Mot</th>
+                            <th>Usage</th>
+                            <th>Exemple</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Unless</td>
+                            <td>Si... ne pas (sauf si)</td>
+                            <td>Unless you hurry, you'll miss the train.</td>
+                        </tr>
+                        <tr>
+                            <td>Provided that</td>
+                            <td>À condition que</td>
+                            <td>I'll help you provided that you try first.</td>
+                        </tr>
+                        <tr>
+                            <td>As long as</td>
+                            <td>Tant que</td>
+                            <td>You can borrow my car as long as you drive carefully.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="exercise">
+                    <h4>Exercice: Phrases Conditionnelles</h4>
+                    <p>Complétez les phrases avec la forme verbale correcte.</p>
+                    <ol>
+                        <li>If she __________ (study) harder, she would have passed the exam.<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                        <li>Unless you __________ (apologize), she won't forgive you.<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                        <li>If I see him, I __________ (give) him the message.<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                    </ol>
+                    <p class="answer-toggle" onclick="$('#conditional-answers').toggle();">Voir les réponses suggérées</p>
+                    <div id="conditional-answers" class="hidden-answer">
+                        <ol>
+                            <li>If she had studied harder, she would have passed the exam.</li>
+                            <li>Unless you apologize, she won't forgive you.</li>
+                            <li>If I see him, I will give him the message.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conjunctions Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="section-title">3. Conjonctions</h2>
+                
+                <p>Les conjonctions relient des mots, des phrases ou des clauses. Elles aident à créer des phrases plus complexes et sophistiquées.</p>
+                
+                <h4>Conjonctions courantes et leur usage</h4>
+                <table class="table table-striped example-table">
+                    <thead>
+                        <tr>
+                            <th>Conjonction</th>
+                            <th>Usage</th>
+                            <th>Exemple</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Although/Even though</td>
+                            <td>Bien que</td>
+                            <td>Although it was raining, we went for a walk.</td>
+                        </tr>
+                        <tr>
+                            <td>Despite/In spite of</td>
+                            <td>Malgré</td>
+                            <td>Despite the rain, we went for a walk.</td>
+                        </tr>
+                        <tr>
+                            <td>Not only... but also</td>
+                            <td>Non seulement... mais aussi</td>
+                            <td>She is not only intelligent but also hardworking.</td>
+                        </tr>
+                        <tr>
+                            <td>Whereas/While</td>
+                            <td>Tandis que/alors que</td>
+                            <td>I prefer tea while my brother prefers coffee.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="exercise">
+                    <h4>Exercice: Conjonctions</h4>
+                    <p>Combine les deux phrases en utilisant la conjonction indiquée.</p>
+                    <ol>
+                        <li>It was raining. We decided to go out. (although)<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                        <li>She is a talented singer. She is a great dancer. (not only... but also)<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                        <li>He failed the exam. He had studied very hard. (despite)<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                    </ol>
+                    <p class="answer-toggle" onclick="$('#conjunction-answers').toggle();">Voir les réponses suggérées</p>
+                    <div id="conjunction-answers" class="hidden-answer">
+                        <ol>
+                            <li>Although it was raining, we decided to go out.</li>
+                            <li>She is not only a talented singer but also a great dancer.</li>
+                            <li>Despite having studied very hard, he failed the exam.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Practice Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="section-title">Exercice de Synthèse</h2>
+                
+                <div class="exercise">
+                    <p>Combine les phrases simples suivantes en une seule phrase complexe en utilisant le mot ou la structure indiquée.</p>
+                    <ol>
+                        <li>Join using a relative clause:<br>
+                            The man is my uncle. He is wearing a blue shirt.<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                        <li>Join using a conditional (type 2):<br>
+                            I don't have enough money. I can't buy that car.<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                        <li>Join using "not only... but also":<br>
+                            She speaks French fluently. She also speaks Japanese.<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                        <li>Join using "although":<br>
+                            He worked very hard. He didn't get the promotion.<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                        <li>Join using a relative clause with "whose":<br>
+                            I admire the writer. Her novels have inspired millions.<br>
+                            <input type="text" class="form-control mb-2" placeholder="Écrivez votre réponse ici">
+                        </li>
+                    </ol>
+                    <p class="answer-toggle" onclick="$('#synthesis-answers').toggle();">Voir les réponses suggérées</p>
+                    <div id="synthesis-answers" class="hidden-answer">
+                        <ol>
+                            <li>The man who is wearing a blue shirt is my uncle.</li>
+                            <li>If I had enough money, I would buy that car.</li>
+                            <li>She not only speaks French fluently but also Japanese.</li>
+                            <li>Although he worked very hard, he didn't get the promotion.</li>
+                            <li>I admire the writer whose novels have inspired millions.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Tips Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="section-title">Conseils pour l'Examen & Erreurs Fréquentes</h2>
+                
+                <div class="tip-box">
+                    <h4>Conseils pour l'examen</h4>
+                    <ul>
+                        <li>Identifiez d'abord le type de structure demandée avant de commencer à écrire.</li>
+                        <li>Vérifiez la ponctuation, surtout pour les relatives non-définies (virgules nécessaires).</li>
+                        <li>Dans les conditionnelles, faites attention à la concordance des temps.</li>
+                        <li>Utilisez des variétés de structures pour montrer votre maîtrise de la langue.</li>
+                    </ul>
+                </div>
+                
+                <div class="tip-box">
+                    <h4>Erreurs fréquentes</h4>
+                    <ul>
+                        <li>Confusion entre "which" et "who" - "who" pour les personnes, "which" pour les choses.</li>
+                        <li>Oubli de la virgule dans les relatives non-définies: "My brother, who lives in Paris..."</li>
+                        <li>Mauvaise concordance des temps dans les conditionnelles: "If I would have known..." au lieu de "If I had known..."</li>
+                        <li>Utilisation incorrecte de "despite" sans "of": "Despite of the rain" au lieu de "Despite the rain".</li>
+                        <li>Double négation avec "unless": "Unless you don't hurry" au lieu de "Unless you hurry".</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Notes -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="alert alert-info">
+                    <h4>Pour aller plus loin</h4>
+                    <p>Pour maîtriser les structures de phrases complexes, pratiquez régulièrement en:</p>
+                    <ul>
+                        <li>Analysant des textes complexes et identifiant les différentes structures</li>
+                        <li>Transformant des phrases simples en phrases complexes en utilisant différentes méthodes</li>
+                        <li>Vous créant des flashcards avec les règles et formules importantes</li>
+                        <li>Faisant des exercices chronométrés pour vous préparer aux conditions d'examen</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer text-center">
+    <footer class="bg-light text-center py-3 mt-5">
         <div class="container">
-            <p>Chapter 2: Different Types of Regimes</p>
-            <p>Designed for Social Studies | Created with Bootstrap</p>
-            <p>Images sourced from Wikimedia Commons and Unsplash</p>
+            <p>Leçon conçue par un expert en préparation aux examens d'anglais | Structures de Phrases Complexes</p>
         </div>
     </footer>
-
-    <!-- Bootstrap & jQuery JS -->
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JavaScript -->
-    <script>
-        $(document).ready(function() {
-            // Toggle answers visibility
-            $("#showReviewAnswers").click(function() {
-                $("#reviewAnswers").toggle();
-            });
-            
-            $(".check-answers").click(function() {
-                $(this).siblings(".answers").toggle();
-            });
-            
-            // Interactive elements
-            $(".interactive-element").hover(function() {
-                $(this).css("background-color", "#f0f0f0");
-            }, function() {
-                $(this).css("background-color", "");
-            });
-            
-            // Debate team selection
-            $("#teamSelect").change(function() {
-                let team = $(this).val();
-                $(".activity-box textarea").attr("placeholder", `Prepare your arguments for ${team} here...`);
-            });
-        });
-    </script>
 </body>
 </html>

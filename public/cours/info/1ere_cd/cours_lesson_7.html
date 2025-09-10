@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condensé JavaScript</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .code-example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        .solution {
+            display: none;
+            background-color: #e9f7ef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .exercise {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Condensé des Notions Essentielles de JavaScript</h1>
+        
+        <!-- Section 1: Introduction -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2>1. Introduction au JavaScript</h2>
+            </div>
+            <div class="card-body">
+                <h4>Notions essentielles</h4>
+                <ul>
+                    <li>JavaScript est un langage de script orienté objet exécuté côté client (navigateur)</li>
+                    <li>Il permet de créer des pages web interactives et dynamiques</li>
+                    <li>Limites : ne peut pas accéder directement aux bases de données ou au système de fichiers</li>
+                    <li>On intègre JavaScript avec la balise <code>&lt;script&gt;</code></li>
+                </ul>
+                
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Pourquoi ne peut-on pas utiliser uniquement le HTML pour créer des pages web interactives?</p>
+                    <button class="btn btn-sm btn-success" onclick="toggleSolution('sol1')">Voir la réponse</button>
+                    <div id="sol1" class="solution">
+                        <p>Le HTML est un langage de balisage qui permet de structurer le contenu d'une page web, mais il ne permet pas d'effectuer des opérations logiques, des calculs, ou d'interagir dynamiquement avec l'utilisateur. JavaScript est nécessaire pour ajouter de l'interactivité et des fonctionnalités dynamiques.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 2: Variables et opérations -->
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h2>2. Variables et Opérations</h2>
+            </div>
+            <div class="card-body">
+                <h4>Notions essentielles</h4>
+                <ul>
+                    <li>Déclaration de variables: <code>var</code>, <code>let</code>, <code>const</code></li>
+                    <li>Types de données: nombres, chaînes, booléens, etc.</li>
+                    <li>Opérateurs arithmétiques: +, -, *, /, %, **</li>
+                    <li>Opérateurs de comparaison: ==, !=, ===, !==, >, <, >=, <=</li>
+                    <li>Opérateurs logiques: &&, ||, !</li>
+                </ul>
+                
+                <div class="code-example">
+                    <h5>Exemple de code</h5>
+                    <pre><code>// Déclaration de variables
+var nom = "Alice";
+let age = 25;
+const TAUX_TVA = 0.2;
+
+// Opérations
+let prixHT = 100;
+let prixTTC = prixHT * (1 + TAUX_TVA);
+console.log("Prix TTC: " + prixTTC);</code></pre>
+                </div>
+                
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Écrivez un script qui demande à l'utilisateur le rayon d'un cercle et calcule son aire (A = $\pi r^2$).</p>
+                    <button class="btn btn-sm btn-success" onclick="toggleSolution('sol2')">Voir la solution</button>
+                    <div id="sol2" class="solution">
+                        <pre><code>// Solution
+let rayon = parseFloat(prompt("Entrez le rayon du cercle:"));
+const PI = 3.14159;
+let aire = PI * Math.pow(rayon, 2);
+alert("L'aire du cercle est: " + aire.toFixed(2));</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 3: Structures de contrôle -->
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h2>3. Structures de Contrôle</h2>
+            </div>
+            <div class="card-body">
+                <h4>Notions essentielles</h4>
+                <ul>
+                    <li>Conditionnelles: if, else if, else, switch</li>
+                    <li>Boucles: for, while, do...while</li>
+                </ul>
+                
+                <div class="code-example">
+                    <h5>Exemple de code</h5>
+                    <pre><code>// Structure conditionnelle
+let note = 15;
+if (note >= 10) {
+    console.log("Admis");
+} else {
+    console.log("Recalé");
+}
+
+// Boucle for
+for (let i = 0; i < 5; i++) {
+    console.log("Itération: " + i);
+}
+
+// Boucle while
+let compteur = 0;
+while (compteur < 3) {
+    console.log("Compteur: " + compteur);
+    compteur++;
+}</code></pre>
+                </div>
+                
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Écrivez une fonction qui affiche tous les nombres pairs entre 0 et un nombre donné.</p>
+                    <button class="btn btn-sm btn-success" onclick="toggleSolution('sol3')">Voir la solution</button>
+                    <div id="sol3" class="solution">
+                        <pre><code>// Solution
+function afficherNombresPairs(limite) {
+    for (let i = 0; i <= limite; i++) {
+        if (i % 2 === 0) {
+            console.log(i);
+        }
+    }
+}
+
+afficherNombresPairs(10);</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 4: Tableaux -->
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h2>4. Tableaux</h2>
+            </div>
+            <div class="card-body">
+                <h4>Notions essentielles</h4>
+                <ul>
+                    <li>Déclaration: <code>let arr = [];</code> ou <code>let arr = new Array();</code></li>
+                    <li>Accès aux éléments: <code>arr[index]</code> (index commence à 0)</li>
+                    <li>Propriété length: <code>arr.length</code></li>
+                    <li>Méthodes courantes: push(), pop(), shift(), unshift(), slice(), splice()</li>
+                </ul>
+                
+                <div class="code-example">
+                    <h5>Exemple de code</h5>
+                    <pre><code>// Création et manipulation de tableaux
+let fruits = ["pomme", "banane", "orange"];
+fruits.push("kiwi"); // Ajoute à la fin
+fruits.pop(); // Supprime le dernier élément
+fruits.unshift("fraise"); // Ajoute au début
+fruits.shift(); // Supprime le premier élément
+
+// Parcours de tableau
+for (let i = 0; i < fruits.length; i++) {
+    console.log(fruits[i]);
+}</code></pre>
+                </div>
+                
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Écrivez une fonction qui prend un tableau de nombres en paramètre et retourne la somme de ses éléments.</p>
+                    <button class="btn btn-sm btn-success" onclick="toggleSolution('sol4')">Voir la solution</button>
+                    <div id="sol4" class="solution">
+                        <pre><code>// Solution
+function sommeTableau(tableau) {
+    let somme = 0;
+    for (let i = 0; i < tableau.length; i++) {
+        somme += tableau[i];
+    }
+    return somme;
+}
+
+// Test
+let nombres = [1, 2, 3, 4, 5];
+console.log(sommeTableau(nombres)); // Affiche 15</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 5: Fonctions -->
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h2>5. Fonctions</h2>
+            </div>
+            <div class="card-body">
+                <h4>Notions essentielles</h4>
+                <ul>
+                    <li>Déclaration: <code>function nomFonction(param1, param2) { ... }</code></li>
+                    <li>Return: retourne une valeur (optionnel)</li>
+                    <li>Portée des variables: globale vs locale</li>
+                </ul>
+                
+                <div class="code-example">
+                    <h5>Exemple de code</h5>
+                    <pre><code>// Déclaration de fonction
+function calculerSurface(longueur, largeur) {
+    return longueur * largeur;
+}
+
+// Appel de fonction
+let surface = calculerSurface(5, 3);
+console.log("Surface: " + surface); // Affiche 15
+
+// Fonction fléchée (ES6)
+const multiplier = (a, b) => a * b;
+console.log(multiplier(4, 5)); // Affiche 20</code></pre>
+                </div>
+                
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Écrivez une fonction qui prend un tableau de nombres en paramètre et retourne le plus grand nombre.</p>
+                    <button class="btn btn-sm btn-success" onclick="toggleSolution('sol5')">Voir la solution</button>
+                    <div id="sol5" class="solution">
+                        <pre><code>// Solution
+function trouverMaximum(nombres) {
+    let max = nombres[0];
+    for (let i = 1; i < nombres.length; i++) {
+        if (nombres[i] > max) {
+            max = nombres[i];
+        }
+    }
+    return max;
+}
+
+// Test
+let valeurs = [12, 45, 2, 37, 9];
+console.log(trouverMaximum(valeurs)); // Affiche 45</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 6: Événements -->
+        <div class="card">
+            <div class="card-header bg-dark text-white">
+                <h2>6. Événements</h2>
+            </div>
+            <div class="card-body">
+                <h4>Notions essentielles</h4>
+                <ul>
+                    <li>Gestionnaires d'événements: onclick, onchange, onmouseover, etc.</li>
+                    <li>Accès aux éléments: <code>document.getElementById()</code></li>
+                    <li>Modification du contenu: <code>element.innerHTML</code>, <code>element.value</code></li>
+                </ul>
+                
+                <div class="code-example">
+                    <h5>Exemple de code</h5>
+                    <pre><code>&lt;!-- HTML --&gt;
+&lt;button id="monBouton"&gt;Cliquez-moi&lt;/button&gt;
+&lt;p id="monParagraphe"&gt;&lt;/p&gt;
+
+&lt;script&gt;
+// JavaScript
+document.getElementById("monBouton").onclick = function() {
+    document.getElementById("monParagraphe").innerHTML = "Vous avez cliqué!";
+};
+&lt;/script&gt;</code></pre>
+                </div>
+                
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Créez un convertisseur de température Celsius vers Fahrenheit qui s'active lors du clic sur un bouton.</p>
+                    <button class="btn btn-sm btn-success" onclick="toggleSolution('sol6')">Voir la solution</button>
+                    <div id="sol6" class="solution">
+                        <pre><code>&lt;!-- HTML --&gt;
+&lt;input type="number" id="celsius" placeholder="Température en Celsius"&gt;
+&lt;button onclick="convertir()"&gt;Convertir&lt;/button&gt;
+&lt;p id="resultat"&gt;&lt;/p&gt;
+
+&lt;script&gt;
+// JavaScript
+function convertir() {
+    let celsius = document.getElementById("celsius").value;
+    let fahrenheit = (celsius * 9/5) + 32;
+    document.getElementById("resultat").innerHTML = 
+        celsius + "°C = " + fahrenheit.toFixed(2) + "°F";
+}
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fonction pour afficher/masquer les solutions
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.style.display = solution.style.display === 'block' ? 'none' : 'block';
+        }
+        
+        // Exemples de code interactifs
+        $(document).ready(function() {
+            // Exemple interactif pour la section Variables
+            console.log("=== Exemple Variables ===");
+            var nom = "Alice";
+            let age = 25;
+            const TAUX_TVA = 0.2;
+            let prixHT = 100;
+            let prixTTC = prixHT * (1 + TAUX_TVA);
+            console.log("Prix TTC: " + prixTTC);
+            
+            // Exemple interactif pour la section Structures de contrôle
+            console.log("=== Exemple Structures de contrôle ===");
+            let note = 15;
+            if (note >= 10) {
+                console.log("Admis");
+            } else {
+                console.log("Recalé");
+            }
+            
+            for (let i = 0; i < 3; i++) {
+                console.log("Itération: " + i);
+            }
+            
+            // Exemple interactif pour la section Tableaux
+            console.log("=== Exemple Tableaux ===");
+            let fruits = ["pomme", "banane", "orange"];
+            for (let i = 0; i < fruits.length; i++) {
+                console.log(fruits[i]);
+            }
+            
+            // Exemple interactif pour la section Fonctions
+            console.log("=== Exemple Fonctions ===");
+            function calculerSurface(longueur, largeur) {
+                return longueur * largeur;
+            }
+            console.log("Surface: " + calculerSurface(5, 3));
+        });
+    </script>
+</body>
+</html>

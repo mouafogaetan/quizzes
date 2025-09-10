@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condensé sur les Piles Électrochimiques</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 20px 20px;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: none;
+        }
+        .card-header {
+            background-color: #f1f8ff;
+            border-bottom: 2px solid #d0e7ff;
+            font-weight: 600;
+            border-radius: 15px 15px 0 0 !important;
+        }
+        .example-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .exercise-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .solution-box {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+            display: none;
+        }
+        .btn-solution {
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+            margin-bottom: 10px;
+        }
+        .btn-solution:hover {
+            background-color: #138496;
+        }
+        .potential-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .potential-table th, .potential-table td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: center;
+        }
+        .potential-table th {
+            background-color: #e9ecef;
+        }
+        .img-placeholder {
+            background-color: #e9ecef;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #6c757d;
+            font-style: italic;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-5">Condensé sur les Piles Électrochimiques</h1>
+            <p class="lead">Notions essentielles, exemples et exercices corrigés</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>1. Définition et principe d'une pile</h2>
+            </div>
+            <div class="card-body">
+                <p>Une pile est un dispositif qui transforme l'énergie chimique en énergie électrique grâce à une réaction d'oxydoréduction spontanée.</p>
+                
+                <div class="example-box">
+                    <h5>Exemple : La pile Daniell</h5>
+                    <p>La pile Daniell est constituée de :</p>
+                    <ul>
+                        <li>Une électrode de zinc (Zn) plongeant dans une solution de sulfate de zinc (ZnSO₄)</li>
+                        <li>Une électrode de cuivre (Cu) plongeant dans une solution de sulfate de cuivre (CuSO₄)</li>
+                        <li>Un pont salin (généralement KCl ou KNO₃) reliant les deux solutions</li>
+                    </ul>
+                    <div class="img-placeholder">
+                        <img src="data:image/png;base64,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">
+                    </div>
+                </div>
+                
+                <p><strong>Fonctionnement :</strong></p>
+                <ul>
+                    <li>À l'anode (pôle négatif) : oxydation du zinc $ \text{Zn} \rightarrow \text{Zn}^{2+} + 2e^- $</li>
+                    <li>À la cathode (pôle positif) : réduction des ions cuivre $ \text{Cu}^{2+} + 2e^- \rightarrow \text{Cu} $</li>
+                    <li>Équation bilan : $ \text{Zn} + \text{Cu}^{2+} \rightarrow \text{Zn}^{2+} + \text{Cu} $</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>2. Représentation conventionnelle d'une pile</h2>
+            </div>
+            <div class="card-body">
+                <p>Une pile est représentée conventionnellement avec le pôle négatif à gauche et le pôle positif à droite :</p>
+                <p class="text-center">$ \text{Zn} | \text{Zn}^{2+} || \text{Cu}^{2+} | \text{Cu} $</p>
+                <p>Où :</p>
+                <ul>
+                    <li>La simple barre | représente une interface entre phases différentes</li>
+                    <li>La double barre || représente le pont salin</li>
+                </ul>
+                
+                <div class="exercise-box">
+                    <h5>Exercice d'application</h5>
+                    <p>Donnez la représentation conventionnelle d'une pile nickel-argent sachant que le nickel constitue le pôle négatif et l'argent le pôle positif.</p>
+                    <button class="btn btn-solution" onclick="$('#solution1').toggle()">Voir la solution</button>
+                    <div id="solution1" class="solution-box">
+                        <p>La représentation conventionnelle est :</p>
+                        <p class="text-center">$ \text{Ni} | \text{Ni}^{2+} || \text{Ag}^{+} | \text{Ag} $</p>
+                        <p>Explication : Le pôle négatif (Ni) est placé à gauche, et le pôle positif (Ag) à droite.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>3. Force électromotrice (f.é.m.) d'une pile</h2>
+            </div>
+            <div class="card-body">
+                <p>La force électromotrice (f.é.m.) d'une pile est la différence de potentiel entre ses deux pôles lorsqu'aucun courant ne circule. Elle se calcule par :</p>
+                <p class="text-center">$ E = E_{\text{cathode}} - E_{\text{anode}} = E_{\text{oxydant}} - E_{\text{réducteur}} $</p>
+                <p>Ou, en utilisant les potentiels standards :</p>
+                <p class="text-center">$ E^\circ = E^\circ_{\text{oxydant}} - E^\circ_{\text{réducteur}} $</p>
+                
+                <div class="example-box">
+                    <h5>Exemple : Calcul de la f.é.m. de la pile Daniell</h5>
+                    <p>Pour la pile Daniell :</p>
+                    <p>$ E^\circ(\text{Cu}^{2+}/\text{Cu}) = +0,34\text{V} $</p>
+                    <p>$ E^\circ(\text{Zn}^{2+}/\text{Zn}) = -0,76\text{V} $</p>
+                    <p>Donc : $ E^\circ = E^\circ(\text{Cu}^{2+}/\text{Cu}) - E^\circ(\text{Zn}^{2+}/\text{Zn}) = 0,34 - (-0,76) = 1,10\text{V} $</p>
+                </div>
+                
+                <div class="exercise-box">
+                    <h5>Exercice d'application</h5>
+                    <p>Calculez la f.é.m. standard d'une pile aluminium-argent sachant que :</p>
+                    <p>$ E^\circ(\text{Ag}^{+}/\text{Ag}) = +0,80\text{V} $ et $ E^\circ(\text{Al}^{3+}/\text{Al}) = -1,66\text{V} $</p>
+                    <button class="btn btn-solution" onclick="$('#solution2').toggle()">Voir la solution</button>
+                    <div id="solution2" class="solution-box">
+                        <p>L'argent ayant le potentiel standard le plus élevé constitue le pôle positif, et l'aluminium le pôle négatif.</p>
+                        <p>$ E^\circ = E^\circ(\text{Ag}^{+}/\text{Ag}) - E^\circ(\text{Al}^{3+}/\text{Al}) = 0,80 - (-1,66) = 2,46\text{V} $</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>4. Classification électrochimique des couples redox</h2>
+            </div>
+            <div class="card-body">
+                <p>Les couples oxydant/réducteur peuvent être classés selon leur potentiel standard. Plus le potentiel standard est élevé, plus l'oxydant est fort.</p>
+                
+                <table class="potential-table">
+                    <thead>
+                        <tr>
+                            <th>Couple redox</th>
+                            <th>Demi-équation</th>
+                            <th>Potentiel standard (V)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Au³⁺/Au</td>
+                            <td>Au³⁺ + 3e⁻ → Au</td>
+                            <td>+1,50</td>
+                        </tr>
+                        <tr>
+                            <td>Ag⁺/Ag</td>
+                            <td>Ag⁺ + e⁻ → Ag</td>
+                            <td>+0,80</td>
+                        </tr>
+                        <tr>
+                            <td>Cu²⁺/Cu</td>
+                            <td>Cu²⁺ + 2e⁻ → Cu</td>
+                            <td>+0,34</td>
+                        </tr>
+                        <tr>
+                            <td>H₃O⁺/H₂</td>
+                            <td>2H₃O⁺ + 2e⁻ → H₂ + 2H₂O</td>
+                            <td>0,00</td>
+                        </tr>
+                        <tr>
+                            <td>Pb²⁺/Pb</td>
+                            <td>Pb²⁺ + 2e⁻ → Pb</td>
+                            <td>-0,13</td>
+                        </tr>
+                        <tr>
+                            <td>Zn²⁺/Zn</td>
+                            <td>Zn²⁺ + 2e⁻ → Zn</td>
+                            <td>-0,76</td>
+                        </tr>
+                        <tr>
+                            <td>Al³⁺/Al</td>
+                            <td>Al³⁺ + 3e⁻ → Al</td>
+                            <td>-1,66</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="exercise-box">
+                    <h5>Exercice d'application</h5>
+                    <p>En utilisant le tableau des potentiels standards, déterminez si la réaction suivante est spontanée :</p>
+                    <p>$ \text{Zn} + 2\text{Ag}^{+} \rightarrow \text{Zn}^{2+} + 2\text{Ag} $</p>
+                    <button class="btn btn-solution" onclick="$('#solution3').toggle()">Voir la solution</button>
+                    <div id="solution3" class="solution-box">
+                        <p>Calculons la f.é.m. standard de cette réaction :</p>
+                        <p>$ E^\circ = E^\circ(\text{Ag}^{+}/\text{Ag}) - E^\circ(\text{Zn}^{2+}/\text{Zn}) = 0,80 - (-0,76) = 1,56\text{V} $</p>
+                        <p>Comme $ E^\circ > 0 $, la réaction est spontanée.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>5. Règle du gamma (γ)</h2>
+            </div>
+            <div class="card-body">
+                <p>La règle du gamma permet de prévoir le sens d'une réaction d'oxydoréduction entre deux couples :</p>
+                <ol>
+                    <li>Classer les deux couples par potentiel standard décroissant (le plus élevé en haut)</li>
+                    <li>Tracer un gamma (γ) qui relie les quatre espèces</li>
+                    <li>La réaction spontanée est celle qui va de l'oxydant du couple du haut vers le réducteur du couple du bas</li>
+                </ol>
+                
+                <div class="example-box">
+                    <h5>Exemple : Réaction entre les couples Zn²⁺/Zn et Cu²⁺/Cu</h5>
+                    <p>Classement :</p>
+                    <p>Cu²⁺/Cu (E° = +0,34 V)</p>
+                    <p>Zn²⁺/Zn (E° = -0,76 V)</p>
+                    <p>Le gamma donne : Cu²⁺ → Cu et Zn → Zn²⁺</p>
+                    <p>Donc la réaction spontanée est : Cu²⁺ + Zn → Cu + Zn²⁺</p>
+                </div>
+                
+                <div class="exercise-box">
+                    <h5>Exercice d'application</h5>
+                    <p>En utilisant la règle du gamma, déterminez la réaction spontanée entre les couples Fe³⁺/Fe²⁺ (E° = +0,77 V) et Sn⁴⁺/Sn²⁺ (E° = +0,15 V).</p>
+                    <button class="btn btn-solution" onclick="$('#solution4').toggle()">Voir la solution</button>
+                    <div id="solution4" class="solution-box">
+                        <p>Classement par potentiel standard décroissant :</p>
+                        <p>Fe³⁺/Fe²⁺ (E° = +0,77 V)</p>
+                        <p>Sn⁴⁺/Sn²⁺ (E° = +0,15 V)</p>
+                        <p>Le gamma donne : Fe³⁺ → Fe²⁺ et Sn²⁺ → Sn⁴⁺</p>
+                        <p>Donc la réaction spontanée est : 2Fe³⁺ + Sn²⁺ → 2Fe²⁺ + Sn⁴⁺</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>6. Demi-pile de référence</h2>
+            </div>
+            <div class="card-body">
+                <p>La demi-pile de référence utilisée est l'électrode standard à hydrogène (ESH) :</p>
+                <p>Demi-équation : $ 2\text{H}_3\text{O}^{+} + 2e^{-} \rightleftharpoons \text{H}_2 + 2\text{H}_2\text{O} $</p>
+                <p>Potentiel standard : $ E^\circ(\text{H}_3\text{O}^{+}/\text{H}_2) = 0\text{V} $</p>
+                
+                <p>En pratique, on utilise souvent une électrode de référence secondaire comme l'électrode au calomel saturé (ECS) ou l'électrode d'argent/chlorure d'argent.</p>
+                
+                <div class="img-placeholder">
+                    <img src="data:image/png;base64,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">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>7. Évolution d'une pile en fonctionnement</h2>
+            </div>
+            <div class="card-body">
+                <p>Lorsqu'une pile fonctionne :</p>
+                <ul>
+                    <li>La masse de l'anode diminue (oxydation du réducteur)</li>
+                    <li>La masse de la cathode augmente (réduction de l'oxydant)</li>
+                    <li>La concentration en ions provenant de l'anode augmente</li>
+                    <li>La concentration en ions provenant de la cathode diminue</li>
+                    <li>La f.é.m. diminue progressivement</li>
+                </ul>
+                
+                <div class="exercise-box">
+                    <h5>Exercice d'application</h5>
+                    <p>On réalise une pile avec les couples Zn²⁺/Zn et Ag⁺/Ag. Décrivez l'évolution des concentrations en ions Zn²⁺ et Ag⁺ pendant le fonctionnement de la pile.</p>
+                    <button class="btn btn-solution" onclick="$('#solution5').toggle()">Voir la solution</button>
+                    <div id="solution5" class="solution-box">
+                        <p>La réaction bilan est : $ \text{Zn} + 2\text{Ag}^{+} \rightarrow \text{Zn}^{2+} + 2\text{Ag} $</p>
+                        <p>Pendant le fonctionnement :</p>
+                        <ul>
+                            <li>La concentration en ions Ag⁺ diminue (ils sont réduits en argent métallique)</li>
+                            <li>La concentration en ions Zn²⁺ augmente (ils proviennent de l'oxydation du zinc)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>8. Applications des piles</h2>
+            </div>
+            <div class="card-body">
+                <p>Les piles ont de nombreuses applications dans la vie quotidienne :</p>
+                <ul>
+                    <li>Piles alcalines (Zn/MnO₂)</li>
+                    <li>Piles au lithium (batteries d'appareils électroniques)</li>
+                    <li>Piles à combustible</li>
+                    <li>Accumulateurs (plomb, nickel-cadmium, lithium-ion)</li>
+                </ul>
+                
+                <div class="img-placeholder">
+                    <img src="data:image/jpeg;base64,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">
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Exercice synthèse</h2>
+            </div>
+            <div class="card-body">
+                <div class="exercise-box">
+                    <h5>Problème complet</h5>
+                    <p>On considère une pile aluminium-cuivre. Les solutions ont une concentration de 1,0 mol/L.</p>
+                    <p>1. Écrivez les demi-équations aux électrodes et l'équation bilan de la réaction.</p>
+                    <p>2. Donnez la représentation conventionnelle de cette pile.</p>
+                    <p>3. Calculez la f.é.m. standard de cette pile.</p>
+                    <p>4. Indiquez le sens de circulation des électrons dans le circuit extérieur.</p>
+                    <p>5. Décrivez les transformations observables aux électrodes pendant le fonctionnement.</p>
+                    <p>Données : $ E^\circ(\text{Al}^{3+}/\text{Al}) = -1,66\text{V} $ ; $ E^\circ(\text{Cu}^{2+}/\text{Cu}) = +0,34\text{V} $</p>
+                    <button class="btn btn-solution" onclick="$('#solution6').toggle()">Voir la solution</button>
+                    <div id="solution6" class="solution-box">
+                        <p><strong>1. Demi-équations et équation bilan :</strong></p>
+                        <p>Oxydation à l'anode : $ \text{Al} \rightarrow \text{Al}^{3+} + 3e^{-} $</p>
+                        <p>Réduction à la cathode : $ \text{Cu}^{2+} + 2e^{-} \rightarrow \text{Cu} $</p>
+                        <p>Pour équilibrer les électrons : $ 2\text{Al} \rightarrow 2\text{Al}^{3+} + 6e^{-} $ et $ 3\text{Cu}^{2+} + 6e^{-} \rightarrow 3\text{Cu} $</p>
+                        <p>Équation bilan : $ 2\text{Al} + 3\text{Cu}^{2+} \rightarrow 2\text{Al}^{3+} + 3\text{Cu} $</p>
+                        
+                        <p><strong>2. Représentation conventionnelle :</strong></p>
+                        <p>$ \text{Al} | \text{Al}^{3+} || \text{Cu}^{2+} | \text{Cu} $</p>
+                        
+                        <p><strong>3. Calcul de la f.é.m. standard :</strong></p>
+                        <p>$ E^\circ = E^\circ(\text{Cu}^{2+}/\text{Cu}) - E^\circ(\text{Al}^{3+}/\text{Al}) = 0,34 - (-1,66) = 2,00\text{V} $</p>
+                        
+                        <p><strong>4. Sens de circulation des électrons :</strong></p>
+                        <p>Les électrons circulent de l'anode (Al) vers la cathode (Cu) dans le circuit extérieur.</p>
+                        
+                        <p><strong>5. Transformations aux électrodes :</strong></p>
+                        <p>À l'anode (aluminium) : la masse diminue (oxydation de l'aluminium).</p>
+                        <p>À la cathode (cuivre) : la masse augmente (dépôt de cuivre métallique).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>Condensé sur les piles électrochimiques - Basé sur le cours de Chimie de Première C et D</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

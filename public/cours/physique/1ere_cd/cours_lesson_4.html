@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travail et puissance d'une force - Cours Cameroun</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Travail et Puissance d'une Force</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script>
         window.MathJax = {
             tex: {
@@ -15,246 +17,302 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
     <style>
-        .header-section {
-            background-color: #007849;
-            color: white;
-            padding: 20px 0;
-            margin-bottom: 30px;
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 20px;
+            padding-bottom: 40px;
         }
-        .problem-section {
-            background-color: #f8f9fa;
-            border-left: 5px solid #007849;
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        .activity-card {
+        .card {
             margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .solution {
+            display: none;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .canvas-container {
+            width: 100%;
+            height: 200px;
+            margin: 15px 0;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-        .activity-header {
-            background-color: #e9ecef;
-            padding: 10px 15px;
-            border-bottom: 1px solid #ddd;
+        h2 {
+            color: #0d6efd;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #0d6efd;
         }
-        .summary-box {
-            background-color: #e8f4f8;
-            border-radius: 5px;
-            padding: 20px;
-            margin: 30px 0;
-        }
-        .exercise-box {
-            background-color: #f0f7f0;
-            border-radius: 5px;
-            padding: 20px;
-            margin: 30px 0;
-        }
-        .solution-box {
+        .important {
             background-color: #fff3cd;
-            border-radius: 5px;
-            padding: 20px;
-            margin: 30px 0;
-            display: none;
-        }
-        .context-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-            margin: 15px 0;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="header-section">
-        <div class="container">
-            <h1 class="text-center">Séquence 1 : Travail et puissance d'une force</h1>
-            <p class="text-center">Physique - Enseignement secondaire Cameroun</p>
-        </div>
-    </div>
-
     <div class="container">
-        <!-- Situation problème -->
-        <div class="problem-section">
-            <h2>Situation Problème</h2>
-            <p>M. Tchinda, un agriculteur de Bafoussam, doit transporter 50 sacs de cacao de 80 kg chacun de son champ jusqu'au centre de collecte situé à 2 km. Il utilise une brouette qui peut porter 2 sacs à la fois. </p>
-            <p>Il se demande s'il serait plus efficace d'utiliser un chariot tiré par un âne, mais il craint que cela ne lui coûte trop cher en nourriture pour l'animal. Comment peut-il déterminer quelle méthode est la plus efficiente en termes de travail fourni et de puissance nécessaire?</p>
-            <img src="data:image/jpeg;base64,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" alt="Agriculteur au Cameroun" class="context-img">
-        </div>
-
-        <!-- Objectifs -->
-        <div class="row mb-4">
-            <div class="col-md-12">
+        <h1 class="text-center mb-4">Travail et Puissance d'une Force</h1>
+        
+        <div class="row">
+            <div class="col-12">
                 <div class="card">
-                    <div class="card-header bg-success text-white">
-                        <h3>Objectifs d'apprentissage</h3>
-                    </div>
+                    <div class="card-header">Introduction</div>
                     <div class="card-body">
-                        <ul>
-                            <li>Définir le travail d'une force et la puissance mécanique</li>
-                            <li>Calculer le travail dans des cas simples (force constante)</li>
-                            <li>Calculer le travail dans des cas de forces variables</li>
-                            <li>Appliquer ces concepts à des situations de la vie courante au Cameroun</li>
-                        </ul>
+                        <p>Le travail et la puissance sont deux grandeurs physiques fondamentales qui décrivent l'action mécanique d'une force. Ces concepts sont essentiels pour comprendre comment l'énergie est transférée et transformée dans les systèmes mécaniques.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Activités d'apprentissage -->
-        <h2>Activités d'apprentissage</h2>
-
-        <!-- Activité 1 -->
-        <div class="activity-card">
-            <div class="activity-header">
-                <h4>Activité 1: Notion de travail d'une force</h4>
-            </div>
+        <h2>1. Travail d'une force constante</h2>
+        
+        <div class="card">
+            <div class="card-header">Définition</div>
             <div class="card-body">
-                <p><strong>Situation:</strong> Un porteur au marché de Douala soulève une caisse de 20 kg et la déplace horizontalement sur 10 m.</p>
-                <img src="data:image/jpeg;base64,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" alt="Marché de Douala" class="context-img">
-                <p><strong>Questions:</strong></p>
-                <ol>
-                    <li>Quelles forces s'exercent sur la caisse?</li>
-                    <li>Quelles forces effectuent un travail lorsque la caisse est soulevée verticalement de 1 m?</li>
-                    <li>Quelles forces effectuent un travail lors du déplacement horizontal?</li>
-                    <li>Calculez le travail effectué dans chaque cas.</li>
-                </ol>
-                <div class="mt-3">
-                    <button class="btn btn-sm btn-outline-success" onclick="$('#reponse-activite1').toggle()">Voir les éléments de réponse</button>
-                    <div id="reponse-activite1" style="display: none; padding: 15px; background-color: #f8f9fa; margin-top: 10px;">
-                        <p>1. Poids (vertical vers le bas), réaction du support (vertical vers le haut), force de poussée (horizontale).</p>
-                        <p>2. Lors du soulèvement, le travail du poids est résistant: $W = -m \cdot g \cdot h = -20 \times 9,8 \times 1 = -196 J$. Le travail de la force de poussée est moteur: $W = F \cdot h = 196 \times 1 = 196 J$ (si F = poids pour soulever à vitesse constante).</p>
-                        <p>3. Lors du déplacement horizontal, seule la force de poussée effectue un travail (si frottements négligés).</p>
-                    </div>
+                <p>Le travail d'une force constante $\vec{F}$ lors d'un déplacement rectiligne de son point d'application de $A$ à $B$ est donné par :</p>
+                <p class="text-center">$W_{AB}(\vec{F}) = \vec{F} \cdot \overrightarrow{AB} = F \times AB \times \cos(\alpha)$</p>
+                <p>où $\alpha$ est l'angle entre la force $\vec{F}$ et le déplacement $\overrightarrow{AB}$.</p>
+                
+                <div class="important">
+                    <p><strong>Unité :</strong> Le travail s'exprime en joules (J). $1\ J = 1\ N \cdot m$</p>
                 </div>
+                
+                <div id="force-angle-canvas"></div>
+                
+                <p><strong>Interprétation selon l'angle :</strong></p>
+                <ul>
+                    <li>Si $\alpha = 0°$ (force dans le sens du déplacement) : $W = F \times AB$ (travail moteur)</li>
+                    <li>Si $\alpha = 90°$ (force perpendiculaire au déplacement) : $W = 0$</li>
+                    <li>Si $\alpha = 180°$ (force opposée au déplacement) : $W = -F \times AB$ (travail résistant)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="exercise">
+            <h4>Exercice d'application</h4>
+            <p>Une personne pousse une caisse avec une force constante de 50 N sur une distance de 10 m. La force fait un angle de 30° avec le déplacement.</p>
+            <p>Calculez le travail effectué par cette force.</p>
+            <button class="btn btn-primary mt-2" onclick="$('#solution1').toggle();">Voir la correction</button>
+            <div id="solution1" class="solution">
+                <p>On utilise la formule du travail : $W = F \times d \times \cos(\alpha)$</p>
+                <p>Données : $F = 50\ N$, $d = 10\ m$, $\alpha = 30°$</p>
+                <p>$W = 50 \times 10 \times \cos(30°) = 50 \times 10 \times \frac{\sqrt{3}}{2} \approx 50 \times 10 \times 0,866 = 433\ J$</p>
+                <p>Le travail est positif, il s'agit donc d'un travail moteur.</p>
             </div>
         </div>
 
-        <!-- Activité 2 -->
-        <div class="activity-card">
-            <div class="activity-header">
-                <h4>Activité 2: Travail d'une force constante</h4>
-            </div>
+        <
+        <h2>2. Puissance mécanique</h2>
+        
+        <div class="card">
+            <div class="card-header">Définition</div>
             <div class="card-body">
-                <p><strong>Situation:</strong> Une femme pousse un chariot de 50 kg avec une force constante de 100 N sur 20 mètres au marché de Yaoundé. La force fait un angle de 30° avec l'horizontal.</p>
-                <img src="data:image/jpeg;base64,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" alt="Femme poussant un chariot" class="context-img">
-                <p><strong>Questions:</strong></p>
-                <ol>
-                    <li>Quelle est l'expression du travail d'une force constante?</li>
-                    <li>Calculez le travail effectué par la femme.</li>
-                    <li>Comment le travail varie-t-il avec l'angle entre la force et le déplacement?</li>
-                </ol>
-                <div class="mt-3">
-                    <button class="btn btn-sm btn-outline-success" onclick="$('#reponse-activite2').toggle()">Voir les éléments de réponse</button>
-                    <div id="reponse-activite2" style="display: none; padding: 15px; background-color: #f8f9fa; margin-top: 10px;">
-                        <p>1. Pour une force constante $\vec{F}$ et un déplacement $\vec{AB}$, le travail est donné par: $W_{AB}(\vec{F}) = \vec{F} \cdot \vec{AB} = F \times AB \times \cos(\theta)$</p>
-                        <p>2. $W = 100 \times 20 \times \cos(30°) = 100 \times 20 \times \frac{\sqrt{3}}{2} \approx 1732 J$</p>
-                        <p>3. Le travail est maximal lorsque la force est parallèle au déplacement ($\theta = 0°$, $\cos(0°) = 1$), nul lorsque la force est perpendiculaire ($\theta = 90°$, $\cos(90°) = 0$), et résistant lorsque $\theta > 90°$.</p>
-                    </div>
+                <p>La puissance mécanique mesure la rapidité avec laquelle un travail est effectué :</p>
+                <p class="text-center">$P = \frac{\delta W}{dt}$</p>
+                <p>Pour une force $\vec{F}$ dont le point d'application se déplace à la vitesse $\vec{v}$ :</p>
+                <p class="text-center">$P = \vec{F} \cdot \vec{v}$</p>
+                
+                <div class="important">
+                    <p><strong>Unité :</strong> La puissance s'exprime en watts (W). $1\ W = 1\ J/s$</p>
                 </div>
+                
+                <p>La puissance moyenne sur un intervalle de temps $\Delta t$ est :</p>
+                <p class="text-center">$P_m = \frac{W}{\Delta t}$</p>
+            </div>
+        </div>
+        
+        <div class="exercise">
+            <h4>Exercice d'application</h4>
+            <p>Un moteur soulève une charge de 100 kg à une vitesse constante de 2 m/s.</p>
+            <p>Calculez la puissance développée par le moteur.</p>
+            <button class="btn btn-primary mt-2" onclick="$('#solution3').toggle();">Voir la correction</button>
+            <div id="solution3" class="solution">
+                <p>La force exercée par le moteur doit compenser le poids de la charge : $F = m \times g = 100 \times 9,8 = 980\ N$</p>
+                <p>La puissance est donnée par : $P = \vec{F} \cdot \vec{v} = F \times v$ (car force et vitesse ont même direction et sens)</p>
+                <p>$P = 980 \times 2 = 1960\ W$</p>
+                <p>Le moteur développe une puissance de 1960 W, soit environ 2,6 CV (1 CV ≈ 736 W).</p>
             </div>
         </div>
 
-        <!-- Activité 3 -->
-        <div class="activity-card">
-            <div class="activity-header">
-                <h4>Activité 3: Puissance mécanique</h4>
-            </div>
+        <h2>3. Applications pratiques</h2>
+        
+        <div class="card">
+            <div class="card-header">Travail du poids</div>
             <div class="card-body">
-                <p><strong>Situation:</strong> Un ouvrier sur un chantier à Garoua monte des parpaings de 10 kg à une hauteur de 8 m. Il met 15 secondes pour monter un parpaing.</p>
-                <img src="data:image/jpeg;base64,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" alt="Ouvrier du bâtiment" class="context-img">
-                <p><strong>Questions:</strong></p>
-                <ol>
-                    <li>Calculez le travail effectué pour monter un parpaing.</li>
-                    <li>Calculez la puissance développée par l'ouvrier.</li>
-                    <li>Si un moteur met 2 secondes pour effectuer le même travail, quelle serait sa puissance?</li>
-                </ol>
-                <div class="mt-3">
-                    <button class="btn btn-sm btn-outline-success" onclick="$('#reponse-activite3').toggle()">Voir les éléments de réponse</button>
-                    <div id="reponse-activite3" style="display: none; padding: 15px; background-color: #f8f9fa; margin-top: 10px;">
-                        <p>1. Travail: $W = m \cdot g \cdot h = 10 \times 9,8 \times 8 = 784 J$</p>
-                        <p>2. Puissance: $P = \frac{W}{t} = \frac{784}{15} \approx 52,3 W$</p>
-                        <p>3. Puissance du moteur: $P = \frac{784}{2} = 392 W$</p>
-                    </div>
+                <p>Le travail du poids d'un corps ne dépend que de la variation d'altitude de son centre de gravité :</p>
+                <p class="text-center">$W_{AB}(\vec{P}) = m \cdot g \cdot (z_A - z_B)$</p>
+                <p>où $z_A$ et $z_B$ sont les altitudes des points A et B.</p>
+                
+                <div class="canvas-container">
+                    <canvas id="weightWorkChart"></canvas>
                 </div>
+                
+                <p><strong>Important :</strong> Le travail du poids est indépendant du chemin suivi.</p>
             </div>
         </div>
-
-        <!-- Résumé du cours -->
-        <div class="summary-box">
-            <h2>Résumé</h2>
-            <h4>1. Travail d'une force constante</h4>
-            <p>Pour une force constante $\vec{F}$ et un déplacement $\vec{AB}$, le travail est donné par:</p>
-            <p class="text-center">$W_{AB}(\vec{F}) = \vec{F} \cdot \vec{AB} = F \times AB \times \cos(\theta)$</p>
-            <ul>
-                <li>Si $0° \leq \theta < 90°$: travail moteur ($W > 0$)</li>
-                <li>Si $\theta = 90°$: travail nul ($W = 0$)</li>
-                <li>Si $90° < \theta \leq 180°$: travail résistant ($W < 0$)</li>
-            </ul>
-
-            <h4>2. Puissance mécanique</h4>
-            <p>La puissance mesure la rapidité avec laquelle un travail est effectué:</p>
-            <p class="text-center">$P = \frac{W}{t}$</p>
-            <p>Où $P$ est la puissance en watts (W), $W$ le travail en joules (J) et $t$ le temps en secondes (s).</p>
-
-            <h4>3. Cas particuliers</h4>
-            <ul>
-                <li>Travail du poids: $W_{AB}(\vec{P}) = m \cdot g \cdot (h_A - h_B)$</li>
-                <li>Force conservative: son travail ne dépend pas du chemin suivi</li>
-            </ul>
-        </div>
-
-        <!-- Exercice d'application -->
-        <div class="exercise-box">
-            <h2>Exercice d'application</h2>
-            <p>Un pousse-pousseur à Limbé tire sa charge avec une force constante de 150 N sur une distance de 500 m. La force fait un angle de 20° avec l'horizontal. Le trajet dure 15 minutes.</p>
-            <img src="https://images.unsplash.com/photo-1599002924695-4c0c56c52c4a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmlja3NoYXclMjBwdWxsZXJ8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60" alt="Pousse-pousse" class="context-img">
-            <ol>
-                <li>Calculez le travail effectué par le pousse-pousseur.</li>
-                <li>Calculez la puissance développée.</li>
-                <li>Si la force de frottement est de 50 N, quel est le travail total effectué?</li>
-            </ol>
-            <button class="btn btn-primary" onclick="$('#solution-exercise').toggle()">Voir la solution</button>
-            
-            <div id="solution-exercise" class="solution-box">
-                <h4>Solution:</h4>
-                <p>1. Travail effectué: $W = F \times d \times \cos(\theta) = 150 \times 500 \times \cos(20°) \approx 150 \times 500 \times 0,94 \approx 70 500 J$</p>
-                <p>2. Puissance: $P = \frac{W}{t} = \frac{70 500}{15 \times 60} = \frac{70 500}{900} \approx 78,3 W$</p>
-                <p>3. Travail de la force de frottement: $W_{frott} = f \times d \times \cos(180°) = 50 \times 500 \times (-1) = -25 000 J$</p>
-                <p>Travail total: $W_{total} = W + W_{frott} = 70 500 - 25 000 = 45 500 J$</p>
+        
+        <div class="card mt-3">
+            <div class="card-header">Travail des forces de frottement</div>
+            <div class="card-body">
+                <p>Les forces de frottement s'opposent toujours au mouvement, donc leur travail est toujours négatif (résistant) :</p>
+                <p class="text-center">$W(\vec{f}) = -f \times L$</p>
+                <p>où $L$ est la longueur du chemin parcouru.</p>
+                
+                <p><strong>Contrairement au poids, le travail des forces de frottement dépend du chemin suivi.</strong></p>
             </div>
         </div>
-
-        <!-- Réponse à la situation problème -->
-        <div class="problem-section">
-            <h2>Réponse à la situation problème</h2>
-            <p>Pour aider M. Tchinda à prendre sa décision, analysons les deux options:</p>
-            
-            <h4>Option 1: Brouette manuelle</h4>
-            <p>• Travail nécessaire pour transporter 50 sacs: </p>
-            <p>Masse totale: $50 \times 80 = 4000 kg$</p>
-            <p>Distance: 2 km = 2000 m (aller simple)</p>
-            <p>Mais comme la brouette porte 2 sacs à la fois (160 kg), il fera 25 allers-retours.</p>
-            <p>Distance totale parcourue: $25 \times 2 \times 2000 = 100 000 m$</p>
-            <p>Travail: $W = F \times d$. Supposons une force de 200 N (environ 20 kg-force):</p>
-            <p>$W = 200 \times 100 000 = 20 000 000 J$ (20 MJ)</p>
-            <p>Si cela prend 6 heures: $P = \frac{20 000 000}{6 \times 3600} \approx 926 W$ (effort intense)</p>
-            
-            <h4>Option 2: Chariot avec âne</h4>
-            <p>• L'âne peut porter 10 sacs à la fois (800 kg), donc 5 allers simples.</p>
-            <p>Distance totale: $5 \times 2000 = 10 000 m$ (en supposant qu'il ne revient pas à vide)</p>
-            <p>Force de traction: environ 300 N (l'âne tire le chariot)</p>
-            <p>Travail: $W = 300 \times 10 000 = 3 000 000 J$ (3 MJ)</p>
-            <p>Si cela prend 2 heures: $P = \frac{3 000 000}{2 \times 3600} \approx 417 W$</p>
-            
-            <p><strong>Conclusion:</strong> L'âne fournit moins de travail total (3 MJ vs 20 MJ) et une puissance moyenne moindre (417 W vs 926 W). Même en considérant le coût de la nourriture de l'âne, l'option 2 est plus efficiente. M. Tchinda devrait opter pour le chariot tiré par l'âne.</p>
+        
+        <div class="exercise">
+            <h4>Exercice synthèse</h4>
+            <p>Un skieur de 80 kg descend une pente inclinée de 30° par rapport à l'horizontale. La piste fait 200 m de long et les frottements sont équivalents à une force constante de 50 N opposée au mouvement.</p>
+            <p>1. Calculez le travail du poids sur toute la descente.</p>
+            <p>2. Calculez le travail des forces de frottement.</p>
+            <p>3. En déduire la vitesse du skieur en bas de la piste, sachant qu'il part du repos.</p>
+            <button class="btn btn-primary mt-2" onclick="$('#solution4').toggle();">Voir la correction</button>
+            <div id="solution4" class="solution">
+                <p><strong>1. Travail du poids :</strong></p>
+                <p>La dénivellation : $h = L \times \sin(30°) = 200 \times 0,5 = 100\ m$</p>
+                <p>$W_p = m \times g \times h = 80 \times 9,8 \times 100 = 78 400\ J$</p>
+                
+                <p><strong>2. Travail des frottements :</strong></p>
+                <p>$W_f = -f \times L = -50 \times 200 = -10 000\ J$</p>
+                
+                <p><strong>3. Vitesse en bas de la piste :</strong></p>
+                <p>D'après le théorème de l'énergie cinétique : $\frac{1}{2}mv^2 - 0 = W_p + W_f$</p>
+                <p>$\frac{1}{2} \times 80 \times v^2 = 78 400 - 10 000 = 68 400\ J$</p>
+                <p>$40 v^2 = 68 400$</p>
+                <p>$v^2 = \frac{68 400}{40} = 1 710$</p>
+                <p>$v = \sqrt{1 710} \approx 41,4\ m/s$ (soit environ 149 km/h)</p>
+            </div>
         </div>
     </div>
 
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <p>Cours de Physique - Enseignement secondaire Cameroun</p>
-        <p>© 2023 - Ministère des Enseignements Secondaires</p>
-    </footer>
+    <script>
+        // Script p5.js pour visualiser l'angle entre force et déplacement
+        function sketchForceAngle(p) {
+            p.setup = function() {
+                p.createCanvas(300, 200);
+                p.angleMode(p.DEGREES);
+            };
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+            p.draw = function() {
+                p.background(240);
+                p.translate(50, 150);
+                
+                // Axe de déplacement
+                p.stroke(0);
+                p.strokeWeight(2);
+                p.line(0, 0, 200, 0);
+                p.text("Déplacement AB", 70, 20);
+                
+                // Force
+                let angle = 30;
+                let forceMagnitude = 80;
+                
+                p.push();
+                p.rotate(-angle);
+                p.stroke(200, 0, 0);
+                p.strokeWeight(2);
+                p.line(0, 0, forceMagnitude, 0);
+                p.fill(200, 0, 0);
+                p.text("Force F", 40, -10);
+                p.pop();
+                
+                // Arc d'angle
+                p.noFill();
+                p.stroke(0);
+                p.arc(0, 0, 40, 40, -angle, 0);
+                p.fill(0);
+                p.noStroke();
+                p.text("α = " + angle + "°", 15, -15);
+            };
+        }
+        
+        new p5(sketchForceAngle, 'force-angle-canvas');
+        
+        // Graphique pour le travail d'un ressort
+        document.addEventListener('DOMContentLoaded', function() {
+            const springCtx = document.getElementById('springWorkChart').getContext('2d');
+            const springChart = new Chart(springCtx, {
+                type: 'line',
+                data: {
+                    labels: [-0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3],
+                    datasets: [{
+                        label: 'Force de rappel F(x) = -kx (k=50 N/m)',
+                        data: [15, 10, 5, 0, -5, -10, -15],
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Allongement x (m)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Force F (N)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Graphique pour le travail du poids
+            const weightCtx = document.getElementById('weightWorkChart').getContext('2d');
+            const weightChart = new Chart(weightCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Chemin 1', 'Chemin 2', 'Chemin 3'],
+                    datasets: [{
+                        label: 'Travail du poids (J) pour m=10kg, Δh=5m',
+                        data: [490, 490, 490],
+                        backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Travail (J)'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

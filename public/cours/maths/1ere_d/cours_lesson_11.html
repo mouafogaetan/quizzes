@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condensé sur les Barycentres</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .example-box {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .solution-box {
+            background-color: #d4edda;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: none;
+        }
+        .toggle-solution {
+            cursor: pointer;
+            color: #0d6efd;
+            font-weight: bold;
+        }
+        .section-title {
+            border-bottom: 2px solid #0d6efd;
+            padding-bottom: 10px;
+            margin: 30px 0 20px 0;
+        }
+        .image-placeholder {
+            background-color: #f8f9fa;
+            border: 1px dashed #dee2e6;
+            padding: 20px;
+            text-align: center;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Condensé sur les Barycentres</h1>
+        <p class="lead text-center">Notions essentielles, exemples et exercices corrigés</p>
+
+        <div class="alert alert-info">
+            <strong>Intérêt des barycentres :</strong> Réduire les sommes de vecteurs et résoudre des problèmes d'équilibre.
+        </div>
+
+        <h2 class="section-title">1. Barycentre de deux points pondérés</h2>
+
+        <div class="card">
+            <div class="card-header">Définition</div>
+            <div class="card-body">
+                <p>Un point pondéré est un couple $(A; \alpha)$ où $A$ est un point et $\alpha$ un réel non nul.</p>
+                <p>Le barycentre du système $\{(A; \alpha), (B; \beta)\}$ est l'unique point $G$ tel que :</p>
+                <p>$\alpha\overrightarrow{GA} + \beta\overrightarrow{GB} = \overrightarrow{0}$, avec $\alpha + \beta \neq 0$</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Propriétés importantes</div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Homogénéité :</strong> $G = \text{bar}\{(A; \alpha), (B; \beta)\} = \text{bar}\{(A; k\alpha), (B; k\beta)\}$ pour tout $k \in \mathbb{R}^*$</li>
+                    <li><strong>Coordonnées :</strong> Dans un repère, si $G = \text{bar}\{(A; \alpha), (B; \beta)\}$, alors :
+                        $$x_G = \frac{\alpha x_A + \beta x_B}{\alpha + \beta}, \quad y_G = \frac{\alpha y_A + \beta y_B}{\alpha + \beta}$$
+                    </li>
+                    <li><strong>Isobarycentre :</strong> Si $\alpha = \beta$, alors $G$ est le milieu de $[AB]$</li>
+                    <li><strong>Réduction vectorielle :</strong> $\alpha\overrightarrow{MA} + \beta\overrightarrow{MB} = (\alpha + \beta)\overrightarrow{MG}$</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Exemple</div>
+            <div class="card-body">
+                <div class="example-box">
+                    <p>Soit $G = \text{bar}\{(A; -1), (B; 3)\}$ avec $A(-1; 3)$ et $B(2; -2)$.</p>
+                    <p>Calculer les coordonnées de $G$.</p>
+                </div>
+                <p class="toggle-solution" onclick="$('#solution1').toggle()">▶ Voir la solution</p>
+                <div id="solution1" class="solution-box">
+                    <p>$$x_G = \frac{-1 \times (-1) + 3 \times 2}{-1 + 3} = \frac{1 + 6}{2} = \frac{7}{2}$$</p>
+                    <p>$$y_G = \frac{-1 \times 3 + 3 \times (-2)}{-1 + 3} = \frac{-3 - 6}{2} = -\frac{9}{2}$$</p>
+                    <p>Ainsi, $G\left(\frac{7}{2}; -\frac{9}{2}\right)$</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Exercice d'application</div>
+            <div class="card-body">
+                <div class="example-box">
+                    <p>On considère deux points distincts $A$ et $B$.</p>
+                    <p>1. Soit $G$ le barycentre des points pondérés $(A, 2)$ et $(B, -3)$. Déterminer le réel $\alpha$ tel que $\overrightarrow{GB} = \alpha \overrightarrow{AB}$.</p>
+                    <p>2. Montrer qu'il existe un point unique $M$ qui vérifie l'égalité : $2\overrightarrow{MA} - 3\overrightarrow{MB} = \overrightarrow{V}$.</p>
+                </div>
+                <p class="toggle-solution" onclick="$('#solution2').toggle()">▶ Voir la solution</p>
+                <div id="solution2" class="solution-box">
+                    <p><strong>1.</strong> On a $G = \text{bar}\{(A, 2), (B, -3)\}$ donc $2\overrightarrow{GA} - 3\overrightarrow{GB} = \overrightarrow{0}$.</p>
+                    <p>En utilisant la relation de Chasles : $\overrightarrow{GB} = \overrightarrow{GA} + \overrightarrow{AB}$</p>
+                    <p>D'où $2\overrightarrow{GA} - 3(\overrightarrow{GA} + \overrightarrow{AB}) = \overrightarrow{0}$</p>
+                    <p>$2\overrightarrow{GA} - 3\overrightarrow{GA} - 3\overrightarrow{AB} = \overrightarrow{0}$</p>
+                    <p>$-\overrightarrow{GA} = 3\overrightarrow{AB}$</p>
+                    <p>$\overrightarrow{AG} = 3\overrightarrow{AB}$</p>
+                    <p>Or $\overrightarrow{GB} = \overrightarrow{GA} + \overrightarrow{AB} = -3\overrightarrow{AB} + \overrightarrow{AB} = -2\overrightarrow{AB}$</p>
+                    <p>Donc $\alpha = -2$</p>
+                    
+                    <p><strong>2.</strong> $2\overrightarrow{MA} - 3\overrightarrow{MB} = (2-3)\overrightarrow{MG} = -\overrightarrow{MG}$ où $G = \text{bar}\{(A, 2), (B, -3)\}$</p>
+                    <p>Ainsi, $-\overrightarrow{MG} = \overrightarrow{V} \Rightarrow \overrightarrow{MG} = -\overrightarrow{V}$</p>
+                    <p>Il existe un unique point $M$ tel que $\overrightarrow{MG} = -\overrightarrow{V}$, c'est le translaté de $G$ par le vecteur $-\overrightarrow{V}$.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="image-placeholder">
+            <p>Image: Construction du barycentre G de deux points A et B</p>
+            <p>Description: Un segment AB avec le point G positionné à 3/5 de A vers B lorsque les coefficients sont (A,2) et (B,3)</p>
+        </div>
+
+        <h2 class="section-title">2. Barycentre de trois points pondérés</h2>
+
+        <div class="card">
+            <div class="card-header">Définition</div>
+            <div class="card-body">
+                <p>Le barycentre du système $\{(A; \alpha), (B; \beta), (C; \gamma)\}$ est l'unique point $G$ tel que :</p>
+                <p>$\alpha\overrightarrow{GA} + \beta\overrightarrow{GB} + \gamma\overrightarrow{GC} = \overrightarrow{0}$, avec $\alpha + \beta + \gamma \neq 0$</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Propriétés importantes</div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Homogénéité :</strong> Similaire au cas de deux points</li>
+                    <li><strong>Coordonnées :</strong>
+                        $$x_G = \frac{\alpha x_A + \beta x_B + \gamma x_C}{\alpha + \beta + \gamma}, \quad y_G = \frac{\alpha y_A + \beta y_B + \gamma y_C}{\alpha + \beta + \gamma}$$
+                    </li>
+                    <li><strong>Barycentre partiel :</strong> Si $H = \text{bar}\{(A; \alpha), (B; \beta)\}$ et $\alpha + \beta \neq 0$, alors $G = \text{bar}\{(H; \alpha + \beta), (C; \gamma)\}$</li>
+                    <li><strong>Centre de gravité :</strong> Si $\alpha = \beta = \gamma$, alors $G$ est le centre de gravité du triangle $ABC$</li>
+                    <li><strong>Réduction vectorielle :</strong> $\alpha\overrightarrow{MA} + \beta\overrightarrow{MB} + \gamma\overrightarrow{MC} = (\alpha + \beta + \gamma)\overrightarrow{MG}$</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Exercice d'application</div>
+            <div class="card-body">
+                <div class="example-box">
+                    <p>ABC est un triangle. Les points M, N, O et P sont tels que :</p>
+                    <p>$\overrightarrow{AM} = \frac{2}{3}\overrightarrow{AB}$, $\overrightarrow{AN} = \frac{3}{4}\overrightarrow{AC}$, $\overrightarrow{BP} = \frac{3}{5}\overrightarrow{BC}$, et O est le milieu de [CM].</p>
+                    <p>1. Démontrer que les points B, N et O sont alignés.</p>
+                    <p>2. Démontrer que les droites (AM), (BN) et (CM) sont concourantes.</p>
+                </div>
+                <p class="toggle-solution" onclick="$('#solution3').toggle()">▶ Voir la solution</p>
+                <div id="solution3" class="solution-box">
+                    <p><strong>1.</strong> Exprimons O comme barycentre de B et N :</p>
+                    <p>O est le milieu de [CM] donc O = bar{(C,1), (M,1)}</p>
+                    <p>M = bar{(A,1), (B,2)} car $\overrightarrow{AM} = \frac{2}{3}\overrightarrow{AB} \Rightarrow \overrightarrow{AM} = \frac{2}{3}(\overrightarrow{AM} + \overrightarrow{MB}) \Rightarrow \frac{1}{3}\overrightarrow{AM} = \frac{2}{3}\overrightarrow{MB} \Rightarrow \overrightarrow{AM} = 2\overrightarrow{MB}$</p>
+                    <p>Donc O = bar{(C,1), (A,1), (B,2)}</p>
+                    <p>N = bar{(A,1), (C,3)} car $\overrightarrow{AN} = \frac{3}{4}\overrightarrow{AC} \Rightarrow \overrightarrow{AN} = \frac{3}{4}(\overrightarrow{AN} + \overrightarrow{NC}) \Rightarrow \frac{1}{4}\overrightarrow{AN} = \frac{3}{4}\overrightarrow{NC} \Rightarrow \overrightarrow{AN} = 3\overrightarrow{NC}$</p>
+                    <p>On voit que O peut s'écrire comme barycentre de B et N avec des coefficients appropriés, donc B, N et O sont alignés.</p>
+                    
+                    <p><strong>2.</strong> Pour montrer que (AM), (BN) et (CM) sont concourantes, on cherche leur point d'intersection et on montre qu'il peut s'exprimer comme barycentre des points A, B, C avec différents systèmes de coefficients.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="image-placeholder">
+            <img src="data:image/jpeg;base64,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">
+            <p>Description: Triangle ABC avec son centre de gravité G et les médianes</p>
+        </div>
+
+        <h2 class="section-title">3. Lignes de niveau</h2>
+
+        <div class="card">
+            <div class="card-header">Définition</div>
+            <div class="card-body">
+                <p>Une ligne de niveau est l'ensemble des points M du plan vérifiant une condition donnée, souvent liée à des distances ou des expressions vectorielles.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Types de lignes de niveau</div>
+            <div class="card-body">
+                <ol>
+                    <li><strong>||αMA + βMB + γMC|| = k</strong>
+                        <p>Si α + β + γ ≠ 0 et G = bar{(A;α), (B;β), (C;γ)}, alors:</p>
+                        <p>||αMA + βMB + γMC|| = k ⇔ ||(α+β+γ)MG|| = k ⇔ MG = k/|α+β+γ|</p>
+                        <p>C'est un cercle de centre G et de rayon k/|α+β+γ| (si k > 0)</p>
+                    </li>
+                    <li><strong>MA² + MB² = k</strong>
+                        <p>Soit I le milieu de [AB], alors:</p>
+                        <p>MA² + MB² = 2MI² + (AB²/2)</p>
+                        <p>Donc MA² + MB² = k ⇔ MI² = (k - AB²/2)/2</p>
+                        <p>Si k > AB²/2, c'est un cercle de centre I</p>
+                    </li>
+                    <li><strong>MA² - MB² = k</strong>
+                        <p>Soit I le milieu de [AB], alors:</p>
+                        <p>MA² - MB² = 2<strong>AB</strong>·<strong>MI</strong></p>
+                        <p>Donc MA² - MB² = k ⇔ <strong>AB</strong>·<strong>MI</strong> = k/2</p>
+                        <p>C'est une droite perpendiculaire à (AB)</p>
+                    </li>
+                    <li><strong>MA/MB = k</strong>
+                        <p>Si k = 1, c'est la médiatrice de [AB]</p>
+                        <p>Si k ≠ 1, c'est un cercle (cercle d'Apollonius)</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Exercice d'application</div>
+            <div class="card-body">
+                <div class="example-box">
+                    <p>Soient A et B deux points du plan tels que AB = 8 cm.</p>
+                    <p>1. Déterminer et construire le barycentre G des points (A; 3) et (B; -1).</p>
+                    <p>2. Calculer AG² et BG².</p>
+                    <p>3. Déterminer et construire l'ensemble (C) des points M du plan tels que $3MA^2 - MB^2 = 72$.</p>
+                </div>
+                <p class="toggle-solution" onclick="$('#solution4').toggle()">▶ Voir la solution</p>
+                <div id="solution4" class="solution-box">
+                    <p><strong>1.</strong> G = bar{(A;3), (B;-1)} donc 3<strong>GA</strong> - <strong>GB</strong> = <strong>0</strong></p>
+                    <p>En utilisant Chasles : 3<strong>GA</strong> - (<strong>GA</strong> + <strong>AB</strong>) = <strong>0</strong> ⇒ 2<strong>GA</strong> = <strong>AB</strong> ⇒ <strong>AG</strong> = (1/2)<strong>AB</strong></p>
+                    <p>Donc G est tel que AG = AB/2 = 4 cm</p>
+                    
+                    <p><strong>2.</strong> AG² = 4² = 16</p>
+                    <p>BG = BA + AG = 8 + 4 = 12 cm ⇒ BG² = 144</p>
+                    
+                    <p><strong>3.</strong> 3MA² - MB² = 72</p>
+                    <p>On sait que 3MA² - MB² = (3-1)MG² + (3GA² - GB²) où G = bar{(A;3), (B;-1)}</p>
+                    <p>Calculons 3GA² - GB² :</p>
+                    <p>3GA² - GB² = 3×16 - 144 = 48 - 144 = -96</p>
+                    <p>Donc 3MA² - MB² = 2MG² - 96</p>
+                    <p>Ainsi, 2MG² - 96 = 72 ⇒ 2MG² = 168 ⇒ MG² = 84 ⇒ MG = √84 = 2√21</p>
+                    <p>L'ensemble (C) est le cercle de centre G et de rayon 2√21 cm.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="image-placeholder">
+            <p>Image: Cercles comme lignes de niveau</p>
+            <p>Description: Deux cercles concentriques de rayons différents représentant différentes lignes de niveau</p>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">Conclusion</div>
+            <div class="card-body">
+                <p>Les barycentres sont des outils puissants en géométrie vectorielle permettant :</p>
+                <ul>
+                    <li>De simplifier des expressions vectorielles complexes</li>
+                    <li>De déterminer des points d'équilibre</li>
+                    <li>De définir des lignes de niveau (cercles, droites)</li>
+                    <li>De démontrer l'alignement de points ou le concours de droites</li>
+                </ul>
+                <p>La maîtrise de ces concepts ouvre la voie à la résolution de nombreux problèmes géométriques.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

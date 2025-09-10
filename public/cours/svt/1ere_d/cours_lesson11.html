@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condensé - Altération des Roches et Sédimentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .solution {
+            display: none;
+            background-color: #d4edda;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #6c757d;
+        }
+        .canvas-container {
+            position: relative;
+            height: 40vh;
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            .canvas-container {
+                height: 30vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4 mb-4">
+        <h1 class="text-center mb-4">Altération des Roches et Sédimentation</h1>
+        <p class="lead text-center">Condensé des notions essentielles du Chapitre 10</p>
+        
+        <ul class="nav nav-pills mb-4 justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="alt-tab" data-bs-toggle="pill" data-bs-target="#alt" type="button" role="tab">Altération</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="transport-tab" data-bs-toggle="pill" data-bs-target="#transport" type="button" role="tab">Transport</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="sedimentation-tab" data-bs-toggle="pill" data-bs-target="#sedimentation" type="button" role="tab">Sédimentation</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="stratigraphie-tab" data-bs-toggle="pill" data-bs-target="#stratigraphie" type="button" role="tab">Stratigraphie</button>
+            </li>
+        </ul>
+        
+        <div class="tab-content" id="myTabContent">
+            <!-- Altération des roches -->
+            <div class="tab-pane fade show active" id="alt" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">1. Types d'altération</div>
+                    <div class="card-body">
+                        <p>L'altération est la décomposition des roches sous l'action des agents atmosphériques.</p>
+                        <ul>
+                            <li><strong>Altération physique</strong>: Fragmentation sans modification chimique (ex: gel-dégel)</li>
+                            <li><strong>Altération chimique</strong>: Modification de la composition chimique (ex: hydrolyse)</li>
+                        </ul>
+                        
+                        <div class="exercise">
+                            <p><strong>Exercice:</strong> Citez deux différences entre l'altération physique et chimique.</p>
+                            <button class="btn btn-sm btn-primary" onclick="$('#solution1').toggle();">Voir correction</button>
+                            <div id="solution1" class="solution">
+                                <p><strong>Correction:</strong></p>
+                                <ol>
+                                    <li>L'altération physique fragmente la roche sans changer sa composition chimique, tandis que l'altération chimique modifie sa composition.</li>
+                                    <li>L'altération physique est principalement due aux variations de température, tandis que l'altération chimique implique des réactions avec l'eau et le CO₂.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">2. Action de l'eau sur les roches</div>
+                    <div class="card-body">
+                        <h5>a) Sur le granite</h5>
+                        <p>L'eau acidifiée par le CO₂ dissous transforme les feldspaths en argile:</p>
+                        <p>Altération ménagée: $5KAlSi_3O_8 + 20H_2O \rightarrow 3 smectites + 8Si(OH)_4 + 4K^+ + 4OH^-$</p>
+                        <p>Altération moyenne: $2KAlSi_3O_8 + 11H_2O \rightarrow Al_2Si_2O_5(OH)_4 + 4Si(OH)_4 + 2K^+ + 2OH^-$</p>
+                        <p>Altération poussée: $KAlSi_3O_8 + 8H_2O \rightarrow Al(OH)_3 + 3Si(OH)_4 + K^+ + OH^-$</p>
+                        
+                        <div class="exercise">
+                            <p><strong>Exercice:</strong> Calculez le pourcentage de perte en potassium (K) pour l'altération poussée de l'orthose (KAlSi₃O₈).</p>
+                            <button class="btn btn-sm btn-primary" onclick="$('#solution2').toggle();">Voir correction</button>
+                            <div id="solution2" class="solution">
+                                <p><strong>Correction:</strong></p>
+                                <p>Masse molaire de l'orthose: K(39) + Al(27) + 3Si(84) + 8O(128) = 278 g/mol</p>
+                                <p>Masse de K: 39 g</p>
+                                <p>Pourcentage de K: (39/278) × 100 = 14%</p>
+                                <p>Dans l'altération poussée, tout le K est libéré sous forme ionique, donc perte de 100% du K initial.</p>
+                            </div>
+                        </div>
+                        
+                        <h5 class="mt-3">b) Sur les roches carbonatées</h5>
+                        <p>Dissolution du calcaire par l'eau chargée en CO₂:</p>
+                        <p>$CaCO_3 + H_2CO_3 \leftrightarrow Ca^{2+} + 2HCO_3^-$</p>
+                        
+                        <h5 class="mt-3">c) Sur les roches tendres</h5>
+                        <p>Action mécanique de ravinement par les eaux de pluie.</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">3. Action des êtres vivants et du climat</div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Végétaux</strong>: Racines qui élargissent les fissures et sécrètent des acides</li>
+                            <li><strong>Microorganismes</strong>: Lichens et bactéries décomposent directement la roche</li>
+                            <li><strong>Climat</strong>: La température influence l'intensité des réactions biochimiques</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Transport des sédiments -->
+            <div class="tab-pane fade" id="transport" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">1. Érosion</div>
+                    <div class="card-body">
+                        <p>L'érosion est le processus de déplacement des matériaux issus de l'altération.</p>
+                        <ul>
+                            <li>Érosion éolienne (par le vent)</li>
+                            <li>Érosion fluviatile (par les cours d'eau)</li>
+                            <li>Érosion glaciaire (par les glaciers)</li>
+                            <li>Érosion marine (par la mer)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">2. Transport des particules solides</div>
+                    <div class="card-body">
+                        <p>La vitesse de transport est inversement proportionnelle à la taille des particules.</p>
+                        <p>Lorsque la vitesse du courant diminue, les particules se déposent des plus grosses aux plus fines (granoclassement).</p>
+                        
+                        <div class="canvas-container">
+                            <canvas id="transportChart"></canvas>
+                        </div>
+                        
+                        <div class="exercise">
+                            <p><strong>Exercice:</strong> Classifiez les sédiments suivants par taille croissante: sables, argiles, graviers, limons.</p>
+                            <button class="btn btn-sm btn-primary" onclick="$('#solution3').toggle();">Voir correction</button>
+                            <div id="solution3" class="solution">
+                                <p><strong>Correction:</strong></p>
+                                <p>Par taille croissante: argiles (< 2μm) < limons (2-50μm) < sables (50μm-2mm) < graviers (> 2mm)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">3. Transport des ions en solution</div>
+                    <div class="card-body">
+                        <p>Les ions dissous sont transportés quelle que soit la vitesse du courant.</p>
+                        <p>La précipitation se produit lorsque les conditions de solubilité changent (pH, température, CO₂).</p>
+                        <p>Équilibre de dissolution/précipitation du calcaire:</p>
+                        <p>$Ca^{2+} + 2HCO_3^- \leftrightarrow CaCO_3 + CO_2 + H_2O$</p>
+                        
+                        <div class="exercise">
+                            <p><strong>Exercice:</strong> Expliquez pourquoi on observe des dépôts de calcaire (tartre) dans les canalisations d'eau chaude.</p>
+                            <button class="btn btn-sm btn-primary" onclick="$('#solution4').toggle();">Voir correction</button>
+                            <div id="solution4" class="solution">
+                                <p><strong>Correction:</strong></p>
+                                <p>L'élévation de température diminue la solubilité du CO₂ dans l'eau, ce qui déplace l'équilibre vers la formation de CaCO₃ solide (tartre) selon la réaction: $Ca^{2+} + 2HCO_3^- \rightarrow CaCO_3 + CO_2 + H_2O$</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sédimentation -->
+            <div class="tab-pane fade" id="sedimentation" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">1. Types de sédimentation</div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Sédimentation littorale</strong>: Embouchures des fleuves, estuaires</li>
+                            <li><strong>Sédimentation de plate-forme continentale</strong>: Subsidence du bassin sédimentaire</li>
+                            <li><strong>Sédimentation profonde</strong>: Dépôt des particules fines au large</li>
+                        </ul>
+                        
+                        <img src="data:image/png;base64,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">
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">2. Diagenèse</div>
+                    <div class="card-body">
+                        <p>Transformation du sédiment en roche sédimentaire par:</p>
+                        <ul>
+                            <li>Compaction</li>
+                            <li>Déshydratation</li>
+                            <li>Cimentation</li>
+                            <li>Réactions chimiques</li>
+                        </ul>
+                        
+                        <p>Cycle: Roche d'origine → altération → transport → sédimentation → diagenèse → roche sédimentaire</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">3. Types de roches sédimentaires</div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Roches détritiques</strong>: Issues de l'altération et érosion (ex: grès, argile)</li>
+                            <li><strong>Roches chimiques</strong>: Issues de la précipitation d'ions (ex: calcaire oolithique, évaporites)</li>
+                            <li><strong>Roches biologiques</strong>: Issues de l'accumulation de restes d'êtres vivants (ex: récifs coralliens, charbon)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stratigraphie -->
+            <div class="tab-pane fade" id="stratigraphie" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">1. Principes de stratigraphie</div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Superposition</strong>: Une couche est plus récente que celle qu'elle recouvre</li>
+                            <li><strong>Continuité</strong>: Une couche a le même âge en tous ses points</li>
+                            <li><strong>Identité paléontologique</strong>: Couches avec mêmes fossiles ont même âge</li>
+                            <li><strong>Actualisme</strong>: Les phénomènes passés obéissent aux mêmes lois que les actuels</li>
+                            <li><strong>Recoupement</strong>: Une structure qui en recoupe une autre est plus récente</li>
+                        </ul>
+                        
+                        <div class="exercise">
+                            <p><strong>Exercice:</strong> Classez par ordre chronologique les événements suivants: sédimentation des couches A, B et C, formation de la faille F.</p>
+                            <p><strong>Image à insérer:</strong> Schéma montrant trois couches sédimentaires A, B, C (A la plus basse, C la plus haute) avec une faille F qui les recoupe toutes.</p>
+                            <button class="btn btn-sm btn-primary" onclick="$('#solution5').toggle();">Voir correction</button>
+                            <div id="solution5" class="solution">
+                                <p><strong>Correction:</strong></p>
+                                <p>Ordre chronologique: 1. Sédimentation de A → 2. Sédimentation de B → 3. Sédimentation de C → 4. Formation de la faille F (car elle recoupe toutes les couches)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">2. Fossiles et reconstitution des milieux anciens</div>
+                    <div class="card-body">
+                        <ul>
+                            <li><strong>Fossiles de faciès</strong>: Indiquent les conditions du milieu (ex: coraux = eaux chaudes peu profondes)</li>
+                            <li><strong>Fossiles stratigraphiques</strong>: Permettent de dater les couches (ex: ammonites pour le Secondaire)</li>
+                        </ul>
+                        
+                        <table class="table table-bordered mt-3">
+                            <thead>
+                                <tr>
+                                    <th>Fossile</th>
+                                    <th>Ère caractéristique</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Trilobites, Goniatites, Fusulines</td>
+                                    <td>Primaire</td>
+                                </tr>
+                                <tr>
+                                    <td>Ammonites</td>
+                                    <td>Secondaire</td>
+                                </tr>
+                                <tr>
+                                    <td>Nummulites</td>
+                                    <td>Tertiaire</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Graphique pour le transport des sédiments
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('transportChart').getContext('2d');
+            const transportChart = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Zone de transport',
+                        data: [
+                            {x: 10, y: 0.001}, {x: 20, y: 0.01}, {x: 30, y: 0.1}, 
+                            {x: 40, y: 1}, {x: 50, y: 10}, {x: 60, y: 100}
+                        ],
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }, {
+                        label: 'Zone de sédimentation',
+                        data: [
+                            {x: 5, y: 0.001}, {x: 10, y: 0.01}, {x: 15, y: 0.1}, 
+                            {x: 20, y: 1}, {x: 25, y: 10}, {x: 30, y: 100}
+                        ],
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }, {
+                        label: 'Zone d'érosion',
+                        data: [
+                            {x: 70, y: 0.001}, {x: 80, y: 0.01}, {x: 90, y: 0.1}, 
+                            {x: 100, y: 1}, {x: 110, y: 10}, {x: 120, y: 100}
+                        ],
+                        backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Vitesse du courant (cm/s)'
+                            },
+                            type: 'linear',
+                            position: 'bottom'
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Taille des particules (mm)'
+                            },
+                            type: 'logarithmic'
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Diagramme de Hjulström - Comportement des sédiments'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Vitesse: ${context.parsed.x} cm/s, Taille: ${context.parsed.y} mm`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

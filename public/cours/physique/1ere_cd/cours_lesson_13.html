@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateurs et Caractéristiques Électriques</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Configuration MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            border: none;
+        }
+        .card-header {
+            background-color: #f1f5fd;
+            border-bottom: 1px solid #d4dcf1;
+            font-weight: 600;
+        }
+        .exercise {
+            background-color: #e8f4f8;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .solution {
+            background-color: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .canvas-container {
+            position: relative;
+            height: 250px;
+            margin: 20px 0;
+        }
+        .formula {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .image-placeholder {
+            background-color: #eee;
+            padding: 30px;
+            text-align: center;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #666;
+        }
+        .nav-tabs .nav-link {
+            color: #495057;
+            font-weight: 500;
+        }
+        .nav-tabs .nav-link.active {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+        h2 {
+            color: #2c3e50;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaeaea;
+            margin-top: 30px;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-5">Générateurs et Caractéristiques Électriques</h1>
+            <p class="lead">Condensé des notions essentielles à retenir</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">Objectifs du chapitre</div>
+                    <div class="card-body">
+                        <ul>
+                            <li>Définir générateur idéal et réel</li>
+                            <li>Déterminer la force électromotrice (E) et la résistance interne (r)</li>
+                            <li>Tracer et exploiter la caractéristique U-I d'un générateur</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>1. Générateur idéal et réel</h2>
+                
+                <div class="card">
+                    <div class="card-header">Générateur idéal</div>
+                    <div class="card-body">
+                        <p>Un générateur idéal est un générateur qui fournit une tension constante quelle que soit l'intensité du courant débité. Sa résistance interne est nulle ($r = 0$).</p>
+                        <div class="formula">
+                            $U = E$ (quelle que soit l'intensité I)
+                        </div>
+                        <p>Où $U$ est la tension aux bornes du générateur et $E$ est la force électromotrice (f.é.m).</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Générateur réel</div>
+                    <div class="card-body">
+                        <p>Un générateur réel possède une résistance interne $r$ non nulle. La tension à ses bornes diminue lorsque l'intensité du courant débité augmente.</p>
+                        <div class="formula">
+                            $U = E - r \cdot I$
+                        </div>
+                        <p>Où $U$ est la tension aux bornes du générateur, $E$ est la force électromotrice, $r$ est la résistance interne et $I$ est l'intensité du courant.</p>
+                        
+                        <div class="image-placeholder">
+							<img src="data:image/jpeg;base64,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">
+                            <p>Description: Schéma électrique représentant un générateur réel avec sa f.é.m E et sa résistance interne r.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>2. Détermination de E et r</h2>
+                
+                <div class="card">
+                    <div class="card-header">Méthodes expérimentales</div>
+                    <div class="card-body">
+                        <p>Il existe plusieurs méthodes pour déterminer la force électromotrice $E$ et la résistance interne $r$ d'un générateur :</p>
+                        
+                        <ul class="nav nav-tabs" id="methodsTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="direct-tab" data-bs-toggle="tab" data-bs-target="#direct" type="button" role="tab">Méthode directe</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="characteristic-tab" data-bs-toggle="tab" data-bs-target="#characteristic" type="button" role="tab">Caractéristique U-I</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="point-tab" data-bs-toggle="tab" data-bs-target="#point" type="button" role="tab">Points particuliers</button>
+                            </li>
+                        </ul>
+                        
+                        <div class="tab-content p-3" id="methodsTabContent">
+                            <div class="tab-pane fade show active" id="direct" role="tabpanel">
+                                <p>On mesure la tension $U$ aux bornes du générateur pour différentes valeurs de l'intensité $I$ du courant débité. En utilisant la relation $U = E - rI$, on détermine $E$ et $r$ par régression linéaire.</p>
+                            </div>
+                            <div class="tab-pane fade" id="characteristic" role="tabpanel">
+                                <p>On trace la caractéristique tension-intensité $U = f(I)$ du générateur. C'est une droite décroissante d'équation $U = -rI + E$. La pente de cette droite donne $-r$ et l'ordonnée à l'origine donne $E$.</p>
+                            </div>
+                            <div class="tab-pane fade" id="point" role="tabpanel">
+                                <p>On utilise deux points particuliers de la caractéristique :</p>
+                                <ul>
+                                    <li>Circuit ouvert ($I = 0$) : $U = E$</li>
+                                    <li>Court-circuit ($U = 0$) : $0 = E - rI_{cc}$ donc $r = E / I_{cc}$</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>On mesure la tension aux bornes d'un générateur pour différentes intensités :</p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>I (mA)</th>
+                                <th>50</th>
+                                <th>100</th>
+                                <th>150</th>
+                                <th>200</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>U (V)</td>
+                                <td>4.75</td>
+                                <td>4.50</td>
+                                <td>4.25</td>
+                                <td>4.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Déterminez la force électromotrice E et la résistance interne r de ce générateur.</p>
+                </div>
+
+                <div class="solution">
+                    <h5>Correction</h5>
+                    <p>La caractéristique du générateur est une droite d'équation $U = E - rI$.</p>
+                    <p>Pour I = 0 (extrapolation), on trouve U = E = 5,0 V.</p>
+                    <p>La pente de la droite est $-r = \frac{\Delta U}{\Delta I} = \frac{4.00 - 4.75}{0.200 - 0.050} = \frac{-0.75}{0.150} = -5$</p>
+                    <p>Donc $r = 5 \Omega$</p>
+                    <p>On peut également utiliser deux points de mesure :</p>
+                    <p>Pour I = 50 mA = 0,05 A, U = 4,75 V : $4,75 = E - r \times 0,05$</p>
+                    <p>Pour I = 200 mA = 0,20 A, U = 4,00 V : $4,00 = E - r \times 0,20$</p>
+                    <p>En soustrayant les deux équations : $0,75 = 0,15r$ donc $r = 5 \Omega$</p>
+                    <p>Puis $E = 4,75 + 5 \times 0,05 = 5,0 V$</p>
+                </div>
+
+                <h2>3. Caractéristique U-I d'un générateur</h2>
+                
+                <div class="card">
+                    <div class="card-header">Tracé et exploitation</div>
+                    <div class="card-body">
+                        <p>La caractéristique tension-intensité $U = f(I)$ d'un générateur réel est une droite décroissante :</p>
+                        
+                        <div class="canvas-container">
+                            <canvas id="characteristicChart"></canvas>
+                        </div>
+                        
+                        <p>Cette droite a pour équation : $U = E - rI$</p>
+                        <p>On peut en déduire :</p>
+                        <ul>
+                            <li>L'ordonnée à l'origine (I = 0) donne la f.é.m E</li>
+                            <li>La pente de la droite donne la résistance interne r (avec un signe négatif)</li>
+                            <li>L'abscisse à l'origine (U = 0) donne le courant de court-circuit $I_{cc} = E/r$</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Un générateur de f.é.m E et de résistance interne r alimente une résistance variable R.</p>
+                    <ol>
+                        <li>Exprimer l'intensité I du courant en fonction de E, r et R.</li>
+                        <li>Calculer I et la tension U aux bornes du générateur pour E = 12 V, r = 1 Ω et R = 5 Ω.</li>
+                        <li>Que deviennent ces valeurs si R = 0 (court-circuit) ?</li>
+                    </ol>
+                </div>
+
+                <div class="solution">
+                    <h5>Correction</h5>
+                    <ol>
+                        <li>D'après la loi d'Ohm : $U = RI$ et $U = E - rI$<br>
+                            Donc $RI = E - rI$ ⇒ $RI + rI = E$ ⇒ $I(R + r) = E$ ⇒ $I = \frac{E}{R + r}$</li>
+                        <li>Pour E = 12 V, r = 1 Ω et R = 5 Ω :<br>
+                            $I = \frac{12}{5 + 1} = \frac{12}{6} = 2$ A<br>
+                            $U = E - rI = 12 - 1 \times 2 = 10$ V ou $U = RI = 5 \times 2 = 10$ V</li>
+                        <li>Si R = 0 (court-circuit) :<br>
+                            $I = \frac{E}{r} = \frac{12}{1} = 12$ A<br>
+                            $U = 0$ V (court-circuit)</li>
+                    </ol>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">Synthèse des formules</div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Grandeur</th>
+                                    <th>Symbole</th>
+                                    <th>Formule</th>
+                                    <th>Unité</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Force électromotrice</td>
+                                    <td>E</td>
+                                    <td>$E = U + rI$</td>
+                                    <td>Volt (V)</td>
+                                </tr>
+                                <tr>
+                                    <td>Résistance interne</td>
+                                    <td>r</td>
+                                    <td>$r = \frac{E - U}{I}$</td>
+                                    <td>Ohm (Ω)</td>
+                                </tr>
+                                <tr>
+                                    <td>Tension aux bornes</td>
+                                    <td>U</td>
+                                    <td>$U = E - rI$</td>
+                                    <td>Volt (V)</td>
+                                </tr>
+                                <tr>
+                                    <td>Intensité de court-circuit</td>
+                                    <td>I<sub>cc</sub></td>
+                                    <td>$I_{cc} = \frac{E}{r}$</td>
+                                    <td>Ampère (A)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p>Résumé sur les générateurs et caractéristiques électriques - Séquence 1</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Graphique de la caractéristique U-I
+            const ctx = document.getElementById('characteristicChart').getContext('2d');
+            const characteristicChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [0, 0.5, 1.0, 1.5, 2.0, 2.5],
+                    datasets: [{
+                        label: 'Caractéristique U-I d\'un générateur',
+                        data: [5.0, 4.75, 4.5, 4.25, 4.0, 3.75],
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0,
+                        pointBackgroundColor: 'rgb(75, 192, 192)',
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Intensité I (A)'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Tension U (V)'
+                            },
+                            beginAtZero: true,
+                            max: 5.5
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Caractéristique U = f(I) d\'un générateur réel'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `U = ${context.parsed.y} V, I = ${context.parsed.x} A`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

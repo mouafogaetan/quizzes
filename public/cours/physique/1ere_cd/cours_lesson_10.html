@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'œil - Vision et défauts visuels</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+	
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 1rem 1rem;
+        }
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border: none;
+        }
+        .card-header {
+            border-radius: 1rem 1rem 0 0 !important;
+            font-weight: 600;
+        }
+        .exercise {
+            background-color: #e9f7fe;
+            border-left: 4px solid #2575fc;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+        }
+        .solution {
+            background-color: #f3f4f6;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        .img-placeholder {
+            background-color: #e9ecef;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #6a11cb;
+        }
+        .nav-pills .nav-link {
+            color: #6a11cb;
+        }
+        .formula {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 1rem 0;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-4">L'œil - Vision et défauts visuels</h1>
+            <p class="lead">Modèle de l'œil réduit, accommodation et correction des défauts visuels</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-pills mb-4 justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="model-tab" data-bs-toggle="pill" data-bs-target="#model" type="button" role="tab">Œil réduit</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="accommodation-tab" data-bs-toggle="pill" data-bs-target="#accommodation" type="button" role="tab">Accommodation</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="defects-tab" data-bs-toggle="pill" data-bs-target="#defects" type="button" role="tab">Défauts visuels</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <!-- Œil réduit -->
+            <div class="tab-pane fade show active" id="model" role="tabpanel">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        Modèle de l'œil réduit
+                    </div>
+                    <div class="card-body">
+                        <p>L'œil réduit est un modèle simplifié qui permet d'étudier les propriétés optiques de l'œil.</p>
+                        
+                        <div class="img-placeholder">
+                            <img src="data:image/png;base64,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">
+                            <p><strong>Description:</strong> Schéma montrant les éléments principaux de l'œil réduit</p>
+                            </div>
+                        
+                        <p>Dans ce modèle, on considère que l'œil est constitué :</p>
+                        <ul>
+                            <li>D'une lentille convergente unique (système cornée-cristallin)</li>
+                            <li>D'un écran (la rétine) où se forme l'image</li>
+                            <li>D'un diaphragme (la pupille) qui contrôle la quantité de lumière entrante</li>
+                        </ul>
+                        
+                        <div class="formula">
+                            <p>La relation de conjugaison pour l'œil réduit s'écrit :</p>
+                            <p>$\frac{1}{\overline{OA'}} - \frac{1}{\overline{OA}} = \frac{1}{f'}$</p>
+                            <p>où $O$ est le centre optique, $A$ le point objet, $A'$ le point image et $f'$ la distance focale image.</p>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h5>Exercice d'application</h5>
+                            <p>Un œil réduit a une distance focale de 17 mm. À quelle distance devant l'œil doit se trouver un objet pour que son image se forme nettement sur la rétine située à 22 mm derrière le centre optique?</p>
+                            <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution1')">Voir la correction</button>
+                            
+                            <div id="solution1" class="solution">
+                                <p>On utilise la relation de conjugaison :</p>
+                                <p>$\frac{1}{\overline{OA'}} - \frac{1}{\overline{OA}} = \frac{1}{f'}$</p>
+                                <p>Avec $\overline{OA'} = +22$ mm et $f' = +17$ mm</p>
+                                <p>$\frac{1}{22} - \frac{1}{\overline{OA}} = \frac{1}{17}$</p>
+                                <p>$-\frac{1}{\overline{OA}} = \frac{1}{17} - \frac{1}{22} = \frac{22 - 17}{17 \times 22} = \frac{5}{374}$</p>
+                                <p>$\frac{1}{\overline{OA}} = -\frac{5}{374}$</p>
+                                <p>$\overline{OA} = -\frac{374}{5} = -74.8$ mm</p>
+                                <p>L'objet doit se trouver à 74.8 mm devant le centre optique de l'œil.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accommodation -->
+            <div class="tab-pane fade" id="accommodation" role="tabpanel">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        L'accommodation de l'œil
+                    </div>
+                    <div class="card-body">
+                        <p>L'accommodation est le mécanisme qui permet à l'œil de modifier sa vergence pour voir nettement des objets à différentes distances.</p>
+                        
+                        <div class="img-placeholder">
+                            <img src="data:image/png;base64,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">
+                            <p><strong>Description:</strong> Représentation du cristallin au repos et lors de l'accommodation, montrant le changement de courbure et le rôle des muscles ciliaires.</p>
+                            </div>
+                        
+                        <p>Caractéristiques de l'accommodation :</p>
+                        <ul>
+                            <li>Au repos, l'œil est adapté pour la vision de loin</li>
+                            <li>Pour voir un objet proche, le cristallin devient plus convexe (augmentation de la vergence)</li>
+                            <li>La capacité d'accommodation diminue avec l'âge (presbytie)</li>
+                        </ul>
+                        
+                        <div class="formula">
+                            <p>La vergence $C$ d'une lentille est l'inverse de sa distance focale :</p>
+                            <p>$C = \frac{1}{f'}$ (en dioptries $\delta$ lorsque $f'$ est en mètres)</p>
+                        </div>
+                        
+                        <div class="chart-container">
+                            <canvas id="accommodationChart"></canvas>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h5>Exercice d'application</h5>
+                            <p>Un œil au repos a une distance focale de 20 mm. Lorsqu'il accommode au maximum, sa distance focale diminue à 18 mm. Calculez la variation de vergence correspondante.</p>
+                            <button class="btn btn-sm btn-success" onclick="toggleSolution('solution2')">Voir la correction</button>
+                            
+                            <div id="solution2" class="solution">
+                                <p>Vergence au repos : $C_{\text{repos}} = \frac{1}{f'_{\text{repos}}} = \frac{1}{0.020} = 50$ δ</p>
+                                <p>Vergence accommodée : $C_{\text{acc}} = \frac{1}{f'_{\text{acc}}} = \frac{1}{0.018} ≈ 55.56$ δ</p>
+                                <p>Variation de vergence : $ΔC = C_{\text{acc}} - C_{\text{repos}} ≈ 55.56 - 50 = 5.56$ δ</p>
+                                <p>L'œil augmente sa vergence de 5.56 dioptries lors de l'accommodation maximale.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Défauts visuels -->
+            <div class="tab-pane fade" id="defects" role="tabpanel">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark">
+                        Défauts visuels et leur correction
+                    </div>
+                    <div class="card-body">
+                        <p>Les principaux défauts visuels sont la myopie, l'hypermétropie et la presbytie. Chacun nécessite une correction spécifique.</p>
+                        
+                        <h4>Myopie</h4>
+                        <p>L'œil myope est trop convergent ou trop long. L'image d'un objet à l'infini se forme devant la rétine.</p>
+                        <p><strong>Correction:</strong> Lentille divergente (concave)</p>
+                        
+                        <div class="img-placeholder">
+                            <img src="data:image/jpeg;base64,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">
+                            <p><strong>Description:</strong> Schéma montrant la formation de l'image devant la rétine chez le myope et comment une lentille divergente permet de corriger ce défaut.</p>
+                            </div>
+                        
+                        <h4>Hypermétropie</h4>
+                        <p>L'œil hypermétrope n'est pas assez convergent ou trop court. L'image d'un objet à l'infini se formerait derrière la rétine.</p>
+                        <p><strong>Correction:</strong> Lentille convergente (convexe)</p>
+                        
+                        <div class="img-placeholder">
+                            <img src="data:image/png;base64,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">
+                            <p><strong>Description:</strong> Schéma montrant la formation de l'image derrière la rétine chez l'hypermétrope et comment une lentille convergente permet de corriger ce défaut.</p>
+                            </div>
+                        
+                        <h4>Presbytie</h4>
+                        <p>Perte progressive de la capacité d'accommodation avec l'âge. Difficulté à voir les objets proches.</p>
+                        <p><strong>Correction:</strong> Lentilles convergentes pour la vision de près (verres progressifs ou double foyer)</p>
+                        
+                        <div class="img-placeholder">
+                            <img src="data:image/jpeg;base64,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">
+                            <p><strong>Description:</strong> Représentation de la perte d'accommodation avec l'âge et des différents types de verres correcteurs (progressifs, double foyer).</p>
+				</div>
+                        
+                        <div class="exercise">
+                            <h5>Exercice d'application</h5>
+                            <p>Une personne myope ne voit nettement que les objets situés à moins de 2 mètres de ses yeux. Déterminez la vergence des verres correcteurs qui lui permettraient de voir distinctement les objets à l'infini.</p>
+                            <button class="btn btn-sm btn-warning" onclick="toggleSolution('solution3')">Voir la correction</button>
+                            
+                            <div id="solution3" class="solution">
+                                <p>Pour un œil myope, le punctum remotum (PR) est à distance finie. Ici, PR = -2 m (convention de signe négatif pour objet virtuel).</p>
+                                <p>La correction nécessite une lentille divergente qui fera d'un objet à l'infini une image virtuelle au PR.</p>
+                                <p>Formule de conjugaison : $\frac{1}{\overline{OA'}} - \frac{1}{\overline{OA}} = C$</p>
+                                <p>Avec $\overline{OA} = -\infty$ (objet à l'infini) et $\overline{OA'} = -2$ m (image au PR)</p>
+                                <p>$\frac{1}{-2} - \frac{1}{-\infty} = C$</p>
+                                <p>$C = -\frac{1}{2} = -0.5$ δ</p>
+                                <p>La vergence des verres correcteurs doit être de -0.5 dioptrie.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap & jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // Fonction pour afficher/masquer les solutions
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.style.display = solution.style.display === 'none' || solution.style.display === '' ? 'block' : 'none';
+        }
+        
+        // Graphique pour l'accommodation
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('accommodationChart').getContext('2d');
+            const accommodationChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['10 ans', '20 ans', '30 ans', '40 ans', '50 ans', '60 ans'],
+                    datasets: [{
+                        label: 'Amplitude d\'accommodation (dioptries)',
+                        data: [14, 10, 7, 4.5, 2.5, 1],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Amplitude (δ)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Âge'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

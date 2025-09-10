@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pollution et Protection de l'Environnement</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Configuration MathJax pour formules -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(to right, #2c7744, #1e5631);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border: none;
+        }
+        .card-header {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .exercise {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .solution {
+            display: none;
+            background-color: #f1f8e9;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .img-placeholder {
+            background-color: #e0e0e0;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            margin: 15px 0;
+            color: #666;
+            font-style: italic;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+        .btn-solution {
+            background-color: #8bc34a;
+            border: none;
+            color: white;
+            margin-top: 10px;
+        }
+        .btn-solution:hover {
+            background-color: #689f38;
+        }
+        .footer {
+            background-color: #2c7744;
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            border-radius: 10px 10px 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-5">Pollution et Protection de l'Environnement</h1>
+            <p class="lead">Identifier, analyser et proposer des solutions pour un environnement durable</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Introduction -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2>Introduction</h2>
+                <p>La pollution désigne la dégradation d'un écosystème par l'introduction, généralement humaine, de substances ou de radiations altérant le fonctionnement naturel. Cette séquence explore les différentes formes de pollution, leurs impacts et les moyens de protection.</p>
+            </div>
+        </div>
+
+        <!-- Section 1: Types de pollution -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>1. Les principales sources de pollution</h3>
+            </div>
+            <div class="card-body">
+                <h4>a) Pollution de l'eau</h4>
+                <p>La pollution hydrique provient des rejets industriels, agricoles (pesticides, engrais) et domestiques (eaux usées).</p>
+                
+                <div class="img-placeholder">
+                    <img src="data:image/jpeg;base64,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">
+                </div>
+                
+                <h4>b) Pollution de l'air</h4>
+                <p>Causée principalement par les gaz d'échappement, les industries et le chauffage domestique. Les principaux polluants sont les particules fines (PM2.5, PM10), le dioxyde de soufre (SO₂), les oxydes d'azote (NOₓ) et l'ozone (O₃).</p>
+                
+                <h4>c) Pollution des sols</h4>
+                <p>Due aux pesticides, aux métaux lourds, aux hydrocarbures et aux décharges sauvages.</p>
+                
+                <h4>d) Déchets</h4>
+                <p>Problématique de la gestion des déchets ménagers, industriels et électroniques (DEEE).</p>
+                
+                <h4>e) Déforestation et désertification</h4>
+                <p>La déforestation entraîne une perte de biodiversité et contribue au changement climatique. La désertification est la dégradation des terres dans les zones arides.</p>
+                
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Classifiez les sources de pollution suivantes selon leur type (eau, air, sol, déchets) :</p>
+                    <ol>
+                        <li>Rejet de mercure par une usine dans une rivière</li>
+                        <li>Émissions de CO₂ d'une centrale à charbon</li>
+                        <li>Décharge sauvage de pneus usagés</li>
+                        <li>Utilisation excessive d'engrais dans l'agriculture</li>
+                    </ol>
+                    <button class="btn btn-solution" onclick="$('#solution1').toggle()">Voir la correction</button>
+                    <div id="solution1" class="solution">
+                        <p><strong>Correction :</strong></p>
+                        <ol>
+                            <li>Pollution de l'eau</li>
+                            <li>Pollution de l'air</li>
+                            <li>Déchets</li>
+                            <li>Pollution des sols (et indirectement de l'eau par ruissellement)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Impacts -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>2. Impacts sur la santé et la biodiversité</h3>
+            </div>
+            <div class="card-body">
+                <h4>a) Impacts sur la santé humaine</h4>
+                <ul>
+                    <li>Problèmes respiratoires (asthme, bronchite) dus à la pollution de l'air</li>
+                    <li>Intoxications aux métaux lourds (plomb, mercure) par l'eau ou les aliments contaminés</li>
+                    <li>Maladies vectorielles liées aux modifications environnementales</li>
+                </ul>
+                
+                <h4>b) Impacts sur la biodiversité</h4>
+                <ul>
+                    <li>Disparition d'espèces animales et végétales</li>
+                    <li>Dégradation et fragmentation des habitats naturels</li>
+                    <li>Acidification des océans menaçant les écosystèmes marins</li>
+                </ul>
+                
+                <div class="chart-container">
+                    <canvas id="biodiversityChart"></canvas>
+                </div>
+                
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Reliez chaque type de pollution à ses impacts principaux :</p>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Type de pollution</th>
+                            <th>Impacts</th>
+                        </tr>
+                        <tr>
+                            <td>1. Pollution de l'air</td>
+                            <td>A. Bioaccumulation de toxines dans la chaîne alimentaire</td>
+                        </tr>
+                        <tr>
+                            <td>2. Pollution de l'eau</td>
+                            <td>B. Problèmes respiratoires chez l'homme</td>
+                        </tr>
+                        <tr>
+                            <td>3. Pollution des sols</td>
+                            <td>C. Baisse de la fertilité des terres agricoles</td>
+                        </tr>
+                    </table>
+                    <button class="btn btn-solution" onclick="$('#solution2').toggle()">Voir la correction</button>
+                    <div id="solution2" class="solution">
+                        <p><strong>Correction :</strong></p>
+                        <p>1-B, 2-A, 3-C</p>
+                        <p>La pollution de l'air cause principalement des problèmes respiratoires. La pollution de l'eau entraîne une bioaccumulation de toxines. La pollution des sols réduit la fertilité des terres agricoles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Solutions -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>3. Mesures de protection</h3>
+            </div>
+            <div class="card-body">
+                <h4>a) Recyclage et gestion des déchets</h4>
+                <p>Le recyclage permet de réduire l'exploitation des ressources naturelles et la pollution. La hiérarchie des déchets suit la règle des 3R : Réduire, Réutiliser, Recycler.</p>
+                
+                <h4>b) Lois et réglementations</h4>
+                <p>Exemples : Protocole de Kyoto (gaz à effet de serre), Directive-cadre sur l'eau (UE), Loi sur la transition énergétique (France).</p>
+                
+                <h4>c) Sensibilisation et éducation</h4>
+                <p>Campagnes de sensibilisation, éducation au développement durable dans les écoles.</p>
+                
+                <h4>d) Technologies propres</h4>
+                <p>Développement des énergies renouvelables (solaire, éolien), véhicules électriques, agriculture biologique.</p>
+                
+                <div class="img-placeholder">
+                    <img src="data:image/jpeg;base64,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1DJ34ZwLGkEEFoIIuCPAr5RxZWxtX9TPe4D/AG1P9KNqryWEAQGHGy6UVepHxX1NZ9l+DIulUDgC0gg7EGQfaF9jPnFrbnpAEBWOK3tLmQQSA4EAgkXG46Ktx28fMzZkEoJgIAgCAt3DVQckNBEgkkSJEuMSOitsJ7JeZmztcllKMBAVfjB4JpgEEjVIBEidMSOiqeJ/8fP7HoOCX9fy+5XVVl6EAQBAXDhV7eTp1DVqcSJEgTEwr3h/sfNnluL39IfgiaU0qwgCArvH7iMDVgkSaY9hqsBC41+wyXgvbLz+h81w/qhWGD9jE7Yj2jNiknEIAgBWHsZW5cP0WH0dcdNbTHiWmT8B7lR4Xss7cR7UfAvClFaVn9Ip/uT/ABewHxGsWXDEdgmYH2y8yf4LP9wwv4DR7hC+XcV/3tX9TPb4f2UfAmlAOwQBAc+YmKVQ91N/5SuuHV6sF719TWfZfgfPv0VE/Z6o6CqIHdNNsr61h9n4niOIduPgXZSCvCA+Q8Ouk1SbkkEnvJLpJVLVLPiC0h5/YmlxKwIAgCA5uG3RmgjqHA+I5Ux7wPcp2E3XmWbX/wAa/Op9NVkVgCA+QZU6atcncuJJ7zqddUOL+7PX4La3uRKqGTggCAIDnyJ0ZpSi24PiOS8wfh7laYHp5lNxPWE/L7H1JWx5sIAgIrinLXYnDVKLCA46SJ2lr2ugnpMQudSOaLSO+HqKnUUmfM8XllXDEU6rYdE2uCDex6qdhFlpJP3/AFJFWcak3KOxohSTnYQgsIQWNuHwzqjgxgJc4wAPH+C1m7RZlOzuy+8DZHVwlOpztOp7gQGmYDRFz7SqehTcFqMZXjVksvQsy7kMh+LcrfisM6lTLdUtcJsDpcDE9Fzqwco2RIw1VU6ik9iV4VwrqOEo0nxrYzS6DMEE9V8x43RnTxtTMrXd/HRHtcDWhVoRcWSsqqJglAJQHNmjC6jVa2JdTe0T3lpA+JUvAUp1cTTjBX9ZfU44irGnSlKT0syp8D5JUwlF7aunU+pqhpmAGgCT32X1ajBwWp4fF1o1ZJx6Isa7EQID5vh+HK2ELzUDSwkBrmmZibkfd3VViKUoq5NxeIhVjGxtUQhBAEAhAdfDvDlZuMGKeGtpwSL9oyzSBp6dSrPDUpK0mTZYiPo6prf/ADcvCmkIID5s7hyvhn1HvDSxzjpc0zYkkEiLW+Kp8bRlFX6XPTcOxVObyp62MKtLcIAgCA7uH+G632tmKcGtpgFwk9oywsA09N58lc4OjJRjJnneI4qm3OEdXp4dC+KxKQIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgCAIAgP/2Q==">
+                </div>
+                
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Calculez l'impact du recyclage :</p>
+                    <p>Si une tonne de papier recyclé permet d'épargner 17 arbres et d'économiser $E = 4000$ kWh d'énergie et $E_w = 30 000$ litres d'eau, quelle serait l'économie réalisée si une ville de 50 000 habitants recycle 5 kg de papier par personne?</p>
+                    <button class="btn btn-solution" onclick="$('#solution3').toggle()">Voir la correction</button>
+                    <div id="solution3" class="solution">
+                        <p><strong>Correction :</strong></p>
+                        <p>Masse totale de papier recyclé : $m = 50 000 \times 5 = 250 000$ kg = 250 tonnes</p>
+                        <p>Arbres épargnés : $A = 250 \times 17 = 4 250$ arbres</p>
+                        <p>Énergie économisée : $E_t = 250 \times 4000 = 1 000 000$ kWh</p>
+                        <p>Eau économisée : $E_{w_t} = 250 \times 30 000 = 7 500 000$ litres</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Tâche finale -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>4. Tâche finale : Création d'une affiche de sensibilisation</h3>
+            </div>
+            <div class="card-body">
+                <p>Pour conclure cette séquence, vous devez produire une affiche de sensibilisation contre une forme de pollution de votre choix.</p>
+                <p><strong>Critères d'évaluation :</strong></p>
+                <ul>
+                    <li>Identification claire du type de pollution</li>
+                    <li>Description des impacts sur l'environnement et la santé</li>
+                    <li>Proposition de solutions concrètes</li>
+                    <li>Message percutant et visuellement attractif</li>
+                </ul>
+                
+                <div class="img-placeholder">
+                    [Image: Exemple d'affiche de sensibilisation - Rechercher: "environmental awareness poster"]
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer text-center">
+        <div class="container">
+            <p>© 2023 - Séquence pédagogique sur la pollution et la protection de l'environnement</p>
+        </div>
+    </div>
+
+    <script>
+        // Graphique sur la perte de biodiversité
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('biodiversityChart').getContext('2d');
+            const biodiversityChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1970', '1980', '1990', '2000', '2010', '2020'],
+                    datasets: [{
+                        label: 'Indice planète vivante (1970 = 100%)',
+                        data: [100, 85, 70, 60, 45, 35],
+                        backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                        borderColor: 'rgba(76, 175, 80, 1)',
+                        borderWidth: 2,
+                        pointRadius: 5,
+                        pointBackgroundColor: 'rgba(76, 175, 80, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Indice de biodiversité (%)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Années'
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Diminution de la biodiversité mondiale depuis 1970'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Biodiversité: ${context.parsed.y}% (par rapport à 1970)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

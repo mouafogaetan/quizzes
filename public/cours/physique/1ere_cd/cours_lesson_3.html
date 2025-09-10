@@ -3,241 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modélisation Scientifique - Séquence 3</title>
+    <title>Modélisation Scientifique - Condensé</title>
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- MathJax Configuration -->
     <script>
         window.MathJax = {
             tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\\)']]
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
             }
         };
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
-        .header-section {
-            background-color: #0078D7;
-            color: white;
-            padding: 20px 0;
-            margin-bottom: 30px;
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        .problem-section, .activity-section, .summary-section, .exercise-section {
-            padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 5px;
-        }
-        .problem-section {
+        .exercise {
             background-color: #f8f9fa;
-            border-left: 5px solid #0078D7;
-        }
-        .activity-section {
-            background-color: #e9ecef;
-        }
-        .summary-section {
-            background-color: #d1ecf1;
-            border-left: 5px solid #0c5460;
-        }
-        .exercise-section {
-            background-color: #d4edda;
-            border-left: 5px solid #155724;
-        }
-        .solution-section {
-            display: none;
-            background-color: #fff3cd;
-            border-left: 5px solid #856404;
             padding: 15px;
-            margin-top: 20px;
-        }
-        .context-img {
-            width: 100%;
             border-radius: 5px;
-            margin: 10px 0;
+            margin-bottom: 15px;
         }
-        .objective-list {
-            list-style-type: none;
-            padding-left: 0;
+        .solution {
+            display: none;
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
         }
-        .objective-list li {
-            padding: 5px 0;
-            padding-left: 30px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16"><path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/><path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z"/></svg>') no-repeat left center;
-            background-size: 20px;
+        .canvas-container {
+            width: 100%;
+            height: 250px;
+            margin: 15px 0;
+        }
+        .nav-link {
+            color: #0d6efd;
         }
     </style>
 </head>
 <body>
-    <div class="header-section text-center">
-        <div class="container">
-            <h1 class="display-4">Séquence 3 : Modélisation scientifique</h1>
-            <p class="lead">Traduire les phénomènes réels par des modèles mathématiques</p>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Section Objectifs -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <h2 class="text-primary">Objectifs d'apprentissage</h2>
-                <ul class="objective-list">
-                    <li>Traduire un phénomène réel par un modèle (loi d'Ohm, loi des gaz parfaits…)</li>
-                    <li>Relier mesures expérimentales et équations mathématiques</li>
-                    <li>Développer rigueur, curiosité et esprit scientifique</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Situation Problème -->
-        <div class="problem-section">
-            <h2>Situation Problème</h2>
-            <p>À Bafoussam, un groupe d'étudiants en génie électrique souhaite installer un système d'éclairage solaire pour une salle de classe dans un village éloigné. Ils disposent de panneaux solaires qui délivrent une tension de 24V, et veulent utiliser des lampes LED de 12V/6W.</p>
-            <p>Comment peuvent-ils déterminer la valeur de la résistance nécessaire pour abaisser la tension de 24V à 12V afin d'alimenter correctement les lampes sans les endommager?</p>
-            <img src="data:image/jpeg;base64,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ZFSxgLWuIjpm7zMCRu5JGg70ZWtN7X61sxI0u5puL9qgTuh/CTfwMmvLfzfzKesbYADgBZByiIghvStg1RV0W7piwFsjZH5nFt2MDjYEA63sfMtesWonszRS6yRvkEpD87TLmy6HhwDBf8FbbOFxY81TEHRRUTVLWVG5jpoj90jc5809s2pzaMLr3dpYHkbC1gimHbK4pNdzBC4yOL3PdK3rOccxdwvrfsVix7L1/wD0WajL4XSl12gPcWiIFrnRg5eJIdbS3W4qfjCIdLMtYAaFw0GgvY68Oa9rGACwFgE0aoYthskLnwznNK14Mha/eNyljDHrzIDnfKELLYLs3iU7RJEInbxrTmdIwdTK0MFraWaGtsBpZTfFujCqqKxzbQR0plfKZw5zpnB73Pyhp6rXBpbH2WYDc6g2jTYDAxjGBmjGhoNyCQO0i11dEK2Q2QqxQVVHVTMYJxZpiJkMea+fxgBrZug7+1U9tDgYoZH05kjleA173ZC3I/K/wQuTci7uHE27Atpoow0WaLBQDaTo0NZVmU1bo6eRxfJCyNoc5xEQeN4Dex3MZ1BtrbjpNFWbObCzVEbZW1O6ElyM0bibNJZoc4uLNFu6ytro22PNAZHmpdMZGhp8HkbcG4PjOJI1581L6LDYYYmQRxtbGwWa21wB5+J7+K9bRbQJo5RcXXzK+wJUH2ixPs93v4vT/uuUxO0ZVERFEREBERAREQEREBERAREQEREHC5REBERAREQEREBEXBJ5IOVhNsZslI93ez1uaFmgvFjU+7gkfla/K0nK7gQOIOh5Izz+2qt/6h3epv1Ivj2X/oQ/ou+tF0eZ2+VxoiLm9UREQEREBERAREQEREBERAREQEREBERAREQEREHw4HkR6L/Slndo9B+tfaIOtodfUi3c0j6UqIQ9rmO4OBafIRZdiIMD/ZSH30n6Q+pFnkV1z9rh+hERR0EREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERB//Z" alt="Système d'éclairage solaire" class="context-img">
-            <p class="mt-2"><small>Image: Système d'éclairage solaire (Source: Unsplash)</small></p>
-        </div>
-
-        <!-- Activités d'apprentissage -->
-        <div class="activity-section">
-            <h2>Activités d'Apprentissage</h2>
-            
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h3>Activité 1: Introduction à la modélisation</h3>
-                </div>
-                <div class="card-body">
-                    <p>La modélisation scientifique consiste à représenter un phénomène réel à l'aide d'équations mathématiques. Au Cameroun, cette approche est utilisée dans divers domaines:</p>
-                    <ul>
-                        <li>Électrification rurale (calcul de résistances, puissances)</li>
-                        <li>Météorologie (prévisions basées sur des modèles)</li>
-                        <li>Agriculture (optimisation des rendements)</li>
-                    </ul>
-                    <img src="https://images.unsplash.com/photo-1627556704307-313ab3ba4d75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Modélisation scientifique" class="context-img">
-                    <p class="mt-2"><small>Image: Modélisation en laboratoire (Source: Unsplash)</small></p>
-                </div>
-            </div>
-            
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h3>Activité 2: La loi d'Ohm</h3>
-                </div>
-                <div class="card-body">
-                    <p>La loi d'Ohm établit une relation entre la tension $U$ (en volts), l'intensité $I$ (en ampères) et la résistance $R$ (en ohms):</p>
-                    <p class="text-center">$U = R \times I$</p>
-                    <p>Cette loi permet de modéliser le comportement des circuits électriques.</p>
-                    <p><strong>Exemple camerounais:</strong> Calcul de la résistance nécessaire pour protéger une lampe torche fabriquée localement.</p>
-                    <div class="text-center">
-                        <img src="data:image/png;base64,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" alt="Circuit électrique" class="context-img" style="max-width: 400px;">
-                        <p class="mt-2"><small>Image: Circuit électrique simple (Source: Unsplash)</small></p>
+    <div class="container my-4">
+        <header class="text-center mb-5">
+            <h1 class="display-4">Modélisation Scientifique</h1>
+            <p class="lead">Condensé des notions essentielles - Séquence 3</p>
+        </header>
+        
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sticky-top" style="top: 20px;">
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action" href="#introduction">Introduction</a>
+                        <a class="list-group-item list-group-item-action" href="#loi-ohm">Loi d'Ohm</a>
+                        <a class="list-group-item list-group-item-action" href="#gaz-parfaits">Loi des gaz parfaits</a>
+                        <a class="list-group-item list-group-item-action" href="#modelisation">Processus de modélisation</a>
+                        <a class="list-group-item list-group-item-action" href="#exercices">Exercices complémentaires</a>
                     </div>
                 </div>
             </div>
             
-            <div class="card mb-3">
-                <div class="card-header">
-                    <h3>Activité 3: La loi des gaz parfaits</h3>
-                </div>
-                <div class="card-body">
-                    <p>La loi des gaz parfaits relie la pression $P$, le volume $V$, la température $T$ et la quantité de matière $n$:</p>
-                    <p class="text-center">$P \times V = n \times R \times T$</p>
-                    <p>où $R$ est la constante des gaz parfaits ($R = 8,314 J·mol^{-1}·K^{-1}$).</p>
-                    <p><strong>Application locale:</strong> Modélisation du comportement des gaz dans les cuisinières à gaz utilisées à Douala.</p>
-                    <div class="text-center">
-                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUSEhIWFhUVFhYWFxcXFxYXFRcVFRcWFxcXFRgZHyggGBolHRUVITEhJSktLi4uFx8zODMsNygtLisBCgoKDg0OGhAQGzImICUtLS03LS0tLS0rLS0tLSsrLS0vNS0tKystLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAAAgMEBQYHAf/EAEkQAAEDAQQECAkKBgEEAwAAAAEAAhEDBBIhMQUGQVETIlJhcYGR0RYyU5KhorHS4QcUFUJDVGNygsEXIzNi4vCTssLT8SQ0g//EABkBAQEBAQEBAAAAAAAAAAAAAAABAgMEBf/EACsRAAICAQMDAgYCAwAAAAAAAAABAhEDEhNRBCFBFDFSYYGRsfAyQiJiof/aAAwDAQACEQMRAD8A7ihCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQAhZlutoP2Pr/4pXhX+D6/+KA0iFm/CseR9f/FHhWPI+v8A4oDSIWb8Kh5L1/8AFJfrZH2Pr/4oDTIWbs+tYe1ruC8YA+NvE8lOO1mA+y9b4IDQIWfGsv4XrfBB1l/C9b4ISzQIWf8ACb8L1vgjwm/C9b4ILNAhZ/wmHkvW+CPCYeS9b4K0LNAhZ/wmHk/W+C8Os48l63wShZoULO+FA8l63wUe3a5CnTc/gZuiYvxPXdShZqkLL2LXAVKbX8DF5oMX5z/SnvCkeS9f4JQs0SFnfCj8L1/gjwn/AAvX+Cgs0SFnvCf8L1vglN1kn7L1vglCy/QqPwh/D9b4I8IPw/W+CUUvEKk8IPw/W+CPCD8P1vggLtCo/CEeT9b4IQGLpuTsqHSenw5Ug5KJTcr2VQLlePOC8lLbRLglAz+k9YnWVrAymKkuqtJlwulpaQIu8l4VX4dVfuw853cl6dt1G1Po0mVCy7eDppEcY3QSbxbsaOdRhq/S22tpxjBjMxifrKAe8O6+yzt7XpB16tHkGdd/vUaloizuLmi0ulkTxGDB2RE5jA4pTtC2cGPnD5x8kPFEn6uwIKFnXe1eSpdjveSTrta+RS813vpo6Ms2fD1Dg0+NSyeYaf6e1efRtm8tW+sPHpZt8b7LYljSOHXS2cml5p95JOuNt/D80d6QLDZvKVjgD/Up5OmPsuYr35pZcBNTHL+aNmeTBvSxR6dbradtPzW96SdaLcfrtH6aaULPZM+PkHf1XZHLIJ1tmseIIdh+JV3A78c1bFEY6xW8/ajzaXcm6+lbc8FrqwIOYinB7Ap7rPYRm1xgF2D65y2YOz5k66x6PPFuPGIF4Oq7RenjOIu7CUsFbS0hbgA0V4AEAAtgAdSV9IW37yfO7grim7RIHGokkNJILzMtwgzVGJzGxOfOtDj7BmYElzIgiSf6uQyKWKKQ2y2HO1Hzn/sEcPajnaz59TuVs/SuixUaxtkpFpaS5xc3A7AMSD2qT9KaKGVms5629f1Sgol6iU6jnVi+sKsNaYL3GBxiSASNwyWoB5o7f3XPqWn6dKs99mNnotcLsGmSQ0xeH8sAuEtnGdq3GjNMWa0NijUa54EuADmnnN12MKglgr28myUAqAdDkXkiV4SgF3kJuUIDP0HqU1yqbFWkKwplQD95KBSAnrNRLjzbVQKpMkFxwaMSehc/0nrZUtEBpqUWQP6b4OWIJuzImMMMFZ60awirestK8GhxY4tjEhxbGOQJBjfM9DermjY49OkHXDAvOjoI4pwjLpJ2q2Qzj6NRwki1OJ2uc53tYrGwavV6kXqj6ZdgwPdBcRkIAw61o7aytBLrMZzlr6bmxt8YtOU7FSW7SApOugOugGONBBcCOLBwjmwOOOJRNL3I7ZU6U1br0Wuq13OYb10A1RfqAYS26MRzTkqfrqee5aKjbBVaKZcA6ZDqlRzW4bDxXATjjIXlu0RUZiaLQDkRUvNJ3ghsLc4drj7GYy8S9yhY7nqSYAh8YkjPBT7PUfEwSDgDiMhlgZ2jpRwLccMWwI5yNnNnirWlTDQxpGAAJ68fZdXI6ESxWMkS/DcO9ThZm7AE5QN4hhmcgWgEHnjM74zEp5liLnhgqMaTsqngSDuN/D0oCG6jByHoThsjTm0HqS69kLHFpLJHJcHDqLZlWD9HXQCX3uKHG4DEHMXnQQ79JQFHW0WTjTHSMMOcFIrWWq2mb0BhiRhiN2GyY9CsrO1znlwJDARhIl10yMBvIxOwTGZmTWoXgRvBHXsVIZShd8mOi6w+1qt7JY2OYXCAW4uaaTMG7wYgnmwTthryboqBl0NkkAlxMyADswHapNupm6eDfeLiLwFM8bLaBzKp0GhDLDZiARck5kONJ8bZDnEeqpFl0ZZ4vm0OAkgB91wJGwObn1BVjbfVpYFoPFIPFaCGnAjLDrEq00VaKb3BrZF4DDEBrwZab044kA4ZEranyRx4H6NirGblSAMB0bMyqzSXzugQRVzyLQBJ3GBI2K+a0l14uqMdk4MpEjAnCXNO/YAnLSL7boa8zymcXp4zVGipllovSja9JtRpzADt4cBiD/vxmB6wDrdWs1UB0NbfbfAY3FhIk8UYmP8Ad20ZWGBBBacWuBkQcR1QR2zkVgpN4ReGoo5rDevDWG8KAkXzvQovDDeEJYMto7TFcCOCpkj8NqvKWmK3kqX/ABtTNCyBqmMC89Pk6alwP2XSFoe4NDKQ3ng24DeoGsGs1NtJzaFRhe4RMQ3MgkYQQIOWeAyJIkaY0uyx0i44vdkBvxu+wx0E4xB53ofRz6haDi9xDWAYgQZgTMMbt58NhK6wVeTLdljoGwUi+KryRN55uVajs5xutJlx27B0lbttmoVRfptdhxcqtImANhuk55p2hoHgWtNCoGVYh7i28KhOJvYg586inS1oplx4WlUa0uY+GmnBwvXXFxxbzDHLo2mjLK/TFGnSZefUNJs+NLndXGnHFVVs+a3GvwcNhaHOOUiYkt60WnWMufwVZt+k4XC0Np3YGRgGSRv29MKqqtp8KQ1xFMjizg6P7sYgERz8y6ygtOqJzU3q0s9YLMMbpHSyqf8AtTda0UifG7WuHpIwVjRvxBdiMNhGIBHtUDSVNz2PYXeM0iYykZrmdCOyzg1ANpIx7+1p61Nqukk7Jw6NnoTGjzJc87BA68B1gEeangPQCfNBMehQoh9OVN0VotlUvNS84MZMXjice4qPUAcZptJECQBMQInDYc52TBxVnoSrFntD/wC1w6ww+8u/TxUp9/n+Dh1Emodvl+TOUmNBwzVw20k07jmMI5RBLvSY9Cq21juHYplmvuEtaSNp+qOlxwHWVxZ2JlEKVOE7lEs1omGR9YyduRvH8ohsbze2QpbWSFCEKx1hTdUBBJDwGgRJL/FAlaGzWiqR/wDWf11KPvLPVLJerMkkS29xTBLqYd+0rQ2TRzCMTUPTUf8AsUso7aTVc0//ABowzNSmY59qY0dbqTqV17b2xzQGuEZS8DCFItmjg2k80WceImSXxtuyc4lZHSWkgC002GQIcHOuua8SC5s4yQd4K2nEz3N8QymA11N1NmADrv8ALA2ZeKOkBP2iyOEXbm2bziN0RAPOsNonWBzXPL2VeCe0tJm8WgzcxccSCduEFw2rUaFslB7nD5uwsABY8iQ5pG2duaS5RY8MrdO2YPusLGvcA4/y6kuAGwy3fkOc71Q2TTgoDghTN2cJfegl2Q4ogYuO3M88dKdZaTGm5TYyc7rQPYufa16PDiXCJOY3nf1+3pWLs2y2tFLHAY+1NOsz+R7O9U2rulHPmjUxLQLp3tJawT1lo6+YrWWC1XuI7PYd/wAVwniTdmozaKr5tU5B9HehaS4hY2ka3GQX0wMTCdsAaXS7DozA29apdarW9hY1pzDj2FoBjt7Vnjp2u3J8dTe5d4ryc2GsdlrmsPnLajbhfxgx76T5e4tfTewEB1y42DEXW9AstS7fTp1S6oCZbDA2nVNxrdg4u6celVo1ptYyrEdTe5e+GFt+8HzafurRDf8AhRZj9d3/ABVvdXPdbqbGgvs9VzmOqX3MeyowNJxvAvAacgN+O1e+GNu+8nzafuqLbtZLVWYadWsXMObS1kHbsCArTZS+XU2kskxF4+zBXbLYH0uDrUqjXA4PaxznGN8ie/pUCyactFJtynVLWicAG7epD9YLUc6zuxvcusMrhdeTnPGpVfgtvpKk1obDxH4VX3VFq2g1IDGPgmHFzSwBu08eJJGAhVjtL1znUd2DuTbtJVeWfR3LnZst6FEt8bM4npJkpRJGIVF8+qbXlefO3csqFL+y1hTJ4pIPJcWwd8fsrn5275lUqkXy52AeAZlzW8YZEYFYgWo8v0rS6RtN2wUhfxJbt33nL19N21y4izy9T30L/ZECz21wcHCjSaZmQxojowwVxbNJOqC8914nCGkAR1knquhZIWn+/wBKULT/AHeleXseo0diDRzE5q5sjZWGFp5z6U422c59KloUzcWjRVV7WmmWtexzi0ukiDscANsQeYlOUDbWiDZWO52123eq80FYllu/Mf0u7k8y2/2v8x/cpqjyKZtuHtXkKY6bQ39mql0noivXeXuFFpIg/wA8nLopqobbf7anmP7kv56eTU81ya48l0vg90loy0U2Bl6805tp1XOyxxHBhbnQemK9CjTpBtnLGta2HPe4mAASeIMcMVhTbTyKnmoba3eTf2DvTcjyNL4N3pPTVV/isos3xwhn2LO22m9/jPZ5ro/6h7VUG0v8k/1e9Hzh/kndrO9NyHKGmXBPsWjmsdfL5IN6BDW3gQQSCSTBAIkxOKsOEG8ecB+6oeGqeSd2s716K1TyZ85qm7DkuiXBpvpKpyx5zO9eLOcK/wAn64QpuY+UNEuDWax2Nj6cvYHXTIkYicDHoWXNko+Tb2Lo1psl9jm7wRsz2LmH0g6bpYZmInEQYxwXizxldo9GFqqZI+bUeQ3zR3KJUAH2dPZI4Ib8cTgnbXai1riWEgAndlj+yyds0m+bxeR+UmOiAs4oTn5NTlGPg11O4RIps6LjO5M1bwOFKnGz+Uz2ys5o21Oql4JcSBIAAg7yRvUOvpBxAJcY2CSSObNbjhlbVmZTjVm6us2MZ5jO5R7UHDxWNj8rc+sLP6A0q5z+DJMRIO3BRtJ6Qc97g6QGmIM4RAJwwz2rEcM9els1LJHTZr6DQQJY2duDV7UDBiQ0DqWQ0LpRwqNaCbrsCD7QtPb5FNxaLxEYZyJE5c0rlkxuMqbLGSasqqOmTMGkDuLRznBw2HrU9mkMjwboifFxmQIM5HH4qJYK7zTqO4IFzfFgGHYbN8J3R9uqvbVmni3xMCA4wcMc4w7VZx9+3t8wmWVGreaHXSJAMEYiRMHnSak4xnBjmKg6KtlV7nCozigSDBGJPi4hNayWu7TaGggucbxnMRlzbV36eo68bfdrt9zlmuWiSXZMkPqXTJdgDjxtkf72JmjpNpMQ4enoy7VlzbLni5nq383Mrq22t3AB4aBeAkjA5gH0fusZMGlpcm45bTLBlpExfEyMbzt+Iun/AHFTDV51hfnWBMc3Wruz22obPe2gOExjgDB9CZen01TJDJZZVbUA4y8dF8iMBsHR6VMp1cBiDhnvWEp2oziMhOHplWWiLTVcx4bsOHSdnMrk6eo3Yhlt0aG12oAiXsHMerGOpSaNYlssLXSccYAG2M8eZYE2x08aZkzvkK30NXeajmtJAumdvGBgbVqXT6Y3ZFluXsaW22sNGJaOnGYMxG1IstpY+bpExkARux9AWP0naagqOvYnCJ3bI3J2x2h5qU7sySOyYPoBVWD/AAuyPJ3o11S2XRxiBG0qPY7W1xAkYRBukTGWJ2qg02ajaskkggxMQMcYjmu9qj2W0mDgCZwjAydy1DCnG7JLI06N40ylYKJZ2PAEkEwJUukxxIEZkDPevJXc9Fi7q8Ww+gmbvahdtiZz3ol8Quf6zWAMtD8DDoeI/uxPrSuhgLPa62MGi6vJmi1ziOU3MjmPxXfLByj2OOOVPuYd9FpwI5sQsTatGVHVTTa04OIBIIF2TiTGSvKusbR9m/tYmXazDknzmLhCOWF0jtJwl5JGidDcDiTJO2NvMqTTWi38KW02OLSQWw0wC6JE7MQp51qbyfWakHWpvJ9YdyR3lK6/AlttVZL0TobgcTi45kbOYJjWDRhcQ+m1xJwcAM8oPo9ihVdaHTxQ0dZ91LZra7a1vnn3FFDMpaqDeOqLDQWguDio/wAcjLkg7OcrQ9RWROt7uQ3/AJD7iR4Wu5A/5D7ixPFmm7a/BqM8cVSZrp5j6EH8qyg1vPIb57vdSXa3nkDtPcufpsvBrdhyas9A7VDttjFRt1w5wQcQd4WdOtzuQO09ySdbX8lvpK0umyp2kR5YMLJoGoahFQQxs4nJ0HACMYMkrRVLOCy4Q0giMj6Fl360v3N7He8o1TWGqTmB1H3l2lizTds5qeOK7E4avP4W6R/Lmb0jERMRMzOC0lKhdaG8WAIiMIWRdrFWDfqGY+qe9MHWKtuZ5p71cmLNOrokZwj7FppDV514cERBzkxB5sMleWSyNptDWxA5ljjrDW/s834rzwhrf2eb8VZYc0kkwp407RoNL6Cvm/TgOnEZAzt5ip2hdH8FTAMXji79sehZRum7QcgD0MlejTNp3DzEeHM46W0FOCdmr0nollYHIOjB07thG5MaC0Q6kXOqXSTAbdMwMZ2Dm7Fnfpe1b2DpDB7SgaZtPLYPMPslFhzKOm1Q1wuza2mx06gh4np9o5+dVtg0AadUOvAsaSRytsThH/pULNLV9temP0z7GJ1ulquy0T+Wk2PTCRw5UqTQc4PvRugVa6t0L9oZIwbLz+nL0wucWXSlYn+qei4wSur/ACf1eEs5eaYa68WXhMvAgzjlnGGGCsOnaabJLMmqRrZQm0L1nnHgU3WYHtLXCWuBaRvBEEdhSkQsmjg2lNX3sq1KUE3HubI2gZHrEHrVJpDQlZsXabztMCfYun61udSqVacXi+XiJBIe4uAEHHd1KsZptlKi14YSWtaY431omDe/ulcpZZL2R9GPSYnG23/G/H29jm7dE1ycKFU//m/uTv0BaPIVf+Oof2W8OvTB9g70f+RKGuAdEUs/95Sxu5/hPJox8mDbq/XP2VX/AI3dykU9VbScrPVP6SFtjrE/ZTZ1pI1itQ8mN2A7k15/CQ04uTIN1PtX3ep2fFOs1LtZysz+1vetf4UWiMQ0neMP2Xg1qrjY3t/xWHPqfEUXTh5Mp4D2z7q/zme8k+Blq+7nz2e8tcdba52Dzv8AFRK2kqtQy5rjzXjHoail1XlL9+orDyzO09TrS7KhP62e8n26hWw/YDrez3lb069VpLm32nmLh7IUj6YtI+sf1Eqt9T4r9+oSw8szztQ7WPsW+e3vS6eoFrP2Q89vepB13tHJHaV54dWjkt7Xd6mrquF+/UVh5Zj7VTg3YydELzg3EkNAw5m/ulWp8kHaXT2q71Zs9KpaG06rixjwZcIkFoJGeC9rlpVs86VukUzqdVu4dAb+wSQyryvT3LqQ1d0Zka9R/NeYPYAUtuhNFN+ze7pqP/YrxvroeE/sehdNLlHLOBqHN57SV58zO13+9q6yKei25WZn63k+0Lw6U0azxbNZQehpKerv2ixscs5Q2xDlexSKWjgcg49HwC6gdbrI3xadIdDJ9gKadrvS2NZ1Uh+7VfUZH/Rk2o/EYGhoN5yo1D+l5/ZT7HqzahUaRZnOB2EDr8YrWO192Nv9QAHtUSvrg55ktc47Jdl1YrSyZn/X9+40Y/iJlLVKsRHzctkbmiPSt3qzYxSs1OmM2gh357xv+tKwmg9L1bVXZRi6HEy4EEgAEk+KMcI6SF0bRtjFJlwOc7FxLnEFxLiSZiN66QeR/wA0jnNQ/qSrqF6hbOY0Sf8AT8F5fPN2/BeOKTKhop9Y7HedTtGANI8YnK6cieYOjqJWa0jQoVBdc+k2JAIcMGk+KRkWiTHtW8cAQQRIIIIORBzBC43rjZHULVUphzgwm+wSYuPxAHMDLf0qONs7Qy0lfgoLfZ+De5syAcCMiNhCLK7CNxTVQk5melKszoPSuiOMmr7F3Tdkfili0mdkflb3KNZncXoT7KWEuMA9bj0D9yhkefaTEg5bgB7FGba6jsie0pTpJDWNxMwJ3Y4k7U7SZVZJ4E47QJyk7Otd4YJzVpf9RzlljF0x2gx7uY74E+dmmzOMnIrw2hxzBB3EEYHI9CReXKUXF0zaaatC2Jy6mJXvDHmWSmWriHEc59qbKetXju/M72lNKgYq5t/MFLYSDIMHeFFrZt/MFKQDgrP5Tu0rwknPHpSQlBSi2ASpU6wWRpaXux410CSBMAkujdeGHM7djYWqx0sYLSA0kua2Lu7EZ54b4iJMq0VRdWUEpV6F5CcaEMjrU8wJtoT9MIDefJjo6TVrHYBTB5zxndkN7V0OnO/EYHD49fWqTUqx8FZKQIxeOEPS/EerdHUrzbO/A/t3dYWGUXB5uz4oXsFeoCEXJF5epJUKe3li/lN0depMrgY0zcd+R+U9DoH6ltIUXSVkbWpPpOye0t6JGB6jB6lUKODvCbBgypdqoFjnNcIc0lpHO0wfSozgtmSxs7sY5X/tTFU0HT1Yf71Qnr53lAT3AbQkCk3ZI6CoZed5Xl7nK3HJOP8AF0ZlCMvdFj2npMn0olV1/nKL3OVltt2ypJdkWSCFXXuleqFK22Dju6SmCFZM0dUqPNxu3M5fHoGKXatA1mAmA+BLrhlzRIElhAcRjmAY2wsucU6stMo6oxb+YKUmKw4zOlSYWiHgSgEAJQCAsqVqbSpkUyHOfnIluEjxXDpjpRpS2B90A4CZAECc5gYHM49KrgEoBYUKdnaWZtaaXg9AS2hACcaFs4imhWOh7GatanSH13tb0AnE9Qk9SgsC2fyaWK9aHVSMKTDH5n8Uei+jB06mwAQMAMB0DJOXUkJbVzKIuO5foCE8hClcV5C8leFyFPXFNOK8L02SgOa/KFYODtHCDxarb36mwHf9p/Usc60M3wuv62aMZXpBjiQQbwIiZgiMdnNzBc6q6lGf6gjnOPsXN9RCLps0sUmrRQttA2OHalcMeV6VbO1M/FHnDuSDqb+K3zm9yepx8jZnwVnCO3lF87z2qfW1TuieEBjc5qZs2rxd9pH6mqrqMdXY2ZEcPO89q9vnee1T/BU+V9dqPBh3lT5zVPU4+Rsz4IF87z2pdK0PaQ5riCMv9KmeDr/Kntag6Ad5U9rEfU4+RszJ+jdOtlwrYF2Bc0lvjHjE3QSD0Z+2w+lqZpkUuMacvvOMOIkjEuw2gbZkBZ12g3eUPa1IdoV/lD2tXB7Ld2bSmisrDjM6SpIaipo9zSCSTBzkYJwBe2M1JWjg4te4i6lAJQalii7knsKraFDaUAnm2N5+r6QPaU4LBV5I85nesPJBeUXTLgYASwnxoyscrg6Xt70+3VyocXVqI6ajcOyVnfhya25cEWk8HJdY+T2xcHZQ851XF36RxW+wn9S55o3QVFpJfaqZABJDH8YxyZbEyuw2Si1jGMZ4jWhregCB6EWWMnSDxtK2TQlBNtclArRkeQm0ICR4O1eUztd3JB1brcpna7uWqQumlEsyZ1Yrctna7uXngvW5bO13ctahNCFnNtadQrXaGsbSq0Ww6TeL4OEAYNO8rOH5Ird5ez+dV9xdsQuexA3uSOJD5ILd5ez+dV9xOD5JLd5az9tX3F2lCnp8fA3ZHFj8kdu8tZ/Oq+4k/wAIrd5azdtX3F2tCenx8DdkcT/hDbvL2ftq+4vP4Q2/y9n86r7i7ahPT4+BuyOIn5ILf5ezdtX3Ek/I/pD7xZu2p/413BCvp8fA3ZHDT8jukPvFm7avuI/g7pD7xZu2r7i7khXYhwNyRww/I5pD7xZu2r7iB8jekPvFm7anuLuaE2YcE3JHDh8j2kPvFm7avuI/g/pH7xZu2r7i7ihNiHA3JHD/AOEGkPvFm7avuL3+EGkPvFm7anuLt6FNjHwXckcTZ8kdvH29m7anuJZ+SW3+Ws3bV9xdpQmxDgbkjio+SS3eWs2eMGr7i32jNWq7KTGPfTLmtDSQXQbuE4jdC1iFpYop2RzbVGeboKpym+nuSvoSpym9p7lfoWtKM2UP0LU5Te09yFfITShYIQhaICEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEAIQhACEIQAhCEB//9k=" alt="Cuisson au gaz" class="context-img" style="max-width: 400px;">
-                        <p class="mt-2"><small>Image: Cuisinière à gaz (Source: Unsplash)</small></p>
+            <div class="col-md-9">
+                <!-- Introduction -->
+                <section id="introduction" class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Introduction à la modélisation scientifique</h2>
+                        <p>La modélisation scientifique consiste à représenter un phénomène réel à l'aide d'équations mathématiques. Cette approche permet de:</p>
+                        <ul>
+                            <li>Comprendre les mécanismes sous-jacents</li>
+                            <li>Prédire le comportement du système</li>
+                            <li>Simuler des situations difficiles à reproduire</li>
+                        </ul>
+                        <p>Un modèle n'est jamais une représentation parfaite de la réalité, mais une simplification qui capture l'essentiel du phénomène étudié.</p>
                     </div>
-                </div>
+                </section>
+                
+                <!-- Loi d'Ohm -->
+                <section id="loi-ohm" class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Loi d'Ohm</h2>
+                        <p>La loi d'Ohm établit une relation entre la tension $U$ aux bornes d'un conducteur ohmique, l'intensité $I$ du courant qui le traverse et sa résistance $R$ :</p>
+                        <p class="text-center">$U = R \times I$</p>
+                        
+                        <div class="canvas-container">
+                            <canvas id="ohmChart"></canvas>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>Exercice d'application</h4>
+                            <p>Un radiateur électrique de résistance $R = 50\ \Omega$ est branché sur une prise de tension $U = 230\ V$.</p>
+                            <p>Calculez l'intensité du courant qui traverse le radiateur.</p>
+                            <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution-ohm')">Voir la solution</button>
+                            <div id="solution-ohm" class="solution">
+                                <p>D'après la loi d'Ohm : $U = R \times I$</p>
+                                <p>Donc : $I = \frac{U}{R} = \frac{230}{50} = 4.6\ A$</p>
+                                <p>L'intensité du courant est de 4,6 A.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Loi des gaz parfaits -->
+                <section id="gaz-parfaits" class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Loi des gaz parfaits</h2>
+                        <p>La loi des gaz parfaits relie la pression $P$, le volume $V$, la température $T$ et la quantité de matière $n$ d'un gaz :</p>
+                        <p class="text-center">$P \times V = n \times R \times T$</p>
+                        <p>Où $R$ est la constante des gaz parfaits ($R = 8,314\ J·mol^{-1}·K^{-1}$).</p>
+                        
+                        <div class="canvas-container">
+                            <canvas id="gazChart"></canvas>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>Exercice d'application</h4>
+                            <p>Une quantité de 0,5 mole de gaz parfait occupe un volume de 10 L à une température de 25°C.</p>
+                            <p>Calculez la pression de ce gaz.</p>
+                            <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution-gaz')">Voir la solution</button>
+                            <div id="solution-gaz" class="solution">
+                                <p>On utilise la loi des gaz parfaits : $P \times V = n \times R \times T$</p>
+                                <p>Donc : $P = \frac{n \times R \times T}{V}$</p>
+                                <p>Convertissons les unités :</p>
+                                <ul>
+                                    <li>$T = 25 + 273 = 298\ K$</li>
+                                    <li>$V = 10\ L = 0,010\ m^3$ (ou on peut garder en L si on utilise R = 0,082 L·atm·mol⁻¹·K⁻¹)</li>
+                                </ul>
+                                <p>Avec $R = 0,082\ L·atm·mol^{-1}·K^{-1}$ :</p>
+                                <p>$P = \frac{0,5 \times 0,082 \times 298}{10} = \frac{12,218}{10} = 1,2218\ atm$</p>
+                                <p>La pression est d'environ 1,22 atm.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Processus de modélisation -->
+                <section id="modelisation" class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Processus de modélisation</h2>
+                        <p>La modélisation scientifique suit généralement ces étapes :</p>
+                        <ol>
+                            <li><strong>Observation</strong> du phénomène réel</li>
+                            <li><strong>Formulation d'hypothèses</strong> simplificatrices</li>
+                            <li><strong>Établissement</strong> des équations mathématiques</li>
+                            <li><strong>Résolution</strong> du modèle</li>
+                            <li><strong>Validation</strong> par comparaison avec des mesures réelles</li>
+                            <li><strong>Utilisation</strong> pour la prédiction ou la simulation</li>
+                        </ol>
+                        
+                        <div class="exercise">
+                            <h4>Exercice de modélisation</h4>
+                            <p>On souhaite modéliser la chute d'une bille dans l'air en négligeant les frottements.</p>
+                            <p>Établissez les équations du mouvement.</p>
+                            <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution-chute')">Voir la solution</button>
+                            <div id="solution-chute" class="solution">
+                                <p>En négligeant les frottements, la bille n'est soumise qu'à son poids $\vec{P} = m \cdot \vec{g}$.</p>
+                                <p>D'après la deuxième loi de Newton : $\sum \vec{F} = m \cdot \vec{a}$</p>
+                                <p>Donc : $m \cdot \vec{g} = m \cdot \vec{a}$ ⇒ $\vec{a} = \vec{g}$</p>
+                                <p>L'accélération est constante et égale à $\vec{g}$ (environ 9,81 m/s² vers le bas).</p>
+                                <p>En choisissant un axe Oz vertical vers le haut, avec origine au point de lâcher :</p>
+                                <ul>
+                                    <li>$a_z = -g$</li>
+                                    <li>$v_z = -g \cdot t + v_0$ (avec $v_0 = 0$ si lâché sans vitesse initiale)</li>
+                                    <li>$z = -\frac{1}{2} g \cdot t^2 + z_0$ (avec $z_0 = 0$)</li>
+                                </ul>
+                                <p>Ces équations constituent le modèle de chute libre sans frottements.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Exercices complémentaires -->
+                <section id="exercices" class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Exercices complémentaires</h2>
+                        
+                        <div class="exercise">
+                            <h4>Exercice 1 : Circuit électrique</h4>
+                            <p>Dans le circuit suivant, on mesure une intensité de 0,2 A et une tension de 6 V aux bornes de la résistance.</p>
+                            <p>Calculez la valeur de la résistance R.</p>
+                            <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution-ex1')">Voir la solution</button>
+                            <div id="solution-ex1" class="solution">
+                                <p>D'après la loi d'Ohm : $U = R \times I$</p>
+                                <p>Donc : $R = \frac{U}{I} = \frac{6}{0,2} = 30\ \Omega$</p>
+                                <p>La résistance vaut 30 Ω.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise">
+                            <h4>Exercice 2 : Gaz parfait</h4>
+                            <p>Un gaz parfait occupe un volume de 2 L sous une pression de 3 atm et à une température de 300 K.</p>
+                            <p>Calculez la quantité de matière de ce gaz.</p>
+                            <button class="btn btn-sm btn-primary" onclick="toggleSolution('solution-ex2')">Voir la solution</button>
+                            <div id="solution-ex2" class="solution">
+                                <p>D'après la loi des gaz parfaits : $P \times V = n \times R \times T$</p>
+                                <p>Donc : $n = \frac{P \times V}{R \times T}$</p>
+                                <p>Avec $R = 0,082\ L·atm·mol^{-1}·K^{-1}$ :</p>
+                                <p>$n = \frac{3 \times 2}{0,082 \times 300} = \frac{6}{24,6} ≈ 0,244\ mol$</p>
+                                <p>La quantité de matière est d'environ 0,244 mole.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    <h3>Activité 4: Méthodologie de modélisation</h3>
-                </div>
-                <div class="card-body">
-                    <p>Les étapes de la modélisation scientifique:</p>
-                    <ol>
-                        <li>Observation du phénomène réel</li>
-                        <li>Formulation d'hypothèses</li>
-                        <li>Établissement des relations mathématiques</li>
-                        <li>Vérification expérimentale</li>
-                        <li>Validation ou ajustement du modèle</li>
-                    </ol>
-                    <p><strong>Exemple:</strong> Modélisation de la consommation électrique d'un quartier de Yaoundé pour optimiser la production.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Résumé -->
-        <div class="summary-section">
-            <h2>Résumé</h2>
-            <ul>
-                <li>La <strong>modélisation scientifique</strong> permet de traduire des phénomènes réels en équations mathématiques.</li>
-                <li>La <strong>loi d'Ohm</strong> ($U = R \times I$) modélise les relations entre tension, intensité et résistance dans un circuit électrique.</li>
-                <li>La <strong>loi des gaz parfaits</strong> ($P \times V = n \times R \times T$) décrit le comportement des gaz sous différentes conditions.</li>
-                <li>Les modèles scientifiques doivent être validés par l'expérimentation.</li>
-                <li>Au Cameroun, ces modèles trouvent des applications dans l'électrification rurale, l'optimisation énergétique et diverses industries.</li>
-            </ul>
-        </div>
-
-        <!-- Exercice d'application -->
-        <div class="exercise-section">
-            <h2>Exercice d'Application</h2>
-            <p>Un technicien électrique à Garoua doit installer un ventilateur (12V/24W) dans un véhicule dont la batterie délivre 24V. Il dispose de résistances de différentes valeurs: 2Ω, 4Ω, 6Ω, 8Ω et 10Ω.</p>
-            <ol>
-                <li>Calculez l'intensité du courant qui traverse le ventilateur lorsqu'il fonctionne normalement.</li>
-                <li>Déterminez la valeur de la résistance à placer en série pour que le ventilateur fonctionne correctement sans être endommagé.</li>
-                <li>Calculez la puissance dissipée par cette résistance.</li>
-            </ol>
-            <button id="show-solution" class="btn btn-primary mt-3">Voir la correction</button>
-            
-            <div id="solution" class="solution-section">
-                <h3>Correction de l'exercice</h3>
-                <ol>
-                    <li>Le ventilateur a une puissance de 24W sous 12V.
-                        <br>D'après la relation $P = U \times I$, on a:
-                        <br>$I = \frac{P}{U} = \frac{24}{12} = 2A$
-                    </li>
-                    <li>La tension aux bornes de la résistance doit être:
-                        <br>$U_R = 24 - 12 = 12V$
-                        <br>D'après la loi d'Ohm $U = R \times I$:
-                        <br>$R = \frac{U_R}{I} = \frac{12}{2} = 6\Omega$
-                        <br>Il faut donc utiliser la résistance de 6Ω.
-                    </li>
-                    <li>Puissance dissipée par la résistance:
-                        <br>$P_R = U_R \times I = 12 \times 2 = 24W$
-                        <br>ou $P_R = R \times I^2 = 6 \times 2^2 = 24W$
-                    </li>
-                </ol>
-            </div>
-        </div>
-
-        <!-- Réponse à la situation problème -->
-        <div class="problem-section">
-            <h2>Réponse à la Situation Problème</h2>
-            <p>Pour résoudre le problème des étudiants de Bafoussam, nous appliquons la loi d'Ohm et les principes de modélisation scientifique:</p>
-            <ol>
-                <li>Une lampe LED de 12V/6W demande un courant de:
-                    <br>$I = \frac{P}{U} = \frac{6}{12} = 0,5A$</li>
-                <li>La résistance doit abaisser la tension de 24V à 12V, donc:
-                    <br>$U_R = 24 - 12 = 12V$</li>
-                <li>La valeur de la résistance nécessaire est:
-                    <br>$R = \frac{U_R}{I} = \frac{12}{0,5} = 24\Omega$</li>
-                <li>La puissance que devra dissiper cette résistance est:
-                    <br>$P_R = U_R \times I = 12 \times 0,5 = 6W$</li>
-            </ol>
-            <p>Les étudiants devront donc choisir une résistance de 24Ω capable de dissiper au moins 6W (idéalement 10W pour une marge de sécurité).</p>
-            <p>Cette modélisation leur permet de dimensionner correctement leur installation solaire et d'éviter d'endommager les lampes LED.</p>
         </div>
     </div>
 
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <div class="container">
-            <p>Modélisation Scientifique - Séquence 3 | Cours adapté au contexte camerounais</p>
-        </div>
-    </footer>
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
-        $(document).ready(function() {
-            $('#show-solution').click(function() {
-                $('#solution').slideToggle();
+        // Fonction pour afficher/masquer les solutions
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.style.display = solution.style.display === 'none' || solution.style.display === '' ? 'block' : 'none';
+        }
+        
+        // Attendre que le document soit chargé
+        document.addEventListener('DOMContentLoaded', function() {
+            // Graphique pour la loi d'Ohm
+            const ohmCtx = document.getElementById('ohmChart').getContext('2d');
+            const ohmChart = new Chart(ohmCtx, {
+                type: 'line',
+                data: {
+                    labels: [0, 1, 2, 3, 4, 5],
+                    datasets: [{
+                        label: 'U = R × I (avec R=50Ω)',
+                        data: [0, 50, 100, 150, 200, 250],
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1,
+                        pointBackgroundColor: 'rgb(75, 192, 192)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Tension U (V)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Intensité I (A)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Graphique pour la loi des gaz parfaits
+            const gazCtx = document.getElementById('gazChart').getContext('2d');
+            const gazChart = new Chart(gazCtx, {
+                type: 'line',
+                data: {
+                    labels: [1, 2, 3, 4, 5],
+                    datasets: [{
+                        label: 'P = nRT/V (avec n=1 mol, T=300 K)',
+                        data: [24.94, 12.47, 8.31, 6.24, 4.99],
+                        borderColor: 'rgb(255, 99, 132)',
+                        tension: 0.1,
+                        pointBackgroundColor: 'rgb(255, 99, 132)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Pression P (atm)'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Volume V (L)'
+                            }
+                        }
+                    }
+                }
             });
         });
     </script>

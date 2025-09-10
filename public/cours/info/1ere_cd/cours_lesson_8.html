@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notions Essentielles en Programmation C</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .code-example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin-bottom: 15px;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-left: 4px solid #0d6efd;
+            margin-bottom: 20px;
+        }
+        .solution {
+            display: none;
+            background-color: #d1e7dd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .section-title {
+            border-bottom: 2px solid #0d6efd;
+            padding-bottom: 10px;
+            margin: 30px 0 20px 0;
+        }
+        .nav-link {
+            color: #495057;
+        }
+        .nav-link.active {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            .card {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-4">
+        <header class="text-center mb-5">
+            <h1 class="display-4">Programmation en C - Notions Essentielles</h1>
+            <p class="lead">Un condensé des concepts fondamentaux avec exemples et exercices</p>
+        </header>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="sticky-top" style="top: 20px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Navigation</h5>
+                        </div>
+                        <div class="card-body">
+                            <nav class="nav flex-column">
+                                <a class="nav-link" href="#intro">Introduction au C</a>
+                                <a class="nav-link" href="#controle">Structures de contrôle</a>
+                                <a class="nav-link" href="#tableaux">Les tableaux</a>
+                                <a class="nav-link" href="#fonctions">Les fonctions</a>
+                                <a class="nav-link" href="#execution">Exécution de programmes</a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <!-- Section 1: Introduction au C -->
+                <section id="intro">
+                    <h2 class="section-title">Introduction au Langage C</h2>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Définitions importantes</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li><strong>Programmation</strong>: Traduction d'un algorithme en langage de programmation</li>
+                                <li><strong>Langage de programmation</strong>: Ensemble des mots et symboles permettant d'écrire un programme</li>
+                                <li><strong>Programme</strong>: Suite d'instructions écrite dans un langage de programmation permettant de réaliser une ou plusieurs tâches</li>
+                                <li><strong>Compilateur</strong>: Application qui transforme le code source en fichier binaire exécutable (ex: GCC, Visual Studio)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Structure d'un programme C</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-example">
+                                <pre>#include &lt;stdio.h&gt;  // Directive au préprocesseur
+
+int main() {          // Fonction principale
+    // Déclarations de variables
+    int a = 5;
+    
+    // Instructions
+    printf("Hello World! %d", a);
+    
+    return 0;         // Fin du programme
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Bibliothèques standard</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Bibliothèque</th>
+                                        <th>Rôle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>&lt;stdio.h&gt;</td>
+                                        <td>Fonctions d'entrée/sortie (printf, scanf)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&lt;stdlib.h&gt;</td>
+                                        <td>Opérations de conversion, allocation mémoire</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&lt;math.h&gt;</td>
+                                        <td>Fonctions mathématiques (sqrt, pow)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&lt;string.h&gt;</td>
+                                        <td>Manipulation des chaînes de caractères</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Entrées/Sorties</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Affichage (sortie)</h4>
+                            <div class="code-example">
+                                <pre>printf("Message simple");
+printf("Valeur: %d", variable);  // %d pour entier
+printf("Caractère: %c", 'A');    // %c pour caractère
+printf("Réel: %.2f", 3.14159);   // %f pour float</pre>
+                            </div>
+
+                            <h4>Lecture (entrée)</h4>
+                            <div class="code-example">
+                                <pre>int age;
+printf("Quel âge avez-vous? ");
+scanf("%d", &age);  // Notez le & avant le nom de variable</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Exercice 1: Premier programme</h4>
+                        <p>Écrivez un programme qui demande à l'utilisateur son nom et son âge, puis affiche un message personnalisé.</p>
+                        <button class="btn btn-sm btn-primary show-solution">Afficher la solution</button>
+                        <div class="solution">
+                            <div class="code-example">
+                                <pre>#include &lt;stdio.h&gt;
+
+int main() {
+    char nom[50];
+    int age;
+    
+    printf("Entrez votre nom: ");
+    scanf("%s", nom);
+    
+    printf("Entrez votre âge: ");
+    scanf("%d", &age);
+    
+    printf("Bonjour %s, vous avez %d ans.\n", nom, age);
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 2: Structures de contrôle -->
+                <section id="controle">
+                    <h2 class="section-title">Structures de Contrôle</h2>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Structure conditionnelle if-else</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-example">
+                                <pre>if (condition) {
+    // Instructions si condition vraie
+} else {
+    // Instructions si condition fausse
+}</pre>
+                            </div>
+                            <p>Exemple:</p>
+                            <div class="code-example">
+                                <pre>int n;
+printf("Saisir un nombre: ");
+scanf("%d", &n);
+
+if (n % 2 == 0) {
+    printf("%d est pair\n", n);
+} else {
+    printf("%d est impair\n", n);
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Opérateur conditionnel ternaire</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Syntaxe: <code>condition ? expression1 : expression2</code></p>
+                            <div class="code-example">
+                                <pre>int a = 5, b = 10;
+int max = (a > b) ? a : b;  // max contiendra 10</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Boucles</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Boucle for (nombre d'itérations connu)</h4>
+                            <div class="code-example">
+                                <pre>for (initialisation; condition; incrémentation) {
+    // Instructions à répéter
+}</pre>
+                            </div>
+                            <p>Exemple:</p>
+                            <div class="code-example">
+                                <pre>for (int i = 0; i < 5; i++) {
+    printf("i = %d\n", i);
+}</pre>
+                            </div>
+
+                            <h4>Boucle while (condition d'arrêt)</h4>
+                            <div class="code-example">
+                                <pre>while (condition) {
+    // Instructions à répéter
+}</pre>
+                            </div>
+
+                            <h4>Boucle do-while (au moins une exécution)</h4>
+                            <div class="code-example">
+                                <pre>do {
+    // Instructions à répéter
+} while (condition);</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Exercice 2: Table de multiplication</h4>
+                        <p>Écrivez un programme qui demande un nombre à l'utilisateur et affiche sa table de multiplication de 1 à 10.</p>
+                        <button class="btn btn-sm btn-primary show-solution">Afficher la solution</button>
+                        <div class="solution">
+                            <div class="code-example">
+                                <pre>#include &lt;stdio.h&gt;
+
+int main() {
+    int n;
+    
+    printf("Entrez un nombre: ");
+    scanf("%d", &n);
+    
+    printf("Table de multiplication de %d:\n", n);
+    for (int i = 1; i <= 10; i++) {
+        printf("%d x %d = %d\n", n, i, n * i);
+    }
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3: Les tableaux -->
+                <section id="tableaux">
+                    <h2 class="section-title">Les Tableaux</h2>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Déclaration et initialisation</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-example">
+                                <pre>// Déclaration d'un tableau de 10 entiers
+int tab[10];
+
+// Initialisation lors de la déclaration
+int nombres[5] = {1, 2, 3, 4, 5};
+
+// Accès aux éléments (index commence à 0)
+int premier = nombres[0];  // = 1
+int troisieme = nombres[2]; // = 3</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Parcours d'un tableau</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-example">
+                                <pre>#define TAILLE 5
+
+int main() {
+    int tab[TAILLE] = {10, 20, 30, 40, 50};
+    
+    // Parcours avec for
+    for (int i = 0; i < TAILLE; i++) {
+        printf("tab[%d] = %d\n", i, tab[i]);
+    }
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Exercice 3: Moyenne des notes</h4>
+                        <p>Écrivez un programme qui demande 5 notes à l'utilisateur, les stocke dans un tableau, puis calcule et affiche la moyenne.</p>
+                        <button class="btn btn-sm btn-primary show-solution">Afficher la solution</button>
+                        <div class="solution">
+                            <div class="code-example">
+                                <pre>#include &lt;stdio.h&gt;
+
+#define N 5
+
+int main() {
+    float notes[N];
+    float somme = 0, moyenne;
+    
+    // Saisie des notes
+    for (int i = 0; i < N; i++) {
+        printf("Entrez la note %d: ", i+1);
+        scanf("%f", &notes[i]);
+        somme += notes[i];
+    }
+    
+    // Calcul de la moyenne
+    moyenne = somme / N;
+    printf("La moyenne est: %.2f\n", moyenne);
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Les fonctions -->
+                <section id="fonctions">
+                    <h2 class="section-title">Les Fonctions (Sous-programmes)</h2>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Définition d'une fonction</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-example">
+                                <pre>// Fonction qui retourne une valeur
+int carre(int x) {
+    return x * x;
+}
+
+// Fonction qui ne retourne rien (void)
+void afficherMessage() {
+    printf("Bonjour!\n");
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Appel de fonction</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-example">
+                                <pre>int main() {
+    int resultat = carre(5);  // resultat = 25
+    afficherMessage();        // Affiche "Bonjour!"
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Variables locales et globales</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-example">
+                                <pre>int globale = 10;  // Variable globale
+
+void maFonction() {
+    int locale = 5;  // Variable locale
+    printf("Globale: %d, Locale: %d\n", globale, locale);
+}
+
+int main() {
+    maFonction();
+    // printf("%d", locale);  // ERREUR: locale n'existe pas ici
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Exercice 4: Fonction de calcul</h4>
+                        <p>Écrivez une fonction qui calcule la factorielle d'un nombre entier positif, puis testez-la dans un programme principal.</p>
+                        <button class="btn btn-sm btn-primary show-solution">Afficher la solution</button>
+                        <div class="solution">
+                            <div class="code-example">
+                                <pre>#include &lt;stdio.h&gt;
+
+// Déclaration de la fonction
+int factorielle(int n);
+
+int main() {
+    int n;
+    
+    printf("Entrez un nombre entier positif: ");
+    scanf("%d", &n);
+    
+    if (n < 0) {
+        printf("Erreur: le nombre doit être positif.\n");
+    } else {
+        printf("%d! = %d\n", n, factorielle(n));
+    }
+    
+    return 0;
+}
+
+// Définition de la fonction
+int factorielle(int n) {
+    int resultat = 1;
+    
+    for (int i = 1; i <= n; i++) {
+        resultat *= i;
+    }
+    
+    return resultat;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5: Exécution de programmes -->
+                <section id="execution">
+                    <h2 class="section-title">Exécution d'un Programme C</h2>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Processus de compilation</h3>
+                        </div>
+                        <div class="card-body">
+                            <ol>
+                                <li><strong>Préprocessing</strong>: Traitement des directives (#include, #define)</li>
+                                <li><strong>Compilation</strong>: Traduction du code C en langage assembleur</li>
+                                <li><strong>Assemblage</strong>: Conversion de l'assembleur en code machine (fichier objet)</li>
+                                <li><strong>Édition de liens</strong>: Liaison des fichiers objets et bibliothèques pour créer l'exécutable</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Compilation avec GCC</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="code-example">
+                                <pre># Compilation simple
+gcc programme.c -o programme
+
+# Compilation avec bibliothèque mathématique
+gcc programme.c -o programme -lm
+
+# Affichage des warnings
+gcc -Wall programme.c -o programme</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Environnements de développement (IDE)</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Les IDE comme Code::Blocks facilitent le développement en intégrant:</p>
+                            <ul>
+                                <li>Éditeur de code avec coloration syntaxique</li>
+                                <li>Compilation et exécution en un clic</li>
+                                <li>Débogage visuel</li>
+                                <li>Gestion de projets</li>
+                            </ul>
+                            <p>Pour utiliser Code::Blocks:</p>
+                            <ol>
+                                <li>Créez un nouveau projet (File → New → Project)</li>
+                                <li>Choisissez "Console application" et suivez les étapes</li>
+                                <li>Écrivez votre code dans le fichier main.c</li>
+                                <li>Compilez et exécutez avec F9</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="exercise">
+                        <h4>Exercice 5: Programme complet</h4>
+                        <p>Écrivez un programme complet qui:</p>
+                        <ol>
+                            <li>Demande à l'utilisateur de saisir 5 nombres</li>
+                            <li>Les stocke dans un tableau</li>
+                            <li>Affiche le maximum, le minimum et la moyenne en utilisant des fonctions</li>
+                        </ol>
+                        <button class="btn btn-sm btn-primary show-solution">Afficher la solution</button>
+                        <div class="solution">
+                            <div class="code-example">
+                                <pre>#include &lt;stdio.h&gt;
+
+#define TAILLE 5
+
+// Prototypes des fonctions
+float trouverMax(float tab[], int taille);
+float trouverMin(float tab[], int taille);
+float calculerMoyenne(float tab[], int taille);
+
+int main() {
+    float nombres[TAILLE];
+    
+    // Saisie des nombres
+    printf("Entrez %d nombres:\n", TAILLE);
+    for (int i = 0; i < TAILLE; i++) {
+        printf("Nombre %d: ", i+1);
+        scanf("%f", &nombres[i]);
+    }
+    
+    // Calculs et affichage
+    printf("\nMaximum: %.2f\n", trouverMax(nombres, TAILLE));
+    printf("Minimum: %.2f\n", trouverMin(nombres, TAILLE));
+    printf("Moyenne: %.2f\n", calculerMoyenne(nombres, TAILLE));
+    
+    return 0;
+}
+
+// Fonction pour trouver le maximum
+float trouverMax(float tab[], int taille) {
+    float max = tab[0];
+    for (int i = 1; i < taille; i++) {
+        if (tab[i] > max) {
+            max = tab[i];
+        }
+    }
+    return max;
+}
+
+// Fonction pour trouver le minimum
+float trouverMin(float tab[], int taille) {
+    float min = tab[0];
+    for (int i = 1; i < taille; i++) {
+        if (tab[i] < min) {
+            min = tab[i];
+        }
+    }
+    return min;
+}
+
+// Fonction pour calculer la moyenne
+float calculerMoyenne(float tab[], int taille) {
+    float somme = 0;
+    for (int i = 0; i < taille; i++) {
+        somme += tab[i];
+    }
+    return somme / taille;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Navigation smooth scroll
+            $('.nav-link').on('click', function(e) {
+                e.preventDefault();
+                var target = $(this).attr('href');
+                $('html, body').animate({
+                    scrollTop: $(target).offset().top - 20
+                }, 500);
+            });
+
+            // Show/hide solutions
+            $('.show-solution').on('click', function() {
+                var solution = $(this).next('.solution');
+                solution.slideToggle();
+                
+                if ($(this).text() === 'Afficher la solution') {
+                    $(this).text('Masquer la solution');
+                } else {
+                    $(this).text('Afficher la solution');
+                }
+            });
+
+            // Update active nav link on scroll
+            $(window).on('scroll', function() {
+                var scrollPosition = $(window).scrollTop();
+                
+                $('section').each(function() {
+                    var currentSection = $(this);
+                    var sectionTop = currentSection.offset().top - 50;
+                    var sectionId = currentSection.attr('id');
+                    
+                    if (scrollPosition >= sectionTop) {
+                        $('.nav-link').removeClass('active');
+                        $('.nav-link[href="#' + sectionId + '"]').addClass('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

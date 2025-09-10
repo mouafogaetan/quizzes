@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lois de l'Hérédité - Mendel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .example-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #0d6efd;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .exercise-box {
+            background-color: #e9ecef;
+            border-left: 4px solid #198754;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .solution-box {
+            background-color: #d1e7dd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: none;
+        }
+        .nav-link {
+            color: #0d6efd;
+        }
+        h2, h3 {
+            color: #0a58ca;
+        }
+        .genotype-table {
+            width: 100%;
+            margin: 15px 0;
+        }
+        .genotype-table td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+        .punnett-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            margin: 15px 0;
+        }
+        .punnett-cell {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        .punnett-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .img-placeholder {
+            background-color: #f8f9fa;
+            border: 1px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <header class="pb-3 mb-4 border-bottom">
+            <h1 class="display-5 fw-bold">Lois de l'Hérédité - Mendel</h1>
+            <p class="lead">Un condensé des notions essentielles sur les lois de l'hérédité selon Gregor Mendel</p>
+        </header>
+
+        <div class="row">
+            <div class="col-12">
+                <nav class="bg-light p-3 rounded mb-4">
+                    <h4>Sommaire</h4>
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="#intro">Introduction</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#concepts">Concepts de base</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#loi1">Première loi de Mendel</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#loi2">Deuxième loi de Mendel</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#loi3">Troisième loi de Mendel</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#exercices">Exercices d'application</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card" id="intro">
+                    <div class="card-body">
+                        <h2>Introduction</h2>
+                        <p>Gregor Mendel (1822-1884) est considéré comme le père de la génétique. À travers ses expériences sur les pois, il a établi les premières lois quantitatives de l'hérédité.</p>
+                        <p>Ses travaux ont permis de comprendre les mécanismes de transmission des caractères héréditaires d'une génération à l'autre.</p>
+                        
+                        <div class="img-placeholder">
+                            <img src="data:image/jpeg;base64,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">
+                            <p class="text-muted">Description: Portrait de Gregor Mendel, le père de la génétique</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" id="concepts">
+                    <div class="card-body">
+                        <h2>Concepts de base</h2>
+                        
+                        <h3>Notions clés</h3>
+                        <ul>
+                            <li><strong>Gène</strong>: Segment d'ADN responsable d'un caractère héréditaire</li>
+                            <li><strong>Allèle</strong>: Version différente d'un même gène</li>
+                            <li><strong>Homozygote</strong>: Individu possédant deux allèles identiques pour un gène (ex: AA ou aa)</li>
+                            <li><strong>Hétérozygote</strong>: Individu possédant deux allèles différents pour un gène (ex: Aa)</li>
+                            <li><strong>Phénotype</strong>: Expression observable d'un caractère (ex: couleur des fleurs)</li>
+                            <li><strong>Génotype</strong>: Constitution génétique d'un individu (ex: AA, Aa, aa)</li>
+                            <li><strong>Dominant</strong>: Allèle qui s'exprime phénotypiquement même en présence d'un autre allèle (noté en majuscule: A)</li>
+                            <li><strong>Récessif</strong>: Allèle qui ne s'exprime phénotypiquement qu'en présence de deux copies (noté en minuscule: a)</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <h4>Exemple</h4>
+                            <p>Chez les pois, le caractère "graine lisse" (L) est dominant sur le caractère "graine ridée" (l).</p>
+                            <ul>
+                                <li>Génotype LL: phénotype graine lisse (homozygote dominant)</li>
+                                <li>Génotype Ll: phénotype graine lisse (hétérozygote)</li>
+                                <li>Génotype ll: phénotype graine ridée (homozygote récessif)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" id="loi1">
+                    <div class="card-body">
+                        <h2>Première loi de Mendel: Loi de l'uniformité des hybrides de première génération</h2>
+                        
+                        <p><strong>Énoncé</strong>: Le croisement de deux individus homozygotes pour deux allèles différents donne une première génération (F1) uniforme, où tous les individus sont hétérozygotes et présentent le phénotype dominant.</p>
+                        
+                        <div class="example-box">
+                            <h4>Exemple</h4>
+                            <p>Croisement entre un pois à graines lisses (homozygote dominant, LL) et un pois à graines ridées (homozygote récessif, ll):</p>
+                            
+                            <table class="genotype-table">
+                                <tr>
+                                    <td></td>
+                                    <td>L</td>
+                                    <td>L</td>
+                                </tr>
+                                <tr>
+                                    <td>l</td>
+                                    <td>Ll</td>
+                                    <td>Ll</td>
+                                </tr>
+                                <tr>
+                                    <td>l</td>
+                                    <td>Ll</td>
+                                    <td>Ll</td>
+                                </tr>
+                            </table>
+                            
+                            <p>Tous les descendants F1 sont hétérozygotes (Ll) et présentent le phénotype dominant (graines lisses).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" id="loi2">
+                    <div class="card-body">
+                        <h2>Deuxième loi de Mendel: Loi de ségrégation des caractères</h2>
+                        
+                        <p><strong>Énoncé</strong>: Lors de la formation des gamètes, les deux allèles d'un gène se séparent (se ségrègent) de façon égale. Chaque gamète ne reçoit qu'un seul allèle pour chaque gène.</p>
+                        
+                        <div class="example-box">
+                            <h4>Exemple</h4>
+                            <p>Croisement entre deux individus hétérozygotes de la génération F1 (Ll × Ll):</p>
+                            
+                            <div class="punnett-grid">
+                                <div class="punnett-cell punnett-header"></div>
+                                <div class="punnett-cell punnett-header">L (0.5)</div>
+                                <div class="punnett-cell punnett-header">l (0.5)</div>
+                                
+                                <div class="punnett-cell punnett-header">L (0.5)</div>
+                                <div class="punnett-cell">LL</div>
+                                <div class="punnett-cell">Ll</div>
+                                
+                                <div class="punnett-cell punnett-header">l (0.5)</div>
+                                <div class="punnett-cell">Ll</div>
+                                <div class="punnett-cell">ll</div>
+                            </div>
+                            
+                            <p>Proportions phénotypiques en F2:</p>
+                            <ul>
+                                <li>3/4 graines lisses (LL + Ll)</li>
+                                <li>1/4 graines ridées (ll)</li>
+                            </ul>
+                            
+                            <p>Proportions génotypiques en F2:</p>
+                            <ul>
+                                <li>1/4 homozygotes dominants (LL)</li>
+                                <li>1/2 hétérozygotes (Ll)</li>
+                                <li>1/4 homozygotes récessifs (ll)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" id="loi3">
+                    <div class="card-body">
+                        <h2>Troisième loi de Mendel: Loi de l'assortiment indépendant</h2>
+                        
+                        <p><strong>Énoncé</strong>: Lors de la formation des gamètes, la ségrégation des allèles de gènes différents se fait indépendamment les uns des autres (pour des gènes non liés, situés sur des chromosomes différents).</p>
+                        
+                        <div class="example-box">
+                            <h4>Exemple</h4>
+                            <p>Étude de deux caractères indépendants chez le pois: forme de la graine (L: lisse, l: ridée) et couleur de la graine (J: jaune, j: verte).</p>
+                            
+                            <p>Croisement de double hétérozygotes: LlJj × LlJj</p>
+                            
+                            <p>Les gamètes possibles pour chaque parent:</p>
+                            <ul>
+                                <li>LJ (probabilité: 1/4)</li>
+                                <li>Lj (probabilité: 1/4)</li>
+                                <li>lJ (probabilité: 1/4)</li>
+                                <li>lj (probabilité: 1/4)</li>
+                            </ul>
+                            
+                            <p>La grille de Punnett pour ce croisement comporte 16 cases. Les proportions phénotypiques attendues sont:</p>
+                            <ul>
+                                <li>9/16 graines lisses et jaunes (L_J_)</li>
+                                <li>3/16 graines lisses et vertes (L_jj)</li>
+                                <li>3/16 graines ridées et jaunes (llJ_)</li>
+                                <li>1/16 graines ridées et vertes (lljj)</li>
+                            </ul>
+                            
+                            <div class="img-placeholder">
+                                <img src="data:image/png;base64,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">
+                                <p class="text-muted">Description: Grille de Punnett 4x4 montrant les combinaisons possibles pour deux gènes indépendants</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" id="exercices">
+                    <div class="card-body">
+                        <h2>Exercices d'application</h2>
+                        
+                        <div class="exercise-box">
+                            <h4>Exercice 1: Application de la première loi</h4>
+                            <p>Chez une certaine plante, la fleur rouge (R) est dominante sur la fleur blanche (r). Si on croise une plante homozygote à fleurs rouges avec une plante à fleurs blanches, quel sera le phénotype de la génération F1?</p>
+                            <button class="btn btn-primary mt-2" onclick="$('#solution1').toggle()">Voir la solution</button>
+                            <div id="solution1" class="solution-box">
+                                <p><strong>Solution:</strong></p>
+                                <p>Parentaux: RR (fleurs rouges) × rr (fleurs blanches)</p>
+                                <p>Gamètes: R (100%) et r (100%)</p>
+                                <p>Génération F1: tous Rr (hétérozygotes)</p>
+                                <p>Ainsi, tous les individus de la F1 auront des fleurs rouges, car R est dominant.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-box">
+                            <h4>Exercice 2: Application de la deuxième loi</h4>
+                            <p>Chez les souris, la couleur noire (N) est dominante sur la couleur blanche (n). Si on croise deux souris noires hétérozygotes (Nn), quelles sont les proportions phénotypiques et génotypiques attendues dans la descendance?</p>
+                            <button class="btn btn-primary mt-2" onclick="$('#solution2').toggle()">Voir la solution</button>
+                            <div id="solution2" class="solution-box">
+                                <p><strong>Solution:</strong></p>
+                                <p>Croisement: Nn × Nn</p>
+                                <p>Grille de Punnett:</p>
+                                
+                                <table class="genotype-table">
+                                    <tr>
+                                        <td></td>
+                                        <td>N</td>
+                                        <td>n</td>
+                                    </tr>
+                                    <tr>
+                                        <td>N</td>
+                                        <td>NN</td>
+                                        <td>Nn</td>
+                                    </tr>
+                                    <tr>
+                                        <td>n</td>
+                                        <td>Nn</td>
+                                        <td>nn</td>
+                                    </tr>
+                                </table>
+                                
+                                <p>Proportions génotypiques:</p>
+                                <ul>
+                                    <li>1/4 NN (homozygote dominant)</li>
+                                    <li>1/2 Nn (hétérozygote)</li>
+                                    <li>1/4 nn (homozygote récessif)</li>
+                                </ul>
+                                
+                                <p>Proportions phénotypiques:</p>
+                                <ul>
+                                    <li>3/4 souris noires (NN + Nn)</li>
+                                    <li>1/4 souris blanches (nn)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-box">
+                            <h4>Exercice 3: Application de la troisième loi</h4>
+                            <p>Chez les pois, la forme lisse (L) est dominante sur ridée (l) et la couleur jaune (J) est dominante sur verte (j). On croise deux plantes double hétérozygotes (LlJj).</p>
+                            <p>a) Quelles sont les proportions des différents gamètes produits?</p>
+                            <p>b) Quelle est la probabilité d'obtenir un pois ridé et vert?</p>
+                            <button class="btn btn-primary mt-2" onclick="$('#solution3').toggle()">Voir la solution</button>
+                            <div id="solution3" class="solution-box">
+                                <p><strong>Solution:</strong></p>
+                                <p>a) Les gamètes possibles pour chaque parent double hétérozygote (LlJj):</p>
+                                <ul>
+                                    <li>LJ (probabilité: 1/4)</li>
+                                    <li>Lj (probabilité: 1/4)</li>
+                                    <li>lJ (probabilité: 1/4)</li>
+                                    <li>lj (probabilité: 1/4)</li>
+                                </ul>
+                                
+                                <p>b) Pour obtenir un pois ridé et vert, il faut le génotype lljj.</p>
+                                <p>La probabilité d'obtenir l et j d'un parent est de 1/4 chacun.</p>
+                                <p>Donc la probabilité d'obtenir lljj est: (1/4) × (1/4) = 1/16</p>
+                                
+                                <p>On peut aussi utiliser la règle du produit pour des événements indépendants:</p>
+                                <p>Probabilité d'être ridé (ll) = 1/4</p>
+                                <p>Probabilité d'être vert (jj) = 1/4</p>
+                                <p>Probabilité d'être ridé ET vert = (1/4) × (1/4) = 1/16</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="pt-3 mt-4 text-muted border-top">
+            <p>© 2023 - Condensé sur les Lois de l'Hérédité de Mendel</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

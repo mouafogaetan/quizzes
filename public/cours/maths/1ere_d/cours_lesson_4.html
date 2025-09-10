@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fonctions Numériques - Résumé</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .solution {
+            display: none;
+            background-color: #d4edda;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .graph-container {
+            width: 100%;
+            height: 300px;
+            margin: 20px 0;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Fonctions Numériques - Notions Essentielles</h1>
+        
+        <!-- Section 1: Applications vs Fonctions -->
+        <div class="card">
+            <div class="card-header">1. Applications vs Fonctions</div>
+            <div class="card-body">
+                <p><strong>Application</strong>: Relation qui associe chaque élément de l'ensemble de départ à <strong>exactement un</strong> élément de l'ensemble d'arrivée.</p>
+                <p><strong>Fonction</strong>: Relation qui associe chaque élément de l'ensemble de départ à <strong>au plus un</strong> élément de l'ensemble d'arrivée.</p>
+                <p class="fst-italic">Toute application est une fonction, mais l'inverse n'est pas toujours vrai.</p>
+                
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Parmi les relations suivantes, lesquelles sont des applications?</p>
+                    <ol>
+                        <li>$f: \mathbb{R} \to \mathbb{R}, x \mapsto x^2$</li>
+                        <li>$g: \mathbb{R} \to \mathbb{R}, x \mapsto \sqrt{x}$</li>
+                        <li>$h: \mathbb{R} \to \mathbb{R}, x \mapsto \frac{1}{x}$</li>
+                    </ol>
+                    <button class="btn btn-sm btn-primary" onclick="$('#solution1').toggle();">Voir la solution</button>
+                    <div id="solution1" class="solution">
+                        <p><strong>Solution:</strong></p>
+                        <ol>
+                            <li>Application: chaque réel a un unique carré</li>
+                            <li>Fonction mais pas application (n'est pas définie pour $x < 0$)</li>
+                            <li>Fonction mais pas application (n'est pas définie pour $x = 0$)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 2: Types d'applications -->
+        <div class="card">
+            <div class="card-header">2. Types d'Applications</div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Injective</strong>: Tout élément de l'arrivée a au plus un antécédent</li>
+                    <li><strong>Surjective</strong>: Tout élément de l'arrivée a au moins un antécédent</li>
+                    <li><strong>Bijective</strong>: Tout élément de l'arrivée a exactement un antécédent</li>
+                </ul>
+                
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Déterminer si $f: \mathbb{R} \to \mathbb{R}, x \mapsto x^3$ est injective, surjective, bijective.</p>
+                    <button class="btn btn-sm btn-primary" onclick="$('#solution2').toggle();">Voir la solution</button>
+                    <div id="solution2" class="solution">
+                        <p><strong>Solution:</strong></p>
+                        <p>Pour tout $y \in \mathbb{R}$, l'équation $x^3 = y$ a une unique solution $x = \sqrt[3]{y}$.</p>
+                        <p>Donc $f$ est bijective (à la fois injective et surjective).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 3: Ensemble de définition -->
+        <div class="card">
+            <div class="card-header">3. Ensemble de Définition</div>
+            <div class="card-body">
+                <p>L'ensemble de définition $D_f$ d'une fonction $f$ est l'ensemble des valeurs pour lesquelles $f$ est définie.</p>
+                
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Déterminer le domaine de définition de $f(x) = \frac{\sqrt{x-2}}{x^2-4}$</p>
+                    <button class="btn btn-sm btn-primary" onclick="$('#solution3').toggle();">Voir la solution</button>
+                    <div id="solution3" class="solution">
+                        <p><strong>Solution:</strong></p>
+                        <p>Conditions:</p>
+                        <ol>
+                            <li>$x-2 \geq 0$ (racine carrée) ⇒ $x \geq 2$</li>
+                            <li>$x^2-4 \neq 0$ (dénominateur) ⇒ $x \neq 2$ et $x \neq -2$</li>
+                        </ol>
+                        <p>Donc $D_f = ]2, +\infty[$</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 4: Opérations sur les fonctions -->
+        <div class="card">
+            <div class="card-header">4. Opérations sur les Fonctions</div>
+            <div class="card-body">
+                <p>Soient $f$ et $g$ deux fonctions:</p>
+                <ul>
+                    <li>$(f+g)(x) = f(x) + g(x)$</li>
+                    <li>$(f \cdot g)(x) = f(x) \cdot g(x)$</li>
+                    <li>$\left(\frac{f}{g}\right)(x) = \frac{f(x)}{g(x)}$ (si $g(x) \neq 0$)</li>
+                    <li>$(f \circ g)(x) = f(g(x))$</li>
+                </ul>
+                
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Soient $f(x) = x^2+1$ et $g(x) = \sqrt{x}$. Déterminer $(f \circ g)(x)$ et son domaine de définition.</p>
+                    <button class="btn btn-sm btn-primary" onclick="$('#solution4').toggle();">Voir la solution</button>
+                    <div id="solution4" class="solution">
+                        <p><strong>Solution:</strong></p>
+                        <p>$(f \circ g)(x) = f(g(x)) = (\sqrt{x})^2 + 1 = x + 1$</p>
+                        <p>Domaines: $D_g = [0, +\infty[$ et pour $x \in D_g$, $g(x) \in [0, +\infty[ \subseteq D_f = \mathbb{R}$</p>
+                        <p>Donc $D_{f \circ g} = [0, +\infty[$</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 5: Parité et périodicité -->
+        <div class="card">
+            <div class="card-header">5. Parité et Périodicité</div>
+            <div class="card-body">
+                <ul>
+                    <li><strong>Fonction paire</strong>: $f(-x) = f(x)$ (symétrie par rapport à l'axe des ordonnées)</li>
+                    <li><strong>Fonction impaire</strong>: $f(-x) = -f(x)$ (symétrie par rapport à l'origine)</li>
+                    <li><strong>Fonction périodique</strong>: Il existe $T > 0$ tel que $f(x+T) = f(x)$ pour tout $x$</li>
+                </ul>
+                
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Étudier la parité de $f(x) = x^3 - 3x$ et $g(x) = x^2 \cos(x)$.</p>
+                    <button class="btn btn-sm btn-primary" onclick="$('#solution5').toggle();">Voir la solution</button>
+                    <div id="solution5" class="solution">
+                        <p><strong>Solution:</strong></p>
+                        <p>Pour $f(x) = x^3 - 3x$:</p>
+                        <p>$f(-x) = (-x)^3 - 3(-x) = -x^3 + 3x = -(x^3 - 3x) = -f(x)$ ⇒ $f$ est impaire</p>
+                        <p>Pour $g(x) = x^2 \cos(x)$:</p>
+                        <p>$g(-x) = (-x)^2 \cos(-x) = x^2 \cos(x) = g(x)$ ⇒ $g$ est paire</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 6: Représentation graphique -->
+        <div class="card">
+            <div class="card-header">6. Représentation Graphique</div>
+            <div class="card-body">
+                <p>La courbe représentative d'une fonction $f$ est l'ensemble des points $(x, f(x))$ pour $x \in D_f$.</p>
+                
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Soit $f(x) = x^2$. Tracer approximativement sa courbe et déterminer graphiquement si elle est injective/surjective.</p>
+                    <button class="btn btn-sm btn-primary" onclick="$('#solution6').toggle();">Voir la solution</button>
+                    <div id="solution6" class="solution">
+                        <p><strong>Solution:</strong></p>
+                        <p>La parabole d'équation $y = x^2$:</p>
+                        <ul>
+                            <li>N'est pas injective: les valeurs $x$ et $-x$ ont la même image</li>
+                            <li>N'est pas surjective de $\mathbb{R}$ dans $\mathbb{R}$: les nombres négatifs n'ont pas d'antécédent</li>
+                            <li>Est surjective de $\mathbb{R}$ dans $\mathbb{R}^+$</li>
+                        </ul>
+                        <!-- Placeholder pour graphique -->
+                        <div class="graph-container">
+                            <p>Image: Parabole y=x² - Courbe en forme de U avec son sommet à l'origine (0,0), symétrique par rapport à l'axe des y</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 7: Fonctions associées -->
+        <div class="card">
+            <div class="card-header">7. Fonctions Associées</div>
+            <div class="card-body">
+                <p>À partir d'une fonction $f$, on peut définir:</p>
+                <ul>
+                    <li>$x \mapsto f(x) + k$: translation verticale</li>
+                    <li>$x \mapsto f(x + k)$: translation horizontale</li>
+                    <li>$x \mapsto k f(x)$: dilatation/contraction verticale</li>
+                    <li>$x \mapsto f(kx)$: dilatation/contraction horizontale</li>
+                    <li>$x \mapsto |f(x)|$: partie positive</li>
+                </ul>
+                
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Soit $f(x) = x^2$. Décrire la transformation subie pour obtenir $g(x) = (x-2)^2 + 1$.</p>
+                    <button class="btn btn-sm btn-primary" onclick="$('#solution7').toggle();">Voir la solution</button>
+                    <div id="solution7" class="solution">
+                        <p><strong>Solution:</strong></p>
+                        <p>$g(x) = (x-2)^2 + 1$ s'obtient à partir de $f(x) = x^2$ par:</p>
+                        <ol>
+                            <li>Translation horizontale de 2 unités vers la droite</li>
+                            <li>Translation verticale de 1 unité vers le haut</li>
+                        </ol>
+                        <!-- Placeholder pour graphique -->
+                        <div class="graph-container">
+                            <p>Image: Parabole y=x² (en pointillés) et parabole décalée y=(x-2)²+1 (continue) - Translation de la parabole originale</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

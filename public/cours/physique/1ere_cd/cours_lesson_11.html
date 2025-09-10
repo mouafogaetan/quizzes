@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instruments d'Optique - Condensé</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border: none;
+        }
+        .card-header {
+            background-color: #f1f8ff;
+            border-bottom: 1px solid #d1e7ff;
+            font-weight: 600;
+        }
+        .exercise {
+            background-color: #e8f4f8;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .solution {
+            display: none;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #4CAF50;
+            margin: 10px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            background-color: #f8f9fa;
+            border-bottom: 3px solid #0d6efd;
+        }
+        .image-placeholder {
+            background-color: #eee;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        .btn-solution {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .card {
+                margin-bottom: 1rem;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-5">Instruments d'Optique</h1>
+            <p class="lead">Microscope, lunette astronomique et télescope de Newton</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="microscope-tab" data-bs-toggle="tab" data-bs-target="#microscope" type="button" role="tab">Microscope</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="lunette-tab" data-bs-toggle="tab" data-bs-target="#lunette" type="button" role="tab">Lunette astronomique</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="telescope-tab" data-bs-toggle="tab" data-bs-target="#telescope" type="button" role="tab">Télescope</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <!-- MICROSCOPE -->
+            <div class="tab-pane fade show active" id="microscope" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">Constitution et principe</div>
+                    <div class="card-body">
+                        <p>Un microscope est constitué de deux systèmes convergents :</p>
+                        <ul>
+                            <li>L'<strong>objectif</strong> : lentille convergente de courte distance focale ($f_1'$ petit)</li>
+                            <li>L'<strong>oculaire</strong> : lentille convergente jouant comme une loupe</li>
+                        </ul>
+                        <p>L'objet à observer est placé légèrement au-delà du foyer objet de l'objectif, qui en donne une image réelle, agrandie et renversée. Cette image sert d'objet pour l'oculaire qui en donne une image virtuelle, agrandie.</p>
+                        
+                        <div class="image-placeholder">
+                            <img src="data:image/jpeg;base64,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AiIgIiICIiAiIgIiICIiAiIgIiICIiAkXFuwamFW4LEOfNXIxB7t4KPGSpFxaMWplWsAxLjtXIwA794qfCSUq4SRMzAmZVIgmRq+II3VGZiDlvcLpbrOAcvEacTygdK9YKLm57gCT4AayK6X3qtrck0ZSQ2ZW6uYtYA2HDv4zUascvlHGdc5C2pXAbIbWNuroLntkmlhgDmbebt5A2scg+iD/wAvA52d+1F0PYzArqCCNzUjhrpykmjSCgKosBoB3CbxAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERASFjUUvSJaxDkoPOPRuLfcSfCTZCxrJnpZgSS56O3Juje5PdlzDx8ZJZq4TBMzRqgAuZWtUetcLurvC7C6ndsVqU2APFuCnipueUrTticXe4UlRvAmxz3y5h0SlSKh15XGnOZo4W97gIpJJC2u91AvUNrhvYeQ15TtQwoXv48dbXtovmrujQaaSRA1RAAABa2g7h2TaIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiYYwBnnPlV02aj0FQhixBRQjMV4FwGGlr2J0G8Lyyq4t6hy0ltzLsrBQA+VgoI3jYPbl1TqDKX5RYhsJl6KpvsldmLlCzsgDLcsNVBdtxSNDYWmaqd0WY1KN9O29lxTwBqa17N2Ut16Y0tmzMgYtYm/LW1uctJS4DHZ8Q6CurgIC1PdD02uD1etbKwvm5kW5iXU02REQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBMMLxEDSlRVRZQAOwaDXUzfLEQMZZtEQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQERED//Z">
+                            <p class="mt-2">Description: Schéma montrant le trajet des rayons lumineux à travers l'objectif et l'oculaire d'un microscope.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Grossissement et puissance</div>
+                    <div class="card-body">
+                        <p>Le <strong>grossissement commercial</strong> $G_c$ du microscope est donné par :</p>
+                        <p class="text-center">$G_c = G_1 \times G_2 = \frac{\delta}{f_1'} \times \frac{1}{f_2'}$</p>
+                        <p>Où :</p>
+                        <ul>
+                            <li>$G_1$ : grossissement de l'objectif</li>
+                            <li>$G_2$ : grossissement de l'oculaire</li>
+                            <li>$f_1'$ : distance focale de l'objectif</li>
+                            <li>$f_2'$ : distance focale de l'oculaire</li>
+                            <li>$\delta$ : distance entre les foyers secondaires (intervalle optique), généralement fixée à 16 cm</li>
+                        </ul>
+                        <p>La <strong>puissance</strong> $P$ est définie comme le grossissement angulaire lorsque l'image est à l'infini :</p>
+                        <p class="text-center">$P = \frac{\delta}{f_1' \cdot f_2'}$</p>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Un microscope est constitué d'un objectif de distance focale $f_1' = 4mm$ et d'un oculaire de distance focale $f_2' = 20mm$. L'intervalle optique $\delta = 160mm$.</p>
+                    <p>1. Calculez le grossissement commercial de ce microscope.</p>
+                    <p>2. Déterminez sa puissance.</p>
+                    <button class="btn-solution" onclick="$('#solution1').toggle();">Voir la solution</button>
+                    <div id="solution1" class="solution">
+                        <p><strong>Solution :</strong></p>
+                        <p>1. Grossissement commercial :</p>
+                        <p>$G_c = \frac{\delta}{f_1'} \times \frac{1}{f_2'} = \frac{160}{4} \times \frac{1}{0.02} = 40 \times 50 = 200$</p>
+                        <p>2. Puissance :</p>
+                        <p>$P = \frac{\delta}{f_1' \cdot f_2'} = \frac{160}{0.004 \times 0.02} = \frac{160}{0.00008} = 2 \times 10^6$ dioptries</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LUNETTE ASTRONOMIQUE -->
+            <div class="tab-pane fade" id="lunette" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">Constitution et principe</div>
+                    <div class="card-body">
+                        <p>Une lunette astronomique est constituée de :</p>
+                        <ul>
+                            <li>Un <strong>objectif</strong> convergent de grande distance focale ($f_1'$ grand)</li>
+                            <li>Un <strong>oculaire</strong> convergent de courte distance focale ($f_2'$ petit)</li>
+                        </ul>
+                        <p>L'objet observé (à l'infini) donne through l'objectif une image réelle située dans le plan focal image de l'objectif. Cette image sert d'objet pour l'oculaire qui en donne une image à l'infini.</p>
+                        
+                        <div class="image-placeholder">
+							<img src="data:image/png;base64,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">
+                            <p class="mt-2">Description: Schéma montrant le trajet des rayons lumineux dans une lunette astronomique en mode afocal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Grossissement</div>
+                    <div class="card-body">
+                        <p>Le <strong>grossissement</strong> $G$ d'une lunette astronomique afocale (image à l'infini) est donné par :</p>
+                        <p class="text-center">$G = -\frac{f_1'}{f_2'}$</p>
+                        <p>Où le signe négatif indique que l'image est renversée.</p>
+                        <p>Pour une lunette terrestre, on ajoute un système pour redresser l'image, ce qui modifie légèrement la formule.</p>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Une lunette astronomique est constituée d'un objectif de distance focale $f_1' = 800mm$ et d'un oculaire de distance focale $f_2' = 20mm$.</p>
+                    <p>1. Calculez le grossissement de cette lunette.</p>
+                    <p>2. Déterminez la longueur de la lunette (distance entre l'objectif et l'oculaire).</p>
+                    <button class="btn-solution" onclick="$('#solution2').toggle();">Voir la solution</button>
+                    <div id="solution2" class="solution">
+                        <p><strong>Solution :</strong></p>
+                        <p>1. Grossissement :</p>
+                        <p>$G = -\frac{f_1'}{f_2'} = -\frac{800}{20} = -40$</p>
+                        <p>Le grossissement est de 40 fois et l'image est renversée.</p>
+                        <p>2. Longueur de la lunette :</p>
+                        <p>Pour une lunette afocale, la distance entre objectif et oculaire est :</p>
+                        <p>$L = f_1' + f_2' = 800 + 20 = 820mm$</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TÉLESCOPE -->
+            <div class="tab-pane fade" id="telescope" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">Télescope de Newton</div>
+                    <div class="card-body">
+                        <p>Le télescope de Newton utilise un miroir concave (objectif) au lieu d'une lentille :</p>
+                        <ul>
+                            <li>Un <strong>miroir primaire</strong> concave (sphérique ou parabolique)</li>
+                            <li>Un <strong>miroir secondaire</strong> plan qui dévie la lumière sur le côté</li>
+                            <li>Un <strong>oculaire</strong> convergent</li>
+                        </ul>
+                        <p>Les avantages du télescope par rapport à la lunette :</p>
+                        <ul>
+                            <li>Absence d'aberration chromatique</li>
+                            <li>Encombrement réduit pour un même diamètre</li>
+                            <li>Coût moindre pour les grandes dimensions</li>
+                        </ul>
+                        
+                        <div class="image-placeholder">
+							<img src="data:image/png;base64,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">
+                            <p class="mt-2">Description: Schéma montrant le trajet de la lumière dans un télescope de Newton avec miroir primaire concave et miroir secondaire plan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Grossissement</div>
+                    <div class="card-body">
+                        <p>Le <strong>grossissement</strong> $G$ d'un télescope est donné par :</p>
+                        <p class="text-center">$G = -\frac{f_1'}{f_2'}$</p>
+                        <p>Où :</p>
+                        <ul>
+                            <li>$f_1'$ : distance focale du miroir primaire</li>
+                            <li>$f_2'$ : distance focale de l'oculaire</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h5>Exercice d'application</h5>
+                    <p>Un télescope de Newton possède un miroir primaire de distance focale $f_1' = 1,2m$ et on utilise un oculaire de distance focale $f_2' = 10mm$.</p>
+                    <p>1. Calculez le grossissement de ce télescope.</p>
+                    <p>2. Si on remplace l'oculaire par un oculaire de $f_2' = 25mm$, quel sera le nouveau grossissement?</p>
+                    <button class="btn-solution" onclick="$('#solution3').toggle();">Voir la solution</button>
+                    <div id="solution3" class="solution">
+                        <p><strong>Solution :</strong></p>
+                        <p>1. Grossissement avec l'oculaire de 10mm :</p>
+                        <p>$G = -\frac{f_1'}{f_2'} = -\frac{1200}{10} = -120$</p>
+                        <p>2. Grossissement avec l'oculaire de 25mm :</p>
+                        <p>$G = -\frac{1200}{25} = -48$</p>
+                        <p>Plus la distance focale de l'oculaire est petite, plus le grossissement est important.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-header">Comparaison des instruments</div>
+            <div class="card-body">
+                <canvas id="comparisonChart" height="250"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Graphique de comparaison
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Microscope', 'Lunette astronomique', 'Télescope Newton'],
+                    datasets: [{
+                        label: 'Grossissement typique (fois)',
+                        data: [400, 50, 120],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Grossissement'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

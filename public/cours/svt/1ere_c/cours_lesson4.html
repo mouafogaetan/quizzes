@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acides Nucléiques et Biosynthèse des Protéines</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .exercise {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .solution {
+            display: none;
+            margin-top: 10px;
+        }
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            background-color: #f8f9fa;
+        }
+        #dnaVisualization {
+            width: 100%;
+            height: 200px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Acides Nucléiques et Biosynthèse des Protéines</h1>
+        
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="structure-tab" data-bs-toggle="tab" data-bs-target="#structure" type="button" role="tab">Structure</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="replication-tab" data-bs-toggle="tab" data-bs-target="#replication" type="button" role="tab">Réplication</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="gene-tab" data-bs-toggle="tab" data-bs-target="#gene" type="button" role="tab">Gène-Protéine</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="biosynthese-tab" data-bs-toggle="tab" data-bs-target="#biosynthese" type="button" role="tab">Biosynthèse</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="myTabContent">
+                    <!-- STRUCTURE DES ACIDES NUCLÉIQUES -->
+                    <div class="tab-pane fade show active" id="structure" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Structure des Acides Nucléiques</h2>
+                            </div>
+                            <div class="card-body">
+                                <h3>Nucléotides</h3>
+                                <p>Les acides nucléiques (ADN et ARN) sont des polymères de nucléotides. Chaque nucléotide est composé de :</p>
+                                <ul>
+                                    <li>Une base azotée (Adénine, Thymine/Uracile, Cytosine, Guanine)</li>
+                                    <li>Un sucre (désoxyribose pour l'ADN, ribose pour l'ARN)</li>
+                                    <li>Un groupe phosphate</li>
+                                </ul>
+                                
+                                <h3>Double hélice d'ADN</h3>
+                                <p>Modèle de Watson et Crick : deux brins antiparallèles formant une double hélice. Les bases sont complémentaires :</p>
+                                <ul>
+                                    <li>A avec T (2 liaisons hydrogène)</li>
+                                    <li>G avec C (3 liaisons hydrogène)</li>
+                                </ul>
+                                
+                                <h3>Différences ADN/ARN</h3>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Caractéristique</th>
+                                            <th>ADN</th>
+                                            <th>ARN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Sucres</td>
+                                            <td>Désoxyribose</td>
+                                            <td>Ribose</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bases</td>
+                                            <td>A, T, C, G</td>
+                                            <td>A, U, C, G</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Structure</td>
+                                            <td>Double brin</td>
+                                            <td>Simple brin (souvent)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Localisation</td>
+                                            <td>Noyau</td>
+                                            <td>Noyau et cytoplasme</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <div id="dnaVisualization">
+                                    <!-- L'image sera chargée ici par p5.js -->
+                                </div>
+                                <p class="text-center"><small>Visualisation simplifiée de la double hélice d'ADN</small></p>
+                                
+                                <div class="exercise">
+                                    <h4>Exercice : Complémentarité des bases</h4>
+                                    <p>Quelle serait la séquence complémentaire de l'ADN pour la séquence suivante : 5'-ATG CCA GTT-3' ?</p>
+                                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                                    <div class="solution">
+                                        <p>La séquence complémentaire est : 3'-TAC GGT CAA-5'</p>
+                                        <p>Ou écrite dans le sens 5'→3' : 5'-AAC TGG CAT-3'</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- RÉPLICATION DE L'ADN -->
+                    <div class="tab-pane fade" id="replication" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Réplication de l'ADN</h2>
+                            </div>
+                            <div class="card-body">
+                                <h3>Mécanisme semi-conservatif</h3>
+                                <p>La réplication de l'ADN est dite semi-conservative car chaque nouvelle molécule d'ADN est constituée d'un brin parental et d'un brin néoformé.</p>
+                                
+                                <h3>Étapes de la réplication</h3>
+                                <ol>
+                                    <li><strong>Initiation</strong> : Ouverture de la double hélice au niveau des origines de réplication par l'hélicase</li>
+                                    <li><strong>Élongation</strong> : Synthèse des nouveaux brins par l'ADN polymérase en suivant les règles de complémentarité</li>
+                                    <li><strong>Terminaison</strong> : Les fourches de réplication se rencontrent et les nouvelles molécules se séparent</li>
+                                </ol>
+                                
+                                <h3>Enzymes impliquées</h3>
+                                <ul>
+                                    <li>Hélicase : sépare les deux brins d'ADN</li>
+                                    <li>ADN polymérase : ajoute les nucléotides complémentaires</li>
+                                    <li>Primase : synthétise une amorce ARN</li>
+                                    <li>Ligase : joint les fragments d'Okazaki</li>
+                                </ul>
+                                
+                                <div class="text-center mb-3">
+                                    <!-- Espace pour une image de la réplication -->
+                                    <img src="data:image/png;base64,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" alt="Schéma du processus de réplication semi-conservative de l'ADN" class="img-fluid">
+                                    <p><small>Schéma montrant le mécanisme semi-conservatif de la réplication de l'ADN</small></p>
+                                </div>
+                                
+                                <div class="exercise">
+                                    <h4>Exercice : Brins retardés et continus</h4>
+                                    <p>Pourquoi parle-t-on de brin continu et de brin discontinu lors de la réplication de l'ADN ?</p>
+                                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                                    <div class="solution">
+                                        <p>L'ADN polymérase ne peut synthétiser que dans le sens 5'→3'.</p>
+                                        <p>Sur le brin où la synthèse se fait dans le même sens que l'ouverture de la fourche de réplication, elle est continue (brin avancé).</p>
+                                        <p>Sur l'autre brin, la synthèse se fait en fragments d'Okazaki (brin retardé) car elle doit s'effectuer en direction opposée à l'ouverture de la fourche.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- RELATION GÈNE-PROTÉINE -->
+                    <div class="tab-pane fade" id="gene" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Relation Gène - Protéine</h2>
+                            </div>
+                            <div class="card-body">
+                                <h3>Le gène</h3>
+                                <p>Un gène est une séquence d'ADN qui code pour une protéine ou un ARN fonctionnel. Il contient l'information génétique nécessaire à la synthèse d'une protéine.</p>
+                                
+                                <h3>Code génétique</h3>
+                                <p>Le code génétique est universel, dégénéré et non chevauchant. Il est composé de codons (triplets de nucléotides) qui spécifient les acides aminés.</p>
+                                <p>Il existe 64 codons possibles :</p>
+                                <ul>
+                                    <li>61 codons qui codent pour les 20 acides aminés</li>
+                                    <li>3 codons stop (UAA, UAG, UGA) qui signalent la fin de la traduction</li>
+                                    <li>1 codon start (AUG) qui initie la traduction et code pour la méthionine</li>
+                                </ul>
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="5" class="text-center">Table du code génétique (première base à gauche)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>UUU</th><th>Phe</th>
+                                                <th>UCU</th><th>Ser</th>
+                                                <th rowspan="4">U<br>A<br>G</th>
+                                            </tr>
+                                            <tr>
+                                                <th>UUC</th><th>Phe</th>
+                                                <th>UCC</th><th>Ser</th>
+                                            </tr>
+                                            <tr>
+                                                <th>UUA</th><th>Leu</th>
+                                                <th>UCA</th><th>Ser</th>
+                                            </tr>
+                                            <tr>
+                                                <th>UUG</th><th>Leu</th>
+                                                <th>UCG</th><th>Ser</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p class="text-center"><small>Extrait de la table du code génétique (partie U)</small></p>
+                                
+                                <div class="exercise">
+                                    <h4>Exercice : Lecture du code génétique</h4>
+                                    <p>Quel acide aminé est codé par le codon AUG ? Et par le codon UUU ?</p>
+                                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                                    <div class="solution">
+                                        <p>AUG code pour la Méthionine (et c'est aussi le codon start).</p>
+                                        <p>UUU code pour la Phénylalanine.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- BIOSYNTHÈSE DES PROTÉINES -->
+                    <div class="tab-pane fade" id="biosynthese" role="tabpanel">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Biosynthèse des Protéines</h2>
+                            </div>
+                            <div class="card-body">
+                                <h3>Transcription (ADN → ARNm)</h3>
+                                <p>Processus par lequel l'information génétique de l'ADN est copiée en ARN messager (ARNm) :</p>
+                                <ol>
+                                    <li>Initiation : fixation de l'ARN polymérase sur le promoteur</li>
+                                    <li>Élongation : synthèse de l'ARNm dans le sens 5'→3'</li>
+                                    <li>Terminaison : arrêt de la transcription au niveau du terminateur</li>
+                                </ol>
+                                
+                                <h3>Traduction (ARNm → Protéine)</h3>
+                                <p>Processus par lequel l'information de l'ARNm est décodée pour synthétiser une protéine :</p>
+                                <ol>
+                                    <li>Initiation : assemblage du ribosome sur l'ARNm</li>
+                                    <li>Élongation : ajout d'acides aminés à la chaîne polypeptidique</li>
+                                    <li>Terminaison : libération de la protéine lorsqu'un codon stop est atteint</li>
+                                </ol>
+                                
+                                <h3>Acteurs moléculaires</h3>
+                                <ul>
+                                    <li>Ribosomes : complexes ribonucléoprotéiques où se déroule la traduction</li>
+                                    <li>ARNt (ARN de transfert) : apporte les acides aminés au ribosome</li>
+                                    <li>ARNm (ARN messager) : porte l'information génétique</li>
+                                </ul>
+                                
+                                <div class="text-center mb-3">
+                                    <!-- Espace pour une image de la synthèse des protéines -->
+                                    <img src="data:image/png;base64,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" alt="Schéma des étapes de la transcription et de la traduction" class="img-fluid">
+                                    <p><small>Représentation schématique du processus complet de synthèse des protéines</small></p>
+                                </div>
+                                
+                                <div class="exercise">
+                                    <h4>Exercice : Transcription et traduction</h4>
+                                    <p>Soit la séquence d'ADN suivante : 3'-TAC GGT CAA TGC ATT-5'</p>
+                                    <p>1. Quelle est la séquence d'ARNm transcrite ?</p>
+                                    <p>2. Quelle est la séquence d'acides aminés traduite ?</p>
+                                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                                    <div class="solution">
+                                        <p>1. Séquence d'ARNm : 5'-AUG CCA GUU ACG UAA-3'</p>
+                                        <p>2. Séquence d'acides aminés : Met-Pro-Val-Thr-Stop</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header bg-success text-white">
+                <h2>Tâche finale</h2>
+            </div>
+            <div class="card-body">
+                <p>Réaliser un schéma légendé du processus complet « ADN → ARNm → Protéine », accompagné d'une brève explication du rôle de chaque étape.</p>
+                
+                <div class="text-center">
+                    <!-- Espace pour l'image de la tâche finale -->
+                    <img src="data:image/png;base64,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Nn+aNP9jVP54//Dw8DRbvkjignD1U7B2czArTWSca+3iB8eewVpskdYzj98//Ula/gCkHUXlj19//Pj26fHbmBYUidY3hnmcouvv2Ut2A1TV5pfjdFKqhrxVlm39TViLLdL6H33mxylm5/PB44/vmBV5pHBPn74fPP51cPCZsiVTUfz212coeATGHp4eD+bsvFM7tdQFtiqF9Otn629ofh/zxHz/1GceHhmseZ///ucfqnCPP/DeAI4AM//88w+h7f7T6enjwdNgcP/5/s+vX+fZqnvyoNP0ynhQ0kcVJ1cJUky5n3bk034rFyYj//tX2PrrAbSReWLuB//36fNR+fP7D6T84POfRE/7TwzQdPT+/QdS/P37A/N98Kn/+ZSUz2li21GZglbtpmoarMB8VUu3rKqTwn9W3XtmxfDfj/U18es9Vq975v7zwdO3B2rNI/8Bs/X92yfm0+eRlf8IEof1kxky/ceHJ+Zh1FdOEDRQKxymGv3qsInCLsOUnfKVU2l06+lqjWltoKWbwPpW/vEBTNS3b/c/ftw/YREalX/tM38y909f7/v3X5kHwgpht//pFJv+rz++HTw9UXM2A7yfysHvVuSwqSqraiMdQrppoaxpgZaUbnE9D+LjpG97uH8g23H5w6jne7x/+kzLZWr9H553IGaqhMgvGzQSk5s7wYa802iEU3im/DkXfymGkPCGHfkETjVec+Tzfrb5Yyv04ZnyOWf+6GdhiBxKg1glRv2msIlR9RExWj8vfzM1qj46eMEjCJPSB85j/aS0SWTmD3l5+d/T5fI4YnMw1x2+IjRg5sqac0tliO69WVSq58o/vH8DscP1viwZkFf+2Yo99thjjz322GOPPfbY45fw/7flGkPU2RhuAAAAAElFTkSuQmCC" alt="Schéma complet de l'expression génique: ADN, transcription, ARNm, traduction, protéine" class="img-fluid">
+                    <p><small>Schéma récapitulatif du flux de l'information génétique</small></p>
+                </div>
+                
+                <h4>Explications :</h4>
+                <ol>
+                    <li><strong>ADN</strong> : Support de l'information génétique, situé dans le noyau.</li>
+                    <li><strong>Transcription</strong> : Copie de l'ADN en ARNm par l'ARN polymérase.</li>
+                    <li><strong>ARNm</strong> : Matrice mobile transportant l'information du noyau au cytoplasme.</li>
+                    <li><strong>Traduction</strong> : Décodage de l'ARNm en chaîne polypeptidique par les ribosomes.</li>
+                    <li><strong>Protéine</strong> : Produit fonctionnel assurant une fonction cellulaire spécifique.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Script pour afficher/masquer les solutions
+        $(document).ready(function() {
+            $('.show-solution').click(function() {
+                $(this).siblings('.solution').toggle();
+            });
+        });
+
+        // Script p5.js pour visualiser l'ADN
+        function sketch(p) {
+            p.setup = function() {
+                p.createCanvas(400, 200);
+                p.angleMode(p.DEGREES);
+            };
+
+            p.draw = function() {
+                p.background(240);
+                p.translate(p.width/2, p.height/2);
+                
+                // Dessiner une représentation simplifiée de l'ADN
+                p.stroke(50, 50, 200);
+                for (let i = -180; i < 180; i += 20) {
+                    let x = i;
+                    let y1 = 30 * p.cos(i * 3);
+                    let y2 = -30 * p.cos(i * 3);
+                    
+                    p.line(x, y1, x + 20, 30 * p.cos((i + 20) * 3));
+                    p.line(x, y2, x + 20, -30 * p.cos((i + 20) * 3));
+                    
+                    // Dessiner les paires de bases
+                    p.stroke(200, 50, 50);
+                    p.line(x, y1, x, y2);
+                }
+            };
+        }
+
+        new p5(sketch, 'dnaVisualization');
+    </script>
+</body>
+</html>

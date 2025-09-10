@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structures Algorithmiques - Résumé</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .code-block {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+        }
+        .exercise {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .solution {
+            display: none;
+            margin-top: 10px;
+        }
+        h2 {
+            color: #0d6efd;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0d6efd;
+        }
+        body {
+            padding-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Structures Algorithmiques - Résumé</h1>
+        
+        <div class="alert alert-info">
+            Ce document présente un condensé des notions essentielles sur les structures algorithmiques, avec des exemples et exercices corrigés.
+        </div>
+
+        <h2>1. Structures Itératives (Boucles)</h2>
+        
+        <div class="card">
+            <div class="card-header">Structure TANT QUE</div>
+            <div class="card-body">
+                <p>Exécute une action tant qu'une condition est vraie.</p>
+                <div class="code-block">
+                    // Syntaxe<br>
+                    TANT QUE condition FAIRE<br>
+                    &nbsp;&nbsp;action;<br>
+                    FIN TANT QUE
+                </div>
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Afficher les nombres de 1 à 5 avec une boucle TANT QUE.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <div class="code-block">
+                            Variables i: Entier<br>
+                            Début<br>
+                            &nbsp;&nbsp;i ← 1;<br>
+                            &nbsp;&nbsp;TANT QUE i ≤ 5 FAIRE<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;AFFICHER(i);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;i ← i + 1;<br>
+                            &nbsp;&nbsp;FIN TANT QUE<br>
+                            Fin
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Structure RÉPÉTER JUSQU'À</div>
+            <div class="card-body">
+                <p>Exécute une action au moins une fois, puis répète jusqu'à ce qu'une condition soit vraie.</p>
+                <div class="code-block">
+                    // Syntaxe<br>
+                    RÉPÉTER<br>
+                    &nbsp;&nbsp;action;<br>
+                    JUSQU'À condition
+                </div>
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Demander un nombre jusqu'à ce qu'il soit positif.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <div class="code-block">
+                            Variables n: Entier<br>
+                            Début<br>
+                            &nbsp;&nbsp;RÉPÉTER<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;AFFICHER("Entrez un nombre positif: ");<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;LIRE(n);<br>
+                            &nbsp;&nbsp;JUSQU'À n > 0<br>
+                            Fin
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Structure POUR</div>
+            <div class="card-body">
+                <p>Exécute une action un nombre déterminé de fois.</p>
+                <div class="code-block">
+                    // Syntaxe<br>
+                    POUR variable ALLANT DE début À fin [PAS valeur] FAIRE<br>
+                    &nbsp;&nbsp;action;<br>
+                    FIN POUR
+                </div>
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Calculer la somme des nombres de 1 à 10.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <div class="code-block">
+                            Variables i, somme: Entier<br>
+                            Début<br>
+                            &nbsp;&nbsp;somme ← 0;<br>
+                            &nbsp;&nbsp;POUR i ALLANT DE 1 À 10 FAIRE<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;somme ← somme + i;<br>
+                            &nbsp;&nbsp;FIN POUR<br>
+                            &nbsp;&nbsp;AFFICHER("La somme est: ", somme);<br>
+                            Fin
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>2. Structures Conditionnelles</h2>
+        
+        <div class="card">
+            <div class="card-header">Structure SI ALORS SINON (complète)</div>
+            <div class="card-body">
+                <p>Exécute une action si une condition est vraie, une autre action si elle est fausse.</p>
+                <div class="code-block">
+                    // Syntaxe<br>
+                    SI condition ALORS<br>
+                    &nbsp;&nbsp;action1;<br>
+                    SINON<br>
+                    &nbsp;&nbsp;action2;<br>
+                    FIN SI
+                </div>
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Vérifier si un nombre est pair ou impair.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <div class="code-block">
+                            Variables n: Entier<br>
+                            Début<br>
+                            &nbsp;&nbsp;AFFICHER("Entrez un nombre: ");<br>
+                            &nbsp;&nbsp;LIRE(n);<br>
+                            &nbsp;&nbsp;SI n MOD 2 = 0 ALORS<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;AFFICHER("Le nombre est pair");<br>
+                            &nbsp;&nbsp;SINON<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;AFFICHER("Le nombre est impair");<br>
+                            &nbsp;&nbsp;FIN SI<br>
+                            Fin
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Structure SI ALORS (simple)</div>
+            <div class="card-body">
+                <p>Exécute une action seulement si une condition est vraie.</p>
+                <div class="code-block">
+                    // Syntaxe<br>
+                    SI condition ALORS<br>
+                    &nbsp;&nbsp;action;<br>
+                    FIN SI
+                </div>
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Afficher un message si la note est supérieure à 10.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <div class="code-block">
+                            Variables note: Réel<br>
+                            Début<br>
+                            &nbsp;&nbsp;AFFICHER("Entrez votre note: ");<br>
+                            &nbsp;&nbsp;LIRE(note);<br>
+                            &nbsp;&nbsp;SI note > 10 ALORS<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;AFFICHER("Vous avez réussi");<br>
+                            &nbsp;&nbsp;FIN SI<br>
+                            Fin
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>3. Structures de Données</h2>
+        
+        <div class="card">
+            <div class="card-header">Enregistrements (Structures)</div>
+            <div class="card-body">
+                <p>Regroupement de données de types différents sous un même nom.</p>
+                <div class="code-block">
+                    // Déclaration d'un type Personne<br>
+                    Type<br>
+                    &nbsp;&nbsp;Structure TPersonne<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;nom: Chaîne<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;âge: Entier<br>
+                    &nbsp;&nbsp;FinStruct
+                </div>
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Créer une variable de type Personne et afficher ses informations.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <div class="code-block">
+                            Variables p: TPersonne<br>
+                            Début<br>
+                            &nbsp;&nbsp;p.nom ← "Dupont";<br>
+                            &nbsp;&nbsp;p.âge ← 25;<br>
+                            &nbsp;&nbsp;AFFICHER("Nom: ", p.nom, ", Âge: ", p.âge);<br>
+                            Fin
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Tableaux</div>
+            <div class="card-body">
+                <p>Collection d'éléments de même type, accessibles par un indice.</p>
+                <div class="code-block">
+                    // Déclaration d'un tableau de 10 entiers<br>
+                    Variables notes: Tableau[10] de Entier
+                </div>
+                <div class="exercise">
+                    <p><strong>Exercice:</strong> Calculer la moyenne des notes d'un tableau.</p>
+                    <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+                    <div class="solution">
+                        <div class="code-block">
+                            Variables notes: Tableau[5] de Réel<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i: Entier<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;somme, moyenne: Réel<br>
+                            Début<br>
+                            &nbsp;&nbsp;// Saisie des notes<br>
+                            &nbsp;&nbsp;POUR i ALLANT DE 0 À 4 FAIRE<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;AFFICHER("Entrez la note ", i+1, ": ");<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;LIRE(notes[i]);<br>
+                            &nbsp;&nbsp;FIN POUR<br>
+                            <br>
+                            &nbsp;&nbsp;// Calcul de la moyenne<br>
+                            &nbsp;&nbsp;somme ← 0;<br>
+                            &nbsp;&nbsp;POUR i ALLANT DE 0 À 4 FAIRE<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;somme ← somme + notes[i];<br>
+                            &nbsp;&nbsp;FIN POUR<br>
+                            &nbsp;&nbsp;moyenne ← somme / 5;<br>
+                            &nbsp;&nbsp;AFFICHER("La moyenne est: ", moyenne);<br>
+                            Fin
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Listes Chaînées</div>
+            <div class="card-body">
+                <p>Structure de données où chaque élément pointe vers le suivant.</p>
+                <p>Image à insérer: Représentation schématique d'une liste chaînée avec des nœuds contenant des données et des pointeurs.</p>
+                <div class="code-block">
+                    // Structure d'un nœud en pseudo-code<br>
+                    Type<br>
+                    &nbsp;&nbsp;Structure TNœud<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;valeur: Entier<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;suivant: ^TNœud  // Pointeur vers le nœud suivant<br>
+                    &nbsp;&nbsp;FinStruct
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Piles</div>
+            <div class="card-body">
+                <p>Structure de données de type LIFO (Last In, First Out - Dernier entré, premier sorti).</p>
+                <p>Image à insérer: Représentation d'une pile avec des éléments empilés les uns sur les autres et les opérations empiler/dépiler.</p>
+                <div class="code-block">
+                    // Opérations principales sur une pile<br>
+                    EMPILER(valeur)  // Ajoute un élément au sommet de la pile<br>
+                    DÉPILER()        // Retire et retourne l'élément au sommet de la pile<br>
+                    EST_VIDE()       // Vérifie si la pile est vide
+                </div>
+            </div>
+        </div>
+
+        <h2>4. Exercices de Synthèse</h2>
+        
+        <div class="exercise">
+            <p><strong>Exercice 1:</strong> Écrire un algorithme qui trouve le plus grand élément dans un tableau d'entiers.</p>
+            <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+            <div class="solution">
+                <div class="code-block">
+                    Variables tab: Tableau[10] de Entier<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i, max: Entier<br>
+                    Début<br>
+                    &nbsp;&nbsp;// Remplissage du tableau (omis pour la brièveté)<br>
+                    &nbsp;&nbsp;max ← tab[0];<br>
+                    &nbsp;&nbsp;POUR i ALLANT DE 1 À 9 FAIRE<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;SI tab[i] > max ALORS<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max ← tab[i];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;FIN SI<br>
+                    &nbsp;&nbsp;FIN POUR<br>
+                    &nbsp;&nbsp;AFFICHER("Le plus grand élément est: ", max);<br>
+                    Fin
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <p><strong>Exercice 2:</strong> Écrire un algorithme qui inverse les éléments d'un tableau.</p>
+            <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+            <div class="solution">
+                <div class="code-block">
+                    Variables tab: Tableau[10] de Entier<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i, temp: Entier<br>
+                    Début<br>
+                    &nbsp;&nbsp;POUR i ALLANT DE 0 À 4 FAIRE<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;temp ← tab[i];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;tab[i] ← tab[9-i];<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;tab[9-i] ← temp;<br>
+                    &nbsp;&nbsp;FIN POUR<br>
+                    Fin
+                </div>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <p><strong>Exercice 3:</strong> Écrire un algorithme qui calcule la factorielle d'un nombre entier positif.</p>
+            <button class="btn btn-sm btn-primary show-solution">Voir la solution</button>
+            <div class="solution">
+                <div class="code-block">
+                    Variables n, i, fact: Entier<br>
+                    Début<br>
+                    &nbsp;&nbsp;AFFICHER("Entrez un nombre entier positif: ");<br>
+                    &nbsp;&nbsp;LIRE(n);<br>
+                    &nbsp;&nbsp;fact ← 1;<br>
+                    &nbsp;&nbsp;POUR i ALLANT DE 1 À n FAIRE<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;fact ← fact * i;<br>
+                    &nbsp;&nbsp;FIN POUR<br>
+                    &nbsp;&nbsp;AFFICHER("La factorielle de ", n, " est: ", fact);<br>
+                    Fin
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.show-solution').click(function() {
+                $(this).siblings('.solution').slideToggle();
+            });
+        });
+    </script>
+</body>
+</html>

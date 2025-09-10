@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dérivabilité et Étude de Fonctions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        .card {
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        .example-box {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .solution-box {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: none;
+        }
+        .toggle-solution {
+            cursor: pointer;
+            color: #0d6efd;
+            font-weight: bold;
+        }
+        .graph-container {
+            width: 100%;
+            height: 300px;
+            margin: 15px 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        h2 {
+            color: #ffffff;
+            border-bottom: 2px solid #0d6efd;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <h1 class="text-center mb-4">Dérivabilité et Étude de Fonctions</h1>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>1. Nombre dérivé et dérivabilité</h2>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Définition :</strong> Une fonction $f$ est dérivable en $x_0$ si la limite suivante existe et est finie :</p>
+                        <p class="text-center">$f'(x_0) = \lim_{x \to x_0} \frac{f(x)-f(x_0)}{x-x_0}$</p>
+                        <p>Cette limite est appelée <strong>nombre dérivé</strong> de $f$ en $x_0$.</p>
+                        
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Soit $f(x) = x^2$. Calculer $f'(2)$.</p>
+                            <p class="toggle-solution" onclick="toggleSolution('solution1')">Voir la solution ▶</p>
+                            <div id="solution1" class="solution-box">
+                                <p>$f'(2) = \lim_{x \to 2} \frac{f(x)-f(2)}{x-2} = \lim_{x \to 2} \frac{x^2-4}{x-2} = \lim_{x \to 2} \frac{(x-2)(x+2)}{x-2} = \lim_{x \to 2} (x+2) = 4$</p>
+                                <p>Ainsi, $f'(2) = 4$.</p>
+                            </div>
+                        </div>
+                        
+                        <p><strong>Propriété :</strong> Si $f$ est dérivable en $x_0$, alors $f$ est continue en $x_0$. La réciproque est fausse.</p>
+                        
+                        <div class="example-box">
+                            <h5>Exercice d'application :</h5>
+                            <p>Étudier la dérivabilité de $f(x) = |x|$ en $x_0 = 0$.</p>
+                            <p class="toggle-solution" onclick="toggleSolution('solution2')">Voir la solution ▶</p>
+                            <div id="solution2" class="solution-box">
+                                <p>Pour $x < 0$, $f(x) = -x$, donc :</p>
+                                <p>$\lim_{x \to 0^-} \frac{f(x)-f(0)}{x-0} = \lim_{x \to 0^-} \frac{-x}{x} = -1$</p>
+                                <p>Pour $x > 0$, $f(x) = x$, donc :</p>
+                                <p>$\lim_{x \to 0^+} \frac{f(x)-f(0)}{x-0} = \lim_{x \to 0^+} \frac{x}{x} = 1$</p>
+                                <p>Les limites à gauche et à droite sont différentes, donc $f$ n'est pas dérivable en 0.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>2. Calcul des dérivées</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Voici les formules de dérivation des fonctions usuelles :</p>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Fonction</th>
+                                        <th>Dérivée</th>
+                                        <th>Domaine de dérivabilité</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$f(x) = k$ (constante)</td>
+                                        <td>$f'(x) = 0$</td>
+                                        <td>$\mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$f(x) = x$</td>
+                                        <td>$f'(x) = 1$</td>
+                                        <td>$\mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$f(x) = x^n$ ($n \in \mathbb{N}^*$)</td>
+                                        <td>$f'(x) = nx^{n-1}$</td>
+                                        <td>$\mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$f(x) = \frac{1}{x}$</td>
+                                        <td>$f'(x) = -\frac{1}{x^2}$</td>
+                                        <td>$\mathbb{R}^*$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$f(x) = \sqrt{x}$</td>
+                                        <td>$f'(x) = \frac{1}{2\sqrt{x}}$</td>
+                                        <td>$]0, +\infty[$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$f(x) = \sin x$</td>
+                                        <td>$f'(x) = \cos x$</td>
+                                        <td>$\mathbb{R}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$f(x) = \cos x$</td>
+                                        <td>$f'(x) = -\sin x$</td>
+                                        <td>$\mathbb{R}$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p>Opérations sur les fonctions dérivables :</p>
+                        <ul>
+                            <li>$(f + g)' = f' + g'$</li>
+                            <li>$(kf)' = kf'$ ($k$ constante)</li>
+                            <li>$(fg)' = f'g + fg'$</li>
+                            <li>$\left(\frac{f}{g}\right)' = \frac{f'g - fg'}{g^2}$</li>
+                            <li>$(f^n)' = nf'f^{n-1}$</li>
+                            <li>$(\sqrt{f})' = \frac{f'}{2\sqrt{f}}$</li>
+                            <li>$(f(ax+b))' = af'(ax+b)$</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <h5>Exercice d'application :</h5>
+                            <p>Calculer la dérivée de $f(x) = \frac{2x-5}{x+3}$.</p>
+                            <p class="toggle-solution" onclick="toggleSolution('solution3')">Voir la solution ▶</p>
+                            <div id="solution3" class="solution-box">
+                                <p>On utilise la formule $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$ :</p>
+                                <p>$u(x) = 2x-5$, donc $u'(x) = 2$</p>
+                                <p>$v(x) = x+3$, donc $v'(x) = 1$</p>
+                                <p>$f'(x) = \frac{2(x+3) - (2x-5)(1)}{(x+3)^2} = \frac{2x+6-2x+5}{(x+3)^2} = \frac{11}{(x+3)^2}$</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>3. Équation de la tangente</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Si $f$ est dérivable en $x_0$, la tangente à la courbe de $f$ au point d'abscisse $x_0$ a pour équation :</p>
+                        <p class="text-center">$y = f'(x_0)(x - x_0) + f(x_0)$</p>
+                        
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Déterminer l'équation de la tangente à la courbe de $f(x) = x^2$ au point d'abscisse $x_0 = 2$.</p>
+                            <p class="toggle-solution" onclick="toggleSolution('solution4')">Voir la solution ▶</p>
+                            <div id="solution4" class="solution-box">
+                                <p>$f(2) = 4$ et $f'(x) = 2x$, donc $f'(2) = 4$</p>
+                                <p>L'équation de la tangente est : $y = 4(x - 2) + 4 = 4x - 4$</p>
+                            </div>
+                        </div>
+                        
+                        <div class="example-box">
+                            <h5>Exercice d'application :</h5>
+                            <p>Soit $f(x) = \frac{x^2 - 2x - 2}{x + 1}$. Déterminer l'équation de la tangente à la courbe de $f$ en $x = 3$.</p>
+                            <p class="toggle-solution" onclick="toggleSolution('solution5')">Voir la solution ▶</p>
+                            <div id="solution5" class="solution-box">
+                                <p>On calcule d'abord $f(3)$ :</p>
+                                <p>$f(3) = \frac{9 - 6 - 2}{3 + 1} = \frac{1}{4}$</p>
+                                <p>On calcule ensuite $f'(x)$ :</p>
+                                <p>On peut réécrire $f(x) = x - 3 + \frac{1}{x+1}$ (par division euclidienne)</p>
+                                <p>Donc $f'(x) = 1 - \frac{1}{(x+1)^2}$</p>
+                                <p>Ainsi, $f'(3) = 1 - \frac{1}{16} = \frac{15}{16}$</p>
+                                <p>L'équation de la tangente est :</p>
+                                <p>$y = \frac{15}{16}(x - 3) + \frac{1}{4}$</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>4. Sens de variation</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Soit $f$ une fonction dérivable sur un intervalle $I$ :</p>
+                        <ul>
+                            <li>Si $f'(x) > 0$ pour tout $x \in I$, alors $f$ est strictement croissante sur $I$</li>
+                            <li>Si $f'(x) < 0$ pour tout $x \in I$, alors $f$ est strictement décroissante sur $I$</li>
+                            <li>Si $f'(x) = 0$ pour tout $x \in I$, alors $f$ est constante sur $I$</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Étudier les variations de $f(x) = x^2 + 4x$.</p>
+                            <p class="toggle-solution" onclick="toggleSolution('solution6')">Voir la solution ▶</p>
+                            <div id="solution6" class="solution-box">
+                                <p>$f'(x) = 2x + 4$</p>
+                                <p>$f'(x) = 0$ lorsque $x = -2$</p>
+                                <p>Signe de $f'(x)$ :</p>
+                                <ul>
+                                    <li>$f'(x) < 0$ pour $x < -2$ : $f$ est décroissante sur $]-\infty, -2]$</li>
+                                    <li>$f'(x) > 0$ pour $x > -2$ : $f$ est croissante sur $[-2, +\infty[$</li>
+                                </ul>
+                                <p>Tableau de variations :</p>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center">
+                                        <tr>
+                                            <th>$x$</th>
+                                            <td>$-∞$</td>
+                                            <td></td>
+                                            <td>$-2$</td>
+                                            <td></td>
+                                            <td>$+∞$</td>
+                                        </tr>
+                                        <tr>
+                                            <th>$f'(x)$</th>
+                                            <td></td>
+                                            <td>$-$</td>
+                                            <td>$0$</td>
+                                            <td>$+$</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th>$f(x)$</th>
+                                            <td>$+∞$</td>
+                                            <td>↘</td>
+                                            <td>$-4$</td>
+                                            <td>↗</td>
+                                            <td>$+∞$</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p><strong>Extremum :</strong> Si $f$ admet un extremum en $x_0$ et si $f$ est dérivable en $x_0$, alors $f'(x_0) = 0$.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>5. Représentation graphique et asymptotes</h2>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Asymptote verticale :</strong> Si $\lim_{x \to a} f(x) = \pm\infty$, alors la droite d'équation $x = a$ est asymptote verticale.</p>
+                        <p><strong>Asymptote horizontale :</strong> Si $\lim_{x \to \pm\infty} f(x) = b$, alors la droite d'équation $y = b$ est asymptote horizontale.</p>
+                        <p><strong>Asymptote oblique :</strong> Si $\lim_{x \to \pm\infty} [f(x) - (ax + b)] = 0$, alors la droite d'équation $y = ax + b$ est asymptote oblique.</p>
+                        
+                        <div class="example-box">
+                            <h5>Exemple :</h5>
+                            <p>Soit $f(x) = \frac{x^2 - 2x - 2}{x + 1}$. Déterminer ses asymptotes.</p>
+                            <p class="toggle-solution" onclick="toggleSolution('solution7')">Voir la solution ▶</p>
+                            <div id="solution7" class="solution-box">
+                                <p>1. Asymptote verticale :</p>
+                                <p>$\lim_{x \to -1^-} f(x) = -\infty$ et $\lim_{x \to -1^+} f(x) = +\infty$</p>
+                                <p>Donc la droite $x = -1$ est asymptote verticale.</p>
+                                
+                                <p>2. Asymptote oblique :</p>
+                                <p>On écrit $f(x) = x - 3 + \frac{1}{x+1}$ (division euclidienne)</p>
+                                <p>$\lim_{x \to \pm\infty} [f(x) - (x - 3)] = \lim_{x \to \pm\infty} \frac{1}{x+1} = 0$</p>
+                                <p>Donc la droite $y = x - 3$ est asymptote oblique.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="example-box">
+                            <h5>Exercice d'application :</h5>
+                            <p>Étudier et représenter graphiquement la fonction $f(x) = \frac{x^2 + 3x + 3}{x + 2}$.</p>
+                            <p class="toggle-solution" onclick="toggleSolution('solution8')">Voir la solution ▶</p>
+                            <div id="solution8" class="solution-box">
+                                <p>1. Domaine de définition : $\mathbb{R} \setminus \{-2\}$</p>
+                                <p>2. Limites :</p>
+                                <ul>
+                                    <li>$\lim_{x \to -2^-} f(x) = -\infty$</li>
+                                    <li>$\lim_{x \to -2^+} f(x) = +\infty$</li>
+                                    <li>$\lim_{x \to \pm\infty} f(x) = \pm\infty$</li>
+                                </ul>
+                                <p>3. Asymptotes :</p>
+                                <ul>
+                                    <li>Asymptote verticale : $x = -2$</li>
+                                    <li>Asymptote oblique : on effectue la division euclidienne</li>
+                                </ul>
+                                <p>$f(x) = x + 1 + \frac{1}{x+2}$</p>
+                                <p>$\lim_{x \to \pm\infty} [f(x) - (x + 1)] = \lim_{x \to \pm\infty} \frac{1}{x+2} = 0$</p>
+                                <p>Donc $y = x + 1$ est asymptote oblique.</p>
+                                <p>4. Dérivée :</p>
+                                <p>$f'(x) = \frac{(2x+3)(x+2) - (x^2+3x+3)}{(x+2)^2} = \frac{x^2+4x+3}{(x+2)^2}$</p>
+                                <p>Signe de $f'(x)$ : le numérateur s'annule en $x = -1$ et $x = -3$</p>
+                                <p>Tableau de variations :</p>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center">
+                                        <tr>
+                                            <th>$x$</th>
+                                            <td>$-∞$</td>
+                                            <td></td>
+                                            <td>$-3$</td>
+                                            <td></td>
+                                            <td>$-2$</td>
+                                            <td></td>
+                                            <td>$-1$</td>
+                                            <td></td>
+                                            <td>$+∞$</td>
+                                        </tr>
+                                        <tr>
+                                            <th>$f'(x)$</th>
+                                            <td></td>
+                                            <td>$+$</td>
+                                            <td>$0$</td>
+                                            <td>$-∞$</td>
+                                            <td>$-$</td>
+                                            <td>$+∞$</td>
+                                            <td>$0$</td>
+                                            <td>$+$</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th>$f(x)$</th>
+                                            <td>$-∞$</td>
+                                            <td>↗</td>
+                                            <td>$-3$</td>
+                                            <td>↘</td>
+                                            <td>$|$</td>
+                                            <td>↗</td>
+                                            <td>$-1$</td>
+                                            <td>↗</td>
+                                            <td>$+∞$</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <p>5. Représentation graphique :</p>
+                                <p>La courbe admet une asymptote verticale en $x = -2$ et une asymptote oblique $y = x + 1$.</p>
+                                <p>Elle présente un maximum relatif en $x = -3$ ($f(-3) = -3$) et un minimum relatif en $x = -1$ ($f(-1) = -1$).</p>
+                                <!-- Placeholder pour le graphique -->
+                                <div class="graph-container">
+                                    <p>Image: Courbe de f(x) = (x²+3x+3)/(x+2) avec ses asymptotes</p>
+                                    <p>Description: La courbe présente une asymptote verticale en x=-2 et une asymptote oblique y=x+1. Elle passe par les points (-3,-3) et (-1,-1).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            if (solution.style.display === 'block') {
+                solution.style.display = 'none';
+                event.target.textContent = 'Voir la solution ▶';
+            } else {
+                solution.style.display = 'block';
+                event.target.textContent = 'Masquer la solution ▼';
+            }
+        }
+        
+        // Script pour initialiser les graphiques (à adapter selon les besoins)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Code pour initialiser les graphiques avec Chart.js
+            // Exemple pour le graphique de la fonction f(x) = (x²+3x+3)/(x+2)
+            const ctx = document.createElement('canvas');
+            ctx.width = 400;
+            ctx.height = 300;
+            // Ajouter le code pour créer le graphique avec Chart.js
+            // Note: Ceci est un placeholder, l'implémentation réelle nécessiterait 
+            // de définir les données précises et les options du graphique
+        });
+    </script>
+</body>
+</html>
