@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 3 : Force de gravitation</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* Container principal simulant une page A4 */
+        .fiche-revision {
+            max-width: 1100px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête de la fiche */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px 35px;
+            border-bottom: 5px solid #ffb347;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 5px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .header .sous-titre {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+            border-left: 3px solid #ffb347;
+            padding-left: 15px;
+            margin-top: 8px;
+        }
+
+        .objectif-bac {
+            background-color: #ffb34720;
+            margin-top: 18px;
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            display: inline-block;
+            font-weight: 500;
+            border: 1px solid #ffb34760;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 35px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 30px;
+            border-left: 4px solid #2a5298;
+            padding-left: 20px;
+        }
+
+        .section h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2 i {
+            font-size: 1.5rem;
+        }
+
+        .section h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin: 15px 0 8px 0;
+        }
+
+        .card-notion {
+            background-color: #f8fafc;
+            border-radius: 16px;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.1s ease;
+        }
+
+        .card-notion strong {
+            color: #2a5298;
+            font-weight: 700;
+        }
+
+        .formule {
+            background-color: #eef2ff;
+            padding: 12px 18px;
+            border-radius: 14px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.05rem;
+            text-align: center;
+            margin: 15px 0;
+            border-left: 4px solid #ffb347;
+            font-weight: 600;
+        }
+
+        .astuce {
+            background-color: #fef9e3;
+            border-left: 4px solid #f59e0b;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .astuce p {
+            margin: 0;
+            font-weight: 500;
+            color: #92400e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #eef2ff;
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        .exemple {
+            background-color: #f1f5f9;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .footer {
+            background-color: #f8fafc;
+            padding: 15px 35px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.75rem;
+            color: #64748b;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            .fiche-revision {
+                border-radius: 16px;
+            }
+            .header {
+                padding: 20px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .section {
+                padding-left: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-revision">
+    <!-- EN-TÊTE -->
+    <div class="header">
+        <div class="badge">📚 TERMINALE C & D – MODULE 1 : INTERACTIONS FONDAMENTALES</div>
+        <h1>⚛️ Leçon 3 : Force de gravitation <br> et loi de l’attraction universelle</h1>
+        <div class="sous-titre">Comprendre l’interaction gravitationnelle entre deux corps massiques</div>
+        <div class="objectif-bac">🎯 Lien Bac 2024-2025 : Loi de l’attraction universelle – Calcul de forces et champs gravitationnels</div>
+    </div>
+
+    <!-- CONTENU PRINCIPAL -->
+    <div class="content">
+        <!-- SECTION 1 : OBJECTIFS PÉDAGOGIQUES -->
+        <div class="section">
+            <h2>📌 Objectifs de la leçon</h2>
+            <ul style="margin-left: 20px; line-height: 1.5;">
+                <li>✔ Énoncer et appliquer la loi de l’attraction universelle de Newton.</li>
+                <li>✔ Calculer la force d’interaction gravitationnelle entre deux corps ponctuels ou sphériques.</li>
+                <li>✔ Déterminer la direction, le sens et l’intensité de la force gravitationnelle.</li>
+                <li>✔ Savoir utiliser la constante de gravitation universelle $G$.</li>
+                <li>✔ Lier la notion de force gravitationnelle au poids d’un corps à la surface de la Terre.</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 2 : NOTIONS CLÉS / COURS -->
+        <div class="section">
+            <h2>📖 Notions clés & Cours</h2>
+            
+            <div class="card-notion">
+                <strong>🔭 1. Énoncé de la loi de Newton</strong><br>
+                Deux corps ponctuels (ou à répartition sphérique de masse) s’attirent avec une force <strong>directement proportionnelle</strong> au produit de leurs masses et <strong>inversement proportionnelle</strong> au carré de la distance qui les sépare.
+                <div class="formule">
+                    $$ F = G \cdot \frac{m_1 \cdot m_2}{d^{2}} $$
+                </div>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    <li><strong>$F$</strong> : intensité de la force gravitationnelle (en newtons, N).</li>
+                    <li><strong>$m_1$ et $m_2$</strong> : masses des deux corps (en kg).</li>
+                    <li><strong>$d$</strong> : distance entre les centres des deux corps (en m).</li>
+                    <li><strong>$G$</strong> : constante universelle de gravitation.<br>
+                    $$ G = 6,67 \times 10^{-11} \ \text{N·m}^{2}\text{·kg}^{-2} $$
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card-notion">
+                <strong>🧲 2. Nature vectorielle de la force</strong><br>
+                La force $\vec{F}_{A \to B}$ exercée par $A$ sur $B$ est dirigée de $B$ vers $A$ (force attractive). Elle s’exprime vectoriellement :
+                <div class="formule">
+                    $$ \vec{F}_{A \to B} = - G \frac{m_A m_B}{d^{2}} \ \vec{u}_{AB} $$
+                </div>
+                où $\vec{u}_{AB}$ est le vecteur unitaire allant de $A$ vers $B$. Le signe $-$ indique une attraction (force opposée au vecteur unitaire).
+            </div>
+
+            <div class="card-notion">
+                <strong>🌍 3. Poids d’un corps et gravitation</strong><br>
+                Le poids $\vec{P}$ d’un corps de masse $m$ à la surface de la Terre est une manifestation de la force gravitationnelle exercée par la Terre.
+                $$ P = m \cdot g_0 \quad \text{avec} \quad g_0 = G \cdot \frac{M_T}{R_T^{2}} $$
+                <ul>
+                    <li>$M_T \approx 5,98 \times 10^{24} \ \text{kg}$ (masse de la Terre)</li>
+                    <li>$R_T \approx 6,38 \times 10^{6} \ \text{m}$ (rayon terrestre)</li>
+                    <li>$g_0 \approx 9,81 \ \text{N·kg}^{-1}$ (intensité du champ de pesanteur)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 3 : PROPRIÉTÉS & MÉTHODES -->
+        <div class="section">
+            <h2>⚙️ Propriétés importantes</h2>
+            <table>
+                <tr>
+                    <th>Caractéristique</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Attraction mutuelle</td>
+                    <td>Les deux forces $\vec{F}_{A\to B}$ et $\vec{F}_{B\to A}$ sont opposées (principe des actions réciproques).</td>
+                </tr>
+                <tr>
+                    <td>Portée infinie</td>
+                    <td>L’interaction gravitationnelle existe quelle que soit la distance, mais devient très faible quand $d$ augmente.</td>
+                </tr>
+                <tr>
+                    <td>Additivité</td>
+                    <td>Pour un système de plusieurs masses, la force résultante sur une masse est la somme vectorielle des forces individuelles.</td>
+                </tr>
+                <tr>
+                    <td>Théorème de Gauss (gravitation)</td>
+                    <td>Pour une distribution sphérique de masse, la force à l’extérieur équivaut à celle d’une masse ponctuelle au centre.</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- SECTION 4 : MÉTHODOLOGIE (Exemple type Bac) -->
+        <div class="section">
+            <h2>✍️ Méthodologie – Résoudre un exercice type</h2>
+            <div class="astuce">
+                <p>📌 Étapes clés pour un calcul de force gravitationnelle :</p>
+                <ol style="margin-left: 20px; margin-top: 8px;">
+                    <li>Identifier les deux corps en interaction et leurs masses $m_1$, $m_2$.</li>
+                    <li>Mesurer ou déterminer la distance $d$ entre leurs centres (en mètres).</li>
+                    <li>Appliquer la formule $F = G \cdot \frac{m_1 m_2}{d^2}$.</li>
+                    <li>Vérifier l’homogénéité : $[F] = M \cdot L \cdot T^{-2}$.</li>
+                    <li>Donner la direction : droite joignant les centres, sens attractif.</li>
+                    <li>Pour un système complexe, projeter les forces sur un axe ou utiliser la composition vectorielle.</li>
+                </ol>
+            </div>
+            <div class="exemple">
+                <strong>💡 Exemple type Bac :</strong><br>
+                Calculer la force gravitationnelle entre la Terre ($M_T = 6,0 \times 10^{24}\ \text{kg}$) et la Lune ($M_L = 7,3 \times 10^{22}\ \text{kg}$) distantes de $d = 3,84 \times 10^{8}\ \text{m}$.<br>
+                <strong>Solution :</strong> 
+                $$ F = 6,67\times10^{-11} \times \frac{(6,0\times10^{24}) \times (7,3\times10^{22})}{(3,84\times10^{8})^2} $$
+                $$ F \approx 1,98 \times 10^{20}\ \text{N} $$
+                (Force colossale responsable des marées).
+            </div>
+        </div>
+
+        <!-- SECTION 5 : LIENS AVEC D'AUTRES LEÇONS (BAC) -->
+        <div class="section">
+            <h2>🔗 Liens transversaux (Baccalauréat)</h2>
+            <ul>
+                <li><strong>Leçon 4 (Champ de gravitation)</strong> : À partir de $F = m \cdot \vec{g}$, on définit le vecteur champ $\vec{g}$.</li>
+                <li><strong>Mécanique – Lois de Newton</strong> : La force gravitationnelle est une force centrale intervenant dans le PFD (ex: satellites, planètes).</li>
+                <li><strong>Leçon 24 (Mouvement des satellites)</strong> : Application directe de la loi universelle pour déterminer la vitesse de satellisation.</li>
+                <li><strong>Travaux pratiques</strong> : Simulation de la force gravitationnelle, mesure de $g$ par pendule.</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 6 : TABLEAU RÉCAPITULATIF DES GRANDEURS -->
+        <div class="section">
+            <h2>📊 Tableau récapitulatif</h2>
+            <table>
+                <tr>
+                    <th>Grandeur</th>
+                    <th>Symbole</th>
+                    <th>Unité (SI)</th>
+                    <th>Valeur typique / remarque</th>
+                </tr>
+                <tr>
+                    <td>Constante gravitationnelle</td>
+                    <td>$G$</td>
+                    <td>N·m²·kg⁻²</td>
+                    <td>$6,67 \times 10^{-11}$</td>
+                </tr>
+                <tr>
+                    <td>Force gravitationnelle</td>
+                    <td>$F$</td>
+                    <td>N (newton)</td>
+                    <td>Toujours attractive</td>
+                </tr>
+                <tr>
+                    <td>Distance centre à centre</td>
+                    <td>$d$</td>
+                    <td>mètre (m)</td>
+                    <td>Ne pas confondre avec le rayon d’un astre</td>
+                </tr>
+                <tr>
+                    <td>Masse</td>
+                    <td>$m$</td>
+                    <td>kg</td>
+                    <td>Propriété inertielle et gravitationnelle</td>
+                </tr>
+                <tr>
+                    <td>Champ de pesanteur terrestre</td>
+                    <td>$g_0$</td>
+                    <td>N/kg ou m/s²</td>
+                    <td>$g_0 \approx 9,81$</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- SECTION 7 : ERREURS FRÉQUENTES & ASTUCES BAC -->
+        <div class="section">
+            <h2>⚠️ Erreurs fréquentes au Bac & Astuces</h2>
+            <div class="card-notion">
+                <ul style="margin-left: 20px;">
+                    <li>❌ <strong>Oublier la conversion des unités</strong> : La distance doit être en mètres, les masses en kg.</li>
+                    <li>❌ <strong>Confondre poids et force gravitationnelle</strong> : Le poids est une force particulière (gravité terrestre).</li>
+                    <li>❌ <strong>Négliger le caractère vectoriel</strong> : Dans un problème à 2D ou 3D, décomposer les forces.</li>
+                    <li>✅ <strong>Astuce 1</strong> : Pour vérifier un calcul, comparer l’ordre de grandeur – une force astronomique est souvent $10^{20}$ N, une force entre objets courants est infime ($10^{-10}$ N).</li>
+                    <li>✅ <strong>Astuce 2</strong> : $G$ étant très petit, pour des masses modestes et distances petites, la force gravitationnelle est négligeable devant d'autres forces (ex: électrique, frottement).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 8 : EXERCICE D’APPLICATION RAPIDE (Auto-évaluation) -->
+        <div class="section">
+            <h2>🧠 Je m’entraîne (extrait type Bac)</h2>
+            <div class="exemple" style="background: #e6f7e6;">
+                <p><strong>❓ Énoncé :</strong> Deux boules de bowling de masses $m_1 = 7,2\ \text{kg}$ et $m_2 = 6,8\ \text{kg}$ sont placées à $0,50\ \text{m}$ (centre à centre). Calculez l’intensité de la force gravitationnelle qui les attire. Commentez.</p>
+                <details style="margin-top: 12px; cursor: pointer;">
+                    <summary><strong>🔍 Voir la correction</strong></summary>
+                    <p style="margin-top: 12px;">$$F = 6,67\times10^{-11} \times \frac{7,2 \times 6,8}{(0,50)^2}$$ <br>
+                    $$F = 6,67\times10^{-11} \times \frac{48,96}{0,25} \approx 1,31 \times 10^{-8}\ \text{N}$$ <br>
+                    <em>Commentaire :</em> Cette force est extrêmement faible ($10^{-8}$ N), imperceptible à notre échelle. Elle montre que l’interaction gravitationnelle n’est significative que pour des masses astronomiques (planètes, étoiles).</p>
+                </details>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER avec références officielles -->
+    <div class="footer">
+        <p>📖 Programme officiel de Physique – Terminale C & D (Cameroun) | Année scolaire 2025-2026 | Baccalauréat 2023-2025</p>
+        <p>✍️ Fiche conforme aux objectifs : Loi de l’attraction universelle, calculs d’interaction gravitationnelle, préparation aux épreuves.</p>
+    </div>
+</div>
+</body>
+</html>

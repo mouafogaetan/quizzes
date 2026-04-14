@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 20 : Généralités sur les systèmes oscillants</title>
+    <style>
+        /* Style inspiré du template et adapté pour la physique */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e9f0f5;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            padding: 40px 20px;
+            line-height: 1.5;
+            color: #1e2a3e;
+        }
+
+        /* Conteneur principal de la fiche */
+        .revision-card {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête avec titre et objectifs */
+        .card-header {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1a4a6f 100%);
+            color: white;
+            padding: 1.8rem 2.5rem;
+        }
+
+        .lesson-tag {
+            display: inline-block;
+            background: #ffb74d;
+            color: #1e2a3e;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .card-header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.3px;
+        }
+
+        .objectives {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 0.9rem 1.2rem;
+            border-radius: 20px;
+            margin-top: 0.8rem;
+            border-left: 4px solid #ffb74d;
+        }
+
+        .objectives p {
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        .objectives ul {
+            margin-left: 1.2rem;
+            list-style-type: none;
+        }
+
+        .objectives li {
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .objectives li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ffb74d;
+            font-weight: bold;
+        }
+
+        /* Corps de la fiche */
+        .card-body {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Grille pour les sections principales */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid #e2edf2;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .info-box h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #0f3b4f;
+            margin-bottom: 1rem;
+            border-left: 5px solid #1a6d8f;
+            padding-left: 15px;
+        }
+
+        .info-box h3 i {
+            font-style: normal;
+            font-size: 1.4rem;
+        }
+
+        .definition {
+            background: #eef2fa;
+            padding: 0.8rem 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+            font-weight: 500;
+            border-left: 4px solid #2c7da0;
+        }
+
+        .formula {
+            background: #ffffff;
+            border: 1px solid #cbdde6;
+            padding: 0.8rem 1rem;
+            border-radius: 16px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            text-align: center;
+            margin: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .bac-link {
+            background: #fff7e5;
+            border-left: 5px solid #f4a100;
+            padding: 0.8rem 1.2rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #cbdde6;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #e1f0f5;
+            font-weight: 700;
+            color: #0b4f6c;
+        }
+
+        .comparison-table td {
+            background-color: white;
+        }
+
+        .badge {
+            background: #d9eef5;
+            color: #085c7a;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 40px;
+            display: inline-block;
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #cbdde6, transparent);
+        }
+
+        .footer-note {
+            background: #f0f6fa;
+            border-radius: 18px;
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            text-align: center;
+            color: #2c5a6e;
+            border: 1px solid #cde1ec;
+        }
+
+        @media (max-width: 750px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .card-header h1 {
+                font-size: 1.5rem;
+            }
+            .card-body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="revision-card">
+    <div class="card-header">
+        <div class="lesson-tag">📘 Leçon 20 – Module 3 : Systèmes oscillants</div>
+        <h1>⚙️ Généralités sur les systèmes oscillants</h1>
+        <div class="objectives">
+            <p>🎯 Objectifs de la leçon (Bac 2023-2025) :</p>
+            <ul>
+                <li>Définir un oscillateur mécanique et son mouvement périodique.</li>
+                <li>Identifier les différents types de pendules (élastique, simple, conique).</li>
+                <li>Caractériser une oscillation : période propre, fréquence, amplitude, élongation.</li>
+                <li>Établir le lien avec les oscillations libres non amorties.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <!-- Section notions clés + définitions -->
+        <div class="grid-2col">
+            <div class="info-box">
+                <h3>📖 Notions fondamentales</h3>
+                <p><strong>🔹 Oscillateur (ou système oscillant) :</strong><br>
+                Système physique qui effectue un mouvement de va-et-vient autour d’une position d’équilibre stable.</p>
+                
+                <div class="definition">
+                    <strong>⚡ Oscillation libre non amortie :</strong><br>
+                    Mouvement périodique qui se poursuit indéfiniment sans perte d’énergie (modèle idéal). 
+                </div>
+                
+                <p><strong>🔹 Période propre $T_0$ :</strong><br>
+                Durée d’un cycle complet d’oscillation libre (en secondes).<br>
+                <strong>🔹 Fréquence propre $f_0$ :</strong><br>
+                Nombre d’oscillations par seconde : $f_0 = 1/T_0$ (Hz).<br>
+                <strong>🔹 Amplitude $A$ ou $X_m$ :</strong><br>
+                Valeur maximale de l’élongation par rapport à la position d’équilibre.<br>
+                <strong>🔹 Élongation $x(t)$ :</strong><br>
+                Position instantanée repérée depuis l’équilibre.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>🧠 Exemples d'oscillateurs mécaniques</h3>
+                <table style="font-size:0.9rem;">
+                    <tr><th>Type</th><th>Exemple typique</th><th>Paramètre clé</th></tr>
+                    <tr><td>Pendule élastique</td><td>Masse accrochée à un ressort</td><td>Raideur $k$ et masse $m$</td></tr>
+                    <tr><td>Pendule simple</td><td>Masse ponctuelle au bout d’un fil</td><td>Longueur $L$, pesanteur $g$</td></tr>
+                    <tr><td>Pendule conique</td><td>Masse tournant sur un cercle horizontal</td><td>Mouvement circulaire uniforme</td></tr>
+                </table>
+                <div class="bac-link">
+                    📌 <strong>Lien Baccalauréat :</strong> Les exercices portent souvent sur la détermination de la période propre $T_0$ à partir de paramètres physiques (ressort, pendule simple). Savoir interpréter un graphe $x(t)$ ou $θ(t)$.
+                </div>
+            </div>
+        </div>
+
+        <!-- Période propre et équations différentielles -->
+        <div class="info-box" style="margin-bottom: 1.5rem;">
+            <h3>📐 Équation différentielle et pulsation propre</h3>
+            <p>Pour un oscillateur harmonique (sans frottement), l’équation différentielle du mouvement s’écrit :</p>
+            <div class="formula">
+                $$\frac{d^2x}{dt^2} + \omega_0^2 \, x = 0$$
+            </div>
+            <p>où $\omega_0 = \frac{2\pi}{T_0}$ est la <strong>pulsation propre</strong> (rad/s).<br>
+            La solution générale est de la forme : $x(t) = X_m \cos(\omega_0 t + \varphi)$.</p>
+            <div class="definition">
+                💡 <strong>Remarque importante :</strong> La période propre $T_0$ ne dépend <strong>pas</strong> de l’amplitude pour un oscillateur harmonique linéaire (isochronisme des petites oscillations).
+            </div>
+        </div>
+
+        <!-- Tableau comparatif périodes propres -->
+        <div class="info-box">
+            <h3>⏱️ Expressions des périodes propres (indispensables au Bac)</h3>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr><th>Système oscillant</th><th>Période propre $T_0$</th><th>Conditions</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Pendule élastique (ressort horizontal ou vertical)</td><td>$T_0 = 2\pi \sqrt{\dfrac{m}{k}}$</td><td>masse $m$, raideur $k$</td></tr>
+                        <tr><td>Pendule simple (petits angles)</td><td>$T_0 = 2\pi \sqrt{\dfrac{L}{g}}$</td><td>longueur $L$, champ $g$</td></tr>
+                        <tr><td>Oscillateur électrique LC</td><td>$T_0 = 2\pi \sqrt{LC}$</td><td>vue en électrocinétique</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="bac-link" style="margin-top: 0.5rem;">
+                🎓 <strong>Astuce examen :</strong> Pour trouver la période expérimentalement, mesurer la durée de plusieurs oscillations et diviser. Savoir exploiter la formule $T_0 = 2\pi\sqrt{\text{(paramètre)}}$ pour calculer $k$ ou $g$.
+            </div>
+        </div>
+
+        <!-- Comparaison oscillateurs et énergie -->
+        <div class="grid-2col" style="margin-top: 0.5rem;">
+            <div class="info-box">
+                <h3>📊 Oscillations libres vs forcées (aperçu)</h3>
+                <ul style="margin-left: 1rem;">
+                    <li><strong>Libres :</strong> l’oscillateur évolue sans excitation extérieure (après un écart initial).</li>
+                    <li><strong>Amorties :</strong> diminution progressive de l’amplitude à cause des frottements.</li>
+                    <li><strong>Forcées :</strong> on applique une excitation périodique ; résonance possible quand la fréquence de l’excitateur se rapproche de $f_0$.</li>
+                </ul>
+                <p class="badge" style="margin-top: 10px;">📌 À retenir : cette leçon pose les bases des oscillations mécaniques et électriques vues dans les chapitres suivants.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>🔁 Analogie électromécanique</h3>
+                <p>Un circuit LC (bobine + condensateur) se comporte comme un oscillateur mécanique :</p>
+                <div class="formula">
+                    Charge $q(t)$ ↔ élongation $x(t)$<br>
+                    Inductance $L$ ↔ masse $m$<br>
+                    Inverse de capacité $1/C$ ↔ raideur $k$
+                </div>
+                <p>La période dans un circuit LC est $T_0 = 2\pi\sqrt{LC}$.</p>
+            </div>
+        </div>
+
+        <!-- Exemple-type tiré du bac -->
+        <div class="info-box" style="background: #eef4fc;">
+            <h3>✍️ Exercice type (Bac Cameroun)</h3>
+            <p><strong>Énoncé simplifié :</strong> Un pendule simple de longueur $L = 1,0\,\text{m}$ oscille librement à la surface de la Terre ($g = 9,8\,\text{m/s}^2$).<br>
+            Calculer sa période propre $T_0$. Si on double la longueur, que devient $T_0$ ?</p>
+            <div class="definition" style="background: white;">
+                ✅ <strong>Correction :</strong> $T_0 = 2\pi \sqrt{\frac{L}{g}} = 2\pi \sqrt{\frac{1,0}{9,8}} \approx 2,0\,\text{s}$.<br>
+                Si $L' = 2L$, alors $T_0' = 2\pi \sqrt{\frac{2L}{g}} = \sqrt{2} \times T_0 \approx 2,83\,\text{s}$. La période augmente d’un facteur $\sqrt{2}$.
+            </div>
+            <p class="bac-link" style="margin-top: 0.5rem;">🎯 <strong>Compétence évaluée :</strong> Maîtriser l’expression de la période propre et son utilisation pour comparer des oscillateurs.</p>
+        </div>
+
+        <!-- Lien avec les leçons suivantes -->
+        <hr>
+        <div class="footer-note">
+            🔗 <strong>Liens avec la suite du programme :</strong> Leçon 21 (Pendule élastique), Leçon 22 (Pendule simple), Leçon 32 (Circuit RLC).<br>
+            💡 La compréhension des notions de période propre, amplitude et oscillation libre est indispensable pour aborder l’amortissement et la résonance.
+        </div>
+        <div class="footer-note" style="margin-top: 1rem; background: #ffffff;">
+            📅 <strong>Conforme au programme officiel Terminale C & D (Cameroun) – Bac 2025</strong> – Mise à jour : Modules Mécanique & Électromagnétisme.
+        </div>
+    </div>
+</div>
+</body>
+</html>

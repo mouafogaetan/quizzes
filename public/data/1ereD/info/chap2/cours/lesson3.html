@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leçon 3 : Introduction à l'invite de commandes</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Small additional style for command blocks to keep consistency */
+        .command-block {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            padding: 0.8rem 1rem;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            border-left: 5px solid #fbbf24;
+        }
+        .inline-code {
+            background-color: #f1f5f9;
+            font-family: 'Courier New', monospace;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.4rem;
+            color: #b45309;
+            font-weight: 500;
+        }
+        .syntax-box {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 0.75rem;
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">📟 Invite de commandes : principes fondamentaux</h1>
+            <p class="lesson-subtitle">Informatique · Première (Séries C, D, E) · Unité d’apprentissage 3</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Carte 1 : Définition de l'invite de commandes -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🔍 Qu’est-ce que l’invite de commandes ?</h3>
+                    <p class="card-description">
+                        L’<strong class="bold">invite de commandes</strong> (ou <strong>Command Prompt</strong> sous Windows, terminal sous Linux/macOS) est une <strong>interface textuelle</strong> qui permet d’interagir avec le système d’exploitation en tapant des instructions. Contrairement à l’interface graphique, chaque action est déclenchée par une commande texte.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Rôle :</strong> exécuter des programmes, gérer les fichiers et dossiers, automatiser des tâches.</li>
+                        <li><strong>Accès sous Windows :</strong> `Win + R` → taper <span class="inline-code">cmd</span> → Entrée.</li>
+                        <li><strong>Principe :</strong> chaque commande suit une syntaxe précise (commande + options + arguments).</li>
+                    </ul>
+                    <div class="syntax-box">
+                        <span style="font-weight: 600;">💻 Exemple visuel :</span>
+                        <div class="command-block">
+                            C:\Users\Eleve> <span style="color:#90ffa0;">dir</span><br>
+                            C:\Users\Eleve> <span style="color:#90ffa0;">cd Documents</span>
+                        </div>
+                        <p class="card-description" style="margin-top: 0.5rem;">Le prompt <span class="inline-code">C:\Users\Eleve></span> indique le répertoire courant ; après la commande, le système exécute l’ordre.</p>
+                    </div>
+                </div>
+
+                <!-- Carte 2 : Types de commandes DOS/Windows -->
+                <div class="card concept-card">
+                    <h3 class="card-title">⌨️ Commandes internes et externes</h3>
+                    <p class="card-description">
+                        Les commandes de l’invite de commandes se divisent en deux familles :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Internes :</strong> intégrées directement à l’interpréteur (<span class="inline-code">DIR</span>, <span class="inline-code">CD</span>, <span class="inline-code">COPY</span>, <span class="inline-code">DEL</span>…). Disponibles sans fichier additionnel.</li>
+                        <li><strong>Externes :</strong> programmes indépendants (ex: <span class="inline-code">format</span>, <span class="inline-code">diskpart</span>, <span class="inline-code">ping</span>). Nécessitent un fichier exécutable.</li>
+                    </ul>
+                    <p class="card-description">
+                        <span class="formule">📌 À retenir :</span> l’invite de commandes est sensible à la casse ? Non, sous Windows les commandes s’écrivent généralement en majuscules ou minuscules indifféremment, mais par convention on utilise les MAJUSCULES.
+                    </p>
+                </div>
+
+                <!-- Carte 3 : Syntaxe générale d'une commande -->
+                <div class="card concept-card">
+                    <h3 class="card-title">📐 Syntaxe des commandes</h3>
+                    <p class="card-description">
+                        Toute commande respecte une structure standard :
+                    </p>
+                    <div class="command-block" style="background:#1e293b;">
+                        <span style="color:#facc15;">COMMANDE</span> [options] [arguments]
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>Commande :</strong> action à réaliser (<span class="inline-code">DIR</span>, <span class="inline-code">COPY</span>, <span class="inline-code">MD</span>…).</li>
+                        <li><strong>Options (ou commutateurs) :</strong> modifient le comportement, souvent préfixées par <span class="inline-code">/</span> sous Windows (ex: <span class="inline-code">DIR /W</span> pour affichage large).</li>
+                        <li><strong>Arguments :</strong> cibles de la commande (noms de fichiers, chemins). Exemple : <span class="inline-code">DEL note.txt</span> → l’argument est <span class="inline-code">note.txt</span>.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.5rem;">
+                        💡 <strong>Aide immédiate :</strong> tapez <span class="inline-code">COMMANDE /?</span> pour afficher l’aide détaillée (ex: <span class="inline-code">DIR /?</span>).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section commandes de base (essentielles) -->
+            <section class="concept-section">
+                <h2 class="section-title">🛠️ Commandes DOS de base (à maîtriser)</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">📂 DIR – Afficher le contenu d’un dossier</h3>
+                    <p class="card-description">
+                        La commande <span class="inline-code">DIR</span> liste tous les fichiers et sous-répertoires du répertoire courant.
+                    </p>
+                    <div class="command-block">
+                        C:\> DIR<br>
+                        C:\> DIR /W    (affichage en largeur)<br>
+                        C:\> DIR /P    (affichage page par page)
+                    </div>
+                    <p class="card-description">
+                        ➕ <strong>Astuce examen :</strong> <span class="inline-code">DIR /?</span> affiche toutes les options disponibles.
+                    </p>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🚪 CD – Changer de répertoire (Change Directory)</h3>
+                    <p class="card-description">
+                        Permet de naviguer dans l’arborescence des dossiers.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="inline-code">CD \</span> → aller à la racine du disque.</li>
+                        <li><span class="inline-code">CD ..</span> → remonter d’un niveau (dossier parent).</li>
+                        <li><span class="inline-code">CD Documents</span> → entrer dans le dossier <strong>Documents</strong>.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">📁 MD / MKDIR – Créer un répertoire</h3>
+                    <p class="card-description">
+                        <span class="inline-code">MD</span> (Make Directory) crée un ou plusieurs dossiers.
+                    </p>
+                    <div class="command-block">
+                        C:\Eleves> MD COURS<br>
+                        C:\Eleves> MKDIR Exercices_JS
+                    </div>
+                    <p class="card-description">✅ Exemple : <span class="inline-code">MD PROJET C++</span> (créera le dossier "PROJET C++").</p>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🗑️ RD / RMDIR – Supprimer un répertoire</h3>
+                    <p class="card-description">
+                        Supprime un dossier (attention : le dossier doit être vide, sauf si on utilise <span class="inline-code">/S</span>).
+                    </p>
+                    <div class="command-block">
+                        C:\> RD Mathématiques<br>
+                        C:\> RMDIR /S DossierNonVide   (supprime le dossier et son contenu)
+                    </div>
+                    <div class="exemple-astuce">
+                        ⚠️ <strong>Piège fréquent :</strong> impossible de supprimer le répertoire courant ou un dossier contenant des fichiers sans l’option <span class="inline-code">/S</span>.
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">✏️ REN – Renommer fichier ou dossier</h3>
+                    <p class="card-description">
+                        Change le nom d’un élément sans le déplacer.
+                    </p>
+                    <div class="command-block">
+                        C:\> REN Mathématiques Informatique<br>
+                        C:\> REN ancien.txt nouveau.txt
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">❌ DEL – Supprimer des fichiers</h3>
+                    <p class="card-description">
+                        Efface un ou plusieurs fichiers (attention : suppression définitive, pas de corbeille).
+                    </p>
+                    <div class="command-block">
+                        C:\> DEL note.txt<br>
+                        C:\> DEL *.tmp   (supprime tous les fichiers .tmp)
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">📋 COPY – Copier des fichiers</h3>
+                    <p class="card-description">
+                        Duplique un fichier d’un emplacement vers un autre.
+                    </p>
+                    <div class="command-block">
+                        C:\> COPY rapport.docx D:\BACKUP\<br>
+                        C:\> COPY devoirs.txt copie_devoirs.txt
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">📄 TYPE – Afficher le contenu d’un fichier texte</h3>
+                    <p class="card-description">
+                        Permet de visualiser rapidement le texte d’un fichier (sans l’ouvrir dans un éditeur).
+                    </p>
+                    <div class="command-block">
+                        C:\> TYPE config.ini<br>
+                        C:\> TYPE resultat.txt
+                    </div>
+                    <p class="card-description">💡 Utilitaire pour vérifier le contenu de scripts ou de fichiers de configuration.</p>
+                </div>
+            </section>
+
+            <!-- Section Exemples concrets de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Organisation de dossiers pour un projet</h3>
+                    <p class="exemple-context">
+                        Situation : Tu es dans le répertoire <span class="inline-code">C:\Utilisateurs\Paul</span>. Tu souhaites créer une arborescence pour ranger tes travaux d’informatique : un dossier principal “PROJET_C” contenant deux sous-dossiers “src” et “includes”.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution pas à pas :</strong><br>
+                        1️⃣ Créer le dossier principal : <span class="inline-code">MD PROJET_C</span><br>
+                        2️⃣ Accéder à ce dossier : <span class="inline-code">CD PROJET_C</span><br>
+                        3️⃣ Créer les sous-dossiers : <span class="inline-code">MD src</span> et <span class="inline-code">MD includes</span><br>
+                        4️⃣ Vérifier la structure avec <span class="inline-code">DIR</span> → on voit src et includes.<br>
+                        ✅ Résultat : arborescence prête à recevoir les fichiers.
+                    </p>
+                    <div class="exemple-astuce">
+                        🧠 Astuce : Utiliser <span class="inline-code">MD PROJET_C\src PROJET_C\includes</span> en une ligne (avec chemins complets).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Nettoyage et renommage rapide</h3>
+                    <p class="exemple-context">
+                        Dans le répertoire <span class="inline-code">C:\Epreuve</span>, il y a deux fichiers : <span class="inline-code">ancien.txt</span> et <span class="inline-code">a_supprimer.doc</span>. On souhaite renommer <span class="inline-code">ancien.txt</span> en <span class="inline-code">final.txt</span> et supprimer <span class="inline-code">a_supprimer.doc</span>.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Commandes à taper :</strong><br>
+                        - <span class="inline-code">REN ancien.txt final.txt</span><br>
+                        - <span class="inline-code">DEL a_supprimer.doc</span><br>
+                        Pour vérifier : <span class="inline-code">DIR</span> affiche uniquement final.txt.
+                    </p>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Utiliser TYPE et COPY pour fusionner</h3>
+                    <p class="exemple-context">
+                        On dispose de deux fichiers texte : <span class="inline-code">intro.txt</span> et <span class="inline-code">conclusion.txt</span>. On veut consulter le contenu du premier, puis copier les deux fichiers dans un nouveau fichier nommé <span class="inline-code">complet.txt</span>.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Procédure :</strong><br>
+                        1️⃣ <span class="inline-code">TYPE intro.txt</span> → affiche le texte.<br>
+                        2️⃣ <span class="inline-code">COPY intro.txt+conclusion.txt complet.txt</span> → concatène les deux fichiers en un seul.<br>
+                        🔍 Vérification : <span class="inline-code">TYPE complet.txt</span> pour voir le résultat.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 À savoir : La concaténation avec <span class="inline-code">+</span> est très utile pour assembler des logs ou des rapports.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges et erreurs fréquentes -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre <span class="inline-code">RD</span> et <span class="inline-code">DEL</span> :</span> <span class="inline-code">DEL</span> supprime des fichiers, <span class="inline-code">RD</span> supprime des dossiers vides. Pour supprimer un dossier avec son contenu → <span class="inline-code">RD /S dossier</span>.</li>
+                        <li><span class="bold">Oublier l’aide intégrée :</span> beaucoup d’élèves ignorent <span class="inline-code">DIR /?</span> ou <span class="inline-code">COPY /?</span>. Utilisez-la en examen !</li>
+                        <li><span class="bold">Espace mal placé :</span> dans <span class="inline-code">MD Mon Dossier</span> → crée deux dossiers “Mon” et “Dossier”. Pour un nom avec espace, utiliser les guillemets : <span class="inline-code">MD "Mon Dossier"</span>.</li>
+                        <li><span class="bold">Se tromper de chemin avec <span class="inline-code">CD</span> :</span> <span class="inline-code">CD ..</span> (deux points) monte d’un niveau ; <span class="inline-code">CD .</span> (un point) ne fait rien.</li>
+                        <li><span class="bold">Suppression irréversible :</span> <span class="inline-code">DEL</span> et <span class="inline-code">RD</span> n’envoient pas à la corbeille ⇒ réflexe de vérification avec <span class="inline-code">DIR</span> avant suppression.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Résumé visuel sous forme de tableau synthétique -->
+            <section class="concept-section">
+                <h2 class="section-title">📋 Tableau récapitulatif des commandes essentielles</h2>
+                <div class="card" style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                        <thead style="background-color: #eef2ff;">
+                            <tr>
+                                <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #cbd5e1;">Commande</th>
+                                <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #cbd5e1;">Action</th>
+                                <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #cbd5e1;">Exemple</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">DIR</span></td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">Lister le contenu</td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">DIR /P</span></td></tr>
+                            <tr><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">CD</span></td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">Changer de répertoire</td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">CD ..</span></td></tr>
+                            <tr><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">MD</span></td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">Créer un dossier</td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">MD "COURS INFO"</span></td></tr>
+                            <tr><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">RD</span></td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">Supprimer dossier (vide)</td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">RD TEMP</span></td></tr>
+                            <tr><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">REN</span></td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">Renommer</td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">REN image.jpg photo.jpg</span></td></tr>
+                            <tr><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">DEL</span></td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">Supprimer fichier(s)</td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">DEL *.bak</span></td></tr>
+                            <tr><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">COPY</span></td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">Copier des fichiers</td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><span class="inline-code">COPY data.txt D:\save\</span></td></tr>
+                            <tr><td style="padding: 0.5rem;"><span class="inline-code">TYPE</span></td><td style="padding: 0.5rem;">Afficher fichier texte</td><td style="padding: 0.5rem;"><span class="inline-code">TYPE readme.txt</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Illustration conceptuelle (image générée IA) -->
+            <section class="concept-section">
+                <div class="card concept-card" style="text-align: center;">
+                    <h3 class="card-title">🖼️ Représentation visuelle : interface invite de commandes</h3>
+                    <img src="" alt="Schéma d’une fenêtre d’invite de commandes avec annotation des éléments : prompt, commande tapée, résultat, répertoire courant. Interface texte sur fond noir avec texte vert clair." style="max-width:100%; border-radius: 1rem; margin-top: 0.5rem; border: 1px solid #cbd5e1;">
+                    <p class="card-description" style="margin-top: 0.8rem;">
+                        L’image ci-dessus (à générer par IA) illustre l’environnement typique de l’invite de commandes : le curseur après le chemin du dossier, la saisie de commandes et le retour du système.
+                    </p>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📘 Fiche de révision – Module : Environnement numérique (Unité 3) · Inspiré du programme officiel Probatoire C, D, E Cameroun<br>
+            🔁 Dernière mise à jour : session 2026 · <a href="#">Commande /? toujours à portée de main</a> · 💻 Bonne pratique !</p>
+        </footer>
+    </div>
+</body>
+</html>

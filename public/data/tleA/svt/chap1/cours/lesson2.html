@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Organisation de la cellule | SVTEEHB Terminale</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts: Inter pour une typographie claire et moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        .img-schema {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+            background-color: #f8fafc;
+            border-radius: 1rem;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .img-schema img {
+            max-width: 100%;
+            border-radius: 0.75rem;
+            cursor: pointer;
+        }
+
+        .img-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 0.3rem;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">📖 Organisation de la cellule</h1>
+            <p class="lesson-subtitle">SVTEEHB – Terminale (A, ES, SH) | Module I : Le monde vivant – Chapitre 1</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section Éléments clés -->
+            <section class="concept-section">
+                <h2 class="section-title">🔬 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. La cellule : unité structurale et fonctionnelle</h3>
+                    <p class="card-description">
+                        Tous les êtres vivants (végétaux, animaux, champignons, bactéries) sont constitués de cellules. 
+                        La cellule est l'unité de base du vivant : elle réalise toutes les fonctions vitales (nutrition, respiration, reproduction).
+                        Chez les animaux et les végétaux, les cellules présentent des similitudes mais aussi des différences liées à leur mode de vie.
+                    </p>
+                    <div class="img-schema">
+                        <!-- Image schématique cellule animale vs végétale (à générer via IA) -->
+                        <img src="" alt="Schéma comparatif d'une cellule animale et d'une cellule végétale montrant les organites : noyau, membrane, cytoplasme, mitochondrie, ribosome, vacuole, chloroplaste.">
+                        <div class="img-caption">Figure 1 : Organisation générale d’une cellule animale (gauche) et végétale (droite).</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Les principaux organites cellulaires et leurs rôles</h3>
+                    <p class="card-description">
+                        Chaque organite est une structure spécialisée à l'intérieur de la cellule. Leurs fonctions sont complémentaires.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="bold">Noyau :</span> Contient l'ADN (information génétique). Il dirige l'activité cellulaire et la synthèse des protéines.</li>
+                        <li><span class="bold">Membrane plasmique :</span> Enveloppe flexible qui délimite la cellule. Elle contrôle les échanges avec le milieu extérieur (entrée/sortie des substances).</li>
+                        <li><span class="bold">Cytoplasme :</span> Milieu gélatineux composé d'eau et de molécules dissoutes. Il contient les organites et permet les réactions chimiques.</li>
+                        <li><span class="bold">Ribosomes :</span> Très petits organites, libres dans le cytoplasme ou fixés sur certaines membranes. <strong>Sièges de la synthèse des protéines</strong> (traduction de l'ARNm).</li>
+                        <li><span class="bold">Mitochondrie :</span> Organite à double membrane, appelée « centrale énergétique ». Elle produit l'énergie (ATP) nécessaire aux activités cellulaires via la respiration cellulaire.</li>
+                    </ul>
+                    <div class="img-schema">
+                        <img src="" alt="Schéma détaillé d'une mitochondrie avec crêtes et matrice, et d'un ribosome en train de synthétiser une protéine.">
+                        <div class="img-caption">Figure 2 : Mitochondrie (production d’énergie) et ribosome (synthèse des protéines).</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Différences entre cellule animale et cellule végétale</h3>
+                    <p class="card-description">
+                        Les cellules végétales possèdent des structures spécifiques absentes chez les cellules animales :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Paroi cellulosique (pariétale) :</strong> Enveloppe rigide externe à la membrane, donne la forme et protège la cellule végétale.</li>
+                        <li><strong>Chloroplastes :</strong> Organites contenant la chlorophylle. Ils permettent la photosynthèse (fabrication de matière organique à partir de lumière, CO₂ et eau).</li>
+                        <li><strong>Grande vacuole :</strong> Stocke l'eau, les déchets et participe à la turgescence (rigidité de la plante).</li>
+                    </ul>
+                    <p class="card-description">
+                        Les cellules animales n’ont ni paroi, ni chloroplastes, ni grande vacuole. Elles possèdent souvent des lysosomes (digestion) et des centrioles (division cellulaire).
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">🔍 Observation microscopique : reconnaître les organites</h3>
+                    <p class="exemple-context">
+                        Lors d'une séance de travaux pratiques, un élève observe une cellule au microscope électronique. Il distingue une structure avec des crêtes internes et une autre très petite (environ 20 nm) libre dans le cytoplasme.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Identification :</strong> La structure à crêtes internes est une <strong>mitochondrie</strong> (siège de la production d'énergie). La petite structure libre est un <strong>ribosome</strong> (synthèse des protéines). Les ribosomes peuvent aussi être fixés sur le réticulum endoplasmique rugueux.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce : « mitochondrie = mémoire + énergie » → ses crêtes augmentent la surface pour fabriquer beaucoup d'ATP. Les ribosomes sont si petits qu'on les voit souvent sous forme de petits points sur les schémas.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">🧫 Comparer cellule animale et cellule végétale à partir d'une image</h3>
+                    <p class="exemple-context">
+                        Un document montre deux cellules : l’une possède une paroi rigide, des chloroplastes et une vacuole centrale ; l’autre a une membrane souple, des centrioles et pas de paroi.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Réponse :</strong> La première cellule est une <strong>cellule végétale</strong> (présence de paroi, chloroplastes, grande vacuole). La seconde est une <strong>cellule animale</strong> (membrane seule, centrioles, absence de paroi). La mitochondrie et le noyau sont présents dans les deux types.
+                    </p>
+                    <div class="exemple-astuce">
+                        🌱 Pour retenir : « Végétal = Vert, mur (paroi) et stock d’eau (vacuole) ; Animal = mobile, sans paroi, pas de photosynthèse ».
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">⚡ Lien avec les examens (session 2024 & 2025)</h3>
+                    <p class="exemple-context">
+                        À l'examen, on peut vous demander : « Où se déroule la biosynthèse des protéines dans la cellule ? » ou « Quel organite est responsable de la production d'énergie ? ».
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Correction type :</strong> La biosynthèse des protéines (traduction) a lieu au niveau des <strong>ribosomes</strong>. La production d'énergie (ATP) est assurée par les <strong>mitochondries</strong>. La <strong>membrane plasmique</strong> contrôle les échanges et le <strong>noyau</strong> contient l'information génétique.
+                    </p>
+                    <div class="exemple-astuce">
+                        🎯 D'après le programme : « ribosome, siège de la biosynthèse des protéines » (session 2024) et « mitochondrie, production d'énergie » (session 2025). Retenez ces deux associations clés !
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Pièges courants / À ne pas confondre -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & idées reçues</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>mitochondrie</strong> et <strong>chloroplaste</strong>. Les deux produisent de l'énergie, mais la mitochondrie est présente dans toutes les cellules eucaryotes (animale et végétale) alors que le chloroplaste est exclusif aux cellules végétales (photosynthèse).</li>
+                        <li><span class="bold">Attention :</span> Penser que le cytoplasme est « vide » ou sans fonction → faux ! Le cytoplasme est un milieu actif contenant des enzymes, des ribosomes et des molécules ; il permet les réactions métaboliques.</li>
+                        <li><span class="bold">À ne pas confondre :</span> <strong>Membrane plasmique</strong> (fine, flexible, présente chez tous les êtres vivants) et <strong>paroi cellulosique</strong> (rigide, seulement chez les végétaux, les champignons et certaines bactéries).</li>
+                        <li><span class="bold">Idée reçue :</span> « Toutes les cellules ont un noyau » → faux. Les bactéries (procaryotes) n'ont pas de noyau vrai ; leur ADN est libre dans le cytoplasme. Mais au programme de terminale littéraire, on se concentre sur les cellules eucaryotes (animale et végétale).</li>
+                    </ul>
+                </div>
+                <div class="card concept-card" style="margin-top: 0.5rem;">
+                    <h3 class="card-title">📌 Récapitulatif pour l’examen (QCM / QRO)</h3>
+                    <p class="card-description">
+                        - Le <strong>noyau</strong> contient l’ADN → commande la cellule.<br>
+                        - Les <strong>ribosomes</strong> fabriquent les protéines.<br>
+                        - Les <strong>mitochondries</strong> fournissent l’énergie (ATP).<br>
+                        - La <strong>membrane plasmique</strong> contrôle les échanges.<br>
+                        - La <strong>paroi végétale</strong> donne la rigidité ; les <strong>chloroplastes</strong> font la photosynthèse.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section complémentaire : schéma interactif (image à générer) -->
+            <section class="exemple-section">
+                <h2 class="section-title">🖼️ Schéma récapitulatif à légender</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Entraînez-vous à reconnaître et à nommer les organites sur une illustration de cellule. Voici un exemple type d'exercice :
+                    </p>
+                    <div class="img-schema">
+                        <img src="" alt="Schéma d'une cellule eucaryote animale avec les structures suivantes : noyau, membrane plasmique, cytoplasme, ribosome libre, mitochondrie, réticulum endoplasmique (optionnel). À légender par l'élève.">
+                        <div class="img-caption">Figure 3 : Cellule animale type. Identifiez le noyau, un ribosome, une mitochondrie et la membrane.</div>
+                    </div>
+                    <div class="img-schema">
+                        <img src="" alt="Schéma d'une cellule végétale avec paroi cellulosique, membrane, noyau, chloroplaste, vacuole centrale, mitochondrie et ribosomes.">
+                        <div class="img-caption">Figure 4 : Cellule végétale. Localisez la paroi, le chloroplaste, la grande vacuole et les ribosomes.</div>
+                    </div>
+                    <p class="exemple-astuce" style="margin-top: 0.5rem;">
+                        ✏️ Conseil de révision : Dessinez vous-même une cellule animale et une cellule végétale en couleur. Attribuez une couleur différente à chaque organite et notez sa fonction à côté. Cette méthode active la mémorisation.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche de révision basée sur le programme officiel SVTEEHB – Terminales Littéraires (A, ES, SH) · Année 2025-2026 · Conforme aux épreuves 2023-2025 · <a href="#">Source : Éducation nationale Cameroun</a> · 📘 Révision active</p>
+        </footer>
+    </div>
+</body>
+</html>

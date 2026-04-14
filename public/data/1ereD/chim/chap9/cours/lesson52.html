@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche Révision Chimie - Leçon 52 : Utilisation des nombres d'oxydation</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour typographie -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (intégré pour garantir l'affichage) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 950px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+
+        .nox-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+        .nox-table th, .nox-table td {
+            border: 1px solid #cbd5e1;
+            padding: 0.6rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .nox-table th {
+            background-color: #e2e8f0;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">Leçon 52 : Utilisation des nombres d'oxydation</h1>
+        <p class="lesson-subtitle">Chimie – Première C & D | Module 2 : Oxydoréduction par voie sèche</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section concepts clés -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Identifier une réaction redox grâce au nombre d'oxydation</h2>
+
+            <div class="card concept-card">
+                <h3 class="card-title">🔍 Variation du n.o. : signature d'une réaction redox</h3>
+                <p class="card-description">
+                    Une réaction d'oxydoréduction s'accompagne <strong>toujours d'une modification des nombres d'oxydation</strong> de certains atomes. 
+                    Si au cours d'une transformation chimique les nombres d'oxydation ne changent pas, il s'agit d'une réaction <strong>non redox</strong> (acido-basique, précipitation…).
+                </p>
+                <ul class="concept-list">
+                    <li><span class="formule">Oxydation</span> : augmentation du nombre d'oxydation d'un élément (perte d'électrons).</li>
+                    <li><span class="formule">Réduction</span> : diminution du nombre d'oxydation d'un élément (gain d'électrons).</li>
+                    <li>L'oxydant est l'espèce dont un élément voit son n.o. <strong>diminuer</strong> ; le réducteur voit son n.o. <strong>augmenter</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">🧩 Dismutation (auto-oxydoréduction)</h3>
+                <p class="card-description">
+                    Une dismutation est un cas particulier où le <strong>même élément</strong> à la fois s'oxyde et se réduit. 
+                    Exemple classique : le chlore en milieu basique : 
+                    $Cl_2 + 2OH^- \rightarrow ClO^- + Cl^- + H_2O$. Le chlore (n.o. 0) donne des ions hypochlorite $ClO^-$ (n.o. +I) et chlorure $Cl^-$ (n.o. -I).
+                </p>
+                <div class="exemple-astuce">
+                    💡 Astuce : Pour reconnaître une dismutation, vérifiez si le même élément apparaît avec au moins deux n.o. différents dans les produits.
+                </div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">⚖️ Équilibrer une équation redox par la méthode des variations du n.o.</h3>
+                <p class="card-description">
+                    Méthode systématique pour équilibrer sans demi-équations en milieu acide ou basique (voie sèche ou humide). Étapes :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>1.</strong> Attribuer les nombres d'oxydation à tous les atomes.</li>
+                    <li><strong>2.</strong> Identifier les éléments dont le n.o. change.</li>
+                    <li><strong>3.</strong> Calculer la variation totale du n.o. par atome (Δ positive pour oxydation, négative pour réduction).</li>
+                    <li><strong>4.</strong> Égaliser les variations totales en multipliant par des coefficients appropriés.</li>
+                    <li><strong>5.</strong> Ajuster les atomes hors oxygène/hydrogène (si besoin) puis équilibrer O avec $H_2O$ et H avec $H^+$ (milieu acide) ou $OH^-$ (milieu basique).</li>
+                </ul>
+                <p>Cette méthode est particulièrement utile pour des équations complexes sans détailler les demi-réactions.</p>
+            </div>
+        </section>
+
+        <!-- Section exemples de compréhension -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Applications pratiques & exemples</h2>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 1 : Oxydation du fer par le dioxygène (formation de rouille)</h3>
+                <p class="exemple-context">Équation non équilibrée : $Fe + O_2 \rightarrow Fe_2O_3$</p>
+                <div class="exemple-correction">
+                    <strong>🔎 Variation des n.o. :</strong><br>
+                    - $Fe$ (corps simple) : n.o. = 0 → dans $Fe_2O_3$, $Fe$ est au n.o. +III (augmentation de 3 par atome).<br>
+                    - $O_2$ (corps simple) : n.o. = 0 → dans $Fe_2O_3$, $O$ est au n.o. -II (diminution de 2 par atome).<br>
+                    Pour équilibrer les variations : chaque atome $Fe$ perd 3 électrons (oxydation), chaque atome $O$ gagne 2 électrons (réduction). <br>
+                    On cherche le PPCM entre 3 et 2 = 6. <br>
+                    - Il faut donc $2$ atomes de $Fe$ (variation totale $2 \times 3 = 6$) et $3$ atomes d'oxygène ($3 \times 2 = 6$). <br>
+                    ➜ Équation équilibrée : $4Fe + 3O_2 \rightarrow 2Fe_2O_3$.
+                </div>
+                <div class="exemple-astuce">
+                    📌 À retenir : L'oxygène moléculaire est toujours réduit (n.o. 0 → -II). Le métal s'oxyde.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 2 : Dismutation de l'eau oxygénée $H_2O_2$</h3>
+                <p class="exemple-context">Réaction de décomposition : $H_2O_2 \rightarrow H_2O + O_2$</p>
+                <div class="exemple-correction">
+                    <strong>📐 Calcul des n.o. :</strong><br>
+                    - Dans $H_2O_2$ : H = +I, donc O = -I (car $2 \times (+I) + 2x = 0 \Rightarrow x = -I$).<br>
+                    - Dans $H_2O$ : O = -II (réduction de O : -I → -II).<br>
+                    - Dans $O_2$ : O = 0 (oxydation de O : -I → 0).<br>
+                    Le même élément (oxygène) est à la fois réduit et oxydé → <strong>dismutation</strong>.<br>
+                    Équation équilibrée : $2H_2O_2 \rightarrow 2H_2O + O_2$.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 3 : Équilibrage avec la méthode des n.o. – Réaction $Cu + HNO_3 \rightarrow Cu(NO_3)_2 + NO + H_2O$</h3>
+                <p class="exemple-context">Réaction classique de dissolution du cuivre dans l'acide nitrique dilué.</p>
+                <div class="exemple-correction">
+                    <strong>1. Attribution des n.o. :</strong><br>
+                    Cu (0) → Cu(+II) dans $Cu(NO_3)_2$ : augmentation de 2.<br>
+                    N dans $HNO_3$ : H = +I, O = -II → $+I + x + 3\times(-II)=0$ → $x = +V$.<br>
+                    N dans $NO$ : O = -II → $x + (-II)=0$ → $x = +II$. Variation : +V → +II = diminution de 3.<br>
+                    <strong>2. Égaliser les variations :</strong> PPCM(2,3) = 6. Multiplier Cu par 3 (variation totale 3×2=6) et N (NO) par 2 (2×3=6).<br>
+                    ➜ $3Cu + 2HNO_3 \rightarrow 3Cu(NO_3)_2 + 2NO + H_2O$ (provisoire).<br>
+                    <strong>3. Équilibrer les autres atomes :</strong> N : côté gauche 2 atomes N, droite : $3Cu(NO_3)_2$ donne 6 N + 2N de NO = 8 N → ajuster $HNO_3$ à 8. Oxygène et hydrogène : $3Cu + 8HNO_3 \rightarrow 3Cu(NO_3)_2 + 2NO + 4H_2O$. Vérification : O (gauche 8×3=24, droite 3×6=18 + 2×1=2 + 4 = 24). Équation finale correcte.
+                </div>
+                <div class="exemple-astuce">
+                    💬 Conseil : après avoir fixé les coefficients des espèces dont les n.o. varient, équilibrez d'abord les métaux puis les non-métaux, terminez par H et O.
+                </div>
+            </div>
+        </section>
+
+        <!-- Tableau récapitulatif de quelques n.o. usuels -->
+        <section class="concept-section">
+            <h2 class="section-title">📊 Nombres d'oxydation à connaître (rappel)</h2>
+            <div class="card">
+                <table class="nox-table">
+                    <thead>
+                        <tr><th>Élément / groupe</th><th>n.o. le plus fréquent</th><th>Exceptions notables</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>H</td><td>+I</td><td>Hydrures métalliques (NaH, CaH₂) : -I</td></tr>
+                        <tr><td>O</td><td>-II</td><td>Peroxydes (H₂O₂) : -I ; Superoxydes : -½ ; OF₂ : +II</td></tr>
+                        <tr><td>Métaux alcalins (Li, Na, K…)</td><td>+I</td><td>toujours +I dans composés ioniques</td></tr>
+                        <tr><td>Métaux alcalino-terreux (Mg, Ca…)</td><td>+II</td><td>toujours +II</td></tr>
+                        <tr><td>Cl, Br, I (halogènes)</td><td>-I</td><td>dans oxyacides : +I, +III, +V, +VII</td></tr>
+                        <tr><td>Carbone (organique)</td><td>-IV à +IV</td><td>CH₄ : -IV ; CO₂ : +IV ; C simple : 0</td></tr>
+                        <tr><td>Azote (N)</td><td>-III, 0, +II, +IV, +V</td><td>NH₃ : -III ; N₂ : 0 ; NO : +II ; NO₂ : +IV ; HNO₃ : +V</td></tr>
+                    </tbody>
+                </table>
+                <p class="card-description" style="margin-top: 0.75rem;">
+                    💡 La somme des n.o. dans une molécule neutre est nulle ; dans un ion polyatomique, elle est égale à la charge de l'ion.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section pièges courants -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants / Erreurs fréquentes</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Confondre oxydant et réducteur :</span> L'oxydant est l'espèce dont le n.o. <strong>diminue</strong> (il est réduit). Le réducteur voit son n.o. <strong>augmenter</strong>.</li>
+                    <li><span class="bold">Oublier les corps simples :</span> Dans un corps simple diatomique ($O_2$, $Cl_2$, $H_2$), le n.o. des atomes est toujours <strong>zéro</strong>.</li>
+                    <li><span class="bold">Mauvaise attribution dans les peroxydes :</span> Dans $H_2O_2$ ou $Na_2O_2$, l'oxygène a un n.o. de <strong>-I</strong> et non -II. Ne pas appliquer mécaniquement -II.</li>
+                    <li><span class="bold">Ne pas vérifier la neutralité électrique globale :</span> Après équilibrage par variation du n.o., pensez à ajuster les $H^+$ ou $OH^-$ et l'eau pour respecter la conservation de la matière et de la charge.</li>
+                    <li><span class="bold">Dismutation non détectée :</span> Penser à examiner si un élément apparaît avec des n.o. différents dans les produits alors qu'il est unique dans le(s) réactif(s).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section pour aller plus loin : application en sidérurgie (en lien avec programme) -->
+        <section class="exemple-section">
+            <h2 class="section-title">🏭 Application industrielle : réduction du minerai de fer</h2>
+            <div class="card exemple-card">
+                <h3 class="card-title">Haut fourneau – Utilisation des n.o. pour comprendre la réaction</h3>
+                <p class="exemple-context">
+                    La réduction de l'hématite ($Fe_2O_3$) par le monoxyde de carbone ($CO$) produit du fer métallique et du dioxyde de carbone.
+                </p>
+                <div class="exemple-correction">
+                    Équation : $Fe_2O_3 + 3CO \rightarrow 2Fe + 3CO_2$<br>
+                    <strong>Suivi des nombres d'oxydation :</strong><br>
+                    - Fer : dans $Fe_2O_3$, n.o. = +III ; dans $Fe$ métal, n.o. = 0 → <strong>réduction</strong> (gain d'électrons).<br>
+                    - Carbone : dans $CO$, O = -II ⇒ C = +II ; dans $CO_2$, C = +IV → <strong>oxydation</strong> (perte d'électrons).<br>
+                    ➜ $CO$ est le réducteur, $Fe_2O_3$ l'oxydant. Cette analyse par les n.o. confirme le transfert d'électrons sans écrire les demi-équations.
+                </div>
+                <div class="exemple-astuce">
+                    🧪 Savoir interpréter les réactions de la sidérurgie par les n.o. est un attendu du programme (leçon 53).
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Fiche de révision – Leçon 52 : Utilisation des nombres d’oxydation | Niveau Première C & D (Cameroun) · 🔬 Module Oxydoréduction</p>
+    </footer>
+</div>
+</body>
+</html>

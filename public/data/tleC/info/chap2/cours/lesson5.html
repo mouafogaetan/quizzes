@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Recherche séquentielle (Terminale C & D)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Recherche séquentielle (linéaire)</h1>
+            <p class="lesson-subtitle">Algorithmique & Programmation · Terminale C & D · Session Bac 2023</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">🔎 Principe général</h3>
+                    <p class="card-description">
+                        La recherche séquentielle (ou linéaire) consiste à parcourir un tableau élément par élément, du premier au dernier, 
+                        jusqu'à trouver la valeur recherchée ou atteindre la fin du tableau. C'est la méthode la plus simple, 
+                        utilisable même si le tableau n'est pas trié.
+                    </p>
+                    <img src="" alt="Schéma illustrant le parcours pas à pas d'un tableau de gauche à droite pour trouver la valeur cible" style="width:100%; max-width:300px; margin:0.5rem 0; border-radius:8px;">
+                    <ul class="concept-list">
+                        <li><strong>Complexité :</strong> O(n) dans le pire des cas (élément absent ou en dernière position).</li>
+                        <li><strong>Condition d'arrêt :</strong> élément trouvé <strong>OU</strong> fin du tableau atteinte.</li>
+                        <li><strong>Sortie :</strong> position (indice) de l'élément ou un message d'absence (ex: -1).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🚩 La variable drapeau (booléenne)</h3>
+                    <p class="card-description">
+                        On utilise souvent une variable booléenne (vrai/faux) appelée <strong>« trouvé »</strong> ou <strong>« flag »</strong> 
+                        pour indiquer si l'élément a été localisé. Cela permet de sortir de la boucle plus tôt et d'éviter de continuer 
+                        le parcours inutilement.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Initialisation :</strong> <span class="formule">trouve ← Faux</span></li>
+                        <li><strong>Condition dans la boucle :</strong> Tant que (non trouve) et (indice ≤ taille)</li>
+                        <li><strong>Si l'élément correspond :</strong> trouve ← Vrai et mémoriser l'indice.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">📝 Structure algorithmique type</h3>
+                    <p class="card-description">
+                        Voici le squelette d'un algorithme de recherche séquentielle dans un tableau <strong>T</strong> de taille <strong>N</strong> 
+                        pour une valeur <strong>V</strong> recherchée.
+                    </p>
+                    <pre style="background:#f1f5f9; padding:1rem; border-radius:12px; overflow-x:auto; font-family:'Courier New', monospace;">
+Fonction recherche_sequentielle(T, N, V) : entier
+   trouve ← Faux
+   i ← 1
+   Tant que (i ≤ N) et (non trouve) Faire
+       Si T[i] = V Alors
+           trouve ← Vrai
+       Sinon
+           i ← i + 1
+       Fin Si
+   Fin Tant que
+   Si trouve Alors
+       Retourner i
+   Sinon
+       Retourner -1
+   Fin Si
+Fin Fonction</pre>
+                    <p class="card-description" style="margin-top:0.75rem;">
+                        ⚡ <strong>Optimisation :</strong> On peut aussi sortir directement avec <span class="formule">RETOURNER i</span> dès que l'élément est trouvé.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Recherche d’un nombre dans une liste de notes</h3>
+                    <p class="exemple-context">
+                        Soit le tableau T = [12, 15, 8, 20, 17] (indices 1 à 5). On recherche la valeur V = 20.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Déroulement pas à pas :</strong><br>
+                        &nbsp;&nbsp;• i=1 → T[1]=12 ≠ 20 → i=2<br>
+                        &nbsp;&nbsp;• i=2 → T[2]=15 ≠ 20 → i=3<br>
+                        &nbsp;&nbsp;• i=3 → T[3]=8 ≠ 20 → i=4<br>
+                        &nbsp;&nbsp;• i=4 → T[4]=20 = 20 → trouve = Vrai, on sort.<br>
+                        ✅ <strong>Résultat :</strong> L’élément 20 est à l’indice 4.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce : On commence souvent l'indice à 0 dans certains langages (C, Python). En algorithmique, le choix (0 ou 1) doit être clair. Ici nous utilisons 1 pour respecter les sujets du bac Cameroun.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Élément absent du tableau</h3>
+                    <p class="exemple-context">
+                        Tableau T = [2, 5, 7, 9, 11] (indices 1 à 5). Rechercher V = 10.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Parcours complet :</strong><br>
+                        i=1 → 2≠10 → i=2<br>
+                        i=2 → 5≠10 → i=3<br>
+                        i=3 → 7≠10 → i=4<br>
+                        i=4 → 9≠10 → i=5<br>
+                        i=5 → 11≠10 → i=6 (dépasse N=5). Condition i≤N fausse, sortie.<br>
+                        ❌ <strong>Résultat :</strong> Valeur non trouvée → retourne -1.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Une fonction qui retourne -1 est une convention courante pour indiquer l'absence.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Écriture en langage C (traduction)</h3>
+                    <p class="exemple-context">
+                        Programme C qui demande à l’utilisateur la valeur à chercher dans un tableau d’entiers.
+                    </p>
+                    <pre style="background:#f1f5f9; padding:1rem; border-radius:12px; overflow-x:auto; font-family:'Courier New', monospace; font-size:0.9rem;">
+#include &lt;stdio.h&gt;
+
+int recherche_sequentielle(int T[], int N, int V) {
+    for (int i = 0; i < N; i++) {
+        if (T[i] == V)
+            return i;   // retourne l'indice (0-based)
+    }
+    return -1;
+}
+
+int main() {
+    int notes[] = {12, 15, 8, 20, 17};
+    int taille = 5;
+    int valeur = 20;
+    int position = recherche_sequentielle(notes, taille, valeur);
+    if (position != -1)
+        printf("Valeur %d trouvée à l'indice %d\n", valeur, position);
+    else
+        printf("Valeur %d non trouvée\n", valeur);
+    return 0;
+}</pre>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> La boucle <span class="formule">for</span> parcourt le tableau de 0 à N-1. 
+                        Dès que la valeur correspond, on renvoie l'indice. Sinon, après la boucle, on renvoie -1.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre indice et valeur :</span> On compare la valeur cherchée avec T[i] et non avec i.</li>
+                        <li><span class="bold">Oublier la condition d'arrêt sur l'indice :</span> Sans vérifier que i ≤ N, on risque de sortir du tableau → erreur.</li>
+                        <li><span class="bold">Boucle infinie :</span> Si on oublie d'incrémenter i dans le cas où l'élément n'est pas trouvé, la boucle ne progresse pas.</li>
+                        <li><span class="bold">Décalage des indices :</span> En C, le premier élément est à l'indice 0, tandis qu'en algorithmique (bac), on débute parfois à 1. Soyez cohérent.</li>
+                        <li><span class="bold">Recherche dans tableau non trié :</span> La recherche séquentielle fonctionne dans tous les cas, mais elle est moins efficace qu'une recherche dichotomique pour un tableau trié.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section supplémentaire : Lien avec l'examen du baccalauréat -->
+            <section class="concept-section">
+                <h2 class="section-title">📄 Lien avec l'épreuve du Bac (Session 2023)</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Lors de la session 2023, Partie III, Exercice 1, les candidats devaient écrire un algorithme de recherche séquentielle 
+                        dans un tableau pour déterminer la présence d’un élément et renvoyer son indice. Les questions portaient également 
+                        sur le rôle de la variable booléenne et la complexité.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Savoir-faire attendu :</strong> Écrire l'algorithme en pseudo-code, le tester sur un petit tableau et évaluer le nombre de comparaisons dans le pire des cas.</li>
+                        <li><strong>Erreur typique :</strong> Ne pas gérer le cas où l'élément est absent (retourner une valeur sentinelle).</li>
+                    </ul>
+                    <img src="" alt="Capture d'écran d'un énoncé type de recherche séquentielle au baccalauréat" style="width:100%; border-radius:12px; margin-top:12px;">
+                </div>
+            </section>
+
+            <!-- Exercice rapide d'auto-évaluation -->
+            <section class="exemple-section">
+                <h2 class="section-title">✍️ Auto-évaluation (entraînement)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exercice : Gestion des notes d’une classe</h3>
+                    <p class="exemple-context">
+                        On dispose d’un tableau <strong>Notes[]</strong> contenant les notes sur 20 de 10 élèves. Écrire un algorithme qui recherche la première occurrence de la note 10 et affiche son indice. Si la note n’existe pas, afficher « Note absente ».
+                    </p>
+                    <div class="exemple-correction">
+                        <details style="cursor:pointer;">
+                            <summary style="font-weight:600; color:#2563eb;">📌 Voir une solution possible</summary>
+                            <pre style="background:#f1f5f9; padding:0.8rem; border-radius:8px; margin-top:0.8rem;">
+Variables : Notes[10] : tableau d'entiers
+           i, trouve : entier
+Début
+   trouve ← 0
+   i ← 1
+   Tant que (i ≤ 10) et (trouve = 0) Faire
+        Si Notes[i] = 10 Alors
+            trouve ← i
+        Sinon
+            i ← i + 1
+        Fin Si
+   Fin Tant que
+   Si trouve ≠ 0 Alors
+        Afficher("Premier 10 trouvé à l'indice ", trouve)
+   Sinon
+        Afficher("Note absente")
+   Fin Si
+Fin</pre>
+                        </details>
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Conseil : Testez mentalement avec des cas particuliers (10 en première position, 10 absent, plusieurs 10).
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme officiel d'Informatique - Terminale C & D (Cameroun) · Inspirée des épreuves 2022-2025 · <a href="#">Recherche séquentielle</a> · 📚 Révision bac</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision · Utiliser des arguments pertinents</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* style.css intégré pour garantir l'affichage dans le document unique */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+        
+        .image-illustration {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .image-illustration img {
+            max-width: 100%;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .image-caption {
+            font-size: 0.8rem;
+            color: #5b6e8c;
+            margin-top: 0.3rem;
+        }
+        .highlight {
+            background-color: #eef2ff;
+            font-weight: 500;
+            padding: 0 0.2rem;
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">📢 Utiliser des arguments pertinents</h1>
+        <p class="lesson-subtitle">Français · 3ème (Troisième) · Texte argumentatif – Chapitre 4, Leçon 2</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section concepts clés -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Éléments clés à retenir</h2>
+
+            <div class="card concept-card">
+                <h3 class="card-title">1️⃣ Qu’est-ce qu’un argument pertinent ?</h3>
+                <p class="card-description">
+                    Un argument est une <strong>raison</strong> qui sert à défendre ou à réfuter une opinion (thèse). 
+                    Pour être <strong>pertinent</strong>, un argument doit être :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>En lien direct avec le sujet</strong> : ne pas sortir du thème.</li>
+                    <li><strong>Vrai ou plausible</strong> : ancré dans la réalité, l’expérience ou une source fiable.</li>
+                    <li><strong>Adapté au destinataire</strong> : tenir compte des valeurs et de la sensibilité du lecteur.</li>
+                    <li><strong>Compréhensible et précis</strong> : formulé clairement, sans généralité vague.</li>
+                </ul>
+                <div class="image-illustration">
+                    <!-- Image générique pour visualiser la notion d'argumentation (description pour IA) -->
+                    <img src="" alt="Diagramme montrant une thèse, deux arguments solides avec des flèches vers des exemples concrets, style tableau synthétique">
+                    <div class="image-caption">🔍 Un argument pertinent s’appuie sur des faits et des exemples.</div>
+                </div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">2️⃣ Où trouver des arguments solides ?</h3>
+                <p class="card-description">
+                    Pour défendre un point de vue (notamment sur des sujets de société comme <strong>le travail des enfants, l’alcool, la dot, l’éducation</strong>), 
+                    on puise ses arguments dans :
+                </p>
+                <ul class="concept-list">
+                    <li><span class="highlight">L’expérience personnelle</span> : vécu, témoignage.</li>
+                    <li><span class="highlight">L’observation de la société</span> : faits divers, actualités, comportements courants.</li>
+                    <li><span class="highlight">Les valeurs universelles</span> : justice, santé, dignité, égalité, solidarité.</li>
+                    <li><span class="highlight">Les conséquences logiques</span> : cause → effet.</li>
+                </ul>
+                <p class="card-description" style="margin-top: 0.75rem;">
+                    💡 <strong>Astuce :</strong> Pour chaque argument, prévois un <strong>exemple concret</strong> qui le rend vivant et convaincant.
+                </p>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">3️⃣ Construire un argumentaire en trois temps</h3>
+                <p class="card-description">
+                    Un argumentaire efficace suit souvent le modèle :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>1. Affirmation de l’argument</strong> : je pose mon idée (ex: « Le travail des enfants nuit à leur éducation »).</li>
+                    <li><strong>2. Justification / Explication</strong> : pourquoi est-ce vrai ? (ex: car les enfants n’ont plus le temps d’aller à l’école).</li>
+                    <li><strong>3. Exemple concret</strong> : une illustration précise (ex: « Dans certaines régions, des fillettes de 10 ans travaillent dans des champs au lieu d’apprendre à lire »).</li>
+                </ul>
+                <p class="card-description">Cette structure (argument + raison + exemple) rend le texte argumentatif solide et persuasif.</p>
+            </div>
+        </section>
+
+        <!-- Section exemples pratiques avec sujets de société -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Exemples de compréhension</h2>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Sujet : « Faut-il interdire la consommation d’alcool aux mineurs ? »</h3>
+                <p class="exemple-context">
+                    <strong>Thèse défendue :</strong> Oui, l’alcool doit être strictement interdit aux mineurs.
+                </p>
+                <p class="exemple-correction">
+                    <strong>📌 Argument n°1 (santé) :</strong> L’alcool nuit gravement au développement physique et cérébral des adolescents.<br>
+                    <em>Justification :</em> Le cerveau continue de se former jusqu’à 25 ans ; l’alcool perturbe cette maturation et peut causer des troubles cognitifs.<br>
+                    <strong>Exemple concret :</strong> Selon l’OMS, les jeunes consommateurs réguliers d’alcool présentent plus de risques de dépendance et d’échec scolaire.
+                </p>
+                <p class="exemple-correction">
+                    <strong>📌 Argument n°2 (responsabilité) :</strong> L’interdit protège les jeunes contre des comportements dangereux.<br>
+                    <em>Justification :</em> Sous l’emprise de l’alcool, les mineurs peuvent adopter des conduites à risque (violence, accidents).<br>
+                    <strong>Exemple concret :</strong> De nombreux accidents de la route impliquant des jeunes ont lieu après des soirées alcoolisées. Interdire l’accès à l’alcool réduit ces drames.
+                </p>
+                <div class="exemple-astuce">
+                    💬 Astuce : Pour chaque argument, pose-toi la question « Pourquoi est-ce important ? » et trouve un fait précis qui renforce ta position.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Sujet : « La dot : une tradition à conserver ou à abolir ? »</h3>
+                <p class="exemple-context">
+                    <strong>Thèse défendue :</strong> La dot, telle qu’elle est pratiquée aujourd’hui, doit être réformée car elle peut être source d’inégalités.
+                </p>
+                <p class="exemple-correction">
+                    <strong>🎯 Argument 1 (dignité humaine) :</strong> La dot excessive transforme le mariage en transaction commerciale.<br>
+                    <em>Justification :</em> Cela réduit la femme à une valeur marchande et peut entraîner des pressions familiales.<br>
+                    <strong>Exemple concret :</strong> Dans certains villages, des jeunes filles sont retirées de l’école car leurs familles exigent une dot trop élevée, ce qui freine leur émancipation.
+                </p>
+                <p class="exemple-correction">
+                    <strong>🎯 Argument 2 (justice sociale) :</strong> La dot peut créer des conflits et des dettes.<br>
+                    <em>Justification :</em> Beaucoup de familles s’endettent pour réunir la somme exigée, ce qui affecte la stabilité du jeune foyer.<br>
+                    <strong>Exemple concret :</strong> Un couple peut commencer sa vie commune avec des dettes écrasantes à cause des exigences de la belle-famille.
+                </p>
+                <div class="exemple-astuce">
+                    💡 Pense à utiliser des connecteurs logiques comme <strong>« en effet » , « par conséquent » , « c’est pourquoi »</strong> pour relier arguments et exemples.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Sujet : « Le travail des enfants : une réalité à combattre »</h3>
+                <p class="exemple-context">
+                    <strong>Thèse défendue :</strong> Le travail des enfants est inacceptable car il compromet leur avenir.
+                </p>
+                <p class="exemple-correction">
+                    <strong>⚖️ Argument moral :</strong> L’enfant a droit à l’éducation et à l’épanouissement (Convention internationale des droits de l’enfant).<br>
+                    <em>Justification :</em> Le travail précoce prive l’enfant de son enfance et le maintient dans un cycle de pauvreté.<br>
+                    <strong>Exemple :</strong> Au Cameroun, des enfants travaillent dans des plantations ou des mines artisanales au lieu d’aller à l’école primaire. Sans instruction, ils restent vulnérables toute leur vie.
+                </p>
+                <div class="exemple-astuce">
+                    💬 Pour rendre tes arguments encore plus percutants, appuie-toi sur des données locales ou des expériences que tu connais.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section pour enrichir : comment trouver 2 ou 3 arguments solides -->
+        <section class="concept-section">
+            <h2 class="section-title">🧠 Méthode : trouver des arguments pertinents en 3 étapes</h2>
+            <div class="card concept-card">
+                <h3 class="card-title">La méthode des « 3 angles »</h3>
+                <ul class="concept-list">
+                    <li><strong>🔎 Angle éthique / moral :</strong> Qu’est-ce qui est juste ou injuste ? (respect des droits, dignité, valeurs)</li>
+                    <li><strong>💰 Angle économique / social :</strong> Quelles conséquences sur la société, l’argent, les inégalités ?</li>
+                    <li><strong>❤️ Angle humain / sanitaire :</strong> Quels effets sur la santé, le bien-être, les relations familiales ?</li>
+                </ul>
+                <p class="card-description">
+                    Exemple avec le thème de <strong>l’alcool</strong> :<br>
+                    - Moral : liberté individuelle vs devoir de protéger les jeunes.<br>
+                    - Social : coût pour la santé publique, violence liée à l’alcool.<br>
+                    - Humain : risques de dépendance, destruction des foyers.
+                </p>
+                <div class="image-illustration">
+                    <img src="" alt="Schéma en trois bulles avec les mots Éthique, Économique, Humain, entourant une thèse centrale : 'Mon argumentation'">
+                    <div class="image-caption">🎯 La méthode des trois angles permet de ne pas manquer d’idées.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pièges courants et erreurs à éviter -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Erreur fréquente :</span> Confondre un <strong>argument</strong> (idée logique) avec un <strong>exemple</strong>. L’argument est la raison générale, l’exemple illustre cette raison. Il faut les deux !</li>
+                    <li><span class="bold">Attention :</span> Utiliser des arguments trop <strong>vagues</strong> ou <strong>hors sujet</strong>. Exemple : pour lutter contre le travail des enfants, parler de la météo n’a aucun sens. Reste centré.</li>
+                    <li><span class="bold">Piège :</span> Multiplier les arguments sans les développer. Mieux vaut deux arguments bien construits (avec justification + exemple) que quatre arguments superficiels.</li>
+                    <li><span class="bold">À ne pas faire :</span> Confondre le ressenti personnel (« je n’aime pas ») avec un argument objectif. Un argument solide repose sur des faits ou des conséquences logiques.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Mini exercice d’auto-évaluation -->
+        <section class="exemple-section">
+            <h2 class="section-title">✍️ Entraîne-toi ! (auto-évaluation)</h2>
+            <div class="card exemple-card">
+                <h3 class="card-title">Sujet proposé : « À votre avis, les réseaux sociaux sont-ils bénéfiques pour les adolescents ? »</h3>
+                <p class="exemple-context">
+                    <strong>Consigne :</strong> Trouve <strong>deux arguments pertinents</strong> (un pour, un contre) et pour chacun, ajoute une justification et un exemple.
+                </p>
+                <p class="exemple-correction">
+                    <strong>✅ Proposition de réponse (à comparer) :</strong><br>
+                    <em>Argument pour (bénéfices) :</em> Les réseaux sociaux permettent de développer des compétences numériques et de maintenir le lien social.<br>
+                    → Justification : À l’ère du numérique, savoir communiquer en ligne est essentiel.<br>
+                    → Exemple : Pendant les périodes de confinement, beaucoup d’élèves ont pu suivre des cours en ligne et rester en contact avec leurs amis grâce à WhatsApp et Instagram.<br><br>
+                    <em>Argument contre (risques) :</em> L’usage excessif des réseaux sociaux nuit à la concentration et à la santé mentale.<br>
+                    → Justification : Les notifications et le scrolling infini créent une addiction qui réduit le temps d’étude et le sommeil.<br>
+                    → Exemple : Des études montrent que les adolescents passant plus de 4h par jour sur les réseaux présentent davantage d’anxiété et de baisse des résultats scolaires.
+                </p>
+                <div class="exemple-astuce">
+                    🧠 Astuce bonus : Relis-toi en vérifiant que chaque argument est bien un <strong>raisonnement solide</strong> et non un simple avis.
+                </div>
+            </div>
+        </section>
+
+        <!-- Rappel de la structure globale pour texte argumentatif -->
+        <div class="card concept-card" style="background-color: #fefce8; border-left-color: #eab308;">
+            <h3 class="card-title" style="color: #b45309;">📖 À retenir pour le texte argumentatif</h3>
+            <p class="card-description">
+                Quand tu rédiges un texte argumentatif (dissertation, lettre de sensibilisation, discours), souviens-toi :
+                <strong>thèse + 2 ou 3 arguments pertinents (avec exemples concrets) + conclusion qui exprime un sentiment ou une leçon.</strong><br>
+                Utilise des connecteurs logiques pour structurer ton développement : <em>d’abord, ensuite, par ailleurs, en conclusion</em>.
+            </p>
+        </div>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Fiche de révision – Programme de français 3ème (Cameroun) · Module 2 – Texte argumentatif · Leçon 2 : arguments pertinents<br>📚 Relis, entraîne-toi avec des sujets de société (travail des enfants, alcool, dot, éducation) et sois convaincant !</p>
+    </footer>
+</div>
+</body>
+</html>

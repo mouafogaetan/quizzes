@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche Révision - Leçon 47 : Demi-équations en milieu acide</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (intégré pour éviter fichier externe) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem; }
+            .fiche-content { padding: 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">Leçon 47 : Établissement des demi-équations en milieu acide</h1>
+        <p class="lesson-subtitle">Chimie · Première C &amp; D · Oxydoréduction en solution aqueuse</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section concepts clés -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Méthode pour écrire une demi-équation en milieu acide</h2>
+            <div class="card concept-card">
+                <h3 class="card-title">Règles fondamentales (méthode en 4 étapes)</h3>
+                <p class="card-description">
+                    Pour équilibrer une demi-équation d’oxydoréduction en milieu acide (excès d’ions H<sub>3</sub>O<sup>+</sup> ou H<sup>+</sup>), 
+                    on respecte l’ordre suivant :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>1. Équilibrer l’élément qui change de n.o.</strong> (hormis H et O).</li>
+                    <li><strong>2. Équilibrer les atomes d’oxygène</strong> en ajoutant des molécules d’eau H<sub>2</sub>O.</li>
+                    <li><strong>3. Équilibrer les atomes d’hydrogène</strong> en ajoutant des ions H<sup>+</sup> (ou H<sub>3</sub>O<sup>+</sup>).</li>
+                    <li><strong>4. Équilibrer la charge électrique</strong> en ajoutant des électrons e<sup>-</sup> du côté le plus chargé positivement.</li>
+                </ul>
+                <p class="card-description" style="margin-top: 0.8rem;">
+                    💡 <strong>Rappel :</strong> La demi-équation s’écrit sous la forme : <span class="formule">Ox + n e<sup>-</sup> ⇌ Red</span>. 
+                    En milieu acide, les H<sup>+</sup> et H<sub>2</sub>O sont les seules espèces ajoutées pour équilibrer.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section des couples majeurs à connaître -->
+        <section class="exemple-section">
+            <h2 class="section-title">🧪 Demi-équations des couples usuels (programme)</h2>
+
+            <!-- 1. MnO4- / Mn2+ -->
+            <div class="card exemple-card">
+                <h3 class="card-title">Couple permanganate / ion manganèse(II) : MnO<sub>4</sub><sup>-</sup> / Mn<sup>2+</sup></h3>
+                <div class="exemple-context">
+                    Oxydant : MnO<sub>4</sub><sup>-</sup> (violet) &nbsp;|&nbsp; Réducteur : Mn<sup>2+</sup> (incolore / rose pâle)
+                </div>
+                <div class="exemple-correction">
+                    <p><strong>Équilibrage pas à pas :</strong></p>
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>Mn déjà équilibré (1 Mn de chaque côté).</li>
+                        <li>Oxygène : 4 O à gauche → ajouter 4 H<sub>2</sub>O à droite.</li>
+                        <li>Hydrogène : 8 H à droite → ajouter 8 H<sup>+</sup> à gauche.</li>
+                        <li>Charge : gauche : (-1) + 8 = +7 ; droite : +2 → ajouter 5 e<sup>-</sup> à gauche.</li>
+                    </ol>
+                    <p><strong>Demi-équation finale :</strong></p>
+                    <div class="formule" style="display: inline-block; background:#eef2ff; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+                        $$ \text{MnO}_4^- + 8\text{H}^+ + 5e^- \longrightarrow \text{Mn}^{2+} + 4\text{H}_2\text{O} $$
+                    </div>
+                    <p style="margin-top: 0.8rem;">Avec H<sub>3</sub>O<sup>+</sup> : <span class="formule">MnO<sub>4</sub><sup>-</sup> + 8H<sub>3</sub>O<sup>+</sup> + 5e<sup>-</sup> → Mn<sup>2+</sup> + 12H<sub>2</sub>O</span>.</p>
+                </div>
+                <div class="exemple-astuce">
+                    ⚡ Astuce : Le permanganate est un oxydant très puissant (E° = 1,51 V) ; toujours 5 électrons échangés.
+                </div>
+            </div>
+
+            <!-- 2. Cr2O72- / Cr3+ -->
+            <div class="card exemple-card">
+                <h3 class="card-title">Couple dichromate / ion chrome(III) : Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup> / Cr<sup>3+</sup></h3>
+                <div class="exemple-context">
+                    Oxydant : Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup> (orangé) &nbsp;|&nbsp; Réducteur : Cr<sup>3+</sup> (vert)
+                </div>
+                <div class="exemple-correction">
+                    <p><strong>Étapes :</strong></p>
+                    <ul class="concept-list">
+                        <li>Équilibrer Cr : 2 Cr à gauche → 2 Cr<sup>3+</sup> à droite.</li>
+                        <li>Oxygène : 7 O → ajouter 7 H<sub>2</sub>O à droite.</li>
+                        <li>Hydrogène : 14 H à droite → ajouter 14 H<sup>+</sup> à gauche.</li>
+                        <li>Charge : gauche : (-2) + 14 = +12 ; droite : 2×(+3) = +6 → ajouter 6 e<sup>-</sup> à gauche.</li>
+                    </ul>
+                    <div class="formule" style="background:#eef2ff; padding: 0.5rem 1rem; border-radius: 0.5rem; margin-top: 0.5rem;">
+                        $$ \text{Cr}_2\text{O}_7^{2-} + 14\text{H}^+ + 6e^- \longrightarrow 2\text{Cr}^{3+} + 7\text{H}_2\text{O} $$
+                    </div>
+                </div>
+                <div class="exemple-astuce">
+                    🧪 Le dichromate est utilisé dans l'oxydation des alcools ; la couleur passe de l'orangé au vert.
+                </div>
+            </div>
+
+            <!-- 3. NO3- / NO -->
+            <div class="card exemple-card">
+                <h3 class="card-title">Couple nitrate / monoxyde d’azote : NO<sub>3</sub><sup>-</sup> / NO</h3>
+                <div class="exemple-context">
+                    Oxydant : NO<sub>3</sub><sup>-</sup> (nitrate) &nbsp;|&nbsp; Réducteur : NO (gaz incolore)
+                </div>
+                <div class="exemple-correction">
+                    <p><strong>Équilibrage :</strong></p>
+                    <ul class="concept-list">
+                        <li>N déjà équilibré (1 de chaque côté).</li>
+                        <li>Oxygène : 3 O à gauche, 1 O à droite → ajouter 2 H<sub>2</sub>O à droite.</li>
+                        <li>Hydrogène : 4 H à droite → ajouter 4 H<sup>+</sup> à gauche.</li>
+                        <li>Charge : gauche : (-1) + 4 = +3 ; droite : 0 → ajouter 3 e<sup>-</sup> à gauche.</li>
+                    </ul>
+                    <div class="formule" style="background:#eef2ff; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+                        $$ \text{NO}_3^- + 4\text{H}^+ + 3e^- \longrightarrow \text{NO} + 2\text{H}_2\text{O} $$
+                    </div>
+                </div>
+                <div class="exemple-astuce">
+                    🔥 Couple fréquent dans l’attaque des métaux par l’acide nitrique.
+                </div>
+            </div>
+
+            <!-- 4. SO42- / SO2 -->
+            <div class="card exemple-card">
+                <h3 class="card-title">Couple sulfate / dioxyde de soufre : SO<sub>4</sub><sup>2-</sup> / SO<sub>2</sub></h3>
+                <div class="exemple-context">
+                    Oxydant : SO<sub>4</sub><sup>2-</sup> &nbsp;|&nbsp; Réducteur : SO<sub>2</sub>
+                </div>
+                <div class="exemple-correction">
+                    <ul class="concept-list">
+                        <li>S équilibré (1 atome S de chaque côté).</li>
+                        <li>Oxygène : 4 O à gauche, 2 O à droite → ajouter 2 H<sub>2</sub>O à droite.</li>
+                        <li>Hydrogène : 4 H à droite → ajouter 4 H<sup>+</sup> à gauche.</li>
+                        <li>Charge : gauche : (-2) + 4 = +2 ; droite : 0 → ajouter 2 e<sup>-</sup> à gauche.</li>
+                    </ul>
+                    <div class="formule" style="background:#eef2ff; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+                        $$ \text{SO}_4^{2-} + 4\text{H}^+ + 2e^- \longrightarrow \text{SO}_2 + 2\text{H}_2\text{O} $$
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. S4O62- / S2O32- -->
+            <div class="card exemple-card">
+                <h3 class="card-title">Couple tétrathionate / thiosulfate : S<sub>4</sub>O<sub>6</sub><sup>2-</sup> / S<sub>2</sub>O<sub>3</sub><sup>2-</sup></h3>
+                <div class="exemple-context">
+                    Oxydant : S<sub>4</sub>O<sub>6</sub><sup>2-</sup> &nbsp;|&nbsp; Réducteur : S<sub>2</sub>O<sub>3</sub><sup>2-</sup> (thiosulfate)
+                </div>
+                <div class="exemple-correction">
+                    <p><strong>Méthode :</strong> on équilibre en milieu acide (utile pour le dosage du diiode).</p>
+                    <ul class="concept-list">
+                        <li>Atomes de soufre : 4 S à gauche, 2×2 = 4 S à droite → OK.</li>
+                        <li>Oxygène : 6 O à gauche, 6 O à droite (3×2) → déjà équilibré.</li>
+                        <li>Hydrogène : pas d’hydrogène → pas de H<sup>+</sup> ni H<sub>2</sub>O ajoutés.</li>
+                        <li>Charge : gauche -2 ; droite 2×(-2) = -4 → ajouter 2 e<sup>-</sup> à gauche.</li>
+                    </ul>
+                    <div class="formule" style="background:#eef2ff; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+                        $$ \text{S}_4\text{O}_6^{2-} + 2e^- \longrightarrow 2\,\text{S}_2\text{O}_3^{2-} $$
+                    </div>
+                    <p>Remarque : cette demi-équation ne nécessite ni H<sup>+</sup> ni H<sub>2</sub>O car les éléments sont déjà équilibrés.</p>
+                </div>
+                <div class="exemple-astuce">
+                    📌 Couple utilisé dans la réaction du thiosulfate avec le diiode : décoloration.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section exemples pratiques d'application -->
+        <section class="exemple-section">
+            <h2 class="section-title">✍️ Application : Construction d'une demi-équation pas à pas</h2>
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple complet : couple IO<sub>3</sub><sup>-</sup> / I<sub>2</sub> (ion iodate / diiode)</h3>
+                <div class="exemple-context">
+                    On souhaite écrire la demi-équation de réduction de IO<sub>3</sub><sup>-</sup> en I<sub>2</sub> en milieu acide.
+                </div>
+                <div class="exemple-correction">
+                    <p><strong>1. Équilibrer l’élément iode :</strong> 1 I à gauche, 2 I dans I<sub>2</sub> → mettre 2 IO<sub>3</sub><sup>-</sup> et I<sub>2</sub>.</p>
+                    <p><strong>2. Équilibrer O :</strong> 2×3 = 6 O → ajouter 6 H<sub>2</sub>O à droite.</p>
+                    <p><strong>3. Équilibrer H :</strong> droite : 12 H → ajouter 12 H<sup>+</sup> à gauche.</p>
+                    <p><strong>4. Charge :</strong> gauche : 2×(-1) + 12 = +10 ; droite : charge 0 (I<sub>2</sub> neutre) → ajouter 10 e<sup>-</sup> à gauche.</p>
+                    <div class="formule" style="background:#eef2ff; padding: 0.5rem 1rem; border-radius: 0.5rem;">
+                        $$ 2\,\text{IO}_3^- + 12\,\text{H}^+ + 10e^- \longrightarrow \text{I}_2 + 6\,\text{H}_2\text{O} $$
+                    </div>
+                </div>
+                <div class="exemple-astuce">
+                    💡 Toujours vérifier que la somme des charges et des atomes est équilibrée avant d’utiliser la demi-équation.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section pièges et erreurs fréquentes -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Erreurs courantes & conseils</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Oublier d’équilibrer O avant H :</span> on doit toujours commencer par l’oxygène (ajout H<sub>2</sub>O), puis hydrogène (H<sup>+</sup>).</li>
+                    <li><span class="bold">Ne pas tenir compte de la charge réelle :</span> surtout pour les ions polyatomiques (Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup>, MnO<sub>4</sub><sup>-</sup>). Compter la charge totale avec les H<sup>+</sup> ajoutés.</li>
+                    <li><span class="bold">Confondre milieu acide / basique :</span> en milieu acide on utilise H<sup>+</sup> et H<sub>2</sub>O, jamais OH<sup>-</sup>. Cette leçon est spécifique au milieu acide.</li>
+                    <li><span class="bold">Mauvais nombre d’électrons :</span> Vérifier la différence de charge entre oxydant et réducteur après équilibrage H<sub>2</sub>O/H<sup>+</sup>.</li>
+                </ul>
+                <div class="exemple-astuce" style="margin-top: 0.8rem;">
+                    ✅ <strong>Vérification rapide :</strong> après avoir écrit la demi-équation, contrôler la conservation des atomes et la neutralité électrique (somme des charges à gauche = somme des charges à droite + (n × e<sup>-</sup>)?).
+                </div>
+            </div>
+        </section>
+
+        <!-- Section mémorisation des demi-équations fréquentes -->
+        <section class="concept-section">
+            <h2 class="section-title">📖 Récapitulatif des demi-équations à connaître (examen)</h2>
+            <div class="card concept-card">
+                <ul class="concept-list">
+                    <li><strong>MnO<sub>4</sub><sup>-</sup> / Mn<sup>2+</sup></strong> : MnO<sub>4</sub><sup>-</sup> + 8H<sup>+</sup> + 5e<sup>-</sup> → Mn<sup>2+</sup> + 4H<sub>2</sub>O</li>
+                    <li><strong>Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup> / Cr<sup>3+</sup></strong> : Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup> + 14H<sup>+</sup> + 6e<sup>-</sup> → 2Cr<sup>3+</sup> + 7H<sub>2</sub>O</li>
+                    <li><strong>NO<sub>3</sub><sup>-</sup> / NO</strong> : NO<sub>3</sub><sup>-</sup> + 4H<sup>+</sup> + 3e<sup>-</sup> → NO + 2H<sub>2</sub>O</li>
+                    <li><strong>SO<sub>4</sub><sup>2-</sup> / SO<sub>2</sub></strong> : SO<sub>4</sub><sup>2-</sup> + 4H<sup>+</sup> + 2e<sup>-</sup> → SO<sub>2</sub> + 2H<sub>2</sub>O</li>
+                    <li><strong>S<sub>4</sub>O<sub>6</sub><sup>2-</sup> / S<sub>2</sub>O<sub>3</sub><sup>2-</sup></strong> : S<sub>4</sub>O<sub>6</sub><sup>2-</sup> + 2e<sup>-</sup> → 2S<sub>2</sub>O<sub>3</sub><sup>2-</sup></li>
+                </ul>
+                <p class="card-description" style="margin-top: 1rem;">
+                    🔎 Ces demi-équations sont incontournables pour équilibrer des réactions complètes d’oxydoréduction en Première C & D.
+                </p>
+                <!-- Image illustrative générée par IA (description pour génération future) -->
+                <img src="" alt="Schéma illustrant la méthode d'équilibrage des demi-équations en milieu acide : étapes avec exemples MnO4- et Cr2O72-" style="width:100%; max-width:300px; margin-top:1rem; border-radius:0.8rem;">
+            </div>
+        </section>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Fiche conforme au programme de Première C & D (Cameroun) - Module Oxydoréduction · Leçon 47 · <a href="#">Revoir les couples redox</a></p>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+[
+  {
+    "intitule": "Contrôle de saisie utilisateur (Éligibilité au permis de conduire)",
+    "type": "competence",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Dans le cadre d'une auto-école au Cameroun, vous devez écrire un algorithme qui vérifie si un candidat est éligible pour s'inscrire aux cours de conduite. L'algorithme doit lire l'âge du candidat et afficher un message approprié selon les règles suivantes :</p><ul><li>Si l'âge est supérieur ou égal à 18 ans, afficher \"Candidat éligible pour l'inscription\".</li><li>Sinon, afficher \"Candidat non éligible (âge minimum requis : 18 ans)\".</li></ul><p>La solution doit utiliser une structure conditionnelle.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire l'algorithme correspondant en pseudocode.",
+        "niveau": "easy",
+        "reponse": "```\nAlgorithme VerificationAge\nVariables\n   age : Entier\nDebut\n   Ecrire(\"Entrez l'âge du candidat : \")\n   Lire(age)\n   Si (age >= 18) Alors\n      Ecrire(\"Candidat éligible pour l'inscription\")\n   Sinon\n      Ecrire(\"Candidat non éligible (âge minimum requis : 18 ans)\")\n   FinSi\nFin\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Identifier et expliquer le rôle de l'opérateur de comparaison utilisé dans la condition.",
+        "niveau": "easy",
+        "reponse": "L'opérateur utilisé est '>=' (supérieur ou égal). Il permet de vérifier si la valeur de la variable 'age' est supérieure ou égale à 18. Le résultat de cette comparaison est une valeur booléenne (Vrai ou Faux) qui détermine quelle branche du Si...Alors...Sinon sera exécutée.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Classification des notes (Mention au Baccalauréat)",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un établissement scolaire souhaite automatiser l'affichage des mentions au Baccalauréat. Écrire un algorithme qui lit la note d'un élève (un nombre réel entre 0 et 20) et affiche sa mention selon le barème officiel suivant :</p><ul><li>$Note < 10$ : \"Non admis\"</li><li>$10 \\leq Note < 12$ : \"Admis sans mention\"</li><li>$12 \\leq Note < 14$ : \"Mention Assez Bien\"</li><li>$14 \\leq Note < 16$ : \"Mention Bien\"</li><li>$Note \\geq 16$ : \"Mention Très Bien\"</li></ul><p>L'algorithme devra gérer le cas où la note saisie est invalide (en dehors de l'intervalle [0,20]) et afficher un message d'erreur.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Dessiner l'organigramme (logigramme) de cet algorithme.",
+        "niveau": "medium",
+        "reponse": "L'organigramme doit comporter :\n- Un début (ovale)\n- Une saisie de la note (parallélogramme)\n- Un test de validité de la note (diamant) : Si note < 0 ou note > 20, branche 'oui' vers un message d'erreur, branche 'non' vers la suite.\n- Une série de tests imbriqués ou en cascade (Si...Alors...SinonSi) pour vérifier chaque intervalle.\n- Des actions d'affichage pour chaque mention (parallélogramme).\n- Une fin (ovale).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire l'algorithme en pseudocode en utilisant une structure \"Si...Alors...Sinon Si...\" (else if).",
+        "niveau": "medium",
+        "reponse": "```\nAlgorithme CalculMention\nVariables\n   note : Reel\nDebut\n   Ecrire(\"Entrez la note de l'élève (0-20) : \")\n   Lire(note)\n   Si (note < 0 OU note > 20) Alors\n      Ecrire(\"Erreur : Note invalide. La note doit être comprise entre 0 et 20.\")\n   Sinon Si (note < 10) Alors\n      Ecrire(\"Non admis\")\n   Sinon Si (note < 12) Alors\n      Ecrire(\"Admis sans mention\")\n   Sinon Si (note < 14) Alors\n      Ecrire(\"Mention Assez Bien\")\n   Sinon Si (note < 16) Alors\n      Ecrire(\"Mention Bien\")\n   Sinon\n      Ecrire(\"Mention Très Bien\")\n   FinSi\nFin\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": "3",
+        "texte": "Déterminer le chemin d'exécution (trace) pour les valeurs de test suivantes : note = 8, note = 12.5, note = 25.",
+        "niveau": "medium",
+        "reponse": "- Pour note = 8 : La condition '(note < 0 OU note > 20)' est fausse. Ensuite, '(note < 10)' est vraie. Le chemin exécute l'affichage \"Non admis\".\n- Pour note = 12.5 : La condition '(note < 0 OU note > 20)' est fausse. '(note < 10)' est fausse. '(note < 12)' est fausse. '(note < 14)' est vraie. Le chemin exécute l'affichage \"Mention Assez Bien\".\n- Pour note = 25 : La condition '(note < 0 OU note > 20)' est vraie (car note > 20). Le chemin exécute directement l'affichage \"Erreur : Note invalide...\" sans vérifier les mentions.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Gestion de caisse (Tarification d'un supermarché)",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un supermarché applique une politique de remise basée sur le montant total des achats d'un client :</p><ul><li>Si le total est < 10 000 FCFA : pas de remise.</li><li>Si le total est entre 10 000 et 49 999 FCFA inclus : remise de 5%.</li><li>Si le total est entre 50 000 et 99 999 FCFA inclus : remise de 10%.</li><li>Si le total est >= 100 000 FCFA : remise de 15%.</li></ul><p>Le caissier saisit le montant total des achats. Écrire un algorithme qui :</p><ol><li>Calcule le montant de la remise.</li><li>Calcule le montant net à payer (total - remise).</li><li>Affiche un récapitulatif : \"Total des achats : X FCFA, Remise : Y FCFA, Net à payer : Z FCFA\".</li></ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": "1",
+        "texte": "Proposer une solution algorithmique en pseudocode.",
+        "niveau": "hard",
+        "reponse": "```\nAlgorithme CalculFacture\nVariables\n   total, remise, net : Reel\nDebut\n   Ecrire(\"Entrez le montant total des achats en FCFA : \")\n   Lire(total)\n   Si (total < 10000) Alors\n      remise <- 0\n   Sinon Si (total <= 49999) Alors\n      remise <- total * 0.05\n   Sinon Si (total <= 99999) Alors\n      remise <- total * 0.10\n   Sinon\n      remise <- total * 0.15\n   FinSi\n   net <- total - remise\n   Ecrire(\"Total des achats : \", total, \" FCFA\")\n   Ecrire(\"Remise : \", remise, \" FCFA\")\n   Ecrire(\"Net à payer : \", net, \" FCFA\")\nFin\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": "2",
+        "texte": "Quelle est l'utilité de la variable 'remise' dans cet algorithme ?",
+        "niveau": "easy",
+        "reponse": "La variable 'remise' sert à mémoriser la valeur calculée de la réduction. Elle est déclarée et initialisée (dans cet algorithme, elle prend une valeur dans chaque branche du Si) avant d'être réutilisée pour le calcul du 'net à payer'. Cela évite de recalculer la remise et rend l'algorithme plus lisible.",
+        "sousQuestions": []
+      },
+      {
+        "numero": "3",
+        "texte": "Détailler le calcul pour un total de 75 000 FCFA.",
+        "niveau": "medium",
+        "reponse": "1. Vérification des conditions : total (75000) n'est pas < 10000. Il est > 49999 (car 75000 > 49999). Il n'est pas <= 49999. Il est <= 99999 (car 75000 < 100000). La condition 'Sinon Si (total <= 99999)' est vraie.\n2. Calcul de la remise : remise = 75000 * 0.10 = 7500 FCFA.\n3. Calcul du net : net = 75000 - 7500 = 67500 FCFA.\n4. Affichage : \"Total des achats : 75000 FCFA, Remise : 7500 FCFA, Net à payer : 67500 FCFA\".",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Authentification simple (Vérification d'un code PIN)",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>On considère l'algorithme d'authentification suivant :</p><pre><code>Algorithme VerificationPIN\nVariables\n   pinSaisi : Entier\n   pinSecret <- 1234\nDebut\n   Ecrire(\"Veuillez saisir votre code PIN : \")\n   Lire(pinSaisi)\n   Si (pinSaisi == pinSecret) Alors\n      Ecrire(\"Accès autorisé.\")\n   Sinon\n      Ecrire(\"Accès refusé. Code PIN incorrect.\")\n   FinSi\nFin</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": "1",
+        "texte": "Identifier dans cet algorithme : la variable, la constante, l'instruction de lecture, l'instruction d'écriture et la condition.",
+        "niveau": "easy",
+        "reponse": "- **Variable** : pinSaisi (sa valeur peut changer selon la saisie utilisateur).\n- **Constante** : pinSecret (sa valeur 1234 est fixée dès le départ et ne change pas).\n- **Instruction de lecture** : Lire(pinSaisi).\n- **Instruction d'écriture** : Ecrire(\"Veuillez saisir votre code PIN : \"), Ecrire(\"Accès autorisé.\"), Ecrire(\"Accès refusé. Code PIN incorrect.\").\n- **Condition** : (pinSaisi == pinSecret). C'est une expression booléenne qui compare l'égalité entre le code saisi et le code secret.",
+        "sousQuestions": []
+      },
+      {
+        "numero": "2",
+        "texte": "Justifier pourquoi l'opérateur '==' est utilisé plutôt que '='.",
+        "niveau": "medium",
+        "reponse": "En algorithmique et en programmation, on utilise généralement '=' pour l'affectation (donner une valeur à une variable) et '==' pour la comparaison (tester l'égalité entre deux valeurs). Si on écrivait 'pinSaisi = pinSecret' dans la condition, cela signifierait \"affecter la valeur de pinSecret à pinSaisi\", ce qui est une instruction et non un test. L'algorithme deviendrait alors incorrect car il n'y aurait pas de comparaison logique.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Équation du second degré (Résolution complète)",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Un élève souhaite un algorithme pour résoudre une équation du second degré de la forme $ax^2 + bx + c = 0$ dans $\\mathbb{R}$. L'algorithme doit :</p><ol><li>Lire les coefficients $a$, $b$ et $c$ (nombres réels).</li><li>Tester si l'équation est bien du second degré ($a \\neq 0$). Si $a = 0$, afficher \"Ce n'est pas une équation du second degré (a = 0)\".</li><li>Si $a \\neq 0$, calculer le discriminant $\\Delta = b^2 - 4ac$.</li><li>Selon le signe de $\\Delta$, afficher les solutions réelles :<ul><li>Si $\\Delta < 0$ : afficher \"Pas de solution réelle\".</li><li>Si $\\Delta = 0$ : afficher \"Solution double : $x_0 = -b/(2a)$\".</li><li>Si $\\Delta > 0$ : afficher \"Deux solutions : $x_1 = (-b - \\sqrt{\\Delta})/(2a)$ et $x_2 = (-b + \\sqrt{\\Delta})/(2a)$\".</li></ul></li></ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": "1",
+        "texte": "Écrire l'algorithme complet en pseudocode. Utilisez la fonction RacineCarree(x) pour calculer $\\sqrt{x}$.",
+        "niveau": "very hard",
+        "reponse": "```\nAlgorithme ResolutionSecondDegre\nVariables\n   a, b, c, delta, x0, x1, x2 : Reel\nDebut\n   Ecrire(\"Entrez le coefficient a : \")\n   Lire(a)\n   Ecrire(\"Entrez le coefficient b : \")\n   Lire(b)\n   Ecrire(\"Entrez le coefficient c : \")\n   Lire(c)\n   Si (a == 0) Alors\n      Ecrire(\"Ce n'est pas une équation du second degré (a = 0).\")\n   Sinon\n      delta <- b*b - 4*a*c\n      Si (delta < 0) Alors\n         Ecrire(\"Pas de solution réelle.\")\n      Sinon Si (delta == 0) Alors\n         x0 <- -b / (2*a)\n         Ecrire(\"Solution double : x0 = \", x0)\n      Sinon\n         x1 <- (-b - RacineCarree(delta)) / (2*a)\n         x2 <- (-b + RacineCarree(delta)) / (2*a)\n         Ecrire(\"Deux solutions : x1 = \", x1, \" et x2 = \", x2)\n      FinSi\n   FinSi\nFin\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": "2",
+        "texte": "Réaliser un test manuel (trace) pour les valeurs a=1, b=-3, c=2.",
+        "niveau": "hard",
+        "reponse": "1. a=1, b=-3, c=2.\n2. a != 0, on entre dans le Sinon.\n3. Calcul de delta : delta = (-3)*(-3) - 4*1*2 = 9 - 8 = 1.\n4. delta > 0, on entre dans le dernier Sinon.\n5. Calcul de x1 : (-(-3) - RacineCarree(1)) / (2*1) = (3 - 1)/2 = 2/2 = 1.\n6. Calcul de x2 : (3 + 1)/2 = 4/2 = 2.\n7. Affichage : \"Deux solutions : x1 = 1 et x2 = 2\".",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

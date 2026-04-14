@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 7 : Introduction à la PréAO</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 7 : Introduction à la PréAO</h1>
+            <p class="lesson-subtitle">Informatique · Première A, ABI, AC & SH · Module 2 : Infographie et Multimédia (UA4 / UE7)</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section de concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Définition de la PréAO</h3>
+                    <p class="card-description">
+                        La <strong>PréAO (Préparation Assistée par Ordinateur)</strong> désigne l'ensemble des techniques et des logiciels permettant de créer, concevoir et préparer des présentations numériques (diaporamas) sur ordinateur. Ces présentations sont ensuite projetées à l'aide d'un vidéoprojecteur ou partagées à l'écran.
+                    </p>
+                    <img src="" alt="Interface d'un logiciel de présentation (PowerPoint) montrant les diapositives, les outils d'animation et l'aperçu de la présentation." style="width:100%; border-radius: 0.5rem; margin: 1rem 0;">
+                    <ul class="concept-list">
+                        <li><strong>Objectif principal :</strong> faciliter la communication orale en appuyant le discours par des supports visuels structurés.</li>
+                        <li><strong>Support produit :</strong> un diaporama composé de plusieurs diapositives (slides).</li>
+                        <li><strong>Logiciels courants :</strong> Microsoft PowerPoint, LibreOffice Impress, Google Slides, Canva.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Usages des logiciels de présentation</h3>
+                    <p class="card-description">
+                        Les logiciels de PréAO sont utilisés dans de nombreux contextes pour rendre l'information plus claire et dynamique.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>En milieu scolaire :</strong> exposés, soutenances, cours magistraux, révisions.</li>
+                        <li><strong>En entreprise :</strong> réunions, rapports d'activité, propositions commerciales, formations.</li>
+                        <li><strong>Personnel / associatif :</strong> présentations de projets, albums photos, événements familiaux.</li>
+                        <li><strong>Conférences et séminaires :</strong> communication scientifique, vulgarisation.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Éléments constitutifs d'une diapositive</h3>
+                    <p class="card-description">
+                        Une diapositive (ou slide) peut contenir plusieurs types d'objets pour enrichir le message :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Texte :</strong> titres, sous-titres, paragraphes, listes à puces.</li>
+                        <li><strong>Images :</strong> photos, illustrations, captures d'écran.</li>
+                        <li><strong>Graphiques et tableaux :</strong> pour visualiser des données chiffrées.</li>
+                        <li><strong>Formes et schémas :</strong> flèches, organigrammes, zones de texte décoratives.</li>
+                        <li><strong>Médias :</strong> vidéos, fichiers audio (musique, voix off).</li>
+                        <li><strong>Animations et transitions :</strong> apparitions progressives des éléments, effets de passage entre les diapositives.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Créer une diapositive de titre</h3>
+                    <p class="exemple-context">
+                        Vous devez réaliser une présentation sur "Les bienfaits de l'ordinateur dans l'éducation". Quelle est la première diapositive à concevoir ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong> La première diapositive est généralement la <strong>page de titre</strong>. Elle doit contenir :
+                    </p>
+                    <ul class="concept-list" style="margin-bottom: 1rem;">
+                        <li>Le titre principal (ex: "L'ordinateur dans l'éducation")</li>
+                        <li>Un sous-titre ou une accroche (ex: "Atouts et bonnes pratiques")</li>
+                        <li>Le nom de l'auteur / du groupe</li>
+                        <li>La date ou l'établissement</li>
+                    </ul>
+                    <img src="" alt="Exemple de diapositive de titre avec un titre principal, un sous-titre, le nom de l'étudiant et une image d'ordinateur en arrière-plan." style="width:100%; border-radius: 0.5rem; margin-top: 0.5rem;">
+                    <div class="exemple-astuce">
+                        💬 Astuce : Utilisez une image pertinente en arrière-plan ou en illustration pour capter l'attention dès le début.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Animer une liste à puces</h3>
+                    <p class="exemple-context">
+                        Vous avez une diapositive listant 3 avantages du Cloud. Pourquoi serait-il judicieux de les faire apparaître un par un ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> Faire apparaître les éléments un par un (animation d'apparition) permet de :
+                    </p>
+                    <ul class="concept-list" style="margin-bottom: 1rem;">
+                        <li>Ne pas surcharger l'auditoire d'informations d'un coup.</li>
+                        <li>Garder l'attention du public sur chaque point à mesure que vous l'expliquez.</li>
+                        <li>Créer un rythme dynamique et éviter la lecture en avance.</li>
+                    </ul>
+                    <div class="exemple-astuce">
+                        💡 Pour appliquer cela sous PowerPoint : sélectionnez la liste → onglet "Animations" → choisir "Apparaître" → puis "Options d'animation" → "Un par un".
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Choisir un logiciel de PréAO</h3>
+                    <p class="exemple-context">
+                        Vous n'avez pas Microsoft Office installé sur votre ordinateur, mais vous avez une connexion Internet. Quel logiciel de présentation pouvez-vous utiliser gratuitement ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Solution :</strong> <strong>Google Slides</strong> (accessible via un navigateur avec un compte Google). Il permet de créer, modifier et partager des présentations en ligne, entièrement gratuitement. LibreOffice Impress est également une alternative gratuite et hors ligne.
+                    </p>
+                    <div class="exemple-astuce">
+                        📌 Google Slides présente l'avantage du travail collaboratif : plusieurs personnes peuvent modifier la même présentation simultanément.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section "À ne pas confondre" ou "Pièges à éviter" -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants à éviter en PréAO</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente 1 :</span> Mettre trop de texte sur une diapositive → l'auditoire lit au lieu d'écouter. <strong>Règle :</strong> privilégiez les mots-clés (5 à 7 lignes max).</li>
+                        <li><span class="bold">Erreur fréquente 2 :</span> Utiliser des polices trop petites ou fantaisistes → illisible au fond de la classe. <strong>Conseil :</strong> police sans sérif (Arial, Calibri) et taille minimum 24 pt pour le corps du texte.</li>
+                        <li><span class="bold">Erreur fréquente 3 :</span> Abuser des animations (effets wahou) → cela distrait plus qu'il n'aide. <strong>Astuce :</strong> animations sobres (apparition, fondu).</li>
+                        <li><span class="bold">Attention :</span> Ne pas négliger le contraste des couleurs (ex: texte jaune sur fond blanc). Utilisez des couleurs lisibles.</li>
+                        <li><span class="bold">Piège :</span> Lire bêtement ses diapositives mot pour mot. La présentation doit être un support, pas un script.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section conseils pratiques supplémentaires -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 Pour bien réussir sa présentation</h2>
+                <div class="card concept-card">
+                    <ul class="concept-list">
+                        <li><strong>Structure claire :</strong> Introduction (plan) → Développement (3-4 idées principales) → Conclusion (synthèse).</li>
+                        <li><strong>Visuels de qualité :</strong> privilégiez des images libres de droits (Pixabay, Unsplash).</li>
+                        <li><strong>Nombre de diapositives :</strong> en moyenne 1 diapositive pour 1 à 2 minutes d'oral.</li>
+                        <li><strong>Répétition :</strong> entraînez-vous à commenter chaque diapositive sans lire.</li>
+                        <li><strong>Maîtrise technique :</strong> vérifiez le projecteur, le pointeur, les fichiers liés (vidéos) avant l'exposé.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page optionnel -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision basée sur le programme officiel d'Informatique (Première A, ABI, AC & SH - Cameroun) · UA4 : Produire une présentation · <a href="#">Retour au sommaire</a> · 📊</p>
+        </footer>
+    </div>
+</body>
+</html>

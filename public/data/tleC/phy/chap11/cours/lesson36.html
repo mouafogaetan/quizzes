@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 36 : Principe de superposition</title>
+    <style>
+        /* ===== STYLES INTÉGRÉS POUR LA FICHE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e9f0f5;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            padding: 40px 20px;
+            line-height: 1.5;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête avec bandeau */
+        .fiche-header {
+            background: linear-gradient(135deg, #0B2B5E 0%, #123e7c 100%);
+            color: white;
+            padding: 1.8rem 2.5rem;
+            border-bottom: 5px solid #FFB347;
+        }
+
+        .fiche-header .matiere {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-bottom: 0.8rem;
+        }
+
+        .fiche-header h1 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.5px;
+        }
+
+        .fiche-header .sous-titre {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .badge {
+            background: #FFB347;
+            color: #0B2B5E;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* Contenu principal */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Blocs de contenu */
+        .card {
+            background: #f9fafc;
+            border-radius: 20px;
+            padding: 1.2rem 1.8rem;
+            margin-bottom: 2rem;
+            border-left: 6px solid #0B2B5E;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0B2B5E;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h2 i {
+            font-size: 1.6rem;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e66;
+            margin: 1rem 0 0.5rem 0;
+            border-bottom: 1px solid #dce5f0;
+            padding-bottom: 4px;
+        }
+
+        .definition {
+            background: #eef2fa;
+            padding: 0.8rem 1.2rem;
+            border-radius: 14px;
+            font-weight: 500;
+            margin: 0.8rem 0;
+            border-left: 4px solid #FFB347;
+        }
+
+        .formule {
+            background: #e6f0ff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 14px;
+            font-family: monospace;
+            font-size: 1rem;
+            text-align: center;
+            font-weight: 600;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .exemple {
+            background: #fef5e8;
+            border-left: 4px solid #FFB347;
+            padding: 1rem 1.4rem;
+            border-radius: 16px;
+            margin: 1.2rem 0;
+        }
+
+        .attention {
+            background: #ffefef;
+            border-left: 4px solid #c72a2a;
+            padding: 0.8rem 1.2rem;
+            border-radius: 14px;
+            margin: 1rem 0;
+        }
+
+        .grid-2cols {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        ul, .liste-puce {
+            padding-left: 1.5rem;
+            margin: 0.8rem 0;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        hr {
+            margin: 1.5rem 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, #ccc, transparent);
+        }
+
+        .footer-bac {
+            background: #eef2fa;
+            padding: 1rem 1.8rem;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1f3a64;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 700px) {
+            .fiche-header h1 { font-size: 1.5rem; }
+            .fiche-content { padding: 1.2rem; }
+            .card { padding: 1rem; }
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="fiche-container">
+    <div class="fiche-header">
+        <div class="matiere">PHYSIQUE – TERMINALE C & D</div>
+        <h1>📡 Leçon 36 : Principe de superposition</h1>
+        <div class="sous-titre">
+            <span>📖 Module 5 – Ondes et physique moderne</span>
+            <span class="badge">🎯 Bac 2025 – Superposition & Interférences</span>
+        </div>
+    </div>
+
+    <div class="fiche-content">
+        <!-- Carte objectifs -->
+        <div class="card">
+            <h2>🎯 Objectifs de la leçon</h2>
+            <ul class="liste-puce">
+                <li>✔ Énoncer et appliquer le principe de superposition des ondes.</li>
+                <li>✔ Comprendre la différence entre une onde résultante et les ondes individuelles.</li>
+                <li>✔ Relier le principe de superposition aux phénomènes d’interférences et de battements.</li>
+                <li>✔ Lien Bac : analyse de figures d’interférences et calcul de l’amplitude résultante.</li>
+            </ul>
+        </div>
+
+        <!-- I. Principe de superposition -->
+        <div class="card">
+            <h2>📐 I. Principe de superposition</h2>
+            <div class="definition">
+                <strong>Énoncé :</strong> Lorsque plusieurs ondes (mécaniques ou lumineuses) se rencontrent en un même point d’un milieu, le déplacement résultant est la <strong>somme vectorielle</strong> des déplacements individuels de chaque onde.
+            </div>
+            <p>Mathématiquement, pour deux ondes $y_1$ et $y_2$ :</p>
+            <div class="formule">
+                $$ y_{\text{résultante}}(x,t) = y_1(x,t) + y_2(x,t) $$
+            </div>
+            <p>Ce principe est valable tant que l’amplitude des ondes reste faible (milieu linéaire, pas de déformations permanentes).</p>
+            <div class="attention">
+                ⚠️ <strong>Condition essentielle :</strong> Le principe s’applique dans les milieux <strong>linéaires</strong> (la réponse est proportionnelle à l’excitation). Pour les ondes de forte amplitude (ex: ondes de choc), le milieu peut devenir non linéaire.
+            </div>
+        </div>
+
+        <!-- II. Cas particuliers -->
+        <div class="card">
+            <h2>📌 II. Applications fondamentales</h2>
+            <h3>🔹 1. Ondes synchrones (même fréquence) – Interférences</h3>
+            <p>Considérons deux ondes sinusoïdales de même fréquence, se propageant dans la même direction :</p>
+            <div class="formule">
+                $y_1 = A \cos(\omega t - kx)$ , $y_2 = A \cos(\omega t - kx + \varphi)$
+            </div>
+            <p>L’onde résultante a la même pulsation $\omega$ et son amplitude dépend du déphasage $\varphi$ :</p>
+            <div class="formule">
+                $$ A_{\text{rés}} = 2A \cos\left(\frac{\varphi}{2}\right) $$
+            </div>
+            <ul>
+                <li><strong>Interférence constructive :</strong> $\varphi = 2k\pi$ ⇒ $A_{\text{rés}} = 2A$ (intensité maximale).</li>
+                <li><strong>Interférence destructive :</strong> $\varphi = (2k+1)\pi$ ⇒ $A_{\text{rés}} = 0$ (annulation).</li>
+            </ul>
+
+            <h3>🔹 2. Ondes de fréquences différentes – Battements</h3>
+            <p>Deux ondes de fréquences $f_1$ et $f_2$ proches ($f_1 \approx f_2$) donnent une amplitude modulée à la fréquence de battement :</p>
+            <div class="formule">
+                $$ f_{\text{battement}} = |f_1 - f_2| $$
+            </div>
+            <div class="exemple">
+                <strong>🎧 Exemple sonore :</strong> Deux diapasons de 440 Hz et 442 Hz produisent 2 battements par seconde. L’oreille perçoit un son dont l’intensité oscille.
+            </div>
+        </div>
+
+        <!-- III. Superposition et cohérence -->
+        <div class="card">
+            <h2>🧠 III. Condition de cohérence pour les interférences</h2>
+            <p>Pour observer des interférences stables (figures fixes), les sources doivent être <strong>cohérentes</strong> :</p>
+            <ul>
+                <li><strong>Cohérence temporelle :</strong> différence de marche constante dans le temps.</li>
+                <li><strong>Cohérence spatiale :</strong> sources ponctuelles ou fentes fines.</li>
+            </ul>
+            <p>Dans le cas de la lumière, on utilise souvent le <strong>dispositif des fentes de Young</strong> (deux fentes éclairées par une même source) pour obtenir deux ondes secondaires cohérentes.</p>
+            <div class="formule">
+                Différence de marche : $\delta = S_2M - S_1M = \dfrac{ax}{D}$ <br>
+                Condition d’interférence constructive : $\delta = k\lambda$ <br>
+                Condition d’interférence destructive : $\delta = (2k+1)\dfrac{\lambda}{2}$
+            </div>
+        </div>
+
+        <!-- IV. Illustration graphique -->
+        <div class="card">
+            <h2>📊 IV. Représentation et visualisation</h2>
+            <div class="grid-2cols">
+                <div class="col">
+                    <p><strong>✓ Superposition constructive :</strong><br>Les crêtes coïncident ⇒ amplitude doublée.</p>
+                    <div style="background:#e0e7ff; border-radius:12px; padding:8px; text-align:center; margin-top:6px;">
+                        <span style="font-size:1.8rem;">↗️ + ↗️ = 🔺🔺</span>
+                    </div>
+                </div>
+                <div class="col">
+                    <p><strong>✓ Superposition destructive :</strong><br>Crête + creux ⇒ annulation.</p>
+                    <div style="background:#ffe0e0; border-radius:12px; padding:8px; text-align:center; margin-top:6px;">
+                        <span style="font-size:1.8rem;">⛰️ + 🕳️ = ⚖️ 0</span>
+                    </div>
+                </div>
+            </div>
+            <p><em>Remarque :</em> L’énergie n’est pas perdue, elle est redistribuée spatialement (franges brillantes et sombres).</p>
+        </div>
+
+        <!-- V. Méthodologie Bac -->
+        <div class="card">
+            <h2>✍️ V. Méthodologie – Exercice type Bac</h2>
+            <div class="exemple">
+                <strong>🔬 Énoncé simplifié :</strong> Deux ondes lumineuses de même amplitude $A = 2,0\ \mu m$ et de longueur d’onde $\lambda = 600\ nm$ arrivent en un point M avec un déphasage $\varphi = \pi/3$.<br>
+                <strong>1.</strong> Calculer l’amplitude de l’onde résultante.<br>
+                <strong>2.</strong> Préciser si l’interférence est constructive, destructive ou intermédiaire.
+            </div>
+            <p><strong>✔ Correction :</strong></p>
+            <div class="formule">
+                $A_{\text{rés}} = 2A \cos(\varphi/2) = 2 \times 2,0 \times \cos(\pi/6) = 4,0 \times \frac{\sqrt{3}}{2} \approx 3,46\ \mu m$
+            </div>
+            <p>Puisque $0 < A_{\text{rés}} < 2A$, l’interférence est partiellement constructive (ni tout à fait sombre, ni totalement brillante).</p>
+            <p>💡 <strong>Astuce Bac :</strong> Pour démontrer la présence d’interférences, commencez par vérifier la cohérence des sources, calculez la différence de marche, puis déduisez le déphasage $\varphi = \frac{2\pi}{\lambda}\delta$.</p>
+        </div>
+
+        <!-- VI. Lien avec d'autres chapitres -->
+        <div class="card">
+            <h2>🔗 VI. Liens avec d'autres notions</h2>
+            <ul>
+                <li>✅ <strong>Ondes mécaniques (Leçon 35)</strong> : le principe s’applique aussi aux ondes sur une corde ou à la surface de l’eau.</li>
+                <li>✅ <strong>Interférences lumineuses (Leçon 37)</strong> : la superposition est la base des franges d’interférence.</li>
+                <li>✅ <strong>Diffraction (Leçon 38)</strong> : superposition d’une infinité d’ondes secondaires (principe d’Huygens-Fresnel).</li>
+            </ul>
+        </div>
+
+        <!-- VII. Pièges à éviter -->
+        <div class="card">
+            <h2>⚠️ Pièges fréquents au Bac</h2>
+            <div class="attention">
+                ❌ <strong>Confondre addition des amplitudes et addition des intensités.</strong><br>
+                → L’intensité $I \propto A^2$ : pour deux ondes cohérentes $I_{\text{rés}} = I_1 + I_2 + 2\sqrt{I_1 I_2}\cos\varphi$ (terme d’interférence).<br>
+                ❌ <strong>Oublier que les sources doivent être cohérentes</strong> pour observer des interférences stationnaires.<br>
+                ❌ <strong>Appliquer la somme vectorielle sans tenir compte de la direction</strong> (si les ondes ne sont pas colinéaires).
+            </div>
+        </div>
+
+        <!-- Récapitulatif -->
+        <div class="footer-bac">
+            🧪 <strong>À retenir pour l’épreuve de Physique :</strong> Le principe de superposition est la clé pour comprendre interférences, battements, et ondes stationnaires. Savoir passer du déphasage à l’amplitude résultante est un savoir-faire évalué chaque année au baccalauréat (séries C & D).
+        </div>
+
+        <hr>
+        <div style="font-size: 0.7rem; text-align: center; color: #6c86a3; padding: 1rem;">
+            Fiche conforme au programme officiel du Cameroun – Terminale C & D (année 2025-2026) | Enseignant : Physique
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+[
+  {
+    "intitule": "Évaluation des événements en JavaScript",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un élève a écrit le code HTML/JavaScript suivant pour créer une page web interactive. Un bouton doit déclencher l'affichage d'un message de bienvenue, mais le code ne fonctionne pas correctement.</p><pre><code>&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n    &lt;title&gt;Test événement&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;button onClick=\"afficherMessage()\"&gt;Cliquez-moi&lt;/button&gt;\n    &lt;script&gt;\n        function afficherMessage() {\n            alert('Bienvenue sur ma page !');\n        }\n    &lt;/script&gt;\n&lt;/body&gt;\n&lt;/html&gt;</code></pre><p>Analysez ce code et répondez aux questions suivantes.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifiez l'événement utilisé dans le code et expliquez à quel moment il se déclenche.",
+        "niveau": "easy",
+        "reponse": "L'événement utilisé est 'onClick'. Il se déclenche lorsque l'utilisateur clique sur le bouton.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquez pourquoi la fonction 'afficherMessage' est correctement exécutée lors du clic.",
+        "niveau": "medium",
+        "reponse": "La fonction est correctement exécutée car elle est définie dans la balise <script> avant que l'utilisateur ne clique. L'attribut onClick du bouton référence cette fonction par son nom, et le navigateur l'exécute au moment de l'événement.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Que se passerait-il si l'attribut 'onClick' était écrit avec une majuscule ('OnClick') ? Justifiez.",
+        "niveau": "hard",
+        "reponse": "Rien ne se passerait car JavaScript est sensible à la casse. L'événement doit être écrit en minuscules 'onclick' (ou 'onClick' en HTML mais reconnu comme 'onclick' en DOM). La plupart des navigateurs ignorent 'OnClick' et le bouton n'aurait aucun effet.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Création d'un formulaire interactif de commande",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Vous êtes chargé de créer une petite application web pour une librairie. Le client souhaite une page où l'utilisateur saisit le nombre de livres et le prix unitaire, puis clique sur un bouton pour voir le montant total de sa commande. Une réduction de 10 % est appliquée si le total dépasse 20 000 FCFA.</p><p>Rédigez le code HTML et JavaScript complet (dans un seul fichier) qui réalise cette fonctionnalité. Vous utiliserez l'événement <code>onClick</code> sur un bouton \"Calculer\" pour déclencher le traitement.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Rédigez la structure HTML contenant deux champs de saisie (nombre, prix), un bouton et un paragraphe pour afficher le résultat.",
+        "niveau": "medium",
+        "reponse": "Voir code complet ci-dessous.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Écrivez la fonction JavaScript associée à l'événement onClick. Cette fonction doit lire les valeurs, calculer le total, appliquer la réduction si nécessaire, puis afficher le résultat.",
+            "niveau": "hard",
+            "reponse": "```html\n<!DOCTYPE html>\n<html>\n<head>\n    <title>Librairie - Calcul commande</title>\n</head>\n<body>\n    <h2>Commande de livres</h2>\n    Nombre de livres : <input type=\"number\" id=\"quantite\"><br>\n    Prix unitaire (FCFA) : <input type=\"number\" id=\"prix\"><br>\n    <button onClick=\"calculerTotal()\">Calculer</button>\n    <p id=\"resultat\"></p>\n\n    <script>\n        function calculerTotal() {\n            // Récupération des valeurs\n            let quantite = parseFloat(document.getElementById('quantite').value);\n            let prixUnitaire = parseFloat(document.getElementById('prix').value);\n            \n            // Vérification des saisies\n            if (isNaN(quantite) || isNaN(prixUnitaire) || quantite <= 0 || prixUnitaire <= 0) {\n                document.getElementById('resultat').innerHTML = \"Veuillez saisir des nombres positifs valides.\";\n                return;\n            }\n            \n            // Calcul du total brut\n            let totalBrut = quantite * prixUnitaire;\n            let totalNet = totalBrut;\n            \n            // Application de la réduction\n            if (totalBrut > 20000) {\n                totalNet = totalBrut * 0.9; // 10% de réduction\n            }\n            \n            // Affichage du résultat\n            document.getElementById('resultat').innerHTML = \"Total à payer : \" + totalNet.toFixed(2) + \" FCFA\";\n        }\n    </script>\n</body>\n</html>\n```"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Analyse d'interaction : événements multiples",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>On souhaite qu'une image change lorsqu'on passe la souris dessus, et qu'elle redevienne normale lorsqu'on la quitte. Voici le code proposé :</p><pre><code>&lt;img src=\"image1.jpg\" id=\"monImage\" onMouseOver=\"changerImage()\" onMouseOut=\"retablirImage()\"&gt;\n&lt;script&gt;\n    function changerImage() {\n        document.getElementById('monImage').src = 'image2.jpg';\n    }\n    function retablirImage() {\n        document.getElementById('monImage').src = 'image1.jpg';\n    }\n&lt;/script&gt;</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Nommez les deux événements utilisés et décrivez leur déclenchement.",
+        "niveau": "easy",
+        "reponse": "Les événements sont onMouseOver (se déclenche quand la souris survole l'image) et onMouseOut (se déclenche quand la souris quitte l'image).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Prédisez ce qui se passerait si on supprimait l'attribut 'onMouseOut' et qu'on laissait uniquement 'onMouseOver'.",
+        "niveau": "medium",
+        "reponse": "L'image changerait en 'image2.jpg' au survol, mais ne reviendrait jamais à 'image1.jpg' même après que la souris quitte l'image. L'utilisateur devrait recharger la page pour retrouver l'image d'origine.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Suggérez une amélioration pour que ce code utilise un seul événement et une seule fonction.",
+        "niveau": "hard",
+        "reponse": "On pourrait utiliser onMouseOver pour basculer entre deux images avec une variable d'état, mais ce n'est pas naturel. Une meilleure approche avec un seul événement serait d'utiliser onMouseEnter et onMouseLeave, mais ce sont deux événements. En réalité, avec un seul événement (ex: onclick) on ne peut pas reproduire exactement le survol. Donc la solution standard est bien d'utiliser deux événements distincts.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

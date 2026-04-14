@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 11 : L'érosion des sols et la conservation</title>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;  /* Fond très clair pour contraster avec les cards */
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24; /* petite touche de couleur vive */
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981; /* vert pour distinguer */
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+        /* Style pour les images */
+        .concept-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .concept-image img {
+            max-width: 100%;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .image-caption {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">🌍 Lesson 11: Soil Erosion and Conservation</h1>
+            <p class="lesson-subtitle">Anglais · Terminale A · Module 2 : Environnement</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Qu'est-ce que l'érosion des sols ? (What is soil erosion?)</h3>
+                    <p class="card-description">
+                        L'<strong>érosion des sols</strong> est le processus par lequel la couche superficielle fertile de la terre (le sol arable ou <em>topsoil</em>) est emportée par des agents naturels comme l'eau, le vent, ou même par l'activité humaine. C'est un problème environnemental grave car la formation du sol est très lente (environ 1 cm tous les 100 à 400 ans).
+                    </p>
+                    <!-- Image conceptuelle -->
+                    <div class="concept-image">
+                        <img src="" alt="Diagramme illustrant les différents types d'érosion des sols : érosion hydrique (par l'eau), érosion éolienne (par le vent), et érosion due au labour.">
+                        <p class="image-caption">Figure 1 : Les principaux agents de l'érosion des sols (eau, vent, et activités humaines).</p>
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>Causes naturelles :</strong> Pluies abondantes, vents forts, pentes raides.</li>
+                        <li><strong>Causes humaines :</strong> Déforestation, mauvaises pratiques agricoles (labour excessif), surpâturage, urbanisation.</li>
+                        <li><strong>Conséquences :</strong> Perte de fertilité des sols, baisse des rendements agricoles, pollution de l'eau (sédiments dans les rivières), glissements de terrain.</li>
+                        <li><strong>Vocabulaire clé :</strong> <em>erosion</em> (érosion), <em>topsoil</em> (couche arable), <em>sediment</em> (sédiment), <em>windbreaks</em> (brise-vent).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Comment lutter contre l'érosion ? (Conservation methods)</h3>
+                    <p class="card-description">
+                        Heureusement, il existe plusieurs techniques pour prévenir et contrôler l'érosion. Ces méthodes sont appelées <strong>méthodes de conservation des sols</strong> (<em>soil conservation methods</em>).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Le reboisement :</strong> Planter des arbres. Les racines fixent le sol. On utilise des <em>windbreaks</em> (brise-vent) pour protéger contre le vent.</li>
+                        <li><strong>Le labour en courbes de niveau :</strong> Labourer perpendiculairement à la pente pour créer des barrières naturelles contre le ruissellement de l'eau.</li>
+                        <li><strong>La culture en terrasses :</strong> Transformer une pente en une série de marches plates (terrasses) pour retenir l'eau et le sol.</li>
+                        <li><strong>Le paillage :</strong> Couvrir le sol de paille ou de feuilles mortes pour le protéger de l'impact des gouttes de pluie.</li>
+                        <li><strong>La rotation des cultures :</strong> Ne pas planter la même culture chaque année pour ne pas épuiser le sol.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Grammaire : Le présent continu pour décrire des processus en cours</h3>
+                    <p class="card-description">
+                        Pour parler d'un processus qui est en train de se dérouler, on utilise le <strong>présent continu (present continuous tense)</strong>. C'est très utile pour décrire l'érosion.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Structure :</strong> <span class="formule">Sujet + am/is/are + verbe-ing</span></li>
+                        <li><strong>Exemple du texte :</strong> "<em>Soil <span class="bold">is eroding</span> faster than it <span class="bold">is being formed</span>.</em>" (Le sol s'érode plus vite qu'il ne se forme).</li>
+                        <li><strong>Autres exemples :</strong> "The wind <span class="bold">is carrying</span> away the topsoil." (Le vent emporte la terre arable). / "Farmers <span class="bold">are planting</span> trees to stop erosion." (Les agriculteurs plantent des arbres pour arrêter l'érosion).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple concret n°1 : Comprendre un texte sur l'érosion</h3>
+                    <p class="exemple-context">
+                        <strong>Texte :</strong> "In many parts of Cameroon, especially in the West region, heavy rains are washing away the fertile topsoil. This process is causing poor harvests. Local authorities are now encouraging farmers to plant trees and build terraces."
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Questions de compréhension :</strong><br>
+                        1. What is happening to the topsoil? <br>
+                        ➡️ <em>The heavy rains are washing it away.</em><br>
+                        2. What is the consequence of this process? <br>
+                        ➡️ <em>It is causing poor harvests.</em><br>
+                        3. What are the authorities encouraging farmers to do? <br>
+                        ➡️ <em>To plant trees and build terraces.</em>
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Pour répondre aux questions sur un texte, cherche toujours les verbes au présent continu (is/are + -ing) : "are washing", "is causing", "are encouraging".
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple d'application n°2 : Utiliser le présent continu</h3>
+                    <p class="exemple-context">
+                        <strong>Consigne :</strong> Complétez les phrases avec la forme correcte du verbe entre parenthèses au présent continu.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Correction :</strong><br>
+                        a. The wind <strong><u>is blowing</u></strong> (blow) strongly and the soil <strong><u>is moving</u></strong> (move).<br>
+                        b. Many young people <strong><u>are joining</u></strong> (join) the reforestation campaign this year.<br>
+                        c. Look! The sediment <strong><u>is flowing</u></strong> (flow) into the river.<br>
+                        d. Right now, the government <strong><u>is implementing</u></strong> (implement) new conservation laws.
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 N'oublie pas : <strong>am</strong> pour "I", <strong>is</strong> pour he/she/it, <strong>are</strong> pour you/we/they.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Expression orale : Discuter des solutions</h3>
+                    <p class="exemple-context">
+                        <strong>Sujet de discussion :</strong> "What can you do as a student to prevent soil erosion in your community?"
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Éléments de réponse (exemple de prise de parole) :</strong><br>
+                        "As a student, I can participate in tree-planting campaigns. I can also educate my friends and family about the dangers of bushfires and deforestation. Furthermore, I can avoid walking on steep bare slopes, which can start erosion. Finally, I can encourage my parents to use mulch in our garden."
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Utilise des articulateurs logiques : <em>first, second, moreover, finally, for example, because</em>.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section vocabulaire spécifique -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 Vocabulaire essentiel de la leçon</h2>
+                <div class="card concept-card">
+                    <ul class="concept-list">
+                        <li><strong>Erosion /ɪˈrəʊʒən/</strong> : l'érosion</li>
+                        <li><strong>Topsoil /ˈtɒp.sɔɪl/</strong> : la couche arable (terre fertile de surface)</li>
+                        <li><strong>Sediment /ˈsed.ɪ.mənt/</strong> : le sédiment (particules de sol déposées)</li>
+                        <li><strong>Conservation /ˌkɒn.səˈveɪ.ʃən/</strong> : la conservation, la protection</li>
+                        <li><strong>Windbreak /ˈwɪnd.breɪk/</strong> : brise-vent (haie d'arbres)</li>
+                        <li><strong>Terrace /ˈter.əs/</strong> : une terrasse (culture en terrasses)</li>
+                        <li><strong>Mulch /mʌltʃ/</strong> : le paillis (couverture protectrice)</li>
+                        <li><strong>To erode /ɪˈrəʊd/</strong> : éroder</li>
+                        <li><strong>To prevent /prɪˈvent/</strong> : prévenir, empêcher</li>
+                        <li><strong>Deforestation /diːˌfɒr.ɪˈsteɪ.ʃən/</strong> : la déforestation</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section "À ne pas confondre" ou "Pièges à éviter" -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente en grammaire :</span> Confondre le présent simple et le présent continu. Le présent simple (e.g., "erodes") exprime une vérité générale. Le présent continu (e.g., "is eroding") exprime une action en cours en ce moment ou une tendance actuelle.</li>
+                        <li><span class="bold">Attention au vocabulaire :</span> Ne pas confondre <em>"erosion"</em> (l'érosion, la dégradation) avec <em>"corrosion"</em> (la corrosion, pour les métaux). On parle d'érosion pour le sol.</li>
+                        <li><span class="bold">Piège dans la compréhension écrite :</span> Lisez bien les questions. Si on vous demande "What is happening?" (Que se passe-t-il en ce moment ?), la réponse sera souvent au présent continu. Si on vous demande "What causes erosion?" (Qu'est-ce qui cause l'érosion ?), la réponse sera plutôt au présent simple.</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Section pour s'entraîner à la maison -->
+            <section class="concept-section">
+                <h2 class="section-title">✍️ Petit exercice d'entraînement</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        <strong>Consigne :</strong> Transformez les phrases suivantes au présent continu pour exprimer une action en cours.
+                    </p>
+                    <ul class="concept-list">
+                        <li>1. The farmers (to build) new terraces on the hill. → <em>The farmers <u>are building</u> new terraces on the hill.</em></li>
+                        <li>2. The rain (to wash away) the topsoil on this slope. → <em>The rain <u>is washing away</u> the topsoil on this slope.</em></li>
+                        <li>3. We (to plant) windbreaks along the edge of the field. → <em>We <u>are planting</u> windbreaks along the edge of the field.</em></li>
+                        <li>4. The situation (to get) worse because of the drought. → <em>The situation <u>is getting</u> worse because of the drought.</u></em></li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        📚 Pour aller plus loin : Relisez la leçon sur les "Conditional sentences (Type 1)" du chapitre 3. Pouvez-vous faire une phrase avec "If... will..." sur le thème de l'érosion ? Exemple : "If we do not protect the soil, we will lose our harvest."
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision créée pour la Terminale A (Cameroun) · Programme 2025-2026 · Leçon 11 : Soil Erosion and Conservation · 📚 Révisez régulièrement pour le Baccalauréat !</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 45 : Fission et Fusion Nucléaire</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Configuration MathJax pour les formules mathématiques -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie professionnelle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles basiques pour un rendu type fiche de révision */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            color: #0f172a;
+        }
+        .fiche-revision {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 2rem 2rem 2.5rem 2rem;
+            transition: all 0.2s;
+        }
+        /* En-tête avec titre et infos */
+        .header {
+            border-bottom: 4px solid #3b82f6;
+            padding-bottom: 1rem;
+            margin-bottom: 1.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-section h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.01em;
+        }
+        .title-section .sous-titre {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #3b82f6;
+            background: #eef2ff;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-top: 8px;
+        }
+        .meta-info {
+            text-align: right;
+        }
+        .meta-info .badge {
+            background: #0f172a;
+            color: white;
+            padding: 0.25rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        .meta-info .lien-bac {
+            font-size: 0.75rem;
+            color: #475569;
+            margin-top: 8px;
+        }
+        /* Grille de contenu principal */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin: 1.8rem 0;
+        }
+        .card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.3rem 1.5rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+            border-left: 5px solid #3b82f6;
+            padding-left: 12px;
+        }
+        .card p, .card li {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #334155;
+        }
+        .card ul, .card ol {
+            padding-left: 1.3rem;
+            margin: 0.8rem 0;
+        }
+        .card li {
+            margin: 0.5rem 0;
+        }
+        .formule {
+            background: #eef2ff;
+            padding: 0.8rem;
+            border-radius: 14px;
+            font-family: monospace;
+            font-size: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+            border: 1px solid #cbd5e1;
+            overflow-x: auto;
+        }
+        .exemple {
+            background: #fef9e3;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+        .exemple strong {
+            color: #b45309;
+        }
+        .table-compare {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        .table-compare th, .table-compare td {
+            border: 1px solid #cbd5e1;
+            padding: 0.6rem;
+            text-align: left;
+            vertical-align: top;
+            font-size: 0.85rem;
+        }
+        .table-compare th {
+            background: #e2e8f0;
+            font-weight: 600;
+        }
+        .footer-note {
+            margin-top: 2rem;
+            background: #e6f0ff;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid #b9d0f8;
+            color: #1e3a8a;
+        }
+        .footer-note strong {
+            color: #0f172a;
+        }
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        @media (max-width: 750px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .fiche-revision {
+                padding: 1.2rem;
+            }
+        }
+        .highlight {
+            font-weight: 700;
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-revision">
+    <div class="header">
+        <div class="title-section">
+            <h1>Leçon 45 : Réactions nucléaires provoquées</h1>
+            <div class="sous-titre">Fission & Fusion – Énergie du noyau</div>
+        </div>
+        <div class="meta-info">
+            <div class="badge">Terminale C & D</div>
+            <div class="lien-bac">🎯 Bac 2024 : Fission, fusion, libération d'énergie</div>
+        </div>
+    </div>
+
+    <!-- Objectifs et notions clés -->
+    <div class="grid-2col">
+        <div class="card">
+            <h3>📌 Objectifs de la leçon</h3>
+            <ul>
+                <li>✔ Distinguer <strong class="highlight">fission nucléaire</strong> et <strong class="highlight">fusion nucléaire</strong>.</li>
+                <li>✔ Écrire les équations-bilans caractéristiques pour chaque type de réaction.</li>
+                <li>✔ Calculer l’énergie libérée lors d’une réaction nucléaire provoquée à l’aide du défaut de masse $\Delta m$ et de la relation $E = \Delta m \cdot c^2$.</li>
+                <li>✔ Expliquer les conditions de déclenchement et les applications (centrales nucléaires, étoiles, bombe H).</li>
+                <li>✔ Lien Bac : problèmes sur calcul d’énergie et identification de réaction.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>🧠 Notions fondamentales</h3>
+            <ul>
+                <li><strong>Réaction provoquée</strong> : réaction nucléaire déclenchée artificiellement (bombardement par neutrons, protons...).</li>
+                <li><strong>Fission</strong> : rupture d’un noyau lourd en deux noyaux plus légers, avec émission de neutrons.</li>
+                <li><strong>Fusion</strong> : union de deux noyaux légers pour former un noyau plus lourd.</li>
+                <li><strong>Énergie de liaison</strong> et <strong>défaut de masse</strong> : $\Delta m = m_{\text{finale}} - m_{\text{initiale}}$ &nbsp;→&nbsp; $\Delta E = |\Delta m| \cdot c^2$.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Partie centrale : fission et fusion en détail -->
+    <div class="grid-2col">
+        <div class="card">
+            <h3>💥 FISSION NUCLÉAIRE</h3>
+            <p><strong>Principe :</strong> Un noyau lourd (ex: uranium-235, plutonium-239) capture un neutron lent et se scinde en deux noyaux plus légers, libérant 2 ou 3 neutrons et une grande quantité d’énergie.</p>
+            <div class="formule">
+                $$\text{Exemple : } \ ^{235}_{92}\text{U} + \ ^{1}_{0}\text{n} \ \longrightarrow\ \ ^{141}_{56}\text{Ba} + \ ^{92}_{36}\text{Kr} + 3\ ^{1}_{0}\text{n} + \text{énergie}$$
+            </div>
+            <ul>
+                <li><strong>Caractéristiques :</strong> réaction en chaîne possible (centrales nucléaires, bombes A).</li>
+                <li><strong>Énergie libérée</strong> ≈ 200 MeV par fission (énorme à l'échelle macroscopique).</li>
+                <li><strong>Applications</strong> : production d'électricité (réacteurs nucléaires), propulsion navale, médecine (production d'isotopes).</li>
+            </ul>
+            <div class="exemple">
+                <strong>🧪 Exemple type Bac :</strong> Calculer l’énergie libérée par la fission d’1 g d’uranium-235 sachant que la fission d’un noyau libère 200 MeV. <br>
+                ($N_A = 6,02\times10^{23}$, $1\ \text{MeV}=1,6\times10^{-13}\ \text{J}$).
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>☀️ FUSION NUCLÉAIRE</h3>
+            <p><strong>Principe :</strong> Deux noyaux légers (ex: deutérium et tritium, isotopes de l'hydrogène) fusionnent pour former un noyau plus lourd (hélium) + neutron, avec un dégagement d’énergie encore plus grand par nucléon.</p>
+            <div class="formule">
+                $$\text{Fusion D+T : }\ ^{2}_{1}\text{H} + \ ^{3}_{1}\text{H} \ \longrightarrow\ \ ^{4}_{2}\text{He} + \ ^{1}_{0}\text{n} + \text{énergie}$$
+            </div>
+            <ul>
+                <li><strong>Conditions extrêmes</strong> : température de millions de degrés (plasma) et forte pression → barrière coulombienne franchie.</li>
+                <li><strong>Avantages</strong> : combustible abondant (deutérium dans l’eau), déchets radioactifs limités, énergie colossale.</li>
+                <li><strong>Applications</strong> : étoiles (soleil), bombe H (thermonucléaire), recherche sur les réacteurs à fusion (ITER).</li>
+            </ul>
+            <div class="exemple">
+                <strong>⭐ À retenir :</strong> La fusion est le processus énergétique du Soleil. Elle libère environ 3 à 4 fois plus d’énergie par unité de masse que la fission.
+            </div>
+        </div>
+    </div>
+
+    <!-- Tableau comparatif fission vs fusion -->
+    <div class="card" style="margin-top: 0.2rem;">
+        <h3>⚖️ Comparaison Fission / Fusion</h3>
+        <table class="table-compare">
+            <thead>
+                <tr><th>Critère</th><th>Fission</th><th>Fusion</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Noyaux concernés</strong></td><td>Noyaux très lourds (U, Pu)</td><td>Noyaux très légers (H, He, Li)</td></tr>
+                <tr><td><strong>Conditions</strong></td><td>Neutrons thermiques, modérateur</td><td>Température $\gtrsim 10^7$ K, confinement</td></tr>
+                <tr><td><strong>Énergie libérée par nucléon</strong></td><td>~0,9 MeV/nucléon</td><td>~6-7 MeV/nucléon</td></tr>
+                <tr><td><strong>Produits</strong></td><td>Noyaux radioactifs à vie longue</td><td>Noyaux stables (peu de déchets)</td></tr>
+                <tr><td><strong>Maîtrise technologique</strong></td><td>Maîtrisée (centrales)</td><td>Expérimentale (ITER)</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Calcul de l'énergie libérée : méthode et formules -->
+    <div class="card">
+        <h3>📐 Calcul de l'énergie libérée $\Delta E$</h3>
+        <p><strong>Étape 1 :</strong> Écrire l’équation bilan équilibrée (conservation du nombre de masse A et du nombre de charge Z).</p>
+        <p><strong>Étape 2 :</strong> Calculer le <strong class="highlight">défaut de masse</strong> $\Delta m$ :</p>
+        <div class="formule">
+            $$\Delta m = m_{\text{produits}} - m_{\text{réactifs}} \quad (\text{en u, kg, ...})$$
+        </div>
+        <p><strong>Étape 3 :</strong> Appliquer la relation d’Einstein :</p>
+        <div class="formule">
+            $$\Delta E = |\Delta m| \cdot c^2$$
+        </div>
+        <ul>
+            <li>$c = 3,00 \times 10^8 \ \text{m/s}$ (célérité de la lumière).</li>
+            <li>Si $\Delta m$ est en kg → $\Delta E$ en joules (J).</li>
+            <li>Si $\Delta m$ est en <strong>unités de masse atomique (u)</strong> : $1\ \text{u} = 1,66054 \times 10^{-27}\ \text{kg}$ et $1\ \text{u} \times c^2 = 931,5 \ \text{MeV}$.</li>
+        </ul>
+        <div class="exemple">
+            <strong>📝 Application directe (Bac 2023) :</strong> <br>
+            On considère la réaction de fusion : $^{2}\text{H} + ^{3}\text{H} \rightarrow ^{4}\text{He} + ^{1}\text{n}$.<br>
+            Masses : $m(^{2}\text{H}) = 2,014102\ u$ ; $m(^{3}\text{H}) = 3,016049\ u$ ; $m(^{4}\text{He}) = 4,002603\ u$ ; $m(n) = 1,008665\ u$.<br>
+            Calculer $\Delta m$ puis $\Delta E$ en MeV. <br>
+            <strong>Réponse :</strong> $\Delta m = (4,002603+1,008665) - (2,014102+3,016049) = 5,011268 - 5,030151 = -0,018883\ u$ <br>
+            $\Delta E = 0,018883 \times 931,5 \approx 17,59\ \text{MeV}$ (énergie libérée).
+        </div>
+    </div>
+
+    <!-- Applications et ordres de grandeur -->
+    <div class="grid-2col">
+        <div class="card">
+            <h3>🏭 Applications technologiques</h3>
+            <ul>
+                <li><strong>Réacteurs nucléaires (fission) :</strong> production d'électricité (environ 10% mondiale).</li>
+                <li><strong>Réacteurs de 4ème génération</strong> : recherche de sûreté et valorisation des déchets.</li>
+                <li><strong>Fusion contrôlée</strong> : projet ITER (France) pour prouver la faisabilité scientifique.</li>
+                <li><strong>Astrophysique</strong> : fusion au cœur des étoiles (cycle proton-proton, cycle CNO).</li>
+                <li><strong>Applications militaires</strong> : bombes A (fission) et bombes H (fusion amorcée par fission).</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>⚠️ Critères de distinction (examen)</h3>
+            <ul>
+                <li>🔹 <strong>Fission</strong> : un noyau lourd + neutron → deux noyaux moyens + neutrons.</li>
+                <li>🔹 <strong>Fusion</strong> : deux noyaux légers → un noyau plus lourd + particule légère.</li>
+                <li>🔹 <strong>Énergie de liaison par nucléon</strong> : la courbe d'Aston montre que la fusion des très légers et la fission des très lourds libèrent de l’énergie.</li>
+                <li>🔹 <strong>Réaction provoquée</strong> : nécessite un apport initial (neutron pour fission, température/pression pour fusion).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Lien avec les sujets de bac et conseils méthodologiques -->
+    <div class="footer-note">
+        <strong>🎓 Conseils pour le Baccalauréat (Partie I & II) :</strong>
+        <ul style="margin: 0.5rem 0 0 1.2rem;">
+            <li>Savoir écrire les équations de fission/fusion et vérifier les lois de conservation (A, Z, charge, nombre de nucléons).</li>
+            <li>Maîtriser le passage de l'unité de masse atomique (u) au MeV ou Joule : <strong>1 u × c² = 931,5 MeV</strong> et <strong>1 eV = 1,6×10⁻¹⁹ J</strong>.</li>
+            <li>Dans une évaluation de compétences, comparer l’intérêt des deux types de réaction en termes de déchets, sécurité, disponibilité du combustible.</li>
+            <li>Interpréter un graphique de la courbe d’Aston (énergie de liaison par nucléon) pour justifier qu’un noyau peut subir fission ou fusion.</li>
+            <li>Savoir calculer le nombre de noyaux dans une masse donnée ($N = \frac{m}{M} \cdot N_A$) puis l’énergie totale libérée.</li>
+        </ul>
+        <hr>
+        <p><strong>📖 Synthèse :</strong> Fission et fusion sont deux réactions nucléaires exoénergétiques (libèrent de l’énergie) grâce à la conversion de masse ($\Delta m > 0$ pour les produits). La fission est exploitée industriellement ; la fusion, plus prometteuse, est encore au stade expérimental. La maîtrise de ces concepts est fondamentale pour le baccalauréat 2024-2025.</p>
+    </div>
+    <!-- Pied de page avec rappel -->
+    <div style="margin-top: 1rem; font-size: 0.7rem; text-align: center; color: #64748b;">
+        Fiche conforme au programme officiel du Cameroun – Terminale C & D | Enseignant : Mise à jour 2025-2026
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Art et Travail (Tle A4/ABI)</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petit ajustement local pour rester cohérent avec le template global */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+        }
+        .img-schema {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .img-placeholder {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            border: 1px dashed #94a3b8;
+            font-size: 0.85rem;
+            color: #1e293b;
+        }
+        .badge-philo {
+            background-color: #e0e7ff;
+            color: #1e3a8a;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">Leçon 21 : Définition des concepts d’art et de travail</h1>
+        <p class="lesson-subtitle">Philosophie – Terminale A4 & ABI (Programme camerounais) · Deuxième trimestre</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section concepts clés -->
+        <section class="concept-section">
+            <h2 class="section-title">🎨⚒️ Éléments clés à retenir</h2>
+            
+            <div class="card concept-card">
+                <h3 class="card-title">1. L’art : création, expression, recherche du beau <span class="badge-philo">poïêsis</span></h3>
+                <p class="card-description">
+                    L’art désigne toute activité humaine qui vise à produire une œuvre porteuse de sens, de beauté ou d’émotion esthétique. 
+                    Il ne répond pas à une stricte nécessité utilitaire mais relève de la liberté créatrice. L’art se distingue du travail par son absence de finalité pratique immédiate.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Art comme « imitation » (mimêsis)</strong> : selon Aristote, l’art imite la nature ou les actions humaines (tragédie, peinture).</li>
+                    <li><strong>Art comme expression des sentiments</strong> : romantisme, théorie de l’expression (Croce, Hegel).</li>
+                    <li><strong>Art pour l’art</strong> : autonomie de l’œuvre, dégagée de toute morale ou fonction sociale (Kant, « finalité sans fin »).</li>
+                    <li>L’art produit du <strong>singulier, de l’unique</strong> (tableau, symphonie, poème) et suscite une contemplation désintéressée.</li>
+                </ul>
+                <div class="img-schema">
+                    <!-- Image générée par IA suggérant dualité art/travail -->
+                    <img src="" alt="Illustration conceptuelle d'une palette de peintre et d'un marteau d'ouvrier en opposition, symbolisant la différence entre création artistique et labeur productif" style="max-width:100%; border-radius:12px; margin-top:8px;">
+                </div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">2. Le travail : activité transformatrice, contrainte et production</h3>
+                <p class="card-description">
+                    Le travail est une activité consciente par laquelle l’être humain transforme la nature pour subvenir à ses besoins et produire des biens utiles. 
+                    Il implique effort, dépense d’énergie et souvent une dimension sociale. Le travail est indissociable de l’économie, de la technique et de l’histoire.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Définition anthropologique</strong> : le travail est spécifiquement humain (Hegel, Marx) – il permet l’hominisation (outil, langage).</li>
+                    <li><strong>Opposition travail/loisir</strong> : le travail est souvent perçu comme une nécessité, voire une peine (Genèse, « à la sueur de ton front »).</li>
+                    <li><strong>Valeur économique</strong> : le crée des richesses et des valeurs d’usage (Adam Smith, Karl Marx).</li>
+                    <li><strong>Travail et aliénation</strong> : dans le capitalisme, le travailleur perd la maîtrise de son produit et de lui-même (Marx).</li>
+                </ul>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">3. Distinction fondamentale art ⇄ travail</h3>
+                <p class="card-description">
+                    La frontière entre art et travail n’est pas toujours étanche, mais la philosophie les distingue selon leur finalité et leur rapport à la nécessité.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Finalité :</strong> le travail est utilitaire (produire un objet utile) alors que l’art est contemplatif (recherche du beau / expressivité).</li>
+                    <li><strong>Contrainte :</strong> le travail est souvent imposé par les besoins ; l’art procède d’un élan libre, d’un génie créateur (Kant).</li>
+                    <li><strong>Résultat :</strong> le travail engendre des biens reproductibles et standardisés ; l’art engendre des œuvres uniques.</li>
+                    <li><strong>Valeur :</strong> la valeur du travail se mesure souvent en temps et productivité ; celle de l’art repose sur le jugement esthétique et la reconnaissance.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section exemples illustrés avec références philo -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Exemples philosophiques & compréhension</h2>
+            
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 1 : Le menuisier et le sculpteur (Kant)</h3>
+                <p class="exemple-context">
+                    Un menuisier fabrique une chaise pour être assis (travail utilitaire). Un sculpteur taille un morceau de bois pour créer une forme esthétique, sans autre fonction que de susciter l’émotion ou la beauté (art). 
+                    Selon Emmanuel Kant dans la <em>Critique de la faculté de juger</em>, l’art est « une production par liberté » tandis que l’artisanat (travail) est une activité rémunérée, « pénible ».
+                </p>
+                <p class="exemple-correction">
+                    <strong>Analyse :</strong> Le travail répond à une nécessité externe (besoin pratique), tandis que l’art répond à une « finalité sans fin » : l’œuvre d’art est appréciée pour elle-même, sans concept déterminé. 
+                    Pourtant, une même personne peut être à la fois artiste et travailleur (artisan d’art).
+                </p>
+                <div class="exemple-astuce">
+                    💡 Astuce bac : Dans une dissertation sur « Art et travail », utilisez cette distinction kantienne pour problématiser : tout travail peut-il devenir art ? L’artisanat est-il un travail ou un art ?
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 2 : La conception marxienne du travail – émancipation ou aliénation ?</h3>
+                <p class="exemple-context">
+                    Karl Marx, dans les <em>Manuscrits de 1844</em>, montre que dans le système capitaliste, le travail devient aliéné : l’ouvrier produit des richesses qui lui échappent, et il se sent « chez lui » seulement en dehors du travail. 
+                    À l’inverse, le travail non aliéné (communisme) permettrait à l’homme de s’épanouir, comme l’artiste dans sa création.
+                </p>
+                <p class="exemple-correction">
+                    <strong>Explication :</strong> Pour Marx, le travail devrait être une « activité vitale » libre et créatrice, proche de l’art. Mais historiquement, la division du travail et la propriété privée l’ont dénaturé. 
+                    Ainsi, l’idéal est une société où le travail deviendrait un art, expression de la puissance humaine.
+                </p>
+                <div class="exemple-astuce">
+                    📚 Référence utile : Comparez cette vision avec celle d’Hannah Arendt (<em>Condition de l’homme moderne</em>) qui distingue travail (animal laborans), œuvre (<em>homo faber</em>) et action.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 3 : Le design – frontière mouvante entre art et travail</h3>
+                <p class="exemple-context">
+                    Un créateur de mobilier design conçoit une lampe qui est à la fois esthétique (œuvre d’art) et fonctionnelle (objet utilitaire). Est-ce du travail ou de l’art ? 
+                    On parle alors d’« art appliqué » ou de « design ».
+                </p>
+                <p class="exemple-correction">
+                    <strong>Piste de réflexion :</strong> Cette hybridation montre que la distinction n’est pas absolue. John Dewey dans <em>L’Art comme expérience</em> défend que l’expérience esthétique peut naître aussi du travail bien fait, d’une cuisine soignée ou d’un jardinage. 
+                    Le contexte et l’intention déterminent la qualification.
+                </p>
+                <div class="exemple-astuce">
+                    ✨ Ouverture : Dans les sociétés africaines précoloniales, nombreux objets rituels (masques, statues) mêlaient fonction sacrée, usage social et beauté artistique, dépassant l’opposition art/travail.
+                </div>
+            </div>
+        </section>
+
+        <!-- Tableau synthétique : résumé des critères -->
+        <section class="concept-section">
+            <h2 class="section-title">📊 Synthèse comparative : Art vs Travail</h2>
+            <div class="card" style="overflow-x:auto;">
+                <table style="width:100%; border-collapse: collapse; text-align: left;">
+                    <thead>
+                        <tr><th style="background-color:#f1f5f9; padding:12px; border-bottom:2px solid #cbd5e1;">Critère</th>
+                            <th style="background-color:#f1f5f9; padding:12px; border-bottom:2px solid #cbd5e1;">Art</th>
+                            <th style="background-color:#f1f5f9; padding:12px; border-bottom:2px solid #cbd5e1;">Travail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding:10px; border-bottom:1px solid #e2e8f0;"><strong>Finalité</strong></td><td style="padding:10px; border-bottom:1px solid #e2e8f0;">Contemplation, émotion, beauté</td><td style="padding:10px; border-bottom:1px solid #e2e8f0;">Utilité, production de biens</td></tr>
+                        <tr><td style="padding:10px; border-bottom:1px solid #e2e8f0;"><strong>Contrainte</strong></td><td style="padding:10px; border-bottom:1px solid #e2e8f0;">Liberté créatrice, jeu (Schiller)</td><td style="padding:10px; border-bottom:1px solid #e2e8f0;">Nécessité, effort, salariat</td></tr>
+                        <tr><td style="padding:10px; border-bottom:1px solid #e2e8f0;"><strong>Résultat</strong></td><td style="padding:10px; border-bottom:1px solid #e2e8f0;">Œuvre singulière, originale</td><td style="padding:10px; border-bottom:1px solid #e2e8f0;">Objet standardisé, reproductible</td></tr>
+                        <tr><td style="padding:10px;"><strong>Valeur</strong></td><td style="padding:10px;">Valeur esthétique, symbolique</td><td style="padding:10px;">Valeur d’échange, économique</td></tr>
+                    </tbody>
+                </table>
+                <div class="img-schema" style="margin-top:1rem;">
+                    <!-- image conceptuelle infographie -->
+                    <img src="" alt="Infographie schématique représentant d'un côté un pinceau et un masque de théâtre (art), de l'autre un marteau et un engrenage (travail), avec une flèche double montrant les tensions et complémentarités." style="max-width:100%; border-radius:12px;">
+                </div>
+            </div>
+        </section>
+
+        <!-- Pièges à éviter et confusions classiques -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants & nuances à maîtriser</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Erreur fréquente :</span> Réduire l’art à une simple distraction ou « passe-temps ». L’art engage une réflexion sur le monde et le sensible (Heidegger).</li>
+                    <li><span class="bold">Attention :</span> Confondre travail et emploi rémunéré. Le travail domestique ou bénévole est aussi une forme de travail (Engels).</li>
+                    <li><span class="bold">À ne pas faire :</span> Opposer radicalement art et travail sans voir leurs possibles réconciliations : l’artisanat d’art, le travail bien fait peut avoir une dimension esthétique (critère du « beau travail »).</li>
+                    <li><span class="bold">Confusion classique :</span> Croire que l’art n’a aucun rapport avec la technique. Pourtant, l’artiste maîtrise des techniques (couleurs, notes, ciseau) – c’est un « techné » chez les Grecs. La différence réside dans la finalité, non dans l’absence de technique.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Citations et auteurs majeurs -->
+        <section class="concept-section">
+            <h2 class="section-title">📖 Références philosophiques essentielles (pour dissertation & commentaire)</h2>
+            <div class="card">
+                <ul class="concept-list">
+                    <li><strong>Platon</strong> : L’art est une imitation (mimêsis) éloignée de la vérité des Idées ; le travail des artisans est nécessaire à la cité.</li>
+                    <li><strong>Aristote</strong> : Distinction entre <em>poïêsis</em> (création, art) et <em>praxis</em> (action morale). Le travail relève de la production.</li>
+                    <li><strong>Kant</strong> : L’art est « production par liberté », le travail « rémunéré » (art libéral vs art mercenaire).</li>
+                    <li><strong>Hegel</strong> : Le travail est le moyen par lequel la conscience de soi se forme (dialectique du maître et de l’esclave). L’art est une manifestation de l’Esprit absolu.</li>
+                    <li><strong>Marx</strong> : Le travail devrait être libre et créatif comme l’art ; l’aliénation capitaliste brise cette unité.</li>
+                    <li><strong>Paul Ricoeur</strong> : Le travail et l’art sont deux médiations symboliques par lesquelles l’homme se construit.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Petit exercice d'application type bac -->
+        <section class="exemple-section">
+            <h2 class="section-title">✍️ Entraînement Bac – Piste de dissertation</h2>
+            <div class="card exemple-card">
+                <h3 class="card-title">Sujet possible : « Le travail peut-il être une œuvre d’art ? »</h3>
+                <p class="exemple-context">
+                    Problématique : En quoi le travail, activité de nécessité, peut-il accéder à la dimension créatrice et gratuite de l’art ?
+                </p>
+                <p class="exemple-correction">
+                    <strong>Plan dialectique succinct :</strong><br/>
+                    - Thèse : Non, travail et art s’opposent par leur finalité (Kant, Arendt).<br/>
+                    - Antithèse : Oui, un travail bien fait peut posséder une dimension esthétique (Dewey, l’artisanat d’art).<br/>
+                    - Synthèse : Dépasser l’opposition par une conception élargie : l’éthique du travail (travail comme réalisation de soi) le rapproche de l’art, sans le confondre.
+                </p>
+                <div class="exemple-astuce">
+                    💬 Pensez à mobiliser l’œuvre d’Ebénézer Njoh-Mouelle (<em>De la médiocrité à l’excellence</em>) : le développement par le « bien-se-faire » implique un travail créateur qui vise l’excellence, proche de l’attitude artistique.
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Fiche conforme au programme officiel de philosophie - Terminale A4/ABI (Cameroun) · Baccalauréat · Leçon 21 : Définition des concepts d’art et de travail</p>
+        <p>📚 Révisions – Mobilisez les auteurs, exemples et distinctions pour réussir dissertation et commentaire.</p>
+    </footer>
+</div>
+</body>
+</html>

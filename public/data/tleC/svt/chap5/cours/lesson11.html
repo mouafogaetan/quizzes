@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Réponse immunitaire humorale | SVTEEHB Terminale</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (pour d'éventuelles formules) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 950px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Style pour les images (placeholders) */
+        .img-placeholder {
+            margin: 1rem 0;
+            text-align: center;
+            background-color: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border: 1px dashed #94a3b8;
+        }
+        .img-placeholder img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .img-caption {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">La réponse immunitaire humorale</h1>
+            <p class="lesson-subtitle">SVTEEHB · Terminale C · Module II : Éducation à la santé</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Antigène et anticorps : des acteurs spécifiques</h3>
+                    <p class="card-description">
+                        <strong>Antigène :</strong> toute substance étrangère (protéine, polysaccharide, toxine) reconnue par le système immunitaire. 
+                        Il déclenche une réponse immunitaire spécifique.<br>
+                        <strong>Anticorps (immunoglobuline) :</strong> protéine soluble produite par les plasmocytes, capable de reconnaître et de se lier spécifiquement à un antigène.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Structure en « Y » : deux chaînes lourdes et deux chaînes légères.</li>
+                        <li>Région variable (site de liaison à l'antigène) : spécificité unique.</li>
+                        <li>Région constante (détermine la classe d'Ig : IgG, IgM, IgA, etc.).</li>
+                    </ul>
+                    <!-- Image IA suggestion : schéma d'un anticorps en Y -->
+                    <div class="img-placeholder">
+                        <img src="" alt="Schéma d'un anticorps (immunoglobuline) avec régions variables et constantes, structure en Y">
+                        <div class="img-caption">Figure 1 : Structure d’un anticorps (IgG) – site de fixation à l’antigène en vert.</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. De l’activation des lymphocytes B aux plasmocytes</h3>
+                    <p class="card-description">
+                        La réponse humorale fait intervenir les <strong>lymphocytes B</strong>. Après reconnaissance de l'antigène par leurs récepteurs membranaires (BCR), 
+                        et sous l’influence des lymphocytes T auxiliaires (CD4+), les LB s'activent, prolifèrent et se différencient en :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Plasmocytes</strong> : cellules usines productrices d'anticorps en grande quantité (jusqu'à 2000 anticorps/seconde).</li>
+                        <li><strong>Lymphocytes B mémoire</strong> : assurant une réponse rapide lors d'une seconde rencontre avec le même antigène.</li>
+                    </ul>
+                    <div class="img-placeholder">
+                        <img src="" alt="Schéma de l'activation des lymphocytes B: antigène + LB → activation avec aide des LT → plasmocytes et LB mémoire">
+                        <div class="img-caption">Figure 2 : Étapes de la différenciation des lymphocytes B en plasmocytes.</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Complexe immun et mécanismes d’élimination</h3>
+                    <p class="card-description">
+                        Un <strong>complexe immun</strong> se forme par liaison antigène-anticorps. Cette liaison neutralise l’agent pathogène ou le marque pour destruction :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Neutralisation</strong> : blocage des toxines ou de l’adhésion des virus/bactéries.</li>
+                        <li><strong>Opsonisation</strong> : les anticorps recouvrent l’antigène, facilitant la phagocytose par les macrophages ou les polynucléaires.</li>
+                        <li><strong>Activation du complément</strong> : cascade protéolytique aboutissant à la lyse de l’agent infectieux.</li>
+                    </ul>
+                    <div class="img-placeholder">
+                        <img src="" alt="Illustration du complexe immun: anticorps lié à un antigène (bactérie) avec phagocytose par un macrophage">
+                        <div class="img-caption">Figure 3 : Formation du complexe immun et opsonisation menant à la phagocytose.</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Sérum et immunité humorale</h3>
+                    <p class="card-description">
+                        Le <strong>sérum</strong> sanguin (plasma sans facteurs de coagulation) contient les anticorps circulants. 
+                        La présence d’anticorps spécifiques dans le sérum après infection ou vaccination atteste d’une réponse humorale. 
+                        On peut transférer passivement des anticorps (sérothérapie) pour une protection immédiate mais temporaire.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Exemples type examen (exploitation de documents) -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension (type baccalauréat)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Expérience de production d'anticorps antitoxine X (Bac 2023)</h3>
+                    <p class="exemple-context">
+                        On injecte une toxine bactérienne X à un lapin. Après 10 jours, on prélève son sérum. 
+                        On mélange ce sérum avec la toxine X, puis on injecte le mélange à une souris. La souris ne développe pas de symptômes. 
+                        En revanche, une souris recevant seulement la toxine X meurt.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Interprétation :</strong> Le lapin a produit des anticorps spécifiques anti-toxine X (anticorps neutralisants). 
+                        Le sérum immun contient ces anticorps qui forment un complexe immun avec la toxine, empêchant son action pathogène. 
+                        C’est la preuve de la réponse humorale.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Dans une expérience de sérum immun, pensez à identifier l’animal immunisé (producteur d’anticorps) et l’animal receveur passif.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Comparaison entre réponse primaire et secondaire</h3>
+                    <p class="exemple-context">
+                        On mesure le taux d'anticorps anti-rougeole dans le sérum d’un enfant après un premier contact avec le virus (vaccin), 
+                        puis après un second contact (épidémie naturelle) deux ans plus tard. Graphique : pic d’anticorps faible et lent au premier contact, 
+                        pic très élevé et rapide au second contact.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> Lors du premier contact, les lymphocytes B naïfs s’activent et se différencient lentement en plasmocytes (phase de latence). 
+                        Lors du second contact, les lymphocytes B mémoire reconnaissent instantanément l’antigène, prolifèrent rapidement et se différencient massivement en plasmocytes, 
+                        d’où une production d’anticorps plus précoce et plus intense. C’est la base de la vaccination.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Le « rappel » vaccinal repose sur cette mémoire immunitaire humorale.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Schéma récapitulatif : production d'anticorps -->
+            <section class="concept-section">
+                <h2 class="section-title">🧬 Synthèse visuelle : de l’antigène aux anticorps</h2>
+                <div class="card">
+                    <div class="img-placeholder">
+                        <img src="" alt="Schéma fléché résumant: Antigène → reconnaissance par LB → activation avec aide LT → prolifération → plasmocytes (anticorps) + LB mémoire">
+                        <div class="img-caption">Figure 4 : Schéma général de la réponse immunitaire humorale.</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 0.5rem;">
+                        <strong>Étapes clés :</strong> 
+                        <br>1. Capture et présentation de l’antigène (par CPA) aux lymphocytes T CD4+. 
+                        <br>2. Activation du lymphocyte B spécifique par l’antigène et les signaux des LT.
+                        <br>3. Prolifération et différenciation en plasmocytes sécréteurs d’anticorps.
+                        <br>4. Production massive d’anticorps circulants qui forment des complexes immuns.
+                        <br>5. Élimination de l’agent pathogène (neutralisation, opsonisation, complément).
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Pièges fréquents et liens avec l'examen -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confusion immunité humorale / cellulaire :</span> La réponse humorale fait intervenir les <strong>anticorps circulants</strong> (produits par les LB/plasmocytes), 
+                            alors que la réponse cellulaire implique les lymphocytes T cytotoxiques (CD8+).</li>
+                        <li><span class="bold">Erreur fréquente :</span> Penser que les anticorps sont produits par les lymphocytes T. Non, les LT produisent des cytokines, pas des anticorps.</li>
+                        <li><span class="bold">Attention :</span> Le sérum immun contient des anticorps <strong>préformés</strong> (immunité passive). Un vaccin déclenche une réponse active (production propre).</li>
+                        <li><span class="bold">À retenir :</span> Les complexes immuns ne sont pas pathologiques en eux-mêmes, mais leur accumulation anormale peut l’être (ex : lupus).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Lien avec l'examen (extrait session 2023) -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 Lien avec les épreuves officielles</h2>
+                <div class="card">
+                    <p class="card-description">
+                        <strong>Session 2023, Partie A :</strong> Une expérience met en évidence la production d’anticorps antitoxine X par un lapin. 
+                        Le sérum immun protège une souris contre la toxine létale. Cette fiche couvre entièrement cette notion : 
+                        formation des anticorps par les plasmocytes, spécificité et neutralisation via complexe immun.
+                        <br><br>
+                        <strong>Savoir-faire attendu :</strong> Exploiter des résultats d’injection de sérum, interpréter une électrophorèse des protéines sériques, 
+                        schématiser la formation du complexe antigène-anticorps.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Petit résumé final avec un tableau récapitulatif -->
+            <section class="concept-section">
+                <h2 class="section-title">📝 Récapitulatif express (avant le bac)</h2>
+                <div class="card">
+                    <ul class="concept-list">
+                        <li><strong>Plasmocytes</strong> = cellules sécrétrices d’anticorps (dérivées des LB).</li>
+                        <li><strong>Anticorps</strong> = immunoglobulines (Ig) spécifiques d’un antigène.</li>
+                        <li><strong>Complexe immun</strong> = liaison Ag-Ac → neutralisation, opsonisation, complément.</li>
+                        <li><strong>Sérum immun</strong> : source d’anticorps pour sérothérapie ou diagnostic (sérodiagnostic).</li>
+                        <li><strong>Mémoire humorale</strong> : LB mémoire → réponse secondaire plus rapide et efficace.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        🧪 <strong>Conseil du prof :</strong> Pour tout document expérimental montrant une protection par un sérum, pensez à mentionner la présence d'anticorps spécifiques formant un complexe immun.
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="fiche-footer">
+            <p>Fiche de révision générée pour la Terminale C (SVTEEHB) · Programme officiel 2025-2026 · D'après l'épreuve de Bac 2023 (anticorps antitoxine X) · 📚 Révision recommandée avant l’évaluation sur le système immunitaire</p>
+            <p style="margin-top: 0.5rem;">🎓 Enseignant : SVTEEHB Cameroun · <a href="#">Retour au sommaire</a></p>
+        </footer>
+    </div>
+</body>
+</html>

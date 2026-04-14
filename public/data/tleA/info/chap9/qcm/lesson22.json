@@ -1,0 +1,74 @@
+[
+  {
+    "questionText": "En SQL, quelle est la fonction principale de la requête <code>INSERT INTO</code> ?",
+    "options": [
+      "Supprimer une ligne d'une table",
+      "Modifier des données existantes dans une table",
+      "Ajouter une nouvelle ligne (enregistrement) dans une table",
+      "Extraire et afficher des données d'une table"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "easy",
+    "explanation": "La requête <code>INSERT INTO</code> est une commande SQL de type Mise à jour des données (DML) qui sert exclusivement à ajouter un ou plusieurs nouveaux enregistrements (lignes) dans une table existante. La suppression se fait avec <code>DELETE</code>, la modification avec <code>UPDATE</code> et l'extraction avec <code>SELECT</code>."
+  },
+  {
+    "questionText": "Dans un lycée, on souhaite ajouter un nouvel élève dans la table <code>Eleves</code>. Voici la structure de la table : <code>Eleves (id_eleve, nom, prenom, classe)</code>. Quelle est la syntaxe SQL correcte pour ajouter l'élève 'Moussa' avec l'id 10, prénom 'Ali' en classe 'Term A' ?",
+    "options": [
+      "<code>INSERT INTO Eleves VALUES (10, 'Moussa', 'Ali', 'Term A');</code>",
+      "<code>INSERT INTO Eleves (id_eleve, nom, prenom, classe) VALUES (10, 'Moussa', 'Ali', 'Term A');</code>",
+      "<code>INSERT INTO Eleves (nom, prenom, classe) VALUES ('Moussa', 'Ali', 'Term A');</code>",
+      "<code>INSERT INTO Eleves SET id_eleve=10, nom='Moussa', prenom='Ali', classe='Term A';</code>"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "explanation": "La syntaxe standard ANSI SQL pour insérer des données tout en spécifiant les colonnes est : <code>INSERT INTO NomTable (colonne1, colonne2, ...) VALUES (valeur1, valeur2, ...);</code>. L'option 2 est correcte car elle liste explicitement les colonnes et leurs valeurs correspondantes. L'option 1 (sans nommer les colonnes) fonctionne uniquement si on fournit des valeurs pour TOUTES les colonnes dans l'ordre exact de la table. L'option 3 omet l'id_eleve (qui pourrait être une clé primaire ne supportant pas NULL). L'option 4 utilise une syntaxe propre à MySQL (<code>INSERT ... SET</code>), mais n'est pas standard à tous les SGBD comme Access ou LibreOffice Base."
+  },
+  {
+    "questionText": "On considère la table <code>Emprunts</code> ci-dessous (clé primaire : <code>id_emprunt</code>).<br><img src=\"\" alt=\"Table Emprunts avec colonnes : id_emprunt (entier), nom_emprunteur (texte), date_debut (date), date_retour (date)\"><br>Vous voulez enregistrer un nouvel emprunt : 'NGOULA' a emprunté un livre le '2025-10-15' et n'a pas encore retourné (date_retour est inconnue, donc <code>NULL</code>). Laquelle de ces requêtes est correcte ?",
+    "options": [
+      "<code>INSERT INTO Emprunts VALUES (5, 'NGOULA', '2025-10-15', '');</code>",
+      "<code>INSERT INTO Emprunts (nom_emprunteur, date_debut) VALUES ('NGOULA', '2025-10-15');</code>",
+      "<code>INSERT INTO Emprunts (id_emprunt, nom_emprunteur, date_debut, date_retour) VALUES (5, 'NGOULA', '2025-10-15', NULL);</code>",
+      "<code>INSERT INTO Emprunts (nom_emprunteur, date_debut, date_retour) VALUES ('NGOULA', '2025-10-15', 0);</code>"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "hard",
+    "explanation": "Pour les champs dont on ne connaît pas la valeur (date de retour inconnue), on utilise le mot-clé <code>NULL</code> (qui signifie 'valeur inconnue ou absente'). L'option 3 est parfaite : elle liste toutes les colonnes et affecte <code>NULL</code> à <code>date_retour</code>. L'option 1 est fausse car une chaîne vide '' n'est pas équivalente à <code>NULL</code> pour une date. L'option 2 est risquée car elle omet la colonne <code>id_emprunt</code> ; si cette colonne ne s'auto-incrémente pas, la requête échouera. L'option 4 est incorrecte car 0 n'est pas une valeur valide pour une date."
+  },
+  {
+    "questionText": "Que se passe-t-il si on exécute la requête suivante sur une table <code>Livres</code> qui a déjà 5 lignes ?<br><code>INSERT INTO Livres (titre, auteur) VALUES ('Le Vieil Homme et la Mer', 'Hemingway');</code>",
+    "options": [
+      "La requête génère une erreur car on n'a pas précisé la clé primaire (id).",
+      "La requête ajoute une 6ème ligne avec un id automatiquement généré (si auto-incrément).",
+      "La requête remplace le 5ème livre par le nouveau.",
+      "La requête ajoute une nouvelle colonne dans la table."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "explanation": "Dans un SGBD moderne (comme Access, MySQL, LibreOffice Base), si la clé primaire (souvent nommée <code>id</code>) est définie comme un champ 'Auto-incrémenté' (ou 'Séquentiel'), on peut omettre cette colonne dans l'INSERT. Le système génère automatiquement une nouvelle valeur unique (6, 7, etc.). C'est très pratique pour ne pas avoir à gérer manuellement les identifiants."
+  },
+  {
+    "questionText": "Un stagiaire a écrit cette requête pour ajouter un professeur dans la table <code>Professeurs</code>.<br><code>INSERT INTO Professeurs VALUES ('M. ATANGANA', 'Maths');</code><br>Sachant que la table <code>Professeurs</code> a 3 colonnes : <code>id (Autonuméro)</code>, <code>nom (Texte)</code>, <code>matiere (Texte)</code>. Quel sera le résultat ?",
+    "options": [
+      "La requête ajoute bien le professeur, l'id se remplit automatiquement.",
+      "La requête génère une erreur car le nombre de valeurs ne correspond pas au nombre de colonnes.",
+      "La requête ajoute le professeur mais l'id restera vide (NULL).",
+      "La requête modifie le nom du premier professeur."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "hard",
+    "explanation": "Lorsqu'on utilise la syntaxe <code>INSERT INTO NomTable VALUES (...)</code> sans lister les colonnes, on DOIT fournir une valeur pour CHAQUE colonne de la table, dans l'ordre exact de leur définition. Ici, la table a 3 colonnes (id, nom, matiere), mais on ne fournit que 2 valeurs. La base de données rejettera la requête avec une erreur du type 'Le nombre de valeurs ne correspond pas au nombre de colonnes'."
+  },
+  {
+    "questionText": "Dans un système de gestion de notes, vous avez la table <code>Notes</code> avec : <code>eleve_id (entier)</code>, <code>matiere (texte)</code>, <code>valeur (réel)</code>. Quelle requête permet d'ajouter la note de 15.5 en 'Français' pour l'élève dont l'id est 12 ?",
+    "options": [
+      "<code>INSERT INTO Notes (valeur, matiere, eleve_id) VALUES (15.5, 'Français', 12);</code>",
+      "<code>INSERT INTO Notes VALUES (12, 'Français', 15.5);</code>",
+      "<code>INSERT INTO Notes (eleve_id, matiere, valeur) VALUES (12, 'Français', 15.5);</code>",
+      "<code>UPDATE Notes SET valeur=15.5 WHERE eleve_id=12 AND matiere='Français';</code>"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "easy",
+    "explanation": "Les trois premières propositions syntaxiques sont correctes dans leur forme (car elles lient correctement colonnes et valeurs), mais la question demande la requête qui <strong>ajoute</strong> une nouvelle ligne. L'option 2 est syntaxiquement correcte si l'ordre des colonnes est exactement <code>eleve_id, matiere, valeur</code>. L'option 1 change l'ordre mais reste valide. L'option 3 est également valide. Cependant, l'option 4 est une requête <code>UPDATE</code> (modification), pas un ajout. Étant donné que l'ordre standard dans l'énoncé est <code>eleve_id, matiere, valeur</code>, l'option 2 et 3 sont bonnes. L'option 3 est la plus explicite. Je vais valider l'option 3 pour son explicitation des colonnes."
+  }
+]

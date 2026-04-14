@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Les champs lexicaux</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (non utilisé ici mais gardé pour compatibilité) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        .highlight {
+            background-color: #e0f2fe;
+            border-radius: 0.3rem;
+            padding: 0.1rem 0.2rem;
+            font-weight: 500;
+            color: #0369a1;
+        }
+        .image-placeholder {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">Identifier et exploiter les champs lexicaux</h1>
+        <p class="lesson-subtitle">Français · 3ème · Module 3 : Le fonctionnement de la langue au service du sens (Chapitre 6 – Le vocabulaire)</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section concepts clés -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Éléments clés à retenir</h2>
+            <div class="card concept-card">
+                <h3 class="card-title">🔍 Qu'est-ce qu'un champ lexical ?</h3>
+                <p class="card-description">
+                    Un <strong class="highlight">champ lexical</strong> est un ensemble de mots (noms, verbes, adjectifs, expressions) qui se rapportent à un même thème, une même idée ou une même réalité.
+                    Ces mots peuvent appartenir à des classes grammaticales différentes mais partagent un <strong>domaine sémantique commun</strong>.
+                </p>
+                <ul class="concept-list">
+                    <li>Il permet de créer une <strong>cohérence thématique</strong> dans un texte.</li>
+                    <li>Il contribue à l'<strong>atmosphère</strong> (triste, joyeuse, angoissante) et à la <strong>vision du monde</strong> de l'auteur.</li>
+                    <li>Repérer un champ lexical, c'est comprendre les <strong>idées directrices</strong> d'un passage.</li>
+                </ul>
+                <div class="image-placeholder">
+                    <img src="" alt="Schéma illustrant un champ lexical : des mots autour du thème 'mer' (vague, écume, marin, naviguer, salé, profond) regroupés en une constellation.">
+                </div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">📖 Comment identifier un champ lexical ?</h3>
+                <p class="card-description">
+                    Pour repérer un champ lexical dans un texte, il faut :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Lire attentivement</strong> et repérer les mots qui reviennent ou qui évoquent un même sujet.</li>
+                    <li><strong>Regrouper</strong> les mots par affinité de sens (ex: nature, guerre, injustice, joie).</li>
+                    <li>Chercher des <strong>synonymes, mots de la même famille, termes spécifiques</strong> liés au thème.</li>
+                    <li>Observer les <strong>images, métaphores</strong> qui peuvent enrichir le champ lexical.</li>
+                </ul>
+                <p class="card-description" style="margin-top: 0.5rem;">
+                    💡 <strong>Utilité en analyse :</strong> Exploiter le champ lexical, c'est montrer comment le vocabulaire oriente le sens, exprime des sentiments ou défend une thèse.
+                </p>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">🎯 Exploitation du champ lexical dans un commentaire</h3>
+                <p class="card-description">
+                    Une fois le champ lexical identifié, il faut l'<strong class="highlight">exploiter</strong> :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Nommer le thème</strong> : « l'auteur développe un champ lexical de la souffrance ».</li>
+                    <li><strong>Relever les mots-clés</strong> et expliquer leur effet : intensité, réalisme, symbolique.</li>
+                    <li><strong>Mettre en relation</strong> avec l'intention de l'auteur (dénoncer, émouvoir, convaincre).</li>
+                    <li><strong>Comparer</strong> éventuellement deux champs lexicaux opposés dans un même texte (ex: champ lexical de la vie / de la mort).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section exemples de compréhension -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Exemples de compréhension</h2>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 1 : Repérer un champ lexical dans un extrait littéraire</h3>
+                <div class="exemple-context">
+                    <strong>Texte :</strong> « La forêt étendait ses <span class="highlight">branches noueuses</span> comme des bras menaçants. Le <span class="highlight">vent</span> <span class="highlight">hurlait</span> à travers les <span class="highlight">fûts</span> sombres, et la <span class="highlight">pluie</span> glaciale fouettait les <span class="highlight">visages</span> des voyageurs égarés. <span class="highlight">L'obscurité</span> les enveloppait, <span class="highlight">silence</span> de mort. »
+                </div>
+                <p class="exemple-correction">
+                    <strong>🔎 Identification :</strong> Les mots en surbrillance appartiennent à un champ lexical de <strong>la nature hostile et de l'angoisse</strong> : 
+                    <em>branches, vent, fûts, pluie, obscurité, silence</em> mais aussi les verbes <em>hurlait, fouettait, enveloppait</em> qui personnifient les éléments.
+                    Ce champ lexical crée une <strong>atmosphère oppressante</strong> et annonce un danger.
+                </p>
+                <div class="exemple-astuce">
+                    💬 Astuce : Ne cherchez pas seulement les noms ; les verbes, adjectifs et adverbes participent aussi au champ lexical. Ici « noueuses », « glaciale », « sombres » renforcent l'aspect inquiétant.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 2 : Exploiter un champ lexical pour analyser un argument</h3>
+                <div class="exemple-context">
+                    <strong>Texte argumentatif :</strong> « Le travail des enfants est une <span class="highlight">plaie</span> qui <span class="highlight">ronge</span> l'avenir de milliers de petits êtres. Privés de leur <span class="highlight">enfance</span>, ils subissent <span class="highlight">l'épuisement</span>, les <span class="highlight">coups</span> et la <span class="highlight">faim</span>. Chaque <span class="highlight">larme</span> versée dans ces <span class="highlight">ateliers obscurs</span> est un cri contre l'<span class="highlight">injustice</span>. »
+                </div>
+                <p class="exemple-correction">
+                    <strong>📖 Analyse :</strong> On relève un champ lexical dominant de <strong>la souffrance et de l'exploitation</strong> : 
+                    <em>plaie, ronge, épuisement, coups, faim, larmes, injustice</em>. 
+                    L'auteur utilise ces mots pour susciter <strong>l'émotion et l'indignation</strong> chez le lecteur. 
+                    Il associe également un champ lexical de <strong>l'enfance volée</strong> (« privés de leur enfance », « petits êtres ») pour renforcer son plaidoyer. 
+                    L'exploitation de ces champs lexicaux permet de dénoncer vigoureusement le travail des enfants.
+                </p>
+                <div class="exemple-astuce">
+                    💡 Lors d'une rédaction ou d'un commentaire, reliez toujours le champ lexical à l'<strong>effet recherché</strong> (pathétique, polémique, lyrique…).
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 3 : Deux champs lexicaux en opposition (antithèse)</h3>
+                <div class="exemple-context">
+                    <strong>Extrait :</strong> « D'un côté, la <span class="highlight">lumière</span> éclatante du <span class="highlight">printemps</span>, les <span class="highlight">parfums</span> suaves, les <span class="highlight">rires</span> des enfants. De l'autre, les <span class="highlight">ténèbres</span> épaisses du <span class="highlight">cachot</span>, l'<span class="highlight">odeur</span> de moisi, les <span class="highlight">plaintes</span> étouffées. »
+                </div>
+                <p class="exemple-correction">
+                    <strong>⚖️ Opposition nette :</strong> Deux champs lexicaux s'opposent : 
+                    <br>➡️ Champ lexical de la <strong>vie / joie / lumière</strong> : <em>lumineux, printemps, parfums, rires</em>. 
+                    <br>➡️ Champ lexical de la <strong>mort / enfermement / souffrance</strong> : <em>ténèbres, cachot, odeur de moisi, plaintes</em>.
+                    <br>Cette opposition souligne la <strong>dualité</strong> entre deux univers et peut symboliser un conflit moral ou social.
+                </p>
+                <div class="exemple-astuce">
+                    🧠 Pensez à utiliser les champs lexicaux pour justifier une <strong>thèse</strong> ou un <strong>changement de registre</strong> dans le texte.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section pièges courants / à ne pas confondre -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Confondre champ lexical et champ sémantique :</span> le champ sémantique est l'ensemble des significations d'un mot, le champ lexical est un groupe de mots autour d'un thème. Ex : « mer » a pour champ sémantique (étendue d'eau salée, immensité…) ; champ lexical de la mer : <em>vague, marin, port, naviguer, salé</em>.</li>
+                    <li><span class="bold">Ne pas prendre en compte les mots connotés :</span> parfois un mot peut appartenir à un champ lexical de façon indirecte. Ex : « hurler » pour le vent appartient au champ lexical de la tempête/peur.</li>
+                    <li><span class="bold">Oublier de justifier l'effet :</span> il ne suffit pas de lister les mots. Il faut expliquer <strong>pourquoi</strong> l'auteur utilise ce champ lexical (créer une ambiance, appuyer un argument, montrer un contraste).</li>
+                    <li><span class="bold">Limiter le champ lexical aux noms :</span> un champ lexical se compose aussi de verbes, d'adjectifs, d'adverbes et parfois de figures de style (métaphore).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section exercices d'application (optionnel mais très pratique) -->
+        <section class="exemple-section">
+            <h2 class="section-title">✍️ Petit exercice d'entraînement</h2>
+            <div class="card exemple-card" style="border-left-color: #f59e0b;">
+                <h3 class="card-title" style="color:#b45309;">À toi de jouer !</h3>
+                <div class="exemple-context">
+                    <strong>Texte :</strong> « La <span class="highlight">guerre</span> avait tout <span class="highlight">dévasté</span>. Les <span class="highlight">ruines</span> s'étendaient à perte de vue. Plus un <span class="highlight">cri</span>, plus un <span class="highlight">sourire</span>. Seule la <span class="highlight">poussière</span> et le <span class="highlight">silence</span> régnaient sur cette terre <span class="highlight">morte</span>. »
+                </div>
+                <p class="exemple-correction">
+                    <strong>Question :</strong> Identifie le champ lexical dominant dans ce passage. Quels mots le composent ? Quel effet produit-il sur le lecteur ? 
+                </p>
+                <details style="margin-top: 1rem; background-color: #f1f5f9; padding: 0.75rem; border-radius: 0.5rem;">
+                    <summary style="font-weight: 600; cursor: pointer;">🔍 Voir la correction</summary>
+                    <p style="margin-top: 0.75rem;"><strong>Champ lexical de la destruction / désolation :</strong> <em>guerre, dévasté, ruines, cri, sourire (négation), poussière, silence, terre morte</em>. 
+                    L'auteur crée une atmosphère de désespoir et de néant. L'absence de vie (« plus un cri, plus un sourire ») renforce l'horreur de la guerre. 
+                    Ce champ lexical suscite la compassion et dénonce les conséquences tragiques des conflits.</p>
+                </details>
+                <div class="exemple-astuce" style="margin-top: 1rem;">
+                    📚 N'hésite pas à repérer plusieurs champs lexicaux dans un même texte ; ils peuvent se compléter ou s'opposer pour enrichir l'analyse.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Fiche de révision - 3ème Cameroun · Module 3 – Le fonctionnement de la langue · Chapitre 6 : Vocabulaire · <a href="#">Revoir les autres leçons</a> · 📖 Exploiter les champs lexicaux pour mieux analyser un texte</p>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Leçon 25 - Oscillations amorties et résonance</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques pour une meilleure lisibilité */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+            color: #0f172a;
+        }
+        .fiche-revision {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 30px 40px;
+            border: 1px solid #e2e8f0;
+        }
+        @media (max-width: 768px) {
+            .fiche-revision {
+                padding: 20px;
+            }
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            color: #1e293b;
+        }
+        .header .chapitre {
+            font-size: 16px;
+            font-weight: 600;
+            color: #3b82f6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .header .objectif {
+            font-size: 14px;
+            color: #475569;
+            margin-top: 8px;
+            font-style: italic;
+        }
+        .section {
+            margin-bottom: 32px;
+            border-left: 4px solid #3b82f6;
+            padding-left: 20px;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title i {
+            font-size: 24px;
+        }
+        .card-notion {
+            background-color: #f1f5f9;
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            transition: transform 0.1s ease;
+        }
+        .card-notion strong {
+            color: #1e40af;
+            font-weight: 700;
+        }
+        .formule {
+            background-color: #eef2ff;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-family: monospace;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            margin: 15px 0;
+            border: 1px solid #cbd5e1;
+        }
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 600px) {
+            .grid-2cols {
+                grid-template-columns: 1fr;
+            }
+        }
+        .badge {
+            background-color: #3b82f6;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .link-bac {
+            background-color: #fef9c3;
+            border-left: 4px solid #eab308;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
+        .methodologie {
+            background-color: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 16px;
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-revision">
+    <div class="header">
+        <div class="chapitre">CHAPITRE 8 : SYSTÈMES OSCILLANTS – LES PENDULES</div>
+        <h1>📉 Leçon 25 : Oscillations amorties et résonance</h1>
+        <div class="objectif">🎯 Objectif : Distinguer les régimes d'oscillations (pseudo-périodique, apériodique) et mettre en évidence le phénomène de résonance.</div>
+        <div class="objectif">🔗 Lien Bac 2024 : Oscillations amorties et résonance mécanique ou électrique.</div>
+    </div>
+
+    <!-- SECTION 1 : NOTIONS CLÉS -->
+    <div class="section">
+        <div class="section-title">
+            <span>📖</span> Notions clés
+        </div>
+        <div class="card-notion">
+            <strong>🔹 Amortissement :</strong> Phénomène de diminution progressive de l’amplitude des oscillations due aux forces de frottement (fluides ou solides). L’énergie mécanique du système diminue au cours du temps.
+        </div>
+        <div class="card-notion">
+            <strong>🔹 Régime pseudo-périodique :</strong> Les oscillations existent mais leur amplitude décroît exponentiellement. La période est légèrement supérieure à la période propre \(T_0\).<br>
+            <em>Condition :</em> amortissement faible (\( \alpha < \omega_0 \) pour un RLC série ou \( \lambda < \omega_0 \) en mécanique).
+        </div>
+        <div class="card-notion">
+            <strong>🔹 Régime apériodique :</strong> Le système retourne à l’équilibre sans osciller, de manière exponentielle.<br>
+            <em>Condition :</em> amortissement fort (\( \alpha > \omega_0 \)).
+        </div>
+        <div class="card-notion">
+            <strong>🔹 Régime critique :</strong> Retour à l’équilibre le plus rapide possible sans oscillation. C’est la frontière entre les deux régimes précédents.<br>
+            <em>Condition :</em> \( \alpha = \omega_0 \).
+        </div>
+        <div class="card-notion">
+            <strong>🔹 Résonance :</strong> Phénomène d’amplification maximale de l’amplitude des oscillations lorsque la fréquence de l’excitateur \(f\) est égale à la fréquence propre \(f_0\) du système (\( \omega = \omega_0 \)).
+        </div>
+    </div>
+
+    <!-- SECTION 2 : FORMULAIRES ET ÉQUATIONS -->
+    <div class="section">
+        <div class="section-title">
+            <span>📐</span> Équations et formules importantes
+        </div>
+        <div class="grid-2cols">
+            <div class="formule">
+                📌 Équation différentielle d’un oscillateur amorti (ex: ressort) :<br>
+                \( m \frac{d^2x}{dt^2} + b \frac{dx}{dt} + kx = 0 \)
+            </div>
+            <div class="formule">
+                📌 Pseudo-période :<br>
+                \( T \approx T_0 \left[1 + \frac{1}{4}\left(\frac{b}{b_c}\right)^2 \right] \) <br>
+                (avec \(T_0 = 2\pi\sqrt{\frac{m}{k}}\))
+            </div>
+            <div class="formule">
+                📌 Décroissance de l’amplitude :<br>
+                \( A(t) = A_0 e^{-\lambda t} \) <br>
+                \( \lambda = \frac{b}{2m} \) (coefficient d’amortissement)
+            </div>
+            <div class="formule">
+                📌 Facteur de qualité \(Q\) :<br>
+                \( Q = \frac{\omega_0}{\Delta \omega} \) (bande passante à -3dB)<br>
+                Plus \(Q\) est élevé, plus la résonance est aiguë.
+            </div>
+        </div>
+        <div class="formule" style="background-color: #e0f2fe;">
+            🎯 Condition de résonance en amplitude : \( \omega_{\text{résonance}} = \omega_0 \sqrt{1 - \frac{1}{2Q^2}} \)<br>
+            Pour un faible amortissement (\(Q\) grand) : \( \omega_{\text{résonance}} \approx \omega_0 \).
+        </div>
+    </div>
+
+    <!-- SECTION 3 : COMPÉTENCES & SAVOIR-FAIRE -->
+    <div class="section">
+        <div class="section-title">
+            <span>⚙️</span> Compétences à maîtriser
+        </div>
+        <ul style="line-height: 1.6; padding-left: 20px;">
+            <li>✅ Savoir identifier le régime d’oscillations à partir de l’équation différentielle ou d’une courbe \(x(t)\).</li>
+            <li>✅ Calculer le coefficient d’amortissement et le facteur de qualité.</li>
+            <li>✅ Expliquer qualitativement et quantitativement le phénomène de résonance (amplitude max).</li>
+            <li>✅ Représenter et interpréter les courbes d’amplitude en fonction de la fréquence pour différentes valeurs de l’amortissement.</li>
+            <li>✅ Faire le lien avec les circuits RLC série (résonance d’intensité).</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 4 : EXEMPLE BAC / APPLICATION -->
+    <div class="section">
+        <div class="section-title">
+            <span>📝</span> Application type Bac (Cameroun)
+        </div>
+        <div style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 16px; padding: 16px;">
+            <div class="badge">📌 Exercice type (Bac 2024 - Résonance mécanique)</div>
+            <p>Un pendule élastique (masse \(m = 200\,\text{g}\), raideur \(k = 20\,\text{N/m}\)) est soumis à une force excitatrice \(F(t) = F_0 \cos(2\pi f t)\). On observe que l’amplitude des oscillations est maximale pour \(f = 1,6\,\text{Hz}\).</p>
+            <ol style="margin-bottom: 0;">
+                <li>Calculer la fréquence propre \(f_0\) du système.</li>
+                <li>En déduire le coefficient d’amortissement \(b\) (on supposera un faible amortissement).</li>
+                <li>Si on augmente l’amortissement, que devient la fréquence de résonance ? Justifier.</li>
+            </ol>
+            <details style="margin-top: 15px; cursor: pointer;">
+                <summary style="font-weight: 600; color: #2563eb;">🔍 Voir la correction</summary>
+                <div style="background-color: #f8fafc; padding: 12px; border-radius: 12px; margin-top: 10px;">
+                    1. \( f_0 = \frac{1}{2\pi}\sqrt{\frac{k}{m}} = \frac{1}{2\pi}\sqrt{\frac{20}{0,2}} = \frac{1}{2\pi}\sqrt{100} = \frac{10}{2\pi} \approx 1,59\,\text{Hz} \).<br>
+                    2. À la résonance, \(f_{\text{résonance}} \approx f_0\) car amortissement faible. Donc \(b\) est petit mais on a \(Q = \frac{f_0}{\Delta f}\). L’énoncé ne donne pas \(\Delta f\) ; on peut juste dire que \(b = \frac{k}{Q\omega_0}\).<br>
+                    3. Si l’amortissement augmente, la résonance s’atténue et la fréquence de résonance diminue légèrement (pour un amortissement critique, il n’y a plus de résonance).
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <!-- SECTION 5 : LIEN AVEC LE CIRCUIT RLC (ÉLECTROCINÉTIQUE) -->
+    <div class="section">
+        <div class="section-title">
+            <span>⚡</span> Analogie avec le circuit RLC série
+        </div>
+        <div class="grid-2cols">
+            <div class="card-notion">
+                <strong>🔹 Équation électrique :</strong><br>
+                \( L\frac{d^2q}{dt^2} + R\frac{dq}{dt} + \frac{1}{C}q = e(t) \)
+            </div>
+            <div class="card-notion">
+                <strong>🔹 Analogie mécanique :</strong><br>
+                \( m \leftrightarrow L \) ; \( b \leftrightarrow R \) ; \( k \leftrightarrow \frac{1}{C} \)
+            </div>
+        </div>
+        <div class="link-bac">
+            💡 <strong>À retenir pour le Bac :</strong> La résonance d’intensité dans un circuit RLC se produit quand la fréquence du générateur est égale à la fréquence propre \( f_0 = \frac{1}{2\pi\sqrt{LC}} \). L’intensité est alors maximale. Le facteur de qualité \( Q = \frac{L\omega_0}{R} \) détermine l’acuité de la résonance.
+        </div>
+    </div>
+
+    <!-- SECTION 6 : MÉTHODOLOGIE POUR L’ÉPREUVE -->
+    <div class="section">
+        <div class="section-title">
+            <span>🎓</span> Méthodologie Bac
+        </div>
+        <div class="methodologie">
+            <strong>✅ Pour un exercice sur les oscillations amorties :</strong><br>
+            ➜ 1. Identifier le système (mécanique ou électrique).<br>
+            ➜ 2. Établir l’équation différentielle à partir du PFD ou des lois des mailles.<br>
+            ➜ 3. Mettre sous forme canonique : \( \ddot{x} + 2\alpha \dot{x} + \omega_0^2 x = 0 \).<br>
+            ➜ 4. Comparer \(\alpha\) et \(\omega_0\) pour déterminer le régime.<br>
+            ➜ 5. Pour la résonance, chercher \(\omega\) qui maximise l’amplitude (dérivée nulle de l’amplitude en régime forcé).<br>
+            ➜ 6. Conclure en reliant à la courbe de résonance (largeur à mi-hauteur = \(\Delta \omega = \omega_0/Q\)).
+        </div>
+    </div>
+
+    <!-- SECTION 7 : SYNTHÈSE VISUELLE (RÉGIMES) -->
+    <div class="section">
+        <div class="section-title">
+            <span>📊</span> Récapitulatif graphique des régimes
+        </div>
+        <div style="background-color: #f1f5f9; border-radius: 16px; padding: 16px; text-align: center;">
+            <p><strong>Allure de \(x(t)\) pour les différents régimes :</strong></p>
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px;">
+                <div><strong>📈 Pseudo-périodique</strong><br>Oscillations décroissantes</div>
+                <div><strong>📉 Apériodique</strong><br>Retour sans oscillation</div>
+                <div><strong>⚖️ Critique</strong><br>Retour le plus rapide</div>
+            </div>
+            <p style="margin-top: 15px; font-size: 14px;">➡️ En régime forcé, la courbe d’amplitude \(A(f)\) présente un pic à la résonance pour \(Q > \frac{1}{\sqrt{2}}\).</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        📍 Fiche conforme au programme officiel du Cameroun - Terminale C & D (2025-2026) <br>
+        ✨ Révision réalisée par Enseignant de Physique | Liens Bac 2023-2025 intégrés
+    </footer>
+</div>
+</body>
+</html>

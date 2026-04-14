@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 5 : Charge électrique et électrisation</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            padding: 40px 20px;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header style */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 30px 35px;
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: #3b82f6;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            color: #cbd5e1;
+            border-left: 4px solid #3b82f6;
+            padding-left: 16px;
+            margin-top: 12px;
+        }
+
+        /* Main card */
+        .card {
+            background: white;
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        /* Sections */
+        .section {
+            padding: 28px 35px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+
+        .section-title .icon {
+            font-size: 1.7rem;
+        }
+
+        .section-title .line {
+            flex: 1;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #e2e8f0);
+            border-radius: 3px;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .concept-card, .formula-card, .method-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 18px 22px;
+            border-left: 5px solid #3b82f6;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .concept-card:hover, .formula-card:hover, .method-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .concept-card h3, .formula-card h3, .method-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .concept-card p, .method-card p {
+            color: #334155;
+            font-size: 0.95rem;
+        }
+
+        .formula-card .formula {
+            background: #eef2ff;
+            padding: 12px;
+            border-radius: 14px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            text-align: center;
+            margin: 12px 0;
+            color: #1e40af;
+        }
+
+        .highlight {
+            background: #fef9c3;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #854d0e;
+        }
+
+        .bac-link {
+            background: #eef2ff;
+            border-radius: 20px;
+            padding: 16px 22px;
+            border-left: 5px solid #f59e0b;
+            margin-top: 20px;
+        }
+
+        .bac-link strong {
+            color: #d97706;
+        }
+
+        .list-styled {
+            padding-left: 20px;
+            margin-top: 10px;
+            color: #334155;
+        }
+
+        .list-styled li {
+            margin-bottom: 6px;
+        }
+
+        .footer-note {
+            background: #f1f5f9;
+            padding: 18px 35px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 700px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+            }
+            .section {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <div class="header">
+        <div class="badge">🇨🇲 Terminale C & D - Module 1 | Interaction électrique</div>
+        <h1>⚡ Leçon 5 : Charge électrique <br> & phénomène d'électrisation</h1>
+        <div class="subtitle">Propriétés fondamentales de la charge électrique | Modes d'électrisation | Conservation et quantification</div>
+    </div>
+    <div class="card">
+        <!-- OBJECTIFS -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🎯</span>
+                <span>Objectifs pédagogiques</span>
+                <div class="line"></div>
+            </div>
+            <div class="grid-2col">
+                <div class="method-card">
+                    <h3>📌 Savoirs visés</h3>
+                    <ul class="list-styled">
+                        <li>• Décrire les différents modes d'électrisation : <span class="highlight">frottement, contact, influence</span>.</li>
+                        <li>• Caractériser la charge électrique comme propriété fondamentale de la matière.</li>
+                        <li>• Comprendre la quantification et la conservation de la charge électrique.</li>
+                    </ul>
+                </div>
+                <div class="method-card">
+                    <h3>🎓 Compétences attendues</h3>
+                    <ul class="list-styled">
+                        <li>• Déterminer la charge électrique d’un corps après électrisation.</li>
+                        <li>• Expliquer un phénomène d’électrisation par influence.</li>
+                        <li>• Appliquer la relation \( q = n \cdot e \) pour calculer un nombre d’électrons transférés.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bac-link">
+                <strong>📎 Lien Baccalauréat 2024-2025 :</strong> Notions de base sur la charge électrique, électrisation par contact et influence, quantification de la charge (exercices à choix multiples et questions de cours).
+            </div>
+        </div>
+
+        <!-- NOTIONS CLÉS -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🧲</span>
+                <span>Notions fondamentales</span>
+                <div class="line"></div>
+            </div>
+            <div class="grid-2col">
+                <div class="concept-card">
+                    <h3>🔋 Charge électrique élémentaire</h3>
+                    <p>La charge électrique est une propriété intrinsèque de la matière. Elle existe sous deux types : <strong>positive (+) et négative (–)</strong>.</p>
+                    <p>La charge la plus petite connue est la <strong>charge élémentaire</strong> :</p>
+                    <div class="formula">\( e = 1,6 \times 10^{-19} \, \text{C} \) (Coulomb)</div>
+                    <p>Le proton porte \( +e \) et l'électron porte \( -e \).</p>
+                </div>
+                <div class="concept-card">
+                    <h3>📐 Quantification de la charge</h3>
+                    <p>Toute charge électrique \( q \) est un multiple entier de la charge élémentaire :</p>
+                    <div class="formula">\( q = n \times e \)</div>
+                    <p>où \( n \) est un entier relatif (positif pour un défaut d’électrons, négatif pour un excès).</p>
+                    <p><span class="highlight">Exemple :</span> Un corps qui a perdu \( 2 \times 10^{12} \) électrons possède une charge \( q = + 2 \times 10^{12} \times e \).</p>
+                </div>
+            </div>
+            <div class="concept-card" style="margin-top: 8px;">
+                <h3>♻️ Loi de conservation de la charge électrique</h3>
+                <p>Dans un système isolé (qui n'échange pas de charges avec l'extérieur), la <strong>charge électrique totale reste constante</strong>. Lors d'une électrisation, il y a simplement <strong>transfert d'électrons</strong> d'un corps vers un autre. La somme algébrique des charges avant = somme après.</p>
+                <p style="margin-top: 8px;"><em>Exemple :</em> Verre frotté avec soie → le verre perd des électrons (devient +), la soie gagne des électrons (devient –). La charge totale reste nulle.</p>
+            </div>
+        </div>
+
+        <!-- MODES D'ÉLECTRISATION -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">⚡</span>
+                <span>Modes d'électrisation</span>
+                <div class="line"></div>
+            </div>
+            <div class="grid-2col">
+                <div class="method-card">
+                    <h3>✋ 1. Électrisation par frottement</h3>
+                    <p>Deux matériaux différents frottés l'un contre l'autre échangent des électrons. Le matériau qui a la plus grande affinité électronique <strong>arrache des électrons</strong> à l'autre.</p>
+                    <p><strong>Série triboélectrique :</strong> verre (perd e⁻ → +) , laine, soie, ebonite (gagne e⁻ → –).</p>
+                </div>
+                <div class="method-card">
+                    <h3>🤝 2. Électrisation par contact</h3>
+                    <p>Un corps neutre mis en contact avec un corps chargé acquiert une charge de <strong>même signe</strong> que celle du corps chargé (transfert d'électrons par contact direct).</p>
+                    <p><span class="highlight">Exemple :</span> Une tige métallique neutre touchant une sphère chargée positivement devient positive.</p>
+                </div>
+                <div class="method-card">
+                    <h3>🔄 3. Électrisation par influence</h3>
+                    <p>Phénomène sans contact : un conducteur neutre est placé près d'un corps chargé. Les charges se <strong>redistribuent</strong> (charges opposées du côté proche, charges de même signe du côté éloigné). En mettant le conducteur à la terre, on peut le charger définitivement.</p>
+                    <p><strong>Application :</strong> électroscope, générateur de Van de Graaff.</p>
+                </div>
+            </div>
+            <!-- Infographie simple influence -->
+            <div style="background:#f1f5f9; border-radius: 16px; padding: 15px; margin-top: 15px; text-align: center;">
+                <p style="font-weight:600;">📌 Schéma mental – Influence électrostatique :</p>
+                <p style="font-family: monospace;">Bâton (+)   →   [ conducteur neutre ]  → séparation de charges<br>
+                [ + + + ]  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   (− − −)   (+)   &nbsp;&nbsp;&nbsp; charges induites</p>
+            </div>
+        </div>
+
+        <!-- FORMULAIRE + EXEMPLES -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📐</span>
+                <span>Applications & calculs typiques</span>
+                <div class="line"></div>
+            </div>
+            <div class="grid-2col">
+                <div class="formula-card">
+                    <h3>🧮 Quantité de charge et nombre d'électrons</h3>
+                    <div class="formula">\( |q| = n \times e \)</div>
+                    <p><strong>Méthode :</strong> Pour trouver le nombre d’électrons en excès ou en défaut :</p>
+                    <div class="formula">\( n = \dfrac{|q|}{e} \)</div>
+                    <p><strong>Exemple :</strong> Une charge \( q = -3,2 \times 10^{-7} \, C \) correspond à un excès d’électrons :</p>
+                    <p>\( n = \frac{3,2 \times 10^{-7}}{1,6 \times 10^{-19}} = 2,0 \times 10^{12} \) électrons.</p>
+                </div>
+                <div class="formula-card">
+                    <h3>📝 Conservation de la charge</h3>
+                    <p>Deux sphères identiques A (charge \( Q_A \)) et B (charge \( Q_B \)) sont mises en contact. Après séparation, chacune a la charge :</p>
+                    <div class="formula">\( Q' = \dfrac{Q_A + Q_B}{2} \)</div>
+                    <p><span class="highlight">Piège fréquent au bac :</span> Ne pas oublier le signe des charges lors de l'addition !</p>
+                </div>
+            </div>
+            <div class="bac-link" style="margin-top: 12px;">
+                <strong>🔍 Exemple typique d'examen (2023) :</strong><br>
+                Un morceau de plastique électrisé par frottement porte une charge \( Q = - 2,4 \times 10^{-8} \, C \). <br>
+                a) Ce corps a-t-il gagné ou perdu des électrons ? <strong style="color:#1e40af;">→ Réponse : gagné (charge négative).</strong><br>
+                b) Calculer le nombre d'électrons transférés. <strong style="color:#1e40af;">→ \( n = 1,5 \times 10^{11} \) électrons.</strong>
+            </div>
+        </div>
+
+        <!-- SYNTHÈSE BAC -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📖</span>
+                <span>À retenir pour l'épreuve</span>
+                <div class="line"></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                <div style="flex:1; min-width: 200px; background: #fef2e8; border-radius: 16px; padding: 15px;">
+                    <p style="font-weight:700;">✅ Définitions précises</p>
+                    <p>• Charge électrique : grandeur scalaire algébrique.<br>• Électrisation : acquisition de charges par un corps initialement neutre.</p>
+                </div>
+                <div style="flex:1; min-width: 200px; background: #e8f0fe; border-radius: 16px; padding: 15px;">
+                    <p style="font-weight:700;">⚠️ Erreurs fréquentes</p>
+                    <p>• Confondre <em>influence</em> et <em>contact</em>.<br>• Oublier que le transfert concerne uniquement les électrons (les protons restent fixes).</p>
+                </div>
+                <div style="flex:1; min-width: 200px; background: #e6f7ec; border-radius: 16px; padding: 15px;">
+                    <p style="font-weight:700;">🧪 Expérience clé</p>
+                    <p>Électroscope à feuilles d'or : divergence des feuilles sous l'effet de charges de même signe (test de présence de charge).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer-note">
+            🇨🇲 Fiche conforme au programme officiel du Cameroun – Terminale C & D (2025-2026) | Révision personnelle & préparations Baccalauréat
+        </div>
+    </div>
+</div>
+</body>
+</html>

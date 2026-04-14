@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 23 : Pendule conique et véhicule dans un virage</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        .fiche-revision {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2b4c7c 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .sous-titre {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .objectif-bac {
+            background-color: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 0.75rem 1rem;
+            margin: 1rem 2rem 0 2rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #92400e;
+        }
+
+        /* Corps */
+        .content {
+            padding: 2rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1.5rem;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #1e3c72;
+            border-left: 4px solid #fbbf24;
+            padding-left: 0.75rem;
+        }
+
+        .section-title i {
+            font-size: 1.2rem;
+        }
+
+        .card {
+            background-color: #f1f5f9;
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .formule {
+            background-color: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .formule p {
+            font-family: 'Courier New', monospace;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .note-importante {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .note-importante strong {
+            color: #b91c1c;
+        }
+
+        .methodologie {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 0.75rem;
+            padding: 1rem;
+        }
+
+        ul, ol {
+            padding-left: 1.5rem;
+            margin: 0.75rem 0;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        .footer {
+            background-color: #f1f5f9;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 640px) {
+            .content {
+                padding: 1.25rem;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-revision">
+        <!-- En-tête -->
+        <div class="header">
+            <div class="badge">Terminale C & D | Physique</div>
+            <h1>Leçon 23 : Pendule conique et véhicule dans un virage</h1>
+            <div class="sous-titre">Application des lois de Newton aux mouvements circulaires non verticaux</div>
+        </div>
+        <div class="objectif-bac">
+            🎯 Liens Bac : Sujet Bac 2023 (virage et dérapage) | Mouvement circulaire uniforme | Principe fondamental de la dynamique
+        </div>
+
+        <div class="content">
+            <!-- 1. OBJECTIFS -->
+            <div class="section">
+                <div class="section-title">
+                    📌 Objectifs de la leçon
+                </div>
+                <ul>
+                    <li>Appliquer les lois de Newton à l’étude du <strong>pendule conique</strong>.</li>
+                    <li>Établir la relation entre la vitesse angulaire, l’angle d’inclinaison et la longueur du fil.</li>
+                    <li>Étudier le mouvement d’un <strong>véhicule dans un virage relevé</strong> (sans frottement puis avec frottement).</li>
+                    <li>Déterminer la <strong>vitesse limite de sécurité</strong> pour éviter le dérapage.</li>
+                </ul>
+            </div>
+
+            <!-- 2. NOTIONS CLÉS & DÉFINITIONS -->
+            <div class="section">
+                <div class="section-title">
+                    🧠 Notions clés
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <strong>⚫ Pendule conique</strong>
+                        <p>Masse ponctuelle attachée à un fil de longueur $L$, décrivant un <strong>cercle horizontal</strong> à vitesse angulaire constante $\omega$. Le fil balaie un cône.</p>
+                    </div>
+                    <div class="card">
+                        <strong>⚫ Virage relevé</strong>
+                        <p>Virage dont la piste est inclinée d’un angle $\alpha$ par rapport à l’horizontale pour aider les véhicules à négocier la courbe sans déraper.</p>
+                    </div>
+                    <div class="card">
+                        <strong>⚫ Force centripète</strong>
+                        <p>Résultante des forces dirigée vers le centre de la trajectoire circulaire : $\sum \vec{F} = m \, \vec{a}_n$ avec $a_n = \dfrac{v^2}{r}$.</p>
+                    </div>
+                    <div class="card">
+                        <strong>⚫ Dérapage</strong>
+                        <p>Perte d’adhérence due à une vitesse excessive. La force de frottement latérale maximale est $f_{max} = \mu_s \, N$ ($\mu_s$ : coefficient d’adhérence).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. FORMULAIRES -->
+            <div class="section">
+                <div class="section-title">
+                    📐 Formules essentielles
+                </div>
+
+                <div class="formule">
+                    <p><strong>🔵 Pendule conique :</strong></p>
+                    <p>Période : $T = 2\pi \sqrt{\dfrac{L \cos\theta}{g}}$</p>
+                    <p>Vitesse angulaire : $\omega = \sqrt{\dfrac{g}{L \cos\theta}}$</p>
+                    <p>Relation fondamentale : $\tan\theta = \dfrac{v^2}{r \, g} = \dfrac{r \, \omega^2}{g}$</p>
+                    <p>Rayon de la trajectoire : $r = L \sin\theta$</p>
+                </div>
+
+                <div class="formule">
+                    <p><strong>🟢 Véhicule dans un virage relevé (sans frottement) :</strong></p>
+                    <p>Vitesse idéale : $v_0 = \sqrt{r \, g \tan\alpha}$</p>
+                    <p>Angle de relevé : $\tan\alpha = \dfrac{v_0^2}{r \, g}$</p>
+                </div>
+
+                <div class="formule">
+                    <p><strong>🟠 Véhicule dans un virage relevé (avec frottement) :</strong></p>
+                    <p>Vitesse maximale sans dérapage vers l’extérieur :</p>
+                    <p>$v_{max} = \sqrt{r\,g\;\dfrac{\tan\alpha + \mu_s}{1 - \mu_s\tan\alpha}}$</p>
+                    <p>Vitesse minimale sans dérapage vers l’intérieur :</p>
+                    <p>$v_{min} = \sqrt{r\,g\;\dfrac{\tan\alpha - \mu_s}{1 + \mu_s\tan\alpha}}$</p>
+                    <p>(avec $\mu_s$ coefficient d’adhérence statique)</p>
+                </div>
+
+                <div class="formule">
+                    <p><strong>🔴 Virage non relevé (plat) :</strong></p>
+                    <p>Vitesse limite de dérapage : $v_{lim} = \sqrt{\mu_s \, r \, g}$</p>
+                </div>
+            </div>
+
+            <!-- 4. MÉTHODOLOGIE (schéma, étapes) -->
+            <div class="section">
+                <div class="section-title">
+                    ⚙️ Méthodologie pour résoudre un problème
+                </div>
+                <div class="methodologie">
+                    <p><strong>1. Pendule conique :</strong></p>
+                    <ol>
+                        <li>Faire le bilan des forces : tension $\vec{T}$ et poids $\vec{P}$.</li>
+                        <li>Décomposer les forces selon les axes : vertical (Oz) et radial (centripète).</li>
+                        <li>Appliquer le PFD : $\sum \vec{F} = m\vec{a}$. L’accélération est centripète : $a = \dfrac{v^2}{r} = r\omega^2$.</li>
+                        <li>Projeter : sur l’axe vertical : $T\cos\theta = mg$ ; sur l’axe radial : $T\sin\theta = m\,r\omega^2$.</li>
+                        <li>En déduire $\tan\theta = \dfrac{r\omega^2}{g}$ puis exprimer $\omega$ ou $T$.</li>
+                    </ol>
+                    <p><strong>2. Véhicule dans un virage :</strong></p>
+                    <ol>
+                        <li>Schématiser le véhicule dans le virage (vue de face ou de dessus).</li>
+                        <li>Définir le repère : axe horizontal centripète ($x$), axe vertical ($y$).</li>
+                        <li>Forces en présence : poids $\vec{P}$, réaction normale $\vec{R}_N$, frottement $\vec{f}$ (si pertinent).</li>
+                        <li>Écrire le PFD : $\sum \vec{F}_x = m\,a_x = m\dfrac{v^2}{r}$ et $\sum \vec{F}_y = 0$ (pas d’accélération verticale).</li>
+                        <li>Exprimer la condition de non-dérapage : $f \le \mu_s R_N$.</li>
+                        <li>Résoudre pour trouver la vitesse maximale ou l’angle de relevé optimal.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- 5. EXEMPLES TYPES (inspirés du Bac) -->
+            <div class="section">
+                <div class="section-title">
+                    🧪 Exercice type – Bac Cameroun
+                </div>
+                <div class="card">
+                    <p><strong>Énoncé (extrait Bac 2023) :</strong><br>
+                    Un véhicule de masse $m = 1200\ \text{kg}$ aborde un virage circulaire de rayon $r = 80\ \text{m}$. La route est relevée d’un angle $\alpha = 15^\circ$. Le coefficient d’adhérence des pneus sur le revêtement est $\mu_s = 0,6$.</p>
+                    <ol>
+                        <li>Calculer la vitesse idéale $v_0$ pour laquelle aucun frottement latéral n’est nécessaire.</li>
+                        <li>Déterminer la vitesse maximale $v_{max}$ que le véhicule peut atteindre sans déraper vers l’extérieur.</li>
+                        <li>Le conducteur roule à $90\ \text{km/h}$. Y a-t-il risque de dérapage ? Justifier.</li>
+                    </ol>
+                    <details style="margin-top: 0.75rem; cursor: pointer;">
+                        <summary style="font-weight: 600; color: #1e3c72;">📌 Voir la correction détaillée</summary>
+                        <div style="margin-top: 0.75rem; background: #ffffff; padding: 0.75rem; border-radius: 0.5rem;">
+                            <p><strong>1. Vitesse idéale :</strong><br>
+                            $v_0 = \sqrt{r\,g\tan\alpha} = \sqrt{80 \times 9,8 \times \tan(15^\circ)}$.<br>
+                            $\tan(15^\circ) \approx 0,268$ ⇒ $v_0 = \sqrt{80 \times 9,8 \times 0,268} = \sqrt{210,1} \approx 14,5\ \text{m/s} \approx 52,2\ \text{km/h}$.
+                            </p>
+                            <p><strong>2. Vitesse maximale avec frottement :</strong><br>
+                            $v_{max} = \sqrt{r\,g\;\dfrac{\tan\alpha + \mu_s}{1 - \mu_s\tan\alpha}} = \sqrt{80 \times 9,8 \times \dfrac{0,268 + 0,6}{1 - 0,6\times0,268}} = \sqrt{784 \times \dfrac{0,868}{0,839}} $<br>
+                            $= \sqrt{784 \times 1,0346} = \sqrt{811,1} \approx 28,5\ \text{m/s} \approx 102,6\ \text{km/h}$.
+                            </p>
+                            <p><strong>3. Comparaison :</strong> $90\ \text{km/h} = 25\ \text{m/s}$. $v < v_{max}$ (25 < 28,5) et $v > v_0$ (25 > 14,5). Il n’y a pas de dérapage car la vitesse est inférieure à la limite, mais des frottements latéraux sont nécessaires (le véhicule tend à glisser vers l’extérieur).</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- 6. CONSEILS POUR LE BAC -->
+            <div class="section">
+                <div class="section-title">
+                    💡 Astuces pour l’épreuve
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <strong>📐 Bien orienter le repère</strong>
+                        <p>Dans un virage relevé, projetez toujours les forces sur l’axe horizontal <strong>dirigé vers le centre du virage</strong> (centripète) et sur l’axe vertical. Ne mélangez pas les axes avec la pente.</p>
+                    </div>
+                    <div class="card">
+                        <strong>🧮 Distinguer les cas</strong>
+                        <p>Si l’énoncé ne mentionne pas le frottement, utilisez la formule $v_0 = \sqrt{rg\tan\alpha}$. Si le frottement est donné, vérifiez s’il s’agit d’une adhérence statique ($\mu_s$) ou dynamique ($\mu_d$).</p>
+                    </div>
+                    <div class="card">
+                        <strong>🔄 Pendule conique = mouvement circulaire uniforme</strong>
+                        <p>La vitesse angulaire $\omega$ est constante mais la vitesse linéaire $v$ dépend du rayon $r = L\sin\theta$. N’oubliez pas que la période $T$ est indépendante de la masse.</p>
+                    </div>
+                    <div class="card">
+                        <strong>⚠️ Unités</strong>
+                        <p>Exprimez toujours la vitesse en m/s avant de l’utiliser dans les formules. Pensez à convertir les km/h en divisant par 3,6.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. LIENS AVEC D'AUTRES LEÇONS -->
+            <div class="section">
+                <div class="section-title">
+                    🔗 Liens avec le programme
+                </div>
+                <ul>
+                    <li>Leçon 14 : Énoncé des lois de Newton (PFD, principe d’inertie).</li>
+                    <li>Leçon 19 : Mouvement d’une particule chargée dans un champ magnétique (analogie : force centripète).</li>
+                    <li>Leçon 24 : Mouvement d’un satellite (force gravitationnelle joue le rôle de force centripète).</li>
+                    <li>Leçon 22 : Pendule simple (différence : mouvement dans un plan vertical vs horizontal).</li>
+                </ul>
+            </div>
+
+            <!-- 8. SYNTHÈSE RAPIDE (carte mentale textuelle) -->
+            <div class="section">
+                <div class="section-title">
+                    🗺️ Synthèse visuelle
+                </div>
+                <div class="card" style="background-color: #fef9e3;">
+                    <p style="font-weight: 700; text-align: center;">Pendule conique ↔ Virage relevé</p>
+                    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+                        <div style="flex:1; min-width: 120px; text-align: center;">⚖️ Forces :<br>Poids + Tension</div>
+                        <div style="font-size:1.5rem;">→</div>
+                        <div style="flex:1; min-width: 120px; text-align: center;">📐 tanθ = v²/(rg)</div>
+                        <div style="font-size:1.5rem;">→</div>
+                        <div style="flex:1; min-width: 120px; text-align: center;">🔄 Mouvement circulaire uniforme</div>
+                    </div>
+                    <hr style="margin: 0.75rem 0;">
+                    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="flex:1; min-width: 120px; text-align: center;">🚗 Forces :<br>Poids + Réaction + Frottement</div>
+                        <div style="font-size:1.5rem;">→</div>
+                        <div style="flex:1; min-width: 120px; text-align: center;">📐 tanα = v₀²/(rg)</div>
+                        <div style="font-size:1.5rem;">→</div>
+                        <div style="flex:1; min-width: 120px; text-align: center;">⚠️ Vitesse limite de dérapage</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. RAPPEL BAC : ce qu'il faut savoir faire -->
+            <div class="section">
+                <div class="section-title">
+                    ✅ Compétences exigibles (Bac)
+                </div>
+                <ul>
+                    <li>Savoir <strong>établir l’équation</strong> du mouvement d’un pendule conique et calculer sa période.</li>
+                    <li>Savoir <strong>déterminer la vitesse idéale</strong> dans un virage relevé sans frottement.</li>
+                    <li>Savoir <strong>calculer la vitesse maximale</strong> avant dérapage en tenant compte du coefficient d’adhérence.</li>
+                    <li>Interpréter un <strong>virage relevé</strong> comme application du principe d’inertie et du PFD.</li>
+                    <li>Réaliser un <strong>schéma normalisé</strong> des forces (support, direction, sens).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Fiche de révision – Programme officiel Terminale C & D (Cameroun) | Bac 2023-2025 | Physique – Leçon 23
+        </div>
+    </div>
+</body>
+</html>

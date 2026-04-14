@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Concentration molaire et ions dans les eaux (3e)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background-color: #e0f2fe;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #0369a1;
+            margin-left: 0.5rem;
+        }
+
+        .ion-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+
+        .ion-item {
+            background-color: #f1f5f9;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            font-family: monospace;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #0c4a6e;
+        }
+
+        .image-placeholder {
+            background: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+            border: 1px dashed #94a3b8;
+            font-style: italic;
+            color: #475569;
+        }
+
+        .image-placeholder img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+    </style>
+    <!-- MathJax pour les formules chimiques et mathématiques -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">📊 Concentration molaire et ions dans les eaux</h1>
+        <p class="lesson-subtitle">PCT · 3ème · Module 1 – Chapitre 6 : Analyse d'une solution aqueuse (Leçon 6.3)</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- SECTION ÉLÉMENTS CLÉS -->
+        <section class="concept-section">
+            <h2 class="section-title">🔑 Éléments clés à retenir</h2>
+
+            <div class="card concept-card">
+                <h3 class="card-title">🧪 Concentration molaire d’un ion $[X]$</h3>
+                <p class="card-description">
+                    La concentration molaire (ou concentration en quantité de matière) d’un ion dissous dans une solution aqueuse correspond au nombre de moles de cet ion par litre de solution.
+                    Elle est notée entre crochets : $[X]$.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Formule fondamentale :</strong> 
+                        <span class="formule">$[X] = \dfrac{n}{V}$</span> 
+                        avec $n$ : quantité de matière de l'ion (en mol) et $V$ : volume de la solution (en L).
+                    </li>
+                    <li>Unité : <strong>mol·L⁻¹</strong> (ou mol/L).</li>
+                    <li>Si on connaît la concentration massique $C_m$ (en g/L) et la masse molaire $M$ de l’ion, on a : 
+                        <span class="formule">$[X] = \dfrac{C_m}{M}$</span>.
+                    </li>
+                    <li>Dans une solution, la somme des charges positives = somme des charges négatives (électroneutralité).</li>
+                </ul>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">💧 Interprétation des étiquettes d’eaux minérales</h3>
+                <p class="card-description">
+                    Les eaux minérales et de source affichent leur composition en ions majeurs. Ces données sont souvent données en <strong>concentration massique</strong> (mg/L) ou parfois en concentration molaire (mmol/L).
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Calcium (Ca²⁺) :</strong> important pour les os. Présent dans l’eau minérale sous forme d’ion calcium.</li>
+                    <li><strong>Magnésium (Mg²⁺) :</strong> participe au métabolisme.</li>
+                    <li><strong>Chlorure (Cl⁻), sulfates (SO₄²⁻), bicarbonates (HCO₃⁻) :</strong> déterminent le goût et la minéralisation.</li>
+                    <li>Pour passer de la concentration massique (mg/L) à la concentration molaire (mol/L) : 
+                        <span class="formule">$[X] = \dfrac{\text{masse par litre (g/L)}}{M \text{ (g/mol)}}$</span>.
+                    </li>
+                </ul>
+                <div class="image-placeholder">
+                    <img src="data:image/jpeg;base64,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" alt="Schéma d'une étiquette d'eau minérale avec valeurs en mg/L d'ions: calcium, magnésium, sodium, chlorures, sulfates, bicarbonates.">
+                    <div><em>📄 Exemple d'étiquette d'eau minérale : les concentrations massiques sont indiquées.</em></div>
+                </div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">⚖️ Loi d’électroneutralité et lien avec les concentrations</h3>
+                <p class="card-description">
+                    Dans une solution aqueuse, la charge totale des cations (ions positifs) est égale en valeur absolue à la charge totale des anions (ions négatifs). 
+                    Cela permet de vérifier la cohérence des concentrations.
+                </p>
+                <ul class="concept-list">
+                    <li>Exemple : pour une solution de chlorure de sodium : $[Na^+] = [Cl^-]$.</li>
+                    <li>Pour une solution de chlorure de calcium : $[Ca^{2+}] = \dfrac{1}{2}[Cl^-]$ car chaque ion Ca²⁺ apporte 2 charges +.</li>
+                    <li>On écrit : $\sum (z_i \times [X_i^{z_i}])_{\text{cations}} = \sum (|z_j| \times [Y_j^{z_j}])_{\text{anions}}$.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION EXEMPLES DE COMPRÉHENSION -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Exemples de compréhension</h2>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 1 : Calcul de concentration molaire à partir de la masse dissoute</h3>
+                <p class="exemple-context">
+                    On dissout $0,585\ \text{g}$ de chlorure de sodium (NaCl) dans de l'eau pour obtenir $250\ \text{mL}$ de solution.
+                    Quelle est la concentration molaire des ions $Na^+$ et $Cl^-$ ?
+                    Données : $M(Na) = 23,0\ \text{g/mol}$ ; $M(Cl) = 35,5\ \text{g/mol}$.
+                </p>
+                <div class="exemple-correction">
+                    <strong>🔍 Résolution :</strong><br>
+                    1. Masse molaire de NaCl : $M_{NaCl} = 23,0 + 35,5 = 58,5\ \text{g/mol}$.<br>
+                    2. Quantité de matière de NaCl : $n_{NaCl} = \dfrac{m}{M} = \dfrac{0,585}{58,5} = 0,0100\ \text{mol}$.<br>
+                    3. Volume en litres : $V = 250\ \text{mL} = 0,250\ \text{L}$.<br>
+                    4. Concentration molaire de NaCl : $C = \dfrac{n}{V} = \dfrac{0,0100}{0,250} = 0,0400\ \text{mol/L}$.<br>
+                    5. Dans l’eau, NaCl se dissocie totalement : $NaCl_{(s)} \rightarrow Na^+_{(aq)} + Cl^-_{(aq)}$.<br>
+                    Donc $[Na^+] = 0,0400\ \text{mol/L}$ et $[Cl^-] = 0,0400\ \text{mol/L}$.
+                </div>
+                <div class="exemple-astuce">
+                    💡 Astuce : Quand un soluté ionique se dissout, le nombre de moles d’ions est un multiple de la quantité de soluté selon la formule.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 2 : Lecture d’étiquette d’eau minérale</h3>
+                <p class="exemple-context">
+                    Une eau minérale affiche les concentrations massiques suivantes : $[Ca^{2+}] = 120\ \text{mg/L}$, $[Mg^{2+}] = 40\ \text{mg/L}$, $[HCO_3^-] = 350\ \text{mg/L}$.
+                    Calculer la concentration molaire des ions $Ca^{2+}$ et $Mg^{2+}$. 
+                    $M(Ca) = 40,1\ \text{g/mol}$, $M(Mg) = 24,3\ \text{g/mol}$.
+                </p>
+                <div class="exemple-correction">
+                    <strong>📐 Calculs :</strong><br>
+                    • Pour $Ca^{2+}$ : $C_m = 120\ \text{mg/L} = 0,120\ \text{g/L}$.<br>
+                    $[Ca^{2+}] = \dfrac{0,120}{40,1} \approx 2,99 \times 10^{-3}\ \text{mol/L} = 2,99\ \text{mmol/L}$.<br><br>
+                    • Pour $Mg^{2+}$ : $C_m = 40\ \text{mg/L} = 0,040\ \text{g/L}$.<br>
+                    $[Mg^{2+}] = \dfrac{0,040}{24,3} \approx 1,65 \times 10^{-3}\ \text{mol/L} = 1,65\ \text{mmol/L}$.
+                </div>
+                <div class="exemple-astuce">
+                    💡 Conversion utile : $1\ \text{mg/L} = 10^{-3}\ \text{g/L}$.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 3 : Utilisation de la concentration molaire pour déterminer une masse</h3>
+                <p class="exemple-context">
+                    Une solution aqueuse de sulfate de potassium ($K_2SO_4$) a une concentration $[K^+] = 0,20\ \text{mol/L}$.
+                    Quelle est la masse de $K_2SO_4$ dissoute dans $500\ \text{mL}$ de cette solution ?
+                    $M(K_2SO_4) = 174\ \text{g/mol}$.
+                </p>
+                <div class="exemple-correction">
+                    <strong>🧪 Démarche :</strong><br>
+                    • Équation de dissolution : $K_2SO_4(s) \rightarrow 2K^+(aq) + SO_4^{2-}(aq)$.<br>
+                    • $[K^+] = 2 \times [K_2SO_4]$, donc $[K_2SO_4] = \dfrac{0,20}{2} = 0,10\ \text{mol/L}$.<br>
+                    • Volume $V = 0,500\ \text{L}$ → $n(K_2SO_4) = C \times V = 0,10 \times 0,500 = 0,050\ \text{mol}$.<br>
+                    • Masse $m = n \times M = 0,050 \times 174 = 8,7\ \text{g}$.<br>
+                    → Il faut $8,7\ \text{g}$ de $K_2SO_4$ pour préparer cette solution.
+                </div>
+                <div class="exemple-astuce">
+                    🔁 Penser aux coefficients stœchiométriques de la dissolution : ils relient la concentration du soluté à celle des ions.
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION APPLICATIONS SUR LES EAUX MINÉRALES -->
+        <section class="concept-section">
+            <h2 class="section-title">🏞️ Eaux minérales et ions : interprétation concrète</h2>
+            <div class="card">
+                <h3 class="card-title">Composition typique d’une eau riche en calcium</h3>
+                <p>Les eaux minérales camerounaises (ex : certaines sources) indiquent souvent les teneurs en ions. Un tableau récapitulatif permet de comparer la minéralisation.</p>
+                <div class="image-placeholder">
+                    <img src="" alt="Tableau comparatif des concentrations molaires et massiques des ions majeurs (Ca2+, Mg2+, Na+, Cl-, SO42-, HCO3-) dans deux eaux minérales différentes.">
+                    <div>📊 Exemple : comparaison de concentrations ioniques (mg/L et mmol/L).</div>
+                </div>
+                <p><strong>Intérêt médical :</strong> Les médecins conseillent certaines eaux selon leurs apports en calcium ou magnésium. La concentration molaire permet de quantifier précisément l’apport journalier.</p>
+            </div>
+        </section>
+
+        <!-- SECTION PIÈGES COURANTS -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Confondre concentration massique et concentration molaire :</span> La première s’exprime en g/L, la seconde en mol/L. Toujours vérifier l’unité avant calcul.</li>
+                    <li><span class="bold">Oublier le volume en litres :</span> Quand on utilise $[X] = n/V$, le volume doit être en litres (1 mL = 0,001 L). Une erreur fréquente est d’utiliser des mL sans convertir.</li>
+                    <li><span class="bold">Négliger les coefficients de dissociation :</span> Pour un composé comme $CaCl_2$, $[Cl^-] = 2 \times [Ca^{2+}]$ et non égal.</li>
+                    <li><span class="bold">Interpréter une étiquette :</span> Les valeurs en mg/L correspondent aux masses d’ions par litre, pas aux masses des sels. Pour la concentration molaire, diviser toujours par la masse molaire de l’ion seul.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SECTION FORMULAIRE RAPIDE -->
+        <section class="concept-section">
+            <h2 class="section-title">📐 Formulaire à mémoriser</h2>
+            <div class="card" style="background: #f8fafc;">
+                <ul class="concept-list">
+                    <li><strong>Concentration molaire d’un soluté ou ion :</strong> $C = \dfrac{n}{V}$ ou $[X] = \dfrac{n_X}{V}$</li>
+                    <li><strong>Relation avec la concentration massique :</strong> $[X] = \dfrac{C_m}{M_X}$ avec $C_m$ en g/L et $M_X$ en g/mol.</li>
+                    <li><strong>Quantité de matière :</strong> $n = m/M$ et $n = C \times V$.</li>
+                    <li><strong>Électroneutralité :</strong> $\sum z_+ [\text{cation}] = \sum z_- [\text{anion}]$</li>
+                    <li><strong>Exemples d’ions courants dans les eaux :</strong> 
+                        <div class="ion-list">
+                            <span class="ion-item">$Ca^{2+}$ (calcium)</span>
+                            <span class="ion-item">$Mg^{2+}$ (magnésium)</span>
+                            <span class="ion-item">$Na^+$ (sodium)</span>
+                            <span class="ion-item">$K^+$ (potassium)</span>
+                            <span class="ion-item">$Cl^-$ (chlorure)</span>
+                            <span class="ion-item">$SO_4^{2-}$ (sulfate)</span>
+                            <span class="ion-item">$HCO_3^-$ (bicarbonate)</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PETIT EXERCICE D'ENTRAÎNEMENT RAPIDE -->
+        <section class="exemple-section">
+            <h2 class="section-title">✍️ Petit test rapide</h2>
+            <div class="card" style="border-left: 6px solid #f59e0b;">
+                <h3 class="card-title" style="color:#b45309;">Auto-évaluation</h3>
+                <p>1. Une eau contient 80 mg/L d’ions magnésium ($Mg^{2+}$). Calculez sa concentration molaire. ($M_{Mg}=24,3\ g/mol$)</p>
+                <p>2. Si $[Na^+] = 0,050\ mol/L$ dans une eau, quelle est la concentration massique en sodium ? ($M_{Na}=23,0\ g/mol$)</p>
+                <p class="exemple-correction" style="margin-top: 1rem;">
+                    <strong>Réponses :</strong><br>
+                    1. $[Mg^{2+}] = 0,080 / 24,3 ≈ 3,29 \times 10^{-3}\ mol/L = 3,29\ mmol/L$.<br>
+                    2. $C_m = [Na^+] \times M = 0,050 \times 23,0 = 1,15\ g/L = 1150\ mg/L$.
+                </p>
+                <div class="exemple-astuce">
+                    🧠 Pour bien maîtriser : s’entraîner à passer des mg/L aux mol/L et inversement.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>📚 Révision PCT 3ème – Leçon 6.3 : Concentration molaire et ions dans les eaux · Conforme au programme APC Cameroun 🇨🇲</p>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - UE 1 : Composants et rôles de l'architecture d'un microordinateur</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (bien que non utilisé ici, gardé pour compatibilité template) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Intégration du style CSS pour que ce soit un fichier autonome */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        .component-img {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .component-img img {
+            max-width: 100%;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+            background-color: #f9f9ff;
+        }
+        .img-caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5b6e8c;
+            margin-top: 0.5rem;
+        }
+        .grid-roles {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-top: 0.75rem;
+        }
+        .role-item {
+            background-color: #f1f5f9;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border-left: 3px solid #2563eb;
+        }
+        .role-item strong {
+            color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">UE 1 : Composants et rôles de l'architecture d'un microordinateur</h1>
+            <p class="lesson-subtitle">Informatique · Classe de Troisième · Architecture et maintenance</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Carte mère -->
+                <div class="card concept-card">
+                    <h3 class="card-title">1. La carte mère</h3>
+                    <p class="card-description">
+                        La carte mère est le composant principal qui relie et permet la communication entre tous les autres composants (processeur, mémoire, disques, périphériques). Elle héberge les circuits électroniques, les ports de connexion et le BIOS.
+                    </p>
+                    <div class="component-img">
+                        <!-- Image générée par IA pour illustrer une carte mère -->
+                        <img src="" alt="Schéma d'une carte mère avec emplacements processeur, RAM, connecteurs SATA et ports périphériques">
+                    </div>
+                    <div class="img-caption">Schéma simplifié d'une carte mère (carte de base de l'ordinateur)</div>
+                    <ul class="concept-list">
+                        <li><span class="bold">Rôle principal :</span> Assurer la liaison physique et électrique entre tous les composants.</li>
+                        <li><span class="bold">Éléments intégrés :</span> Chipset, slots d'extension (PCIe), connecteurs SATA, ports USB/Ethernet.</li>
+                        <li><span class="bold">BIOS/UEFI :</span> Programme stocké sur la carte mère qui lance le démarrage de l'ordinateur.</li>
+                    </ul>
+                </div>
+
+                <!-- Processeur (CPU) -->
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Le processeur (CPU - Central Processing Unit)</h3>
+                    <p class="card-description">
+                        C'est le "cerveau" de l'ordinateur. Il exécute les instructions des programmes, effectue les calculs et contrôle les autres composants.
+                    </p>
+                    <div class="component-img">
+                        <img src="" alt="Image d’un processeur moderne avec ses broches ou sa surface métallique">
+                    </div>
+                    <div class="img-caption">Un processeur (vue de dessus et de dessous)</div>
+                    <ul class="concept-list">
+                        <li><span class="bold">Fréquence :</span> Mesurée en GHz (gigahertz), elle indique le nombre d'opérations par seconde.</li>
+                        <li><span class="bold">Cœurs :</span> Plusieurs unités de calcul indépendantes (dual-core, quad-core...).</li>
+                        <li><span class="bold">Rôle :</span> Interpréter et exécuter les instructions, gérer les échanges de données.</li>
+                    </ul>
+                </div>
+
+                <!-- Mémoire RAM -->
+                <div class="card concept-card">
+                    <h3 class="card-title">3. La mémoire RAM (Random Access Memory)</h3>
+                    <p class="card-description">
+                        Mémoire vive, volatile : elle stocke temporairement les données et les programmes en cours d'utilisation. Sa capacité est exprimée en Go (gigaoctets).
+                    </p>
+                    <div class="component-img">
+                        <img src="" alt="Barrettes de mémoire RAM pour ordinateur">
+                    </div>
+                    <div class="img-caption">Barrettes de RAM (mémoire vive)</div>
+                    <ul class="concept-list">
+                        <li><span class="bold">Volatilité :</span> Les données sont effacées à l'extinction de l'ordinateur.</li>
+                        <li><span class="bold">Influence :</span> Plus la RAM est grande, plus on peut exécuter d'applications simultanément sans ralentissement.</li>
+                        <li>Le processeur accède directement à la RAM pour lire/écrire rapidement les données.</li>
+                    </ul>
+                </div>
+
+                <!-- Disque dur / SSD -->
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Disque dur (HDD) et SSD (Solid State Drive)</h3>
+                    <p class="card-description">
+                        Ils assurent le stockage permanent des données (système d'exploitation, documents, logiciels). Contrairement à la RAM, les données persistent après extinction.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="bold">HDD :</span> Disque mécanique avec plateaux magnétiques, grande capacité mais plus lent.</li>
+                        <li><span class="bold">SSD :</span> Mémoire flash électronique, très rapide, silencieux et plus résistant aux chocs.</li>
+                        <li>Capacité exprimée en Go ou To (téraoctets).</li>
+                    </ul>
+                </div>
+
+                <!-- Périphériques -->
+                <div class="card concept-card">
+                    <h3 class="card-title">5. Périphériques d'entrée/sortie</h3>
+                    <p class="card-description">
+                        Les périphériques permettent d'interagir avec l'ordinateur et d'échanger des données avec le monde extérieur.
+                    </p>
+                    <div class="grid-roles">
+                        <div class="role-item"><strong>🖱️ Entrée :</strong> Clavier, souris, microphone, scanner, webcam.</div>
+                        <div class="role-item"><strong>🖨️ Sortie :</strong> Écran, imprimante, haut-parleurs, casque.</div>
+                        <div class="role-item"><strong>📀 Mixte :</strong> Écran tactile, clé USB, modem (entrée/sortie).</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 0.75rem;">
+                        Ils se connectent via des ports (USB, HDMI, VGA, RJ45, Jack audio) et sont gérés par des pilotes (drivers).
+                    </p>
+                </div>
+
+                <!-- Schéma synthétique -->
+                <div class="card concept-card">
+                    <h3 class="card-title">Schéma fonctionnel simplifié</h3>
+                    <p class="card-description">
+                        Les échanges entre composants se font via la carte mère (bus de données, bus d'adresses, bus de contrôle).
+                    </p>
+                    <div class="component-img">
+                        <img src="" alt="Schéma en blocs : Processeur ↔ Carte mère ↔ RAM, Disque dur, Périphériques d'entrée/sortie">
+                    </div>
+                    <div class="img-caption">Communication entre les composants</div>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Identifier le goulot d'étranglement</h3>
+                    <p class="exemple-context">
+                        Sophie a un ordinateur avec un processeur récent (Intel Core i7), 4 Go de RAM et un disque dur HDD de 1 To. Elle constate que son ordinateur rame beaucoup lorsqu'elle a 15 onglets ouverts dans son navigateur + un logiciel de montage vidéo.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Analyse :</strong> Le processeur est puissant, mais la RAM (4 Go) est insuffisante pour exécuter plusieurs applications lourdes simultanément. Le système utilise alors le disque dur comme mémoire virtuelle, ce qui ralentit tout car le HDD est lent comparé à la RAM. <br>
+                        <strong>Solution envisagée :</strong> Augmenter la quantité de RAM (passer à 8 Go ou 16 Go) et remplacer le HDD par un SSD pour améliorer la réactivité générale.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : La RAM est cruciale pour le multitâche, le stockage (SSD) améliore le temps de démarrage et d'ouverture des logiciels.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Associer périphérique et fonction</h3>
+                    <p class="exemple-context">
+                        Lors d’un cours, l’enseignant demande : « Je veux numériser un document papier pour le modifier sur l’ordinateur. De quel périphérique ai-je besoin ? Et si je veux afficher une présentation sur un grand écran ? »
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Réponse :</strong> Pour numériser un document → un scanner (périphérique d’entrée). Pour afficher sur grand écran → un vidéoprojecteur ou un écran externe connecté via HDMI/VGA (périphérique de sortie). <br>
+                        Ces périphériques communiquent avec la carte mère via leurs ports dédiés.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 À retenir : Les périphériques d'entrée envoient des informations à l'ordinateur ; les périphériques de sortie reçoivent des informations de l'ordinateur.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Rôle de la carte mère dans la communication</h3>
+                    <p class="exemple-context">
+                        Lorsque tu tapes une lettre au clavier, comment l'information parvient-elle à l'écran ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Cheminement :</strong> 
+                        <ol style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Le clavier (périphérique d’entrée) envoie un signal électrique via le port USB.</li>
+                            <li>La <span class="bold">carte mère</span> achemine le signal vers le processeur via les bus.</li>
+                            <li>Le <span class="bold">processeur</span> analyse l’information et demande à la RAM de stocker temporairement le caractère.</li>
+                            <li>Le processeur envoie ensuite l’ordre d’affichage à la carte graphique (ou graphique intégrée).</li>
+                            <li>L’écran (sortie) affiche la lettre.</li>
+                        </ol>
+                        Cet exemple illustre la coordination obligatoire entre tous les composants.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre RAM et stockage :</span> La RAM est temporaire (mémoire vive) et le disque dur/SSD est permanent. On ne sauvegarde pas ses fichiers dans la RAM !</li>
+                        <li><span class="bold">Croire que seul le processeur détermine la vitesse :</span> Un ordinateur rapide nécessite un équilibre entre CPU, RAM et stockage. Un SSD accélère énormément les démarrages.</li>
+                        <li><span class="bold">Oublier les périphériques internes vs externes :</span> La carte réseau, la carte graphique (si dédiée) sont aussi des composants internes ayant des rôles précis.</li>
+                        <li><span class="bold">Penser que tous les périphériques sont indispensables :</span> Un ordinateur peut fonctionner sans imprimante, mais sans RAM il ne démarre pas.</li>
+                    </ul>
+                </div>
+                <div class="card concept-card" style="margin-top: 0.5rem;">
+                    <h3 class="card-title">📝 Résumé mnémotechnique</h3>
+                    <p class="card-description">
+                        <strong>« Le Processeur calcule, la RAM garde en mémoire vive, le Disque stocke à long terme, la Carte mère relie tout, les Périphériques dialoguent avec l’utilisateur. »</strong>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section quiz express pour auto-évaluation -->
+            <section class="exemple-section">
+                <h2 class="section-title">🧠 Auto-évaluation rapide</h2>
+                <div class="card" style="background-color: #fefce8;">
+                    <h3 class="card-title" style="border-left-color: #eab308;">Teste-toi !</h3>
+                    <ul class="concept-list">
+                        <li>1. Quel composant est considéré comme le "cerveau" de l'ordinateur ?</li>
+                        <li>2. Cite deux différences entre un disque dur (HDD) et un SSD.</li>
+                        <li>3. Vrai ou faux : La mémoire RAM conserve les données après extinction de l'ordinateur.</li>
+                        <li>4. Donne un exemple de périphérique d’entrée et un exemple de périphérique de sortie.</li>
+                        <li>5. Quel rôle joue la carte mère dans le fonctionnement global ?</li>
+                    </ul>
+                    <details style="margin-top: 1rem; background-color: #fff; padding: 0.75rem; border-radius: 0.75rem;">
+                        <summary style="font-weight: 600; cursor: pointer;">📖 Voir les réponses</summary>
+                        <p>1. Le processeur (CPU).<br>
+                        2. Le HDD est mécanique (plus lent, plus de capacité à moindre coût) ; le SSD est électronique (très rapide, silencieux, plus résistant).<br>
+                        3. Faux, la RAM est volatile ; les données sont perdues à l'extinction.<br>
+                        4. Exemples d’entrée : clavier, souris. Sortie : écran, imprimante.<br>
+                        5. La carte mère relie et permet la communication entre tous les composants (processeur, mémoire, périphériques, stockage).</p>
+                    </details>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="fiche-footer">
+            <p>Fiche de révision conçue pour les élèves de 3ème (Cameroun) · Architecture et maintenance · <a href="#">Revoir le cours complet</a> · 📚</p>
+        </footer>
+    </div>
+</body>
+</html>

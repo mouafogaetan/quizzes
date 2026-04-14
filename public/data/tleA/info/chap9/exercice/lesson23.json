@@ -1,0 +1,144 @@
+[
+  {
+    "intitule": "Modification du statut d'un adhérent",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Une association culturelle « Arts et Lettres » utilise une base de données pour gérer ses adhérents. Voici la structure de la table <code>Adherents</code> :</p>\n<ul>\n<li><code>IdAdherent</code> (clé primaire, entier)</li>\n<li><code>Nom</code> (texte)</li>\n<li><code>Prenom</code> (texte)</li>\n<li><code>Email</code> (texte)</li>\n<li><code>Statut</code> (texte, peut être « Actif » ou « Inactif »)</li>\n</ul>\n<p>Le secrétaire de l'association souhaite modifier le statut de l'adhérent dont l'identifiant est 5, en le passant de « Actif » à « Inactif ».</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Rappeler la syntaxe générale de la requête SQL UPDATE.",
+        "niveau": "easy",
+        "reponse": "La syntaxe générale est : UPDATE nom_table SET colonne1 = valeur1, colonne2 = valeur2, ... WHERE condition;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire la requête SQL UPDATE permettant de réaliser la modification demandée par le secrétaire.",
+        "niveau": "easy",
+        "reponse": "UPDATE Adherents SET Statut = 'Inactif' WHERE IdAdherent = 5;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Expliquer pourquoi l'utilisation de la clause WHERE est indispensable dans cette requête.",
+        "niveau": "medium",
+        "reponse": "La clause WHERE est indispensable car sans elle, la modification s'appliquerait à tous les enregistrements de la table. Tous les adhérents deviendraient 'Inactifs', ce qui n'est pas l'effet désiré. WHERE permet de cibler précisément l'adhérent dont l'IdAdherent est 5.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Mise à jour des prix d'un catalogue",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Une librairie dispose d'une base de données avec une table <code>Livres</code> contenant les colonnes suivantes : <code>IdLivre</code> (clé primaire), <code>Titre</code>, <code>Auteur</code>, <code>Prix</code> (nombre décimal) et <code>QuantiteStock</code> (entier).</p>\n<p>Le gérant décide une augmentation de 10% sur tous les livres dont le prix est inférieur à 5000 FCFA.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier la ou les colonnes qui seront modifiées par cette opération.",
+        "niveau": "easy",
+        "reponse": "La colonne 'Prix' sera modifiée.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Formuler la condition (clause WHERE) permettant de sélectionner les livres concernés par l'augmentation.",
+        "niveau": "medium",
+        "reponse": "La condition est : WHERE Prix < 5000",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Écrire la requête SQL UPDATE complète pour appliquer cette augmentation de 10%.",
+        "niveau": "hard",
+        "reponse": "UPDATE Livres SET Prix = Prix * 1.10 WHERE Prix < 5000;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Discuter les précautions à prendre avant d'exécuter une requête UPDATE qui modifie de nombreuses lignes comme celle-ci.",
+        "niveau": "hard",
+        "reponse": "Avant d'exécuter une telle requête, il faut :\n1. Faire une sauvegarde (backup) de la table ou de la base de données.\n2. Tester la condition avec un SELECT pour vérifier quelles lignes sont concernées (ex: SELECT * FROM Livres WHERE Prix < 5000;).\n3. S'assurer que l'opération arithmétique (multiplication par 1.10) est correcte.\n4. Si possible, exécuter la requête dans une transaction pour pouvoir l'annuler en cas d'erreur.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Correction d'erreurs dans un annuaire",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un club de lecture utilise une base de données <code>Membres</code>. Voici un extrait de la table :</p>\n<table border=\"1\">\n<tr><th>IdMembre</th><th>Nom</th><th>Email</th><th>Telephone</th></tr>\n<tr><td>1</td><td>NDJOCK</td><td>paul@email.com</td><td>699887755</td></tr>\n<tr><td>2</td><td>MBARGA</td><td>sarah@email.com</td><td>677889900</td></tr>\n<tr><td>3</td><td>BESSALA</td><td>jean@emial.com</td><td>655443322</td></tr>\n</table>\n<p>Le secrétaire constate deux erreurs :</p>\n<ul>\n<li>L'email de Jean Bessala (IdMembre 3) contient une faute de frappe : « emial » au lieu de « email ».</li>\n<li>Le numéro de téléphone de Paul Ndjock (IdMembre 1) doit être mis à jour vers le nouveau numéro : 690001122.</li>\n</ul>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Analyser le tableau et rédiger la requête UPDATE pour corriger l'erreur dans l'email de Jean Bessala.",
+        "niveau": "medium",
+        "reponse": "UPDATE Membres SET Email = 'jean@email.com' WHERE IdMembre = 3;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Rédiger la requête UPDATE pour mettre à jour le numéro de téléphone de Paul Ndjock.",
+        "niveau": "medium",
+        "reponse": "UPDATE Membres SET Telephone = '690001122' WHERE IdMembre = 1;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Écrire une seule requête UPDATE permettant de modifier simultanément l'email et le téléphone d'un même membre (choisissez un membre fictif). Illustrez avec un exemple.",
+        "niveau": "hard",
+        "reponse": "UPDATE Membres SET Email = 'nouveau@email.com', Telephone = '699999999' WHERE IdMembre = 2;\nCette requête modifie à la fois l'email et le téléphone du membre dont l'IdMembre est 2.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Justifier l'utilisation de la clé primaire (IdMembre) dans la clause WHERE plutôt que le nom ou l'email.",
+        "niveau": "hard",
+        "reponse": "La clé primaire (IdMembre) est préférable car elle est unique et ne change jamais. Les noms peuvent être homonymes (deux membres peuvent s'appeler BESSALA) et les emails peuvent aussi comporter des erreurs. Utiliser la clé primaire garantit qu'on modifie exactement le bon enregistrement, et un seul.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Modification avec condition composée",
+    "type": "ressource",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Une médiathèque gère sa collection de DVD avec la table <code>DVDs</code> :</p>\n<ul>\n<li><code>IdDVD</code> (clé primaire)</li>\n<li><code>Titre</code> (texte)</li>\n<li><code>Genre</code> (texte : « Action », « Comédie », « Drame »)</li>\n<li><code>AnneeSortie</code> (entier)</li>\n<li><code>NombrePrets</code> (entier, compteur de prêts)</li>\n</ul>\n<p>Le bibliothécaire souhaite incrémenter automatiquement de 1 le compteur <code>NombrePrets</code> pour le DVD intitulé « Le Roi Lion » sorti en 1994.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Expliquer à quoi sert la clause SET dans une requête UPDATE.",
+        "niveau": "easy",
+        "reponse": "La clause SET sert à désigner la ou les colonnes à modifier et à leur attribuer une nouvelle valeur.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire la requête UPDATE pour incrémenter le compteur de prêts du DVD « Le Roi Lion » de 1994.",
+        "niveau": "hard",
+        "reponse": "UPDATE DVDs SET NombrePrets = NombrePrets + 1 WHERE Titre = 'Le Roi Lion' AND AnneeSortie = 1994;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Évaluer les risques potentiels si la condition WHERE utilise uniquement le titre sans l'année de sortie.",
+        "niveau": "very hard",
+        "reponse": "Si on utilise uniquement WHERE Titre = 'Le Roi Lion', la requête modifierait tous les DVD portant ce titre. Or, il peut exister plusieurs versions (remake, suite, adaptation différente) sorties à des années différentes. L'ajout de l'année permet d'être précis et de n'incrémenter que le compteur du film souhaité, évitant ainsi des erreurs de données.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

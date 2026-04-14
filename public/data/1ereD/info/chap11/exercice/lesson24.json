@@ -1,0 +1,123 @@
+[
+  {
+    "intitule": "Savoir distinguer une fonction d'une procédure",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>En langage C, les sous-programmes se divisent en deux catégories : les fonctions et les procédures.</p><p>Répondez aux questions suivantes pour vérifier votre compréhension de ces concepts.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Définissez ce qu'est une fonction en programmation.",
+        "niveau": "easy",
+        "reponse": "Une fonction est un sous-programme qui retourne une valeur (un résultat) au programme appelant, via l'instruction 'return'. Le type de cette valeur est spécifié avant le nom de la fonction.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Définissez ce qu'est une procédure en programmation.",
+        "niveau": "easy",
+        "reponse": "Une procédure est un sous-programme qui n'est pas censé retourner de valeur. En langage C, on parle aussi de 'fonction void' car on utilise le mot-clé 'void' pour indiquer l'absence de type de retour.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Expliquez la principale différence de syntaxe entre la déclaration d'une fonction et celle d'une procédure en langage C.",
+        "niveau": "medium",
+        "reponse": "La principale différence réside dans le type de retour. Une fonction déclare un type de données (int, float, char, etc.) avant son nom, tandis qu'une procédure utilise le mot-clé 'void' à la place du type de retour, indiquant qu'elle ne renvoie aucune valeur.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Identifier les variables locales et globales",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Analyser la portée des variables est crucial pour éviter les effets de bord. Observez l'extrait de code C suivant :</p><pre><code>#include &lt;stdio.h&gt;\n\nint compteurGlobal = 0;\n\nvoid incrementer() {\n    int compteurLocal = 0;\n    compteurGlobal++;\n    compteurLocal++;\n    printf(\"Global : %d, Local : %d\\n\", compteurGlobal, compteurLocal);\n}\n\nint main() {\n    incrementer();\n    incrementer();\n    return 0;\n}</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifiez la variable globale dans ce code. Justifiez votre réponse.",
+        "niveau": "easy",
+        "reponse": "La variable globale est 'compteurGlobal' car elle est déclarée en dehors de toute fonction, en haut du fichier. Elle est donc accessible depuis n'importe quelle fonction du programme.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Identifiez la variable locale dans la procédure 'incrementer'. Justifiez votre réponse.",
+        "niveau": "easy",
+        "reponse": "La variable locale est 'compteurLocal' car elle est déclarée à l'intérieur de la procédure 'incrementer'. Elle ne peut être utilisée qu'à l'intérieur de cette procédure.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Prévoyez ce que le programme va afficher après son exécution complète. Expliquez l'évolution des deux variables.",
+        "niveau": "hard",
+        "reponse": "Le programme affichera :\\nGlobal : 1, Local : 1\\nGlobal : 2, Local : 1\\n\\nExplication : 'compteurGlobal' est une variable unique partagée par tous les appels. À chaque appel d''incrementer', elle est incrémentée de 1. 'compteurLocal' est recréée à chaque appel de la fonction. Elle est initialisée à 0, incrémentée à 1, puis détruite à la fin de l'appel. Lors du second appel, une nouvelle variable 'compteurLocal' est créée et réinitialisée à 0.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Calculer des moyennes avec des fonctions",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous êtes enseignant et souhaitez écrire un programme C pour aider vos élèves à calculer leur moyenne de fin de trimestre. La moyenne est la somme de toutes les notes divisée par leur nombre.</p><p>Écrivez un programme complet qui :</p><ol><li>Demande à l'utilisateur le nombre de notes (N).</li><li>Demande à l'utilisateur de saisir N notes (des nombres réels).</li><li>Contienne une fonction <code>float calculerMoyenne(float notes[], int taille)</code> qui prend un tableau de notes et sa taille en paramètres et retourne la moyenne.</li><li>Affiche la moyenne obtenue avec deux décimales dans la fonction principale <code>main()</code>.</li></ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrivez le code C complet pour résoudre ce problème.",
+        "niveau": "hard",
+        "reponse": "```c\n#include <stdio.h>\n\n// Déclaration et définition de la fonction\nfloat calculerMoyenne(float notes[], int taille) {\n    float somme = 0.0;\n    for (int i = 0; i < taille; i++) {\n        somme = somme + notes[i];\n    }\n    return somme / taille;\n}\n\nint main() {\n    int N;\n    printf(\"Entrez le nombre de notes : \");\n    scanf(\"%d\", &N);\n\n    float tableauNotes[N];\n    for (int i = 0; i < N; i++) {\n        printf(\"Entrez la note %d : \", i + 1);\n        scanf(\"%f\", &tableauNotes[i]);\n    }\n\n    float moyenne = calculerMoyenne(tableauNotes, N);\n    printf(\"La moyenne est : %.2f\\n\", moyenne);\n\n    return 0;\n}\n```",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Expliquez le rôle des paramètres de la fonction `calculerMoyenne`.",
+            "niveau": "easy",
+            "reponse": "Le paramètre `float notes[]` reçoit le tableau de notes du programme principal. Le paramètre `int taille` reçoit le nombre d'éléments de ce tableau, permettant à la fonction de savoir quand arrêter sa boucle de calcul."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Gérer le stock d'une petite boutique",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Vous gérez une petite boutique de fournitures informatiques. Vous souhaitez créer un programme C pour gérer le stock. Le programme doit permettre de :</p><ol><li>Afficher un menu avec les options : 1. Ajouter un produit, 2. Vendre un produit, 3. Afficher le stock, 4. Quitter.</li><li>Utiliser un tableau de structures (ou plusieurs tableaux parallèles) pour stocker le nom du produit et la quantité en stock.</li><li>Le programme doit contenir les sous-programmes suivants :<ul><li>Une procédure <code>ajouterProduit()</code> pour ajouter un nouveau produit ou augmenter la quantité d'un produit existant.</li><li>Une procédure <code>vendreProduit()</code> pour diminuer la quantité (et gérer le cas où le stock est insuffisant).</li><li>Une procédure <code>afficherStock()</code> pour lister tous les produits et leurs quantités.</li></ul></li><li>Le programme principal ne doit contenir que la boucle de menu et les appels aux sous-programmes.</li></ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Proposez une structure de données (tableaux) pour représenter le stock de la boutique (nom du produit, quantité).",
+        "niveau": "medium",
+        "reponse": "On peut utiliser deux tableaux parallèles : un tableau de chaînes de caractères `char noms[100][50]` pour stocker jusqu'à 100 noms de 50 caractères maximum, et un tableau d'entiers `int quantites[100]` pour stocker les quantités correspondantes. On utilisera également une variable entière `int nbProduits` pour compter le nombre réel de produits en stock.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrivez le code C pour la procédure `ajouterProduit()`. Elle doit demander le nom et la quantité à ajouter. Si le produit existe déjà, elle ajoute la quantité au stock existant. Sinon, elle crée un nouveau produit.",
+        "niveau": "very hard",
+        "reponse": "```c\nvoid ajouterProduit(char noms[][50], int quantites[], int *nbProduits) {\n    char nom[50];\n    int qte, i;\n    \n    printf(\"Nom du produit : \");\n    scanf(\"%s\", nom);\n    printf(\"Quantite a ajouter : \");\n    scanf(\"%d\", &qte);\n    \n    // Rechercher si le produit existe\n    for (i = 0; i < *nbProduits; i++) {\n        if (strcmp(noms[i], nom) == 0) {\n            quantites[i] += qte;\n            printf(\"Quantite mise a jour pour %s. Nouveau stock : %d\\n\", nom, quantites[i]);\n            return;\n        }\n    }\n    \n    // Si non trouvé, ajouter un nouveau produit\n    if (*nbProduits < 100) {\n        strcpy(noms[*nbProduits], nom);\n        quantites[*nbProduits] = qte;\n        (*nbProduits)++;\n        printf(\"Nouveau produit %s ajoute avec %d unites.\\n\", nom, qte);\n    } else {\n        printf(\"Stock plein, impossible d'ajouter un nouveau produit.\\n\");\n    }\n}\n```\n*Note : Il faudra inclure `<string.h>` pour utiliser `strcmp` et `strcpy`.*",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Expliquez pourquoi les paramètres `nbProduits` sont passés par adresse (avec `*nbProduits`) et non par valeur.",
+        "niveau": "hard",
+        "reponse": "Le paramètre `nbProduits` représente le nombre total de produits en stock. Cette valeur doit être modifiée par la procédure `ajouterProduit` (si un nouveau produit est ajouté, le nombre de produits augmente). En C, les paramètres sont passés par valeur par défaut. Pour qu'une fonction puisse modifier une variable du programme principal, il faut passer son adresse (pointeur). Ainsi, en utilisant `int *nbProduits` et en déréférencant avec `*nbProduits`, la fonction agit directement sur la variable d'origine dans le `main()`.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

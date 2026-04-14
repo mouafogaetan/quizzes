@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Les mouvements d'eau à travers la membrane | SVTEEHB Terminale C</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (intégré pour un seul fichier autonome) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .image-schema {
+            margin: 1rem 0;
+            text-align: center;
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 0.8rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .image-schema img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            height: auto;
+        }
+
+        .figcaption {
+            font-size: 0.8rem;
+            color: #4b5563;
+            margin-top: 0.4rem;
+            font-style: italic;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Les mouvements d'eau à travers la membrane</h1>
+            <p class="lesson-subtitle">SVTEEHB · Terminale C · Module I : Le monde vivant</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Objectif spécifique -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 Objectif de la leçon</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        <strong>Expérimenter et interpréter les phénomènes d'osmose et de plasmolyse</strong> pour comprendre comment l'eau traverse la membrane plasmique 
+                        en fonction des différences de concentration entre le milieu intérieur et extérieur de la cellule.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Éléments clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Osmose : diffusion de l'eau à travers la membrane</h3>
+                    <p class="card-description">
+                        L'osmose est un mouvement passif de l'eau à travers une membrane semi-perméable (la membrane plasmique). 
+                        L'eau se déplace de la solution la moins concentrée en solutés (hypotonique) vers la solution la plus concentrée (hypertonique), 
+                        jusqu'à équilibrer les concentrations.
+                    </p>
+                    <div class="image-schema">
+                        <!-- Image générée par IA ou schéma conceptuel -->
+                        <img src="" alt="Schéma de l'osmose : passage d'eau du milieu hypotonique vers le milieu hypertonique à travers une membrane semi-perméable.">
+                        <div class="figcaption">Figure 1 : Principe de l'osmose. L'eau (●) migre vers la zone de forte concentration en solutés (■).</div>
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>Membrane semi-perméable :</strong> laisse passer l'eau mais pas tous les solutés (ions, sucres…).</li>
+                        <li><strong>Gradient de concentration :</strong> moteur de l'osmose (aucune dépense d'ATP).</li>
+                        <li><span class="formule">Équilibre dynamique :</span> lorsque les concentrations deviennent égales, les flux nets d'eau s'annulent.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Plasmolyse & Turgescence : réponses cellulaires</h3>
+                    <p class="card-description">
+                        Selon la tonicité du milieu, la cellule végétale ou animale modifie son volume et sa forme.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Plasmolyse :</strong> Dans une solution <strong>hypertonique</strong> (ex: eau salée), l'eau sort de la cellule → le protoplasme se contracte et se détache de la paroi (chez les végétaux).</li>
+                        <li><strong>Turgescence :</strong> Dans une solution <strong>hypotonique</strong> (ex: eau pure), l'eau entre dans la cellule → la cellule se gonfle, devient rigide (paroi végétale empêche l'éclatement).</li>
+                        <li><strong>Hématies en milieu hypotonique :</strong> elles gonflent et peuvent éclater (hémolyse) car elles n'ont pas de paroi.</li>
+                    </ul>
+                    <div class="image-schema">
+                        <img src="" alt="Schéma comparatif : cellule végétale normale, plasmolisée, turgescente ; hématie en solutions hypotonique, isotonique et hypertonique.">
+                        <div class="figcaption">Figure 2 : Plasmolyse d'une cellule végétale (sortie d'eau) et turgescence (entrée d'eau).</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Solutions hypotonique, isotonique, hypertonique</h3>
+                    <p class="card-description">
+                        La comparaison des concentrations en solutés non diffusibles (osmolalité) détermine le sens du mouvement d'eau.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Hypotonique :</strong> milieu extérieur moins concentré que le milieu intérieur → l'eau entre dans la cellule.</li>
+                        <li><strong>Isotonique :</strong> concentrations égales → aucun mouvement net d'eau (équilibre).</li>
+                        <li><strong>Hypertonique :</strong> milieu extérieur plus concentré → l'eau sort de la cellule.</li>
+                    </ul>
+                    <p class="card-description" style="margin-top: 0.5rem;">
+                        💧 Exemple concret : Une hématie placée dans une solution de NaCl à 9 g/L (sérum physiologique) est en milieu isotonique ; 
+                        à 20 g/L (hypertonique) elle se crénèle ; dans l'eau distillée (hypotonique) elle gonfle puis éclate.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Exemples de compréhension / Sujets type Bac -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension (inspirés des examens)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Expérience des hématies (Bac 2024, Partie A)</h3>
+                    <p class="exemple-context">
+                        On prélève trois échantillons de sang. On place des hématies dans trois solutions : 
+                        <strong>A (eau distillée)</strong>, <strong>B (sérum physiologique 0,9% NaCl)</strong>, 
+                        <strong>C (solution concentrée de NaCl à 3%)</strong>. Après 10 minutes, on observe au microscope.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résultats attendus :</strong><br>
+                        - Échantillon A : hématies gonflées, certaines éclatées (hémolyse) → <strong>milieu hypotonique</strong>.<br>
+                        - Échantillon B : hématies normales, aspect biconcave → <strong>milieu isotonique</strong>.<br>
+                        - Échantillon C : hématies déshydratées, crénelées (plasmolysées) → <strong>milieu hypertonique</strong>.<br>
+                        <strong>Conclusion :</strong> L'eau traverse la membrane plasmique pour équilibrer les concentrations. 
+                        L'osmose est responsable de ces modifications morphologiques.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce examen : Pour interpréter des résultats, comparez toujours la concentration interne (environ 0,9% pour les globules) et externe. 
+                        La sortie d'eau → plasmolyse ; l'entrée d'eau → turgescence / hémolyse.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Cellule végétale et phénomène de plasmolyse</h3>
+                    <p class="exemple-context">
+                        On place un épiderme d'oignon dans une solution de saccharose à 0,5 M. On observe une contraction du protoplasme qui se détache de la paroi. 
+                        On rince ensuite à l'eau distillée.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> La solution de saccharose est hypertonique par rapport au contenu vacuolaire : l'eau sort de la cellule → plasmolyse. 
+                        Après rinçage à l'eau distillée (milieu hypotonique), l'eau entre de nouveau dans la cellule → déplasmolyse, la cellule redevient turgescente. 
+                        Ceci prouve la réversibilité du phénomène et le rôle de l'osmose dans le maintien de la rigidité des tissus végétaux.
+                    </p>
+                    <div class="exemple-astuce">
+                        📌 Retenez : La paroi pectocellulosique limite l'expansion cellulaire, mais ne s'oppose pas aux mouvements d'eau.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schéma récapitulatif des flux d'eau -->
+            <section class="concept-section">
+                <h2 class="section-title">🧠 Schéma récapitulatif : sens de l'eau selon la tonicité</h2>
+                <div class="card concept-card">
+                    <div class="image-schema">
+                        <img src="" alt="Tableau récapitulatif : milieu hypotonique → entrée d'eau, turgescence/hémolyse ; milieu isotonique → équilibre ; milieu hypertonique → sortie d'eau, plasmolyse/crénation.">
+                        <div class="figcaption">Sens du flux d'eau (flèches bleues) en fonction du gradient de concentration.</div>
+                    </div>
+                    <ul class="concept-list">
+                        <li>🧫 <strong>Cellule animale (hématie)</strong> : hypotonique → éclatement (hémolyse) ; hypertonique → crénation.</li>
+                        <li>🌿 <strong>Cellule végétale</strong> : hypotonique → turgescence ; hypertonique → plasmolyse.</li>
+                        <li>🔁 L'osmose est un phénomène passif, qui ne nécessite pas d'énergie cellulaire.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Pièges fréquents et points de vigilance -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & erreurs à éviter</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre diffusion simple et osmose :</span> L'osmose concerne <strong>uniquement le solvant (eau)</strong>. La diffusion simple concerne les solutés non chargés à travers la membrane.</li>
+                        <li><span class="bold">Croire que l'eau va toujours du « plus concentré vers le moins concentré » :</span> Non ! L'eau va du milieu <strong>hypotonique</strong> (peu de solutés) vers le milieu <strong>hypertonique</strong> (beaucoup de solutés).</li>
+                        <li><span class="bold">Penser que la plasmolyse est définitive :</span> Elle est réversible si on replace la cellule dans un milieu hypotonique (déplasmolyse).</li>
+                        <li><span class="bold">Négliger l'importance de la paroi chez les végétaux :</span> La turgescence est possible grâce à la paroi rigide ; sans paroi, la cellule éclaterait en milieu hypotonique.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Mini-quiz / auto-évaluation (optionnel) -->
+            <section class="concept-section">
+                <h2 class="section-title">✏️ Vérifie tes acquis (auto-test)</h2>
+                <div class="card concept-card">
+                    <ul class="concept-list">
+                        <li>1. Une cellule animale placée dans une solution hypotonique va-t-elle gonfler ou se ratatiner ? <strong>(Réponse : gonfler / éclater)</strong></li>
+                        <li>2. Cite un exemple de milieu isotonique pour les globules rouges humains. <strong>(Sérum physiologique, NaCl 0,9%)</strong></li>
+                        <li>3. Que signifie le terme « plasmolyse » ? <strong>(Sortie d'eau d'une cellule végétale, contraction du protoplasme)</strong></li>
+                        <li>4. L'osmose nécessite-t-elle de l'ATP ? <strong>(Non, c'est un transport passif)</strong></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Lien avec les sujets d'examen -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 En rapport avec l'examen (Baccalauréat)</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Cette leçon est régulièrement évaluée : 
+                        <strong>Session 2024 – Partie A</strong> (étude d'hématies placées dans des solutions de différentes concentrations, exploitation de photomicrographies). 
+                        Vous devez savoir analyser des résultats d'expérience, prévoir l'aspect des cellules, interpréter les variations de volume en lien avec l'osmose.
+                    </p>
+                    <p class="card-description">
+                        Sachez également relier ce chapitre à la notion d'<strong>homéostasie</strong> : maintien de la composition du milieu intérieur (sang, lymphe) 
+                        grâce à des mécanismes régulant l'équilibre hydrique.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche de révision SVTEEHB - Terminale C · Enseignant : M. Nkolo · 📚 Basée sur le programme officiel 2025-2026 
+            · <a href="#">Télécharger PDF</a></p>
+        </footer>
+    </div>
+</body>
+</html>

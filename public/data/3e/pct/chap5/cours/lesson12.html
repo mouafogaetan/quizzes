@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision : Électrolyse de l'eau - 3ème</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Images et légendes */
+        .schema-container {
+            margin: 1rem 0;
+            text-align: center;
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+        .schema-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+        .legend {
+            font-size: 0.85rem;
+            color: #4b5563;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">CHAPITRE 5 : ÉLECTROLYSE ET SYNTHÈSE DE L'EAU</h1>
+            <p class="lesson-subtitle">Leçon 5.1 · Électrolyse de l'eau · Physique-Chimie - 3ème (Cameroun)</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">🔬 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">Qu'est-ce que l'électrolyse de l'eau ?</h3>
+                    <p class="card-description">
+                        L'<strong>électrolyse de l'eau</strong> est une transformation chimique forcée. Grâce à un courant électrique continu, on décompose l’eau (H₂O) en ses deux constituants gazeux : le <strong>dihydrogène</strong> (H₂) et le <strong>dioxygène</strong> (O₂). C'est une <strong>réaction de décomposition</strong>.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Équation-bilan :</strong> <span class="formule">2 H₂O(l) → 2 H₂(g) + O₂(g)</span></li>
+                        <li>Elle nécessite un <strong>générateur de courant continu</strong> (pile, batterie) et deux électrodes (inertes : platine, graphite).</li>
+                        <li>Les électrodes sont plongées dans l’eau légèrement acidifiée (ou additionnée d'un électrolyte) pour la rendre conductrice.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Dispositif expérimental et polarité</h3>
+                    <p class="card-description">
+                        Le montage classique comporte un <strong>électrolyseur</strong> (cuve) avec deux tubes à essais pour recueillir les gaz.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Anode (+)</strong> : reliée au pôle positif du générateur. On y observe un dégagement de <strong>dioxygène (O₂)</strong>.</li>
+                        <li><strong>Cathode (−)</strong> : reliée au pôle négatif. On y observe un dégagement de <strong>dihydrogène (H₂)</strong>.</li>
+                        <li>Le volume de dihydrogène recueilli est <strong>deux fois plus grand</strong> que celui du dioxygène (rapport volumétrique 2 : 1).</li>
+                    </ul>
+                    <!-- Schéma du dispositif -->
+                    <div class="schema-container">
+                        <img src="data:image/jpeg;base64,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" alt="Schéma de l'électrolyse de l'eau : cuve avec deux électrodes, générateur continu, tubes gradués. Anode (+) produit O₂, cathode (-) produit H₂, volume H₂ = 2× O₂" class="schema-img" onerror="this.style.display='none'">
+                        <div class="legend">📐 Schéma du montage d’électrolyse de l’eau (à mémoriser).</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Identification des gaz formés</h3>
+                    <p class="card-description">
+                        Deux tests simples permettent d'identifier les gaz produits :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Dihydrogène (H₂) :</strong> il s’enflamme avec une petite <strong>détonation</strong> (pop) en approchant une flamme. C’est un gaz combustible.</li>
+                        <li><strong>Dioxygène (O₂) :</strong> il ravive vivement une <strong>braise</strong> (test de la bûchette incandescente). C’est un gaz comburant.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Interprétation des volumes</h3>
+                    <p class="exemple-context">
+                        Lors d’une électrolyse, on a recueilli 40 mL de dihydrogène (H₂) à la cathode. Quel volume de dioxygène (O₂) a-t-on obtenu à l’anode ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution :</strong> D'après l'équation 2 H₂O → 2 H₂ + O₂, les volumes de gaz (dans les mêmes conditions de température et pression) sont proportionnels aux coefficients stoechiométriques. <br>
+                        Soit \( V_{H_2} / 2 = V_{O_2} / 1 \). <br>
+                        \( V_{O_2} = V_{H_2} / 2 = 40\ \text{mL} / 2 = 20\ \text{mL} \). <br>
+                        <span class="formule">Réponse : 20 mL de dioxygène.</span>
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Astuce : Retenir le rapport 2:1 — le volume d’hydrogène est toujours le double de celui d’oxygène.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Reconnaître les électrodes</h3>
+                    <p class="exemple-context">
+                        On réalise l'électrolyse de l'eau avec deux tubes. Dans le tube relié à la borne négative du générateur, on prélève un peu de gaz et on approche une allumette. Une légère détonation se produit. Que peut-on conclure ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Explication :</strong> La détonation est caractéristique du <strong>dihydrogène (H₂)</strong>. Or, le dihydrogène se dégage à la <strong>cathode (−)</strong>. Le tube relié à la borne négative contient bien du H₂. L'autre tube (borne positive) contient du O₂.
+                    </div>
+                    <div class="exemple-astuce">
+                        🧪 À retenir : <strong>Cathode (-) = Hydrogène</strong> (pensez à la lettre "C" comme Cathode et comme "Combustible" pour H₂).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre les pôles. <strong>Anode = + = O₂</strong> ; <strong>Cathode = − = H₂</strong>.</li>
+                        <li><span class="bold">Attention :</span> L'eau pure n'est pas conductrice. Il faut ajouter quelques gouttes d'acide sulfurique ou de soude pour que l'électrolyse ait lieu (les ions apportent la conductivité).</li>
+                        <li><span class="bold">Ne pas inverser les tests :</span> La braise ravive le dioxygène ; la flamme provoque une détonation avec le dihydrogène (mélange explosif).</li>
+                        <li><span class="bold">Volume VS quantité de matière :</span> Les volumes mesurés (mL) sont directement proportionnels aux nombres de moles (loi d'Avogadro-Ampère) dans les mêmes conditions de pression/température.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section pour aller plus loin : réaction et électrons -->
+            <section class="concept-section">
+                <h2 class="section-title">⚡ Mécanisme simplifié (demi-réactions)</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Au niveau des électrodes</h3>
+                    <p class="card-description">
+                        L'électrolyse est une réaction d'oxydo-réduction provoquée par le courant électrique :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>À la cathode (−) : réduction</strong> : \( 2 H^+ + 2 e^- \rightarrow H_2 \) (ou réduction de l’eau : \( 2 H_2O + 2 e^- \rightarrow H_2 + 2 OH^- \)).</li>
+                        <li><strong>À l’anode (+) : oxydation</strong> : \( 2 H_2O \rightarrow O_2 + 4 H^+ + 4 e^- \).</li>
+                        <li>L'équation globale s'obtient en combinant les demi-réactions pour équilibrer les électrons : \( 2 H_2O \rightarrow 2 H_2 + O_2 \).</li>
+                    </ul>
+                    <div class="exemple-astuce">
+                        🔋 Le courant électrique « force » la décomposition de l’eau alors que dans la nature, c’est l’inverse (synthèse de l’eau) qui se produit spontanément avec dégagement d’énergie.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exemple d'application type exercice -->
+            <section class="exemple-section">
+                <h2 class="section-title">📝 Exercice-type (Baccalauréat / Brevet)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Application : Électrolyse et quantité de matière</h3>
+                    <p class="exemple-context">
+                        On réalise l'électrolyse de l'eau pendant 30 minutes. À la cathode, on recueille 0,15 mol de dihydrogène. <br>
+                        1) Quelle quantité de matière de dioxygène obtient-on à l'anode ? <br>
+                        2) Calculer la masse d’eau consommée (masse molaire de H₂O = 18,0 g/mol).
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>1) D'après l'équation 2 H₂O → 2 H₂ + O₂ :</strong> <br>
+                        \( n_{H_2} = 0,15\ \text{mol} \). Les coefficients montrent que \( n_{O_2} = \frac{1}{2} n_{H_2} \). <br>
+                        \( n_{O_2} = 0,15 / 2 = 0,075\ \text{mol} \). <br>
+                        <strong>2) Quantité d’eau consommée :</strong> \( n_{H_2O} = n_{H_2} = 0,15\ \text{mol} \) (car 2 H₂O → 2 H₂). <br>
+                        Masse d’eau : \( m = n \times M = 0,15 \times 18,0 = 2,7\ \text{g} \). <br>
+                        <span class="formule">Réponses : \( n(O_2) = 0,075\ \text{mol} \) ; \( m(H_2O) = 2,7\ \text{g} \).</span>
+                    </div>
+                    <div class="exemple-astuce">
+                        📌 Toujours utiliser les coefficients de l’équation-bilan équilibrée pour passer des quantités de matière d’un réactif/produit à un autre.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau récapitulatif rapide -->
+            <section class="concept-section">
+                <h2 class="section-title">📋 Récapitulatif visuel</h2>
+                <div class="card concept-card">
+                    <div style="overflow-x: auto;">
+                        <table style="width:100%; border-collapse: collapse; margin-top: 0.5rem;">
+                            <thead style="background-color: #eef2ff;">
+                                <tr>
+                                    <th style="border:1px solid #cbd5e1; padding: 0.5rem;">Électrode</th>
+                                    <th style="border:1px solid #cbd5e1; padding: 0.5rem;">Polarité</th>
+                                    <th style="border:1px solid #cbd5e1; padding: 0.5rem;">Gaz produit</th>
+                                    <th style="border:1px solid #cbd5e1; padding: 0.5rem;">Test d’identification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border:1px solid #cbd5e1; padding: 0.5rem;">Cathode</td>
+                                    <td style="border:1px solid #cbd5e1; padding: 0.5rem;">− (négatif)</td>
+                                    <td style="border:1px solid #cbd5e1; padding: 0.5rem;">Dihydrogène (H₂)</td>
+                                    <td style="border:1px solid #cbd5e1; padding: 0.5rem;">Détonation (pop) à la flamme</td>
+                                </tr>
+                                <tr style="background-color: #f9fafb;">
+                                    <td style="border:1px solid #cbd5e1; padding: 0.5rem;">Anode</td>
+                                    <td style="border:1px solid #cbd5e1; padding: 0.5rem;">+ (positif)</td>
+                                    <td style="border:1px solid #cbd5e1; padding: 0.5rem;">Dioxygène (O₂)</td>
+                                    <td style="border:1px solid #cbd5e1; padding: 0.5rem;">Ravive une braise</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        🧠 Mnémotechnique : <strong>« ANODE = POSITIF = Oxygène »</strong> ; <strong>« CATHODE = NÉGATIF = Hydrogène »</strong>.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Révision créée pour les élèves de 3ème (PCT) · Programme Cameroun · 📘 Fiche 5.1 : Électrolyse de l'eau · <a href="#">Revoir le cours</a></p>
+        </footer>
+    </div>
+</body>
+</html>

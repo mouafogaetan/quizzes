@@ -1,0 +1,99 @@
+[
+  {
+    "intitule": "Compléter un script de conversion de devises",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous êtes développeur(se) d'une petite agence web au Cameroun. Un client vous demande de créer un outil simple sur son site pour convertir des montants en Euros (EUR) vers des Francs CFA (XAF). Le taux de change est fixé à 1 EUR = 655,96 XAF.</p>\n<p>Voici le script JavaScript incomplet. Complétez-le en utilisant les fonctions <code>prompt()</code>, <code>parseFloat()</code> et <code>document.write()</code>.</p>\n<pre><code>&lt;script language=\"Javascript\"&gt;\n    // 1. Afficher un message d'accueil\n    document.write(\"&lt;h2&gt;Convertisseur EUR vers XAF&lt;/h2&gt;\");\n    \n    // 2. Demander à l'utilisateur le montant en Euros\n    var montantEUR = ______(\"Entrez le montant en Euros:\");\n    \n    // 3. Convertir le montant saisi en nombre décimal\n    montantEUR = ______(montantEUR);\n    \n    // 4. Calculer le montant équivalent en Francs CFA\n    const TAUX = 655.96;\n    var montantXAF = montantEUR * TAUX;\n    \n    // 5. Afficher le résultat dans la page\n    document.write(\"&lt;p&gt;\" + montantEUR + \" EUR équivalent à \" + ______ + \" XAF.&lt;/p&gt;\");\n&lt;/script&gt;</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Recopiez le script complet en remplaçant les traits de soulignement par les noms des fonctions JavaScript appropriées.",
+        "niveau": "medium",
+        "reponse": "```javascript\n<script language=\"Javascript\">\n    document.write(\"<h2>Convertisseur EUR vers XAF</h2>\");\n    \n    var montantEUR = prompt(\"Entrez le montant en Euros:\");\n    \n    montantEUR = parseFloat(montantEUR);\n    \n    const TAUX = 655.96;\n    var montantXAF = montantEUR * TAUX;\n    \n    document.write(\"<p>\" + montantEUR + \" EUR équivalent à \" + montantXAF + \" XAF.</p>\");\n</script>\n```\n**Explications :**\n- `prompt()` : Affiche une boîte de dialogue pour saisir la valeur.\n- `parseFloat()` : Convertit la chaîne de caractères (ex: \"100\") en nombre décimal (ex: 100).\n- `montantXAF` : La variable contenant le résultat du calcul est affichée.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Analyser un script de calcul de moyenne",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Un élève a écrit le script JavaScript suivant pour calculer la moyenne de trois notes. Il utilise les fonctions <code>prompt()</code>, <code>parseFloat()</code> et <code>document.write()</code>.</p>\n<pre><code>&lt;script language=\"Javascript\"&gt;\n    var note1 = parseFloat(prompt(\"Entrez la première note :\"));\n    var note2 = parseFloat(prompt(\"Entrez la deuxième note :\"));\n    var note3 = parseFloat(prompt(\"Entrez la troisième note :\"));\n    var moyenne = (note1 + note2 + note3) / 3;\n    document.write(\"&lt;p&gt;La moyenne est : \" + moyenne + \"&lt;/p&gt;\");\n&lt;/script&gt;</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier chaque fonction JavaScript utilisée dans ce script et expliquer son rôle précis.",
+        "niveau": "easy",
+        "reponse": "- `prompt(\"Entrez la première note :\")` : Affiche une boîte de dialogue avec un message pour que l'utilisateur saisisse une valeur. La valeur saisie est retournée sous forme de chaîne de caractères.\n- `parseFloat(...)` : Convertit la chaîne de caractères récupérée par `prompt()` en un nombre décimal (flottant). Cela permet d'effectuer les opérations arithmétiques (+, /) correctement.\n- `document.write(\"<p>La moyenne est : \" + moyenne + \"</p>\")` : Écrit le texte et la valeur de la variable `moyenne` directement dans le code HTML de la page, à l'emplacement de la balise `<script>`.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquer ce qui se passerait si on omettait la fonction `parseFloat()` dans ce script. Illustrez avec un exemple.",
+        "niveau": "medium",
+        "reponse": "Si on omet `parseFloat()`, la variable `note1`, `note2` et `note3` resteraient des chaînes de caractères. En JavaScript, l'opérateur `+` entre deux chaînes concatène (colle) les textes au lieu de les additionner.\n\n**Exemple :** Si l'utilisateur saisit `12`, `14` et `16` :\n- Avec `parseFloat()` : `note1 = 12, note2 = 14, note3 = 16`, alors `(12 + 14 + 16) / 3 = 42 / 3 = 14`.\n- Sans `parseFloat()` : `note1 = \"12\", note2 = \"14\", note3 = \"16\"`, alors `(\"12\" + \"14\" + \"16\") / 3 = \"121416\" / 3`. Le résultat serait `NaN` (Not a Number) car on ne peut pas diviser une chaîne de caractères par un nombre.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Écrire un programme de calcul du prix TTC",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans le cadre de la gestion d'une petite boutique, vous devez créer un script JavaScript qui :</p>\n<ol>\n<li>Demande à l'utilisateur le prix hors taxe (HT) d'un produit en utilisant <code>prompt()</code>.</li>\n<li>Demande le taux de TVA (en pourcentage, par exemple 19.25 pour 19.25%).</li>\n<li>Convertit ces deux valeurs en nombres décimaux avec <code>parseFloat()</code>.</li>\n<li>Calcule le prix toutes taxes comprises (TTC) selon la formule : $TTC = HT \\times \\left(1 + \\frac{TVA}{100}\\right)$.</li>\n<li>Affiche le résultat dans la page HTML avec <code>document.write()</code>.</li>\n</ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire le script JavaScript complet qui répond à ce besoin. Votre code doit être bien structuré et commenté.",
+        "niveau": "medium",
+        "reponse": "```javascript\n<script language=\"Javascript\">\n    // Demande du prix HT\n    var prixHT = prompt(\"Entrez le prix hors taxe (HT) du produit :\");\n    // Conversion en nombre décimal\n    prixHT = parseFloat(prixHT);\n    \n    // Demande du taux de TVA\n    var tauxTVA = prompt(\"Entrez le taux de TVA (en %) :\");\n    // Conversion en nombre décimal\n    tauxTVA = parseFloat(tauxTVA);\n    \n    // Calcul du prix TTC\n    var prixTTC = prixHT * (1 + tauxTVA / 100);\n    \n    // Affichage du résultat\n    document.write(\"<h3>Facture</h3>\");\n    document.write(\"<p>Prix HT : \" + prixHT + \" FCFA</p>\");\n    document.write(\"<p>TVA (\" + tauxTVA + \"%) : \" + (prixTTC - prixHT) + \" FCFA</p>\");\n    document.write(\"<p><strong>Prix TTC : \" + prixTTC + \" FCFA</strong></p>\");\n</script>\n```",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Corriger un script de calcul de surface",
+    "type": "ressource",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un stagiaire a écrit le script suivant pour calculer la surface d'un rectangle. Le script contient trois erreurs. Analysez-le et corrigez-le.</p>\n<pre><code>&lt;script language=\"Javascript\"&gt;\n    var longueur = prompt(\"Longueur : \");\n    var largeur = prompt(\"Largeur : \");\n    var surface = longueur * largeur;\n    document.write(\"La surface est : \" + surface);\n&lt;/script&gt;</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier et corriger les trois erreurs présentes dans ce script.",
+        "niveau": "hard",
+        "reponse": "**Erreur 1 (Fonctionnelle)** : Les valeurs retournées par `prompt()` sont des chaînes de caractères. L'opérateur `*` peut fonctionner par hasard (conversion automatique), mais ce n'est pas fiable. **Correction :** Utiliser `parseFloat()` pour convertir explicitement.\n\n**Erreur 2 (Exactitude du résultat)** : La variable `surface` contiendra le produit de deux chaînes. JavaScript les convertit en nombres. Ce n'est pas une erreur bloquante mais une mauvaise pratique. **Correction :** Convertir avant le calcul.\n\n**Erreur 3 (Qualité du code / Prévention d'erreur)** : Si l'utilisateur saisit une lettre ou laisse vide, `parseFloat()` retourne `NaN` (Not a Number). Le script ne gère pas ce cas. **Correction (niveau avancé)** : Ajouter un contrôle.\n\n**Script corrigé :**\n```javascript\n<script language=\"Javascript\">\n    var longueur = parseFloat(prompt(\"Longueur : \"));\n    var largeur = parseFloat(prompt(\"Largeur : \"));\n    \n    // Vérification simple\n    if (isNaN(longueur) || isNaN(largeur)) {\n        document.write(\"<p>Erreur : Veuillez entrer des nombres valides.</p>\");\n    } else {\n        var surface = longueur * largeur;\n        document.write(\"<p>La surface du rectangle est : \" + surface + \" unités carrées.</p>\");\n    }\n</script>\n```",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Justifier l'utilité de `parseFloat()`",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>On considère l'extrait de code suivant :</p>\n<pre><code>var age = prompt(\"Quel est votre âge ?\");\nvar ageAnneeProchaine = age + 1;</code></pre>\n<p>Si l'utilisateur saisit la valeur <code>17</code>, quelle sera la valeur de la variable <code>ageAnneeProchaine</code> ? Pourquoi ?</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Calculer la valeur de `ageAnneeProchaine` et expliquer le rôle que la fonction `parseInt()` ou `parseFloat()` aurait dû jouer.",
+        "niveau": "easy",
+        "reponse": "La variable `ageAnneeProchaine` vaudra `\"171\"` (la chaîne de caractères \"17\" concaténée avec le nombre 1).\n\n**Explication :** La fonction `prompt()` retourne toujours une **chaîne de caractères**. L'opérateur `+` a deux sens en JavaScript : l'addition arithmétique (pour les nombres) et la concaténation (pour les chaînes). Lorsqu'une chaîne et un nombre sont utilisés avec `+`, JavaScript privilégie la concaténation et convertit le nombre en chaîne.\n\n**Rôle de `parseInt()` / `parseFloat()` :** Ces fonctions permettent de convertir explicitement la chaîne de caractères en un type numérique. Ainsi, `age = parseInt(prompt(\"Quel est votre âge ?\"));` suivie de `ageAnneeProchaine = age + 1;` donnerait le résultat arithmétique correct `18`.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

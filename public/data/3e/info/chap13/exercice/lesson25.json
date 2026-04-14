@@ -1,0 +1,121 @@
+[
+  {
+    "intitule": "Contrôle de connaissances : Structures conditionnelles et boucles",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Cet exercice permet de vérifier votre compréhension des structures SI...ALORS...SINON et des boucles POUR et TANT QUE en algorithmique.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Expliquez la différence fondamentale entre une structure alternative simple (SI...ALORS) et une structure alternative complète (SI...ALORS...SINON). Donnez un exemple concret pour chacune.",
+        "niveau": "medium",
+        "reponse": "Une structure alternative simple (SI...ALORS) exécute une action seulement si la condition est vraie ; si elle est fausse, on passe à la suite sans rien faire. Exemple : SI il pleut ALORS je prends mon parapluie. Une structure alternative complète (SI...ALORS...SINON) exécute un bloc d'instructions si la condition est vraie, et un autre bloc différent si elle est fausse. Exemple : SI il pleut ALORS je prends mon parapluie SINON je prends mes lunettes de soleil.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Un algorithme doit afficher les nombres pairs de 2 à 20. Deux versions sont proposées : l'une avec une boucle POUR, l'autre avec une boucle TANT QUE. Écrivez ces deux algorithmes.",
+        "niveau": "medium",
+        "reponse": "Version POUR : POUR i DE 2 A 20 AVEC PAS 2 FAIRE Afficher i FIN POUR. Version TANT QUE : i ← 2 TANT QUE i <= 20 FAIRE Afficher i i ← i + 2 FIN TANT QUE.",
+        "sousQuestions": [
+          {
+            "numero": "2.a",
+            "texte": "Justifiez le choix du type de boucle dans ce cas précis. Laquelle est la plus adaptée et pourquoi ?",
+            "niveau": "hard",
+            "reponse": "La boucle POUR est plus adaptée car on connaît à l'avance le nombre exact d'itérations (de 2 à 20 avec un pas de 2, soit 10 itérations). La boucle TANT QUE serait utilisée si on ne connaissait pas le nombre d'itérations à l'avance (par exemple, afficher les nombres pairs tant que l'utilisateur le souhaite)."
+          }
+        ]
+      },
+      {
+        "numero": 3,
+        "texte": "Identifiez et corrigez l'erreur dans l'algorithme suivant qui devrait calculer la somme des entiers de 1 à 10 : <br> i ← 1 <br> TANT QUE i < 10 FAIRE <br> &nbsp;&nbsp;&nbsp;somme ← somme + i <br> FIN TANT QUE <br> Afficher somme",
+        "niveau": "hard",
+        "reponse": "Deux erreurs : 1) La variable 'somme' n'est pas initialisée à 0. 2) L'indice i n'est jamais incrémenté, ce qui crée une boucle infinie. Algorithme corrigé : i ← 1 ; somme ← 0 ; TANT QUE i <= 10 FAIRE ; somme ← somme + i ; i ← i + 1 ; FIN TANT QUE ; Afficher somme.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Classez les problèmes suivants selon qu'ils nécessitent plutôt une structure SI, une boucle POUR ou une boucle TANT QUE :",
+        "niveau": "medium",
+        "reponse": "",
+        "sousQuestions": [
+          {
+            "numero": "4.a",
+            "texte": "Déterminer si un nombre est positif ou négatif",
+            "niveau": "easy",
+            "reponse": "Structure SI (conditionnelle)"
+          },
+          {
+            "numero": "4.b",
+            "texte": "Lire 20 notes et calculer la moyenne de la classe",
+            "niveau": "easy",
+            "reponse": "Boucle POUR (nombre d'itérations connu : 20)"
+          },
+          {
+            "numero": "4.c",
+            "texte": "Demander à un utilisateur de saisir un mot de passe jusqu'à ce qu'il soit correct (sans limite de tentatives)",
+            "niveau": "easy",
+            "reponse": "Boucle TANT QUE (on ne sait pas combien de tentatives seront nécessaires)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Projet : Contrôle d'accès et analyse de données d'un club",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Vous êtes chargé(e) de créer un algorithme pour gérer le système d'accès et analyser les âges des membres d'un club de sport.</p>",
+      "images": [
+        "Diagramme simple d'un système de contrôle d'accès avec capteur de carte et affichage 'Accès autorisé' ou 'Accès refusé'"
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Concevez un algorithme qui : demande l'âge de l'utilisateur, puis affiche 'Accès autorisé' si l'âge est compris entre 12 et 65 ans inclus, 'Accès jeune' si l'âge est inférieur à 12 ans, 'Accès senior' si l'âge est supérieur à 65 ans, et 'Âge invalide' si l'âge est négatif.",
+        "niveau": "medium",
+        "reponse": "Algorithme ControleAcces\nVariables: age: entier\nDebut\n    Ecrire('Entrez votre âge : ')\n    Lire(age)\n    SI age >= 12 ET age <= 65 ALORS\n        Ecrire('Accès autorisé')\n    SINON SI age < 12 ET age >= 0 ALORS\n        Ecrire('Accès jeune')\n    SINON SI age > 65 ALORS\n        Ecrire('Accès senior')\n    SINON\n        Ecrire('Âge invalide')\n    FIN SI\nFin",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Le club souhaite enregistrer l'âge de 30 membres. Écrivez un algorithme qui : lit les 30 âges, compte combien sont mineurs (moins de 18 ans), combien sont majeurs (18 ans et plus), et affiche ces deux résultats.",
+        "niveau": "medium",
+        "reponse": "Algorithme ComptageMembres\nVariables: i, age, mineurs, majeurs: entier\nDebut\n    mineurs ← 0\n    majeurs ← 0\n    POUR i DE 1 A 30 FAIRE\n        Ecrire('Âge du membre ', i, ' : ')\n        Lire(age)\n        SI age < 18 ALORS\n            mineurs ← mineurs + 1\n        SINON\n            majeurs ← majeurs + 1\n        FIN SI\n    FIN POUR\n    Ecrire('Nombre de mineurs : ', mineurs)\n    Ecrire('Nombre de majeurs : ', majeurs)\nFin",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Améliorez l'algorithme précédent en ajoutant une boucle TANT QUE qui continue à demander des âges jusqu'à ce que l'utilisateur entre -1 pour terminer. L'algorithme doit alors afficher l'âge minimum, l'âge maximum et l'âge moyen des membres saisis (sans compter le -1).",
+        "niveau": "very hard",
+        "reponse": "Algorithme StatsMembres\nVariables: age, somme, compteur, minAge, maxAge: entier\nDebut\n    somme ← 0\n    compteur ← 0\n    minAge ← 999\n    maxAge ← -1\n    Ecrire('Entrez les âges (-1 pour terminer) : ')\n    Lire(age)\n    TANT QUE age != -1 FAIRE\n        SI age >= 0 ALORS\n            somme ← somme + age\n            compteur ← compteur + 1\n            SI age < minAge ALORS minAge ← age FIN SI\n            SI age > maxAge ALORS maxAge ← age FIN SI\n        SINON\n            Ecrire('Âge invalide, ignore')\n        FIN SI\n        Lire(age)\n    FIN TANT QUE\n    SI compteur > 0 ALORS\n        Ecrire('Âge minimum : ', minAge)\n        Ecrire('Âge maximum : ', maxAge)\n        Ecrire('Âge moyen : ', somme / compteur)\n    SINON\n        Ecrire('Aucune donnée valide saisie')\n    FIN SI\nFin",
+        "sousQuestions": [
+          {
+            "numero": "3.a",
+            "texte": "Pourquoi avoir initialisé minAge à 999 et maxAge à -1 ?",
+            "niveau": "hard",
+            "reponse": "Pour que la première valeur saisie devienne automatiquement le nouveau minimum et le nouveau maximum. minAge est initialisé à une valeur très haute pour que tout âge saisi soit inférieur, et maxAge à -1 pour que tout âge valide (>=0) soit supérieur."
+          },
+          {
+            "numero": "3.b",
+            "texte": "Testez mentalement votre algorithme avec la séquence : 15, 42, 8, 23, -1. Quels sont les résultats ?",
+            "niveau": "medium",
+            "reponse": "Âge minimum : 8, Âge maximum : 42, Âge moyen : (15+42+8+23)/4 = 88/4 = 22."
+          }
+        ]
+      },
+      {
+        "numero": 4,
+        "texte": "Créez l'algorigramme correspondant à l'algorithme de la question 1 (contrôle d'accès). Décrivez les symboles utilisés.",
+        "niveau": "medium",
+        "reponse": "Algorigramme : Début (ovale) -> Saisie âge (parallélogramme) -> Condition age>=12 et age<=65 (losange) -> si vrai : Afficher 'Accès autorisé' (parallélogramme) -> Fin (ovale) ; si faux : Condition age<12 et age>=0 (losange) -> si vrai : Afficher 'Accès jeune' -> Fin ; si faux : Condition age>65 (losange) -> si vrai : Afficher 'Accès senior' -> Fin ; si faux : Afficher 'Âge invalide' -> Fin. Symboles : ovale (début/fin), parallélogramme (entrée/sortie), losange (test conditionnel).",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Utiliser les fichiers multimédias</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie professionnelle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petit style additionnel pour bien mettre en valeur les formules et les images virtuelles */
+        .image-placeholder {
+            background: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px dashed #94a3b8;
+            font-size: 0.9rem;
+            color: #1e293b;
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .image-caption {
+            font-size: 0.8rem;
+            color: #475569;
+            font-style: italic;
+        }
+        .highlight {
+            background-color: #dbeafe;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-family: monospace;
+        }
+        .step-list {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+            margin: 0.5rem 0;
+        }
+        .step-list li {
+            margin-bottom: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">📸 UE 6 : Utiliser les fichiers multimédias</h1>
+            <p class="lesson-subtitle">Informatique · Première C, D, E (Probatoire) · Images numériques & calculs</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">🖼️ Définition, définition et dimensions d’une image</h3>
+                    <p class="card-description">
+                        Une <strong>image numérique</strong> est composée de milliers de petits points appelés <strong>pixels</strong> (picture elements). 
+                        Chaque pixel porte une couleur.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="formule">Définition</span> = nombre total de pixels = largeur (en px) × hauteur (en px). <br>
+                        Exemple : <strong>3840 × 2160 pixels</strong> (image 4K).</li>
+                        <li><span class="formule">Dimensions physiques</span> = taille réelle de l'image (ex: 31,7 cm × 47,55 cm).<br>
+                        Elles dépendent de la résolution d’impression.</li>
+                        <li><span class="formule">Résolution</span> = rapport entre la définition et les dimensions. Elle s’exprime en <strong>pixels par pouce (ppi)</strong> ou <strong>dpi</strong> (dots per inch).<br>
+                        <strong>Formule :</strong> $Résolution = \frac{Définition\ (pixels)}{Dimensions\ (pouces)}$.<br>
+                        ➡️ Une résolution élevée = image plus nette.</li>
+                    </ul>
+                    <div class="image-placeholder">
+                        <!-- Image illustrative générée par IA / description pour l'IA -->
+                        <img src="" alt="Diagramme explicatif : comparaison entre une image basse résolution (pixels visibles) et haute résolution (pixels fins). Des carrés agrandis montrent le pixel art vs image lisse.">
+                        <div class="image-caption">Illustration : différence entre basse résolution (effet pixelisé) et haute résolution (image nette).</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🎨 Profondeur des couleurs & taille de l'image</h3>
+                    <p class="card-description">
+                        La <strong>profondeur des couleurs</strong> (bits par pixel) détermine le nombre de couleurs possibles.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Exemple classique : <strong>24 bits/pixel</strong> → $2^{24} = 16\,777\,216$ couleurs (vraies couleurs).</li>
+                        <li><strong>Calcul de la taille d’une image (en bits) :</strong> <br>
+                        <span class="formule">Taille (bits) = Définition (largeur × hauteur) × Profondeur (bits/pixel)</span>.</li>
+                        <li><strong>Conversion en octets :</strong> $1 \text{ octet} = 8 \text{ bits}$ donc <br>
+                        <span class="formule">Taille (octets) = \frac{Définition \times Profondeur}{8}</span>.</li>
+                        <li>Unités usuelles : <strong>1 Ko = 1024 octets</strong>, <strong>1 Mo = 1024 Ko</strong>.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top:0.8rem;">
+                        💡 Astuce mémoire : "Déf × profondeur / 8 = taille en octets, puis diviser par 1024 pour les Ko/Mo."
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">📐 Exemple de calcul complet (indispensable au probatoire)</h3>
+                    <p class="card-description">
+                        Soit une image de définition <strong>3840 × 2160 pixels</strong> et une profondeur de <strong>24 bits</strong>.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Étape 1 :</strong> Définition totale = $3840 \times 2160 = 8\,294\,400$ pixels.</li>
+                        <li><strong>Étape 2 :</strong> Taille en bits = $8\,294\,400 \times 24 = 199\,065\,600$ bits.</li>
+                        <li><strong>Étape 3 :</strong> Taille en octets = $199\,065\,600 / 8 = 24\,883\,200$ octets.</li>
+                        <li><strong>Étape 4 :</strong> Taille en Ko = $24\,883\,200 / 1024 \approx 24\,300$ Ko.</li>
+                        <li><strong>Étape 5 :</strong> Taille en Mo = $24\,300 / 1024 \approx 23,73$ Mo.</li>
+                    </ul>
+                    <p class="card-description" style="margin-top:0.5rem;">
+                        ✅ <strong>Résultat :</strong> L’image occupe environ <strong>23,73 Mo</strong> sur le disque.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Calcul de taille avec une image plus petite</h3>
+                    <p class="exemple-context">
+                        Une photographie au format 1024 × 768 pixels (définition standard) avec une profondeur de 16 bits (65536 couleurs). 
+                        Calculez sa taille en Ko et en Mo.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>🔎 Résolution détaillée :</strong><br>
+                        1. Définition = $1024 \times 768 = 786\,432$ pixels.<br>
+                        2. Taille (bits) = $786\,432 \times 16 = 12\,582\,912$ bits.<br>
+                        3. Taille (octets) = $12\,582\,912 / 8 = 1\,572\,864$ octets.<br>
+                        4. Taille (Ko) = $1\,572\,864 / 1024 = 1\,536$ Ko.<br>
+                        5. Taille (Mo) = $1\,536 / 1024 = 1,5$ Mo.<br>
+                        📌 <strong>Réponse :</strong> 1 536 Ko ou 1,5 Mo.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : pour passer rapidement des octets aux Ko, divisez par 1024. Pour des valeurs exactes, retenez que 1024×1024 = 1 048 576 octets dans 1 Mo.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Comparaison de résolution et impact sur la netteté</h3>
+                    <p class="exemple-context">
+                        Une image A a une définition de 1920×1080 pixels et des dimensions 50,8 cm × 28,6 cm. 
+                        Une image B a une définition 600×400 pixels pour des dimensions 10 cm × 6,7 cm. Laquelle a la meilleure résolution ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>📐 Méthode :</strong> Convertir les dimensions en pouces (1 pouce = 2,54 cm). <br>
+                        Image A : largeur pouces = 50,8 / 2,54 = 20 pouces ; hauteur = 28,6 / 2,54 ≈ 11,26 pouces.<br>
+                        Résolution horizontale A = 1920 / 20 = 96 dpi ; verticale ≈ 1080 / 11,26 ≈ 96 dpi → résolution ≈ 96 dpi.<br>
+                        Image B : largeur = 10 / 2,54 ≈ 3,94 pouces ; hauteur = 6,7 / 2,54 ≈ 2,64 pouces.<br>
+                        Résolution B = 600 / 3,94 ≈ 152 dpi (horizontal).<br>
+                        ➡️ <strong>Conclusion :</strong> L’image B a une meilleure résolution (plus de pixels par pouce), donc elle sera plus nette à l’impression.
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Piège fréquent : Ne pas confondre définition (pixels) et résolution (pixels/pouce). Une grande définition n’implique pas forcément une haute résolution si les dimensions physiques sont grandes.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Taille d’une image après réduction de la profondeur</h3>
+                    <p class="exemple-context">
+                        On convertit une image true color (24 bits/pixel) de 4 000 × 3 000 pixels en une image en niveau de gris (8 bits/pixel). 
+                        Calculez la taille gagnée en Mo.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>📊 Étapes de calcul :</strong><br>
+                        Définition = $4\,000 \times 3\,000 = 12\,000\,000$ pixels.<br>
+                        Taille initiale (bits) = $12\,000\,000 \times 24 = 288\,000\,000$ bits.<br>
+                        Taille initiale (octets) = $288\,000\,000 / 8 = 36\,000\,000$ octets ≈ <strong>34,33 Mo</strong> (car 36 000 000 / 1 048 576 ≈ 34,33).<br>
+                        Taille après (8 bits) = $12\,000\,000 \times 8 = 96\,000\,000$ bits → $12\,000\,000$ octets ≈ <strong>11,44 Mo</strong>.<br>
+                        ✅ <strong>Économie réalisée :</strong> $34,33 - 11,44 = 22,89$ Mo gagnés.
+                    </div>
+                    <div class="image-placeholder">
+                        <img src="" alt="Illustration d'une image true color (riche en couleurs) à côté de sa version en niveaux de gris (moins de profondeur), montrant la réduction de taille.">
+                        <div class="image-caption">Comparaison : image 24 bits (couleurs vives) vs 8 bits (niveaux de gris) – la taille est divisée par 3.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section supplémentaire : tableaux récapitulatifs et conversion -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Tableaux récapitulatifs & conversions utiles</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Unités de mesure en informatique</h3>
+                    <ul class="concept-list">
+                        <li><strong>1 octet (B)</strong> = 8 bits</li>
+                        <li><strong>1 Kilooctet (Ko)</strong> = 1024 octets = $2^{10}$ octets</li>
+                        <li><strong>1 Mégaoctet (Mo)</strong> = 1024 Ko = $2^{20}$ octets ≈ 1 048 576 octets</li>
+                        <li><strong>1 Gigaoctet (Go)</strong> = 1024 Mo = $2^{30}$ octets</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.5rem;">
+                        📌 <strong>À retenir pour l'examen :</strong> Dans les exercices de taille d’image, on utilise toujours les puissances de 2 (1024) et non 1000.
+                    </div>
+                </div>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">Résumé des formules clés</h3>
+                    <div class="card-description">
+                        <p style="background:#eef2ff; padding:0.5rem; border-radius:0.5rem; font-family:monospace;">
+                        $Définition = Largeur_{px} \times Hauteur_{px}$<br>
+                        $Taille_{bits} = Définition \times Profondeur_{bits}$<br>
+                        $Taille_{octets} = \dfrac{Taille_{bits}}{8}$<br>
+                        $Taille_{Ko} = \dfrac{Taille_{octets}}{1024}$<br>
+                        $Taille_{Mo} = \dfrac{Taille_{Ko}}{1024}$<br>
+                        $Résolution\ (dpi) = \dfrac{Définition\ (pixels)}{Dimension\ (pouces)}$
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section des pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>définition</strong> (largeur×hauteur en pixels) et <strong>résolution</strong> (pixels par pouce). Une image peut avoir une grande définition mais une faible résolution si elle est affichée en grand format.</li>
+                        <li><span class="bold">Attention aux unités :</span> Ne pas utiliser 1000 pour convertir les Ko en Mo en informatique (toujours 1024).</li>
+                        <li><span class="bold">Oublier la division par 8 :</span> Certains élèves calculent la taille en bits et s’arrêtent là. L’énoncé demande souvent la taille en octets, Ko ou Mo → penser à diviser par 8.</li>
+                        <li><span class="bold">Confusion pixel / pouce :</span> Vérifier les conversions cm → pouces (diviser par 2,54) quand on calcule la résolution.</li>
+                        <li><span class="bold">Profondeur = 24 bits ≠ 24 octets :</span> 24 bits = 3 octets, ne pas inverser.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section d'application rapide (type QCM mental) -->
+            <section class="exemple-section">
+                <h2 class="section-title">🧠 Vérifie ta compréhension</h2>
+                <div class="card exemple-card" style="background: #ffffff;">
+                    <h3 class="card-title">Mini-exercice (auto-évaluation)</h3>
+                    <p class="exemple-context">
+                        1. Une image de 1280 × 720 pixels avec une profondeur de 32 bits (couleur + transparence). Quelle est sa taille en Mo ?<br>
+                        2. Si la même image est compressée sans perte et passe à 2,5 Mo, quel pourcentage de réduction a-t-on obtenu ?<br>
+                        (Résultats : 1) environ 3,52 Mo ; 2) réduction ≈ 29%).
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Correction rapide :</strong><br>
+                        1. Déf = 921 600 px ; Taille bits = 921 600×32 = 29 491 200 bits ; octets = 3 686 400 ; Mo = 3 686 400 / 1 048 576 ≈ 3,52 Mo.<br>
+                        2. (3,52 - 2,5)/3,52 ≈ 0,289 → 28,9% de réduction.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conseil supplémentaire : outils pratiques -->
+            <section class="concept-section">
+                <div class="card concept-card">
+                    <h3 class="card-title">🔧 Pour aller plus loin (conseils pour les TPs)</h3>
+                    <p class="card-description">
+                        Dans les travaux pratiques, pour connaître la définition d’une image sous Windows : clic droit → Propriétés → Détails → Dimensions. 
+                        Sous Linux, utiliser <span class="highlight">identify</span> ou <span class="highlight">file</span> en ligne de commande. 
+                        Les logiciels comme GIMP ou Photoshop affichent aussi la résolution et la profondeur.
+                    </p>
+                    <div class="image-placeholder">
+                        <img src="" alt="Capture d'écran conceptuelle montrant les propriétés d'une image : définition 1920x1080, profondeur 24 bits, taille 2,3 Mo.">
+                        <div class="image-caption">Exemple d'affichage des caractéristiques d'une image dans les propriétés du fichier.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📚 Fiche de révision - Unité d'apprentissage 6 : Utiliser les fichiers multimédias (Images numériques) · Niveau Première C, D, E · Probatoire Cameroun<br>
+            ✨ Révision créée pour maîtriser définition, résolution, profondeur et calculs de taille. <a href="#">Télécharger la version PDF</a> · 📅 Mise à jour conforme au programme officiel</p>
+        </footer>
+    </div>
+</body>
+</html>

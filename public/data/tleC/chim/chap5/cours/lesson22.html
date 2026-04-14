@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Oxydation ménagée des alcools</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            font-family: monospace;
+            font-weight: 600;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            color: #0f172a;
+        }
+
+        .exemple-correction strong {
+            color: #1e40af;
+        }
+
+        .exemple-astuce {
+            background-color: #fef9e3;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 4px solid #ef4444;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .reaction-image {
+            background-color: #f8fafc;
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 0.9rem;
+            border: 1px solid #e2e8f0;
+            color: #0f172a;
+        }
+
+        footer {
+            background-color: #f8fafc;
+            padding: 1rem 2.5rem;
+            border-top: 1px solid #e9eef2;
+            font-size: 0.8rem;
+            color: #64748b;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 22 : Oxydation ménagée des alcools</h1>
+            <p class="lesson-subtitle">Chimie · Terminale C & D · Programme 2025-2026</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Distinction oxydation complète / oxydation ménagée</h3>
+                    <p class="card-description">
+                        <strong>Oxydation complète :</strong> combustion vive dans le dioxygène. Les alcools brûlent entièrement en donnant du dioxyde de carbone et de l'eau. 
+                        <br>Exemple : $C_2H_5OH + 3O_2 \to 2CO_2 + 3H_2O$.
+                    </p>
+                    <p class="card-description">
+                        <strong>Oxydation ménagée :</strong> oxydation contrôlée en milieu aqueux à l'aide d'oxydants doux (dichromate de potassium $K_2Cr_2O_7$ en milieu acide ou permanganate de potassium $KMnO_4$). 
+                        Le produit final dépend de la classe de l'alcool.
+                    </p>
+                    <ul class="concept-list">
+                        <li>L'oxydation ménagée permet de distinguer les alcools primaires, secondaires et tertiaires.</li>
+                        <li>Elle est à la base de nombreuses synthèses organiques (aldéhydes, cétones, acides).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Oxydation ménagée des alcools primaires (R–CH₂OH)</h3>
+                    <p class="card-description">
+                        Un alcool primaire est oxydé d'abord en <strong>aldéhyde</strong>, puis en <strong>acide carboxylique</strong> si l'oxydant est en excès.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Première étape : $R–CH_2OH \xrightarrow{[O]} R–CHO$ (aldéhyde)</li>
+                        <li>Deuxième étape : $R–CHO \xrightarrow{[O]} R–COOH$ (acide carboxylique)</li>
+                        <li>Réactifs typiques : $K_2Cr_2O_7 / H^+$ (changement de couleur : orange → vert) ou $KMnO_4 / H^+$ (violet → incolore).</li>
+                        <li>Exemple : l'éthanol donne l'éthanal (acétaldéhyde) puis l'acide éthanoïque.</li>
+                    </ul>
+                    <div class="reaction-image">
+                        📝 $CH_3-CH_2OH \xrightarrow{[O], K_2Cr_2O_7/H^+} CH_3-CHO \xrightarrow{[O]} CH_3-COOH$
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Oxydation ménagée des alcools secondaires (R–CHOH–R')</h3>
+                    <p class="card-description">
+                        Un alcool secondaire est oxydé en <strong>cétone</strong>. La réaction s'arrête à ce stade car la cétone est résistante à l'oxydation ménagée.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Équation : $R–CHOH–R' \xrightarrow{[O]} R–CO–R'$ (cétone)</li>
+                        <li>Exemple : le propan-2-ol (isopropanol) donne la propanone (acétone).</li>
+                        <li>Observation : le réactif de Tollens ou Fehling n'est pas réduit par une cétone (test négatif).</li>
+                    </ul>
+                    <div class="reaction-image">
+                        📝 $CH_3-CHOH-CH_3 \xrightarrow{[O], KMnO_4/H^+} CH_3-CO-CH_3$
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Cas des alcools tertiaires : inertie</h3>
+                    <p class="card-description">
+                        Les alcools tertiaires ne possèdent pas d'hydrogène sur le carbone porteur du groupe –OH. Ils ne subissent <strong>pas d'oxydation ménagée</strong> dans les conditions douces. 
+                        Ils restent inchangés (ou subissent une déshydratation en milieu très acide).
+                    </p>
+                    <ul class="concept-list">
+                        <li>Test de reconnaissance : un alcool tertiaire ne fait pas virer la solution de dichromate de potassium.</li>
+                        <li>Exemple : le 2-méthylpropan-2-ol (tert-butanol) n'est pas oxydé par $K_2Cr_2O_7/H^+$.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">5. Réactifs oxydants usuels et tests de reconnaissance</h3>
+                    <p class="card-description">
+                        Les oxydants ménagés permettent à la fois d'effectuer des synthèses et d'identifier la classe d'un alcool.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Dichromate de potassium en milieu acide ($K_2Cr_2O_7/H_2SO_4$) :</strong> orange → vert (formation d'ions $Cr^{3+}$).</li>
+                        <li><strong>Permanganate de potassium en milieu acide ($KMnO_4/H^+$) :</strong> violet → incolore (formation de $Mn^{2+}$).</li>
+                        <li><strong>Réaction avec l'aldéhyde produit :</strong> les aldéhydes issus des alcools primaires sont réducteurs et réagissent avec la liqueur de Fehling (précipité rouge brique) ou le réactif de Tollens (miroir d'argent).</li>
+                    </ul>
+                    <p class="card-description">
+                        Ces tests sont souvent demandés au Baccalauréat pour identifier un composé inconnu.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Examen Bac : Différencier trois isomères de formule $C_4H_{10}O$</h3>
+                    <p class="exemple-context">
+                        On dispose de trois alcools de formule brute $C_4H_{10}O$ : A (butan-1-ol), B (butan-2-ol), C (2-méthylpropan-2-ol). 
+                        On réalise une oxydation ménagée sur chacun avec $K_2Cr_2O_7/H^+$. Décrire les observations et identifier les produits obtenus.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution :</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li><strong>Alcool A (primaire) :</strong> oxydation en butanal (aldéhyde) puis en acide butanoïque. Le dichromate passe du orange au vert.</li>
+                            <li><strong>Alcool B (secondaire) :</strong> oxydation en butanone (cétone). Le dichromate vire également au vert car la cétone se forme mais il n'y a pas d'oxydation ultérieure.</li>
+                            <li><strong>Alcool C (tertiaire) :</strong> aucune réaction d'oxydation, la couleur orange du dichromate persiste.</li>
+                        </ul>
+                        <p style="margin-top: 0.75rem;">✅ On distingue C des deux autres par absence de virage. Pour distinguer A et B, on utilise un test caractéristique des aldéhydes (Tollens ou Fehling) : seul A (via son aldéhyde) donne un test positif.</p>
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : En oxydation ménagée, les alcools tertiaires sont les seuls à ne pas réagir. Pour les distinguer, penser au test au dichromate.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Application : Écrire l'équation d'oxydation de l'éthanol en éthanal</h3>
+                    <p class="exemple-context">
+                        On oxyde une solution d'éthanol (0,1 mol) par une solution acidifiée de dichromate de potassium en excès modéré pour s'arrêter à l'aldéhyde. 
+                        Donner l'équation bilan de la demi-oxydation.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Équation ionique simplifiée :</strong><br>
+                        $3CH_3CH_2OH + Cr_2O_7^{2-} + 8H^+ \to 3CH_3CHO + 2Cr^{3+} + 7H_2O$<br><br>
+                        <strong>Explication :</strong> L'ion dichromate ($Cr_2O_7^{2-}$) orange est réduit en $Cr^{3+}$ vert, tandis que l'éthanol est oxydé en éthanal (perte de deux hydrogènes). 
+                        La réaction nécessite un milieu acide ($H^+$).
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Penser à équilibrer les demi-équations électroniques : $CH_3CH_2OH \to CH_3CHO + 2H^+ + 2e^-$ et $Cr_2O_7^{2-} + 14H^+ + 6e^- \to 2Cr^{3+} + 7H_2O$.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Lien Bac 2025 : oxydation ménagée et reconnaissance des fonctions</h3>
+                    <p class="exemple-context">
+                        Un composé organique X de formule $C_3H_8O$ subit une oxydation ménagée par $KMnO_4/H^+$. Le produit obtenu réagit avec la liqueur de Fehling en donnant un précipité rouge brique. Déterminer la nature et la classe de X.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Démarche :</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Formule $C_3H_8O$ correspond à un alcool ou un éther. Comme il est oxydé, c'est un alcool.</li>
+                            <li>Le produit d'oxydation donne un test de Fehling positif → il s'agit d'un aldéhyde (réducteur).</li>
+                            <li>Seul un alcool primaire conduit à un aldéhyde. X est donc un alcool primaire en $C_3$ : le propan-1-ol ($CH_3CH_2CH_2OH$).</li>
+                        </ul>
+                        <p>L'oxydation donne le propanal ($CH_3CH_2CHO$), qui est un aldéhyde.</p>
+                    </div>
+                    <div class="exemple-astuce">
+                        📌 À retenir : Test de Fehling positif = présence d'aldéhyde (ou d'alpha-hydroxycétone). L'oxydation ménagée d'un alcool primaire aboutit à un aldéhyde qui réduit Fehling.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges et confusions fréquentes -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li><span class="bold">❌ Erreur fréquente :</span> Croire qu'un alcool tertiaire peut être oxydé en cétone. <strong>Non !</strong> Il ne réagit pas en oxydation ménagée (absence d'hydrogène sur le carbone hydroxylé).</li>
+                        <li><span class="bold">❌ Confusion :</span> Penser que l'oxydation d'un alcool primaire donne toujours directement l'acide carboxylique. <strong>Attention :</strong> L'aldéhyde est un intermédiaire ; si l'oxydant est en défaut, on isole l'aldéhyde.</li>
+                        <li><span class="bold">⚠️ Réactifs :</span> Le dichromate de potassium est orange en milieu acide, mais devient vert après réduction. Ne pas confondre avec le permanganate (violet → incolore).</li>
+                        <li><span class="bold">🔍 À surveiller :</span> Les aldéhydes issus de l'oxydation des alcools primaires sont volatils et peuvent s'évaporer ; il faut parfois refroidir le milieu.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Schéma récapitulatif visuel (IA générera l'image) -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Tableau récapitulatif des oxydations</h2>
+                <div class="card" style="overflow-x: auto;">
+                    <table style="width:100%; border-collapse: collapse; font-size: 0.9rem;">
+                        <thead style="background-color: #eef2ff;">
+                            <tr>
+                                <th style="padding: 12px; border: 1px solid #cbd5e1;">Classe d'alcool</th>
+                                <th style="padding: 12px; border: 1px solid #cbd5e1;">Produit d'oxydation ménagée</th>
+                                <th style="padding: 12px; border: 1px solid #cbd5e1;">Test au dichromate</th>
+                                <th style="padding: 12px; border: 1px solid #cbd5e1;">Exemple</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;"><strong>Primaire</strong></td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;">Aldéhyde → Acide carboxylique</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;">Orange → Vert</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;">Éthanol → Éthanal</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;"><strong>Secondaire</strong></td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;">Cétone</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;">Orange → Vert</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;">Propan-2-ol → Acétone</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;"><strong>Tertiaire</strong></td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;">Pas de réaction</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;">Resté orange</td>
+                                <td style="padding: 10px; border: 1px solid #e2e8f0;">2-méthylpropan-2-ol</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top: 1rem; font-size: 0.85rem; color: #475569;">🔬 <strong>Moyen mnémotechnique :</strong> "Primaire = Aldéhyde puis Acide, Secondaire = Cétone, Tertiaire = Rien"</p>
+                </div>
+                <!-- Emplacement pour une illustration générée par IA : schéma des oxydations -->
+                <div style="text-align: center; margin: 1rem 0 0.5rem;">
+                    <img src="schema_oxydation_menagee_alcools" alt="Diagramme montrant l'oxydation ménagée des alcools primaires, secondaires et tertiaires avec réactifs et produits (K2Cr2O7/H+, aldéhyde, cétone, acide carboxylique). Schéma synthétique pour Terminale." style="max-width:100%; border-radius: 16px; border: 1px solid #e2e8f0;">
+                    <p style="font-size: 0.75rem; color: #6c757d;">Illustration : vue d'ensemble des transformations (générée par IA)</p>
+                </div>
+            </section>
+
+            <!-- Lien avec les sujets de bac et application pratique -->
+            <section class="exemple-section">
+                <h2 class="section-title">🎯 FOCUS BAC : ce qu'il faut maîtriser</h2>
+                <div class="card">
+                    <ul class="concept-list">
+                        <li>Savoir écrire les équations d'oxydation d'un alcool primaire ou secondaire avec $K_2Cr_2O_7/H^+$ ou $KMnO_4/H^+$.</li>
+                        <li>Déterminer la classe d'un alcool à partir du produit d'oxydation ou d'un test de reconnaissance (test de Schiff, Tollens, Fehling).</li>
+                        <li>Prévoir la formation d'un aldéhyde, d'une cétone ou d'un acide carboxylique selon les conditions (excès d'oxydant).</li>
+                        <li>Interpréter des données expérimentales (virage de couleur, test positif) pour identifier un composé inconnu.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        📖 Révision express : pour un alcool primaire → oxydation possible jusqu'à acide. Pour un secondaire → cétone stable. Pour tertiaire → inerte. 
+                        Les sujets de Bac 2024-2025 utilisent fréquemment l'oxydation ménagée comme outil de caractérisation.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme de Chimie Terminale C & D (année 2025-2026) · Révision Leçon 22 : Oxydation ménagée des alcools · 🇨🇲</p>
+        </footer>
+    </div>
+</body>
+</html>

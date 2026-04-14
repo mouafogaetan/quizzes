@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Exprimer la cause et la conséquence</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (optionnel, mais conservé pour compatibilité) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+        /* Tableau stylisé pour les connecteurs */
+        .connecteurs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        .connecteurs-table th, .connecteurs-table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .connecteurs-table th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #1e40af;
+        }
+        .connecteurs-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Exprimer la cause et la conséquence</h1>
+            <p class="lesson-subtitle">Français · Classe de 3ème · Module 2 – Texte argumentatif</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des éléments clés à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">🔗 Connecteurs logiques : cause et conséquence</h3>
+                    <p class="card-description">
+                        Dans un texte argumentatif ou explicatif, il est essentiel de lier les idées entre elles. 
+                        Les <strong>connecteurs de cause</strong> expliquent l'origine d'un fait ou d'une opinion. 
+                        Les <strong>connecteurs de conséquence</strong> montrent le résultat ou l'effet produit.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Cause :</strong> <span class="formule">car, parce que, puisque, étant donné que, en raison de, à cause de, grâce à, sous l’effet de</span></li>
+                        <li><strong>Conséquence :</strong> <span class="formule">donc, ainsi, c’est pourquoi, par conséquent, en conséquence, de sorte que, si bien que, dès lors</span></li>
+                        <li>📌 <em>Astuce :</em> Une cause répond à la question <strong>"Pourquoi ?"</strong> Une conséquence répond à <strong>"Quel résultat ?"</strong></li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">✍️ Structure d’un raisonnement avec cause → conséquence</h3>
+                    <p class="card-description">
+                        Dans une production écrite (argumentation, sensibilisation, explication), il est efficace d’enchaîner logiquement :
+                        <strong>Phénomène / constat → Cause(s) → Conséquence(s) → Solution(s) (optionnel)</strong>. 
+                        Les connecteurs permettent de fluidifier le texte et de montrer la cohérence de votre réflexion.
+                    </p>
+                    <!-- Image schématique : schéma simple cause -> conséquence -->
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <img src="" alt="Schéma montrant une flèche reliant un événement A (cause) à un événement B (conséquence). Sous la cause, liste de connecteurs : car, parce que, puisque. Sous la conséquence, donc, ainsi, c’est pourquoi." style="max-width:100%; border-radius: 12px; border:1px solid #e2e8f0;">
+                        <p style="font-size:0.8rem; color:#475569;">📖 Illustration : l’enchaînement cause → conséquence</p>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🎯 Nuances importantes : exprimer la cause avec finesse</h3>
+                    <p class="card-description">
+                        Certains connecteurs ont une valeur particulière :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>« Parce que »</strong> : cause objective, factuelle. <em>Ex. : Il a échoué parce qu’il n’a pas révisé.</em></li>
+                        <li><strong>« Puisque »</strong> : cause déjà connue ou admise. <em>Ex. : Puisque tu es d’accord, nous pouvons commencer.</em></li>
+                        <li><strong>« Grâce à » / « à cause de »</strong> : valeur positive / négative. <em>Grâce à son courage, il a réussi. / À cause de la pluie, la fête a été annulée.</em></li>
+                        <li><strong>« Si bien que », « de sorte que »</strong> : conséquence forte, parfois inattendue.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">📘 Exemple 1 : argumentation sur le travail des enfants</h3>
+                    <p class="exemple-context">
+                        Dans certains villages, les enfants travaillent dans les champs dès l’âge de huit ans.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Utilisation des connecteurs :</strong><br>
+                        <em>« <span class="formule">Parce que</span> leurs familles vivent dans une grande pauvreté, ces enfants sont privés d’école. <span class="formule">Ainsi</span>, ils grandissent sans instruction et restent prisonniers du cycle de la misère. <span class="formule">C’est pourquoi</span> il est urgent d’investir dans l’éducation. »</em>
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Repérez les liens logiques : pauvreté (cause) → privation d’école (cause intermédiaire) → absence d’instruction (conséquence) → urgence d’agir (conclusion).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">🌍 Exemple 2 : sensibilisation à l’alcoolisme chez les jeunes</h3>
+                    <p class="exemple-context">
+                        Consommation précoce d’alcool et ses dangers.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Enchaînement cause-conséquence :</strong><br>
+                        « <span class="formule">En raison de</span> la pression sociale et du manque d’encadrement, de nombreux adolescents commencent à boire très tôt. <span class="formule">De sorte que</span> leur santé se détériore et leurs résultats scolaires chutent. <span class="formule">Par conséquent</span>, des campagnes de sensibilisation doivent être renforcées. »
+                    </p>
+                    <div class="exemple-astuce">
+                        🧠 Le conditionnel peut aussi accompagner la conséquence : « Cela <strong>aurait</strong> des effets désastreux si rien n’est fait. »
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">📖 Exemple 3 : récit explicatif – la dot au Cameroun</h3>
+                    <p class="exemple-context">
+                        La dot est une tradition ancrée, mais ses excès posent problème.
+                    </p>
+                    <p class="exemple-correction">
+                        « <span class="formule">Puisque</span> la dot est souvent perçue comme un gage de respect, certaines familles exigent des sommes élevées. <span class="formule">Il en résulte</span> que de jeunes couples retardent leur mariage ou s’endettent. <span class="formule">Dès lors</span>, une réflexion collective s’impose pour préserver l’esprit d’union sans appauvrir les familles. »
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section tableau synthétique des connecteurs -->
+            <section class="concept-section">
+                <h2 class="section-title">📚 Tableau récapitulatif : connecteurs de cause et de conséquence</h2>
+                <div class="card">
+                    <table class="connecteurs-table">
+                        <thead>
+                            <tr><th>Type</th><th>Connecteurs / expressions</th><th>Exemple d'utilisation</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Cause</strong></td><td>car, parce que, puisque, étant donné que, du fait que, sous prétexte que, à cause de, grâce à, en raison de</td><td>Il est absent <strong>parce qu’</strong>il est malade.</td></tr>
+                            <tr><td><strong>Conséquence</strong></td><td>donc, ainsi, c’est pourquoi, par conséquent, en conséquence, de sorte que, si bien que, dès lors, d’où</td><td>Le trafic était bloqué, <strong>par conséquent</strong> nous sommes arrivés en retard.</td></tr>
+                            <tr><td><strong>Cause + conséquence imbriquées</strong></td><td>si … alors, tellement … que, trop … pour que</td><td>Il avait <strong>tellement</strong> faim <strong>qu’</strong>il a dévoré tout le plat.</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 0.8rem; background-color:#eef2ff; padding:0.6rem; border-radius:0.5rem;">
+                        🎯 À retenir : un texte sans connecteurs semble plat et peu convaincant. Variez les outils pour enrichir votre style.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>« à cause de »</strong> (nuance négative) et <strong>« grâce à »</strong> (nuance positive). Ex. : « Il a réussi grâce à son travail » ≠ « Il a échoué à cause de son inattention ».</li>
+                        <li><span class="bold">Attention :</span> Utiliser <strong>« donc »</strong> à outrance. Variez avec <em>par conséquent, ainsi, c’est pourquoi</em> pour éviter les répétitions.</li>
+                        <li><span class="bold">Piège syntaxique :</span> Oublier la virgule après un connecteur placé en début de phrase. Exemple : <em>« Par conséquent, nous devons agir. »</em> La virgule est importante pour la clarté.</li>
+                        <li><span class="bold">À ne pas faire :</span> Enchaîner cause et conséquence sans logique réelle. Vérifiez que le lien est pertinent et que l’idée est bien justifiée.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Exercice d'application rapide -->
+            <section class="exemple-section">
+                <h2 class="section-title">✏️ Petite application – À toi de jouer !</h2>
+                <div class="card" style="background-color:#fefce8;">
+                    <h3 class="card-title" style="border-left-color: #eab308;">Relie chaque cause à sa conséquence avec un connecteur</h3>
+                    <p><strong>Situation :</strong> De nombreux élèves manquent de manuels scolaires.</p>
+                    <ul style="margin: 0.8rem 0 0 1.5rem;">
+                        <li><strong>Cause :</strong> Les livres sont trop chers pour certaines familles.</li>
+                        <li><strong>Conséquence :</strong> Les élèves ne peuvent pas réviser correctement à la maison.</li>
+                    </ul>
+                    <p><strong>Proposition de phrase :</strong> <em>« <span style="background:#ffe6b3;">[connecteur de cause]</span> le coût élevé des manuels, de nombreuses familles n’en achètent pas ; <span style="background:#ffe6b3;">[connecteur de conséquence]</span> les élèves manquent de ressources pour réviser. »</em></p>
+                    <div class="exemple-astuce">
+                        🔍 Correction possible : <em>« À cause du coût élevé des manuels, de nombreuses familles n’en achètent pas ; par conséquent, les élèves manquent de ressources pour réviser. »</em>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche créée pour les élèves de 3ème – Programme de français (Cameroun) · Module 2 – Le texte argumentatif · <a href="#">Réviser avec les connecteurs logiques</a> · 📚</p>
+        </footer>
+    </div>
+</body>
+</html>

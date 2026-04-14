@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Élément chimique et numéro atomique</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section avertisement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Image placeholder style */
+        .image-placeholder {
+            background-color: #f1f5f9;
+            border: 1px dashed #cbd5e1;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #475569;
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 2.1 : Notion d'élément chimique et numéro atomique</h1>
+            <p class="lesson-subtitle">PCT · Classe de 3ème · Programme officiel Cameroun</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Qu'est-ce qu'un élément chimique ?</h3>
+                    <p class="card-description">
+                        Un <strong>élément chimique</strong> est une catégorie d'atomes qui possèdent le même nombre de protons dans leur noyau, c’est-à-dire le même <strong>numéro atomique Z</strong>. 
+                        Chaque élément est représenté par un symbole chimique (ex : H, O, C, Fe).
+                    </p>
+                    <ul class="concept-list">
+                        <li>Le nombre de protons (Z) est une caractéristique unique : tous les atomes d’un même élément ont le même Z.</li>
+                        <li>Exemples : l’élément carbone regroupe tous les atomes ayant Z = 6.</li>
+                        <li>Un atome neutre possède autant d’électrons que de protons.</li>
+                    </ul>
+                    <!-- Image descriptive -->
+                    <div class="image-placeholder">
+                        <img src="data:image/jpeg;base64,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" alt="Schéma d'un atome de carbone (6 protons, 6 neutrons, 6 électrons) mettant en évidence le noyau avec Z=6">
+                        <em>Figure : Atome de carbone – son numéro atomique Z = 6.</em>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Le numéro atomique (Z)</h3>
+                    <p class="card-description">
+                        Le <strong>numéro atomique Z</strong> est le nombre de protons contenus dans le noyau d'un atome. Il détermine l’identité de l’élément chimique. 
+                        Pour un atome neutre, Z correspond aussi au nombre d’électrons.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="formule">Z = nombre de protons = nombre d’électrons (atome neutre)</span></li>
+                        <li>Le symbole de l’élément s’écrit avec Z en indice à gauche : $_Z^A X$ (A = nombre de masse).</li>
+                        <li>Le tableau périodique classe les éléments par Z croissant.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Origine de la classification périodique</h3>
+                    <p class="card-description">
+                        C’est le chimiste russe <strong>Dmitri Mendeleïev</strong> (1869) qui a proposé la première classification périodique des éléments. 
+                        Il a rangé les éléments par masse atomique croissante et a remarqué une périodicité des propriétés chimiques.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Mendeleïev a laissé des cases vides pour des éléments non encore découverts, prédisant leurs propriétés.</li>
+                        <li>Aujourd’hui, le tableau périodique moderne classe les éléments par numéro atomique Z croissant.</li>
+                    </ul>
+                    <div class="image-placeholder">
+                        <img src="" alt="Portrait de Dmitri Mendeleïev et une reproduction de son tableau périodique original">
+                        <em>Dmitri Mendeleïev (1834-1907) – père de la classification périodique.</em>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section des exemples -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Identifier un élément à partir de Z</h3>
+                    <p class="exemple-context">
+                        Un atome possède 12 protons dans son noyau. Quel est son numéro atomique ? À quel élément correspond-il ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong> Le numéro atomique Z est égal au nombre de protons. Donc Z = 12. <br>
+                        En consultant le tableau périodique, l’élément ayant Z = 12 est le <strong>magnésium (Mg)</strong>.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Retiens que Z est l’identité de l’atome. Si Z change, l’élément change.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Atome neutre et électrons</h3>
+                    <p class="exemple-context">
+                        Un atome de sodium (Na) possède un numéro atomique Z = 11. Combien d’électrons cet atome contient-il à l’état neutre ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Calcul :</strong> Dans un atome neutre, le nombre d’électrons est égal au nombre de protons (Z). <br>
+                        Donc nombre d’électrons = Z = <strong>11 électrons</strong>.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Un atome peut perdre ou gagner des électrons pour devenir un ion ; le nombre de protons (Z) reste inchangé.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Mendeleïev et les éléments prédits</h3>
+                    <p class="exemple-context">
+                        Mendeleïev a prédit l’existence d’un élément qu’il a appelé « éka-aluminium », situé juste après l’aluminium dans son tableau. Quel élément réel correspond à cette prédiction ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> L’« éka-aluminium » a été découvert plus tard et nommé <strong>gallium (Ga)</strong>. Ses propriétés (masse atomique, densité) correspondaient remarquablement aux prédictions de Mendeleïev.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre numéro atomique (Z) et nombre de masse (A). <strong>Z = protons</strong> ; <strong>A = protons + neutrons</strong>.</li>
+                        <li><span class="bold">Attention :</span> Un ion a un nombre d’électrons différent de Z, mais son Z reste celui de l’élément chimique.</li>
+                        <li><span class="bold">Ne pas oublier :</span> Le symbole d’un élément est toujours écrit avec une majuscule (et éventuellement une minuscule : Na, Cl, etc.).</li>
+                        <li><span class="bold">Piège :</span> Tous les atomes d’un même élément ont forcément le même Z, mais ils peuvent avoir des nombres de neutrons différents (isotopes).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section complémentaire : petit récapitulatif des symboles et Z importants -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 À savoir : quelques éléments et leur numéro atomique</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Exemples d'éléments courants</h3>
+                    <ul class="concept-list">
+                        <li><strong>Hydrogène (H)</strong> : Z = 1</li>
+                        <li><strong>Carbone (C)</strong> : Z = 6</li>
+                        <li><strong>Azote (N)</strong> : Z = 7</li>
+                        <li><strong>Oxygène (O)</strong> : Z = 8</li>
+                        <li><strong>Sodium (Na)</strong> : Z = 11</li>
+                        <li><strong>Chlore (Cl)</strong> : Z = 17</li>
+                        <li><strong>Fer (Fe)</strong> : Z = 26</li>
+                    </ul>
+                    <p class="card-description">
+                        Retiens que le tableau périodique est construit en lignes (périodes) et colonnes (familles). Les éléments d’une même colonne ont des propriétés chimiques voisines.
+                    </p>
+                    <div class="image-placeholder">
+                        <img src="data:image/png;base64,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" alt="Extrait simplifié du tableau périodique des éléments avec mise en évidence de quelques numéros atomiques (H=1, C=6, O=8, Na=11, Cl=17, Fe=26)">
+                        <em>Extrait du tableau périodique : les éléments sont classés par Z croissant.</em>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Révision créée pour les élèves de 3ème (Cameroun) · Programme de PCT · <a href="#">Retour au sommaire</a> · 🔬</p>
+        </footer>
+    </div>
+</body>
+</html>

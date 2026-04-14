@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 15 : La nature de la connaissance scientifique</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Style pour les images */
+        .illustration {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .illustration img {
+            max-width: 100%;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .illustration-caption {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 15 : La nature de la connaissance scientifique</h1>
+            <p class="lesson-subtitle">Philosophie · Terminale C & D · Baccalauréat 2025-2026</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">L'observation scientifique : une "observation polémique" (Gaston Bachelard)</h3>
+                    <p class="card-description">
+                        Pour Bachelard, l'observation scientifique n'est jamais neutre ou pure. Elle est toujours <strong>polémique</strong> : elle confirme ou infirme une thèse préalable. 
+                        Contrairement à l'observation courante, elle est orientée par des hypothèses et des théories.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Thèse préalable :</strong> Toute observation scientifique répond à une question précise.</li>
+                        <li><strong>Contre l'illusion d'immédiateté :</strong> On n'observe pas "la réalité en soi", mais des phénomènes construits par la théorie.</li>
+                        <li><strong>Exemple :</strong> L'observation d'une particule en physique quantique dépend de l'appareil de mesure, lui-même conçu selon une théorie.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">L'expérimentation et les instruments : des "théories matérialisées"</h3>
+                    <p class="card-description">
+                        Les instruments scientifiques (microscope, accélérateur de particules, etc.) ne sont pas de simples prolongements des sens. 
+                        Ils sont le fruit de théories et de techniques : ce sont des <strong>"théories matérialisées"</strong>.
+                    </p>
+                    <ul class="concept-list">
+                        <li>L'instrument permet de produire le phénomène à observer, et non pas seulement de l'enregistrer.</li>
+                        <li>La science moderne ne se contente pas d'observer la nature : elle l'interroge et la transforme.</li>
+                        <li>L'expérimentation est une <strong>production contrôlée de phénomènes</strong>.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">La rupture épistémologique (Bachelard)</h3>
+                    <p class="card-description">
+                        Pour accéder à la connaissance scientifique, l'esprit doit se défaire des premières intuitions, des opinions et des évidences du sens commun. 
+                        Ce processus est appelé <strong>"rupture épistémologique"</strong>.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Il faut "rompre" avec les connaissances immédiates, souvent trompeuses.</li>
+                        <li>La science progresse par des révolutions conceptuelles, non par simple accumulation.</li>
+                        <li>Cette rupture est difficile car l'esprit a une tendance naturelle à l'imaginaire et aux représentations simplistes.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Science et philosophie : complémentarité et différence</h3>
+                    <p class="card-description">
+                        La science fournit des faits, des lois et des modèles. La philosophie interroge le sens, les fondements et les limites de la démarche scientifique.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Complémentarité :</strong> La philosophie des sciences analyse les concepts fondamentaux (cause, temps, vérité, réalité).</li>
+                        <li><strong>Différence :</strong> La science cherche des explications causales et des prédictions ; la philosophie questionne les présupposés de ces explications.</li>
+                        <li><strong>Filiation historique :</strong> La philosophie est la "mère" des sciences, mais les sciences sont devenues autonomes.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : L'observation polémique en action</h3>
+                    <p class="exemple-context">
+                        Un chercheur veut tester l'hypothèse que "l'augmentation du CO₂ atmosphérique entraîne une hausse des températures mondiales". 
+                        Il ne se contente pas de "regarder le ciel". Il utilise des stations de mesure, des satellites, des modèles climatiques.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Application du concept :</strong> L'observation est ici <strong>polémique</strong> car elle vise à confirmer ou infirmer une thèse précise. 
+                        Les instruments (capteurs, ordinateurs) sont des "théories matérialisées" : ils incarnent des principes physiques et mathématiques. 
+                        L'observation scientifique n'est jamais naïve : elle est toujours guidée par un questionnement théorique.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 <strong>Astuce Bac :</strong> Dans un commentaire de texte sur Bachelard, montrez comment l'observation scientifique est active et non passive. 
+                        Évitez de dire que le scientifique "observe la nature" comme un simple spectateur.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : La rupture avec l'expérience commune</h3>
+                    <p class="exemple-context">
+                        Le sens commun perçoit le soleil tournant autour de la Terre. Galilée, grâce à l'observation par lunette astronomique, rompt avec cette évidence pour adopter l'héliocentrisme.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> Cette rupture épistémologique a été difficile car elle allait contre les évidences sensibles et les croyances établies. 
+                        L'instrument (la lunette) a permis de produire une nouvelle observation, qui contredisait l'observation naïve. 
+                        Bachelard dirait que la science progresse en se détournant du "premier contact" avec le monde.
+                    </p>
+                    <div class="exemple-astuce">
+                        📖 <strong>Référence utile :</strong> Citer Galilée (Dialogues sur les deux grands systèmes du monde) et Bachelard (La formation de l'esprit scientifique) pour illustrer la rupture épistémologique.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : L'instrument comme théorie matérialisée</h3>
+                    <p class="exemple-context">
+                        Un microscope électronique permet de "voir" des virus. Mais cette "vision" n'est pas directe : l'image est construite à partir d'interactions électroniques et de calculs informatiques.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Analyse :</strong> Le microscope électronique matérialise une théorie électromagnétique et quantique. 
+                        Sans cette théorie, l'image produite serait incompréhensible. L'instrument ne prolonge pas le regard : il le transforme radicalement.
+                        L'observation scientifique est donc une <strong>production</strong> de phénomènes, non un simple enregistrement.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section des illustrations (images générées par IA) -->
+            <section class="exemple-section">
+                <h2 class="section-title">🖼️ Schémas et illustrations</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Le processus de la connaissance scientifique selon Bachelard</h3>
+                    <div class="illustration">
+                        <img src="" alt="Diagramme montrant le processus de la connaissance scientifique : rupture avec l'opinion, construction d'hypothèses, expérimentation avec des instruments (théories matérialisées), observation polémique, et nouvelle connaissance. Flèches reliant ces étapes.">
+                        <div class="illustration-caption">Figure 1 : Les étapes de la démarche scientifique selon Bachelard (à générer par IA)</div>
+                    </div>
+                    <p class="card-description">
+                        Ce schéma rappelle que la science ne part pas d'une observation pure, mais d'une <strong>rupture avec l'opinion</strong>, suivie d'une construction théorique.
+                    </p>
+                </div>
+                <div class="card concept-card">
+                    <h3 class="card-title">Observation naïve vs observation scientifique</h3>
+                    <div class="illustration">
+                        <img src="" alt="Comparaison entre une personne regardant le ciel à l'œil nu (observation naïve) et un scientifique utilisant un télescope avec des données sur un écran (observation scientifique polémique). Légendes : 'donnée immédiate' vs 'construction théorique'.">
+                        <div class="illustration-caption">Figure 2 : De l'observation commune à l'observation polémique (à générer par IA)</div>
+                    </div>
+                    <p class="card-description">
+                        L'observation scientifique est médiatisée par des instruments et des théories, contrairement à l'impression sensible immédiate.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section "À ne pas confondre" -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente 1 :</span> Croire que l'observation scientifique est une simple "constatation" neutre.  
+                            <span class="bold">Correction :</span> Bachelard montre qu'elle est toujours polémique (contre une opinion ou pour une thèse).</li>
+                        <li><span class="bold">Erreur fréquente 2 :</span> Penser que les instruments ne font qu'amplifier nos sens naturels.  
+                            <span class="bold">Correction :</span> Ils sont des "théories matérialisées" qui transforment la nature de l'observation.</li>
+                        <li><span class="bold">Erreur fréquente 3 :</span> Confondre "rupture épistémologique" avec simple progrès continu.  
+                            <span class="bold">Correction :</span> La rupture est un saut qualitatif, un abandon des évidences premières, parfois douloureux.</li>
+                        <li><span class="bold">Attention :</span> Dans une dissertation, ne pas réduire Bachelard à un simple "anti-positiviste". Montrer sa conception active et constructive de la science.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section Auteurs et références pour le Bac -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 Auteurs et références clés (pour le Bac)</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Gaston Bachelard (1884-1962)</h3>
+                    <p class="card-description">
+                        Philosophe français des sciences. Œuvres majeures : <em>Le Nouvel Esprit scientifique</em> (1934), <em>La Formation de l'esprit scientifique</em> (1938), <em>La Philosophie du non</em> (1940).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Thèse centrale :</strong> La science progresse par ruptures épistémologiques, non par accumulation linéaire.</li>
+                        <li><strong>Concept d'obstacle épistémologique :</strong> Les habitudes mentales, les premières impressions, les images, constituent des obstacles à la connaissance scientifique.</li>
+                        <li><strong>Lien avec le programme :</strong> Bachelard est l'auteur de référence pour la leçon 15. Il faut maîtriser la notion d'"observation polémique" et de "théorie matérialisée".</li>
+                    </ul>
+                </div>
+                <div class="card concept-card">
+                    <h3 class="card-title">Autres auteurs utiles (comparaisons)</h3>
+                    <ul class="concept-list">
+                        <li><strong>Descartes :</strong> Méthode scientifique fondée sur l'évidence et la déduction (rationalisme). Bachelard critique l'idée d'une science "pure" sans rupture.</li>
+                        <li><strong>Auguste Comte :</strong> Positivisme : la science observe des lois constantes. Bachelard dépasse ce positivisme en insistant sur le rôle actif de la théorie.</li>
+                        <li><strong>Karl Popper :</strong> Le critère de démarcation (falsifiabilité). Complémentarité possible avec Bachelard sur l'importance des théories et des conjectures.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision créée pour les Terminales C & D - Philosophie · Baccalauréat 2025-2026 · 📚 <a href="#">Réviser avec des annales</a></p>
+        </footer>
+    </div>
+</body>
+</html>

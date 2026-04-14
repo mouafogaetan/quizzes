@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 16 : Mouvement rectiligne dans le champ de pesanteur</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f5f9;
+            color: #0f172a;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .badge {
+            background: #fbbf24;
+            color: #1e293b;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.8rem;
+        }
+
+        /* Corps de la fiche */
+        .content {
+            padding: 2rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            font-size: 1.4rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin-top: 0.8rem;
+        }
+
+        .card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1rem 1.2rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            border-color: #94a3b8;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid #cbd5e1;
+            display: inline-block;
+        }
+
+        .formula {
+            background: #eef2ff;
+            padding: 0.8rem;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 1rem;
+            text-align: center;
+            margin: 0.8rem 0;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .note {
+            background: #fef9c3;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            border-left: 4px solid #eab308;
+        }
+
+        .example {
+            background: #e6f7ec;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            border-left: 4px solid #22c55e;
+        }
+
+        .list-styled {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .list-styled li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .list-styled li::before {
+            content: "•";
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .footer {
+            background: #f1f5f9;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #475569;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+            .content {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <!-- En-tête avec le titre de la leçon -->
+    <div class="header">
+        <h1>📘 Leçon 16 : Mouvement rectiligne dans le champ de pesanteur</h1>
+        <div class="subtitle">Chute libre verticale · Équations horaires · Applications</div>
+        <div class="badge">🎯 Baccalauréat 2023 - 2025 | Terminale C & D</div>
+    </div>
+
+    <div class="content">
+        <!-- Section Objectifs -->
+        <div class="section">
+            <div class="section-title">
+                <span>🎯</span> Objectifs d'apprentissage
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Savoirs</h3>
+                    <ul class="list-styled">
+                        <li>Définir la chute libre d’un solide.</li>
+                        <li>Connaître les équations horaires du mouvement rectiligne uniformément accéléré.</li>
+                        <li>Comprendre l’influence des conditions initiales (vitesse initiale, position initiale).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Savoir-faire</h3>
+                    <ul class="list-styled">
+                        <li>Établir les équations horaires à partir du PFD.</li>
+                        <li>Déterminer la vitesse et la position à un instant donné.</li>
+                        <li>Calculer la durée de chute, la vitesse d’impact, l’altitude maximale (lancer vers le haut).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Liens Bac</h3>
+                    <ul class="list-styled">
+                        <li>Mouvement de chute libre (sujet type 2023, 2024).</li>
+                        <li>Étude dynamique d’un projectile vertical.</li>
+                        <li>Application du principe fondamental de la dynamique.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Notions clés et Définitions -->
+        <div class="section">
+            <div class="section-title">
+                <span>📖</span> Notions clés & définitions
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>⚡ Chute libre</h3>
+                    <p>Un solide est en chute libre lorsqu’il n’est soumis qu’à son poids (on néglige les frottements et la poussée d’Archimède). L’accélération est alors égale au vecteur champ de pesanteur $\vec{g}$.</p>
+                    <div class="formula">
+                        $\vec{a} = \vec{g}$
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>📏 Accélération $g$</h3>
+                    <p>Intensité du champ de pesanteur terrestre :</p>
+                    <div class="formula">
+                        $g \approx 9,81 \, \text{m} \cdot \text{s}^{-2}$ (varie légèrement avec l’altitude et la latitude)
+                    </div>
+                    <p>Au Cameroun, on utilise souvent $g = 9,8 \, \text{m} \cdot \text{s}^{-2}$.</p>
+                </div>
+                <div class="card">
+                    <h3>🔁 Mouvement rectiligne uniformément accéléré (MRUA)</h3>
+                    <p>Le vecteur accélération $\vec{a}$ est constant, colinéaire à la trajectoire verticale. En projection sur un axe vertical orienté vers le haut ou vers le bas, l’accélération est constante.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Lois / Équations fondamentales -->
+        <div class="section">
+            <div class="section-title">
+                <span>📐</span> Équations horaires du mouvement
+            </div>
+            <div class="note">
+                💡 <strong>Méthode générale :</strong> On applique la 2ᵉ loi de Newton $\sum \vec{F} = m \vec{a}$. En chute libre, $\vec{P} = m \vec{g}$ ⇒ $\vec{a} = \vec{g}$. On projette sur un axe vertical (Oz) et on intègre deux fois.
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3>📌 Cas 1 : Chute verticale sans vitesse initiale</h3>
+                    <p>Conditions initiales : $t=0$, $z_0 = h$, $v_0 = 0$. Axe (Oz) orienté vers le bas.</p>
+                    <div class="formula">
+                        $a_z = g$ <br>
+                        $v_z(t) = g\,t$ <br>
+                        $z(t) = h + \dfrac{1}{2} g\,t^2$
+                    </div>
+                    <p><strong>Durée de chute</strong> depuis une hauteur $h$ : $t = \sqrt{\dfrac{2h}{g}}$</p>
+                    <p><strong>Vitesse d’impact</strong> : $v = \sqrt{2gh}$</p>
+                </div>
+                <div class="card">
+                    <h3>📌 Cas 2 : Lancer vertical vers le haut</h3>
+                    <p>Conditions initiales : $t=0$, $z_0 = 0$, $v_0 > 0$. Axe (Oz) orienté vers le haut.</p>
+                    <div class="formula">
+                        $a_z = -g$ <br>
+                        $v_z(t) = v_0 - g\,t$ <br>
+                        $z(t) = v_0 t - \dfrac{1}{2} g\,t^2$
+                    </div>
+                    <p><strong>Hauteur maximale</strong> ($v_z=0$) : $z_{\text{max}} = \dfrac{v_0^2}{2g}$</p>
+                    <p><strong>Temps de montée</strong> : $t_m = \dfrac{v_0}{g}$</p>
+                </div>
+                <div class="card">
+                    <h3>📌 Cas 3 : Lancer vertical vers le bas</h3>
+                    <p>Conditions initiales : $t=0$, $z_0 = h$, $v_0$ orienté vers le bas. Axe (Oz) vers le bas.</p>
+                    <div class="formula">
+                        $a_z = g$ <br>
+                        $v_z(t) = v_0 + g\,t$ <br>
+                        $z(t) = h + v_0 t + \dfrac{1}{2} g\,t^2$
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Démarche et compétences -->
+        <div class="section">
+            <div class="section-title">
+                <span>🧠</span> Démarche méthodologique
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>✅ Étapes pour résoudre un exercice de chute libre</h3>
+                    <ol style="margin-left: 1.2rem;">
+                        <li>Choisir un référentiel terrestre supposé galiléen.</li>
+                        <li>Faire le bilan des forces : uniquement le poids (chute libre).</li>
+                        <li>Appliquer le PFD : $\vec{P} = m\vec{a}$ ⇒ $\vec{a} = \vec{g}$.</li>
+                        <li>Définir un axe vertical (Oz) et orienter le sens positif.</li>
+                        <li>Projeter l’équation vectorielle sur l’axe.</li>
+                        <li>Intégrer pour obtenir $v_z(t)$ puis $z(t)$ en utilisant les conditions initiales.</li>
+                        <li>Répondre aux questions (durée, vitesse, position, hauteur maximale…).</li>
+                    </ol>
+                </div>
+                <div class="card">
+                    <h3>⚠️ Erreurs fréquentes à éviter</h3>
+                    <ul class="list-styled">
+                        <li>Oublier le signe de $g$ dans la projection selon l’orientation de l’axe.</li>
+                        <li>Confondre chute libre et chute avec frottements (ici on néglige tout frottement).</li>
+                        <li>Ne pas utiliser les bonnes unités (m, s, m/s).</li>
+                        <li>Appliquer les formules du MRUA sans vérifier l’uniformité de l’accélération.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exemple type Bac -->
+        <div class="section">
+            <div class="section-title">
+                <span>📝</span> Application type – Exercice Bac
+            </div>
+            <div class="example">
+                <strong>📌 Énoncé simplifié :</strong><br>
+                Un objet est lancé verticalement vers le haut depuis le sol avec une vitesse initiale $v_0 = 15 \, \text{m} \cdot \text{s}^{-1}$. On prend $g = 9,8 \, \text{m} \cdot \text{s}^{-2}$ et on néglige les frottements.<br>
+                1. Établir les équations horaires $v(t)$ et $z(t)$.<br>
+                2. Calculer la hauteur maximale atteinte.<br>
+                3. Déterminer la durée totale du vol avant que l’objet ne retombe au sol.<br>
+                <br>
+                <strong>✔️ Corrigé rapide :</strong><br>
+                Axe (Oz) vertical vers le haut, origine au sol.<br>
+                - $a_z = -g$ ⇒ $v_z(t) = v_0 - g t$ ⇒ $z(t) = v_0 t - \frac12 g t^2$.<br>
+                - À $z_{\text{max}}$, $v=0$ ⇒ $t_m = v_0/g = 15/9,8 \approx 1,53 \, \text{s}$ ⇒ $z_{\text{max}} = v_0 t_m - \frac12 g t_m^2 = \frac{v_0^2}{2g} \approx 11,48 \, \text{m}$.<br>
+                - Retour au sol : $z(t)=0$ ⇒ $t (v_0 - \frac12 g t) = 0$ ⇒ $t=0$ (départ) ou $t = 2v_0/g \approx 3,06 \, \text{s}$.
+            </div>
+        </div>
+
+        <!-- Complément : Cas particuliers et lien avec les autres leçons -->
+        <div class="section">
+            <div class="section-title">
+                <span>🔗</span> Liens avec d’autres leçons
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>📌 Leçon 14 : Lois de Newton</h3>
+                    <p>Le mouvement rectiligne dans le champ de pesanteur est une application directe du PFD. La chute libre illustre la première loi (inertie si vitesse initiale nulle ? Non, ici accélération constante, donc mouvement varié).</p>
+                </div>
+                <div class="card">
+                    <h3>📌 Leçon 17 : Mouvement plan dans le champ de pesanteur</h3>
+                    <p>Lorsque la vitesse initiale n’est pas verticale, on obtient une trajectoire parabolique. La composante verticale suit exactement les équations étudiées ici.</p>
+                </div>
+                <div class="card">
+                    <h3>📌 Leçon 21 : Pendule élastique</h3>
+                    <p>La chute libre verticale est un mouvement de translation rectiligne uniformément accéléré, différent des oscillations périodiques.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Petit récapitulatif des formules essentielles -->
+        <div class="section">
+            <div class="section-title">
+                <span>🧮</span> Formulaire essentiel
+            </div>
+            <div class="formula" style="background: #e0f2fe; text-align: left;">
+                <strong>Chute libre (axe vertical descendant) :</strong><br>
+                $v(t) = v_0 + g t$ &nbsp;&nbsp;|&nbsp;&nbsp;
+                $z(t) = z_0 + v_0 t + \frac12 g t^2$<br><br>
+                <strong>Chute libre (axe vertical ascendant) :</strong><br>
+                $v(t) = v_0 - g t$ &nbsp;&nbsp;|&nbsp;&nbsp;
+                $z(t) = z_0 + v_0 t - \frac12 g t^2$<br><br>
+                <strong>Hauteur max (lancer vers le haut) :</strong> $H = \dfrac{v_0^2}{2g}$<br>
+                <strong>Vitesse d’impact (sans vitesse initiale) :</strong> $v = \sqrt{2gh}$<br>
+                <strong>Temps de chute (sans $v_0$) :</strong> $t = \sqrt{\dfrac{2h}{g}}$
+            </div>
+        </div>
+
+        <!-- Conseils pour l'examen -->
+        <div class="section">
+            <div class="section-title">
+                <span>🏆</span> Astuces pour le Baccalauréat
+            </div>
+            <div class="note">
+                🔑 <strong>Points clés souvent évalués :</strong>
+                <ul class="list-styled" style="margin-top: 8px;">
+                    <li>Savoir orienter correctement l’axe et déterminer le signe de l’accélération.</li>
+                    <li>Établir les équations horaires par intégration des conditions initiales.</li>
+                    <li>Savoir exploiter $v=0$ pour trouver l’altitude maximale.</li>
+                    <li>Pour un mouvement avec plusieurs phases (montée/descente), traiter séparément ou utiliser la symétrie.</li>
+                    <li>Ne pas oublier les unités : $g$ en $\text{m/s}^2$, $v_0$ en $\text{m/s}$.</li>
+                </ul>
+            </div>
+            <div class="example">
+                💡 <strong>Application numérique rapide :</strong> Si on lance une pierre verticalement avec $v_0 = 20 \, \text{m/s}$, sa hauteur maximale est $\frac{20^2}{2\times 9,8} \approx 20,4 \, \text{m}$ et le temps de vol total est $\frac{2\times 20}{9,8} \approx 4,08 \, \text{s}$.
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© Fiche de révision – Programme officiel de Physique Terminale C & D (Cameroun) | Année scolaire 2025-2026 | Leçon 16 : Mouvement rectiligne dans le champ de pesanteur</p>
+        <p>📖 Référence : Loi de l’attraction universelle, PFD, équations horaires – Bac 2023-2025</p>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aluminothermie - Fiche de Révision | Première C & D (Cameroun)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petit style supplémentaire pour bien coller au template original */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+        /* Style pour les images simulées */
+        .schema-placeholder {
+            background: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+            border: 1px dashed #94a3b8;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #1e40af;
+        }
+        .schema-placeholder img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+        }
+        .legende {
+            font-size: 0.85rem;
+            color: #475569;
+            margin-top: 0.4rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Aluminothermie : réduction d'oxydes métalliques par l'aluminium</h1>
+            <p class="lesson-subtitle">Chimie – Première C & D (Module 2 : Oxydoréduction) | Leçon 54 · Programme Cameroun</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- SECTION CONCEPTS CLÉS -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🔬 Définition de l'aluminothermie</h3>
+                    <p class="card-description">
+                        L’<strong>aluminothermie</strong> est un procédé de réduction d’oxydes métalliques par l’aluminium. 
+                        L’aluminium, réducteur très puissant, capte l’oxygène de l’oxyde métallique pour former de l’alumine ($Al_2O_3$) et libérer le métal sous forme fondue.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Réaction très exothermique (dégagement intense de chaleur).</li>
+                        <li>Températures pouvant atteindre 2500 °C – permet d’obtenir le métal à l’état liquide.</li>
+                        <li>Couples redox mis en jeu : $Al^{3+}/Al$ (réducteur) et $M^{n+}/M$ (oxydant).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">⚗️ Équation générale et équation bilan pour l’oxyde de fer(III)</h3>
+                    <p class="card-description">
+                        L’exemple historique et le plus courant est la réduction de l’hématite ($Fe_2O_3$) par l’aluminium.
+                    </p>
+                    <div class="exemple-correction" style="background:#f8fafc; padding:0.75rem; border-radius:0.75rem; text-align:center;">
+                        <span class="formule">$Fe_2O_3(s) \;+\; 2Al(s) \;\longrightarrow\; Al_2O_3(s) \;+\; 2Fe(l)$</span>
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>Oxydation :</strong> $Al \rightarrow Al^{3+} + 3e^-$ (×2) → $2Al \rightarrow 2Al^{3+} + 6e^-$</li>
+                        <li><strong>Réduction :</strong> $Fe^{3+} + 3e^- \rightarrow Fe$ ; pour $Fe_2O_3$ : $Fe_2O_3 + 6e^- \rightarrow 2Fe + 3O^{2-}$</li>
+                        <li>Bilan électronique : 6 électrons échangés.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🔥 Caractéristiques thermodynamiques</h3>
+                    <p class="card-description">
+                        L’aluminium possède une très grande affinité pour l’oxygène (enthalpie libre de formation de $Al_2O_3$ très négative). 
+                        Il réduit de nombreux oxydes métalliques : $Cr_2O_3$, $MnO_2$, $TiO_2$, $Fe_3O_4$, etc.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Plus le métal à extraire est peu réactif (ex: fer, chrome), plus l’aluminothermie est efficace.</li>
+                        <li>Réaction auto-entretenue après amorçage (par exemple avec un ruban de magnésium).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🏭 Applications industrielles : soudure aluminothermique (procédé Goldschmidt)</h3>
+                    <p class="card-description">
+                        La principale application au Cameroun et dans le monde est la <strong>soudure des rails de chemin de fer</strong> (soudure aluminothermique).
+                    </p>
+                    <ul class="concept-list">
+                        <li>Mélange de poudre d’aluminium et d’oxyde de fer (thermite) dans un creuset.</li>
+                        <li>Après amorçage, le fer liquide coule dans l’interstice entre deux rails et solidifie → jonction parfaite et résistante.</li>
+                        <li>Utilisé également pour la réparation de pièces métalliques, soudure de câbles de masse, etc.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION EXEMPLES DE COMPRÉHENSION -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Écrire l’équation de l’aluminothermie pour le chrome</h3>
+                    <p class="exemple-context">
+                        On veut réduire l’oxyde de chrome(III) $Cr_2O_3$ par l’aluminium. Écrire l’équation bilan équilibrée et identifier l’oxydant et le réducteur.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution :</strong><br>
+                        1. L’aluminium est le réducteur : $Al \rightarrow Al^{3+} + 3e^-$.<br>
+                        2. $Cr_2O_3$ contient $Cr^{3+}$ qui se réduit en chrome métallique : $Cr^{3+} + 3e^- \rightarrow Cr$.<br>
+                        3. Bilan électronique : pour 2 atomes Cr ($2Cr^{3+}$) il faut 6 électrons, donc 2 atomes Al.<br>
+                        Équation : <span class="formule">$Cr_2O_3(s) + 2Al(s) \rightarrow Al_2O_3(s) + 2Cr(l)$</span>.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Dans une aluminothermie, le métal de l’oxyde est toujours réduit à l’état métallique, et l’aluminium devient $Al_2O_3$.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Calcul de masse (cas de la thermite fer)</h3>
+                    <p class="exemple-context">
+                        On réalise la soudure d’un rail avec 500 g d’oxyde de fer(III) ($Fe_2O_3$). Quelle masse d’aluminium est nécessaire ? (Masses molaires : $M(Fe)=56~g/mol$, $M(O)=16~g/mol$, $M(Al)=27~g/mol$)
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Démarche :</strong><br>
+                        1. Équation : $Fe_2O_3 + 2Al \rightarrow Al_2O_3 + 2Fe$<br>
+                        2. $M(Fe_2O_3) = 2×56 + 3×16 = 112 + 48 = 160~g/mol$<br>
+                        3. Quantité de matière $n(Fe_2O_3) = 500 / 160 = 3,125~mol$<br>
+                        4. D’après l’équation : $n(Al) = 2 × n(Fe_2O_3) = 6,25~mol$<br>
+                        5. $m(Al) = n×M = 6,25 × 27 = 168,75~g$<br>
+                        <span class="bold">Résultat :</span> Il faut environ 169 g d’aluminium.
+                    </div>
+                    <div class="exemple-astuce">
+                        🔥 Attention : La réaction est très violente, le mélange ne doit pas être humidifié. Toujours amorcer avec précaution.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Schéma du creuset de soudure aluminothermique (rails)</h3>
+                    <div class="schema-placeholder">
+                        <img src="" alt="Schéma du creuset utilisé pour la soudure aluminothermique des rails : un creuset réfractaire contenant le mélange thermite (Fe2O3 + Al), amorcé par un allumeur. En bas, le trou de coulée laisse s’écouler le fer liquide dans l’espace entre deux rails.">
+                        <div class="legende">📐 Principe de la soudure de rails : le fer en fusion obtenu par réaction aluminothermique comble l’interstice entre les deux rails.</div>
+                    </div>
+                    <p class="card-description" style="margin-top:0.5rem;">
+                        La poudre d’aluminium et d’oxyde de fer (thermite) est placée dans un creuset en graphite ou en magnésie. 
+                        L’amorçage (magnésium ou poudre spéciale) déclenche la réaction exothermique. Le métal fondu (fer à ~1500 °C) 
+                        s’écoule par gravité dans le moule autour des rails. Après refroidissement, on meule l’excédent.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION AVANTAGES / LIMITES ET LIEN AVEC OXYDORÉDUCTION -->
+            <section class="concept-section">
+                <h2 class="section-title">🧪 Aluminothermie dans le contexte de l’oxydoréduction</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Comparaison avec d’autres procédés métallurgiques</h3>
+                    <ul class="concept-list">
+                        <li><strong>Réduction par le carbone (haut fourneau) :</strong> moins coûteuse pour le fer mais nécessite des températures élevées et produit du $CO_2$.</li>
+                        <li><strong>Aluminothermie :</strong> idéale pour des métaux spéciaux (chrome, manganèse) ou pour des réparations sur site (soudure).</li>
+                        <li><strong>Point commun :</strong> transfert d’électrons – le réducteur (Al) cède ses électrons à l’oxydant (oxyde métallique).</li>
+                    </ul>
+                </div>
+                <div class="card concept-card">
+                    <h3 class="card-title">Demi-équations électroniques (rappel couple $Al^{3+}/Al$)</h3>
+                    <p class="card-description">
+                        Le couple $Al^{3+}/Al$ a un potentiel standard $E°(Al^{3+}/Al) = -1,66~V$ (très négatif), ce qui en fait un réducteur très fort. 
+                        Pour $Fe^{3+}/Fe$ : $E°(Fe^{3+}/Fe) ≈ -0,04~V$ (en milieu acide pour $Fe^{3+}/Fe^{2+}$ mais pour $Fe_2O_3$ solide la réaction est très favorisée). 
+                        La différence de potentiel est grande → réaction totale et très exothermique.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION PIÈGES COURANTS / À NE PAS CONFONDRE -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confusion avec l'électrolyse :</span> L’aluminothermie est une réaction chimique spontanée, pas un procédé électrolytique. L’aluminium n’est pas produit ici, il est consommé.</li>
+                        <li><span class="bold">Oublier l’état physique :</span> Le métal obtenu est souvent liquide (Fe, Cr) à cause de la chaleur dégagée ; ne pas écrire (s) si l’énoncé précise qu’il est en fusion.</li>
+                        <li><span class="bold">Équilibrer l’équation :</span> Ne pas oublier le coefficient stoechiométrique 2 devant Al pour $Fe_2O_3$ ou devant le métal produit.</li>
+                        <li><span class="bold">Amorçage :</span> La réaction n’est pas spontanée à température ambiante ; il faut un apport d’énergie initial (magnésium ou flamme).</li>
+                        <li><span class="bold">Ne pas confondre avec la combustion de l’aluminium :</span> Dans l’aluminothermie, l’aluminium réduit un oxyde ; dans la combustion simple, Al réagit avec $O_2$ de l’air pour donner $Al_2O_3$ sans produire de métal.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION RÉSUMÉ + FORMULES CLÉS -->
+            <section class="concept-section">
+                <h2 class="section-title">📝 Formulaire et réaction générale</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Réaction type : $M_xO_y + \frac{2y}{3}Al \rightarrow \frac{y}{3}Al_2O_3 + xM$</h3>
+                    <p class="card-description">
+                        Pour un oxyde $M_xO_y$ où M a un degré d’oxydation $+2y/x$ (si simplifié), l’aluminium réduit et forme l’alumine.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Exemple avec $MnO_2$ : $3MnO_2 + 4Al \rightarrow 2Al_2O_3 + 3Mn$</li>
+                        <li>Exemple avec $Cr_2O_3$ (vu plus haut).</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top:0.8rem;">
+                        ✨ À retenir : L’aluminium est <strong>toujours oxydé</strong> en $Al_2O_3$ ; l’oxyde métallique est <strong>toujours réduit</strong> en métal.
+                    </div>
+                </div>
+            </section>
+
+            <!-- LIEN AVEC LE PROGRAMME OFFICIEL : LEÇON 54 -->
+            <div class="card" style="background-color:#eef2ff; border-color:#a5b4fc;">
+                <h3 class="card-title" style="color:#1e3a8a;">📘 Conformité au programme de Première C & D (Cameroun)</h3>
+                <p class="card-description">
+                    Leçon 54 – <strong>Applications industrielles : Aluminothermie</strong> (Module 2 : Oxydoréduction, Chap.9 – Oxydoréduction par voie sèche).
+                    Objectif du programme : 
+                    <em>“Définir l’aluminothermie (réduction d’oxydes métalliques par l’aluminium). Écrire l’équation : $Fe_2O_3 + 2Al \rightarrow Al_2O_3 + 2Fe$. Connaître l’utilisation pour la soudure des rails.”</em>
+                    Cette fiche couvre intégralement la définition, l’équation, le principe et les applications.
+                </p>
+            </div>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche de révision - Enseignant de Chimie (Cameroun) · Leçon 54 : Aluminothermie · Niveau 1ère C & D · 📚 Révision conforme au programme officiel</p>
+            <p style="margin-top:0.5rem;">📖 Mots-clés : thermite, réduction, exothermique, soudure des rails, couple Al³⁺/Al, oxyde de fer.</p>
+        </footer>
+    </div>
+</body>
+</html>

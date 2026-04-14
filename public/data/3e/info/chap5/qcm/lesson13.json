@@ -1,0 +1,122 @@
+[
+  {
+    "questionText": "Dans un tableur, quelle formule permet de calculer la somme des valeurs contenues dans les cellules A1, A2, A3, A4 et A5 ?",
+    "options": [
+      "=A1+A2+A3+A4+A5",
+      "=SOMME(A1:A5)",
+      "=TOTAL(A1-A5)",
+      "=ADD(A1;A5)"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "easy",
+    "explanation": "La fonction prédéfinie pour additionner une plage de cellules dans la plupart des tableurs (Excel, Google Sheets, LibreOffice Calc) est `SOMME`. L'option `=A1+A2+A3+A4+A5` fonctionnerait aussi mais est moins efficace. `=SOMME(A1:A5)` est la syntaxe correcte utilisant l'opérateur de plage ':'."
+  },
+  {
+    "questionText": "Voici une feuille de calcul : <table border='1' cellpadding='5' style='border-collapse: collapse;'><tr><th></th><th>A</th><th>B</th></tr><tr><th>1</th><td>15</td><td>5</td></tr><tr><th>2</th><td>10</td><td>8</td></tr><tr><th>3</th><td>20</td><td>12</td></tr></table> Quelle formule renvoie la moyenne des valeurs de la colonne A ?",
+    "options": [
+      "=MOYENNE(A1:A3)",
+      "=A1+A2+A3/3",
+      "=SOMME(A1:A3)/3",
+      "=A1;A2;A3/3"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "easy",
+    "explanation": "La fonction `MOYENNE` est spécialement conçue pour calculer la moyenne arithmétique d'une plage de cellules. `=MOYENNE(A1:A3)` calcule correctement (15+10+20)/3 = 15. L'option `=SOMME(A1:A3)/3` donnerait le même résultat numérique mais n'utilise pas la fonction prédéfinie `MOYENNE` demandée dans le contexte."
+  },
+  {
+    "questionText": "Quelle est la différence entre une référence relative (ex: B2) et une référence absolue (ex: $B$2) dans un tableur ?",
+    "options": [
+      "Il n'y a aucune différence, les deux fonctionnent pareil.",
+      "La référence absolue change lorsqu'on copie la formule, la référence relative reste fixe.",
+      "La référence relative change lorsqu'on copie la formule, la référence absolue reste fixe.",
+      "La référence relative ne peut être utilisée qu'avec des nombres, l'absolue qu'avec du texte."
+    ],
+    "correctAnswer": 2,
+    "difficulty": "medium",
+    "explanation": "Par défaut, les références sont relatives : quand on copie une formule d'une cellule à une autre, les références s'ajustent automatiquement en fonction du déplacement. Les références absolues (avec le symbole $) restent bloquées sur une cellule spécifique, ce qui est utile pour utiliser une constante (ex: un taux de TVA) dans plusieurs calculs."
+  },
+  {
+    "questionText": "Dans un tableau de notes, on souhaite afficher 'Admis' si la note dans la cellule B2 est supérieure ou égale à 10, sinon 'Refusé'. Quelle formule est correcte ?",
+    "options": [
+      "=SI(B2>=10; 'Admis'; 'Refusé')",
+      "=ET(B2>=10; 'Admis'; 'Refusé')",
+      "=OU(B2>=10; 'Admis'; 'Refusé')",
+      "=CONDITION(B2>=10: 'Admis' 'Refusé')"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "medium",
+    "explanation": "La fonction `SI` est la structure conditionnelle par excellence dans un tableur. Sa syntaxe est : `SI(test_logique; valeur_si_vrai; valeur_si_faux)`. Ici, le test `B2>=10` est évalué : si vrai, la formule affiche 'Admis' ; si faux, 'Refusé'. `ET` et `OU` sont des fonctions logiques qui combinent plusieurs conditions."
+  },
+  {
+    "questionText": "On veut vérifier qu'un nombre dans la cellule A1 est à la fois supérieur à 0 et inférieur à 100. Quelle formule logique doit-on utiliser à l'intérieur d'un SI ?",
+    "options": [
+      "=OU(A1>0; A1<100)",
+      "=ET(A1>0; A1<100)",
+      "=NON(A1>0; A1<100)",
+      "=A1>0 ET A1<100"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "explanation": "La fonction `ET` renvoie VRAI uniquement si TOUTES les conditions qu'elle contient sont vraies. Pour vérifier qu'un nombre est strictement compris entre 0 et 100, il faut que A1>0 ET que A1<100 soient simultanément vrais. `OU` renverrait VRAI si une seule des conditions est vraie."
+  },
+  {
+    "questionText": "<img src='' alt='Tableau des ventes avec colonnes : Produit (A), Prix unitaire (B), Quantité (C). Ligne 4: ColA=Stylo, ColB=200, ColC=3. Ligne 5: ColA=Cahier, ColB=500, ColC=2. Ligne 6: Total des ventes.'> Pour calculer le montant total de la vente du 'Stylo' (Prix unitaire * Quantité) dans la cellule D4, on saisit '=B4*C4'. Ensuite, pour obtenir automatiquement le total du 'Cahier' en D5, il suffit de :",
+    "options": [
+      "Recopier la formule de D4 vers D5 en utilisant la poignée de recopie.",
+      "Saisir manuellement '=B5*C5' dans D5.",
+      "Utiliser la fonction =PRODUIT(B4:C4) dans D5.",
+      "La formule se mettra à jour toute seule sans aucune action."
+    ],
+    "correctAnswer": 0,
+    "difficulty": "easy",
+    "explanation": "Grâce aux références relatives, quand on recopie la formule `=B4*C4` de D4 vers D5, le tableur ajuste automatiquement les références : la ligne 4 devient ligne 5, donnant `=B5*C5`. C'est le principe fondamental de l'efficacité des tableurs. La poignée de recopie (petit carré en bas à droite de la cellule) permet de faire cette copie rapidement."
+  },
+  {
+    "questionText": "Une entreprise applique une commission de 5% sur le montant des ventes (cellule C3). Pour calculer la commission de chaque vente dans la colonne D, on doit utiliser une référence absolue pour le taux. Quelle formule saisir en D2 avant de la recopier vers le bas ?",
+    "options": [
+      "=C2*C3",
+      "=C2*$C$3",
+      "=$C$2*C3",
+      "=C2*5%"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "hard",
+    "explanation": "Le taux de commission (5%) se trouve dans une cellule unique C3. Pour que toutes les formules des cellules D2, D3, D4, etc. pointent toujours vers cette même cellule C3, il faut la figer avec des dollars : `$C$3` (colonne C et ligne 3 absolues). Si on utilise `=C2*C3`, en recopiant vers le bas, la formule deviendra `=C3*C4`, ce qui est faux. `=C2*$C$3` est la solution correcte."
+  },
+  {
+    "questionText": "Quelle est la différence entre les fonctions `ET` et `OU` ?",
+    "options": [
+      "`ET` sert pour les chiffres, `OU` pour le texte.",
+      "`ET` renvoie VRAI si toutes les conditions sont vraies, `OU` renvoie VRAI si au moins une condition est vraie.",
+      "`ET` renvoie VRAI si au moins une condition est vraie, `OU` renvoie VRAI si toutes les conditions sont vraies.",
+      "Il n'y a pas de différence, ce sont des synonymes."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "easy",
+    "explanation": "C'est la base de l'algèbre de Boole. `ET` est plus exigeant (toutes les conditions doivent être remplies). `OU` est plus permissif (une seule condition suffit). Exemple : Pour aller au cinéma, il faut (avoir de l'argent ET avoir du temps). Pour être accepté dans un club, il suffit d'être (majeur OU accompagné d'un parent)."
+  },
+  {
+    "questionText": "On souhaite afficher 'Valide' si la note dans A1 est >=10 ET si la présence dans B1 est 'Présent'. Sinon, afficher 'Non valide'. Quelle est la formule correcte ?",
+    "options": [
+      "=SI(OU(A1>=10; B1='Présent'); 'Valide'; 'Non valide')",
+      "=SI(ET(A1>=10; B1='Présent'); 'Valide'; 'Non valide')",
+      "=ET(SI(A1>=10; B1='Présent'); 'Valide'; 'Non valide')",
+      "=SI(A1>=10; B1='Présent'; 'Valide'; 'Non valide')"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "hard",
+    "explanation": "On combine ici une fonction logique (`ET`) dans un test de `SI`. Le test doit vérifier deux conditions simultanément : la note ET la présence. `ET(A1>=10; B1='Présent')` est donc le test_logique. Si ce test combiné est vrai, la formule affiche 'Valide' ; sinon 'Non valide'. L'option 0 avec `OU` afficherait 'Valide' si une seule des deux conditions était remplie (ex: présent mais 5/20)."
+  },
+  {
+    "questionText": "Dans un tableur, que renvoie la formule `=MOYENNE(SI(A1:A10>10; A1:A10))` (validée comme formule matricielle) ?",
+    "options": [
+      "La moyenne de toutes les cellules de la plage A1:A10.",
+      "La moyenne des cellules de la plage A1:A10 qui sont supérieures à 10.",
+      "Le nombre de cellules supérieures à 10 dans la plage A1:A10.",
+      "Une erreur, car MOYENNE ne peut pas contenir de condition."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "very hard",
+    "explanation": "C'est une formule matricielle avancée. Le `SI` interne teste chaque cellule de A1 à A10. Pour les cellules >10, il conserve la valeur ; pour les autres, il renvoie FAUX. La fonction `MOYENNE` calcule alors la moyenne uniquement sur les valeurs numériques conservées (les FAUX sont ignorés). Cela permet de faire une moyenne conditionnelle sans utiliser de colonne supplémentaire."
+  }
+]

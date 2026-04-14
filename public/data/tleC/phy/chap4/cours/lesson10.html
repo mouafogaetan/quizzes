@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 10 : Champ magnétique créé par un courant</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Configuration MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles basiques pour une bonne présentation */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #0f2b3d 0%, #1b4a6e 100%);
+            color: white;
+            padding: 1.8rem 2.5rem;
+            border-bottom: 5px solid #ffb703;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .badge {
+            background-color: #ffb703;
+            color: #0f2b3d;
+            padding: 0.25rem 0.8rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* Corps */
+        .content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            border-left: 4px solid #1b4a6e;
+            padding-left: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f2b3d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            font-size: 1.5rem;
+        }
+
+        .notion-card {
+            background-color: #f8fafc;
+            border-radius: 1rem;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+
+        .notion-card strong {
+            color: #1b4a6e;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .formula {
+            background-color: #eef2ff;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            font-family: monospace;
+            font-size: 1rem;
+            margin: 0.8rem 0;
+            text-align: center;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .example-box {
+            background-color: #fef9e3;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 1rem;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .grid-2cols {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .footer {
+            background-color: #f1f5f9;
+            padding: 1rem 2.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.8rem;
+            color: #475569;
+            text-align: center;
+        }
+        .lien-bac {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- EN-TÊTE -->
+        <div class="header">
+            <h1>📡 Leçon 10 : Champ magnétique créé par un conducteur parcouru par un courant</h1>
+            <div class="subtitle">
+                <span>📚 Module 2 : Électromagnétisme | Terminale C & D</span>
+                <span class="badge">🎯 Objectif Bac 2025</span>
+            </div>
+        </div>
+
+        <!-- CONTENU PRINCIPAL -->
+        <div class="content">
+            <!-- OBJECTIFS -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🎯</span> Objectifs d'apprentissage
+                </div>
+                <ul style="margin-left: 1.5rem; list-style-type: disc;">
+                    <li>Appliquer les lois de Biot et Savart et de Laplace pour calculer le champ magnétique.</li>
+                    <li>Calculer le champ magnétique créé par des conducteurs de géométrie simple : fil rectiligne infini, spire circulaire, solénoïde.</li>
+                    <li>Représenter les lignes de champ magnétique pour différentes configurations.</li>
+                    <li><span class="lien-bac">📌 Lien Bac</span> : Savoir déterminer l'expression du champ $B$ et l'orienter avec la règle de la main droite.</li>
+                </ul>
+            </div>
+
+            <!-- NOTIONS CLÉS ET FORMULAIRES -->
+            <div class="section">
+                <div class="section-title">
+                    <span>⚡</span> Notions clés & Formulaires
+                </div>
+
+                <div class="notion-card">
+                    <strong>🔹 Loi de Biot et Savart</strong><br>
+                    Un élément de courant $I \cdot d\vec{\ell}$ crée en un point M un champ magnétique élémentaire :
+                    $$ d\vec{B} = \frac{\mu_0}{4\pi} \cdot \frac{I \cdot d\vec{\ell} \times \vec{u}}{r^2} $$
+                    où $\mu_0 = 4\pi \times 10^{-7}$ H/m (perméabilité du vide), $r$ distance de l'élément au point M, $\vec{u}$ vecteur unitaire orienté de l'élément vers M.
+                </div>
+
+                <div class="notion-card">
+                    <strong>🔹 Champ créé par un fil rectiligne infini</strong><br>
+                    Un conducteur rectiligne infini parcouru par un courant $I$ produit un champ magnétique à symétrie cylindrique :
+                    <div class="formula">
+                        $$ B = \frac{\mu_0 \cdot I}{2\pi \cdot r} $$
+                    </div>
+                    <ul>
+                        <li>$r$ : distance perpendiculaire au fil (en mètres).</li>
+                        <li>Lignes de champ : cercles concentriques autour du fil.</li>
+                        <li><strong>Règle de la main droite</strong> : pouce dans le sens du courant, doigts courbés donnent le sens de $\vec{B}$.</li>
+                    </ul>
+                </div>
+
+                <div class="notion-card">
+                    <strong>🔹 Champ au centre d'une spire circulaire</strong><br>
+                    Pour une spire de rayon $R$, parcourue par un courant $I$, le champ au centre O est :
+                    <div class="formula">
+                        $$ B = \frac{\mu_0 \cdot I}{2R} $$
+                    </div>
+                    Pour une bobine plate de $N$ spires :
+                    <div class="formula">
+                        $$ B = N \cdot \frac{\mu_0 \cdot I}{2R} $$
+                    </div>
+                    Direction : perpendiculaire au plan de la spire (règle du tire-bouchon).
+                </div>
+
+                <div class="notion-card">
+                    <strong>🔹 Champ à l'intérieur d'un solénoïde long</strong><br>
+                    Un solénoïde de longueur $L$, comportant $N$ spires serrées, crée à l'intérieur un champ magnétique <strong>uniforme</strong> :
+                    <div class="formula">
+                        $$ B = \mu_0 \cdot n \cdot I \quad \text{avec} \quad n = \frac{N}{L} $$
+                    </div>
+                    <ul>
+                        <li>$n$ : nombre de spires par unité de longueur (spires/m).</li>
+                        <li>Direction : parallèle à l'axe du solénoïde.</li>
+                        <li>À l'extérieur, $B \approx 0$ (pour un solénoïde infini).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TABLEAU SYNTHÈSE -->
+            <div class="section">
+                <div class="section-title">
+                    <span>📊</span> Tableau récapitulatif des configurations
+                </div>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; background: #fff; border-radius: 1rem; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
+                        <thead style="background-color: #1b4a6e; color: white;">
+                            <tr>
+                                <th style="padding: 12px; border: 1px solid #cbd5e1;">Conducteur</th>
+                                <th style="padding: 12px; border: 1px solid #cbd5e1;">Champ magnétique (valeur)</th>
+                                <th style="padding: 12px; border: 1px solid #cbd5e1;">Direction / Particularité</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #f8fafc;">
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">Fil rectiligne infini</td>
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">$B = \dfrac{\mu_0 I}{2\pi r}$</td>
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">Lignes circulaires, $B \propto 1/r$</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">Spire circulaire (centre)</td>
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">$B = \dfrac{\mu_0 I}{2R}$ (pour 1 spire)</td>
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">Perpendiculaire au plan</td>
+                            </tr>
+                            <tr style="background-color: #f8fafc;">
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">Bobine plate (N spires)</td>
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">$B = N \cdot \dfrac{\mu_0 I}{2R}$</td>
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">Superposition, même centre</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">Solénoïde long (intérieur)</td>
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">$B = \mu_0 \, n \, I$</td>
+                                <td style="padding: 10px; border: 1px solid #cbd5e1;">Uniforme, axial</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- EXEMPLES & APPLICATIONS -->
+            <div class="section">
+                <div class="section-title">
+                    <span>✏️</span> Application type (Bac)
+                </div>
+                <div class="example-box">
+                    <strong>📖 Énoncé :</strong><br>
+                    Un solénoïde de longueur $L = 40\ \text{cm}$ comporte $N = 500$ spires. Il est parcouru par un courant $I = 2,0\ \text{A}$. <br>
+                    1. Calculer le nombre de spires par mètre $n$. <br>
+                    2. En déduire l'intensité du champ magnétique à l'intérieur du solénoïde. <br>
+                    3. Si on place une spire de rayon $R = 5\ \text{cm}$ au centre du solénoïde, quel serait le champ créé par cette seule spire ? (On donne $\mu_0 = 4\pi \times 10^{-7}\ \text{H/m}$).
+                    <br><br>
+                    <strong>✔️ Correction :</strong><br>
+                    1. $n = \dfrac{N}{L} = \dfrac{500}{0,40} = 1250\ \text{spires/m}$. <br>
+                    2. $B_{\text{sol}} = \mu_0 \cdot n \cdot I = 4\pi \times 10^{-7} \times 1250 \times 2,0 = 3,14 \times 10^{-3}\ \text{T}$ (soit 3,14 mT). <br>
+                    3. Pour la spire seule : $B_{\text{spire}} = \dfrac{\mu_0 I}{2R} = \dfrac{4\pi \times 10^{-7} \times 2,0}{2 \times 0,05} = 2,51 \times 10^{-5}\ \text{T}$ (soit 25,1 µT). On observe que le solénoïde concentre bien le champ.
+                </div>
+            </div>
+
+            <!-- COMPÉTENCES À MAÎTRISER -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🧠</span> Compétences exigibles
+                </div>
+                <div class="grid-2cols">
+                    <div class="notion-card" style="margin-bottom: 0;">
+                        ✅ Savoir orienter $\vec{B}$ avec la règle de la main droite (fil, spire).<br>
+                        ✅ Calculer $B$ en un point pour un fil infini ou au centre d'une spire.
+                    </div>
+                    <div class="notion-card" style="margin-bottom: 0;">
+                        ✅ Déterminer l'expression du champ dans un solénoïde.<br>
+                        ✅ Expliquer qualitativement pourquoi $B$ est uniforme à l'intérieur d'un solénoïde long.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ERREURS FRÉQUENTES & CONSEILS -->
+            <div class="section">
+                <div class="section-title">
+                    <span>⚠️</span> Pièges à éviter
+                </div>
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Confondre $B$ et $H$</strong> : En Terminale on utilise $B$ (champ magnétique en Tesla).</li>
+                    <li><strong>Oublier le facteur $2\pi$</strong> pour le fil infini : $B = \mu_0 I / (2\pi r)$ et non $\mu_0 I / r$.</li>
+                    <li><strong>Inverser $n$</strong> : $n = N/L$ (spires par mètre) et non $L/N$.</li>
+                    <li><strong>Ne pas préciser l'unité</strong> : $B$ en Tesla (T) ; $1\ \text{mT} = 10^{-3}\ \text{T}$.</li>
+                </ul>
+            </div>
+
+            <!-- LIEN AVEC BAC ET SYNTHÈSE -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🏆</span> Synthèse Baccalauréat
+                </div>
+                <p>Au baccalauréat Camerounais (séries C & D), les exercices d'électromagnétisme portent souvent sur :</p>
+                <ul>
+                    <li>Le calcul du champ $B$ créé par un fil ou un solénoïde et la détermination du sens des lignes.</li>
+                    <li>L'étude de l'interaction entre deux fils (force de Laplace) faisant suite à cette leçon.</li>
+                    <li>Des situations expérimentales avec une aiguille aimantée ou une sonde à effet Hall pour mesurer $B$.</li>
+                </ul>
+                <div class="formula" style="margin-top: 0.8rem;">
+                    💡 Mémorisez : $\displaystyle B_{\text{fil}} = \frac{\mu_0 I}{2\pi r}$, $\displaystyle B_{\text{spire}} = \frac{\mu_0 I}{2R}$, $\displaystyle B_{\text{solénoïde}} = \mu_0 n I$
+                </div>
+            </div>
+        </div>
+
+        <!-- PIED DE PAGE -->
+        <div class="footer">
+            <p>📖 Fiche conforme au programme officiel de Physique - Terminale C & D (Cameroun) | Année 2025-2026 | Enseignant : M. MBARGA</p>
+            <p style="margin-top: 5px;">✍️ Révision libre - Utilisation permise pour les révisions personnelles et les évaluations.</p>
+        </div>
+    </div>
+</body>
+</html>

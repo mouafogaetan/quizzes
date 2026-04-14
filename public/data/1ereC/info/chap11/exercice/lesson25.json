@@ -1,0 +1,109 @@
+[
+  {
+    "intitule": "Notion de tableaux en C",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>En vous basant sur le cours, répondez aux questions suivantes concernant les tableaux en langage C.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier la déclaration correcte d'un tableau d'entiers nommé 'notes' pouvant contenir 20 éléments en langage C.",
+        "niveau": "easy",
+        "reponse": "La déclaration correcte est : int notes[20];",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquer la différence d'indice d'un tableau entre l'algorithmique et le langage C.",
+        "niveau": "medium",
+        "reponse": "En algorithmique, les indices des tableaux commencent généralement à 1. En langage C, les indices commencent toujours à 0. Ainsi, le premier élément d'un tableau C se trouve à l'indice 0, et le dernier à l'indice (taille - 1).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Soit la déclaration suivante : <code>float temperature[7];</code> Indiquer l'indice du dernier élément de ce tableau et expliquer pourquoi.",
+        "niveau": "easy",
+        "reponse": "L'indice du dernier élément est 6. En C, les indices vont de 0 à taille-1. Comme la taille est 7, le dernier indice est 7 - 1 = 6.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Manipulation des éléments d'un tableau",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un professeur souhaite stocker les 15 notes obtenues par un élève en première. Il décide d'utiliser un tableau en C.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la déclaration en langage C d'un tableau nommé <code>notesEleve</code> capable de stocker 15 nombres réels (float).",
+        "niveau": "easy",
+        "reponse": "float notesEleve[15];",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Le professeur souhaite augmenter la note du 5ème élément du tableau (dans l'ordre de saisie) de 1.5 points. Donner l'instruction C correspondante, sachant que l'indice du premier élément est 0.",
+        "niveau": "medium",
+        "reponse": "Le 5ème élément correspond à l'indice 4. L'instruction est : notesEleve[4] = notesEleve[4] + 1.5;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Traduire en langage C l'algorithme suivant qui permet de saisir les 15 notes au clavier : <br> <code>Pour i allant de 1 à 15 pas=1 faire<br> &nbsp;&nbsp;&nbsp;&nbsp;Ecrire('Entrer la note ', i)<br> &nbsp;&nbsp;&nbsp;&nbsp;Lire(notesEleve[i])<br>FinPour</code>",
+        "niveau": "hard",
+        "reponse": "```c\nint i;\nfor (i = 0; i < 15; i++) {\n    printf(\"Entrer la note %d: \", i+1);\n    scanf(\"%f\", &notesEleve[i]);\n}\n```",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Calcul de la moyenne d'une classe",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Dans une classe de première, on veut calculer la moyenne des notes obtenues à une épreuve de Mathématiques. Les notes sont des entiers compris entre 0 et 20. Le nombre d'élèves N est saisi par l'utilisateur.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Rédiger un programme complet en langage C qui : <br> 1. Demande à l'utilisateur le nombre d'élèves N. <br> 2. Déclare un tableau d'entiers de taille N. <br> 3. Remplit le tableau avec les notes saisies au clavier. <br> 4. Calcule et affiche la moyenne de la classe.",
+        "niveau": "very hard",
+        "reponse": "```c\n#include <stdio.h>\n\nint main() {\n    int N, i, somme = 0;\n    float moyenne;\n    \n    printf(\"Entrer le nombre d'eleves: \");\n    scanf(\"%d\", &N);\n    \n    int notes[N]; // Déclaration d'un tableau de taille variable (C99)\n    \n    // Remplissage du tableau\n    for (i = 0; i < N; i++) {\n        printf(\"Note de l'eleve %d (0-20): \", i+1);\n        scanf(\"%d\", &notes[i]);\n        somme = somme + notes[i];\n    }\n    \n    // Calcul et affichage de la moyenne\n    moyenne = (float)somme / N;\n    printf(\"La moyenne de la classe est: %.2f\\n\", moyenne);\n    \n    return 0;\n}\n```",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Justifier l'utilisation du cast <code>(float)</code> dans le calcul de la moyenne.",
+            "niveau": "hard",
+            "reponse": "Le cast (float) est utilisé pour convertir la variable 'somme' de type int en float. Cela permet d'éviter une division entière. Sans ce cast, la division de deux entiers (somme et N) donnerait un résultat entier, tronqué, ce qui fausserait la moyenne."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Recherche de la meilleure note",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Pour féliciter le meilleur élève de la classe, on souhaite trouver la note maximale et l'indice (position) de l'élève qui l'a obtenue.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "À partir du programme de l'exercice précédent, écrire seulement la portion de code qui permet de parcourir le tableau <code>notes</code> pour déterminer la note maximale et la position (indice) de l'élève correspondant.",
+        "niveau": "very hard",
+        "reponse": "```c\nint max = notes[0];\nint indice_max = 0;\n\nfor (i = 1; i < N; i++) {\n    if (notes[i] > max) {\n        max = notes[i];\n        indice_max = i;\n    }\n}\n\nprintf(\"La meilleure note est %d, obtenue par l'eleve %d\\n\", max, indice_max + 1);\n```",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

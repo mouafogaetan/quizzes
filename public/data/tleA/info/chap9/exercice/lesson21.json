@@ -1,0 +1,149 @@
+[
+  {
+    "intitule": "Structure d'une requête SELECT (Ressource)",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>On considère une table <strong>ETUDIANTS</strong> contenant les colonnes suivantes : <strong>id_etudiant</strong> (clé primaire), <strong>nom</strong>, <strong>prenom</strong>, <strong>classe</strong>, <strong>moyenne</strong>.</p><p>Répondez aux questions suivantes en vous basant sur la syntaxe du langage SQL.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier les trois mots-clés obligatoires dans une requête SELECT simple qui extrait des colonnes spécifiques d'une table.",
+        "niveau": "easy",
+        "reponse": "Les trois mots-clés obligatoires sont SELECT (pour choisir les colonnes), FROM (pour indiquer la table source) et le point-virgule (;) qui termine la requête. (WHERE est optionnel).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Associer chaque élément de la colonne de gauche à son rôle dans la requête SELECT.",
+        "niveau": "easy",
+        "reponse": "*SELECT* -> Choisir quelles colonnes afficher ; *FROM* -> Indiquer la table source des données ; *WHERE* -> Filtrer les lignes selon une condition ; *\\** -> Sélectionner toutes les colonnes.",
+        "sousQuestions": [
+          {
+            "numero": "2.a",
+            "texte": "Mots-clés : SELECT, FROM, WHERE",
+            "niveau": "easy",
+            "reponse": "Voir réponse principale."
+          },
+          {
+            "numero": "2.b",
+            "texte": "Symbole : *",
+            "niveau": "easy",
+            "reponse": "Voir réponse principale."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Lecture d'une requête SELECT (Ressource)",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Voici deux requêtes SQL exécutées sur la table <strong>PRODUITS</strong> (colonnes : id_produit, nom_produit, prix, quantite_stock).</p><p>Requête 1 : <code>SELECT nom_produit, prix FROM PRODUITS WHERE quantite_stock > 10;</code></p><p>Requête 2 : <code>SELECT * FROM PRODUITS;</code></p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Expliquer la différence entre ce que renvoie la Requête 1 et la Requête 2.",
+        "niveau": "medium",
+        "reponse": "La Requête 1 renvoie uniquement deux colonnes (nom_produit et prix) pour les produits dont la quantité en stock est supérieure à 10. La Requête 2 renvoie toutes les colonnes (id_produit, nom_produit, prix, quantite_stock) et toutes les lignes de la table PRODUITS, sans aucun filtre.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Interpréter le but de la condition <code>WHERE quantite_stock > 10</code> dans la Requête 1.",
+        "niveau": "medium",
+        "reponse": "Cette condition sert à filtrer les enregistrements. Seuls les produits dont la valeur dans la colonne 'quantite_stock' est strictement supérieure à 10 seront inclus dans le résultat. Les produits avec un stock de 10 ou moins sont exclus.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Écrire une requête SELECT simple (Compétence)",
+    "type": "competence",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Vous êtes le secrétaire d'une association culturelle d'un lycée à Yaoundé. Vous gérez une table <strong>MEMBRES</strong> avec les colonnes : id_membre, nom, telephone, date_adhesion, cotisation_paye (OUI/NON).</p><p>Écrire les requêtes SQL permettant de :</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Afficher les noms et numéros de téléphone de tous les membres.",
+        "niveau": "easy",
+        "reponse": "```sql\nSELECT nom, telephone FROM MEMBRES;\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Afficher toutes les informations des membres qui ont payé leur cotisation.",
+        "niveau": "easy",
+        "reponse": "```sql\nSELECT * FROM MEMBRES WHERE cotisation_paye = 'OUI';\n```",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Application : Gestion des notes d'une école (Compétence)",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans le cadre de la gestion des résultats du baccalauréat, un établissement utilise une base de données. Une table <strong>ELEVES_TERM_A</strong> contient les colonnes : <strong>matricule</strong> (clé primaire), <strong>nom_complet</strong>, <strong>moyenne_genre_litteraire</strong>, <strong>moyenne_philo</strong>, <strong>moyenne_histoire</strong>.</p><p>En vous aidant du tableau ci-dessous, écrivez les requêtes SELECT demandées.</p>",
+      "images": [
+        "Un petit tableau d'exemple avec 3 lignes de données. Colonnes : matricule (A001, A002, A003), nom_complet (DIALLO Aminata, FOTSO Charles, NGONO Marie), moyenne_genre_litteraire (15.5, 12.0, 18.0), moyenne_philo (14.0, 16.5, 13.0), moyenne_histoire (16.0, 11.5, 17.5)"
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire une requête pour afficher le matricule et le nom complet de tous les élèves.",
+        "niveau": "easy",
+        "reponse": "```sql\nSELECT matricule, nom_complet FROM ELEVES_TERM_A;\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire une requête pour afficher le nom complet et la note de philosophie des élèves qui ont une moyenne en histoire supérieure à 15.",
+        "niveau": "medium",
+        "reponse": "```sql\nSELECT nom_complet, moyenne_philo FROM ELEVES_TERM_A WHERE moyenne_histoire > 15;\n```\n(Cela afficherait DIALLO Aminata avec 14.0 et NGONO Marie avec 13.0)",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Proposer une requête pour afficher tous les détails de l'élève dont le matricule est 'A002'.",
+        "niveau": "medium",
+        "reponse": "```sql\nSELECT * FROM ELEVES_TERM_A WHERE matricule = 'A002';\n```\n(Le résultat afficherait la ligne de FOTSO Charles)",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Analyse critique : Amélioration d'une requête (Compétence)",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un stagiaire a écrit la requête suivante pour la table <strong>COMMANDES</strong> (id_commande, client_nom, montant, statut) :</p><p><code>SELECT * FROM COMMANDES;</code></p><p>Le chef de service lui demande de n'afficher que les commandes des clients dont le nom commence par la lettre 'N' et dont le montant est supérieur à 5000 FCFA, tout en ne montrant que les colonnes <strong>client_nom</strong> et <strong>montant</strong>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Critiquer la requête du stagiaire en expliquant pourquoi elle ne répond pas à la demande du chef.",
+        "niveau": "hard",
+        "reponse": "La requête du stagiaire (`SELECT * FROM COMMANDES;`) ne répond à aucun des critères du chef. Elle affiche toutes les colonnes (`*`) alors que seules 'client_nom' et 'montant' sont demandées. De plus, elle n'applique aucun filtre (`WHERE`), donc elle affiche toutes les commandes, sans se limiter à celles dont le client commence par 'N' ni à celles dont le montant dépasse 5000 FCFA.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Formuler la requête SQL correcte qui répond précisément à la demande du chef de service.",
+        "niveau": "very hard",
+        "reponse": "```sql\nSELECT client_nom, montant FROM COMMANDES WHERE client_nom LIKE 'N%' AND montant > 5000;\n```\n(Note : L'opérateur `LIKE 'N%'` est utilisé pour chercher les noms commençant par 'N'.)",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

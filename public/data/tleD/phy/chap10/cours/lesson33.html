@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 33 : Oscillations forcées et résonance</title>
+    <style>
+        /* ===== STYLES INSPIRÉS DU TEMPLATE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-revision {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #0f2b3d 0%, #1b4a6e 100%);
+            color: white;
+            padding: 1.8rem 2.5rem;
+            border-bottom: 4px solid #f59e0b;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #f59e0b;
+            color: #1e293b;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            margin-top: 0.8rem;
+        }
+
+        /* Corps de la fiche */
+        .content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Grille pour les sections */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.2rem 1.5rem;
+            border-left: 5px solid #1b4a6e;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f2b3d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .card h3 i {
+            font-style: normal;
+            font-size: 1.3rem;
+        }
+
+        .formula {
+            background-color: #eef2ff;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 1rem;
+            margin: 0.8rem 0;
+            text-align: center;
+            font-weight: 600;
+            color: #1e40af;
+            border: 1px solid #cbd5e1;
+        }
+
+        .note {
+            background-color: #fef9e3;
+            border-left: 4px solid #f59e0b;
+            padding: 0.8rem 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            border-radius: 8px;
+        }
+
+        .note strong {
+            color: #b45309;
+        }
+
+        ul, .liste-simple {
+            padding-left: 1.2rem;
+            margin: 0.8rem 0;
+        }
+
+        li {
+            margin: 0.4rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 0.6rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        .schema-placeholder {
+            background-color: #e6f0fa;
+            border: 1px dashed #1b4a6e;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #1e3a8a;
+            margin: 1rem 0;
+        }
+
+        .footer {
+            background-color: #f1f5f9;
+            padding: 1rem 2.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.75rem;
+            color: #475569;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .header {
+                padding: 1.2rem 1.5rem;
+            }
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fiche-revision">
+        <!-- EN-TÊTE -->
+        <div class="header">
+            <h1>📘 Leçon 33 : Oscillations forcées et résonance d'intensité</h1>
+            <div class="subtitle">Circuit RLC série soumis à une tension sinusoïdale | Terminale C & D</div>
+            <div class="badge">🎯 Bac 2025 – Résonance & Facteur de qualité</div>
+        </div>
+
+        <!-- CONTENU PRINCIPAL -->
+        <div class="content">
+            <!-- OBJECTIFS ET CONTEXT BAC -->
+            <div class="grid-2">
+                <div class="card">
+                    <h3>🎯 Objectifs d'apprentissage</h3>
+                    <ul>
+                        <li>Établir l'équation différentielle d'un circuit RLC série en régime sinusoïdal forcé.</li>
+                        <li>Définir et identifier la condition de résonance d'intensité.</li>
+                        <li>Déterminer la fréquence de résonance et l'intensité maximale.</li>
+                        <li>Expliquer l'influence de la résistance $R$ sur la netteté de la résonance (facteur de qualité $Q$).</li>
+                        <li>Analyser les courbes de résonance ($I(\omega)$ ou $I(N)$).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>⚡ Lien avec les épreuves du Bac</h3>
+                    <ul>
+                        <li><strong>Bac 2025 (Cameroun) :</strong> Résonance d'intensité dans un circuit RLC série.</li>
+                        <li><strong>Exercice typique :</strong> On donne $R, L, C$ et la tension efficace $U$. Calcul de $N_0$, $I_{max}$, $Q$ et tracé de $I(N)$.</li>
+                        <li><strong>Compétences évaluées :</strong> Établir une équation différentielle, utiliser les impédances, interpréter un phénomène de résonance.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 1. MONTAGE ET ÉQUATION DIFFÉRENTIELLE -->
+            <div class="card" style="margin-bottom: 1.8rem;">
+                <h3>🔧 1. Circuit RLC série en régime forcé sinusoïdal</h3>
+                <p>On applique une tension sinusoïdale $u(t) = U_m \cos(\omega t + \varphi_u)$ aux bornes d'un dipole RLC série.</p>
+                <div class="schema-placeholder">
+                    ⚡ [Schéma mental] GBF → Résistance R → Bobine L → Condensateur C → retour GBF.<br>
+                    Tension aux bornes : $u(t) = u_R(t) + u_L(t) + u_C(t)$
+                </div>
+                <p><strong>Équation différentielle en fonction de la charge $q(t)$ :</strong></p>
+                <div class="formula">
+                    $$ L \frac{d^2q}{dt^2} + R \frac{dq}{dt} + \frac{1}{C} q = u(t) $$
+                </div>
+                <p>Ou en fonction de l'intensité $i(t) = \frac{dq}{dt}$ :</p>
+                <div class="formula">
+                    $$ L \frac{di}{dt} + R\, i + \frac{1}{C} \int i\, dt = u(t) $$
+                </div>
+                <p>En régime sinusoïdal forcé, après le régime transitoire, $i(t)$ est sinusoïdale de même pulsation $\omega$ que l'excitation : $i(t) = I_m \cos(\omega t + \varphi_i)$.</p>
+            </div>
+
+            <!-- 2. IMPÉDANCE ET INTENSITÉ -->
+            <div class="grid-2">
+                <div class="card">
+                    <h3>📐 2. Impédance et intensité efficace</h3>
+                    <p>L'impédance complexe du circuit RLC série est :</p>
+                    <div class="formula">
+                        $$ Z = \sqrt{R^2 + \left( L\omega - \frac{1}{C\omega} \right)^2 } $$
+                    </div>
+                    <p>L'intensité efficace $I$ (ou l'amplitude $I_m$) est donnée par la loi d'Ohm en valeurs efficaces :</p>
+                    <div class="formula">
+                        $$ I = \frac{U}{Z} = \frac{U}{\sqrt{R^2 + \left( L\omega - \frac{1}{C\omega} \right)^2 }} $$
+                    </div>
+                    <p>où $U$ est la tension efficace aux bornes du générateur.</p>
+                </div>
+                <div class="card">
+                    <h3>🎵 3. Condition de résonance d'intensité</h3>
+                    <p>L'intensité $I$ est maximale lorsque l'impédance $Z$ est minimale, c'est-à-dire quand la réactance totale s'annule :</p>
+                    <div class="formula">
+                        $$ L\omega_0 - \frac{1}{C\omega_0} = 0 \quad \Rightarrow \quad \omega_0 = \frac{1}{\sqrt{LC}} $$
+                    </div>
+                    <p>La <strong>fréquence de résonance</strong> en Hertz :</p>
+                    <div class="formula">
+                        $$ N_0 = \frac{\omega_0}{2\pi} = \frac{1}{2\pi\sqrt{LC}} $$
+                    </div>
+                    <div class="note">
+                        <strong>💡 À retenir :</strong> À la résonance, $Z_{min} = R$, donc $I_{max} = \dfrac{U}{R}$.  
+                        Le circuit est alors purement résistif : $u(t)$ et $i(t)$ sont en phase ($\varphi = 0$).
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. FACTEUR DE QUALITÉ ET BANDE PASSANTE -->
+            <div class="card" style="margin-bottom: 1.8rem;">
+                <h3>📈 4. Facteur de qualité $Q$ et bande passante</h3>
+                <p>Le facteur de qualité $Q$ (ou coefficient de surtension) caractérise la <strong>netteté de la résonance</strong> :</p>
+                <div class="formula">
+                    $$ Q = \frac{L\omega_0}{R} = \frac{1}{R}\sqrt{\frac{L}{C}} = \frac{U_L}{U} \quad \text{(à la résonance)} $$
+                </div>
+                <p><strong>Interprétation :</strong></p>
+                <ul>
+                    <li>$Q$ grand ($> 1$) → résonance aiguë, pic fin et haut, circuit sélectif.</li>
+                    <li>$Q$ petit ($< 1$) → résonance large, peu marquée.</li>
+                </ul>
+                <p><strong>Bande passante $\Delta \omega$ (à $-3 \text{ dB}$ ou $I = I_{max}/\sqrt{2}$) :</strong></p>
+                <div class="formula">
+                    $$ \Delta \omega = \frac{\omega_0}{Q} \quad \text{et} \quad \Delta N = \frac{N_0}{Q} $$
+                </div>
+                <div class="note">
+                    <strong>🎓 Bac 2025 :</strong> On peut demander de calculer $Q$, $\Delta N$ ou de déterminer graphiquement la bande passante sur la courbe $I(N)$.
+                </div>
+            </div>
+
+            <!-- 4. COURBES DE RÉSONANCE -->
+            <div class="grid-2">
+                <div class="card">
+                    <h3>📉 5. Courbes de résonance $I(\omega)$ ou $I(N)$</h3>
+                    <p>Allure générale :</p>
+                    <ul>
+                        <li>Pour $\omega \ll \omega_0$ : $C$ impose $I$ faible (blocage par condensateur).</li>
+                        <li>Pour $\omega = \omega_0$ : pic maximal $I_{max} = U/R$.</li>
+                        <li>Pour $\omega \gg \omega_0$ : $L$ impose $I$ faible.</li>
+                    </ul>
+                    <p>Plus $R$ est petit (donc $Q$ grand), plus le pic est haut et étroit.</p>
+                    <div class="schema-placeholder">
+                        📊 [Courbe type] Intensité I en fonction de N : courbe en cloche symétrique autour de N₀, largeur à mi-hauteur = ΔN.
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>🧪 6. Applications et exemples</h3>
+                    <ul>
+                        <li><strong>Sélection de fréquences (radio, TV) :</strong> On ajuste C pour que $\omega_0$ coïncide avec la fréquence de la station désirée.</li>
+                        <li><strong>Filtrage :</strong> Circuit RLC comme filtre passe-bande.</li>
+                        <li><strong>Détection de signaux faibles :</strong> La résonance amplifie le courant.</li>
+                    </ul>
+                    <div class="note">
+                        <strong>⚠️ Piège fréquent :</strong> Ne pas confondre résonance d'intensité (courant max) avec résonance de tension (aux bornes de L ou C).  
+                        À la résonance, $U_C = Q \times U$ peut être très grand.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. MÉTHODOLOGIE POUR EXERCICE TYPE BAC -->
+            <div class="card">
+                <h3>✍️ Méthodologie – Résolution d'un problème de résonance</h3>
+                <table>
+                    <thead>
+                        <tr><th>Étape</th><th>Action</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1. Lire l'énoncé</td><td>Identifier $R, L, C$ et la valeur efficace $U$ du générateur.</td></tr>
+                        <tr><td>2. Calculer $\omega_0$ ou $N_0$</td><td>$\omega_0 = \frac{1}{\sqrt{LC}}$ , $N_0 = \frac{1}{2\pi\sqrt{LC}}$.</td></tr>
+                        <tr><td>3. Intensité maximale</td><td>$I_{max} = \dfrac{U}{R}$ (à la résonance).</td></tr>
+                        <tr><td>4. Facteur de qualité</td><td>$Q = \dfrac{L\omega_0}{R}$ ou $Q = \dfrac{1}{R}\sqrt{\dfrac{L}{C}}$.</td></tr>
+                        <tr><td>5. Bande passante</td><td>$\Delta N = \dfrac{N_0}{Q}$.</td></tr>
+                        <tr><td>6. Tracer ou interpréter</td><td>Courbe $I(N)$ : pic en $N_0$, largeur $\Delta N$, hauteur $I_{max}$.</td></tr>
+                    </tbody>
+                </table>
+                <div class="formula" style="background-color: #dcfce7;">
+                    📌 <strong>Exemple type Bac :</strong> $R = 10\ \Omega$, $L = 0,1\ \text{H}$, $C = 10\ \mu\text{F}$, $U = 5\ \text{V}$.  
+                    $N_0 = \frac{1}{2\pi\sqrt{0,1 \times 10\times 10^{-6}}} \approx 159\ \text{Hz}$, $I_{max}=0,5\ \text{A}$, $Q \approx 10$, $\Delta N \approx 15,9\ \text{Hz}$.
+                </div>
+            </div>
+
+            <!-- 6. RÉCAPITULATIF DES FORMULES CLÉS -->
+            <div class="card" style="margin-top: 1rem; background-color: #eef2ff;">
+                <h3>📖 Formulaire – Ce qu'il faut absolument retenir</h3>
+                <div class="grid-2" style="gap: 0.8rem; margin-top: 0.5rem;">
+                    <div>
+                        <strong>Pulsation propre :</strong><br>
+                        $\omega_0 = \frac{1}{\sqrt{LC}}$
+                    </div>
+                    <div>
+                        <strong>Fréquence propre :</strong><br>
+                        $N_0 = \frac{1}{2\pi\sqrt{LC}}$
+                    </div>
+                    <div>
+                        <strong>Impédance :</strong><br>
+                        $Z = \sqrt{R^2 + (L\omega - \frac{1}{C\omega})^2}$
+                    </div>
+                    <div>
+                        <strong>Intensité efficace :</strong><br>
+                        $I = \frac{U}{Z}$
+                    </div>
+                    <div>
+                        <strong>Résonance :</strong><br>
+                        $L\omega_0 = \frac{1}{C\omega_0}$
+                    </div>
+                    <div>
+                        <strong>Facteur de qualité :</strong><br>
+                        $Q = \frac{L\omega_0}{R}$
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. ASTUCES ET ERREURS COURANTES -->
+            <div class="note" style="margin-top: 1rem;">
+                <strong>🧠 Conseils pour le Bac :</strong><br>
+                ✔ Vérifiez toujours l'homogénéité des formules ($\omega_0$ en rad/s, $N_0$ en Hz).<br>
+                ✔ À la résonance, le circuit est résistif → $\cos\varphi = 1$, $P = UI$ maximale.<br>
+                ✔ Ne pas oublier que $Q$ est sans unité.<br>
+                ✔ Sur un graphique $I(N)$, la bande passante se lit à $I_{max}/\sqrt{2}$.
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            Fiche conforme au programme de Physique Terminale C & D (Cameroun 2025-2026) – Leçon 33 : Oscillations forcées et résonance d'intensité.<br>
+            Révision Bac – Utilisez ces formules et la méthode pour traiter tout exercice sur le RLC série forcé.
+        </div>
+    </div>
+</body>
+</html>

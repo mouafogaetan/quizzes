@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Le non-soi (SVTEEHB - Première D)</title>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;  /* Fond très clair pour contraster avec les cards */
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24; /* petite touche de couleur vive */
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981; /* vert pour distinguer */
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        .image-illustration {
+            margin: 1rem 0;
+            text-align: center;
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .image-illustration img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            height: auto;
+        }
+        .image-caption {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 0.25rem;
+            font-style: italic;
+        }
+    </style>
+    <!-- MathJax Configuration (au cas où) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js" async></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 20 : Le non-soi</h1>
+            <p class="lesson-subtitle">SVTEEHB · Première D · Module II : Éducation à la santé (Séquence 7)</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">Définition du non-soi</h3>
+                    <p class="card-description">
+                        Le <strong>non-soi</strong> désigne tout élément étranger à l’organisme. Il s’oppose au « soi » (les constituants propres de l’individu). 
+                        Le système immunitaire reconnaît et élimine les éléments du non-soi pour protéger l’intégrité de l’organisme.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Agents infectieux : virus, bactéries, parasites, champignons.</li>
+                        <li>Cellules ou tissus étrangers : greffes, transfusions incompatibles.</li>
+                        <li>Substances toxiques ou allergènes (pollen, venin, certaines molécules).</li>
+                        <li>Cellules anormales de l’organisme (cellules cancéreuses) qui deviennent « non-soi » par leurs marqueurs modifiés.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Reconnaissance du non-soi : les antigènes</h3>
+                    <p class="card-description">
+                        Les éléments du non-soi portent à leur surface des <strong>antigènes</strong> (souvent des protéines ou des polysaccharides). 
+                        Un antigène est une molécule capable de déclencher une réponse immunitaire spécifique.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="bold">Exemples d’antigènes microbiens :</span> protéines de la capsule des bactéries, glycoprotéines de l’enveloppe du VIH, toxines bactériennes.</li>
+                        <li><span class="bold">Antigènes d’histocompatibilité (HLA) :</span> présents sur toutes les cellules ; s’ils sont différents (greffe), ils sont reconnus comme non-soi.</li>
+                        <li>Chaque antigène est reconnu par des récepteurs spécifiques à la surface des lymphocytes.</li>
+                    </ul>
+                    <!-- Image suggérée : schéma d'un antigène (bactérie avec antigènes de surface) -->
+                    <div class="image-illustration">
+                        <img src="" alt="Schéma d’une bactérie montrant des antigènes de surface (protéines) reconnus par le système immunitaire comme non-soi">
+                        <div class="image-caption">Figure 1 : Des antigènes (en rouge) à la surface d’un agent pathogène signalent le non-soi.</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Origines et diversité du non-soi</h3>
+                    <p class="card-description">
+                        Le non-soi peut être <strong>exogène</strong> (venant de l’extérieur) ou <strong>endogène</strong> (provenant de l’intérieur mais devenu étranger).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Non-soi exogène :</strong> microbes, pollens, greffes de peau, transfusions sanguines incompatibles (système ABO).</li>
+                        <li><strong>Non-soi endogène :</strong> cellules infectées par un virus (présentant des peptides viraux), cellules tumorales (néo-antigènes).</li>
+                        <li>Le système immunitaire tolère le soi et réagit contre le non-soi : c’est le principe d’<strong>auto-tolérance</strong>.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Infection par une bactérie pathogène</h3>
+                    <p class="exemple-context">
+                        Un élève se coupe avec un objet sale. La plaie est contaminée par la bactérie <em>Staphylococcus aureus</em>.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Analyse immunitaire :</strong> Les bactéries sont des éléments du non-soi exogène. Leurs antigènes de surface sont reconnus par les cellules immunitaires (macrophages, polynucléaires). 
+                        Ces cellules déclenchent une inflammation et une réponse adaptative (production d’anticorps spécifiques). La destruction des bactéries permet la guérison.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Le non-soi n’est pas forcément « nuisible » (ex: pollen allergène inoffensif pour certains, mais reconnu comme non-soi par les allergiques). La réaction dépend de la sensibilisation du système immunitaire.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Rejet de greffe</h3>
+                    <p class="exemple-context">
+                        Un patient reçoit une greffe de rein provenant d’un donneur non apparenté.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Mécanisme :</strong> Les cellules du rein greffé portent des molécules du CMH (Complexe Majeur d’Histocompatibilité) différentes de celles du receveur. 
+                        Ces molécules sont reconnues comme non-soi. Les lymphocytes T du receveur attaquent le greffon → rejet de la greffe. 
+                        Pour éviter cela, on utilise des immunosuppresseurs et on recherche la meilleure compatibilité HLA.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 À retenir : Une greffe réussie nécessite que les antigènes du donneur soient les plus proches possibles de ceux du receveur (diminution du non-soi perçu).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Cellules tumorales et non-soi</h3>
+                    <p class="exemple-context">
+                        Une cellule cancéreuse du poumon se multiplie anormalement. Le système immunitaire peut la détruire.
+                    </p>
+                    <p class="exemple-correction">
+                        Les cellules cancéreuses produisent des antigènes anormaux (néo-antigènes) à leur surface. Ils sont reconnus comme non-soi endogène. 
+                        Les lymphocytes T cytotoxiques les éliminent. C’est le principe de l’<strong>immunosurveillance</strong> des cancers.
+                    </p>
+                    <div class="exemple-astuce">
+                        🔬 Concept clé : La frontière soi / non-soi n’est pas absolue. Les cellules infectées par un virus expriment des peptides viraux (non-soi) associés aux CMH, ce qui déclenche leur destruction.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges à éviter / à ne pas confondre -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre « non-soi » et « pathogène ». Tout élément étranger est non-soi, même inoffensif (ex: pollen, poussière). Ce n’est pas parce qu’un élément est non-soi qu’il provoque obligatoirement une maladie.</li>
+                        <li><span class="bold">Attention :</span> Le système immunitaire tolère parfois certains non-soi bénéfiques (flore intestinale commensale). On parle de tolérance immunitaire périphérique.</li>
+                        <li><span class="bold">À ne pas confondre :</span> Antigène ≠ anticorps. L’antigène est la molécule du non-soi qui déclenche la réponse. L’anticorps est produit par l’organisme pour neutraliser l’antigène.</li>
+                        <li><span class="bold">Piège :</span> Une transfusion incompatible (groupe sanguin différent) : les globules rouges du donneur portent des antigènes A ou B reconnus comme non-soi → réaction de rejet aiguë (hémolyse).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section schéma / résumé visuel supplémentaire -->
+            <section class="concept-section">
+                <h2 class="section-title">🧬 Schéma récapitulatif : origine du non-soi</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Voici une représentation simplifiée des principales catégories du non-soi reconnues par notre système immunitaire.
+                    </p>
+                    <div class="image-illustration">
+                        <img src="" alt="Diagramme en arbre montrant les deux grandes branches du non-soi : exogène (microbes, allergènes, greffes) et endogène (cellules infectées, cellules cancéreuses) avec exemples visuels">
+                        <div class="image-caption">Figure 2 : Classification des éléments du non-soi en immunologie.</div>
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>Non-soi exogène :</strong> provient de l’environnement extérieur.</li>
+                        <li><strong>Non-soi endogène :</strong> provient de l’intérieur de l’organisme mais ses antigènes sont anormaux ou étrangers.</li>
+                        <li>La distinction permet de comprendre les réponses immunitaires contre les infections, les cancers et les rejets de greffe.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section liens avec d'autres leçons (optionnel) -->
+            <section class="exemple-section">
+                <h2 class="section-title">🔗 Liens avec d’autres leçons</h2>
+                <div class="card exemple-card">
+                    <p class="exemple-context">
+                        La notion de non-soi est fondamentale pour aborder :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Leçon 19 (Le soi) :</strong> le soi est défini par les marqueurs CMH et les antigènes des groupes sanguins. Le non-soi est tout ce qui n’est pas « soi ».</li>
+                        <li><strong>Leçon 21 (Principales cellules immunitaires) :</strong> phagocytes, lymphocytes B et T reconnaissent et éliminent le non-soi.</li>
+                        <li><strong>Leçon 22 (VIH/SIDA) :</strong> le VIH est un virus du non-soi ; il infecte les lymphocytes T4, affaiblissant la reconnaissance du non-soi.</li>
+                    </ul>
+                    <div class="exemple-astuce">
+                        📚 À réviser ensemble : Leçon 19 + Leçon 20 pour bien maîtriser la distinction soi / non-soi.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rappel des objectifs officiels (selon programme) -->
+            <section class="warning-section">
+                <h2 class="section-title">🎯 Objectif officiel (Programme Première D)</h2>
+                <div class="card warning-card" style="background-color:#f0f9ff; border-left-color:#2563eb;">
+                    <ul>
+                        <li>Définir le « non-soi » comme tout élément étranger à l’organisme (agents infectieux, cellules étrangères, substances allergènes, cellules modifiées).</li>
+                        <li>Identifier les différents éléments du non-soi.</li>
+                        <li>Comprendre que la reconnaissance du non-soi est à la base de la réponse immunitaire et de la protection de l’organisme.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision SVTEEHB – Première D | Leçon 20 : Le non-soi (Module II : Éducation à la santé) · 📚 Réviser avec les exemples et schémas</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 13 : Suivre des instructions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 950px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Image style */
+        .illustration {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .illustration img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .img-caption {
+            font-size: 0.8rem;
+            color: #5b6e8c;
+            margin-top: 0.3rem;
+        }
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.8rem 0;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .grammar-table th, .grammar-table td {
+            border: 1px solid #e2e8f0;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .grammar-table th {
+            background-color: #eef2ff;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+        .highlight {
+            background-color: #e6f7ec;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">📞 Lesson 13: Following Instructions</h1>
+        <p class="lesson-subtitle">Anglais – Terminale A (Littéraire) – Compréhension orale & écrite</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section concept clés -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Objectifs & éléments clés</h2>
+            <div class="card concept-card">
+                <h3 class="card-title">🎯 Savoir suivre des instructions (orales et écrites)</h3>
+                <p class="card-description">
+                    Dans la vie quotidienne et professionnelle, on doit souvent comprendre un message téléphonique automatique, lire une notice d'utilisation, ou exécuter des consignes administratives. 
+                    Cette leçon vous apprend à : 
+                </p>
+                <ul class="concept-list">
+                    <li>Comprendre les étapes d’un mode d’emploi (manuel utilisateur).</li>
+                    <li>Interpréter un message téléphonique enregistré (service client, banque, administration).</li>
+                    <li>Identifier les mots-clés (verbes d’action, options, numéros).</li>
+                    <li>Utiliser le <strong>discours rapporté (reported speech)</strong> pour relayer ce que quelqu’un a dit ou annoncé.</li>
+                </ul>
+                <div class="illustration">
+                    <img src="" alt="Illustration : une personne écoute un message vocal sur son téléphone tout en prenant des notes, avec des icônes d'options (1,2,3) et une notice utilisateur à côté" style="max-width:100%; border-radius:12px;">
+                    <div class="img-caption">📱 Écouter un message automatique ou lire une notice sont des compétences clés.</div>
+                </div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">📖 Vocabulaire du service client & instructions</h3>
+                <p class="card-description">Mémorisez ces mots et expressions fréquents dans les manuels et les messages téléphoniques :</p>
+                <ul class="concept-list">
+                    <li><span class="bold">refund</span> : remboursement</li>
+                    <li><span class="bold">warranty</span> : garantie</li>
+                    <li><span class="bold">complaint</span> : réclamation</li>
+                    <li><span class="bold">customer service</span> : service client</li>
+                    <li><span class="bold">option</span> : option (appuyez sur 1, 2...)</li>
+                    <li><span class="bold">press / dial</span> : appuyer / composer</li>
+                    <li><span class="bold">hold the line</span> : rester en ligne, ne pas raccrocher</li>
+                    <li><span class="bold">user manual / instructions</span> : manuel utilisateur / instructions</li>
+                    <li><span class="bold">step by step</span> : étape par étape</li>
+                </ul>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">🏗️ Grammaire : le discours rapporté (Reported Speech)</h3>
+                <p class="card-description">
+                    Pour rapporter ce qu’une personne (ou un message enregistré) a dit, on utilise le <strong>discours indirect</strong>. Cela permet de transmettre une information sans citer les paroles exactes.
+                </p>
+                <table class="grammar-table">
+                    <thead>
+                        <tr><th>Discours direct (style direct)</th><th>Discours rapporté (reported speech)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>"I will process your refund tomorrow."</td><td>He said <strong>that he would</strong> process my refund the next day.</td></tr>
+                        <tr><td>"Press 1 for English, press 2 for French."</td><td>The recording instructed us <strong>to press</strong> 1 for English or 2 for French.</td></tr>
+                        <tr><td>"We are sorting out the garbage collection."</td><td>The Mayor announced <strong>that they were sorting out</strong> the garbage collection.</td></tr>
+                        <tr><td>"You must send the warranty certificate."</td><td>The manual says <strong>that we must send</strong> the warranty certificate.</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>Règles essentielles :</strong></p>
+                <ul class="concept-list">
+                    <li>Changement des pronoms (I → he/she, we → they).</li>
+                    <li>Recul des temps (présent → passé, futur → conditionnel : will → would).</li>
+                    <li>Modification des adverbes (tomorrow → the next day, here → there).</li>
+                    <li>Pour les ordres / instructions : <em>tell + personne + to + infinitif</em>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section exemples concrets -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Exemples de compréhension</h2>
+            
+            <div class="card exemple-card">
+                <h3 class="card-title">📞 Exemple 1 : Message téléphonique automatique (écoute)</h3>
+                <p class="exemple-context">
+                    <strong>Message :</strong> <em>"Thank you for calling FastTech Support. If you have a problem with a recent purchase, press 1. For warranty information, press 2. To speak to a customer service agent, press 3. Please note that refunds are processed within 14 business days. To repeat these options, press 0."</em>
+                </p>
+                <p class="exemple-correction">
+                    <strong>Compréhension :</strong> 
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>🔹 Pour un problème avec un achat récent → <span class="bold">appuyer sur 1</span>.</li>
+                        <li>🔹 Pour la garantie → <span class="bold">appuyer sur 2</span>.</li>
+                        <li>🔹 Pour parler à un conseiller → <span class="bold">appuyer sur 3</span>.</li>
+                        <li>🔹 Les remboursements prennent 14 jours ouvrés.</li>
+                    </ul>
+                </p>
+                <div class="exemple-astuce">
+                    💬 Astuce : Notez toujours les chiffres et les mots-clés (refund, warranty, customer service). Entraînez-vous à reformuler l’information : « The recording said that if I had a problem, I should press 1. »
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">📄 Exemple 2 : Lire un extrait de manuel utilisateur (notice)</h3>
+                <p class="exemple-context">
+                    <strong>Notice (extrait) :</strong> <em>"How to set up your new speaker: Step 1: Unpack the device and check all components. Step 2: Connect the power adapter to a wall outlet. Step 3: Press the power button for 3 seconds. Step 4: Activate Bluetooth on your phone and select 'SpeakerX'. The blue light will blink when pairing is successful."</em>
+                </p>
+                <p class="exemple-correction">
+                    <strong>Résolution / Explication :</strong> Pour utiliser l’enceinte, il faut d’abord déballer, brancher l’adaptateur, appuyer 3 secondes sur le bouton power, puis activer Bluetooth et choisir 'SpeakerX'. La lumière bleue clignotante confirme l’appairage.
+                </p>
+                <div class="exemple-astuce">
+                    💡 Quand vous lisez une notice, repérez les verbes d’action (unpack, connect, press, activate). Cela vous donne la chronologie.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">✍️ Exemple 3 : Discours rapporté – Annonce officielle</h3>
+                <p class="exemple-context">
+                    Le maire a déclaré lors d’une conférence : <em>"We will be sorting out our garbage collection system starting next month. All residents must separate plastic and organic waste."</em>
+                </p>
+                <p class="exemple-correction">
+                    <strong>Rapportez cette déclaration :</strong><br>
+                    <span class="highlight">Réponse :</span> <em>The Mayor announced that they would be sorting out their garbage collection system starting the following month and that all residents had to separate plastic and organic waste.</em>
+                </p>
+                <p><strong>Explication :</strong> On change <em>will</em> → <em>would</em>, <em>next month</em> → <em>the following month</em>, <em>must</em> → <em>had to</em> (obligation au passé).</p>
+            </div>
+        </section>
+
+        <!-- Section pièges fréquents -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants & conseils</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Ne pas confondre "press" et "hold" :</span> "Press 1" = appuyer une fois. "Hold the button" = maintenir enfoncé.</li>
+                    <li><span class="bold">Oublier le changement de temps dans le discours rapporté :</span> Exemple : <em>"He said he will come"</em> → ❌ ; <em>He said he would come</em> → ✅ (sauf vérité générale).</li>
+                    <li><span class="bold">Mots transparents trompeurs :</span> "Actually" ne signifie pas "actuellement" mais "en fait". Dans une notice, "eventually" = "finalement", pas "éventuellement".</li>
+                    <li><span class="bold">Ne pas noter les options :</span> lors d’un message téléphonique, notez immédiatement les chiffres correspondants aux actions. C’est un piège fréquent à l’examen.</li>
+                    <li><span class="bold">Mauvaise compréhension du "warranty" :</span> La garantie couvre généralement les défauts, pas les dommages accidentels. Vérifiez le manuel.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section exercice d'application type examen -->
+        <section class="exemple-section">
+            <h2 class="section-title">🎧 Entraînement : message téléphonique + report</h2>
+            <div class="card exemple-card">
+                <h3 class="card-title">📝 Écoute et restitution (simulation examen)</h3>
+                <p class="exemple-context">
+                    <strong>Message vocal (service après-vente) :</strong> <em>"Hello, this is GlobalShop. If you are calling about a refund, press 1. For a product exchange, press 2. To check your warranty status, press 3. Please have your order number ready. Our office hours are Monday to Friday, 9 AM to 5 PM. For any other request, stay on the line and an agent will assist you shortly."</em>
+                </p>
+                <p class="exemple-correction">
+                    <strong>À faire :</strong> Répondez aux questions suivantes (auto-correction ci-dessous) :<br>
+                    1. Quelle touche pour un échange de produit ?<br>
+                    2. Quelle information doit-on avoir prête ?<br>
+                    3. Rapportez la phrase concernant les horaires en utilisant le reported speech.<br><br>
+                    <span class="bold">✅ Corrigé :</span><br>
+                    1. Press 2.<br>
+                    2. The order number.<br>
+                    3. The recording said that their office hours were Monday to Friday, from 9 AM to 5 PM. (Ou : The customer service message announced that the office hours were Monday to Friday...)<br>
+                    💡 Conseil : Quand vous écoutez, prenez des notes avec des symboles (ex: 🔁 échange=2, 🆔 order number).
+                </p>
+                <div class="exemple-astuce">
+                    🔁 À retenir : Dans les épreuves de compréhension orale, soyez attentif aux nombres, aux horaires et aux verbes d’action. Entraînez-vous avec des messages réels (banque, transport, etc.).
+                </div>
+            </div>
+        </section>
+
+        <!-- Petit récapitulatif du discours rapporté pour les instructions -->
+        <section class="concept-section">
+            <div class="card concept-card">
+                <h3 class="card-title">🔁 Récapitulatif : rapporter des instructions (Reporting commands/requests)</h3>
+                <p class="card-description">
+                    Quand on rapporte un ordre, une instruction ou un conseil, on utilise souvent la structure : <br>
+                    <strong>verbe introducteur (tell / ask / order / instruct) + personne + to + infinitif</strong>.
+                </p>
+                <ul class="concept-list">
+                    <li><em>"Press 1 for English."</em> → The voice <strong>instructed me to press</strong> 1 for English.</li>
+                    <li><em>"Don't forget to attach your receipt."</em> → The manual <strong>tells the user not to forget</strong> to attach the receipt.</li>
+                    <li><em>"Please hold the line."</em> → The operator <strong>asked me to hold</strong> the line.</li>
+                </ul>
+                <p>Pour les déclarations simples (annonces), on utilise <strong>said (that)</strong> ou <strong>announced (that)</strong> avec le recul des temps.</p>
+            </div>
+        </section>
+
+        <!-- Image d'illustration d'un schéma de reported speech -->
+        <div class="illustration">
+            <img src="" alt="Schéma explicatif du reported speech en anglais : présent -> past, will -> would, can -> could, avec une bulle de dialogue 'I will call you' devenant 'He said he would call me'.">
+            <div class="img-caption">📚 Tableau de conversion des temps en discours rapporté.</div>
+        </div>
+
+        <!-- Lien vers des ressources -->
+        <div style="background:#eef2ff; border-radius: 1rem; padding: 1rem; margin: 1rem 0 0.5rem 0;">
+            <p style="font-weight: 500;">🌐 Pour approfondir :</p>
+            <ul style="margin-left: 1.5rem;">
+                <li>Écoutez des messages vocaux de service client sur YouTube (ex: "automated phone menu practice").</li>
+                <li>Entraînez-vous à rapporter les consignes d’un manuel (notice d’un appareil).</li>
+                <li>Révisez les modaux et le reported speech avec des exercices en ligne (BBC Learning English).</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Fiche de révision – Leçon 13 : Following Instructions (écoute & lecture) · Terminale A · Année 2025-2026</p>
+        <p>📚 Relayer une information avec le <strong>reported speech</strong> · Vocabulaire du service client · Stratégies de compréhension</p>
+    </footer>
+</div>
+</body>
+</html>

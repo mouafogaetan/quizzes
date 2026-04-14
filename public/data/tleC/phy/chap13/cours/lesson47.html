@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 47 : Dangers des rayonnements et radioprotection</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie professionnelle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== STYLES GLOBAUX ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        /* Conteneur principal type fiche A4 */
+        .fiche-revision {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête avec bandeau */
+        .header {
+            background: linear-gradient(135deg, #0f2b3d 0%, #1b4a6e 100%);
+            color: white;
+            padding: 1.8rem 2.2rem;
+            border-bottom: 5px solid #ffb74d;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ffb74d;
+            color: #1e293b;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        .header h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 0.75rem;
+        }
+
+        .meta {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.85rem;
+            margin-top: 0.75rem;
+            opacity: 0.85;
+            flex-wrap: wrap;
+        }
+
+        .meta span {
+            background: rgba(255,255,255,0.15);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* Corps de la fiche */
+        .content {
+            padding: 2rem 2.2rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2rem;
+            border-left: 4px solid #ffb74d;
+            padding-left: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #0f2b3d;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-title i {
+            font-size: 1.5rem;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.2rem 1.4rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e4a6e;
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid #ffb74d;
+            display: inline-block;
+            padding-bottom: 0.2rem;
+        }
+
+        .definition {
+            background: #eef2ff;
+            padding: 0.8rem 1rem;
+            border-radius: 16px;
+            font-weight: 500;
+            margin: 0.8rem 0;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .formula {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 0.8rem 1rem;
+            border-radius: 14px;
+            font-family: monospace;
+            font-size: 1rem;
+            text-align: center;
+            margin: 0.8rem 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .warning {
+            background: #fff3e3;
+            border-left: 4px solid #f97316;
+            padding: 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+        }
+
+        .warning strong {
+            color: #c2410c;
+        }
+
+        ul, .liste {
+            margin: 0.8rem 0 0.5rem 1.4rem;
+        }
+
+        li {
+            margin: 0.4rem 0;
+        }
+
+        .btn-bac {
+            background: #1e293b;
+            color: white;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        footer {
+            background: #f1f5f9;
+            padding: 1rem 2.2rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.75rem;
+            color: #475569;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-revision">
+    <div class="header">
+        <div class="badge">📘 MODULE 5 – PHYSIQUE NUCLÉAIRE & SANTÉ</div>
+        <h1>⚠️ Leçon 47 : Dangers des rayonnements et radioprotection</h1>
+        <h2>Irradiation, contamination, effets biologiques et moyens de protection</h2>
+        <div class="meta">
+            <span>🎓 Terminale C & D</span>
+            <span>📅 Année 2025-2026</span>
+            <span>🎯 Baccalauréat 2025 (spécial)</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Section 1 : Objectifs et lien Bac -->
+        <div class="section">
+            <div class="section-title">
+                🎯 Objectifs d’apprentissage
+            </div>
+            <ul>
+                <li>✅ Distinguer <strong>irradiation</strong> et <strong>contamination</strong>.</li>
+                <li>✅ Identifier les dangers des rayonnements ionisants sur l’organisme (effets somatiques et génétiques).</li>
+                <li>✅ Citer et expliquer les trois principes fondamentaux de la radioprotection : <strong>Temps – Distance – Blindage</strong>.</li>
+                <li>✅ Analyser des situations concrètes (métiers exposés, accidents nucléaires, imagerie médicale).</li>
+                <li>✅ <span class="btn-bac">🎓 BAC 2025</span> <strong>Savoir différencier irradiation et contamination</strong> et justifier des mesures de protection.</li>
+            </ul>
+        </div>
+
+        <!-- Section 2 : Concepts clés (définitions) -->
+        <div class="section">
+            <div class="section-title">
+                🧠 Notions fondamentales
+            </div>
+            <div class="grid-2col">
+                <div class="card">
+                    <h3>☢️ Irradiation</h3>
+                    <p>Exposition <strong>externe</strong> à une source radioactive. Le corps <strong>ne devient pas radioactif</strong>. L’exposition cesse quand on s’éloigne de la source ou qu’on la retire.</p>
+                    <div class="definition">
+                        Exemple : Passer une radiographie chez le dentiste → irradiation passagère.
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>🧪 Contamination</h3>
+                    <p>Présence de substances radioactives <strong>à l’intérieur ou à la surface</strong> de l’organisme (par inhalation, ingestion, blessure). La personne devient <strong>source radioactive</strong>.</p>
+                    <div class="definition">
+                        Exemple : Inhaler du césium-137 après un accident nucléaire → contamination interne.
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ Piège fréquent au Bac :</strong> Une personne irradiée n’est pas contaminée (elle n’émet pas de radioactivité après retrait de la source). Une personne contaminée est également irradiée de l’intérieur.
+            </div>
+        </div>
+
+        <!-- Section 3 : Effets biologiques -->
+        <div class="section">
+            <div class="section-title">
+                🧬 Effets des rayonnements sur la santé
+            </div>
+            <div class="grid-2col">
+                <div class="card">
+                    <h3>🔴 Effets somatiques</h3>
+                    <p>Atteintes <strong>directes</strong> sur l’individu exposé.</p>
+                    <ul>
+                        <li><strong>Déterministes (seuil)</strong> : brûlures, stérilité, cataracte, syndrome aigu d’irradiation (forte dose).</li>
+                        <li><strong>Stochastiques (aléatoires)</strong> : cancers, leucémies (probabilité augmente avec la dose, pas de seuil).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🧬 Effets génétiques / héréditaires</h3>
+                    <p>Atteintes <strong>transmissibles à la descendance</strong> (mutations sur les cellules reproductrices).</p>
+                    <div class="definition">
+                        ⚡ Les embryons et fœtus sont extrêmement sensibles (malformations, retard mental).
+                    </div>
+                </div>
+            </div>
+            <div class="formula">
+                📏 Dose absorbée : \( D = \frac{E}{m} \) (J·kg⁻¹ = Gray, Gy) <br>
+                ☣️ Dose équivalente (Sv) = \( D \times w_R \) (facteur de pondération selon le type de rayonnement)
+            </div>
+        </div>
+
+        <!-- Section 4 : Principes de radioprotection -->
+        <div class="section">
+            <div class="section-title">
+                🛡️ Les 3 piliers de la radioprotection
+            </div>
+            <div class="grid-2col">
+                <div class="card">
+                    <h3>⏱️ 1. Temps</h3>
+                    <p>Réduire la durée d’exposition.</p>
+                    <div class="definition">Dose = débit de dose × temps. Plus le temps est court, moins on reçoit de dose.</div>
+                </div>
+                <div class="card">
+                    <h3>📏 2. Distance</h3>
+                    <p>S’éloigner de la source.</p>
+                    <div class="definition">L’intensité du rayonnement diminue avec le carré de la distance (loi en 1/d² pour une source ponctuelle).</div>
+                </div>
+                <div class="card">
+                    <h3>🧱 3. Blindage (Écran)</h3>
+                    <p>Interposer une matière absorbante.</p>
+                    <ul>
+                        <li><strong>α</strong> : feuille de papier.</li>
+                        <li><strong>β</strong> : plaque d’aluminium ou Plexiglas.</li>
+                        <li><strong>γ et neutrons</strong> : plomb, béton épais, eau.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🧴 Mesures complémentaires</h3>
+                    <p>Contrôle médical, dosimètre, équipements de protection (gants, masques), confinement, ventilation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5 : Situations types & exemples Bac -->
+        <div class="section">
+            <div class="section-title">
+                📌 Applications et liens avec le Baccalauréat
+            </div>
+            <div class="warning" style="background:#e6f7ff; border-left-color:#0284c7;">
+                <strong>🧑‍🏫 Sujet typique (2024-2025) :</strong> <br>
+                « Un technicien manipule une source de cobalt-60 en milieu hospitalier. Expliquez la différence entre irradiation et contamination. Quelles précautions doit-il prendre ? Calculez la dose reçue à 1 m pendant 5 min si le débit de dose est de 50 µGy/h. »
+            </div>
+            <ul>
+                <li><strong>En médecine</strong> : radiologie, radiothérapie → bénéfice/risque, optimisation des doses.</li>
+                <li><strong>Dans l’industrie</strong> : gammagraphie (contrôle de soudures) → zone contrôlée, balisage.</li>
+                <li><strong>Accident nucléaire</strong> : distribution d’iode stable (pour saturer la thyroïde et éviter fixation d’iode radioactif).</li>
+                <li><strong>Radioprotection opérationnelle</strong> : utilisation de pinces, écrans mobiles, dosimètre passif et actif.</li>
+            </ul>
+        </div>
+
+        <!-- Section 6 : Grandeurs et formules essentielles -->
+        <div class="section">
+            <div class="section-title">
+                📊 Formulaire clé
+            </div>
+            <div class="grid-2col">
+                <div class="card">
+                    <h3>⚡ Dose absorbée</h3>
+                    <div class="formula">\( D = \frac{\Delta E}{\Delta m} \) (Gy)</div>
+                    <p>1 Gy = 1 J/kg</p>
+                </div>
+                <div class="card">
+                    <h3>⚠️ Dose équivalente</h3>
+                    <div class="formula">\( H = D \cdot w_R \) (Sv)</div>
+                    <p>\( w_R = 1 \) (γ, β), 20 (α), 5-10 (neutrons)</p>
+                </div>
+                <div class="card">
+                    <h3>⏳ Relation débit de dose</h3>
+                    <div class="formula">\( D(t) = \dot{D} \times t \)</div>
+                    <p>Dose = débit × temps d’exposition</p>
+                </div>
+                <div class="card">
+                    <h3>📉 Décroissance radioactive (activité)</h3>
+                    <div class="formula">\( A(t) = A_0 e^{-\lambda t} \)</div>
+                    <p>L’activité diminue → protection évolutive</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 7 : Vrai/Faux type Bac + conseils méthode -->
+        <div class="section">
+            <div class="section-title">
+                💡 Astuces & erreurs fréquentes (Bac)
+            </div>
+            <div class="card" style="background:#fef9e3;">
+                <h3>✅ Vrai / Faux (auto-évaluation)</h3>
+                <ul>
+                    <li>❌ « Une personne contaminée peut être sans danger pour son entourage. » → <strong>Faux</strong>, elle émet des rayonnements.</li>
+                    <li>✅ « Le blindage contre les rayons gamma nécessite du plomb ou du béton épais. » → <strong>Vrai</strong>.</li>
+                    <li>❌ « L’irradiation rend définitivement radioactif. » → <strong>Faux</strong>, l’irradiation externe ne rend pas radioactif.</li>
+                    <li>✅ « Le principe ALARA (As Low As Reasonably Achievable) est fondamental en radioprotection. » → <strong>Vrai</strong>.</li>
+                </ul>
+                <div class="definition" style="margin-top: 0.8rem;">
+                    🧠 <strong>Méthode Bac partie 1 (savoirs)</strong> : Pour une question de distinction irradiation/contamination, donnez une définition précise + un exemple concret.
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 8 : Synthèse visuelle sous forme de tableau -->
+        <div class="section">
+            <div class="section-title">
+                📋 Comparaison rapide : Irradiation vs Contamination
+            </div>
+            <div style="overflow-x: auto;">
+                <table style="width:100%; border-collapse: collapse; background:#f9f9ff; border-radius: 20px; overflow: hidden;">
+                    <thead style="background:#1e4a6e; color:white;">
+                        <tr><th style="padding: 12px;">Critère</th><th style="padding: 12px;">Irradiation</th><th style="padding: 12px;">Contamination</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid #cbd5e1;"><td style="padding: 10px;">Nature</td><td style="padding: 10px;">Exposition externe</td><td style="padding: 10px;">Pénétration de matière radioactive</td></tr>
+                        <tr style="border-bottom:1px solid #cbd5e1;"><td style="padding: 10px;">Devenir de la personne</td><td style="padding: 10px;">Non radioactive</td><td style="padding: 10px;">Devient source radioactive</td></tr>
+                        <tr style="border-bottom:1px solid #cbd5e1;"><td style="padding: 10px;">Protection</td><td style="padding: 10px;">Temps, distance, blindage</td><td style="padding: 10px;">Ventilation, combinaison, masque, décontamination</td></tr>
+                        <tr><td style="padding: 10px;">Exemple typique</td><td style="padding: 10px;">Passer un scanner</td><td style="padding: 10px;">Ingérer du tritium (eau radioactive)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- petite mention supplémentaire sur la gestion des déchets radioactifs (optionnel) -->
+        <div class="section">
+            <div class="section-title">
+                🌍 Enjeux sociétaux (culture scientifique)
+            </div>
+            <p>La gestion des déchets radioactifs (enfouissement géologique, entreposage) et la surveillance des travailleurs exposés (limites réglementaires : 20 mSv/an en moyenne sur 5 ans) sont des sujets transversaux. L’exposition naturelle (radon, cosmique) représente ≈ 2,4 mSv/an.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© Fiche de révision – Physique Terminale C/D (Cameroun) | Programme officiel 2025-2026 | Conforme aux attendus du Baccalauréat</p>
+        <p>📖 Revoir la leçon 46 (applications) et leçon 44 (loi de décroissance) pour une maîtrise complète.</p>
+    </footer>
+</div>
+</body>
+</html>

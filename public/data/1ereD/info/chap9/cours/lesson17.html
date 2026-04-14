@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Insérer des fichiers multimédia en HTML</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Optionnel: Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques pour les balises HTML dans les exemples */
+        .tag {
+            background-color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.85rem;
+            color: #1e40af;
+            font-weight: 600;
+        }
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin: 0.75rem 0;
+        }
+        .code-block code {
+            color: #86efac;
+        }
+        .attr {
+            color: #fbbf24;
+        }
+        .str {
+            color: #7dd3fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">UE 17 : Insérer les fichiers multimédias dans une page web</h1>
+            <p class="lesson-subtitle">HTML & Multimédia · Première C, D, E · Probatoire</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Qu'est-ce que le HTML ?</h3>
+                    <p class="card-description">
+                        <strong>HTML</strong> (<strong>H</strong>yper<strong>T</strong>ext <strong>M</strong>arkup <strong>L</strong>anguage) est le langage standard utilisé pour créer et structurer le contenu des pages web. Ce n'est pas un langage de programmation, mais un langage de <strong>balisage</strong> qui permet d'organiser le texte, d'insérer des images, des vidéos, des sons et de créer des liens hypertextes.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Les pages HTML sont interprétées par les navigateurs (Chrome, Firefox, Safari, etc.).</li>
+                        <li>Les balises sont généralement composées d'une balise ouvrante <span class="tag">&lt;nom&gt;</span> et d'une balise fermante <span class="tag">&lt;/nom&gt;</span>.</li>
+                        <li>Certaines balises sont dites "orphelines" (ou auto-fermantes) : <span class="tag">&lt;img&gt;</span>, <span class="tag">&lt;br&gt;</span>, <span class="tag">&lt;hr&gt;</span>.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Structure de base d'une page HTML</h3>
+                    <p class="card-description">
+                        Toute page HTML respecte une structure minimale obligatoire pour être correctement interprétée.
+                    </p>
+                    <div class="code-block">
+                        <code>
+&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="fr"&gt;<br>
+&nbsp;&nbsp;&lt;head&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Titre de la page&lt;/title&gt;<br>
+&nbsp;&nbsp;&lt;/head&gt;<br>
+&nbsp;&nbsp;&lt;body&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Contenu visible de la page --&gt;<br>
+&nbsp;&nbsp;&lt;/body&gt;<br>
+&lt;/html&gt;
+                        </code>
+                    </div>
+                    <ul class="concept-list">
+                        <li><span class="tag">&lt;!DOCTYPE html&gt;</span> : Déclare la version HTML5 du document.</li>
+                        <li><span class="tag">&lt;html&gt;</span> : Élément racine qui contient toute la page.</li>
+                        <li><span class="tag">&lt;head&gt;</span> : Contient les métadonnées (titre, encodage, liens CSS, etc.).</li>
+                        <li><span class="tag">&lt;body&gt;</span> : Contient tout le contenu visible par l'utilisateur.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Insérer des images avec <span class="tag">&lt;img&gt;</span></h3>
+                    <p class="card-description">
+                        La balise <span class="tag">&lt;img&gt;</span> permet d'afficher une image dans une page web. C'est une balise orpheline (pas de balise fermante).
+                    </p>
+                    <div class="code-block">
+                        <code>
+&lt;img src="<span class="str">logo.png</span>" alt="<span class="str">Description de l'image</span>" width="<span class="str">200</span>" height="<span class="str">150</span>"&gt;
+                        </code>
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong class="attr">src</strong> (source) : Chemin vers le fichier image (URL ou chemin local). <strong>Obligatoire</strong>.</li>
+                        <li><strong class="attr">alt</strong> (alternative text) : Texte alternatif affiché si l'image ne charge pas. <strong>Recommandé (accessibilité)</strong>.</li>
+                        <li><strong class="attr">width</strong> et <strong class="attr">height</strong> : Dimensions en pixels (optionnel, mais améliore le rendu).</li>
+                        <li>Formats supportés : JPEG, PNG, GIF, SVG, WebP, etc.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.75rem;">
+                        💡 <strong>Astuce :</strong> Toujours renseigner l'attribut <code>alt</code> pour l'accessibilité (malvoyants utilisant un lecteur d'écran) et le référencement (SEO).
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Insérer des titres (<span class="tag">&lt;h1&gt;</span> à <span class="tag">&lt;h6&gt;</span>)</h3>
+                    <p class="card-description">
+                        Les balises de titre hiérarchisent le contenu textuel. <span class="tag">&lt;h1&gt;</span> est le plus important (titre principal), <span class="tag">&lt;h6&gt;</span> le moins important.
+                    </p>
+                    <div class="code-block">
+                        <code>
+&lt;h1&gt;Titre principal de la page&lt;/h1&gt;<br>
+&lt;h2&gt;Sous-titre important&lt;/h2&gt;<br>
+&lt;h3&gt;Section secondaire&lt;/h3&gt;
+                        </code>
+                    </div>
+                    <ul class="concept-list">
+                        <li>Un seul <span class="tag">&lt;h1&gt;</span> par page (recommandé pour le SEO).</li>
+                        <li>Les navigateurs appliquent des styles par défaut (tailles différentes, gras).</li>
+                        <li>Ces balises aident à structurer logiquement le document.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">5. Insérer des fichiers audio et vidéo</h3>
+                    <p class="card-description">
+                        HTML5 introduit les balises <span class="tag">&lt;audio&gt;</span> et <span class="tag">&lt;video&gt;</span> pour intégrer facilement du multimédia sans plugins.
+                    </p>
+                    <div class="code-block">
+                        <code>
+&lt;audio controls&gt;<br>
+&nbsp;&nbsp;&lt;source src="<span class="str">musique.mp3</span>" type="<span class="str">audio/mpeg</span>"&gt;<br>
+&nbsp;&nbsp;Votre navigateur ne supporte pas l'audio.<br>
+&lt;/audio&gt;<br><br>
+&lt;video controls width="<span class="str">640</span>"&gt;<br>
+&nbsp;&nbsp;&lt;source src="<span class="str">video.mp4</span>" type="<span class="str">video/mp4</span>"&gt;<br>
+&nbsp;&nbsp;Votre navigateur ne supporte pas la vidéo.<br>
+&lt;/video&gt;
+                        </code>
+                    </div>
+                    <ul class="concept-list">
+                        <li>L'attribut <strong class="attr">controls</strong> ajoute les boutons de lecture/pause/volume.</li>
+                        <li>La balise <span class="tag">&lt;source&gt;</span> permet de proposer plusieurs formats pour compatibilité.</li>
+                        <li>Formats audio : MP3, OGG, WAV. Formats vidéo : MP4, WebM, OGG.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Page simple avec image et titres</h3>
+                    <p class="exemple-context">
+                        Créer une page HTML qui affiche un titre principal "Bienvenue au Cameroun", un sous-titre "Les paysages magnifiques", et une image du Mont Cameroun.
+                    </p>
+                    <div class="code-block">
+                        <code>
+&lt;!DOCTYPE html&gt;<br>
+&lt;html&gt;<br>
+&nbsp;&nbsp;&lt;head&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Découverte du Cameroun&lt;/title&gt;<br>
+&nbsp;&nbsp;&lt;/head&gt;<br>
+&nbsp;&nbsp;&lt;body&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Bienvenue au Cameroun&lt;/h1&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Les paysages magnifiques&lt;/h2&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;img src="<span class="str">mont-cameroun.jpg</span>" alt="<span class="str">Vue du Mont Cameroun avec sa végétation luxuriante</span>" width="<span class="str">500</span>"&gt;<br>
+&nbsp;&nbsp;&lt;/body&gt;<br>
+&lt;/html&gt;
+                        </code>
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 <strong>Astuce :</strong> Toujours placer les images dans le même dossier que la page HTML ou dans un sous-dossier (ex: <code>images/</code>) pour simplifier le chemin.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Intégration d'une vidéo avec plusieurs formats</h3>
+                    <p class="exemple-context">
+                        On souhaite intégrer une vidéo de présentation du système éducatif camerounais. Pour être sûr que tous les navigateurs la lisent, on fournit les formats MP4 et WebM.
+                    </p>
+                    <div class="code-block">
+                        <code>
+&lt;video controls width="<span class="str">640</span>" height="<span class="str">360</span>" poster="<span class="str">vignette.jpg</span>"&gt;<br>
+&nbsp;&nbsp;&lt;source src="<span class="str">education.mp4</span>" type="<span class="str">video/mp4</span>"&gt;<br>
+&nbsp;&nbsp;&lt;source src="<span class="str">education.webm</span>" type="<span class="str">video/webm</span>"&gt;<br>
+&nbsp;&nbsp;Votre navigateur ne supporte pas la balise vidéo.<br>
+&lt;/video&gt;
+                        </code>
+                    </div>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> L'attribut <code>poster</code> affiche une image de prévisualisation avant la lecture. Les balises <code>&lt;source&gt;</code> sont essayées dans l'ordre : si MP4 ne marche pas, le navigateur essaie WebM.
+                    </p>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Image avec lien cliquable</h3>
+                    <p class="exemple-context">
+                        Transformer une image en lien hypertexte vers un autre site.
+                    </p>
+                    <div class="code-block">
+                        <code>
+&lt;a href="<span class="str">https://www.cameroun-tourisme.com</span>"&gt;<br>
+&nbsp;&nbsp;&lt;img src="<span class="str">drapeau-cameroun.png</span>" alt="<span class="str">Drapeau du Cameroun</span>" width="<span class="str">200</span>"&gt;<br>
+&lt;/a&gt;
+                        </code>
+                    </div>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong> La balise <span class="tag">&lt;a&gt;</span> (ancre) encadre l'image. En cliquant sur l'image, l'utilisateur est redirigé vers le site indiqué dans <code>href</code>.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section "À ne pas confondre" et pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Oublier l'attribut <code>alt</code> dans la balise <code>&lt;img&gt;</code>. Cela nuit à l'accessibilité et au référencement.</li>
+                        <li><span class="bold">Attention :</span> Confondre les balises <code>&lt;img&gt;</code> (orpheline) avec <code>&lt;image&gt;</code> qui n'existe pas en HTML.</li>
+                        <li><span class="bold">Piège classique :</span> Utiliser des fichiers image trop volumineux sans spécifier <code>width</code>/<code>height</code>, ce qui ralentit le chargement et déforme la page.</li>
+                        <li><span class="bold">À ne pas oublier :</span> Les chemins des fichiers sont <strong>sensibles à la casse</strong> sur les serveurs Linux. "Image.JPG" ≠ "image.jpg".</li>
+                        <li><span class="bold">Erreur :</span> Oublier de fermer les balises de titre ou d'imbriquer correctement les éléments.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section supplémentaire : Résumé des balises multimédias -->
+            <section class="concept-section">
+                <h2 class="section-title">📋 Récapitulatif des balises multimédia</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Tableau des principales balises</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                        <thead>
+                            <tr style="background-color: #e2e8f0; text-align: left;">
+                                <th style="padding: 0.5rem; border: 1px solid #cbd5e1;">Balise</th>
+                                <th style="padding: 0.5rem; border: 1px solid #cbd5e1;">Description</th>
+                                <th style="padding: 0.5rem; border: 1px solid #cbd5e1;">Attributs essentiels</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;"><span class="tag">&lt;img&gt;</span></td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">Insère une image</td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">src, alt, width, height</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;"><span class="tag">&lt;audio&gt;</span></td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">Insère un fichier audio</td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">controls, autoplay, loop</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;"><span class="tag">&lt;video&gt;</span></td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">Insère une vidéo</td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">controls, width, height, poster</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;"><span class="tag">&lt;source&gt;</span></td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">Définit une source multimédia alternative</td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">src, type</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;"><span class="tag">&lt;h1&gt;</span> à <span class="tag">&lt;h6&gt;</span></td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">Titres et sous-titres</td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">Aucun (style via CSS)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Image d'illustration générée par IA -->
+            <div style="text-align: center; margin: 1rem 0;">
+                <img src="" alt="Schéma explicatif de la structure HTML avec les balises principales (html, head, body, img, h1) et leurs imbrications" style="max-width: 100%; border-radius: 0.5rem; border: 1px solid #e2e8f0;">
+                <p style="font-size: 0.8rem; color: #64748b; margin-top: 0.3rem;">Figure 1 : Structure d'une page HTML avec insertion d'image et de titres</p>
+            </div>
+        </main>
+        
+        <!-- Pied de page optionnel -->
+        <footer class="fiche-footer">
+            <p>Révision créée le · <a href="#">Programme officiel informatique - Probatoire C, D, E</a> · 📚 UE17 : Multimédia en HTML</p>
+        </footer>
+    </div>
+</body>
+</html>

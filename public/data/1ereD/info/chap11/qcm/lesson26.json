@@ -1,0 +1,122 @@
+[
+  {
+    "questionText": "En langage C, quelle est la principale différence entre une fonction et une procédure ?",
+    "options": [
+      "Une fonction peut prendre des paramètres, mais pas une procédure.",
+      "Une procédure retourne une valeur, contrairement à une fonction.",
+      "Une fonction retourne une valeur (via <code>return</code>), alors qu'une procédure ne retourne rien (type <code>void</code>).",
+      "Une procédure est toujours globale, une fonction est toujours locale."
+    ],
+    "correctAnswer": 2,
+    "difficulty": "easy",
+    "explanation": "En langage C, il n'y a pas de mot-clé 'procedure'. On parle de fonctions. Une fonction qui ne retourne pas de valeur est déclarée avec le type <code>void</code>, ce qui correspond à une procédure en algorithmique. Une fonction 'normale' retourne une valeur avec <code>return</code>."
+  },
+  {
+    "questionText": "Voici un extrait de code C : <br><code>int calculer(int a, int b) { return a + b; }</code><br>Que représente <code>int calculer(int a, int b)</code> ?",
+    "options": [
+      "L'appel de la fonction",
+      "Le prototype (ou en-tête) de la fonction",
+      "Le corps de la fonction",
+      "La déclaration d'une variable globale"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "easy",
+    "explanation": "Cette ligne constitue l'en-tête (ou signature) de la fonction. Elle indique le type de retour (<code>int</code>), le nom (<code>calculer</code>) et la liste des paramètres (<code>int a, int b</code>). Le corps est ce qui se trouve entre les accolades <code>{}</code>."
+  },
+  {
+    "questionText": "Soit le programme C suivant :<br><pre>#include &lt;stdio.h&gt;\nint x = 10;\nvoid fonction() {\n    int x = 5;\n    printf(\"%d\", x);\n}\nint main() {\n    fonction();\n    return 0;\n}</pre> Qu'affiche ce programme ?",
+    "options": [
+      "10",
+      "5",
+      "Erreur de compilation",
+      "15"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "explanation": "La variable globale <code>x</code> existe, mais à l'intérieur de <code>fonction()</code>, on déclare une variable <code>locale x</code> qui 'masque' la globale. Le <code>printf</code> affiche donc la valeur de la variable locale, soit 5."
+  },
+  {
+    "questionText": "En algorithmique et en programmation, que signifie qu'une variable est 'globale' ?",
+    "options": [
+      "Elle n'est accessible qu'à l'intérieur de la fonction où elle est déclarée.",
+      "Elle est accessible depuis n'importe quel sous-programme du programme.",
+      "Elle ne peut stocker que des nombres entiers.",
+      "Elle doit obligatoirement être initialisée à zéro."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "easy",
+    "explanation": "Une variable globale est déclarée en dehors de toute fonction (souvent en début de programme). Elle est accessible et modifiable par toutes les fonctions du programme. À l'inverse, une variable locale n'existe qu'à l'intérieur de la fonction où elle est créée."
+  },
+  {
+    "questionText": "On souhaite écrire une fonction en C qui calcule la factorielle d’un nombre entier <code>n</code> (avec $n! = n \\times (n-1) \\times ... \\times 1$). Quelle est la signature correcte pour cette fonction ?",
+    "options": [
+      "<code>void factorielle(int n)</code>",
+      "<code>int factorielle(int n)</code>",
+      "<code>float factorielle(void)</code>",
+      "<code>char factorielle(int n)</code>"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "explanation": "La factorielle retourne un nombre entier (souvent grand). Elle prend un paramètre (l'entier <code>n</code>). Le type de retour doit être <code>int</code> (ou <code>long</code> pour de grandes valeurs). Une fonction <code>void</code> ne retournerait rien, ce qui est inadapté pour un calcul."
+  },
+  {
+    "questionText": "Dans un programme C, quel est le rôle du mot-clé <code>return</code> ?",
+    "options": [
+      "Il arrête l'exécution du programme entier.",
+      "Il permet d'afficher une valeur à l'écran.",
+      "Il termine l'exécution d'une fonction et peut renvoyer une valeur au programme appelant.",
+      "Il déclare une variable globale."
+    ],
+    "correctAnswer": 2,
+    "difficulty": "easy",
+    "explanation": "<code>return</code> a deux rôles : 1) il sort immédiatement de la fonction, 2) il donne la valeur de retour de la fonction. Dans <code>main()</code>, <code>return 0;</code> indique que le programme s'est terminé correctement."
+  },
+  {
+    "questionText": "On donne le code suivant : <br><pre>void echange(int a, int b) {\n    int temp = a;\n    a = b;\n    b = temp;\n}\nint main() {\n    int x = 2, y = 5;\n    echange(x, y);\n    printf(\"%d %d\", x, y);\n    return 0;\n}</pre> Que va afficher le programme ?",
+    "options": [
+      "5 2",
+      "2 5",
+      "Erreur car on ne peut pas échanger dans une fonction",
+      "0 0"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "hard",
+    "explanation": "En C, les paramètres sont passés par valeur. La fonction <code>echange</code> reçoit des COPIES de <code>x</code> et <code>y</code>. Elle modifie <code>a</code> et <code>b</code> localement, mais cela n'affecte pas <code>x</code> et <code>y</code> dans <code>main()</code>. L'affichage reste '2 5'. Pour un véritable échange, il faudrait utiliser des pointeurs."
+  },
+  {
+    "questionText": "Comment appelle-t-on la variable <code>a</code> dans la déclaration <code>int carre(int a) { return a * a; }</code> ?",
+    "options": [
+      "Variable globale",
+      "Paramètre formel (ou paramètre)",
+      "Constante",
+      "Valeur de retour"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "easy",
+    "explanation": "Dans l'en-tête de la fonction, <code>int a</code> est un paramètre formel. C'est une variable locale qui recevra la copie de la valeur passée lors de l'appel. Par exemple, si on appelle <code>carre(5)</code>, <code>a</code> vaudra 5."
+  },
+  {
+    "questionText": "Voici un algorithme :<br><pre>Fonction somme(a, b: entier): entier\n    retourner a + b\nFinFonction</pre><br>Quel est l'équivalent correct en langage C ?",
+    "options": [
+      "<code>void somme(int a, int b) { return a + b; }</code>",
+      "<code>int somme(int a, int b) { return a + b; }</code>",
+      "<code>int somme(int a, int b) { a + b; }</code>",
+      "<code>somme(int a, int b) { return a + b; }</code>"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "explanation": "En C, il faut préciser le type de retour (<code>int</code>). L'instruction <code>return</code> doit être suivie de la valeur à renvoyer. L'option B est la seule syntaxiquement correcte. L'option A a un type <code>void</code> (pas de retour). L'option C oublie <code>return</code>. L'option D oublie le type de retour."
+  },
+  {
+    "questionText": "Parmi ces propositions, laquelle décrit le mieux l'utilité des sous-programmes (fonctions/procédures) en programmation ?",
+    "options": [
+      "Ils ralentissent l'exécution du programme.",
+      "Ils permettent d'éviter la répétition de code et de structurer le programme.",
+      "Ils sont obligatoires pour utiliser des variables.",
+      "Ils servent uniquement à faire des calculs mathématiques."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "easy",
+    "explanation": "Les sous-programmes sont essentiels pour le principe 'Diviser pour régner'. Ils permettent d'écrire une portion de code une seule fois et de la réutiliser (modularité), rendant le programme plus lisible, maintenable et moins sujet aux erreurs."
+  }
+]

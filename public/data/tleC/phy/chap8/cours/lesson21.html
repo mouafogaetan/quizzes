@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche Révision : Pendule élastique (Leçon 21) - Terminale</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+            color: #1e2a3e;
+            line-height: 1.5;
+        }
+
+        /* Conteneur principal de la fiche */
+        .revision-card {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* En-tête avec titre et métadonnées */
+        .card-header {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1a4a6f 100%);
+            padding: 28px 32px;
+            color: white;
+            border-bottom: 4px solid #ffb347;
+        }
+
+        .lecon-badge {
+            display: inline-block;
+            background: #ffb347;
+            color: #1e2a3e;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .card-header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 500;
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .subtitle span {
+            background: rgba(255,255,255,0.15);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+        }
+
+        /* Corps de la fiche */
+        .card-body {
+            padding: 28px 32px 40px;
+        }
+
+        /* Grille pour les objectifs et compétences */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .info-box {
+            background: #f8fafc;
+            border-left: 6px solid #1a4a6f;
+            padding: 18px 22px;
+            border-radius: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .info-box h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #0f3b4f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-box ul, .contenu-list {
+            padding-left: 24px;
+        }
+
+        .info-box li, .contenu-list li {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 32px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #ffb347;
+            display: inline-block;
+            color: #0b2b3b;
+        }
+
+        .card-equation {
+            background: #f1f5f9;
+            padding: 20px 24px;
+            border-radius: 24px;
+            margin: 24px 0;
+            border: 1px solid #e2e8f0;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+
+        .equation {
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 12px 0;
+            font-weight: 500;
+        }
+
+        .highlight {
+            background: #ffecb3;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn-bac {
+            background: #e9ecef;
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            color: #1e4663;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            background: #fef7e0;
+            padding: 16px 24px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid #ffe0a3;
+            text-align: center;
+        }
+
+        @media (max-width: 750px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .card-header h1 {
+                font-size: 1.5rem;
+            }
+            .card-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="revision-card">
+    <div class="card-header">
+        <div class="lecon-badge">LEÇON 21 • MÉCANIQUE</div>
+        <h1>📌 Pendule en translation – Pendule élastique</h1>
+        <div class="subtitle">
+            <span>📖 Module 3 : Systèmes oscillants</span>
+            <span>🎯 Terminale C & D (Bac 2023-2025)</span>
+            <span>⚡ 2<sup>ème</sup> trimestre</span>
+        </div>
+    </div>
+    <div class="card-body">
+        <!-- objectifs + compétences -->
+        <div class="grid-2">
+            <div class="info-box">
+                <h3>🎯 Objectifs pédagogiques</h3>
+                <ul>
+                    <li>✔ Étudier le mouvement d’un pendule élastique (système masse-ressort).</li>
+                    <li>✔ Établir l’équation différentielle du mouvement à partir du PFD.</li>
+                    <li>✔ Déterminer la pulsation propre, la période propre et l’amplitude.</li>
+                    <li>✔ <strong class="highlight">Lien Bac 2023</strong> : résolution de problème dynamique sur ressort.</li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>🧠 Compétences attendues</h3>
+                <ul>
+                    <li>✅ Établir l’équation différentielle d’un oscillateur harmonique.</li>
+                    <li>✅ Calculer la période propre : $T_0 = 2\pi \sqrt{m/k}$.</li>
+                    <li>✅ Exploiter la solution $x(t) = X_m \cos(\omega_0 t + \varphi)$.</li>
+                    <li>✅ Interpréter l’influence de $m$ et $k$ sur les oscillations.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Notions clés / schéma mental -->
+        <div>
+            <h2 class="section-title">🔧 Définition & Modèle du pendule élastique</h2>
+            <p>Un <strong>pendule élastique</strong> (ou système masse-ressort) est constitué d’un solide de masse $m$, attaché à l’extrémité d’un ressort à spires non jointives, l’autre extrémité étant fixe. Le mouvement se fait sans frottement (ou frottements négligés) et en <strong>translation rectiligne</strong>.</p>
+            <div style="background:#eef2ff; border-radius: 20px; padding: 16px 20px; margin: 20px 0;">
+                <p style="font-weight:600; margin-bottom: 8px;">📐 Rappel : Loi de Hooke</p>
+                <p>La force de rappel exercée par le ressort est : $\vec{F} = -k \cdot \Delta \vec{\ell}$ <br>où $k$ est la <strong>constante de raideur</strong> (N/m) et $\Delta \ell$ l’allongement (ou compression) par rapport à la longueur à vide.</p>
+            </div>
+        </div>
+
+        <!-- Équation différentielle + mise en équation -->
+        <h2 class="section-title">📐 Mise en équation (PFD)</h2>
+        <div class="card-equation">
+            <p style="font-weight:600; margin-bottom: 12px;">⚡ Principe fondamental de la dynamique (projection sur l’axe horizontal $x$):</p>
+            <div class="equation">
+                $$ \sum \vec{F}_{\text{ext}} = m \, \vec{a} $$
+            </div>
+            <p>Pour un ressort horizontal, l’origine $x=0$ correspond à la position d’équilibre (ressort non déformé si pas de pesanteur). La seule force horizontale est $-k x$ :</p>
+            <div class="equation">
+                $$ -k x = m \frac{d^2x}{dt^2} $$
+            </div>
+            <p>Soit l’<strong>équation différentielle harmonique</strong> :</p>
+            <div class="equation">
+                $$ \boxed{ \frac{d^2x}{dt^2} + \frac{k}{m}\, x = 0 } $$
+            </div>
+            <p>On pose $\omega_0^2 = \frac{k}{m}$, d’où $\ddot{x} + \omega_0^2 x = 0$.</p>
+        </div>
+
+        <!-- Solutions et paramètres -->
+        <h2 class="section-title">⏱️ Solutions et caractéristiques propres</h2>
+        <div class="grid-2" style="margin-bottom: 10px;">
+            <div class="info-box">
+                <h3>📈 Pulsation & période propres</h3>
+                <p>Pulsation propre : $\omega_0 = \sqrt{\frac{k}{m}}$  (rad/s)</p>
+                <p>Période propre : $T_0 = \frac{2\pi}{\omega_0} = 2\pi \sqrt{\frac{m}{k}}$</p>
+                <p>Fréquence propre : $f_0 = \frac{1}{T_0} = \frac{1}{2\pi}\sqrt{\frac{k}{m}}$ (Hz)</p>
+                <p class="btn-bac" style="margin-top: 12px; background:#ffb34720;">📌 Bac : $T_0$ indépendante de l’amplitude (isochronisme)</p>
+            </div>
+            <div class="info-box">
+                <h3>📝 Équation horaire</h3>
+                <p>Solution générale : $x(t) = X_m \cos(\omega_0 t + \varphi)$</p>
+                <ul style="margin-top: 8px;">
+                    <li>$X_m$ : <strong>amplitude</strong> (m) → élongation maximale</li>
+                    <li>$\varphi$ : <strong>phase à l'origine</strong> (détermine la condition initiale)</li>
+                    <li>Vitesse : $v(t) = -X_m \omega_0 \sin(\omega_0 t + \varphi)$</li>
+                    <li>Accélération : $a(t) = -X_m \omega_0^2 \cos(\omega_0 t + \varphi)$</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Énergie mécanique (consolidation) -->
+        <h2 class="section-title">⚡ Énergie dans l’oscillateur élastique</h2>
+        <div class="card-equation">
+            <p>L’énergie mécanique $E_m$ est constante (sans frottement) :</p>
+            <div class="equation">
+                $$ E_m = E_c + E_{pe} = \frac{1}{2} m v^2 + \frac{1}{2} k x^2 = \frac{1}{2} k X_m^2 $$
+            </div>
+            <p>$\frac{1}{2} k X_m^2$ est l’énergie totale emmagasinée par le système.</p>
+            <p>En passant par la position d’équilibre ($x=0$), l’énergie est purement cinétique : $E_m = \frac{1}{2} m v_{\text{max}}^2$.</p>
+            <p>Au point extrême ($x = \pm X_m$), l’énergie est purement potentielle élastique.</p>
+        </div>
+
+        <!-- Cas vertical (variante importante) -->
+        <h2 class="section-title">🔁 Cas particulier : pendule élastique vertical</h2>
+        <p>Si le ressort est suspendu verticalement, le poids $mg$ provoque un allongement statique $\Delta \ell_0 = \frac{mg}{k}$ à l’équilibre. On repère la position par rapport à cet équilibre (variable $x$). L’équation différentielle devient identique au cas horizontal :</p>
+        <div class="equation">
+            $$ \frac{d^2x}{dt^2} + \frac{k}{m} x = 0 $$
+        </div>
+        <p>La période propre reste $T_0 = 2\pi\sqrt{\frac{m}{k}}$, <strong>indépendante de $g$</strong> et de la position de l’équilibre. On retrouve le même comportement harmonique.</p>
+        <div class="info-box" style="margin-top: 15px; background:#e9f5e9;">
+            <h3>📌 À retenir pour le BAC</h3>
+            <ul>
+                <li>✓ Savoir établir l'équation différentielle à partir du bilan des forces.</li>
+                <li>✓ Identifier $\omega_0$ et $T_0$ : analyse dimensionnelle de $\sqrt{m/k}$.</li>
+                <li>✓ Exploiter les conditions initiales pour trouver $X_m$ et $\varphi$.</li>
+                <li>✓ Le pendule élastique est un <strong>oscillateur harmonique</strong> modèle en mécanique.</li>
+                <li>✓ Exercice classique : détermination de $k$ à partir de la mesure de $T_0$.</li>
+            </ul>
+        </div>
+
+        <!-- Exemple type et méthodologie -->
+        <h2 class="section-title">🧪 Exemple type (Bac) – Démarche</h2>
+        <div style="background:#f9f9fb; border-radius: 20px; padding: 18px 24px; margin: 16px 0;">
+            <p><strong>🔍 Énoncé synthétique :</strong> Un solide de masse $m = 200\ \text{g}$ est accroché à un ressort de raideur $k = 40\ \text{N/m}$. On écarte le solide de $4\ \text{cm}$ de sa position d’équilibre et on le lâche sans vitesse initiale à $t=0$. <br> Déterminer : l’équation horaire, la période, l’énergie mécanique.</p>
+            <ol style="margin-top: 12px; padding-left: 22px;">
+                <li><strong>Période propre</strong> : $T_0 = 2\pi\sqrt{\frac{0,2}{40}} = 2\pi\sqrt{0,005} \approx 2\pi \times 0,0707 \approx 0,444\ \text{s}$.</li>
+                <li><strong>Pulsation</strong> : $\omega_0 = \sqrt{40/0,2} = \sqrt{200} \approx 14,14\ \text{rad/s}$.</li>
+                <li><strong>Conditions initiales</strong> : $x(0)=0,04\ \text{m}$ , $v(0)=0$ → $X_m = 0,04\ \text{m}$ et $\varphi = 0$ (car cosinus). <br> Donc $x(t)=0,04\cos(14,14\,t)$.</li>
+                <li><strong>Énergie mécanique</strong> : $E_m = \frac12 k X_m^2 = 0,5 \times 40 \times (0,04)^2 = 0,032\ \text{J}$.</li>
+            </ol>
+        </div>
+
+        <!-- Lien avec le programme officiel -->
+        <div class="footer-note">
+            <span style="font-weight:700;">🎓 Liens avec le programme officiel Cameroun – Terminale C/D :</span><br>
+            Module 3 – Chapitre 8 : Systèmes oscillants. Leçon 21 : Pendule en translation – Pendule élastique. <br>
+            ✔ Établir l’équation différentielle $\ddot{x} + \frac{k}{m}x=0$ ✔ Utiliser la loi de Hooke ✔ Retrouver $T_0 = 2\pi\sqrt{m/k}$.<br>
+            <strong>💡 Conseil de révision :</strong> Maîtrisez la méthode du bilan des forces et la résolution par projection. Les exercices d’oscillateurs mécaniques tombent régulièrement à la partie B du Baccalauréat (évaluation des compétences).
+        </div>
+
+        <div style="margin-top: 28px; font-size: 0.8rem; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; color: #4a627a;">
+            📚 Fiche conforme au programme de Physique – Terminale C & D (année 2025-2026) | Enseignant : M. NDJOCK
+        </div>
+    </div>
+</div>
+</body>
+</html>

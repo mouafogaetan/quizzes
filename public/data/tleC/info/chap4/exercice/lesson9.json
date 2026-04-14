@@ -1,0 +1,92 @@
+[
+  {
+    "intitule": "Exercice 1 : Identifier la boucle appropriée",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Pour chacun des problèmes algorithmiques suivants, identifiez et justifiez la structure de boucle en C (<code>for</code>, <code>while</code> ou <code>do...while</code>) la mieux adaptée.</p><ol><li>Afficher les nombres pairs de 2 à 20.</li><li>Demander à l'utilisateur de saisir un mot de passe jusqu'à ce qu'il corresponde à une valeur secrète.</li><li>Calculer la somme des entiers saisis par l'utilisateur (l'utilisateur peut saisir autant de nombres qu'il veut, et entre 0 pour terminer).</li><li>Parcourir un tableau de 100 notes pour calculer la moyenne.</li></ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Associez chaque problème à la boucle C la plus appropriée et justifiez votre choix.",
+        "niveau": "easy",
+        "reponse": "<p>1. <code>for</code> : Le nombre d'itérations est connu à l'avance (de 2 à 20 avec un pas de 2).<br>2. <code>do...while</code> : La condition est testée après l'exécution du bloc, car l'utilisateur doit saisir le mot de passe au moins une fois.<br>3. <code>while</code> : Le nombre d'itérations est inconnu à l'avance et la condition d'arrêt (entrée de 0) est évaluée avant chaque itération.<br>4. <code>for</code> : Le nombre d'itérations est connu (100 éléments).</p>",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 2 : Analyser et corriger des boucles",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Analysez les extraits de code C ci-dessous. Pour chaque extrait :</p><ul><li>Expliquez ce que le programmeur essaie de faire.</li><li>Identifiez l'erreur logique ou syntaxique.</li><li>Proposez une version corrigée.</li></ul><pre><code>// Extrait A\nint i = 1;\nwhile (i <= 5);\n{\n    printf(\"%d \", i);\n    i++;\n}\n\n// Extrait B\nint n = 10;\nfor (int i = 0; i < n; i--);\n{\n    printf(\"%d \", i);\n}\n\n// Extrait C\nint x = 0;\ndo {\n    printf(\"Entrez un nombre positif : \");\n    scanf(\"%d\", &x);\n} while (x > 0);\nprintf(\"Fin.\");</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Analysez et corrigez chaque extrait de code.",
+        "niveau": "medium",
+        "reponse": "<p><strong>Extrait A :</strong> Boucle infinie à cause du point-virgule après <code>while (i <= 5)</code>. Correction : enlever le point-virgule.</p><p><strong>Extrait B :</strong> Décrémentation au lieu d'incrémentation (<code>i--</code> au lieu de <code>i++</code>) et point-virgule après le <code>for</code>. La boucle ne s'exécute pas ou est infinie selon le contexte. Correction : <code>for (int i = 0; i < n; i++)</code>.</p><p><strong>Extrait C :</strong> L'intention est de demander un nombre positif. Mais la boucle continue tant que <code>x > 0</code>, donc elle s'arrête si l'utilisateur entre 0 ou un négatif. Ce n'est pas logique. Correction : <code>while (x <= 0);</code> pour forcer un nombre positif.</p>",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 3 : Écrire un programme de calcul de moyenne",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans le cadre de la gestion des notes d'une classe de Terminale C, vous devez écrire un programme en langage C qui :</p><ol><li>Demande à l'utilisateur le nombre d'élèves (N).</li><li>Pour chaque élève, demande une note sur 20.</li><li>Calcule et affiche : la moyenne de la classe, la note maximale, la note minimale, et le nombre d'élèves ayant une note supérieure ou égale à 10.</li></ol><p>Contraintes : utilisez une boucle <code>for</code> pour la saisie des notes. Gérez le cas où N <= 0.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrivez le programme complet en C répondant au problème posé.",
+        "niveau": "medium",
+        "reponse": "<pre><code>#include <stdio.h>\n\nint main() {\n    int N, i, nbSup10 = 0;\n    float note, somme = 0, maxNote, minNote;\n\n    printf(\"Entrez le nombre d'élèves : \");\n    scanf(\"%d\", &N);\n\n    if (N <= 0) {\n        printf(\"Nombre invalide.\\n\");\n        return 1;\n    }\n\n    // Initialisation\n    printf(\"Entrez la note de l'élève 1 : \");\n    scanf(\"%f\", &note);\n    somme = note;\n    maxNote = note;\n    minNote = note;\n    if (note >= 10) nbSup10++;\n\n    for (i = 2; i <= N; i++) {\n        printf(\"Entrez la note de l'élève %d : \", i);\n        scanf(\"%f\", &note);\n\n        somme += note;\n        if (note > maxNote) maxNote = note;\n        if (note < minNote) minNote = note;\n        if (note >= 10) nbSup10++;\n    }\n\n    printf(\"\\nMoyenne de la classe : %.2f\\n\", somme / N);\n    printf(\"Note maximale : %.2f\\n\", maxNote);\n    printf(\"Note minimale : %.2f\\n\", minNote);\n    printf(\"Nombre d'élèves ayant >= 10 : %d\\n\", nbSup10);\n\n    return 0;\n}</code></pre>",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 4 : Valider un mot de passe avec tentatives limitées",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un établissement scolaire souhaite sécuriser l'accès à un logiciel de gestion des notes. Le mot de passe correct est \"Cameroun2026\".</p><p>Écrivez un programme en C qui :</p><ul><li>Autorise l'utilisateur à saisir un mot de passe.</li><li>S'il est correct, affiche \"Accès autorisé\" et termine.</li><li>S'il est incorrect, affiche \"Mot de passe incorrect. Il vous reste X tentatives.\"</li><li>L'utilisateur a droit à 3 tentatives au maximum.</li><li>Après 3 échecs, affiche \"Compte bloqué. Contactez l'administrateur.\"</li><li>Utilisez une boucle <code>while</code> ou <code>do...while</code>.</li><li>La comparaison doit être insensible à la casse (exemple : \"CAMEROUN2026\" doit être accepté).</li></ul>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrivez le programme en C avec gestion des tentatives et comparaison insensible à la casse.",
+        "niveau": "hard",
+        "reponse": "<pre><code>#include <stdio.h>\n#include <string.h>\n#include <ctype.h>\n\nvoid toLowerString(char *str) {\n    for (int i = 0; str[i]; i++) {\n        str[i] = tolower(str[i]);\n    }\n}\n\nint main() {\n    char password[50];\n    char correct[] = \"cameroun2026\";\n    int tentatives = 3;\n    int success = 0;\n\n    do {\n        printf(\"Entrez le mot de passe : \");\n        scanf(\"%s\", password);\n        toLowerString(password);\n\n        if (strcmp(password, correct) == 0) {\n            printf(\"Accès autorisé.\\n\");\n            success = 1;\n            break;\n        } else {\n            tentatives--;\n            if (tentatives > 0) {\n                printf(\"Mot de passe incorrect. Il vous reste %d tentative(s).\\n\", tentatives);\n            }\n        }\n    } while (tentatives > 0);\n\n    if (!success) {\n        printf(\"Compte bloqué. Contactez l'administrateur.\\n\");\n    }\n\n    return 0;\n}</code></pre>",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 5 : Simuler un distributeur automatique (billets)",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Une entreprise installe un distributeur automatique de billets pour payer les repas au lycée.</p><p>Le distributeur contient initialement : 50 billets de 500 FCFA, 30 billets de 1000 FCFA, 20 billets de 2000 FCFA.</p><p>Écrivez un programme en C qui :</p><ol><li>Affiche le menu : (1) Retrait d'argent (2) État du stock (3) Quitter.</li><li>Pour un retrait, demande le montant (multiple de 500, entre 500 et 20000).</li><li>Le distributeur doit fournir le nombre minimal de billets pour ce montant (priorité aux grosses coupures).</li><li>Met à jour le stock après chaque retrait.</li><li>Vérifie la disponibilité avant de délivrer les billets.</li><li>Affiche le détail des billets délivrés.</li><li>Utilisez des boucles <code>while</code> ou <code>do...while</code> pour la gestion du menu et le calcul de la décomposition.</li></ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrivez le programme complet en C simulant le distributeur de billets.",
+        "niveau": "very hard",
+        "reponse": "<pre><code>#include <stdio.h>\n\nint main() {\n    int stock500 = 50, stock1000 = 30, stock2000 = 20;\n    int choix, montant;\n    int b2000, b1000, b500, reste;\n\n    do {\n        printf(\"\\n--- DISTRIBUTEUR AUTOMATIQUE ---\\n\");\n        printf(\"1. Retrait d'argent\\n\");\n        printf(\"2. État du stock\\n\");\n        printf(\"3. Quitter\\n\");\n        printf(\"Votre choix : \");\n        scanf(\"%d\", &choix);\n\n        switch(choix) {\n            case 1:\n                printf(\"Montant à retirer (500-20000, multiple de 500) : \");\n                scanf(\"%d\", &montant);\n\n                if (montant < 500 || montant > 20000 || montant % 500 != 0) {\n                    printf(\"Montant invalide.\\n\");\n                    break;\n                }\n\n                reste = montant;\n                // Calcul des billets nécessaires (algorithme glouton)\n                b2000 = reste / 2000;\n                if (b2000 > stock2000) b2000 = stock2000;\n                reste -= b2000 * 2000;\n\n                b1000 = reste / 1000;\n                if (b1000 > stock1000) b1000 = stock1000;\n                reste -= b1000 * 1000;\n\n                b500 = reste / 500;\n                if (b500 > stock500) b500 = stock500;\n                reste -= b500 * 500;\n\n                if (reste != 0) {\n                    printf(\"Désolé, stock insuffisant pour ce montant.\\n\");\n                } else {\n                    // Mise à jour du stock\n                    stock2000 -= b2000;\n                    stock1000 -= b1000;\n                    stock500 -= b500;\n\n                    printf(\"Billets délivrés :\\n\");\n                    printf(\"  2000 FCFA : %d\\n\", b2000);\n                    printf(\"  1000 FCFA : %d\\n\", b1000);\n                    printf(\"   500 FCFA : %d\\n\", b500);\n                    printf(\"Total retiré : %d FCFA\\n\", montant);\n                }\n                break;\n\n            case 2:\n                printf(\"\\nÉtat du stock :\\n\");\n                printf(\"Billets de 500  : %d\\n\", stock500);\n                printf(\"Billets de 1000 : %d\\n\", stock1000);\n                printf(\"Billets de 2000 : %d\\n\", stock2000);\n                break;\n\n            case 3:\n                printf(\"Au revoir.\\n\");\n                break;\n\n            default:\n                printf(\"Choix invalide.\\n\");\n        }\n    } while (choix != 3);\n\n    return 0;\n}</code></pre>",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

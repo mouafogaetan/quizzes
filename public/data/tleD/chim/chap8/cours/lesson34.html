@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Le Zwitterion (Leçon 34)</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* Styles spécifiques pour les formules et mises en valeur */
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.375rem;
+            font-family: monospace;
+            font-weight: 600;
+            color: #1e40af;
+        }
+
+        .bold {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            margin-bottom: 0.75rem;
+            color: #475569;
+        }
+
+        .exemple-correction {
+            margin-bottom: 0.75rem;
+        }
+
+        .exemple-astuce {
+            background-color: #fef9c3;
+            border-left: 4px solid #eab308;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            color: #854d0e;
+            margin-top: 0.75rem;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .image-placeholder {
+            background-color: #f8fafc;
+            border: 1px dashed #94a3b8;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        .image-placeholder img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        footer {
+            background-color: #f8fafc;
+            border-top: 1px solid #e9eef2;
+            padding: 1rem 2.5rem;
+            font-size: 0.8rem;
+            color: #64748b;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 34 : Propriétés acido-basiques – Le zwitterion</h1>
+            <p class="lesson-subtitle">Chimie · Terminale C & D (Cameroun) · Programme 2025-2026</p>
+        </header>
+
+        <!-- Contenu principal -->
+        <main class="fiche-content">
+            
+            <!-- SECTION : Concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Concepts fondamentaux</h2>
+                
+                <!-- Concept 1 : Zwitterion -->
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Le zwitterion : ion dipolaire amphotère</h3>
+                    <p class="card-description">
+                        Un acide α-aminé possède deux groupes fonctionnels : 
+                        une fonction acide carboxylique ($-COOH$) et une fonction amine ($-NH_2$).
+                        En solution aqueuse, ces deux groupes réagissent entre eux par transfert de proton.
+                        On obtient une espèce ionique dont la charge nette est nulle : le <strong class="bold">zwitterion</strong>.
+                    </p>
+                    <div class="image-placeholder">
+                        <img src="" alt="Schéma montrant la transformation d'un acide α-aminé neutre (forme non ionisée) en zwitterion (H3N+-CHR-COO-) par transfert de proton interne.">
+                        <p><em>Figure 1 : Équilibre de formation du zwitterion à partir de la forme neutre.</em></p>
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>Formule générale du zwitterion :</strong> $H_3N^+ - CHR - COO^-$.</li>
+                        <li>La molécule porte à la fois une charge positive ($-NH_3^+$) et une charge négative ($-COO^-$).</li>
+                        <li>Le zwitterion prédomine au <strong>point isoélectrique (pI)</strong>.</li>
+                    </ul>
+                </div>
+
+                <!-- Concept 2 : Couples acide-base -->
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Couples acide-base d'un acide α-aminé</h3>
+                    <p class="card-description">
+                        Le zwitterion se comporte à la fois comme un acide (il peut céder un proton) et comme une base (il peut capter un proton).
+                        On distingue deux couples acide-base successifs.
+                    </p>
+                    <ul class="concept-list">
+                        <li>
+                            <strong>Premier couple ($pK_{a1}$) :</strong> 
+                            $H_3N^+ - CHR - COOH \;\rightleftharpoons\; H_3N^+ - CHR - COO^- \;+\; H^+$
+                            <br>→ La forme acide est la forme totalement protonée (cation), la forme basique est le zwitterion.
+                        </li>
+                        <li>
+                            <strong>Second couple ($pK_{a2}$) :</strong> 
+                            $H_3N^+ - CHR - COO^- \;\rightleftharpoons\; H_2N - CHR - COO^- \;+\; H^+$
+                            <br>→ La forme acide est le zwitterion, la forme basique est l'anion (forme totalement déprotonée).
+                        </li>
+                    </ul>
+                    <div class="image-placeholder">
+                        <img src="" alt="Diagramme des différentes formes ioniques d'un acide α-aminé en fonction du pH : cation, zwitterion, anion.">
+                        <p><em>Figure 2 : Espèces successives en fonction du pH.</em></p>
+                    </div>
+                </div>
+
+                <!-- Concept 3 : Point isoélectrique -->
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Point isoélectrique (pI) et prédominance</h3>
+                    <p class="card-description">
+                        Le <strong class="bold">point isoélectrique (pI)</strong> est la valeur du pH pour laquelle la charge électrique nette de l'acide α-aminé est nulle. 
+                        À ce pH, l'espèce prédominante est le zwitterion.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Pour un acide α-aminé possédant deux groupes ionisables (sans chaîne latérale acide ou basique supplémentaire) : 
+                            $$ pI = \frac{pK_{a1} + pK_{a2}}{2} $$
+                        </li>
+                        <li>
+                            <strong>Règle de prédominance :</strong>
+                            <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                                <li>Si $pH < pI$ → La forme cationique $H_3N^+ - CHR - COOH$ prédomine.</li>
+                                <li>Si $pH = pI$ → Le zwitterion $H_3N^+ - CHR - COO^-$ prédomine.</li>
+                                <li>Si $pH > pI$ → La forme anionique $H_2N - CHR - COO^-$ prédomine.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION : Exemples d'application -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Applications & exercices types</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Le couple de la glycine</h3>
+                    <p class="exemple-context">
+                        La glycine (acide 2-aminoéthanoïque) a pour $pK_{a1} = 2,34$ et $pK_{a2} = 9,60$.
+                        Déterminer son point isoélectrique $pI$ et l'espèce prédominante à pH = 7,0.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong> <br>
+                        1. Calcul du pI : $pI = \frac{pK_{a1} + pK_{a2}}{2} = \frac{2,34 + 9,60}{2} = \frac{11,94}{2} = 5,97$. <br>
+                        2. À pH = 7,0, on a $pH > pI$ (car 7,0 > 5,97). Donc l'espèce prédominante est la forme anionique : $H_2N-CH_2-COO^-$.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce : Le pI d'un acide α-aminé neutre (sans chaîne latérale ionisable) se situe toujours autour de 6.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Prédominance et migration électrophorétique</h3>
+                    <p class="exemple-context">
+                        On place un mélange d'acides α-aminés dans une solution tamponnée à pH = 4,0. 
+                        Sachant que l'alanine a $pI = 6,0$ et l'acide glutamique a $pI = 3,2$, vers quelle électrode chaque acide migre-t-il ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> <br>
+                        - Pour l'alanine : $pH = 4,0 < pI = 6,0$ → forme cationique (charge +) → migre vers la cathode ($-$).<br>
+                        - Pour l'acide glutamique : $pH = 4,0 > pI = 3,2$ → forme anionique (charge -) → migre vers l'anode ($+$).<br>
+                        On peut ainsi séparer les acides aminés par électrophorèse.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 À retenir : un acide aminé migre vers l'anode si pH > pI, vers la cathode si pH < pI.
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION : Pièges et erreurs fréquentes -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Erreurs fréquentes & conseils</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre les deux pKa :</span> $pK_{a1}$ correspond toujours à la déprotonation du groupe $-COOH$ (qui est plus acide), $pK_{a2}$ à celle du groupe $-NH_3^+$.</li>
+                        <li><span class="bold">Oublier que le zwitterion est un amphotère :</span> Il peut réagir aussi bien avec un acide (pour former le cation) qu'avec une base (pour former l'anion).</li>
+                        <li><span class="bold">Erreur sur la formule du pI :</span> Pour un acide aminé diacide (ex : acide glutamique) ou dibasique (ex : lysine), la formule change : $pI = \frac{pK_{a}(-COOH) + pK_{a}(chaîne)}{2}$ ou autre selon les groupes. Ne pas appliquer la formule simple sans vérifier.</li>
+                        <li><span class="bold">Attention :</span> À pH = pI, la solubilité de l'acide aminé est minimale (propriété utilisée en cristallisation).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION : Récapitulatif visuel (tableau) -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Récapitulatif : Espèces et pH</h2>
+                <div class="card">
+                    <h3 class="card-title">Diagramme de prédominance général</h3>
+                    <div class="image-placeholder">
+                        <img src="" alt="Axe pH gradué avec les domaines de prédominance : pH < pKa1 (cation), pKa1 < pH < pKa2 (zwitterion), pH > pKa2 (anion).">
+                        <p><em>Figure 3 : Zones de prédominance des espèces en fonction du pH.</em></p>
+                    </div>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+                        <thead>
+                            <tr style="background-color: #f1f5f9;">
+                                <th style="padding: 0.5rem; border: 1px solid #cbd5e1;">Condition</th>
+                                <th style="padding: 0.5rem; border: 1px solid #cbd5e1;">Espèce prédominante</th>
+                                <th style="padding: 0.5rem; border: 1px solid #cbd5e1;">Charge nette</th>
+                            </td>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">$pH < pK_{a1}$</td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">$H_3N^+-CHR-COOH$ (cation)</td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">$+1$</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">$pK_{a1} < pH < pK_{a2}$</td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">$H_3N^+-CHR-COO^-$ (zwitterion)</td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">$0$</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">$pH > pK_{a2}$</td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">$H_2N-CHR-COO^-$ (anion)</td>
+                                <td style="padding: 0.5rem; border: 1px solid #cbd5e1;">$-1$</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision basée sur le programme officiel du Cameroun (Terminale C & D) · Bac 2025-2026 · Leçon 34 : Zwitterion</p>
+        </footer>
+    </div>
+</body>
+</html>

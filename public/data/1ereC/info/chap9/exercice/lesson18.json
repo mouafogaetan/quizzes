@@ -1,0 +1,112 @@
+[
+  {
+    "intitule": "Analyse d'une page web existante (Formulaire et Tableau)",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Observez attentivement le code HTML ci-dessous. Il représente une page web contenant un tableau et un formulaire.</p>\n<pre><code>\n&lt;table border=\"1\"&gt;\n    &lt;tr&gt;\n        &lt;th&gt;Matière&lt;/th&gt;\n        &lt;th&gt;Note&lt;/th&gt;\n        &lt;th&gt;Coefficient&lt;/th&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n        &lt;td&gt;Mathématiques&lt;/td&gt;\n        &lt;td&gt;15&lt;/td&gt;\n        &lt;td&gt;4&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n        &lt;td&gt;Informatique&lt;/td&gt;\n        &lt;td&gt;18&lt;/td&gt;\n        &lt;td&gt;3&lt;/td&gt;\n    &lt;/tr&gt;\n    &lt;tr&gt;\n        &lt;td colspan=\"2\" align=\"center\"&gt;Total des coefficients&lt;/td&gt;\n        &lt;td&gt;7&lt;/td&gt;\n    &lt;/tr&gt;\n&lt;/table&gt;\n\n&lt;form action=\"/traiter_notes.php\" method=\"post\"&gt;\n    Nom de l'élève: &lt;input type=\"text\" name=\"nom\"&gt;&lt;br&gt;&lt;br&gt;\n    &lt;input type=\"submit\" value=\"Envoyer les notes\"&gt;\n&lt;/form&gt;\n</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier et décrire la fonction de chaque balise HTML utilisée dans l'extrait de code pour construire le tableau et le formulaire.",
+        "niveau": "medium",
+        "reponse": "Les balises identifiées sont : <ul><li><code>\\<table></code> : Définit le début et la fin du tableau.</li><li><code>border=\"1\"</code> : Attribut qui ajoute une bordure visible au tableau.</li><li><code>\\<tr></code> : Définit une ligne (Table Row) dans le tableau.</li><li><code>\\<th></code> : Définit une cellule d'en-tête (Table Header), le texte y est en gras et centré par défaut.</li><li><code>\\<td></code> : Définit une cellule de données standard (Table Data).</li><li><code>colspan=\"2\"</code> : Attribut permettant à une cellule de s'étendre sur plusieurs colonnes (ici, 2 colonnes).</li><li><code>\\<form></code> : Définit un formulaire HTML pour recueillir des données utilisateur.</li><li><code>action=\"/traiter_notes.php\"</code> : Spécifie l'URL où les données du formulaire seront envoyées.</li><li><code>method=\"post\"</code> : Définit la méthode HTTP (ici POST) pour envoyer les données.</li><li><code>\\<input></code> : Crée un champ de saisie interactif. Les types utilisés sont 'text' (pour le nom) et 'submit' (pour le bouton d'envoi).</li></ul>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquer l'effet de l'attribut `colspan=\"2\"` dans la troisième ligne du tableau. Que se passerait-il si on supprimait cet attribut ?",
+        "niveau": "easy",
+        "reponse": "L'attribut `colspan=\"2\"` fusionne deux cellules sur la même ligne. Dans ce code, il permet à la cellule contenant le texte 'Total des coefficients' de s'étendre sur les deux premières colonnes (Matière et Note). Si on supprimait cet attribut, la ligne aurait trois cellules distinctes : la première avec 'Total des coefficients', la deuxième vide, et la troisième avec '7'. Le tableau serait décalé et moins lisible.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Distinguer les rôles des méthodes `get` et `post` dans un formulaire HTML. Pourquoi le code utilise-t-il `method=\"post\"` pour envoyer des notes ?",
+        "niveau": "hard",
+        "reponse": "<ul><li><strong>GET</strong> : Les données du formulaire sont encodées dans l'URL. Elles sont visibles, ont une taille limitée et peuvent être mises en cache. À utiliser pour des requêtes non sensibles (recherches, filtres).</li><li><strong>POST</strong> : Les données sont envoyées dans le corps de la requête HTTP. Elles ne sont pas visibles dans l'URL, n'ont pas de limite de taille théorique et ne sont pas mises en cache. À utiliser pour des données sensibles ou des modifications (connexion, envoi de notes).</li></ul>Le code utilise `method=\"post\"` car l'envoi de notes est une action qui modifie des données (ajout dans une base de données) et ne doit pas être visible dans l'URL pour des raisons de sécurité et de taille.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Création d'un bulletin de notes et d'un formulaire de saisie",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un professeur du lycée de Nkongsamba souhaite digitaliser la gestion des notes de sa classe de Première C. Il a besoin d'une page web contenant deux parties :</p>\n<ol>\n<li>Un <strong>tableau HTML</strong> qui affiche le bulletin d'un élève avec les matières, les notes (sur 20) et les coefficients.</li>\n<li>Un <strong>formulaire HTML</strong> qui permettra, à l'avenir, d'ajouter une nouvelle ligne (une nouvelle matière) dans ce bulletin.</li>\n</ol>\n<p>Le formulaire doit contenir des champs pour : le nom de la matière, la note (nombre décimal entre 0 et 20), et le coefficient (nombre entier).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Construire le code HTML complet qui réalise la page web décrite. Le tableau doit initialement contenir au moins 3 matières (ex: Français, Maths, Anglais) avec des notes et coefficients fictifs. La dernière ligne du tableau doit calculer et afficher la 'Moyenne Générale' (vous pouvez mettre une valeur fixe pour l'exemple, comme '15.5', ou utiliser un petit script JavaScript si vous le souhaitez).",
+        "niveau": "hard",
+        "reponse": "<!DOCTYPE html>\n<html>\n<head>\n<title>Bulletin de notes - Première C</title>\n</head>\n<body>\n<h1>Bulletin de l'élève : Jean Dupont</h1>\n\n<table border='1'>\n    <tr>\n        <th>Matière</th>\n        <th>Note / 20</th>\n        <th>Coefficient</th>\n    </tr>\n    <tr>\n        <td>Français</td>\n        <td>14.5</td>\n        <td>4</td>\n    </tr>\n    <tr>\n        <td>Mathématiques</td>\n        <td>16.0</td>\n        <td>5</td>\n    </tr>\n    <tr>\n        <td>Anglais</td>\n        <td>12.0</td>\n        <td>2</td>\n    </tr>\n    <tr>\n        <td>Informatique</td>\n        <td>18.0</td>\n        <td>3</td>\n    </tr>\n    <tr>\n        <td colspan='2' align='center'><strong>Moyenne Générale</strong></td>\n        <td>15.2</td>\n    </tr>\n</table>\n\n<h2>Ajouter une nouvelle matière</h2>\n<form action='' method='post'>\n    Matière : <input type='text' name='matiere' required><br><br>\n    Note : <input type='number' name='note' step='0.01' min='0' max='20' required><br><br>\n    Coefficient : <input type='number' name='coef' step='1' min='1' required><br><br>\n    <input type='submit' value='Ajouter la matière'>\n    <input type='reset' value='Effacer'>\n</form>\n\n</body>\n</html>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Justifier le choix des différents types d'attributs `input` (text, number, submit, reset) dans le formulaire que vous avez créé, en expliquant leur apport par rapport à un simple champ `input type=\"text\"`.",
+        "niveau": "medium",
+        "reponse": "<ul><li><strong>type='text'</strong> : Pour le champ 'Matière', c'est adapté car on attend une chaîne de caractères.</li><li><strong>type='number'</strong> : Pour 'Note' et 'Coefficient'. C'est un meilleur choix que 'text' car cela restreint la saisie aux chiffres, offre des boutons (+/-) pour ajuster la valeur, et permet une validation native du navigateur grâce aux attributs `step`, `min` et `max`.</li><li><strong>step='0.01'</strong> : Permet des notes comme 14.50.</li><li><strong>min='0' et max='20'</strong> : Empêche l'utilisateur de saisir des notes en dehors de l'intervalle autorisé.</li><li><strong>type='submit'</strong> : Crée un bouton qui, lorsqu'il est cliqué, envoie les données du formulaire au serveur (à l'URL spécifiée dans l'attribut 'action').</li><li><strong>type='reset'</strong> : Crée un bouton qui remet tous les champs du formulaire à leur valeur par défaut (ici, les vide).</li></ul>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Modifier votre code pour que la cellule contenant la mention 'Moyenne Générale' s'étende sur les deux premières colonnes (Matière et Note) et que la note de la moyenne s'affiche dans la troisième colonne.",
+        "niveau": "easy",
+        "reponse": "Il suffit de modifier la dernière ligne du tableau `<tr>` comme suit :\n```html\n<tr>\n    <td colspan='2' align='center'><strong>Moyenne Générale</strong></td>\n    <td>15.2</td>\n</tr>\n```\nL'attribut `colspan='2'` appliqué à la première cellule de la ligne lui permet de fusionner avec la cellule suivante. On n'a donc que deux balises `<td>` dans cette ligne : la première fusionnée, et la seconde pour la moyenne.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Validation de connaissances sur les tableaux et formulaires HTML",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Répondez par Vrai ou Faux aux affirmations suivantes concernant les tableaux et formulaires en HTML.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "La balise `\\<td>` permet de créer une cellule d'en-tête dans un tableau.",
+        "niveau": "easy",
+        "reponse": "Faux. C'est la balise `<th>` (Table Header) qui crée une cellule d'en-tête. La balise `<td>` (Table Data) crée une cellule de données standard.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "L'attribut `colspan` permet à une cellule de s'étendre sur plusieurs lignes.",
+        "niveau": "easy",
+        "reponse": "Faux. L'attribut `colspan` permet de fusionner des colonnes (extension horizontale). L'attribut `rowspan` permet de fusionner des lignes (extension verticale).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Un formulaire utilisant la méthode `GET` ne peut pas envoyer de fichier.",
+        "niveau": "medium",
+        "reponse": "Vrai. La méthode `GET` encode les données dans l'URL, ce qui est limité en taille et ne permet pas d'envoyer des données binaires comme des fichiers. Pour envoyer des fichiers, il faut utiliser `method='POST'` et `enctype='multipart/form-data'`.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "On peut placer un tableau à l'intérieur d'un formulaire.",
+        "niveau": "easy",
+        "reponse": "Vrai. Un tableau peut être placé à l'intérieur d'un formulaire pour structurer la disposition des champs (par exemple, une colonne pour les libellés, une pour les champs de saisie).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 5,
+        "texte": "Le bouton créé avec `<input type=\"reset\">` envoie automatiquement les données du formulaire au serveur.",
+        "niveau": "medium",
+        "reponse": "Faux. Le bouton `reset` remet simplement tous les champs du formulaire à leurs valeurs initiales. C'est le bouton `submit` qui envoie les données au serveur.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

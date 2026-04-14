@@ -1,0 +1,179 @@
+[
+  {
+    "intitule": "Formules de base et opérateurs arithmétiques",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Un tableur utilise des opérateurs arithmétiques (+, -, *, /) et des fonctions prédéfinies pour effectuer des calculs. La saisie d'une formule commence toujours par le signe $=$.</p><p><strong>Question :</strong> Associez chaque description à la formule correcte.</p><ul><li>Additionner les cellules A1 et B1</li><li>Multiplier la cellule C5 par 10% (0,1)</li><li>Calculer la moyenne des cellules D2, D3, D4, D5</li><li>Élever la cellule E3 au carré</li></ul>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrivez les formules correspondant aux descriptions ci-dessus en utilisant la syntaxe d'un tableur (exemple : =A1+B1).",
+        "niveau": "easy",
+        "reponse": "1. =A1+B1\n2. =C5*0.1 ou =C5*10%\n3. =MOYENNE(D2:D5)\n4. =E3^2",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Calcul d'un total de vente",
+    "type": "competence",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Dans une petite épicerie de Yaoundé, vous gérez le tableau des ventes suivant :</p><table border='1'><tr><th>Produit</th><th>Prix unitaire (FCFA)</th><th>Quantité vendue</th></tr><tr><td>Sac de riz 25kg</td><td>15000</td><td>5</td></tr><tr><td>Carton d'huile</td><td>12000</td><td>3</td></tr><tr><td>Sucre 1kg</td><td>850</td><td>20</td></tr></table><p>Les données sont placées ainsi : A1='Produit', B1='Prix unitaire', C1='Quantité vendue'. Les données commencent ligne 2.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Déterminez la formule à saisir dans la cellule D2 pour calculer le total des ventes pour le sac de riz (prix unitaire * quantité).",
+        "niveau": "easy",
+        "reponse": "=B2*C2",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Calculez ensuite le total général des ventes (somme des totaux des trois produits) à l'aide d'une formule.",
+            "niveau": "easy",
+            "reponse": "=SOMME(D2:D4) ou =D2+D3+D4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Application d'une remise et calcul de TVA",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un supermarché à Douala offre une remise de 5% sur le montant total des achats si le client achète pour plus de 50 000 FCFA. La TVA est de 19,25% sur le montant après remise. Un client achète :</p><ul><li>Riz : 25 000 FCFA</li><li>Poisson : 18 000 FCFA</li><li>Légumes : 12 000 FCFA</li></ul><p>Créez les formules dans un tableur colonne par colonne : Montant total, Remise, Montant après remise, TVA, Montant final à payer.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Élaborez la formule pour calculer la remise (5% du total) dans le cas où le total dépasse 50 000 FCFA, sinon 0.",
+        "niveau": "medium",
+        "reponse": "=SI(total > 50000 ; total*0.05 ; 0) où 'total' est la référence de la cellule contenant le montant total.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Calculez le montant après remise puis la TVA (19,25% du montant après remise). En déduire le montant final.",
+            "niveau": "medium",
+            "reponse": "Total = 25000+18000+12000 = 55000 FCFA. Remise = 55000*0.05 = 2750 FCFA. Après remise = 52250 FCFA. TVA = 52250*0.1925 ≈ 10058,13 FCFA. Final = 52250 + 10058,13 = 62308,13 FCFA."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Calcul d'une moyenne pondérée avec référence absolue",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Dans un lycée de Bafoussam, les notes des élèves sont coefficientées. Voici un extrait :</p><table border='1'><tr><th>Élève</th><th>Math (coef 5)</th><th>Physique (coef 4)</th><th>Informatique (coef 3)</th></tr><tr><td>Alima</td><td>15</td><td>12</td><td>18</td></tr><tr><td>Boris</td><td>10</td><td>14</td><td>16</td></tr><tr><td>Claude</td><td>13</td><td>11</td><td>14</td></tr></table><p>Les coefficients sont en ligne 1 (B1=5, C1=4, D1=3). Les notes commencent ligne 2.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Concevez la formule à placer dans la colonne E2 pour calculer la moyenne pondérée d'Alima. Utilisez des références absolues pour les coefficients afin de pouvoir recopier la formule vers le bas.",
+        "niveau": "hard",
+        "reponse": "=(B2*$B$1 + C2*$C$1 + D2*$D$1) / SOMME($B$1:$D$1)",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Appliquez la formule pour Boris et Claude et calculez leur moyenne. Que se passe-t-il si on oublie les $ ?",
+            "niveau": "medium",
+            "reponse": "Boris : (10*5 + 14*4 + 16*3)/12 = (50+56+48)/12 = 154/12 ≈ 12,83. Claude : (13*5 + 11*4 + 14*3)/12 = (65+44+42)/12 = 151/12 ≈ 12,58. Sans $, en recopiant, les coefficients se décaleraient et deviendraient 0 (ou des valeurs erronées) car la plage se déplacerait."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Gestion des stocks : seuil de réapprovisionnement",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Une boutique en ligne à Garoua veut automatiser la gestion de ses stocks. Le tableau ci-dessous présente quelques produits :</p><table border='1'><tr><th>Produit</th><th>Stock initial</th><th>Ventes du jour</th><th>Stock final</th><th>Seuil d'alerte</th><th>Statut</th></tr><tr><td>Laptop</td><td>10</td><td>3</td><td></td><td>5</td><td></td></tr><tr><td>Souris</td><td>50</td><td>12</td><td></td><td>20</td><td></td></tr><tr><td>Clavier</td><td>15</td><td>2</td><td></td><td>8</td><td></td></tr></table><p>Les colonnes A à F sont : A=Produit, B=Stock initial, C=Ventes, D=Stock final, E=Seuil, F=Statut.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Rédigez la formule pour calculer le Stock final (colonne D) pour le premier produit.",
+        "niveau": "easy",
+        "reponse": "=B2-C2",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Écrivez la formule pour la colonne Statut (colonne F) qui affiche 'Commander' si le stock final est inférieur ou égal au seuil d'alerte, sinon 'OK'.",
+            "niveau": "hard",
+            "reponse": "=SI(D2 <= E2 ; \"Commander\" ; \"OK\")",
+            "sousQuestions": [
+              {
+                "numero": "1.a.i",
+                "texte": "Que doit-on modifier si le seuil est exprimé en pourcentage du stock initial ? Par exemple, seuil = 30% du stock initial.",
+                "niveau": "hard",
+                "reponse": "La formule deviendrait : =SI(D2 <= B2*0,3 ; \"Commander\" ; \"OK\") et il faudrait enlever la colonne E ou l'utiliser pour stocker le pourcentage."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Erreurs de saisie et correction de formules",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un élève a saisi les formules suivantes dans un tableur. Chacune contient une erreur. Identifiez l'erreur et proposez la correction.</p><ol><li><code>=SOMME(A1:A10)/MOYENNE(B1:B10)</code></li><li><code>=A1*A2+3</code> mais la cellule A2 contient le texte 'cinq'</li><li><code>=SI(A1>10;\"Grand\";\"Petit\")</code> mais la fonction SI attend trois arguments séparés par des points-virgules.</li><li><code>=TOTAL(C1:C5)</code> (l'utilisateur voulait faire la somme)</li></ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Expliquez pourquoi chaque formule produit une erreur ou un résultat inattendu, puis donnez la formule corrigée.",
+        "niveau": "medium",
+        "reponse": "1. Pas d'erreur de syntaxe mais logique : division d'une somme par une moyenne. Ce n'est pas une erreur mais peut être non souhaité. Correction : aucune si c'est le but.\n2. Erreur de type : multiplication d'un nombre par du texte. Corriger la cellule A2 en nombre.\n3. Les arguments doivent être séparés par des points-virgules : =SI(A1>10;\"Grand\";\"Petit\") est correct (c'est déjà le cas). Sinon, vérifier les guillemets.\n4. La fonction TOTAL n'existe pas. Utiliser =SOMME(C1:C5).",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Projet intégrateur : Facture avec remise progressive",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Vous êtes stagiaire dans une entreprise de vente de matériel informatique à Maroua. On vous demande de créer une feuille de calcul pour générer automatiquement les factures. Voici les règles :</p><ul><li>Remise : 0% si total < 100 000 FCFA ; 5% si 100 000 ≤ total < 200 000 ; 10% si total ≥ 200 000.</li><li>Frais de livraison : 2000 FCFA si le montant après remise est inférieur à 50 000, sinon gratuits.</li><li>La TVA (19,25%) s'applique sur le montant après remise et après frais de livraison.</li></ul><p>Un client achète : 2 ordinateurs à 85 000 FCFA pièce et 3 imprimantes à 45 000 FCFA pièce.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Construisez les formules pas à pas : total HT, remise, sous-total, frais de livraison, montant imposable, TVA, total TTC.",
+        "niveau": "very hard",
+        "reponse": "Total HT = 2*85000 + 3*45000 = 170000 + 135000 = 305000 FCFA.\nRemise : 305000 ≥ 200000 → 10% → 305000*0.10 = 30500 FCFA.\nSous-total = 305000 - 30500 = 274500 FCFA.\nFrais de livraison = 0 (car 274500 > 50000).\nMontant imposable = 274500 FCFA.\nTVA = 274500 * 0.1925 ≈ 52841.25 FCFA.\nTotal TTC = 274500 + 52841.25 = 327341.25 FCFA.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Généralisez : écrivez la formule unique pour la remise en utilisant la fonction SI imbriquée (SI(condition; valeur_si_vrai; SI(autre condition; ...)))",
+            "niveau": "very hard",
+            "reponse": "=SI(total < 100000 ; 0 ; SI(total < 200000 ; total*0.05 ; total*0.10))",
+            "sousQuestions": [
+              {
+                "numero": "1.a.i",
+                "texte": "Testez votre formule avec un total de 150000 FCFA puis 250000 FCFA.",
+                "niveau": "hard",
+                "reponse": "150000 → 5% = 7500 ; 250000 → 10% = 25000"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

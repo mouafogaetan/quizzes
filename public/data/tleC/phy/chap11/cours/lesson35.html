@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 35 : Ondes mécaniques progressives</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie professionnelle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles de base (intégrés pour l'autonomie du fichier) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 1.75rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.75rem;
+        }
+
+        /* Corps de la fiche */
+        .content {
+            padding: 2rem 2rem;
+        }
+
+        /* Grille pour les objectifs et compétences */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background-color: #f8fafc;
+            border-left: 5px solid #3b82f6;
+            padding: 1.2rem 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card ul, .card p {
+            font-size: 0.95rem;
+            color: #1e293b;
+        }
+
+        .card li {
+            margin-left: 1.25rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* sections thématiques */
+        .section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 0.8rem;
+        }
+
+        .concept-box {
+            background: #f1f5f9;
+            padding: 1rem 1.5rem;
+            border-radius: 0.8rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 1rem;
+            border: 1px solid #cbd5e1;
+        }
+
+        .formula {
+            background-color: #e6f0ff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.6rem;
+            font-weight: 600;
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 1.05rem;
+            border-left: 4px solid #2563eb;
+        }
+
+        .example-box {
+            background-color: #fef9e3;
+            border-left: 4px solid #eab308;
+            padding: 1rem 1.5rem;
+            border-radius: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .example-box strong {
+            color: #b45309;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 0.6rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        .footer {
+            background-color: #f1f5f9;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #475569;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        @media (max-width: 700px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 1.2rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <div class="header">
+        <h1>📡 Leçon 35 : Ondes mécaniques progressives</h1>
+        <div class="subtitle">Module 5 – Phénomènes ondulatoires | Terminale C/D (Cameroun)</div>
+        <div class="badge">🎯 Bac 2025 – Onde progressive, célérité, longueur d'onde</div>
+    </div>
+
+    <div class="content">
+        <!-- Objectifs + Compétences -->
+        <div class="grid-2">
+            <div class="card">
+                <h3>🎯 Objectifs d'apprentissage</h3>
+                <ul>
+                    <li>Distinguer ondes transversales et longitudinales.</li>
+                    <li>Caractériser une onde mécanique progressive par sa célérité, sa période et sa longueur d'onde.</li>
+                    <li>Définir et utiliser la relation \( c = \lambda \cdot f = \frac{\lambda}{T} \).</li>
+                    <li>Expliquer la propagation sans transport de matière mais avec transport d'énergie.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🧠 Compétences exigibles (Bac)</h3>
+                <ul>
+                    <li>Calculer la célérité, la longueur d'onde ou la fréquence à partir de données expérimentales.</li>
+                    <li>Déterminer graphiquement la période spatiale (longueur d'onde) sur une représentation d'onde.</li>
+                    <li>Différencier une onde longitudinale (ex: son) d'une onde transversale (ex: onde sur une corde).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 1. Définition et nature des ondes -->
+        <div class="section">
+            <div class="section-title">🔍 1. Qu'est-ce qu'une onde mécanique progressive ?</div>
+            <p>Une <strong>onde mécanique progressive</strong> est la propagation d'une perturbation dans un milieu matériel élastique, sans transport global de matière, mais avec transport d'énergie. Elle se déplace de proche en proche.</p>
+            <ul>
+                <li><strong>Onde transversale :</strong> La perturbation est perpendiculaire à la direction de propagation.  
+                    <em>Exemple : onde le long d'une corde vibrante, onde sismique S.</em></li>
+                <li><strong>Onde longitudinale :</strong> La perturbation est parallèle à la direction de propagation.  
+                    <em>Exemple : onde sonore (compression/dilatation), onde sismique P.</em></li>
+            </ul>
+            <div class="concept-box">
+                📌 <strong>À retenir :</strong> Une onde mécanique a besoin d'un milieu matériel pour se propager (contrairement aux ondes électromagnétiques).
+            </div>
+        </div>
+
+        <!-- 2. Grandeurs caractéristiques -->
+        <div class="section">
+            <div class="section-title">📏 2. Grandeurs caractéristiques d'une onde progressive périodique</div>
+            <p>Une onde progressive est dite <strong>périodique</strong> si la perturbation se répète identique à intervalles de temps réguliers (période temporelle \(T\)) ou d'espace réguliers (longueur d'onde \(\lambda\)).</p>
+            <table>
+                <tr><th>Grandeur</th><th>Symbole</th><th>Définition / Unité (SI)</th></tr>
+                <tr><td>Période temporelle</td><td>\(T\)</td><td>Durée minimale au bout de laquelle le signal se répète (s).</td></tr>
+                <tr><td>Fréquence</td><td>\(f\)</td><td>Nombre d'oscillations par seconde : \(f = \frac{1}{T}\) (Hz).</td></tr>
+                <tr><td>Longueur d'onde</td><td>\(\lambda\) (lambda)</td><td>Distance parcourue par l'onde pendant une période : \( \lambda = c \cdot T\) (m).</td></tr>
+                <tr><td>Célérité (vitesse)</td><td>\(c\) ou \(v\)</td><td>Vitesse de propagation de l'onde (m/s).</td></tr>
+            </table>
+
+            <div class="formula">
+                📐 Relation fondamentale : \( \displaystyle c = \frac{\lambda}{T} = \lambda \cdot f \)
+            </div>
+            <p><em>Remarque :</em> La célérité dépend des propriétés du milieu (température, élasticité, masse linéique...).</p>
+        </div>
+
+        <!-- 3. Double périodicité -->
+        <div class="section">
+            <div class="section-title">⏳🔄 3. Double périodicité : temporelle et spatiale</div>
+            <ul>
+                <li><strong>Périodicité temporelle :</strong> En un point fixe du milieu, l'élongation varie au cours du temps et se reproduit identique à chaque période \(T\).</li>
+                <li><strong>Périodicité spatiale :</strong> À un instant donné, la forme de l'onde se répète tous les \(\lambda\) mètres.</li>
+            </ul>
+            <div class="example-box">
+                <strong>🎓 Exemple type Bac :</strong> On visualise une onde sur une corde à \(t = 0\) : la distance entre deux crêtes consécutives est \(\lambda = 0,12 \, m\). La fréquence d'excitation est \(f = 25 \, Hz\). Calculer la célérité.<br>
+                <strong>Solution :</strong> \(c = \lambda \cdot f = 0,12 \times 25 = 3,0 \, m/s\).
+            </div>
+        </div>
+
+        <!-- 4. Propagation et énergie -->
+        <div class="section">
+            <div class="section-title">⚡ 4. Transport d'énergie – pas de matière</div>
+            <p>Lors du passage d'une onde mécanique, chaque point du milieu effectue un mouvement oscillatoire autour de sa position d'équilibre. Il n'y a <strong>pas de déplacement définitif de matière</strong>, mais l'onde transporte de l'énergie mécanique (cinétique + potentielle).</p>
+            <ul>
+                <li>L'intensité de l'onde diminue avec la distance (atténuation) à cause des phénomènes d'amortissement.</li>
+                <li>Dans un milieu non dispersif, toutes les fréquences se propagent à la même célérité.</li>
+            </ul>
+        </div>
+
+        <!-- 5. Onde progressive sinusoïdale (pour mémoire) -->
+        <div class="section">
+            <div class="section-title">📈 5. Expression d'une onde progressive sinusoïdale (rappels)</div>
+            <p>Pour une onde transversale se propageant selon l'axe \(x\) avec une amplitude \(A\), la fonction d'onde (élongation \(y(x,t)\)) s'écrit :</p>
+            <div class="formula">
+                $$ y(x,t) = A \cos\left( 2\pi f t - \frac{2\pi}{\lambda} x + \varphi \right) = A \cos\left( \omega t - k x + \varphi \right) $$
+            </div>
+            <ul>
+                <li>\(\omega = 2\pi f\) : pulsation (rad/s).</li>
+                <li>\(k = \frac{2\pi}{\lambda}\) : nombre d'onde (rad/m).</li>
+                <li>Signe <strong>–</strong> : onde progressive se déplaçant vers les \(x\) croissants.</li>
+            </ul>
+            <p><em>Au baccalauréat, on demande souvent de déterminer sens de propagation, amplitude, période ou longueur d'onde à partir de l'équation.</em></p>
+        </div>
+
+        <!-- 6. Exercice-type résolu -->
+        <div class="section">
+            <div class="section-title">✏️ 6. Application directe (sujet type)</div>
+            <div class="example-box">
+                <strong>📌 Énoncé :</strong> Une onde sonore sinusoïdale (onde longitudinale) a une fréquence de 440 Hz. La célérité du son dans l'air à 25°C est 340 m/s.<br>
+                1. Calculer la longueur d'onde \(\lambda\).<br>
+                2. Quelle distance l'onde parcourt-elle pendant 5 périodes ?<br>
+                3. Cette onde peut-elle se propager dans le vide ? Justifier.<br><br>
+                <strong>✔️ Correction :</strong><br>
+                1. \(\lambda = \frac{c}{f} = \frac{340}{440} \approx 0,773 \, m\) (soit 77,3 cm).<br>
+                2. En 5 périodes : \(d = c \times (5T) = c \times \frac{5}{f} = 5\lambda = 5 \times 0,773 \approx 3,86 \, m\).<br>
+                3. Non, une onde mécanique a besoin d'un milieu matériel (air) ; dans le vide, il n'y a pas de particules pour transmettre la perturbation.
+            </div>
+        </div>
+
+        <!-- Tableau récapitulatif -->
+        <div class="section">
+            <div class="section-title">📋 Synthèse Bac : Comparaison onde transversale / longitudinale</div>
+            <table>
+                <tr><th>Critère</th><th>Onde transversale</th><th>Onde longitudinale</th></tr>
+                <tr><td>Direction perturbation</td><td>⊥ à la propagation</td><td>// à la propagation</td></tr>
+                <tr><td>Exemples</td><td>Corde vibrante, ondes sismiques S, ondes à la surface de l'eau</td><td>Ondes sonores, ondes sismiques P, ressort hélicoïdal</td></tr>
+                <tr><td>Milieu possible</td><td>Solides (et surface liquide)</td><td>Solides, liquides, gaz</td></tr>
+                <tr><td>Visualisation</td><td>Crêtes et creux</td><td>Zones de compression et dilatation</td></tr>
+            </table>
+        </div>
+
+        <!-- Conseils pour le Bac -->
+        <div class="section">
+            <div class="section-title">💡 Conseils pour l'épreuve de physique (Bac)</div>
+            <ul>
+                <li><strong>Vérification des savoirs :</strong> soyez capable de redéfinir célérité, longueur d'onde, période et de donner des exemples concrets.</li>
+                <li><strong>Application directe :</strong> maîtrisez \(c = \lambda f\) et sachez extraire \(T\) ou \(\lambda\) à partir d'un graphique (y(t) ou y(x)).</li>
+                <li><strong>Piège fréquent :</strong> ne pas confondre la période temporelle \(T\) (en secondes) et la longueur d'onde \(\lambda\) (en mètres).</li>
+                <li><strong>Interprétation physique :</strong> justifiez toujours pourquoi une onde mécanique ne se propage pas dans le vide.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer">
+        Fiche conforme au programme officiel de Physique – Terminale C & D (Cameroun) – Année 2025-2026<br>
+        Leçon 35 : Ondes mécaniques progressives – Révision baccalauréat
+    </div>
+</div>
+</body>
+</html>

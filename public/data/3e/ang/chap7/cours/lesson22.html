@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 22 : Formes plurielles et négation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- MathJax Configuration (utile pour d'éventuelles formules, mais pas nécessaire ici) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .highlight {
+            background-color: #fef9c3;
+            font-weight: 600;
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.3rem;
+            color: #854d0e;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+        .grammar-table th, .grammar-table td {
+            border: 1px solid #cbd5e1;
+            padding: 0.6rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .grammar-table th {
+            background-color: #eef2ff;
+            font-weight: 600;
+            color: #1e40af;
+        }
+        .grammar-table td {
+            background-color: #ffffff;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+            .grammar-table th, .grammar-table td {
+                padding: 0.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Lesson 22: Plural Forms & Negation</h1>
+            <p class="lesson-subtitle">Anglais · 3ème · Formes plurielles irrégulières et négation en anglais</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+
+                <!-- Carte 1 : Pluriels irréguliers -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🔤 1. Les pluriels irréguliers (Irregular Plural Nouns)</h3>
+                    <p class="card-description">
+                        En anglais, la plupart des noms forment leur pluriel en ajoutant <strong>-s</strong> ou <strong>-es</strong>. 
+                        Mais certains noms ont un pluriel <strong>irrégulier</strong> qu'il faut apprendre par cœur. 
+                        Voici les groupes principaux et des exemples courants.
+                    </p>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr><th>Catégorie</th><th>Singulier → Pluriel</th><th>Exemples (français / anglais)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Changement de voyelle</td><td>man → men<br>woman → women<br>foot → feet<br>tooth → teeth<br>goose → geese</td><td>homme → hommes<br>femme → femmes<br>pied → pieds<br>dent → dents<br>oie → oies</td></tr>
+                            <tr><td>Terminaison en -f / -fe</td><td>knife → knives<br>wife → wives<br>leaf → leaves<br>wolf → wolves</td><td>couteau → couteaux<br>épouse → épouses<br>feuille → feuilles<br>loup → loups</td></tr>
+                            <tr><td>Noms en -o (certains prennent -es)</td><td>potato → potatoes<br>tomato → tomatoes<br>hero → heroes</td><td>pomme de terre → pommes de terre<br>tomate → tomates<br>héros → héros</td></tr>
+                            <tr><td>Pluriel identique au singulier</td><td>sheep → sheep<br>fish → fish<br>deer → deer<br>species → species</td><td>mouton → moutons<br>poisson → poissons<br>cerf → cerfs<br>espèce → espèces</td></tr>
+                            <tr><td>Noms venant du latin/grec</td><td>cactus → cacti<br>focus → foci/focuses<br>criterion → criteria<br>phenomenon → phenomena</td><td>cactus → cactus<br>foyer → foyers<br>critère → critères<br>phénomène → phénomènes</td></tr>
+                            <tr><td>Cas particulier</td><td>child → children<br>ox → oxen<br>person → people</td><td>enfant → enfants<br>bœuf → bœufs<br>personne → personnes</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="exemple-astuce" style="margin-top:0.8rem;">
+                        💡 <strong>Astuce :</strong> Pour les mots comme <span class="highlight">fish</span>, si on parle de différentes espèces, on peut dire <em>fishes</em>. 
+                        Mais en général, <strong>fish</strong> reste invariable au pluriel.
+                    </div>
+                </div>
+
+                <!-- Carte 2 : La négation en anglais -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🚫 2. La négation : formes et contractions</h3>
+                    <p class="card-description">
+                        Pour former une phrase négative en anglais, on utilise l'auxiliaire <strong>do/does/did</strong> (pour les verbes ordinaires) 
+                        ou on ajoute <strong>not</strong> après l'auxiliaire (be, have, modaux). Les <strong>contractions</strong> sont très courantes à l'oral et à l'écrit informel.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Présent simple (verbes ordinaires) :</strong> sujet + <span class="formule">do/does + not</span> + base verbale. <br>
+                        Ex: <em>She <span class="highlight">does not (doesn't)</span> like coffee.</em> — Elle n'aime pas le café.</li>
+                        <li><strong>Présent avec BE :</strong> sujet + <span class="formule">am/is/are + not</span>.<br>
+                        Ex: <em>They <span class="highlight">are not (aren't)</span> students.</em> — Ils ne sont pas étudiants.</li>
+                        <li><strong>Prétérit simple (verbes ordinaires) :</strong> sujet + <span class="formule">did not (didn't)</span> + base verbale.<br>
+                        Ex: <em>He <span class="highlight">did not (didn't)</span> go to school yesterday.</em> — Il n'est pas allé à l'école hier.</li>
+                        <li><strong>Futur (will) :</strong> sujet + <span class="formule">will not (won't)</span> + verbe.<br>
+                        Ex: <em>I <span class="highlight">will not (won't)</span> forget you.</em> — Je ne t'oublierai pas.</li>
+                        <li><strong>Verbes modaux (can, must, should, etc.) :</strong> sujet + modal + <span class="formule">not</span>.<br>
+                        Ex: <em>You <span class="highlight">cannot (can't)</span> smoke here.</em> — Tu ne peux pas fumer ici. <br>
+                        <em>They <span class="highlight">must not (mustn't)</span> be late.</em> — Ils ne doivent pas être en retard.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top:0.5rem;">
+                        📌 <strong>Attention !</strong> Après <em>do/does/did</em> (négatif), le verbe reprend toujours sa forme de base (infinitif sans "to"). 
+                        On ne met jamais de -s ou -ed.
+                    </div>
+                </div>
+
+                <!-- Carte 3 : Négation avec "no", "not any", "never" -->
+                <div class="card concept-card">
+                    <h3 class="card-title">❌ 3. Autres formes de négation : no, not any, never</h3>
+                    <p class="card-description">
+                        Pour exprimer l'absence ou la quantité nulle, on utilise souvent <strong>no</strong> devant un nom, ou <strong>not any</strong>.
+                        <strong>Never</strong> signifie "jamais" et rend la phrase négative sans avoir besoin de "not".
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="highlight">no + nom</span> = pas de / aucun(e). Ex: <em>There is <strong>no</strong> water.</em> (Il n'y a pas d'eau.)</li>
+                        <li><span class="highlight">not any</span> équivalent, mais utilisé avec do/does/be. Ex: <em>She doesn't have <strong>any</strong> friends.</em> (Elle n'a aucun ami.)</li>
+                        <li><span class="highlight">never</span> = jamais. Ex: <em>I have <strong>never</strong> visited Douala.</em> (Je n'ai jamais visité Douala.)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Pluriel irrégulier dans une phrase</h3>
+                    <p class="exemple-context">Complète avec le bon pluriel : "Look at those _____ (child) playing in the yard. Their _____ (foot) are muddy."</p>
+                    <p class="exemple-correction">
+                        <strong>✅ Correction :</strong> <em>Look at those <span class="highlight">children</span> playing in the yard. Their <span class="highlight">feet</span> are muddy.</em><br>
+                        → "child" devient "children" (irrégulier) et "foot" devient "feet" (changement de voyelle).
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Fais attention aux mots comme "child", "man", "woman" ; ils changent complètement de forme au pluriel.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Négation au présent simple</h3>
+                    <p class="exemple-context">Transforme la phrase affirmative en négative (forme contractée) : <br>
+                    "My brother plays football every Saturday."</p>
+                    <p class="exemple-correction">
+                        <strong>🔁 Résolution :</strong> On utilise l'auxiliaire <strong>does</strong> (car "brother" = he) + not + base verbale "play".<br>
+                        → <em>My brother <span class="highlight">doesn't play</span> football every Saturday.</em>
+                    </p>
+                    <div class="exemple-astuce">
+                        ⚠️ Ne pas oublier d'enlever le -s du verbe après "doesn't".
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Négation avec "no" / "any"</h3>
+                    <p class="exemple-context">Traduis en anglais : "Il n'y a pas de pain dans le frigo. Je n'ai aucune idée."</p>
+                    <p class="exemple-correction">
+                        <strong>🍞 Proposition :</strong> <em>There is <span class="highlight">no</span> bread in the fridge. / There isn't <span class="highlight">any</span> bread in the fridge.</em><br>
+                        <em>I have <span class="highlight">no</span> idea. / I don't have <span class="highlight">any</span> idea.</em><br>
+                        Les deux formes sont correctes ; "no" est plus direct, "not any" est un peu plus formel.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Pièges courants / À ne pas confondre -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & erreurs à éviter</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Ajouter un -s au verbe après <strong>doesn't</strong> ou <strong>didn't</strong> ❌ <em>He doesn't <u>likes</u></em> → ✔ <em>He doesn't <u>like</u></em>. L'auxiliaire "do/does/did" est déjà conjugué, le verbe reste à l'infinitif.</li>
+                        <li><span class="bold">Confusion :</span> Pluriel des mots en -f / -fe : certains prennent -ves (knife→knives), mais d'autres prennent simplement -s (roof→roofs). À apprendre progressivement.</li>
+                        <li><span class="bold">Attention :</span> "There is no" + singulier ; "There are no" + pluriel. Ex: <em>There is no milk</em> (indénombrable), <em>There are no eggs</em> (pluriel).</li>
+                        <li><span class="bold">Erreur avec "never" :</span> Ne pas ajouter "not" après "never" car la phrase est déjà négative. ❌ <em>I don't never go</em> → ✔ <em>I never go</em>.</li>
+                        <li><span class="bold">Pluriels latins :</span> "Cactus" peut faire "cacti" ou "cactuses". Les deux sont acceptés mais "cacti" est plus soutenu. </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section Vocabulaire supplémentaire / Image conceptuelle -->
+            <section class="concept-section">
+                <h2 class="section-title">🖼️ Petit mémo visuel : pluriels fréquents</h2>
+                <div class="card concept-card" style="background-color: #faf5ff; border-left: 4px solid #a855f7;">
+                    <p class="card-description">
+                        Voici une illustration mentale pour retenir quelques pluriels irréguliers très utilisés. 
+                        Pense à ces associations :
+                    </p>
+                    <ul class="concept-list">
+                        <li>🧑‍🤝‍🧑 <strong>Man → Men</strong> : un homme, des hommes (le a devient e)</li>
+                        <li>👧 <strong>Child → Children</strong> : enfant → enfants (ajoute -ren)</li>
+                        <li>🐑 <strong>Sheep → Sheep</strong> : un mouton, des moutons (identique)</li>
+                        <li>🐟 <strong>Fish → Fish</strong> : poisson (invariable)</li>
+                        <li>🦷 <strong>Tooth → Teeth</strong> : dent → dents (changement de voyelle)</li>
+                    </ul>
+                    <!-- Image générique générée avec IA via alt descriptif -->
+                    <img src="" alt="Schéma illustrant des exemples de pluriels irréguliers: un homme et plusieurs hommes, un enfant et plusieurs enfants, un mouton et plusieurs moutons." style="max-width:100%; border-radius:0.75rem; margin-top:1rem; background:#e9eef2; padding:0.5rem;">
+                    <p class="exemple-astuce" style="margin-top:1rem;">✨ Pour générer une image avec IA, tu peux utiliser un prompt comme : <em>"A colorful infographic showing irregular plural nouns in English: man to men, child to children, sheep to sheep, foot to feet"</em>.</p>
+                </div>
+            </section>
+
+            <!-- Section tableau récapitulatif des contractions négatives -->
+            <section class="concept-section">
+                <h2 class="section-title">📝 Tableau des contractions négatives (à connaître)</h2>
+                <div class="card concept-card">
+                    <table class="grammar-table">
+                        <thead><tr><th>Forme longue</th><th>Contraction</th><th>Exemple</th></tr></thead>
+                        <tbody>
+                            <tr><td>is not</td><td>isn’t</td><td>He isn’t happy.</td></tr>
+                            <tr><td>are not</td><td>aren’t</td><td>We aren’t ready.</td></tr>
+                            <tr><td>do not</td><td>don’t</td><td>I don’t know.</td></tr>
+                            <tr><td>does not</td><td>doesn’t</td><td>She doesn’t work.</td></tr>
+                            <tr><td>did not</td><td>didn’t</td><td>They didn’t come.</td></tr>
+                            <tr><td>will not</td><td>won’t</td><td>It won’t rain.</td></tr>
+                            <tr><td>cannot</td><td>can’t</td><td>You can’t park here.</td></tr>
+                            <tr><td>must not</td><td>mustn’t</td><td>We mustn’t be late.</td></tr>
+                            <tr><td>should not</td><td>shouldn’t</td><td>He shouldn’t worry.</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="exemple-astuce">
+                        🧠 À retenir : <strong>won’t</strong> est la contraction de <strong>will not</strong>, et <strong>can’t</strong> pour <strong>cannot</strong> (pas de "cannot’t").
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mini exercice d'auto-évaluation -->
+            <section class="exemple-section">
+                <h2 class="section-title">✍️ Auto-évaluation (teste-toi !)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Petit exercice rapide</h3>
+                    <p class="exemple-context">Mets les phrases suivantes au pluriel (attention aux pluriels irréguliers) et à la forme négative selon la consigne :</p>
+                    <ol style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>This woman is a teacher. (pluriel) → ______________</li>
+                        <li>There is a mouse in the kitchen. (pluriel + négation) → ______________</li>
+                        <li>I will buy a new phone. (négation) → ______________</li>
+                        <li>He has some money. (négation avec "any") → ______________</li>
+                    </ol>
+                    <p class="exemple-correction">
+                        <strong>🔍 Correction :</strong><br>
+                        1. <em>These women are teachers.</em><br>
+                        2. <em>There are no mice in the kitchen. / There aren't any mice in the kitchen.</em><br>
+                        3. <em>I will not (won’t) buy a new phone.</em><br>
+                        4. <em>He doesn't have any money.</em>
+                    </p>
+                    <div class="exemple-astuce">
+                        🎯 Si tu as réussi, tu maîtrises bien la leçon 22 ! Sinon, relis les tableaux des pluriels et les règles de négation.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision créée pour la classe de 3ème (Cameroun) · Leçon 22 : Pluriels irréguliers & Négation · 📚 Révise régulièrement !</p>
+        </footer>
+    </div>
+</body>
+</html>

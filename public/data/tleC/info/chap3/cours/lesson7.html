@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision : Structure d'un programme en C (Leçon 7)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (utile si des formules mathématiques apparaissent) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petit style additionnel pour les blocs de code (intégré directement pour rester cohérent avec la fiche) */
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid #fbbf24;
+        }
+        .code-block .keyword {
+            color: #7dd3fc;
+        }
+        .code-block .function {
+            color: #fde047;
+        }
+        .code-block .comment {
+            color: #94a3b8;
+        }
+        .inline-code {
+            background-color: #f1f5f9;
+            font-family: 'Courier New', monospace;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.4rem;
+            font-size: 0.9rem;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 7 : Structure d'un programme en C</h1>
+            <p class="lesson-subtitle">Informatique · Terminale C & D · Programme officiel 2025-2026</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Anatomie d'un programme C minimal</h3>
+                    <p class="card-description">
+                        Tout programme écrit en langage C suit une structure obligatoire comprenant : 
+                        l'inclusion de bibliothèques, la déclaration de la fonction principale <span class="inline-code">main()</span>, 
+                        un corps d'instructions et une valeur de retour.
+                    </p>
+                    <div class="code-block">
+                        <span class="comment">// Exemple du programme "Bonjour le monde"</span><br>
+                        <span class="keyword">#include</span> &lt;stdio.h&gt;   <span class="comment">// Bibliothèque pour entrées/sorties</span><br>
+                        <br>
+                        <span class="keyword">int</span> <span class="function">main</span>(<span class="keyword">void</span>) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Corps du programme : instructions</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;printf(<span class="string">"Bonjour les Terminales C & D !"</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> 0;   <span class="comment">// Fin normale du programme</span><br>
+                        }
+                    </div>
+                    <ul class="concept-list">
+                        <li><span class="bold">#include :</span> Directive préprocesseur qui intègre une bibliothèque (fichier d'en-tête .h).</li>
+                        <li><span class="bold">int main(void) :</span> Point d'entrée obligatoire. <span class="inline-code">int</span> indique le type de retour (entier).</li>
+                        <li><span class="bold">return 0 ;</span> : Signale au système d'exploitation que le programme s'est exécuté sans erreur.</li>
+                        <li><span class="bold">{} :</span> Les accolades délimitent le bloc d'instructions de la fonction.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Rôle des bibliothèques standard</h3>
+                    <p class="card-description">
+                        Les bibliothèques fournissent des fonctions prêtes à l'emploi. Les deux plus utilisées en terminale :
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="inline-code">&lt;stdio.h&gt;</span> → <strong>STandard Input Output</strong> : <span class="inline-code">printf()</span> (affichage), <span class="inline-code">scanf()</span> (saisie utilisateur).</li>
+                        <li><span class="inline-code">&lt;stdlib.h&gt;</span> → Fonctions utilitaires (conversion, génération aléatoire, gestion mémoire).</li>
+                        <li><span class="inline-code">&lt;math.h&gt;</span> → Fonctions mathématiques (sqrt, pow, sin…).</li>
+                    </ul>
+                    <div class="exemple-astuce">
+                        💡 Astuce : <span class="inline-code">#include &lt;stdio.h&gt;</span> est indispensable pour toute interaction avec l'écran ou le clavier.
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Fonction principale : signature et variations</h3>
+                    <p class="card-description">
+                        La norme impose <span class="inline-code">int main(void)</span> ou <span class="inline-code">int main()</span> pour un programme sans arguments en ligne de commande. 
+                        Une autre forme existe (<span class="inline-code">int main(int argc, char *argv[])</span>) pour récupérer des paramètres, mais elle n'est pas exigible au baccalauréat.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="bold">void</span> entre parenthèses signifie que la fonction ne reçoit aucun argument.</li>
+                        <li>Le <span class="bold">return</span> est obligatoire pour une fonction déclarée <span class="inline-code">int</span>.</li>
+                        <li>Un programme correct se termine toujours par <span class="inline-code">return 0;</span> (succès).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Examen type : Analyser la structure d'un programme C</h3>
+                    <p class="exemple-context">
+                        Extrait d'un exercice (Bac session 2025, Partie III, Exercice 2) :<br>
+                        <strong>Énoncé :</strong> On donne le programme C suivant. Identifiez chaque partie (bibliothèque, fonction principale, corps, retour) et dites ce qu'il affiche.
+                    </p>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        #include &lt;stdio.h&gt;<br>
+                        int main(void) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;printf("Année scolaire 2025-2026");<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                        }
+                    </div>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong> <br>
+                        • <span class="inline-code">#include &lt;stdio.h&gt;</span> : directive d'inclusion pour utiliser printf.<br>
+                        • <span class="inline-code">int main(void)</span> : fonction principale sans paramètres.<br>
+                        • <span class="inline-code">{ ... }</span> : bloc contenant l'instruction <span class="inline-code">printf(...)</span> puis <span class="inline-code">return 0;</span>.<br>
+                        • <strong>Affichage :</strong> <span class="inline-code">Année scolaire 2025-2026</span> à l'écran.<br>
+                        • Le programme se termine correctement avec le code 0.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 À retenir : Toute instruction se termine par un point-virgule <strong>;</strong> en C (sauf directives préprocesseur comme #include).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Programme avec saisie et affichage (mise en pratique)</h3>
+                    <p class="exemple-context">
+                        On souhaite un programme qui demande l'âge de l'utilisateur et affiche "Tu as X ans". 
+                        Compléter la structure manquante.
+                    </p>
+                    <div class="code-block">
+                        #include &lt;stdio.h&gt;<br>
+                        <br>
+                        int main(void) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;int age;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;printf("Entrez votre âge : ");<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;scanf("%d", &amp;age);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;printf("Tu as %d ans\n", age);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                        }
+                    </div>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> <br>
+                        1. Déclaration de la variable <span class="inline-code">age</span> de type <span class="inline-code">int</span>.<br>
+                        2. <span class="inline-code">printf()</span> affiche un message.<br>
+                        3. <span class="inline-code">scanf()</span> lit une valeur entrée au clavier et la stocke dans <span class="inline-code">age</span> (le &amp; donne l'adresse de la variable).<br>
+                        4. Second <span class="inline-code">printf()</span> utilise le format <span class="inline-code">%d</span> pour insérer l'entier.<br>
+                        5. Le programme renvoie 0 : exécution réussie.
+                    </p>
+                    <div class="exemple-astuce">
+                        🧠 Note : Les commentaires (// ou /* */) aident à documenter la structure mais ne sont pas exécutés.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges à éviter -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Oublier le <span class="inline-code">#include &lt;stdio.h&gt;</span> → provoque une erreur de compilation car <span class="inline-code">printf()</span> ou <span class="inline-code">scanf()</span> ne sont pas reconnus.</li>
+                        <li><span class="bold">Attention :</span> Écrire <span class="inline-code">main()</span> sans type de retour (<span class="inline-code">int</span>) n'est plus autorisé par la norme actuelle et peut générer un avertissement.</li>
+                        <li><span class="bold">Piège classique :</span> Oublier le point-virgule <strong>;</strong> après une instruction (ex: <span class="inline-code">printf("...")</span> sans <strong>;</strong>).</li>
+                        <li><span class="bold">Confusion possible :</span> <span class="inline-code">return 0 ;</span> n'est pas une instruction d'affichage ; il termine la fonction. Ne pas écrire <span class="inline-code">return 0 ;</span> dans une fonction <span class="inline-code">void</span> (mais main est <span class="inline-code">int</span>).</li>
+                        <li><span class="bold">À ne pas oublier :</span> Les accolades <span class="inline-code">{ }</span> doivent être équilibrées (ouverture et fermeture).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section pour visualiser l'organisation générale (schéma mental) -->
+            <section class="concept-section">
+                <h2 class="section-title">🧩 Schéma récapitulatif : structure type</h2>
+                <div class="card concept-card" style="background-color: #fefce8;">
+                    <h3 class="card-title">Modèle générique à mémoriser</h3>
+                    <div class="code-block" style="background-color: #0f172a;">
+                        /* 1. Inclusion des bibliothèques */<br>
+                        #include &lt;stdio.h&gt;   <span class="comment">// obligatoire pour entrées/sorties</span><br>
+                        #include &lt;stdlib.h&gt;  <span class="comment">// facultatif selon besoins</span><br>
+                        <br>
+                        /* 2. Fonction principale */<br>
+                        int main(void) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;/* 3. Déclarations des variables locales */<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;int a, b;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;float moyenne;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;/* 4. Corps du programme : entrées, traitements, sorties */<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;printf("Saisir deux entiers : ");<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;scanf("%d %d", &amp;a, &amp;b);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;moyenne = (a + b) / 2.0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;printf("La moyenne est %.2f\n", moyenne);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;/* 5. Retour de la fonction */<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return 0;<br>
+                        }
+                    </div>
+                    <p class="card-description">
+                        Chaque programme C respecte cet enchaînement : 
+                        <strong>Directives #include → Déclaration de main() → Variables → Instructions → return 0 ;</strong>
+                    </p>
+                    <img src="" alt="Diagramme illustrant la structure d'un programme C : en-tête, fonction main, corps et retour" style="display: none;">
+                    <div class="exemple-astuce">
+                        ✅ Pour le Baccalauréat, savoir écrire un programme simple, reconnaître les blocs et expliquer le rôle de <span class="inline-code">#include</span> et <span class="inline-code">return 0;</span>.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lien avec l'examen - section spécifique -->
+            <section class="exemple-section">
+                <h2 class="section-title">🎯 Liens avec les épreuves du Baccalauréat</h2>
+                <div class="card exemple-card" style="border-left-color: #2563eb;">
+                    <h3 class="card-title">Sujets typiques (Session 2025, Partie III, Exercice 2)</h3>
+                    <p class="exemple-context">
+                        Les questions d'examen portent souvent sur :
+                        <ul class="concept-list">
+                            <li>Identifier les erreurs dans une structure de programme C (bibliothèque manquante, oubli de return, point-virgule).</li>
+                            <li>Compléter un squelette de programme en ajoutant les bonnes directives.</li>
+                            <li>Écrire un programme complet de quelques lignes qui lit deux nombres et affiche leur somme.</li>
+                            <li>Expliquer à quoi sert <span class="inline-code">int main(void)</span> et la signification de <span class="inline-code">return 0;</span>.</li>
+                        </ul>
+                    </p>
+                    <div class="exemple-astuce">
+                        📌 Méthode : Avant d'écrire le code, toujours commencer par <span class="inline-code">#include &lt;stdio.h&gt;</span> puis la fonction main. Vérifier les parenthèses et les accolades.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme officiel (Sessions 2022-2025) · Révision pour la Terminale C & D · 📘 <a href="#">Télécharger la fiche PDF</a></p>
+            <p style="font-size: 0.75rem; margin-top: 0.5rem;">Enseignant : Lycée technique de Douala / Yaoundé · Année scolaire 2025-2026</p>
+        </footer>
+    </div>
+</body>
+</html>

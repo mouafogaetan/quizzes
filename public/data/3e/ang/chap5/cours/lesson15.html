@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Question Formation (3ème)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (non utilisé ici mais conservé pour cohérence) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Style CSS intégré pour que la fiche soit autonome */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        .tag-en {
+            font-family: monospace;
+            background-color: #e2e8f0;
+            padding: 0.1rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #0f3b5c;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">✅ Poser des questions en anglais : Question tags & Wh- questions</h1>
+            <p class="lesson-subtitle">Anglais · 3ème (Module 2 – Chapitre 5, Leçon 3) · Révision</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- SECTION CONCEPTS CLÉS -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Carte 1 : Question tags -->
+                <div class="card concept-card">
+                    <h3 class="card-title">1️⃣ Les Question tags (questions brèves)</h3>
+                    <p class="card-description">
+                        Une <strong>question tag</strong> est une petite question placée en fin de phrase pour confirmer une information ou obtenir l’accord. 
+                        En français, cela correspond à <em>« n’est-ce pas ? », « pas vrai ? », « d’accord ? »</em>. 
+                        La règle est simple : <strong>si la phrase est affirmative, le tag est négatif ; si la phrase est négative, le tag est affirmatif.</strong>
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Structure :</strong> auxiliaire (ou be) + pronom sujet. On reprend l’auxiliaire du verbe principal.</li>
+                        <li><span class="formule">Affirmative → tag négatif</span> : <em>You are a student, <span class="tag-en">aren’t you</span> ?</em> (Tu es étudiant, n’est-ce pas ?)</li>
+                        <li><span class="formule">Négative → tag affirmatif</span> : <em>She doesn’t like coffee, <span class="tag-en">does she</span> ?</em> (Elle n’aime pas le café, si ?)</li>
+                        <li><strong>Avec “I am”</strong> : le tag est <span class="tag-en">aren’t I ?</span> (ex: I’m clever, <strong>aren’t I</strong> ?)</li>
+                        <li><strong>Impératif</strong> : le tag est souvent <span class="tag-en">will you ?</span> (ex: Open the door, <strong>will you</strong> ?)</li>
+                        <li><strong>Let’s</strong> : le tag est <span class="tag-en">shall we ?</span> (Let’s go, <strong>shall we</strong> ?)</li>
+                    </ul>
+                    <div class="exemple-astuce">
+                        💡 <strong>Astuce :</strong> Pour construire le tag, repère d’abord l’auxiliaire (be, have, do, will, can…). Si la phrase n’a pas d’auxiliaire (présent simple/prétérit simple), utilise do/does/did.
+                    </div>
+                </div>
+
+                <!-- Carte 2 : Wh- questions -->
+                <div class="card concept-card">
+                    <h3 class="card-title">2️⃣ Les Wh- questions (questions ouvertes)</h3>
+                    <p class="card-description">
+                        Les Wh- questions commencent par un mot interrogatif (<strong>what, where, when, why, who, whose, which, how</strong>). 
+                        Elles permettent d’obtenir une information précise, et non une simple réponse par oui ou non.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Structure générale :</strong> Wh- mot + auxiliaire + sujet + verbe ?</li>
+                        <li><strong>Principaux mots interrogatifs :</strong>
+                            <ul style="margin-top: 6px; margin-left: 20px; list-style: circle;">
+                                <li><span class="tag-en">What</span> → quoi / quel (What is your name?)</li>
+                                <li><span class="tag-en">Where</span> → où (Where do you live?)</li>
+                                <li><span class="tag-en">When</span> → quand (When did she arrive?)</li>
+                                <li><span class="tag-en">Why</span> → pourquoi (Why are you sad?)</li>
+                                <li><span class="tag-en">Who</span> → qui (Who wrote this book?)</li>
+                                <li><span class="tag-en">Whose</span> → à qui (Whose bag is this?)</li>
+                                <li><span class="tag-en">Which</span> → lequel/laquelle (Which colour do you prefer?)</li>
+                                <li><span class="tag-en">How</span> → comment (How does it work?)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Si le mot interrogatif est le sujet</strong> (Who / What), on n’utilise PAS d’auxiliaire : <em>Who called you ?</em> (Qui t’a appelé ?)</li>
+                    </ul>
+                </div>
+
+                <!-- Carte 3 : nuances et intonation -->
+                <div class="card concept-card">
+                    <h3 class="card-title">3️⃣ Intonation et usage</h3>
+                    <p class="card-description">
+                        En anglais, l’intonation est très importante. 
+                        - Pour les <strong>question tags</strong>, si on veut vraiment confirmer (incertitude), la voix monte en fin de tag. 
+                        Si on est presque sûr, la voix descend (simple acquiescement).<br>
+                        - Pour les <strong>Wh- questions</strong>, l’intonation descend généralement en fin de phrase.
+                    </p>
+                    <!-- image illustrative (optionnelle) -->
+                    <img src="" alt="Schéma explicatif : intonation montante et descendante pour les question tags en anglais, avec exemples visuels" style="max-width:100%; margin-top:12px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                </div>
+            </section>
+
+            <!-- SECTION EXEMPLES CONCRETS -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <!-- Exemple Question tags -->
+                <div class="card exemple-card">
+                    <h3 class="card-title">🔖 Exemple 1 : Question tags avec différents temps</h3>
+                    <p class="exemple-context">
+                        <strong>Situation :</strong> Tu parles avec un camarade. Transforme les phrases en ajoutant le tag approprié.
+                    </p>
+                    <div class="exemple-correction">
+                        <p>✅ <strong>Phrase affirmative :</strong> <em>“They play football every Sunday.”</em><br>
+                        → Tag : <span class="tag-en">don’t they ?</span> → <strong>They play football every Sunday, don’t they ?</strong><br>
+                        <em>(Ils jouent au foot tous les dimanches, n’est-ce pas ?)</em></p>
+                        <p>✅ <strong>Phrase négative :</strong> <em>“She wasn’t at the meeting.”</em><br>
+                        → Tag : <span class="tag-en">was she ?</span> → <strong>She wasn’t at the meeting, was she ?</strong><br>
+                        <em>(Elle n’était pas à la réunion, si ?)</em></p>
+                        <p>✅ <strong>Futur avec will :</strong> <em>“You will help me.”</em><br>
+                        → Tag : <span class="tag-en">won’t you ?</span> → <strong>You will help me, won’t you ?</strong></p>
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 <strong>Astuce :</strong> Attention aux verbes irréguliers ! Pour le past simple, utilise <em>did</em> si le verbe est lexical (ex: She bought a car, <strong>didn’t she</strong> ?).
+                    </div>
+                </div>
+
+                <!-- Exemple Wh- questions -->
+                <div class="card exemple-card">
+                    <h3 class="card-title">🔖 Exemple 2 : Former des Wh- questions à partir d’indices</h3>
+                    <p class="exemple-context">
+                        <strong>Consigne :</strong> Imagine que tu es journaliste. Pose une question pour chaque information donnée.
+                    </p>
+                    <div class="exemple-correction">
+                        <p>📌 <strong>Information :</strong> The President will visit Buea <em>next Monday</em>.<br>
+                        <strong>Question (temps) :</strong> <span class="tag-en">When will the President visit Buea ?</span><br>
+                        → Quand le Président visitera-t-il Buéa ?</p>
+                        <p>📌 <strong>Information :</strong> <em>Mr. Atangana</em> teaches English at our school.<br>
+                        <strong>Question (personne) :</strong> <span class="tag-en">Who teaches English at our school ?</span><br>
+                        → Attention : ici “who” est le sujet, donc pas d’auxiliaire !</p>
+                        <p>📌 <strong>Information :</strong> She chose the <em>blue dress</em>.<br>
+                        <strong>Question (choix) :</strong> <span class="tag-en">Which dress did she choose ?</span></p>
+                    </div>
+                    <div class="exemple-astuce">
+                        🧠 <strong>À retenir :</strong> Quand on utilise <em>who/what/which</em> comme sujet, le verbe reste à la forme affirmative (ex: Who broke the window ?).
+                    </div>
+                </div>
+
+                <!-- Exemple mixte et contexte Camerounais -->
+                <div class="card exemple-card">
+                    <h3 class="card-title">🇨🇲 Exemple 3 : Mise en situation (contexte Cameroun)</h3>
+                    <p class="exemple-context">
+                        <strong>Dialogue :</strong> Dans ton quartier, un ami te dit : “You are from Yaoundé, … ?” Complète avec le bon tag et imagine une réponse.
+                    </p>
+                    <div class="exemple-correction">
+                        <p>✅ <strong>Question tag :</strong> <em>You are from Yaoundé, <span class="tag-en">aren’t you</span> ?</em><br>
+                        <strong>Réponse possible :</strong> <em>Yes, I am. I live in Mvog-Mbi.</em></p>
+                        <p>✅ <strong>Wh- question :</strong> Maintenant, pour obtenir plus d’informations sur les traditions, tu demandes : <em>“<span class="tag-en">What</span> are the main cultural events in your village ?”</em></p>
+                        <p>✅ <strong>Autre tag avec impératif :</strong> <em>“Explain the lesson again, <span class="tag-en">will you</span> ?”</em> (pour demander poliment).</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION PIÈGES COURANTS -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente n°1 :</span> Utiliser le mauvais auxiliaire dans les question tags. Exemple : <em>“She likes pizza, <del>likes she</del> ?”</em> → ❌ On doit dire : <span class="tag-en">doesn’t she ?</span></li>
+                        <li><span class="bold">Erreur n°2 :</span> Oublier l’inversion sujet-auxiliaire dans les Wh- questions. ❌ <em>“Where you are going ?”</em> → ✅ <em>“Where <strong>are you</strong> going ?”</em></li>
+                        <li><span class="bold">Erreur n°3 :</span> Confondre <strong>whose</strong> (à qui) et <strong>who’s</strong> (who is / who has). Attention à l’orthographe !</li>
+                        <li><span class="bold">Piège :</span> Avec “have” comme verbe principal (possession), dans le tag on utilise souvent <strong>do/does/did</strong> en anglais britannique courant. Ex: <em>You have a car, <strong>don’t you</strong> ?</em></li>
+                        <li><span class="bold">Attention à la négation :</span> Les tags négatifs utilisent toujours la forme contractée (<em>isn’t, aren’t, don’t, didn’t, won’t</em>…).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- PETITE SECTION PRATIQUE ADDITIONNELLE -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 Petits exercices pour s’entraîner (auto-évaluation)</h2>
+                <div class="card concept-card" style="background-color: #fefce8;">
+                    <h3 class="card-title">✏️ À toi de jouer !</h3>
+                    <p class="card-description">
+                        Complète avec le bon question tag ou le bon mot interrogatif. Les réponses sont à vérifier avec ton professeur.
+                    </p>
+                    <ul class="concept-list">
+                        <li>1. You are from the North region, ___________ ?</li>
+                        <li>2. _________ book is this? (indique la possession)</li>
+                        <li>3. She didn’t attend the meeting, ___________ ?</li>
+                        <li>4. _________ do you celebrate National Youth Day? (moment)</li>
+                        <li>5. Let’s protect our environment, ___________ ?</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        💡 <strong>Réponses :</strong> 1. aren’t you  / 2. Whose  / 3. did she  / 4. When  / 5. shall we
+                    </div>
+                </div>
+            </section>
+
+            <!-- PETITE IMAGE DE SYNTHÈSE (facultative, mais pour l'IA) -->
+            <div style="margin: 1rem 0 0.5rem; text-align: center; font-size: 0.8rem; color: #5b6e8c;">
+                <img src="" alt="Tableau récapitulatif : question tags avec auxiliaires (be, do, will, can) et wh-words avec exemples visuels colorés pour la révision rapide" style="max-width: 100%; border-radius: 16px; border: 1px solid #ddd;">
+            </div>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>📚 Fiche de révision – Anglais 3ème (Programme Cameroun) · Module 2 : Structures intermédiaires · Leçon 3 : Question Formation (Question tags & Wh-questions) · À garder pour les évaluations !</p>
+            <p>🔍 Conseil : Répète à voix haute les exemples pour bien maîtriser l’intonation. 🇨🇲</p>
+        </footer>
+    </div>
+</body>
+</html>

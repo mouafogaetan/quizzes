@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - La construction du problème</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Image style */
+        .schema-img {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+            display: block;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 4 : La construction du problème</h1>
+            <p class="lesson-subtitle">Philosophie · Première (C-D-E-TI) · Compétence II : Essai de problématisation</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. De l'opinion à la question philosophique</h3>
+                    <p class="card-description">
+                        Une opinion est une réponse spontanée, souvent non justifiée (« La liberté, c’est faire ce qu’on veut »). 
+                        Une question philosophique, au contraire, met en lumière une tension, un paradoxe ou une difficulté qui appelle un examen critique.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Passage obligé :</strong> partir du sujet ou de la citation pour en dégager les présupposés implicites.</li>
+                        <li><strong>Exemple d'opposition :</strong> « Suis-je vraiment libre si je suis déterminé par mes désirs ? » (tension entre liberté et déterminisme).</li>
+                        <li><strong>Objectif :</strong> transformer une évidence en interrogation radicale.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Identifier les implications et les présupposés</h3>
+                    <p class="card-description">
+                        Chaque sujet de dissertation contient des termes chargés de sens et des présupposés qu'il faut débusquer. 
+                        Cette étape évite le hors-sujet et permet de poser un problème authentique.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Implication :</strong> conséquence logique ou sous-entendu d'une affirmation.</li>
+                        <li><strong>Présupposé :</strong> ce que l'on tient pour vrai sans le dire explicitement (exemple : « Faut-il avoir peur de la liberté ? » présuppose que la liberté peut être angoissante).</li>
+                        <li><strong>Méthode :</strong> interroger chaque mot du sujet avec un « qu’est-ce que cela implique ? ».</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Formuler la problématique (la question centrale)</h3>
+                    <p class="card-description">
+                        La problématique est la question directrice qui structure toute la dissertation. Elle doit être <strong>ouverte, précise et dialectique</strong> (qui admet plusieurs réponses possibles). 
+                        Elle naît de la mise en tension des implications repérées.
+                    </p>
+                    <ul class="concept-list">
+                        <li>✔ Une bonne problématique commence souvent par : « Dans quelle mesure ? », « En quoi ? », « Est-ce que … ? », « Peut-on … sans … ? ».</li>
+                        <li>✔ Elle ne doit pas être une question de pur fait ou de simple définition.</li>
+                        <li>✔ Exemple : au lieu de « Qu’est-ce que la raison ? » → « La raison peut-elle nous libérer de tous nos préjugés ? ».</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.5rem;">
+                        💡 Astuce : Une problématique efficace contient un verbe problématisant (peut-on, faut-il, est-ce légitime…) et un couple de notions opposées.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section des exemples concrets (construction de problème) -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de construction du problème</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple n°1 : À partir d’un sujet de dissertation</h3>
+                    <p class="exemple-context">
+                        <strong>Sujet :</strong> « La philosophie est-elle utile pour la vie quotidienne ? »
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>🔍 Démarche pas à pas :</strong><br>
+                        1️⃣ <strong>Analyse des termes</strong> : « philosophie » (réflexion rationnelle, amour de la sagesse), « utile » (qui sert à quelque chose, qui a une efficacité pratique), « vie quotidienne » (actions concrètes, routines, décisions ordinaires).<br>
+                        2️⃣ <strong>Repérer les présupposés</strong> : Le sujet suppose que l’utilité se mesure à l’efficacité pratique. Il oppose peut-être théorie et pratique.<br>
+                        3️⃣ <strong>Identifier la tension</strong> : La philosophie semble abstraite (théorique), donc éloignée du quotidien. Pourtant, elle forme l’esprit critique et éclaire nos choix.<br>
+                        4️⃣ <strong>Formulation du problème</strong> : <strong>« Dans quelle mesure une activité théorique comme la philosophie peut-elle transformer concrètement notre manière d’agir et de penser au jour le jour ? »</strong>
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 À retenir : Le problème ne demande pas simplement « oui ou non », mais interroge les conditions et les limites de l’utilité.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple n°2 : À partir d’une citation (type bac)</h3>
+                    <p class="exemple-context">
+                        <strong>Citation :</strong> « Chaque nation est d’autant plus civilisée et polie que les hommes y philosopher mieux. » – René Descartes
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>📖 Construction du problème :</strong><br>
+                        • <strong>Définitions</strong> : « civilisée » (organisation sociale, mœurs), « philosopher » (exercice de la raison, doute, recherche de la vérité).<br>
+                        • <strong>Présupposé de l’auteur</strong> : Descartes croit en un lien nécessaire entre la pratique de la philosophie et le progrès de la civilisation.<br>
+                        • <strong>Mise en question</strong> : Toute pratique philosophique favorise-t-elle réellement la civilité ? La philosophie peut aussi être critique, voire subversive. N’y a-t-il pas des civilisations non occidentales très structurées sans philosophie « cartésienne » ?<br>
+                        • <strong>Problématique</strong> : <strong>« Le développement de la philosophie est-il une condition suffisante et universelle de la civilisation des mœurs, ou bien cette idée cache-t-elle un préjugé rationaliste ? »</strong>
+                    </p>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple n°3 : Transformation d’une opinion en problème</h3>
+                    <p class="exemple-context">
+                        <strong>Opinion courante :</strong> « Pour être heureux, il suffit de suivre ses désirs. »
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>⚙️ Travail de problématisation :</strong><br>
+                        ➜ <strong>Interroger les termes</strong> : « heureux » (plaisir durable ? satisfaction ?), « désirs » (besoins naturels ou artificiels ?).<br>
+                        ➜ <strong>Détecter l’implicite</strong> : L’opinion suppose que désir et bonheur coïncident toujours. Or, certains désirs mènent à l’insatisfaction (addictions, désirs infinis).<br>
+                        ➜ <strong>Tension</strong> : Le désir est source de manque, mais aussi moteur d’action. Peut-on identifier bonheur et satisfaction immédiate des désirs ?<br>
+                        ➜ <strong>Problématique philosophique</strong> : <strong>« Le bonheur résulte-t-il de la satisfaction de tous nos désirs ou bien exige-t-il au contraire une maîtrise et un choix éclairé de ceux-ci ? »</strong>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Schéma / illustration visuelle de la construction du problème -->
+            <section class="concept-section">
+                <h2 class="section-title">🧭 Schéma récapitulatif : Les 4 étapes clés</h2>
+                <div class="card concept-card">
+                    <img src="" alt="Schéma des étapes de la problématisation : 1. Analyser le sujet et les termes, 2. Dégager les présupposés et implications, 3. Mettre en lumière une tension ou un paradoxe, 4. Formuler la question centrale sous forme dialectique" class="schema-img" style="background-color: #f8fafc; padding: 1rem; font-style: italic; text-align: center; color: #1e40af;">
+                    <p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem;">(Schéma à visualiser : De l'analyse des mots à la question dialectique)</p>
+                    <ul class="concept-list">
+                        <li><strong>Étape 1 :</strong> Lire et définir chaque notion (ne pas confondre sens courant et sens philosophique).</li>
+                        <li><strong>Étape 2 :</strong> Chercher les présupposés (« qu’est-ce qui est déjà admis sans preuve ? »).</li>
+                        <li><strong>Étape 3 :</strong> Dégager la contradiction ou l’alternative (thèse/antithèse en germe).</li>
+                        <li><strong>Étape 4 :</strong> Formuler la problématique finale (une question ouverte qui organise la réflexion).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section "Pièges à éviter" et erreurs fréquentes -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants dans la construction du problème</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">❌ Énoncer une question trop large ou hors-sujet :</span> Exemple : « Qu’est-ce que la liberté ? » sur un sujet portant sur la responsabilité. Toujours recentrer sur les termes précis.</li>
+                        <li><span class="bold">❌ Confondre problème philosophique et question d’opinion :</span> « Aimez-vous la philosophie ? » n’est pas une problématique.</li>
+                        <li><span class="bold">❌ Oublier la dimension dialectique :</span> Une problématique doit laisser place à plusieurs réponses possibles, pas à une évidence.</li>
+                        <li><span class="bold">❌ Négliger les présupposés du sujet :</span> Par exemple, le sujet « La raison peut-elle tout expliquer ? » présuppose que la raison aspire à l’explication totale. Il faut interroger ce présupposé.</li>
+                        <li><span class="bold">⚠️ Erreur fréquente en dissertation :</span> annoncer le plan avant d’avoir clairement formulé la problématique. La problématique doit guider le plan, non l’inverse.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Méthodologie : comparer opinion / problème -->
+            <section class="exemple-section">
+                <h2 class="section-title">📝 De l’opinion au problème : tableau récapitulatif</h2>
+                <div class="card" style="background-color: #f1f5f9;">
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <div style="border-bottom: 1px solid #cbd5e1; padding-bottom: 0.5rem;">
+                            <span class="bold" style="color:#1e40af;">🗣️ Opinion spontanée</span> 
+                            <span style="display: inline-block; margin-left: 1rem;">→</span> 
+                            <span class="bold" style="color:#0b5e42;">⚡ Question / Problème philosophique</span>
+                        </div>
+                        <div>« La vérité est toujours relative. » → <strong>« Est-il possible d’affirmer la relativité de toute vérité sans tomber dans une contradiction performative ? »</strong></div>
+                        <div>« Il faut douter de tout. » → <strong>« Le doute radical est-il un commencement possible pour la philosophie ou mène-t-il à une impasse ? »</strong></div>
+                        <div>« La philosophie ne sert à rien. » → <strong>« L’utilité de la philosophie se mesure-t-elle seulement à son efficacité pratique ou bien réside-t-elle dans une transformation intérieure du regard ? »</strong></div>
+                    </div>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        🧠 Conseil : Après avoir lu un sujet, posez-vous la question « En quoi ce sujet est-il problématique ? Quelle difficulté cache-t-il ? ».
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lien avec les auteurs vus en classe (pour nourrir la problématique) -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 Convoquer les auteurs pour problématiser</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Références philosophiques utiles</h3>
+                    <p class="card-description">
+                        Une bonne problématique s’enrichit des grandes tensions philosophiques déjà pensées par les auteurs :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Socrate</strong> : l’interrogation permanente (« Tout ce que je sais, c’est que je ne sais rien ») → permet de problématiser la prétendue connaissance.</li>
+                        <li><strong>Descartes</strong> : le doute méthodique comme outil pour atteindre la certitude → problématique : « Le doute est-il un obstacle ou une condition de la connaissance vraie ? ».</li>
+                        <li><strong>Kant</strong> : critique des illusions dogmatiques → problématiser les limites de la raison.</li>
+                        <li><strong>Russell / Vergez & Huisman</strong> : la philosophie libère des préjugés, mais est-ce que cette libération a un prix ?</li>
+                        <li><strong>Njoh-Mouelle</strong> : la philosophie africaine comme interrogation critique, non comme idéologie → problématique : « La philosophie doit-elle être ancrée dans une culture ou viser l’universel ? ».</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Exercice d’entraînement pour les élèves -->
+            <section class="exemple-section">
+                <h2 class="section-title">✏️ Entraînement : À vous de problématiser</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Sujet d’entraînement</h3>
+                    <p class="exemple-context">
+                        « Faut-il avoir peur de la liberté ? » (d’après sujet de bac 2021 revisité)
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Consigne :</strong> En suivant la méthode des 4 étapes, rédigez la problématique. 
+                        Vérifiez qu’elle met en évidence une tension (ex : la liberté est source d’angoisse mais aussi d’accomplissement).<br>
+                        ➜ <strong>Proposition de correction :</strong> « La liberté, qui est souvent célébrée comme une valeur suprême, peut-elle aussi susciter une inquiétude légitime, au point qu’il faudrait la craindre, ou bien cette peur révèle-t-elle simplement une mauvaise compréhension de ce qu’être libre signifie ? »
+                    </p>
+                    <div class="exemple-astuce">
+                        💪 Astuce : Pour progresser, prenez n’importe quelle citation d’auteur et forcez-vous à formuler trois questions problématiques différentes.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision générée pour les élèves de Première (C-D-E-TI) · Programme officiel du Cameroun · Compétence II : Problématisation · 📚 <a href="#">Retour au sommaire</a></p>
+        </footer>
+    </div>
+</body>
+</html>

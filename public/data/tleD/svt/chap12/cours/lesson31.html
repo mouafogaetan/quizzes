@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Recyclage des déchets papiers (Tle D)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 34 : Le recyclage des déchets papiers</h1>
+            <p class="lesson-subtitle">SVTEEHB – Terminale D (Éducation à l’Environnement & Développement Durable) · Module IV : La biotechnologie</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section Éléments clés à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Pourquoi recycler le papier ?</h3>
+                    <p class="card-description">
+                        Le recyclage des déchets papiers réduit la déforestation, économise l'eau et l'énergie, et limite la pollution liée à la fabrication de papier à partir de fibres vierges. Au Cameroun, la gestion des déchets papiers est un enjeu environnemental et sanitaire majeur.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Bilan écologique :</strong> 1 tonne de papier recyclé évite l'abattage d'environ 15 arbres, économise 30 000 litres d'eau et 4 000 kWh d'électricité.</li>
+                        <li><strong>Réduction des émissions :</strong> Diminution des gaz à effet de serre par rapport à la production classique.</li>
+                        <li><strong>Valorisation locale :</strong> Création d'emplois dans la collecte, le tri et la transformation artisanale ou industrielle.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Filière de recyclage : du bac de collecte au produit fini</h3>
+                    <p class="card-description">
+                        Les grandes étapes de transformation des vieux papiers en nouveaux produits (papier hygiénique, serviettes jetables, cartons, etc.).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Collecte et tri :</strong> Séparation par catégories (journaux, magazines, cartons, papiers de bureau). Élimination des contaminants (agrafes, plastiques).</li>
+                        <li><strong>Mise en pâte (délintage) :</strong> Les papiers sont mélangés à de l'eau et des agents chimiques pour former une pâte fibreuse.</li>
+                        <li><strong>Désencrage et nettoyage :</strong> Élimination des encres, colles et impuretés par flottation ou centrifugation.</li>
+                        <li><strong>Raffinage et blanchiment :</strong> Amélioration des propriétés mécaniques ; blanchiment possible (sans chlore de préférence).</li>
+                        <li><strong>Formation de la feuille :</strong> La pâte est étalée sur une toile, pressée, séchée puis enroulée.</li>
+                        <li><strong>Transformation :</strong> Bobines transformées en rouleaux de papier hygiénique, essuie-tout, serviettes jetables ou autres produits.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        💡 <strong>À retenir :</strong> Le papier peut être recyclé 5 à 7 fois avant que les fibres ne deviennent trop courtes pour être réutilisées.
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Produits finis issus du recyclage</h3>
+                    <p class="card-description">
+                        En fonction de la qualité des papiers collectés, on obtient différents produits destinés à l'hygiène, à l'emballage ou au bureau.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Papier hygiénique & essuie-tout :</strong> Utilisation de papiers de bureau et journaux désencrés.</li>
+                        <li><strong>Serviettes jetables :</strong> Souvent fabriquées à partir de pâte recyclée blanche ou naturelle.</li>
+                        <li><strong>Cartons & emballages :</strong> Papiers kraft recyclés ou mélangés.</li>
+                        <li><strong>Papier d'impression écologique :</strong> De plus en plus présent sur le marché.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples contextualisés (Cameroun) -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension & applications locales</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Un atelier de recyclage à Douala</h3>
+                    <p class="exemple-context">
+                        Une association récupère 500 kg de vieux journaux, cahiers usagés et cartons par semaine. Elle produit des rouleaux de papier hygiénique et des serviettes jetables destinés aux cantines scolaires.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Démarche expliquée :</strong><br>
+                        1️⃣ Tri manuel pour enlever plastiques, agrafes.<br>
+                        2️⃣ Trempage et broyage dans une cuve → obtention de pâte.<br>
+                        3️⃣ Désencrage simple (tamisage et rinçage).<br>
+                        4️⃣ Étalage de la pâte sur des cadres grillagés (séchage solaire).<br>
+                        5️⃣ Pressage et découpe → feuilles transformées en rouleaux hygiéniques.<br>
+                        <strong>Impact :</strong> 200 kg de déchets évités chaque semaine, 10 emplois créés, économie d'environ 75 arbres par mois.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce examen : Dans une situation problème, pensez à relier le recyclage du papier aux Objectifs de Développement Durable (ODD 12 : consommation et production responsables, ODD 13 : lutte contre le changement climatique).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Comparaison énergétique et environnementale</h3>
+                    <p class="exemple-context">
+                        Une étude compare la fabrication de 1 tonne de papier hygiénique à partir de fibres vierges (pâte à bois) et à partir de papiers recyclés. Calculer l’économie d’eau et d’énergie réalisée par le recyclage.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Données typiques :</strong><br>
+                        - Fibres vierges : 60 000 L d’eau / tonne, 8 000 kWh / tonne.<br>
+                        - Fibres recyclées : 30 000 L d’eau / tonne, 4 000 kWh / tonne.<br>
+                        <strong>Économies :</strong> 30 000 L d’eau et 4 000 kWh par tonne.<br>
+                        Pour une petite unité produisant 5 tonnes par mois : économie de 150 000 L d’eau et 20 000 kWh par mois. Cela correspond à environ 2 tonnes de CO₂ évitées.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Pensez à bien justifier vos calculs et à citer les avantages : préservation des forêts, réduction de la pollution des eaux, diminution des décharges.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schéma / illustration (image générée par IA) -->
+            <section class="concept-section">
+                <h2 class="section-title">🖼️ Les grandes étapes du recyclage papier</h2>
+                <div class="card concept-card" style="text-align: center;">
+                    <img src="" alt="Diagramme illustrant les étapes de recyclage du papier : collecte, tri, mise en pâte, désencrage, raffinage, formation de la feuille, séchage, transformation en papier hygiénique et serviettes jetables. Flèches reliant chaque étape." style="max-width:100%; border-radius: 12px; margin-bottom: 1rem; background: #f1f5f9;">
+                    <p class="card-description" style="font-size:0.9rem; color:#475569;">
+                        <strong>Figure 1 :</strong> Processus complet du recyclage des déchets papiers vers des produits d'hygiène (papier toilette, serviettes jetables).
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Pièges courants & recommandations -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>recyclage</strong> (transformation en un nouveau produit) et <strong>réutilisation</strong> (utilisation du même objet sans transformation). Exemple : transformer un vieux journal en papier hygiénique est un recyclage ; utiliser le verso d'une feuille pour écrire est une réutilisation.</li>
+                        <li><span class="bold">Attention :</span> Tous les papiers ne sont pas recyclables de la même façon : les papiers gras, souillés (emballages de fast-food) ou plastifiés ne peuvent pas être recyclés en papier hygiénique de qualité.</li>
+                        <li><span class="bold">Idée reçue :</span> Le papier recyclé est toujours de moins bonne qualité. Faux : les procédés modernes (désencrage, raffinage) permettent d’obtenir des produits très performants (serviettes jetables douces, papier toilette épais).</li>
+                        <li><span class="bold">Pour l’examen :</span> N’oubliez pas de citer les <strong>avantages économiques</strong> (création d’emplois, réduction des importations de pâte à bois) et <strong>sanitaires</strong> (moins de déchets sauvages, réduction des sites d’enfouissement).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Bonus : synthèse pour mémorisation -->
+            <section class="concept-section">
+                <h2 class="section-title">📚 Synthèse rapide (à retenir pour l’épreuve)</h2>
+                <div class="card concept-card">
+                    <ul class="concept-list">
+                        <li><strong>Définition :</strong> Recycler le papier = réintroduire les fibres de vieux papiers dans un cycle de production pour fabriquer de nouveaux produits (papier hygiénique, serviettes jetables, cartons).</li>
+                        <li><strong>Principales étapes :</strong> Collecte → Tri → Mise en pâte → Désencrage → Raffinage → Formage → Séchage → Transformation.</li>
+                        <li><strong>Produits finis :</strong> Papier toilette, essuie-tout, serviettes jetables, papier d’emballage, cartons.</li>
+                        <li><strong>Avantages au Cameroun :</strong> Réduction de la pression sur les forêts, création d'activités génératrices de revenus, assainissement des villes, diminution des émissions de méthane dans les décharges.</li>
+                        <li><strong>Limites :</strong> Nécessité de tri à la source, coût des infrastructures de désencrage, perte de qualité des fibres après plusieurs cycles.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Lien avec l'examen officiel (sessions précédentes) -->
+            <div class="card" style="background-color: #eef2ff; border-left: 6px solid #2563eb;">
+                <p style="font-weight: 500;">🎓 <strong>Lien avec l’examen (session 2024 D) :</strong> Dans l’épreuve de SVTEEHB, une situation problème peut porter sur l’évaluation d’un projet de recyclage de déchets papiers en milieu urbain (ex : production de papier hygiénique pour les établissements scolaires). Savoir décrire les étapes et justifier les bénéfices environnementaux est un attendu majeur.</p>
+            </div>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme officiel SVTEEHB – Terminale D (Cameroun) · Révision créée pour l’année scolaire 2025-2026 · <a href="#">Annales session 2024 – recyclage papier</a> · 🌍 Éducation à l’environnement</p>
+        </footer>
+    </div>
+</body>
+</html>

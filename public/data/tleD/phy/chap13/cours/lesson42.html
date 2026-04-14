@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 42 : Le noyau atomique</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie professionnelle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles inspirés du template et adaptés pour la fiche */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .fiche {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #1e2a3a 0%, #0f172a 100%);
+            color: white;
+            padding: 1.8rem 2.5rem;
+            border-bottom: 5px solid #f59e0b;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.25rem;
+        }
+
+        .header .chapitre {
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.85;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header .objectifs {
+            background: rgba(255,255,255,0.15);
+            padding: 0.8rem 1rem;
+            border-radius: 18px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .badge-bac {
+            display: inline-block;
+            background-color: #f59e0b;
+            color: #0f172a;
+            font-weight: bold;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            margin-left: 0.75rem;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            border-left: 4px solid #e2e8f0;
+            padding-left: 1.2rem;
+            transition: border-color 0.2s;
+        }
+        .section:hover {
+            border-left-color: #3b82f6;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section h2 i {
+            font-size: 1.4rem;
+        }
+
+        .grid-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .card {
+            flex: 1 1 200px;
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #eef2ff;
+        }
+        .card-title {
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            border-bottom: 1px dashed #cbd5e1;
+            display: inline-block;
+        }
+        .formula {
+            background: #eef2ff;
+            padding: 0.9rem 1rem;
+            border-radius: 20px;
+            font-family: monospace;
+            font-size: 1rem;
+            text-align: center;
+            margin: 0.8rem 0;
+            font-weight: 500;
+            color: #0c4a6e;
+        }
+
+        .example-box {
+            background: #fefce8;
+            border-left: 6px solid #eab308;
+            padding: 1rem 1.2rem;
+            border-radius: 20px;
+            margin: 1rem 0;
+        }
+
+        .note {
+            background: #e0f2fe;
+            padding: 0.8rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .footer {
+            background: #f1f5f9;
+            padding: 1rem 2.5rem;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #334155;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        @media (max-width: 680px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche">
+    <div class="header">
+        <div class="chapitre">CHAPITRE 13 : PHYSIQUE NUCLÉAIRE</div>
+        <h1>Leçon 42 : Le noyau atomique <span class="badge-bac">BAC 2024</span></h1>
+        <div class="objectifs">
+            🎯 <strong>Objectifs :</strong> Définir les notions de nucléons, isotopes, énergie de liaison. Analyser la stabilité des noyaux.
+            <br>📌 <em>Lien Bac 2024 :</em> Masse atomique, énergie de liaison.
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- 1. Composition du noyau -->
+        <div class="section">
+            <h2>📦 1. Composition du noyau</h2>
+            <p>Le noyau atomique est situé au centre de l'atome. Il contient des <strong>nucléons</strong> :</p>
+            <div class="grid-cards">
+                <div class="card">
+                    <div class="card-title">Protons (p)</div>
+                    <div>Charge électrique : $+e = 1,6 \times 10^{-19} \, C$<br>Masse : $m_p \approx 1,6726 \times 10^{-27} \, kg$</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Neutrons (n)</div>
+                    <div>Charge électrique : nulle<br>Masse : $m_n \approx 1,6749 \times 10^{-27} \, kg$</div>
+                </div>
+            </div>
+            <p><strong>Notations :</strong><br>
+            - Nombre de protons (numéro atomique) : $Z$<br>
+            - Nombre de neutrons : $N$<br>
+            - Nombre de masse : $A = Z + N$<br>
+            - Représentation d'un noyau : $^{A}_{Z}X$</p>
+            <div class="example-box">
+                💡 <strong>Exemple :</strong> Noyau de Carbone 12 : $^{12}_{6}C$ → 6 protons, 6 neutrons.
+            </div>
+        </div>
+
+        <!-- 2. Isotopes -->
+        <div class="section">
+            <h2>⚛️ 2. Isotopes</h2>
+            <p>Des <strong>isotopes</strong> sont des noyaux qui possèdent le même nombre de protons $Z$ mais des nombres de neutrons $N$ différents (donc $A$ différent).</p>
+            <div class="formula">
+                Même $Z$ → même élément chimique ; $A$ différent → propriétés nucléaires différentes.
+            </div>
+            <div class="grid-cards">
+                <div class="card">
+                    <span class="card-title">Exemple hydrogène</span>
+                    $^{1}_{1}H$ (protium), $^{2}_{1}H$ (deutérium), $^{3}_{1}H$ (tritium)
+                </div>
+                <div class="card">
+                    <span class="card-title">Exemple uranium</span>
+                    $^{235}_{92}U$ (fissile), $^{238}_{92}U$ (plus abondant)
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Masse et défaut de masse -->
+        <div class="section">
+            <h2>⚖️ 3. Défaut de masse & énergie de liaison</h2>
+            <p>La masse d’un noyau est <strong>inférieure</strong> à la somme des masses de ses nucléons séparés. Cette différence est appelée <strong>défaut de masse</strong> $\Delta m$.</p>
+            <div class="formula">
+                $\Delta m = Z \cdot m_p + N \cdot m_n - m_{\text{noyau}}$
+            </div>
+            <p>Le défaut de masse est lié à l’<strong>énergie de liaison</strong> $E_l$ du noyau par la relation d’Einstein :</p>
+            <div class="formula">
+                $E_l = \Delta m \cdot c^2$
+            </div>
+            <p>où $c = 3,00 \times 10^8 \, m \cdot s^{-1}$ (célérité de la lumière).</p>
+            <p><strong>Énergie de liaison par nucléon :</strong> $E_l / A$ (indicateur de stabilité).</p>
+            <div class="note">
+                📘 <strong>Unités pratiques :</strong> En physique nucléaire, on utilise l'<strong>électronvolt (eV)</strong> ou le MeV.<br>
+                $1 \, u = 1,66054 \times 10^{-27} \, kg$ (unité de masse atomique unifiée).<br>
+                $1 \, u \cdot c^2 = 931,5 \, MeV$.
+            </div>
+            <div class="example-box">
+                🔍 <strong>Application type Bac :</strong> Calcul du défaut de masse pour le noyau $^{4}_{2}He$ (masse noyau = 4,0015 u ; $m_p = 1,00728 \, u$, $m_n = 1,00867 \, u$).<br>
+                $\Delta m = 2(1,00728)+2(1,00867)-4,0015 = 0,0304 \, u$<br>
+                $E_l = 0,0304 \times 931,5 \approx 28,3 \, MeV$ ; $E_l/A \approx 7,07 \, MeV/nucléon$.
+            </div>
+        </div>
+
+        <!-- 4. Stabilité des noyaux -->
+        <div class="section">
+            <h2>📊 4. Stabilité des noyaux – Diagramme (N, Z)</h2>
+            <p>La stabilité d’un noyau dépend de l’équilibre entre les forces nucléaires (attractive à courte portée) et la répulsion électrostatique (protons).</p>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                <li><strong>Noyaux stables</strong> : situés dans la <strong>vallée de stabilité</strong> (bande $N \approx Z$ pour $A<40$, puis $N > Z$ pour les noyaux lourds).</li>
+                <li><strong>Noyaux instables (radioactifs)</strong> : excédent de protons ou de neutrons → désintégration radioactive ($\alpha$, $\beta^-$, $\beta^+$).</li>
+                <li><strong>Nombre magique</strong> : 2, 8, 20, 28, 50, 82, 126 (stabilité accrue).</li>
+            </ul>
+            <div class="formula">
+                💡 Plus l'énergie de liaison par nucléon est élevée, plus le noyau est stable.
+                Le fer $^{56}_{26}Fe$ possède l’un des $E_l/A$ maximum (~8,8 MeV/nucléon).
+            </div>
+        </div>
+
+        <!-- 5. Méthode pour les exercices -->
+        <div class="section">
+            <h2>✍️ 5. Compétences exigibles (Bac)</h2>
+            <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(220px,1fr));">
+                <div class="card">
+                    <div class="card-title">🔢 Calcul de $\Delta m$</div>
+                    À partir des masses des nucléons et du noyau.
+                </div>
+                <div class="card">
+                    <div class="card-title">⚡ Énergie de liaison $E_l$</div>
+                    $E_l = \Delta m \cdot c^2$ (en J ou en MeV).
+                </div>
+                <div class="card">
+                    <div class="card-title">📈 Comparaison stabilité</div>
+                    Utiliser $E_l/A$ ou diagramme (N,Z).
+                </div>
+                <div class="card">
+                    <div class="card-title">🧪 Identifier isotopes</div>
+                    Même Z, A différent.
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Astuce mémoire et rappel -->
+        <div class="section">
+            <h2>🧠 Astuce & synthèse</h2>
+            <div class="note">
+                📌 <strong>Point clé :</strong> L'énergie de liaison correspond à l’énergie qu’il faut fournir pour dissocier le noyau en ses nucléons. Plus elle est grande, plus le noyau est stable.<br>
+                ✅ Savoir convertir les unités de masse (kg ↔ u) et utiliser $1u = 931,5 \, MeV/c^2$.
+            </div>
+            <div class="example-box" style="margin-top: 0.8rem;">
+                🧪 <strong>Typologie sujet baccalauréat (Cameroun) :</strong> On vous donne les masses atomiques (parfois avec les électrons), il faut retrouver la masse du noyau en soustrayant la masse des électrons ($m_{\text{atome}} \approx m_{\text{noyau}} + Z \cdot m_e$). Attention aux approximations.
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        📚 Programme officiel Terminale C & D (2025-2026) – Module 5 : Physique nucléaire | Leçon 42 : Noyau atomique, énergie de liaison
+    </div>
+</div>
+</body>
+</html>

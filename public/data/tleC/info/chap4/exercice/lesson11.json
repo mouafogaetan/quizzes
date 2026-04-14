@@ -1,0 +1,144 @@
+[
+  {
+    "intitule": "Syntaxe et manipulation des tableaux en C",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>On considère le programme C suivant :</p><pre><code>#include &lt;stdio.h&gt;<br>int main() {<br>    int notes[5] = {12, 15, 8, 19, 10};<br>    int i, somme = 0;<br>    for(i = 0; i &lt; 5; i++) {<br>        somme = somme + notes[i];<br>    }<br>    printf(\"La moyenne est : %.2f\", somme / 5.0);<br>    return 0;<br>}</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Décrire la structure du tableau `notes`. Quelle est sa taille ? Quel est le type des éléments qu'il contient ?",
+        "niveau": "easy",
+        "reponse": "Le tableau `notes` est un tableau d'entiers (int) de taille 5. Il contient 5 éléments : notes[0]=12, notes[1]=15, notes[2]=8, notes[3]=19, notes[4]=10.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Identifier l'instruction qui permet d'accéder au troisième élément du tableau. Quelle est sa valeur ?",
+        "niveau": "easy",
+        "reponse": "L'instruction `notes[2]` permet d'accéder au troisième élément. Sa valeur est 8 (car l'indice 0 correspond au premier élément).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Expliquer à quoi sert la boucle `for` dans ce programme. Que se passerait-il si on remplaçait `i < 5` par `i <= 5` ?",
+        "niveau": "medium",
+        "reponse": "La boucle `for` sert à parcourir tous les indices du tableau de 0 à 4 pour additionner chaque note à la variable `somme`. Si on remplace `i < 5` par `i <= 5`, le programme tentera d'accéder à `notes[5]` qui n'existe pas, provoquant un comportement indéfini (erreur de segmentation ou valeur aléatoire).",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Gestion des notes d'une classe",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous êtes enseignant au Cameroun et vous souhaitez automatiser le calcul des statistiques des notes de votre classe de Terminale C. Vous avez 10 élèves. Le programme doit :</p><ol><li>Demander à l'utilisateur de saisir les 10 notes (entiers entre 0 et 20).</li><li>Les stocker dans un tableau.</li><li>Afficher la note la plus élevée et la note la plus basse.</li><li>Afficher le nombre d'élèves ayant une note supérieure ou égale à 10 (admis).</li></ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Ecrire l'en-tête de la fonction `main` et la déclaration des variables nécessaires (tableau, taille, compteurs).",
+        "niveau": "easy",
+        "reponse": "```c\nint main() {\n    int notes[10];\n    int i, max, min, admis = 0;\n    // Le reste du code\n    return 0;\n}\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Ecrire la boucle de saisie qui permet de remplir le tableau. On suppose que l'utilisateur saisit des notes valides.",
+        "niveau": "medium",
+        "reponse": "```c\nfor(i = 0; i < 10; i++) {\n    printf(\"Entrez la note de l'élève %d : \", i+1);\n    scanf(\"%d\", &notes[i]);\n}\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Ecrire l'algorithme (en langage C) de recherche de la note maximale et minimale dans le tableau.",
+        "niveau": "hard",
+        "reponse": "```c\nmax = notes[0];\nmin = notes[0];\nfor(i = 1; i < 10; i++) {\n    if(notes[i] > max) {\n        max = notes[i];\n    }\n    if(notes[i] < min) {\n        min = notes[i];\n    }\n}\nprintf(\"Note max : %d\\n\", max);\nprintf(\"Note min : %d\\n\", min);\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Ajouter l'extrait de code qui compte et affiche le nombre d'admis (note >= 10).",
+        "niveau": "medium",
+        "reponse": "```c\nadmis = 0;\nfor(i = 0; i < 10; i++) {\n    if(notes[i] >= 10) {\n        admis++;\n    }\n}\nprintf(\"Nombre d'admis : %d\\n\", admis);\n```",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Décodage d'un message codé par décalage",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>En cryptographie, le chiffre de César consiste à décaler chaque lettre d'un message d'un certain nombre de positions dans l'alphabet. Pour décoder un message, on effectue le décalage inverse.</p><p>On suppose qu'un message secret (une phrase en majuscules sans espace, stockée dans un tableau de caractères) a été codé avec un décalage de 3. Par exemple, 'D' devient 'A', 'E' devient 'B', ..., 'C' devient 'Z'.</p><p>Exemple : le message codé <strong>'KHOOR'</strong> correspond au message clair <strong>'HELLO'</strong>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Analyser le principe du décalage. Quelle est la relation mathématique entre le code ASCII d'une lettre majuscule (de 'A'=65 à 'Z'=90) et la lettre d'origine après décalage de 3 ?",
+        "niveau": "hard",
+        "reponse": "Si `code` est le code ASCII de la lettre codée, alors la lettre claire (avant décalage) est donnée par : `clair = code + 3`. Pour gérer le retour à 'A' après 'Z', on utilise l'arithmétique modulaire : `clair = (code - 65 + 3) % 26 + 65`. Ce qui donne en C : `(code - 65 + 3) % 26 + 65`.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Ecrire un programme C complet qui :<br> - Déclare et initialise un tableau `message_code` avec la chaîne \"KHOOR\".<br> - Parcourt ce tableau et applique le décalage inverse (de +3) à chaque caractère.<br> - Affiche le message décodé.",
+        "niveau": "very hard",
+        "reponse": "```c\n#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char message_code[] = \"KHOOR\";\n    int i, longueur = strlen(message_code);\n    \n    for(i = 0; i < longueur; i++) {\n        // Application du décalage de +3\n        message_code[i] = ((message_code[i] - 65 + 3) % 26) + 65;\n    }\n    \n    printf(\"Message décodé : %s\\n\", message_code);\n    return 0;\n}\n```\nRésultat : `HELLO`",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Tester mentalement votre programme avec le message codé \"WKH TXLFN EURZQ IRA MXPSV RYHU WKH ODCB GRJ\". Quel sera le message clair ? (Ne pas écrire de code, juste appliquer la logique).",
+        "niveau": "hard",
+        "reponse": "Le message clair est : \"THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG\" (décalage de 3).",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Fusion de deux tableaux de notes",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un professeur a deux classes de Terminale : la classe C1 avec 8 élèves et la classe C2 avec 6 élèves. Il souhaite fusionner les notes des deux classes dans un seul tableau pour établir un classement général.</p><p>Les notes de C1 sont : [14, 9, 17, 12, 8, 15, 11, 13]</p><p>Les notes de C2 sont : [10, 16, 7, 18, 12, 14]</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Ecrire les déclarations en C pour créer trois tableaux : `notes_C1`, `notes_C2` et `notes_toutes` (qui contiendra la fusion).",
+        "niveau": "easy",
+        "reponse": "```c\nint notes_C1[8] = {14, 9, 17, 12, 8, 15, 11, 13};\nint notes_C2[6] = {10, 16, 7, 18, 12, 14};\nint notes_toutes[14]; // 8 + 6 = 14 éléments\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Ecrire la boucle qui permet de copier tous les éléments de `notes_C1` dans `notes_toutes` (aux premières positions).",
+        "niveau": "medium",
+        "reponse": "```c\nint i;\nfor(i = 0; i < 8; i++) {\n    notes_toutes[i] = notes_C1[i];\n}\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Ecrire la boucle qui permet de copier tous les éléments de `notes_C2` à la suite de ceux de `notes_C1` dans `notes_toutes`.",
+        "niveau": "medium",
+        "reponse": "```c\nfor(i = 0; i < 6; i++) {\n    notes_toutes[8 + i] = notes_C2[i];\n}\n```\nOu : `notes_toutes[i+8] = notes_C2[i]`",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Calculer et afficher la moyenne générale des 14 élèves à partir du tableau fusionné.",
+        "niveau": "hard",
+        "reponse": "```c\nint somme = 0;\nfor(i = 0; i < 14; i++) {\n    somme += notes_toutes[i];\n}\nprintf(\"Moyenne générale : %.2f\\n\", somme / 14.0);\n```",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

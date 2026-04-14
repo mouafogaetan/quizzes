@@ -1,0 +1,48 @@
+[
+  {
+    "intitule": "Gestion des notes d'une classe avec un tableau en C",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans le cadre de l'évaluation continue, un enseignant d'informatique au Cameroun souhaite automatiser le calcul de la moyenne de ses élèves de première. Il utilise le langage C. Les notes (sur 20) des 15 élèves d'une classe sont stockées dans un tableau. L'enseignant doit écrire un programme qui :</p><ul><li>Déclare un tableau de réels nommé <code>Notes</code> pouvant contenir 15 éléments.</li><li>Remplit le tableau en saisissant les notes au clavier.</li><li>Affiche toutes les notes.</li><li>Calcule et affiche la moyenne de la classe.</li><li>Affiche le nombre d'élèves ayant une note supérieure ou égale à 10 (la moyenne de réussite).</li></ul><p>Rappel : La taille d'un tableau en C est fixe. L'indice du premier élément est 0.</p><p>$$ \\text{Moyenne} = \\frac{\\sum_{i=0}^{N-1} \\text{Notes}[i]}{N} $$</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire l'algorithme correspondant au programme demandé en utilisant une structure itérative POUR.",
+        "niveau": "medium",
+        "reponse": "```\nALGORITHME GestionNotes\nCONSTANTE\n    N <- 15\nVARIABLES\n    Notes : tableau[1..N] de réels\n    i, compteur : entiers\n    somme, moyenne : réels\nDEBUT\n    somme <- 0\n    compteur <- 0\n    POUR i ALLANT DE 1 A N PAS=1 FAIRE\n        Ecrire(\"Entrer la note de l'élève \", i)\n        Lire(Notes[i])\n        somme <- somme + Notes[i]\n    FINPOUR\n    \n    Ecrire(\"Liste des notes :\")\n    POUR i ALLANT DE 1 A N PAS=1 FAIRE\n        Ecrire(Notes[i])\n    FINPOUR\n    \n    moyenne <- somme / N\n    Ecrire(\"La moyenne de la classe est : \", moyenne)\n    \n    POUR i ALLANT DE 1 A N PAS=1 FAIRE\n        SI Notes[i] >= 10 ALORS\n            compteur <- compteur + 1\n        FINSI\n    FINPOUR\n    \n    Ecrire(\"Nombre d'élèves ayant la moyenne : \", compteur)\nFIN\n```",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Identifier et expliquer la différence entre l'indice de début en algorithmique (1) et en langage C (0).",
+            "niveau": "easy",
+            "reponse": "En algorithmique, l'indexation des tableaux commence généralement à 1 (premier élément = tableau[1]). En langage C, l'indexation commence toujours à 0 (premier élément = tableau[0]). Cela signifie que pour un tableau de taille N, les indices valides en C vont de 0 à N-1, alors qu'en algorithmique ils vont de 1 à N."
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "texte": "Traduire l'algorithme de la question 1 en un programme C complet en respectant la syntaxe du langage.",
+        "niveau": "hard",
+        "reponse": "```c\n#include <stdio.h>\n\nint main() {\n    const int N = 15;\n    float Notes[15];\n    int i, compteur = 0;\n    float somme = 0, moyenne;\n    \n    // Remplissage et calcul de la somme\n    for (i = 0; i < N; i++) {\n        printf(\"Entrer la note de l'élève %d : \", i+1);\n        scanf(\"%f\", &Notes[i]);\n        somme = somme + Notes[i];\n    }\n    \n    // Affichage des notes\n    printf(\"\\nListe des notes :\\n\");\n    for (i = 0; i < N; i++) {\n        printf(\"%.2f\\t\", Notes[i]);\n    }\n    \n    // Calcul de la moyenne\n    moyenne = somme / N;\n    printf(\"\\nLa moyenne de la classe est : %.2f\\n\", moyenne);\n    \n    // Comptage des élèves ayant la moyenne\n    for (i = 0; i < N; i++) {\n        if (Notes[i] >= 10) {\n            compteur++;\n        }\n    }\n    \n    printf(\"Nombre d'élèves ayant la moyenne (>=10) : %d\\n\", compteur);\n    \n    return 0;\n}\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Analyser le programme C ci-dessous (incomplet). Corriger les erreurs et compléter les lignes manquantes pour qu'il réalise la même fonction que la question 2.\n\n```c\n#include <stdio.h>\nint main() {\n    float Notes[15];\n    int i, compteur;\n    float somme, moyenne;\n    // Ligne 1 : Initialiser somme à 0\n    // Ligne 2 : Initialiser compteur à 0\n    for (i = 0; i <= 15; i++) {\n        printf(\"Note %d : \", i);\n        scanf(\"%f\", Notes[i]);\n        somme = somme + Notes[i];\n    }\n    moyenne = somme / 15;\n    // Ligne 3 : Afficher la moyenne\n    for (i = 0; i < 15; i++) {\n        if (Notes[i] >= 10)\n            compteur++; // Ligne 4 : Que fait cette instruction ?\n    }\n    printf(\"Moyenne: %f, Compteur: %d\", moyenne, compteur);\n    return 0;\n}\n```",
+        "niveau": "medium",
+        "reponse": "**Erreurs corrigées et lignes complétées :**\n\n- **Erreur 1 :** La condition du for est `i <= 15` alors que le tableau va de 0 à 14. Il faut `i < 15`.\n- **Erreur 2 :** `scanf(\"%f\", Notes[i])` doit être `scanf(\"%f\", &Notes[i])` car `scanf` a besoin de l'adresse mémoire.\n- **Ligne 1 :** `somme = 0;`\n- **Ligne 2 :** `compteur = 0;`\n- **Ligne 3 :** `printf(\"La moyenne est : %.2f\\n\", moyenne);`\n- **Ligne 4 :** Cette instruction incrémente `compteur` de 1 à chaque fois que la note est >= 10. Elle permet de compter les élèves ayant la moyenne.\n\n**Programme corrigé :**\n```c\n#include <stdio.h>\nint main() {\n    float Notes[15];\n    int i, compteur;\n    float somme, moyenne;\n    somme = 0;\n    compteur = 0;\n    for (i = 0; i < 15; i++) {\n        printf(\"Note %d : \", i+1);\n        scanf(\"%f\", &Notes[i]);\n        somme = somme + Notes[i];\n    }\n    moyenne = somme / 15;\n    printf(\"La moyenne est : %.2f\\n\", moyenne);\n    for (i = 0; i < 15; i++) {\n        if (Notes[i] >= 10)\n            compteur++;\n    }\n    printf(\"Moyenne: %.2f, Compteur: %d\\n\", moyenne, compteur);\n    return 0;\n}\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Imaginer une situation où l'enseignant souhaite maintenant calculer la note maximale et la note minimale de la classe. Créer une solution en modifiant le programme C initial (question 2) sans ajouter de nouveau tableau.",
+        "niveau": "hard",
+        "reponse": "**Solution :** On ajoute deux variables `max` et `min`. On initialise `max` à la première note (ou à 0) et `min` à la première note (ou à 20). Dans la boucle de saisie, on compare chaque note avec `max` et `min`.\n\n```c\n#include <stdio.h>\n\nint main() {\n    const int N = 15;\n    float Notes[15];\n    int i, compteur = 0;\n    float somme = 0, moyenne, max, min;\n    \n    // Saisie de la première note pour initialiser max et min\n    printf(\"Entrer la note de l'élève 1 : \");\n    scanf(\"%f\", &Notes[0]);\n    somme = Notes[0];\n    max = Notes[0];\n    min = Notes[0];\n    \n    // Saisie des autres notes\n    for (i = 1; i < N; i++) {\n        printf(\"Entrer la note de l'élève %d : \", i+1);\n        scanf(\"%f\", &Notes[i]);\n        somme = somme + Notes[i];\n        if (Notes[i] > max) max = Notes[i];\n        if (Notes[i] < min) min = Notes[i];\n    }\n    \n    // Affichage des notes\n    printf(\"\\nListe des notes :\\n\");\n    for (i = 0; i < N; i++) {\n        printf(\"%.2f\\t\", Notes[i]);\n    }\n    \n    // Calcul de la moyenne\n    moyenne = somme / N;\n    printf(\"\\nMoyenne de la classe : %.2f\\n\", moyenne);\n    printf(\"Note maximale : %.2f\\n\", max);\n    printf(\"Note minimale : %.2f\\n\", min);\n    \n    // Comptage des élèves ayant la moyenne\n    for (i = 0; i < N; i++) {\n        if (Notes[i] >= 10) compteur++;\n    }\n    \n    printf(\"Nombre d'élèves ayant la moyenne : %d\\n\", compteur);\n    \n    return 0;\n}\n```\n\n**Explication :** Le maximum et le minimum sont trouvés en parcourant une seule fois le tableau. On initialise avec la première note pour éviter les valeurs par défaut.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

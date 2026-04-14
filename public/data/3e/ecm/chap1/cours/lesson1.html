@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Les fondements de la démocratie (ECM 3e)</title>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">📜 Leçon 1 : Les fondements de la démocratie</h1>
+            <p class="lesson-subtitle">ECM (Éducation à la Citoyenneté et aux Morale) · Classe de 3ème · Module 1 : Initiation à la démocratie</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section de concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Qu'est-ce que la démocratie ?</h3>
+                    <p class="card-description">
+                        La démocratie est un régime politique dans lequel le pouvoir est exercé par le peuple (souveraineté populaire). 
+                        Elle repose sur la participation des citoyens à la vie politique et sur le respect des droits fondamentaux. 
+                        Le mot vient du grec *dêmos* (peuple) et *kratos* (pouvoir) : « pouvoir du peuple ».
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Démocratie directe</strong> : Les citoyens décident directement des lois (ex : référendum).</li>
+                        <li><strong>Démocratie représentative</strong> : Les citoyens élisent des représentants qui exercent le pouvoir en leur nom (ex : Cameroun, France).</li>
+                        <li><strong>État de droit</strong> : Principe selon lequel l'État est soumis au droit et garantit les libertés fondamentales.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Les grands principes de la démocratie</h3>
+                    <p class="card-description">
+                        Une démocratie véritable repose sur plusieurs piliers fondamentaux qui garantissent la liberté et l'égalité des citoyens.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>La séparation des pouvoirs</strong> (théorisée par Montesquieu) : Pouvoir exécutif (gouverne), législatif (fait les lois), judiciaire (juge). Indispensable pour éviter les abus.</li>
+                        <li><strong>La souveraineté nationale</strong> : La Nation est la source du pouvoir. Au Cameroun, elle s'exprime par le suffrage.</li>
+                        <li><strong>Les libertés fondamentales</strong> : liberté d'opinion, de presse, de réunion, d'association, etc.</li>
+                        <li><strong>Le pluralisme politique</strong> : existence de plusieurs partis politiques (multipartisme) et liberté d'expression des opinions.</li>
+                        <li><strong>Le suffrage universel</strong> : droit de vote pour tous les citoyens majeurs sans distinction de sexe, d'origine ou de religion.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Le citoyen dans la démocratie</h3>
+                    <p class="card-description">
+                        Le citoyen est un acteur central de la démocratie. Il ne se limite pas à voter, il participe à la vie de la cité.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Droits du citoyen</strong> : droit de vote, d'éligibilité, accès aux services publics, liberté d'expression.</li>
+                        <li><strong>Devoirs du citoyen</strong> : respect des lois, paiement des impôts, défense de la patrie, participation à la vie associative ou politique.</li>
+                        <li><strong>Laïcité et tolérance</strong> : respect des croyances de chacun et neutralité de l'État.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple concret n°1 : La séparation des pouvoirs au Cameroun</h3>
+                    <p class="exemple-context">
+                        Contexte : Au Cameroun, la Constitution du 18 janvier 1996 (révisée) établit les trois pouvoirs.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>🔍 Application :</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li><strong>Pouvoir exécutif</strong> : exercé par le Président de la République et le Gouvernement (Premier ministre).</li>
+                            <li><strong>Pouvoir législatif</strong> : exercé par le Parlement composé de l'Assemblée Nationale et du Sénat.</li>
+                            <li><strong>Pouvoir judiciaire</strong> : exercé par les cours et tribunaux, indépendants dans leur fonction.</li>
+                        </ul>
+                        <p class="exemple-correction">Ce système garantit qu'aucune autorité ne concentre tous les pouvoirs, limitant ainsi les risques d'arbitraire.</p>
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Pour retenir les trois pouvoirs, pensez à "EXécutif = EXerce, LÉGislatif = LÉGifère, JUDiciaire = JUGement".
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple d'application n°2 : Dénoncer une violation des principes démocratiques</h3>
+                    <p class="exemple-context">
+                        Situation : Dans un pays, des manifestations pacifiques sont dispersées violemment et plusieurs journaux d'opposition sont censurés.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>✊ Que ferait un citoyen engagé ?</strong><br>
+                        1. S'informer sur les faits via des sources fiables.<br>
+                        2. Défendre les principes démocratiques en participant à des débats citoyens.<br>
+                        3. Dénoncer la violation des libertés auprès des organisations de défense des droits de l'homme ou via les réseaux sociaux (expression citoyenne).<br>
+                        4. Utiliser les voies légales (recours, pétitions) pour demander le respect des libertés fondamentales.
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Le devoir de mémoire et de vigilance : une démocratie se construit et se défend chaque jour. Ne jamais banaliser les atteintes aux libertés.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple de situation : Le déficit de formation politique</h3>
+                    <p class="exemple-context">
+                        D'après l'exemple de situation du programme : "Le déficit de formation politique" et l'action attendue "S'informer sur la vie politique".
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>📢 Comment s'informer efficacement ?</strong><br>
+                        - Lire la presse (journaux nationaux comme Cameroon Tribune, journaux en ligne).<br>
+                        - Suivre les émissions politiques à la radio et à la télévision (CRTV, canaux privés).<br>
+                        - Participer aux débats dans les associations de quartier, les forums citoyens.<br>
+                        - Consulter les programmes des partis politiques et les comptes rendus des débats parlementaires.<br>
+                        <strong>Objectif :</strong> devenir un citoyen éclairé capable de faire des choix libres et responsables.
+                    </div>
+                    <div class="exemple-astuce">
+                        ⚡ S'informer ne signifie pas adhérer sans critique. Confronter plusieurs sources d'information est essentiel pour se forger une opinion solide.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section "À ne pas confondre" et valeurs citoyennes -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & Savoir-être citoyen</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>démocratie</strong> et <strong>république</strong>.<br>
+                        La république est une forme d'État (avec un président élu, parfois), tandis que la démocratie est le principe de souveraineté du peuple. Une république peut ne pas être démocratique si les droits sont bafoués.</li>
+                        <li><span class="bold">Attention :</span> Penser que la démocratie se limite au droit de vote. En réalité, elle implique aussi la <strong>participation active</strong>, le respect des droits de l'opposition et la <strong>tolérance</strong>.</li>
+                        <li><span class="bold">Ne pas confondre :</span> <strong>Liberté individuelle</strong> (faire ce que l'on veut dans le respect des lois) et <strong>licence</strong> (faire ce que l'on veut sans aucune limite). En démocratie, la liberté s'arrête où commence celle d'autrui.</li>
+                    </ul>
+                </div>
+                
+                <div class="card concept-card" style="margin-top: 1rem; background-color: #f0f9ff;">
+                    <h3 class="card-title" style="border-left-color: #fbbf24;">🧭 Les valeurs (Savoir-être) à cultiver</h3>
+                    <p class="card-description">
+                        L'éducation à la citoyenneté ne se limite pas aux connaissances. Elle forge des comportements :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Acceptation de la différence</strong> : respecter les opinions, cultures et croyances d'autrui.</li>
+                        <li><strong>Tolérance</strong> : ne pas rejeter ceux qui pensent différemment.</li>
+                        <li><strong>Respect des lois et des institutions</strong> : base de la vie en société.</li>
+                        <li><strong>Curiosité intellectuelle</strong> : s'intéresser à la vie politique et économique pour être un citoyen actif.</li>
+                        <li><strong>Esprit critique</strong> : ne pas accepter les informations sans les vérifier et analyser.</li>
+                    </ul>
+                    <div style="margin-top: 1rem; text-align: center;">
+                        <img src="" alt="Schéma représentant les piliers de la démocratie : séparation des pouvoirs, libertés, suffrage universel, participation citoyenne - à générer avec l'IA" style="max-width: 100%; border-radius: 0.75rem; background-color: #e2e8f0; padding: 0.5rem;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Petit mémo récapitulatif des savoirs -->
+            <section class="concept-section">
+                <h2 class="section-title">📚 Mémorisation rapide (Savoirs)</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Définitions essentielles</h3>
+                    <ul class="concept-list">
+                        <li><strong>Démocratie</strong> : Régime politique où le pouvoir appartient au peuple.</li>
+                        <li><strong>Séparation des pouvoirs</strong> : Organisation de l'État en trois fonctions distinctes pour éviter l'abus d'autorité.</li>
+                        <li><strong>Libertés fondamentales</strong> : Droits inaliénables reconnus à chaque citoyen (liberté d'expression, de conscience, etc.).</li>
+                        <li><strong>Citoyen</strong> : Membre d'une communauté politique jouissant de droits civiques et politiques et ayant des devoirs.</li>
+                        <li><strong>Suffrage universel</strong> : Principe selon lequel tous les citoyens majeurs ont le droit de vote.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page avec référence -->
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme d'ECM (Cameroun - Classe de 3ème) · Module 1 - Chapitre 1 : Généralités sur la démocratie <br>
+            📖 Révision créée pour les examens · <a href="#">Consulter la Constitution camerounaise</a> · 🇨🇲 Citoyenneté et engagement</p>
+        </footer>
+    </div>
+</body>
+</html>

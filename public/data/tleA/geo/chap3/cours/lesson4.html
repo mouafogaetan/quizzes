@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 4 : L'agriculture des grandes plantations</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (gardé au cas où, mais pas central ici) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (intégré ici pour l'indépendance du fichier) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+        }
+
+        @media (max-width: 640px) {
+            .fiche-header, .fiche-content, .fiche-footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 4 : L'agriculture des grandes plantations</h1>
+            <p class="lesson-subtitle">Géographie · Terminale A · Programme 2025-2026 (Bac 2021-2025)</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Définition et caractéristiques des grandes plantations</h3>
+                    <p class="card-description">
+                        Les grandes plantations sont des exploitations agricoles de grande superficie (souvent plusieurs centaines d'hectares) spécialisées dans les <strong>cultures de rente</strong> destinées à l'exportation. 
+                        Elles utilisent des techniques modernes (irrigation, engrais, main-d'œuvre salariée) et sont souvent gérées par des <strong>complexes agro-industriels</strong> ou des sociétés d'État.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Cultures de rente principales :</strong> cacao, café, hévéa (caoutchouc), palmier à huile (huile de palme), canne à sucre, banane.</li>
+                        <li><strong>Objectif :</strong> production massive pour l'exportation et l'industrie locale (agroalimentaire, savonnerie, biocarburants).</li>
+                        <li><strong>Main-d'œuvre :</strong> salariée (journaliers, ouvriers agricoles), souvent encadrée par des techniciens.</li>
+                        <li><strong>Lien Bac 2021 :</strong> Les complexes agro-industriels du plateau Sud-camerounais sont un sujet clé.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Principaux acteurs et localisation au Cameroun</h3>
+                    <p class="card-description">
+                        Au Cameroun, l'agriculture des grandes plantations est dominée par des sociétés parapubliques (ex-SODECAO) ou privées, souvent localisées dans les zones côtières et le plateau Sud-camerounais.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>SOCAPALM</strong> (palmier à huile) : plantations à Kribi, Mbambou, Sodébok (région du Sud, Littoral).</li>
+                        <li><strong>SOSUCAM</strong> (canne à sucre) : Mbandjock (région du Centre), Nkoteng (région du Centre).</li>
+                        <li><strong>HEVECAM</strong> (hévéa → caoutchouc) : Kribi, régions du Sud et du Littoral.</li>
+                        <li><strong>CDC (Cameroon Development Corporation)</strong> : banane, palmier à huile, hévéa dans le Sud-Ouest (Tiko, Limbé).</li>
+                        <li><strong>Plantations du Haut Penja</strong> (banane) : région du Littoral (Penja).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Impacts économiques et aménagement du territoire</h3>
+                    <p class="card-description">
+                        Les grandes plantations jouent un rôle majeur dans l'économie camerounaise et l'organisation spatiale.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Emplois :</strong> Des milliers d'emplois directs (ouvriers, techniciens, cadres) et indirects (transport, commerce).</li>
+                        <li><strong>Devises :</strong> Exportations de cacao, café, caoutchouc, huile de palme, sucre, banane → premières sources de devises après le pétrole.</li>
+                        <li><strong>Aménagement du territoire :</strong> Création d'infrastructures (routes, écoles, hôpitaux, cités ouvrières) autour des plantations.</li>
+                        <li><strong>Intégration régionale :</strong> Les plantations du Sud-Ouest et du Sud alimentent les marchés de la CEMAC et de l'UE.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension / application Bac -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples & applications (Bac)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Le complexe agro-industriel SOCAPALM (palmier à huile)</h3>
+                    <p class="exemple-context">
+                        <strong>Contexte :</strong> La SOCAPALM (Société Camerounaise de Palmeraies) possède plus de 20 000 hectares de plantations de palmier à huile dans les régions du Sud et du Littoral (Kribi, Mbambou). 
+                        Elle produit de l'huile de palme brute et des tourteaux pour l'alimentation animale.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Impact économique :</strong> Plus de 6 000 emplois directs, contribution à la balance commerciale (exportations vers l'Europe et l'Afrique centrale), 
+                        et transformation locale dans des raffineries. <br>
+                        <strong>Impact social :</strong> Création de cités ouvrières, écoles primaires, dispensaires, amélioration des conditions de vie dans les zones rurales isolées.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce Bac : Pour une question sur « Les complexes agro-industriels du plateau Sud-camerounais », citez SOCAPALM, SOSUCAM, HEVECAM et CDC en montrant leur rôle dans l'emploi et les devises.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : La canne à sucre et la SOSUCAM</h3>
+                    <p class="exemple-context">
+                        La SOSUCAM (Société Sucrière du Cameroun) exploite 12 000 hectares de canne à sucre à Mbandjock et Nkoteng. 
+                        Elle produit plus de 100 000 tonnes de sucre par an, couvrant 80% des besoins nationaux.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution / Explication :</strong> La plantation utilise un système d'irrigation moderne (pivots centraux) et une usine intégrée de transformation. 
+                        La production évite les importations massives de sucre, économisant des devises. L'entreprise exporte également vers le Tchad et la RCA.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 À retenir : Les grandes plantations ne se limitent pas à l'exportation ; elles participent aussi à la <strong>substitution aux importations</strong> (ex: sucre local).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : La banane et les plantations du Sud-Ouest (CDC)</h3>
+                    <p class="exemple-context">
+                        La CDC (Cameroon Development Corporation) et des plantations privées (Haut Penja) produisent environ 200 000 tonnes de banane par an, principalement exportées vers l'Union européenne (marché de la banane douce).
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Défis :</strong> Concurrence internationale (Amérique latine), respect des normes environnementales (GlobalGAP), et problèmes sécuritaires dans la région du Sud-Ouest (crise anglophone) qui perturbent la production.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Lien Bac 2024 : La diversité naturelle du Cameroun (climat tropical humide du Sud-Ouest) favorise ces plantations.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges à éviter / points de vigilance -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & nuances à maîtriser</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Ne pas confondre :</span> Agriculture des grandes plantations ≠ agriculture vivrière traditionnelle. La première est tournée vers l'exportation et l'industrie, la seconde vers l'autoconsommation.</li>
+                        <li><span class="bold">Attention :</span> Les grandes plantations peuvent avoir des impacts négatifs : déforestation, accaparement des terres, dépendance aux cours mondiaux, conflits sociaux (ex: tensions avec les communautés locales à Kribi).</li>
+                        <li><span class="bold">Erreur fréquente :</span> Oublier de citer des exemples précis d'entreprises (SOCAPALM, SOSUCAM, HEVECAM, CDC). L'examen attend des noms et des localisations.</li>
+                        <li><span class="bold">À nuancer :</span> Toutes les grandes plantations ne sont pas modernes ; certaines souffrent de vieillissement des équipements (ex: anciennes palmeraies de la SODECAO).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section vocabulaire spécifique (ajout utile pour la leçon) -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 Vocabulaire essentiel</h2>
+                <div class="card concept-card">
+                    <ul class="concept-list">
+                        <li><strong>Plantation :</strong> Grande exploitation agricole spécialisée dans une culture de rente.</li>
+                        <li><strong>Culture de rente :</strong> Culture destinée principalement à la vente (exportation ou industrie) plutôt qu'à l'alimentation du producteur.</li>
+                        <li><strong>Agro-industrie :</strong> Intégration de la production agricole à la transformation industrielle (ex: usine d'huile de palme à côté de la plantation).</li>
+                        <li><strong>Complexe agro-industriel :</strong> Ensemble regroupant plantations, usines de transformation, et parfois réseaux de commercialisation.</li>
+                        <li><strong>Monoculture :</strong> Culture d'une seule espèce végétale sur de vastes étendues (caractéristique des grandes plantations).</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision pour la Terminale A (Cameroun) · Programme officiel 2025-2026 · Sujets Bac 2021-2025 intégrés · <a href="#">Révision leçon 4 : grandes plantations</a> · 🌴📦</p>
+        </footer>
+    </div>
+</body>
+</html>

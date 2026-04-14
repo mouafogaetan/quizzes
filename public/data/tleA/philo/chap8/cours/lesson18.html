@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Liberté et Responsabilité</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques pour la fiche - intégration directe pour correspondre au template */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+        .quote {
+            font-style: italic;
+            background-color: #f1f5f9;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin: 0.75rem 0;
+            border-left: 3px solid #2563eb;
+            color: #0c4a6e;
+        }
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">La liberté comme fondement de la responsabilité</h1>
+            <p class="lesson-subtitle">Philosophie - Terminale A4 & ABI · Leçon 18 · Deuxième trimestre</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">Liberté et responsabilité : un lien indissociable</h3>
+                    <p class="card-description">
+                        Être libre, c'est pouvoir choisir entre plusieurs possibles. Mais cette capacité engage celui qui agit : il devient <strong>responsable</strong> de ses actes, c'est-à-dire qu'il peut en répondre, être loué ou blâmé. Sans liberté, il n'y a ni mérite ni faute. La responsabilité est donc la contrepartie morale de la liberté.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Liberté d'indifférence</strong> : choisir sans motif déterminant (Descartes).</li>
+                        <li><strong>Liberté autonome</strong> : agir selon la loi que l'on se donne à soi-même (Kant).</li>
+                        <li><strong>Responsabilité</strong> : obligation de répondre de ses choix et d'assumer les conséquences.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Sartre : « L'homme est condamné à être libre »</h3>
+                    <p class="card-description">
+                        Pour Jean-Paul Sartre, l'existence précède l'essence : l'homme n'a pas de nature prédéfinie, il se définit par ses actes. Cette liberté absolue implique une responsabilité totale : non seulement je suis responsable de moi-même, mais en choisissant, je choisis l'humanité entière comme modèle. D'où l'angoisse et le sentiment d'être « sans excuse ».
+                    </p>
+                    <div class="quote">
+                        « Nous sommes seuls, sans excuses. C’est ce que j’exprimerai en disant que l’homme est condamné à être libre. Condamné, parce qu’il ne s’est pas créé lui-même, et par ailleurs cependant libre, parce qu’une fois jeté dans le monde, il est responsable de tout ce qu’il fait. » — Jean-Paul Sartre, *L’existentialisme est un humanisme*.
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Fondements philosophiques : Kant et la loi morale</h3>
+                    <p class="card-description">
+                        Chez Kant, la liberté est la condition de la moralité. Un acte n'a de valeur morale que s'il est posé librement, par respect pour la loi pratique (impératif catégorique). La responsabilité découle alors de l'autonomie de la volonté : l'être rationnel est législateur dans le règne des fins.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Agir par devoir, non par inclination.</li>
+                        <li>La liberté transcendantale : pouvoir commencer une série d'états par soi-même.</li>
+                        <li>Responsabilité : l'homme est imputable car il suit la loi qu'il se prescrit.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension et applications -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Cas concret : choix d'orientation après le Bac</h3>
+                    <p class="exemple-context">
+                        Un élève de terminale doit choisir entre des études de médecine (influencé par ses parents) et des études de philosophie (sa passion personnelle). Il hésite longtemps, puis décide finalement de s'inscrire en philosophie.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Analyse sartrienne :</strong> L'élève est libre car aucun déterminisme (pression familiale, avenir financier) ne peut lui ôter son pouvoir de choisir. Sa décision l'engage entièrement : il devient « l'étudiant en philosophie » par cet acte. Il est responsable des conséquences (difficultés professionnelles éventuelles, fierté ou regrets). En se choisissant, il choisit aussi une certaine image de l'humanité : celle qui privilégie l'épanouissement intellectuel sur la sécurité matérielle.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce : Pour une dissertation, mobilisez Sartre pour montrer que la liberté précède l'essence et que l'angoisse naît de l'entière responsabilité.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Illustration kantienne : le commerçant honnête</h3>
+                    <p class="exemple-context">
+                        Un commerçant rend la monnaie exacte à ses clients, non pas par souci d'honnêteté, mais parce qu'il craint de perdre sa clientèle et sa réputation.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> Selon Kant, cet acte conforme au devoir (rendre la monnaie) n'a pas de valeur morale véritable car il n'est pas accompli par respect pour la loi morale, mais par intérêt. La véritable responsabilité morale suppose une liberté intérieure et le choix délibéré d'agir par devoir. La liberté kantienne rend possible l'imputation morale : l'agent doit pouvoir agir autrement.
+                    </p>
+                    <div class="exemple-astuce">
+                        📚 Distinguer « agir conformément au devoir » (légalité) et « agir par devoir » (moralité).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Situation limite : le déterminisme psychologique</h3>
+                    <p class="exemple-context">
+                        Un individu souffre d'une addiction sévère et commet un vol pour se procurer sa substance. Peut-on le tenir pour responsable ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Débat philosophique :</strong> Si l'on considère que sa volonté est aliénée par la dépendance, sa liberté est réduite, donc sa responsabilité aussi. Mais Sartre répondrait que même l'addict a un choix fondamental : il peut choisir de résister ou de se faire aider. Pour les existentialistes, l'homme n'a pas d'excuses ; pour d'autres (psychanalyse, neurosciences), les causes inconscientes ou biologiques atténuent la responsabilité. La liberté reste le fondement, mais ses degrés sont variables.
+                    </p>
+                    <div class="exemple-astuce">
+                        ⚖️ Sujet possible au Bac : « La responsabilité suppose-t-elle la liberté absolue ? » → Penser aux atténuations (contrainte, ignorance, pathologie).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges et distinctions importantes -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confusion :</span> liberté d'indifférence (choix arbitraire) ≠ liberté morale (choix raisonné orienté par le bien). La responsabilité n'est pas la même selon la conception.</li>
+                        <li><span class="bold">Erreur fréquente :</span> Penser que la responsabilité ne concerne que les conséquences prévisibles. En droit et en morale, on peut être responsable même d'effets imprévus si l'action était libre (principe de précaution morale).</li>
+                        <li><span class="bold">Contre-sens sur Sartre :</span> « L'homme est condamné à être libre » ne signifie pas qu'il peut tout faire impunément, mais qu'il ne peut échapper à son pouvoir de choix et à la responsabilité qui l'accompagne.</li>
+                        <li><span class="bold">Distinguer :</span> Responsabilité morale (conscience personnelle) et responsabilité juridique (sanction par la loi). La première découle de la liberté intérieure, la seconde suppose aussi des critères sociaux.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section auteurs et références essentielles -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 Auteurs et références clés</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Jean-Paul Sartre (1905-1980)</h3>
+                    <p class="card-description">
+                        <strong>Thèse centrale :</strong> L'existence précède l'essence → l'homme n'est rien d'autre que ce qu'il se fait. La liberté est absolue, donc la responsabilité est totale. Chaque choix individuel engage l'humanité entière. Pas de déterminisme, pas de nature humaine préétablie.
+                    </p>
+                    <p class="card-description">
+                        <strong>Œuvre conseillée :</strong> <em>L'existentialisme est un humanisme</em> (1946) — conférence qui expose clairement le lien liberté/responsabilité.
+                    </p>
+                </div>
+                <div class="card concept-card">
+                    <h3 class="card-title">Emmanuel Kant (1724-1804)</h3>
+                    <p class="card-description">
+                        <strong>Thèse centrale :</strong> La liberté est le présupposé de la loi morale. « Tu dois, donc tu peux » : l'obligation morale implique la capacité d'agir (liberté). La volonté autonome se donne à elle-même sa loi (impératif catégorique). Sans liberté, pas d'imputation morale.
+                    </p>
+                    <p class="card-description">
+                        <strong>Œuvre conseillée :</strong> <em>Fondation de la métaphysique des mœurs</em> (1785) — distinction entre autonomie et hétéronomie.
+                    </p>
+                </div>
+                <div class="card concept-card">
+                    <h3 class="card-title">Aristote (384-322 av. J.-C.)</h3>
+                    <p class="card-description">
+                        <strong>Prémisse antique :</strong> Les actions volontaires (effectuées sans contrainte et avec connaissance) sont l'objet de la louange et du blâme. La responsabilité suppose la délibération. Une action involontaire (ignorance ou force extérieure) n'engage pas la responsabilité pleine.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Schéma conceptuel (image générée par IA) -->
+            <section class="exemple-section">
+                <h2 class="section-title">🖼️ Schéma : Liberté → Responsabilité</h2>
+                <div class="card exemple-card" style="text-align: center;">
+                    <img src="" alt="Diagramme circulaire montrant le lien dialectique entre liberté et responsabilité : l'agent libre pose un choix, ce choix génère des conséquences, l'agent en répond devant autrui et sa conscience. Flèches allant de 'Liberté' vers 'Choix' puis vers 'Action', aboutissant à 'Responsabilité (imputation, sanction, mérite)'." style="max-width:100%; border-radius: 12px; margin: 0 auto; display: block;">
+                    <p class="exemple-context" style="margin-top: 1rem; background: none; font-style: normal;">
+                        <strong>Légende :</strong> La liberté est la condition première. Sans possibilité de choisir entre plusieurs options, l'acte ne saurait être imputé. La responsabilité naît de l'usage de cette liberté et se manifeste dans le jugement moral ou juridique.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Exercice type Bac : sujets possibles -->
+            <section class="warning-section">
+                <h2 class="section-title">📝 Sujets de dissertation possibles (Baccalauréat)</h2>
+                <div class="card warning-card" style="background-color: #eff6ff; border-left-color: #3b82f6;">
+                    <ul>
+                        <li>« La liberté est-elle le fondement de la responsabilité ou son obstacle ? »</li>
+                        <li>« Être responsable, est-ce être libre ? »</li>
+                        <li>« Sans liberté, peut-on encore parler de responsabilité ? » (sujet proche des annales Cameroun)</li>
+                        <li>« L’homme est condamné à être libre » (Sartre) — Discutez cette affirmation.</li>
+                        <li>« Sommes-nous responsables de tout ce que nous faisons librement ? »</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.8rem; background-color: #dbeafe;">
+                        💡 Méthodologie : Pour chaque sujet, commencez par définir liberté et responsabilité, puis montrez leur lien conceptuel (thèse), discutez les limites (déterminismes, contraintes), et proposez une synthèse contextualisée (par exemple : degrés de responsabilité selon les sphères d’action).
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision générée pour la Terminale A4 & ABI (Cameroun) · Programme officiel · Leçon 18 : La liberté comme fondement de la responsabilité · 📚 Baccalauréat 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

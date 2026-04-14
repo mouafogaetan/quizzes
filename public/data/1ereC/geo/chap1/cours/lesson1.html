@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - La croissance démographique (1ère A4/ABI)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Style CSS intégré pour correspondre au template et éviter un fichier externe */
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 950px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Style pour les images (illustratif) */
+        .geo-img {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .geo-img img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .img-caption {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 1 : La croissance démographique</h1>
+            <p class="lesson-subtitle">Géographie · Première A4 – A BI (et ACD) · Module I : La population</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Concept 1 : Évolution et indicateurs -->
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Évolution et indicateurs démographiques</h3>
+                    <p class="card-description">
+                        La population mondiale a connu une croissance spectaculaire, surtout depuis le XVIIIe siècle (révolution industrielle). 
+                        En 2024, elle dépasse les 8 milliards d’habitants. Cette évolution s’explique par plusieurs facteurs et se mesure grâce à des indicateurs précis :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Taux de natalité</strong> : nombre de naissances pour 1000 habitants par an. Élevé dans les pays en développement.</li>
+                        <li><strong>Taux de mortalité</strong> : nombre de décès pour 1000 habitants par an. Faible grâce aux progrès médicaux.</li>
+                        <li><strong>Accroissement naturel</strong> = Taux de natalité – Taux de mortalité. Exprimé en %.</li>
+                        <li><strong>Transition démographique</strong> : théorie expliquant le passage d’un régime démographique traditionnel (forte natalité/mortalité) à un régime moderne (faible natalité/mortalité).</li>
+                    </ul>
+                    <div class="geo-img">
+                        <img src="" alt="Graphique montrant l'évolution de la population mondiale de 1800 à 2024 avec une courbe exponentielle (hockey stick) - légende : en abscisse les années, en ordonnée les milliards d'habitants. Points clés : 1 milliard en 1800, 3 milliards en 1960, 8 milliards en 2024.">
+                        <div class="img-caption">Figure 1 : Évolution de la population mondiale (courbe en bâton de hockey). À réaliser lors du TP.</div>
+                    </div>
+                </div>
+
+                <!-- Concept 2 : Facteurs de la croissance -->
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Facteurs explicatifs de la croissance démographique</h3>
+                    <p class="card-description">
+                        La forte augmentation de la population résulte d’une combinaison de facteurs :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Progrès médical et hygiène</strong> : Vaccination, antibiotiques, meilleur accès aux soins → baisse de la mortalité infantile et générale.</li>
+                        <li><strong>Amélioration de l’alimentation</strong> : Révolution agricole (engrais, irrigation) → réduction des famines.</li>
+                        <li><strong>Politiques natalistes</strong> (dans certains pays comme la France au XXe siècle) ou au contraire <strong>politiques malthusiennes</strong> (ex: Chine, politique de l’enfant unique jusqu’en 2015).</li>
+                        <li><strong>Facteurs culturels et religieux</strong> : valorisation de la famille nombreuse, croyances.</li>
+                    </ul>
+                </div>
+
+                <!-- Concept 3 : Inégalités de répartition -->
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Inégalités de répartition de la population mondiale</h3>
+                    <p class="card-description">
+                        Les hommes ne sont pas répartis uniformément sur la planète. On observe des foyers de peuplement majeurs et des déserts humains.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Foyers de peuplement principaux</strong> : Asie du Sud et de l’Est (Inde, Chine), Europe occidentale, Nord-Est des États-Unis.</li>
+                        <li><strong>Déserts humains</strong> : zones polaires, déserts chauds (Sahara), forêts équatoriales denses (Amazonie), hautes montagnes.</li>
+                        <li><strong>Densité de population</strong> = nombre d’habitants / superficie (hab/km²). Outil de mesure des inégalités.</li>
+                    </ul>
+                    <div class="geo-img">
+                        <img src="" alt="Carte mondiale des densités de population : couleurs chaudes (rouge/orange) pour les zones très peuplées (Inde, Chine, Europe, côte Est des USA), couleurs froides (bleu clair/blanc) pour les zones vides (Sahara, Sibérie, Australie intérieure, Amazonie).">
+                        <div class="img-caption">Figure 2 : Inégalités de répartition de la population mondiale (TP1 – réalisation d’une carte).</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section des exemples / études de cas -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension & applications</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple de calcul d’accroissement naturel</h3>
+                    <p class="exemple-context">
+                        Au Cameroun en 2023, le taux de natalité était d’environ 35 ‰ (pour mille) et le taux de mortalité de 9 ‰. Calculez l’accroissement naturel en pourcentage.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution :</strong><br>
+                        Accroissement naturel = (Taux natalité – Taux mortalité) / 10 <br>
+                        = (35 – 9) / 10 = 26 / 10 = <strong>2,6 %</strong>. <br>
+                        Cela signifie que la population camerounaise augmente naturellement de 2,6 % par an (sans compter les migrations). Un taux élevé typique des pays en développement.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Ne pas oublier que les taux sont souvent donnés en ‰ (pour mille). Pour obtenir un pourcentage (%), on divise par 10.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Étude de cas : La transition démographique en France et au Niger</h3>
+                    <p class="exemple-context">
+                        Comparer deux stades de la transition démographique : la France (achevé, natalité ~11‰, mortalité ~9‰) et le Niger (début, natalité ~45‰, mortalité ~8‰).
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Analyse :</strong> La France a un accroissement naturel faible (~0,2%) car la natalité a baissé avec l’urbanisation, la contraception et l’émancipation des femmes. Le Niger a un accroissement très fort (~3,7%) car la mortalité a fortement baissé (progrès médical) mais la natalité reste élevée (tradition, précocité des mariages). La France connaît un vieillissement ; le Niger, une pression démographique importante sur les ressources.
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Pensez aux causes : développement économique, éducation, accès à la contraception modifient les comportements démographiques.
+                    </div>
+                </div>
+
+                <!-- Exemple d'analyse de graphique (compétence requise pour l'examen) -->
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exercice type examen : analyse de graphique</h3>
+                    <p class="exemple-context">
+                        Le graphique ci-dessous représente l'évolution de la population de l'Afrique subsaharienne de 1950 à 2020 (projection). Décrivez la tendance et donnez deux explications.
+                    </p>
+                    <div class="geo-img">
+                        <img src="" alt="Graphique linéaire: axe X années (1950-2020), axe Y population en millions. Courbe partant de 180 millions en 1950, puis montée progressive jusqu'à 1,1 milliard en 2020, avec une pente plus forte à partir des années 1980.">
+                        <div class="img-caption">Figure 3 : Évolution démographique en Afrique subsaharienne (données fictives pour exercice).</div>
+                    </div>
+                    <div class="exemple-correction">
+                        <strong>Proposition de réponse (10-15 lignes) :</strong><br>
+                        Le graphique montre une croissance démographique très forte en Afrique subsaharienne entre 1950 et 2020. La population est passée d’environ 180 millions à plus d’1,1 milliard d’habitants, soit un quasi sextuplement. Cette augmentation s’accélère nettement à partir des années 1980.<br>
+                        Deux explications majeures : (1) La baisse spectaculaire de la mortalité grâce aux progrès sanitaires (vaccination, lutte contre le paludisme, accès à l’eau potable). (2) Le maintien d’une natalité élevée pour des raisons socioculturelles (valorisation de la descendance, faible accès à la contraception moderne). Cette situation correspond à la phase 2 du modèle de transition démographique (fort accroissement naturel).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section : Pièges à éviter & conseils pour l'examen -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & Conseils méthodologiques</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>accroissement naturel</strong> et <strong>croissance démographique totale</strong> (qui inclut le solde migratoire). Pour la leçon 1, on se concentre sur l’accroissement naturel.</li>
+                        <li><span class="bold">Attention :</span> Ne pas oublier de convertir les ‰ en % lors des calculs (diviser par 10). Exemple : 25‰ = 2,5%.</li>
+                        <li><span class="bold">Piège classique :</span> Penser que la surpopulation est uniquement due à une natalité trop élevée. Il faut aussi considérer les ressources disponibles et la répartition (ex : une faible densité peut poser problème dans un désert).</li>
+                        <li><span class="bold">Pour la carte des inégalités (TP1) :</span> Utilisez un figuré ponctuel ou des plages de couleurs ; n’oubliez pas le titre, la légende et l’échelle. Placez bien les foyers de peuplement (Asie du Sud, Asie de l’Est, Europe, Nord-Est des États-Unis).</li>
+                        <li><span class="bold">Vocabulaire essentiel :</span> Transition démographique, taux de natalité/mortalité, accroissement naturel, densité, foyer de peuplement, désert humain, politique nataliste/malthusienne.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section pour l'évaluation des compétences -->
+            <section class="exemple-section">
+                <h2 class="section-title">📝 Préparation à l’évaluation (Partie 1 & 2)</h2>
+                <div class="card">
+                    <h3 class="card-title">Savoir-faire exigibles pour le Bac / examen</h3>
+                    <ul class="concept-list">
+                        <li><strong>Construction graphique :</strong> À partir d’un tableau de données (ex: population mondiale 1950-2020), savoir tracer une courbe d’évolution ou un histogramme.</li>
+                        <li><strong>Analyse de dossier documentaire :</strong> Être capable d’extraire des causes, des conséquences et de proposer des solutions en lien avec la croissance démographique (pression sur les ressources, besoins en éducation/santé).</li>
+                        <li><strong>Production écrite :</strong> Rédiger un paragraphe argumenté (10-15 lignes) sur « Les inégalités de répartition de la population mondiale : facteurs et conséquences ».</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        💡 Entraînez-vous à rédiger des petites synthèses en utilisant le plan suivant : constat (description) → causes → conséquences → solutions éventuelles.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lien avec le dossier 1 (programme) -->
+            <div class="card" style="background-color: #eff6ff; border-left: 4px solid #3b82f6;">
+                <h3 class="card-title" style="border-left-color: #3b82f6;">🔗 Prolongement – Dossier 1 : Les politiques démographiques</h3>
+                <p>
+                    La leçon 1 pose les bases pour comprendre le <strong>Dossier 1</strong> du programme. Vous étudierez ensuite les politiques malthusiennes (ex: Chine, Inde) et natalistes (ex: France, Russie). Pour le Cameroun, quelle politique serait adaptée face à une croissance encore élevée ? (sensibilisation, planning familial, scolarisation des filles).
+                </p>
+            </div>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision conforme au programme officiel de Géographie – Première A4/ABI (Cameroun) · Inspirée des sujets d’examen 2022-2024 · 📚 Réaliser les TP : carte des inégalités de répartition & courbe d’évolution.</p>
+        </footer>
+    </div>
+</body>
+</html>

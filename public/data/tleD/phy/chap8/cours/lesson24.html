@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 25 : Oscillations amorties et résonance</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 2rem 2rem 1.5rem 2rem;
+            border-bottom: 4px solid #f59e0b;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: #f59e0b;
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .header-subtitle {
+            font-size: 1rem;
+            color: #cbd5e1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.75rem;
+        }
+
+        .header-subtitle span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 2rem;
+        }
+
+        /* Cartes */
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-header {
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .card-header .icon {
+            font-size: 1.6rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Grilles */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Tableaux */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-table td, .info-table th {
+            padding: 0.75rem 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+
+        .info-table th {
+            font-weight: 600;
+            width: 35%;
+            color: #334155;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #eef2ff;
+            color: #1e40af;
+            font-weight: 500;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .formula {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 16px;
+            font-family: 'Courier New', monospace;
+            font-weight: 500;
+            text-align: center;
+            margin: 1rem 0;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .alert {
+            background: #fef9e3;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .alert strong {
+            color: #b45309;
+        }
+
+        .figure-placeholder {
+            background: #f1f5f9;
+            border-radius: 16px;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #475569;
+            border: 1px dashed #cbd5e1;
+            margin: 1rem 0;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #e2e8f0, transparent);
+        }
+
+        .footer {
+            background: #f8fafc;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #64748b;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 700px) {
+            .content {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <div class="header">
+        <div class="header-badge">📘 FICHE DE RÉVISION – TERMINALE C & D</div>
+        <h1>Leçon 25 : Oscillations amorties et résonance</h1>
+        <div class="header-subtitle">
+            <span>📐 Module 3 : Mécanique</span>
+            <span>⚙️ Chapitre 8 : Systèmes oscillants</span>
+            <span>🎓 Bac 2024 – 2025</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- OBJECTIFS -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">🎯</span>
+                <h2>Objectifs d’apprentissage</h2>
+            </div>
+            <div class="card-body">
+                <ul style="margin-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                    <li>✓ Distinguer les différents régimes d’oscillations : <strong>pseudo-périodique, apériodique et critique</strong>.</li>
+                    <li>✓ Expliquer l’influence de l’amortissement sur un oscillateur mécanique.</li>
+                    <li>✓ Mettre en évidence le phénomène de <strong>résonance</strong> et déterminer la fréquence de résonance.</li>
+                    <li>✓ Interpréter la courbe d’amplitude en fonction de la fréquence de l’excitateur.</li>
+                </ul>
+                <div class="alert" style="margin-top: 1rem;">
+                    <strong>🔗 Lien Bac 2024 :</strong> Les oscillations amorties et la résonance sont fréquemment évaluées à travers l’étude d’un pendule élastique ou d’un circuit RLC série (analogie électromécanique).
+                </div>
+            </div>
+        </div>
+
+        <!-- RAPPEL / OSCILLATEUR AMORTI -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">📉</span>
+                <h2>1. Oscillations libres amorties</h2>
+            </div>
+            <div class="card-body">
+                <p>Un oscillateur mécanique réel est soumis à des <strong>forces de frottement</strong> (fluides ou solides) qui dissipent l’énergie mécanique. L’amplitude des oscillations diminue au cours du temps.</p>
+                <div class="formula">
+                    Équation différentielle d’un oscillateur amorti (ressort + frottement fluide) : <br>
+                    \( m \frac{d^2x}{dt^2} + \lambda \frac{dx}{dt} + k x = 0 \)
+                </div>
+                <p>Où : <br>
+                - \( m \) : masse (kg) <br>
+                - \( \lambda \) : coefficient de frottement fluide (N·s/m) <br>
+                - \( k \) : raideur du ressort (N/m)
+                </p>
+                <div class="grid-2" style="margin-top: 1rem;">
+                    <div class="figure-placeholder">
+                        <strong>📈 Courbe x(t) - régime pseudo-périodique</strong><br>
+                        Oscillations décroissantes exponentiellement.
+                    </div>
+                    <div class="figure-placeholder">
+                        <strong>📉 Courbe x(t) - régime apériodique</strong><br>
+                        Retour à l’équilibre sans oscillation.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RÉGIMES D'OSCILLATIONS -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">⚖️</span>
+                <h2>2. Les trois régimes d’amortissement</h2>
+            </div>
+            <div class="card-body">
+                <table class="info-table">
+                    <tr>
+                        <th>🔹 Régime pseudo-périodique</th>
+                        <td>Amortissement faible (\( \lambda < \lambda_c \)). Le système oscille avec une amplitude décroissante exponentiellement. La <strong>pseudo-période</strong> \( T \) est proche de la période propre \( T_0 \).</td>
+                    </tr>
+                    <tr>
+                        <th>🔸 Régime apériodique</th>
+                        <td>Amortissement fort (\( \lambda > \lambda_c \)). Le système revient à l’équilibre sans osciller, très lentement.</td>
+                    </tr>
+                    <tr>
+                        <th>🔹 Régime critique</th>
+                        <td>Amortissement \( \lambda = \lambda_c \) (valeur seuil). Retour à l’équilibre le plus rapide possible sans oscillation. Utilisé en instrumentation (amortisseurs, suspensions).</td>
+                    </tr>
+                </table>
+                <div class="alert">
+                    <strong>🧠 À retenir :</strong> Le coefficient d’amortissement critique \( \lambda_c = 2\sqrt{mk} \).  
+                    Pour un système masse-ressort, le facteur de qualité \( Q = \frac{\sqrt{mk}}{\lambda} \) indique l’acuité de la résonance.
+                </div>
+            </div>
+        </div>
+
+        <!-- RÉSONANCE MÉCANIQUE -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">🎵</span>
+                <h2>3. Phénomène de résonance</h2>
+            </div>
+            <div class="card-body">
+                <p>Lorsqu’un oscillateur amorti est soumis à une <strong>excitation sinusoïdale</strong> de fréquence \( f \), l’amplitude des oscillations forcées dépend de \( f \).</p>
+                <div class="formula">
+                    <strong>Résonance :</strong> L’amplitude est maximale lorsque la fréquence de l’excitateur \( f \) est proche de la <strong>fréquence propre</strong> \( f_0 \) de l’oscillateur.
+                </div>
+                <p>Pour un oscillateur faiblement amorti, on a :</p>
+                <ul style="margin-left: 1.5rem;">
+                    <li>Fréquence de résonance \( f_r \approx f_0 = \frac{1}{2\pi}\sqrt{\frac{k}{m}} \) (pour un ressort).</li>
+                    <li>Plus l’amortissement est faible, plus la résonance est <strong>aiguë</strong> (amplitude élevée et pic fin).</li>
+                </ul>
+                <div class="figure-placeholder">
+                    <strong>📊 Courbes d’amplitude A(f) pour différents amortissements</strong><br>
+                    - Amortissement faible → pic élevé et étroit.<br>
+                    - Amortissement fort → pic bas et large.<br>
+                    - Amortissement critique → pas de pic.
+                </div>
+                <div class="alert">
+                    <strong>⚠️ Danger de la résonance :</strong> Un pont, une aile d’avion ou un bâtiment peut entrer en résonance avec des vibrations extérieures (vent, séisme) et subir des dommages catastrophiques (exemple : pont de Tacoma).
+                </div>
+            </div>
+        </div>
+
+        <!-- EXEMPLES & APPLICATIONS -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">🛠️</span>
+                <h2>4. Applications et exemples concrets</h2>
+            </div>
+            <div class="card-body">
+                <div class="grid-2">
+                    <div>
+                        <strong>✅ Utile :</strong>
+                        <ul style="margin-left: 1.2rem; margin-top: 0.5rem;">
+                            <li>Instruments de musique (caisse de résonance).</li>
+                            <li>Circuits électroniques accordés (radio, télévision).</li>
+                            <li>Four à micro-ondes (résonance des molécules d’eau).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>❌ Nuisible :</strong>
+                        <ul style="margin-left: 1.2rem; margin-top: 0.5rem;">
+                            <li>Vibrations dans les moteurs.</li>
+                            <li>Effondrement de structures sous l’effet du vent.</li>
+                            <li>Cassure d’une lame de verre par un chanteur (fréquence propre).</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <p><strong>📌 Analogie électrique :</strong> Un circuit RLC série soumis à une tension sinusoïdale présente une résonance d’intensité quand \( \omega = \frac{1}{\sqrt{LC}} \). Cette analogie est fréquente au Bac.</p>
+            </div>
+        </div>
+
+        <!-- FORMULAIRE RÉCAPITULATIF -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">📐</span>
+                <h2>Formulaire – Ce qu’il faut absolument maîtriser</h2>
+            </div>
+            <div class="card-body">
+                <table class="info-table">
+                    <tr>
+                        <th>Période propre (oscillateur harmonique)</th>
+                        <td>\( T_0 = 2\pi \sqrt{\frac{m}{k}} \) &nbsp;&nbsp; ou &nbsp;&nbsp; \( T_0 = 2\pi \sqrt{\frac{L}{g}} \) (pendule simple)</td>
+                    </tr>
+                    <tr>
+                        <th>Pseudo-période</th>
+                        <td>\( T \approx T_0 \) pour amortissement faible</td>
+                    </tr>
+                    <tr>
+                        <th>Décrément logarithmique</th>
+                        <td>\( \delta = \ln\left(\frac{A_n}{A_{n+1}}\right) = \lambda T / (2m) \) (caractérise l’amortissement)</td>
+                    </tr>
+                    <tr>
+                        <th>Fréquence de résonance</th>
+                        <td>\( f_r \approx f_0 = \frac{1}{2\pi}\sqrt{\frac{k}{m}} \) (faible amortissement)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- CONSEILS BAC -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">🎓</span>
+                <h2>Conseils pour l’épreuve du Baccalauréat</h2>
+            </div>
+            <div class="card-body">
+                <ul style="margin-left: 1.5rem;">
+                    <li><strong>Analyse de courbes :</strong> Savoir identifier sur un graphe \( x(t) \) le régime pseudo-périodique (oscillations décroissantes) et apériodique (pas d’oscillation).</li>
+                    <li><strong>Résonance :</strong> Sur une courbe \( A(f) \), reconnaître le pic de résonance, lire la fréquence propre et commenter l’influence de l’amortissement (plus \( \lambda \) est petit, plus le pic est haut).</li>
+                    <li><strong>Justification qualitative :</strong> Expliquer pourquoi un amortissement trop faible peut être dangereux (amplitude trop grande à la résonance).</li>
+                    <li><strong>Lien avec l’électrocinétique :</strong> On retrouve exactement les mêmes régimes (pseudo-périodique, apériodique, critique) et le même phénomène de résonance dans le circuit RLC. Maîtrisez l’analogie.</li>
+                </ul>
+                <div class="alert" style="margin-top: 1rem; background: #e6f7ec; border-left-color: #10b981;">
+                    <strong>💡 Astuce mémoire :</strong> « Amortissement faible → oscillations nombreuses ; amortissement fort → retour mou sans oscillation ; amortissement critique → retour rapide ».
+                </div>
+            </div>
+        </div>
+
+        <!-- SCHÉMA BILAN -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">🧲</span>
+                <h2>Synthèse illustrée</h2>
+            </div>
+            <div class="card-body">
+                <div class="figure-placeholder">
+                    <strong>📉 Évolution temporelle selon le régime d’amortissement</strong><br>
+                    [Régime pseudo-périodique] : 〰️〰️〰️ amplitude décroissante <br>
+                    [Régime apériodique] : ⤵️ courbe sans oscillation <br>
+                    [Régime critique] : ⬇️ retour rapide à zéro
+                </div>
+                <div class="figure-placeholder">
+                    <strong>📊 Amplitude des oscillations forcées en fonction de f/f₀</strong><br>
+                    Pic maximal quand \( f \approx f_0 \) (résonance).
+                </div>
+                <p style="font-size: 0.85rem; text-align: center;">Ces graphiques sont classiques au baccalauréat (Cameroun, séries C et D).</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Fiche conforme au programme officiel de Physique – Terminale C & D (Cameroun) | Année 2025-2026 | Enseignant : Mr. [Nom]</p>
+        <p>📖 Révision libre – Toute reproduction à usage pédagogique est autorisée.</p>
+    </div>
+</div>
+</body>
+</html>

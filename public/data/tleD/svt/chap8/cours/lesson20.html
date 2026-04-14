@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 20 : La régulation de la glycémie (Terminale D)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 20 : La régulation de la glycémie</h1>
+            <p class="lesson-subtitle">SVTEEHB · Terminale D (Module II : Éducation à la santé) · Homéostasie glucidique</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section de concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. La glycémie : une constante du milieu intérieur</h3>
+                    <p class="card-description">
+                        La <strong class="bold">glycémie</strong> est la concentration de glucose dans le sang. Chez l'humain en bonne santé, elle est maintenue autour de <strong>1 g/L</strong> (environ 5,5 mmol/L) à jeun, même en cas de variations d'apport ou de dépense énergétique. Cette stabilité est essentielle car le glucose est la principale source d'énergie des cellules, notamment du système nerveux.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Une baisse trop importante (hypoglycémie) peut entraîner des troubles neurologiques (malaise, coma).</li>
+                        <li>Une hausse excessive (hyperglycémie) est toxique pour les vaisseaux et les organes (diabète).</li>
+                        <li>La régulation de la glycémie est un mécanisme <strong>homéostatique</strong> faisant intervenir le foie et le pancréas.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Les hormones clés : insuline et glucagon</h3>
+                    <p class="card-description">
+                        Le pancréas endocrine (îlots de Langerhans) produit deux hormones aux effets antagonistes :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>L'insuline</strong> (sécrétée par les cellules β) : hormone hypoglycémiante. Elle abaisse la glycémie en favorisant le stockage et l'utilisation du glucose.</li>
+                        <li><strong>Le glucagon</strong> (sécrété par les cellules α) : hormone hyperglycémiante. Il augmente la glycémie en libérant du glucose dans le sang.</li>
+                    </ul>
+                    <p class="card-description" style="margin-top: 10px;">
+                        <span class="formule">Relation : Glycémie haute → stimulation insuline → retour à la normale ; Glycémie basse → stimulation glucagon → retour à la normale.</span>
+                    </p>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Rôle du foie dans l'homéostasie glucidique</h3>
+                    <p class="card-description">
+                        Le foie est l'organe central du métabolisme du glucose. Sous l'influence des hormones pancréatiques, il réalise :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Glycogénèse</strong> : stockage du glucose sous forme de glycogène (sous l'action de l'insuline).</li>
+                        <li><strong>Glycogénolyse</strong> : dégradation du glycogène en glucose (sous l'action du glucagon).</li>
+                        <li><strong>Néoglucogenèse</strong> : fabrication de glucose à partir de précurseurs (acides aminés, lactate) lorsque les réserves de glycogène sont épuisées.</li>
+                    </ul>
+                    <img src="" alt="Schéma bilan : variations de la glycémie, action de l'insuline et du glucagon sur le foie (stockage ou libération du glucose)" style="max-width:100%; margin-top:12px; border-radius:12px; background:#f1f5f9; padding:8px;">
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Boucle de régulation (rétrocontrôle négatif)</h3>
+                    <p class="card-description">
+                        La régulation de la glycémie fonctionne par un mécanisme de <strong>rétroaction négative</strong> :
+                    </p>
+                    <ul class="concept-list">
+                        <li>⬆️ <strong>Hyperglycémie</strong> → Cellules β du pancréas sécrètent plus d'insuline → Insuline stimule la captation du glucose par les cellules et son stockage dans le foie → La glycémie diminue → Retour à l'équilibre.</li>
+                        <li>⬇️ <strong>Hypoglycémie</strong> → Cellules α sécrètent du glucagon → Glucagon stimule la glycogénolyse et la néoglucogenèse hépatiques → Libération de glucose dans le sang → La glycémie augmente → Retour à l'équilibre.</li>
+                    </ul>
+                    <img src="" alt="Diagramme de la boucle de régulation : hyperglycémie active insuline, hypoglycémie active glucagon, cible foie et tissus périphériques" style="max-width:100%; margin-top:12px; border-radius:12px; background:#f1f5f9; padding:8px;">
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple concret : Après un repas riche en glucides</h3>
+                    <p class="exemple-context">
+                        Vous consommez un plat de pâtes et une boisson sucrée. Que se passe-t-il dans l'heure qui suit ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution / Explication :</strong> Le glucose passe du tube digestif vers le sang. La glycémie augmente (→ hyperglycémie postprandiale). Les cellules β pancréatiques détectent cette hausse et sécrètent de l'insuline. L'insuline agit sur les cellules cibles (foie, muscles, tissu adipeux) pour : 
+                        <br>• augmenter l'entrée du glucose dans les cellules, 
+                        <br>• stimuler la glycogénèse (stockage sous forme de glycogène), 
+                        <br>• inhiber la production hépatique de glucose.
+                        <br>La glycémie redescend vers 1 g/L en quelques heures.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Pensez à "insuline = abaisse le sucre" (comme une insuline qui range le glucose dans les réserves). Le glucagon fait l'inverse.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Situation d'effort physique prolongé</h3>
+                    <p class="exemple-context">
+                        Un élève court un cross de 10 km à jeun. Après 30 minutes, sa glycémie baisse (environ 0,7 g/L). Quels mécanismes se mettent en place ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution / Explication :</strong> La consommation de glucose par les muscles actifs augmente, entraînant une hypoglycémie. Les cellules α du pancréas sécrètent du glucagon. Le glucagon agit sur le foie pour déclencher la glycogénolyse (libération de glucose à partir du glycogène hépatique) et la néoglucogenèse. Le glucose libéré dans le sang permet de maintenir une glycémie suffisante pour alimenter le cerveau et les muscles. En cas de prolongation extrême, le cortisol et l'adrénaline renforcent l'action hyperglycémiante.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Le glucagon est l'hormone de "secours" qui puise dans les réserves du foie. D'où l'importance des repas avant l'effort pour reconstituer le glycogène.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Analyse de document : suivi glycémique et dosage hormonal</h3>
+                    <p class="exemple-context">
+                        On réalise une courbe de glycémie chez un sujet sain après absorption d'une boisson glucosée. La glycémie passe de 0,95 g/L à 1,45 g/L en 30 min, puis revient à 0,98 g/L au bout de 2h. Simultanément, le dosage de l'insuline plasmatique montre un pic à 30 min, et celui du glucagon reste bas puis augmente légèrement après 2h. Interpréter.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Interprétation :</strong> Le pic d'insuline après la montée de glycémie provoque le stockage du glucose, d'où la baisse. Le glucagon reste bas pendant la phase postprandiale car l'insuline inhibe sa sécrétion. La légère remontée tardive du glucagon participe à prévenir une hypoglycémie de retour à l'équilibre. C'est une illustration parfaite du rétrocontrôle négatif.
+                    </p>
+                    <div class="exemple-astuce">
+                        📊 Lire une courbe : toujours repérer le stimulus (hyperglycémie) et la réponse hormonale (insuline). L'effet de l'insuline est rapide (quelques minutes).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section schéma intégratif (optionnel) -->
+            <section class="concept-section">
+                <h2 class="section-title">🧠 Schéma bilan des voies de régulation</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Voici un schéma récapitulatif des principaux acteurs et flux de la régulation glycémique.
+                    </p>
+                    <img src="" alt="Schéma complet de la régulation de la glycémie : pancréas (îlots), insuline et glucagon, foie (glycogène/glucose), captation périphérique. Flèches rouges pour l'hyperglycémie et vertes pour l'hypoglycémie." style="width:100%; border-radius:16px; margin-top:8px;">
+                    <p class="card-description" style="margin-top:12px;">
+                        <strong>Légende :</strong> 
+                        <span style="background:#dcfce7; padding:2px 6px; border-radius:20px;">🟢 Glucagon → foie → libération glucose</span> &nbsp;&nbsp;
+                        <span style="background:#fee2e2; padding:2px 6px; border-radius:20px;">🔴 Insuline → foie + muscles → stockage & captation</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Pièges courants et astuces -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre insuline (hypoglycémiante) et glucagon (hyperglycémiant). Retenez : <strong>"Insuline = abaisse"</strong> (stockage), <strong>"Glucagon = gonfle"</strong> la glycémie (libération).</li>
+                        <li><span class="bold">Attention :</span> Le glucose n'est pas seulement régulé par le pancréas : le système nerveux (adrénaline) et d'autres hormones (cortisol) jouent aussi un rôle, surtout lors du stress ou du jeûne prolongé.</li>
+                        <li><span class="bold">Piège :</span> Croire que l'insuline agit uniquement sur le foie. Elle agit aussi sur les muscles (stockage du glycogène) et le tissu adipeux (synthèse des graisses).</li>
+                        <li><span class="bold">Erreur classique en exercice :</span> Oublier que la glycémie à jeun normale est d'environ 1 g/L ; une valeur de 1,8 g/L après repas reste physiologique si elle revient rapidement à la normale. Ce n'est pas systématiquement un diabète.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Lien avec l'examen et application pratique -->
+            <section class="exemple-section">
+                <h2 class="section-title">📖 Lien avec l'examen (baccalauréat SVTEEHB)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Sujet type – Session 2024 & 2025</h3>
+                    <p class="exemple-context">
+                        Dans les épreuves du baccalauréat (sessions 2024 D et 2025 D), la régulation de la glycémie est souvent évaluée sous forme de QROC ou d'exploitation de documents. On vous demande de :
+                    </p>
+                    <ul class="concept-list" style="margin-bottom: 12px;">
+                        <li>Schématiser la boucle de régulation insuline/glucagon.</li>
+                        <li>Interpréter des courbes glycémiques et hormonales après un repas ou un test de tolérance au glucose.</li>
+                        <li>Distinguer diabète de type 1 et type 2 (lié à la leçon 21).</li>
+                        <li>Expliquer les conséquences d'une absence d'insuline.</li>
+                    </ul>
+                    <p class="exemple-correction">
+                        <strong>Conseil de révision :</strong> Maîtrisez le schéma fonctionnel pancréas-foie, apprenez la définition précise de chaque hormone et sachez décrire l'évolution de la glycémie dans différentes conditions (repas, jeûne, effort). Entraînez-vous à légender des schémas.
+                    </p>
+                    <div class="exemple-astuce">
+                        🎯 Astuce examen : Lorsqu'on vous demande "expliquer comment la glycémie est maintenue constante", structurez votre réponse : 
+                        1) valeur normale, 2) détection par le pancréas, 3) hormone sécrétée, 4) action sur le foie/tissus, 5) retour à l'équilibre. N'oubliez pas les termes « glycogénolyse » et « glycogénèse ».
+                    </div>
+                </div>
+            </section>
+
+            <!-- Complément : récapitulatif des valeurs normales -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Tableau récapitulatif des paramètres</h2>
+                <div class="card concept-card">
+                    <table style="width:100%; border-collapse: collapse; background: #f9f9fc; border-radius: 12px; overflow: hidden;">
+                        <thead style="background:#e2e8f0;">
+                            <tr><th style="padding:10px; text-align:left;">Paramètre</th><th style="padding:10px; text-align:left;">Valeur normale</th><th style="padding:10px; text-align:left;">Hormone principale</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom:1px solid #ddd;"><td style="padding:10px;">Glycémie à jeun</td><td style="padding:10px;">0,9 – 1,1 g/L (4,5 – 6,1 mmol/L)</td><td style="padding:10px;">Insuline basale, glucagon bas</td></tr>
+                            <tr style="border-bottom:1px solid #ddd;"><td style="padding:10px;">Hyperglycémie postprandiale</td><td style="padding:10px;">jusqu'à 1,4 – 1,6 g/L transitoire</td><td style="padding:10px;">⬆️ Insuline, ⬇️ glucagon</td></tr>
+                            <tr><td style="padding:10px;">Hypoglycémie modérée</td><td style="padding:10px;">&lt; 0,7 g/L</td><td style="padding:10px;">⬆️ Glucagon, adrénaline</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top: 12px; font-size:0.9rem; color:#475569;">NB : Ces valeurs sont indicatives pour le sujet sain à jeun. Le maintien de l'homéostasie repose sur l'équilibre insuline/glucagon.</p>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision créée pour les élèves de Terminale D (Cameroun) · Programme officiel SVTEEHB · Leçon 20 : La régulation de la glycémie · <a href="#">Référence : sessions 2024/2025</a> · 📚 Homéostasie glucidique</p>
+        </footer>
+    </div>
+</body>
+</html>

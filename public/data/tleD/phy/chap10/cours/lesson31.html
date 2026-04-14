@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 31 : Circuit LC et oscillations libres</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e9f0f5;
+            font-family: 'Inter', sans-serif;
+            color: #1a2c3e;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+
+        /* Conteneur principal simulant une fiche A4 */
+        .fiche {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* En-tête colorée avec le module et le titre */
+        .header {
+            background: linear-gradient(135deg, #0b3b5f 0%, #1b5a7a 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+        }
+
+        .module {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .titre-lecon {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .chapitre {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .badge-bac {
+            background-color: #f4c542;
+            color: #1e3a4d;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
+
+        /* Objectifs et liens bac */
+        .objectifs {
+            background: #f0f7fc;
+            border-left: 6px solid #1b7c9e;
+            padding: 1.2rem 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+
+        .objectifs h3, .card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: #0f4c5f;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .objectifs ul, .card ul {
+            margin-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .objectifs li, .card li {
+            margin-bottom: 0.4rem;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2edf2;
+            border-radius: 20px;
+            padding: 1.3rem 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+            transition: transform 0.1s ease;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            border-bottom: 2px solid #cbe4ee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .formule {
+            background: #fef9e6;
+            border-left: 4px solid #f4b942;
+            padding: 0.8rem 1rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin: 1rem 0;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+
+        .remarque {
+            background: #eef3fa;
+            padding: 0.8rem 1.2rem;
+            border-radius: 14px;
+            font-style: italic;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #cbdbe2;
+            padding: 0.7rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #e4f0f5;
+            font-weight: 600;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            border-top: 1px dashed #bdd4de;
+            padding-top: 1rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #5f7f8c;
+        }
+
+        @media (max-width: 700px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .titre-lecon {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche">
+    <div class="header">
+        <div class="module">⚡ MODULE 4 : ÉLECTROCINÉTIQUE</div>
+        <div class="titre-lecon">Leçon 31 : Circuit LC et oscillations libres</div>
+        <div class="chapitre">
+            <span>📘 Chapitre 10 : Circuits en régime variable – Circuit RLC</span>
+            <span class="badge-bac">🎯 Bac 2023 – Oscillations électriques</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Objectifs pédagogiques -->
+        <div class="objectifs">
+            <h3>🎯 Objectifs de la leçon</h3>
+            <ul>
+                <li>Établir l’équation différentielle des oscillations électriques libres non amorties dans un circuit <strong>LC</strong>.</li>
+                <li>Déterminer la pulsation propre $\omega_0$ et la période propre $T_0$ des oscillations.</li>
+                <li>Analyser la solution temporelle pour la charge $q(t)$ ou la tension $u_C(t)$.</li>
+                <li>Mettre en évidence les transferts d’énergie entre bobine et condensateur.</li>
+            </ul>
+            <div class="remarque" style="margin-top: 12px;">
+                💡 <strong>Lien Baccalauréat :</strong> Savoir exploiter la relation $T_0 = 2\pi\sqrt{LC}$ et interpréter les courbes $u_C(t)$ et $i(t)$.
+            </div>
+        </div>
+
+        <!-- Grille principales notions -->
+        <div class="grid-2col">
+            <!-- Schéma et constitution -->
+            <div class="card">
+                <h3>🔧 Circuit LC idéal</h3>
+                <ul>
+                    <li><strong>Composants :</strong> Condensateur de capacité $C$ (initialement chargé) + Bobine d’inductance $L$ (résistance interne nulle).</li>
+                    <li><strong>Régime :</strong> oscillations électriques <strong>libres</strong> (aucune source extérieure) et <strong>non amorties</strong> ($R=0$).</li>
+                    <li><strong>Grandeurs :</strong> Charge $q(t)$ du condensateur, courant $i(t) = \dfrac{dq}{dt}$, tension $u_C(t) = \dfrac{q}{C}$ aux bornes du condensateur.</li>
+                </ul>
+                <div class="formule">
+                    ⚡ Loi des mailles (sens conventionnel) : $u_C + u_L = 0$<br>
+                    Avec $u_L = L \dfrac{di}{dt} = L \dfrac{d^2q}{dt^2}$.
+                </div>
+            </div>
+
+            <!-- Equation différentielle -->
+            <div class="card">
+                <h3>📐 Équation différentielle</h3>
+                <p>En remplaçant $u_C = q/C$ et $u_L = L \ddot{q}$ :</p>
+                <div class="formule">
+                    $$ L \frac{d^2q}{dt^2} + \frac{1}{C} q = 0 \quad\Rightarrow\quad \frac{d^2q}{dt^2} + \frac{1}{LC} q = 0 $$
+                </div>
+                <p>Ou pour la tension $u_C(t)$ (car $u_C = q/C$) :</p>
+                <div class="formule">
+                    $$ \frac{d^2 u_C}{dt^2} + \frac{1}{LC} u_C = 0 $$
+                </div>
+                <p>C’est l’équation d’un <strong>oscillateur harmonique</strong>.</p>
+            </div>
+        </div>
+
+        <!-- Pulsation et période propres -->
+        <div class="card" style="margin-bottom: 1.8rem;">
+            <h3>⏱️ Pulsation propre et période propre</h3>
+            <p>On pose $\omega_0^2 = \dfrac{1}{LC}$, d’où :</p>
+            <div class="formule">
+                $$ \boxed{\omega_0 = \frac{1}{\sqrt{LC}}} \qquad \text{(rad/s)} $$
+            </div>
+            <div class="formule">
+                $$ \boxed{T_0 = \frac{2\pi}{\omega_0} = 2\pi \sqrt{LC}} $$
+            </div>
+            <ul>
+                <li>$\omega_0$ : pulsation propre des oscillations électriques.</li>
+                <li>$T_0$ : période propre (ne dépend que de $L$ et $C$).</li>
+                <li>Fréquence propre : $f_0 = \dfrac{1}{T_0} = \dfrac{1}{2\pi\sqrt{LC}}$ (Hz).</li>
+            </ul>
+            <div class="remarque">
+                📌 <strong>Analogies mécaniques :</strong> $LC$ ↔ ressort masse ($k$ ↔ $1/C$, $m$ ↔ $L$). La charge $q$ joue le rôle de la position $x$.
+            </div>
+        </div>
+
+        <!-- Solutions temporelles -->
+        <div class="grid-2col">
+            <div class="card">
+                <h3>📈 Solutions temporelles</h3>
+                <p>La solution générale de $\ddot{q} + \omega_0^2 q = 0$ est :</p>
+                <div class="formule">
+                    $$ q(t) = Q_m \cos(\omega_0 t + \varphi) $$
+                </div>
+                <p>Avec :</p>
+                <ul>
+                    <li>$Q_m$ : amplitude de charge (maximale) [C].</li>
+                    <li>$\varphi$ : phase à l'origine [rad] (dépend des conditions initiales).</li>
+                </ul>
+                <p><strong>Tension aux bornes du condensateur :</strong></p>
+                <div class="formule">
+                    $$ u_C(t) = \frac{q(t)}{C} = U_{Cm} \cos(\omega_0 t + \varphi) \quad\text{avec}\quad U_{Cm} = \frac{Q_m}{C} $$
+                </div>
+                <p><strong>Intensité :</strong> $i(t) = \dfrac{dq}{dt} = -Q_m\omega_0 \sin(\omega_0 t + \varphi)$</p>
+                <p>Soit $i(t) = I_m \cos(\omega_0 t + \varphi + \frac{\pi}{2})$ → courant en quadrature avance par rapport à $u_C$.</p>
+            </div>
+
+            <div class="card">
+                <h3>💡 Énergie dans le circuit LC</h3>
+                <p>L’énergie totale est constante (pas de résistance).</p>
+                <div class="formule">
+                    $$ E_{tot} = E_C + E_L = \frac{1}{2}C u_C^2 + \frac{1}{2} L i^2 = \text{constante} $$
+                </div>
+                <ul>
+                    <li>Quand $u_C$ est max → énergie stockée dans le condensateur, $i=0$.</li>
+                    <li>Quand $i$ est max → énergie stockée dans la bobine, $u_C=0$.</li>
+                    <li>Oscillations entre les deux formes d’énergie à la fréquence $f_0$.</li>
+                </ul>
+                <div class="formule">
+                    $$ E_{tot} = \frac{1}{2} C U_{Cm}^2 = \frac{1}{2} L I_m^2 $$
+                </div>
+            </div>
+        </div>
+
+        <!-- Conditions initiales typiques et exemple -->
+        <div class="card" style="margin-top: 0.5rem;">
+            <h3>🔁 Conditions initiales courantes</h3>
+            <table>
+                <thead>
+                    <tr><th>Cas</th><th>Conditions à $t=0$</th><th>Solution $u_C(t)$</th><th>$i(t)$</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Condensateur initialement chargé</td>
+                        <td>$u_C(0)=U_0$, $i(0)=0$</td>
+                        <td>$u_C(t)=U_0 \cos(\omega_0 t)$</td>
+                        <td>$i(t)= -C U_0 \omega_0 \sin(\omega_0 t)$</td>
+                    </tr>
+                    <tr>
+                        <td>Condensateur déchargé, courant initial</td>
+                        <td>$u_C(0)=0$, $i(0)=I_0$</td>
+                        <td>$u_C(t)= \dfrac{I_0}{C\omega_0} \sin(\omega_0 t)$</td>
+                        <td>$i(t)=I_0 \cos(\omega_0 t)$</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="remarque">
+                ✨ Pour déterminer $\varphi$ et $Q_m$, on utilise $q(0)=C u_C(0)$ et $i(0) = \dot{q}(0)$.
+            </div>
+        </div>
+
+        <!-- Récapitulatif visuel des grandeurs -->
+        <div class="card" style="background: #eef3fc;">
+            <h3>📝 À retenir absolument (synthèse Bac)</h3>
+            <ul>
+                <li>Dans un circuit LC idéal, les oscillations sont <strong>sinusoïdales non amorties</strong> de pulsation propre $\omega_0 = \frac{1}{\sqrt{LC}}$.</li>
+                <li>L’équation différentielle : $\ddot{u_C} + \frac{1}{LC}u_C = 0$.</li>
+                <li>La période propre $T_0 = 2\pi\sqrt{LC}$ ne dépend pas des conditions initiales.</li>
+                <li>L’énergie totale se conserve et oscille entre $E_C$ (condensateur) et $E_L$ (bobine).</li>
+                <li>Graphiquement, $u_C(t)$ et $i(t)$ sont déphasés de $\pi/2$ : le courant est en quadrature avance.</li>
+            </ul>
+            <div class="formule" style="background: #fff3df;">
+                🧠 <strong>Méthode pour le Bac :</strong> Établir l’équation différentielle à partir de la loi des mailles, identifier $\omega_0$, puis écrire $q(t) = Q_m \cos(\omega_0 t + \varphi)$ et déterminer constantes avec les conditions initiales (charge initiale, courant initial).
+            </div>
+        </div>
+
+        <!-- Exercice d'application type -->
+        <div style="margin-top: 2rem; background: #fafcff; border-radius: 20px; border: 1px solid #cde5ef; padding: 1.2rem 1.5rem;">
+            <h3 style="color: #0b5e7a;">✏️ Exemple type examen</h3>
+            <p><strong>Énoncé :</strong> Un condensateur de capacité $C = 10\,\mu\text{F}$ est chargé sous une tension $U_0 = 12\,\text{V}$. On le connecte à une bobine d’inductance $L = 0,5\,\text{H}$ et de résistance négligeable à la date $t=0$.</p>
+            <ol>
+                <li>Établir l’équation différentielle vérifiée par $u_C(t)$.</li>
+                <li>Calculer la pulsation propre $\omega_0$ et la période $T_0$.</li>
+                <li>Donner l’expression de $u_C(t)$.</li>
+                <li>Exprimer l’intensité $i(t)$ et calculer sa valeur maximale.</li>
+            </ol>
+            <div class="formule" style="background: #eef1f5;">
+                <strong>Réponses :</strong><br>
+                1. $\frac{d^2u_C}{dt^2} + \frac{1}{LC}u_C = 0$ <br>
+                2. $\omega_0 = \frac{1}{\sqrt{LC}} = \frac{1}{\sqrt{0,5 \times 10\times 10^{-6}}} = \frac{1}{\sqrt{5\times10^{-6}}} \approx 447,2\,\text{rad/s}$ ; $T_0 = 2\pi/\omega_0 \approx 0,014\,\text{s}$ (14 ms). <br>
+                3. $u_C(t) = U_0 \cos(\omega_0 t) = 12\cos(447,2\,t)$ (V). <br>
+                4. $i(t)=C\frac{du_C}{dt} = -C U_0 \omega_0 \sin(\omega_0 t)$ ; $I_{max}= C U_0 \omega_0 = 10\cdot10^{-6} \times 12 \times 447,2 \approx 0,0537\,\text{A}$ (53,7 mA).
+            </div>
+        </div>
+
+        <div class="footer-note">
+            🇨🇲 Fiche conforme au programme de Physique Terminale C & D – Bac 2023-2025 | Enseignant : Cameroun
+        </div>
+    </div>
+</div>
+</body>
+</html>

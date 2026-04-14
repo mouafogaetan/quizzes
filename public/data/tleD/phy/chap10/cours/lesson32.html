@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Circuit RLC série (Leçon 32)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            padding: 3rem 1.5rem;
+            line-height: 1.5;
+            color: #0f172a;
+        }
+
+        /* Conteneur principal style fiche A4 */
+        .fiche-revision {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* En-tête avec bandeau */
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 1.75rem 2.5rem;
+            border-bottom: 5px solid #f59e0b;
+        }
+
+        .header .badge {
+            background: #f59e0b;
+            color: #0f172a;
+            font-weight: 700;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .header .sous-titre {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .header .meta {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+        }
+
+        /* Corps de la fiche */
+        .content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Grille pour les infos clés */
+        .infos-cles {
+            background: #f8fafc;
+            border-left: 6px solid #f59e0b;
+            padding: 1.2rem 1.8rem;
+            border-radius: 18px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .infos-cles h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .infos-cles ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .infos-cles li {
+            background: white;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid #e2e8f0;
+            color: #0f172a;
+        }
+
+        /* sections avec titre et contenu */
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            border-left: 5px solid #f59e0b;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-notion {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.2rem;
+            transition: 0.1s linear;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        .card-notion strong {
+            color: #b45309;
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .formule {
+            background: #f1f5f9;
+            padding: 0.75rem 1rem;
+            border-radius: 14px;
+            font-family: monospace;
+            font-size: 1.05rem;
+            text-align: center;
+            margin: 0.75rem 0;
+            border: 1px dashed #cbd5e1;
+            font-weight: 500;
+        }
+
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .regime-card {
+            background: #fefce8;
+            border-radius: 18px;
+            padding: 1rem;
+            border: 1px solid #fde047;
+        }
+
+        footer {
+            background: #f1f5f9;
+            padding: 1rem 2.5rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.8rem;
+            color: #475569;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 700px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        .highlight {
+            background: #fffbeb;
+            font-weight: 600;
+            color: #b45309;
+        }
+
+        .lien-bac {
+            background: #eef2ff;
+            border-radius: 12px;
+            padding: 0.8rem 1.2rem;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            border-left: 4px solid #3b82f6;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-revision">
+    <div class="header">
+        <div class="badge">📘 FICHE DE RÉVISION – TERMINALE C & D</div>
+        <h1>Leçon 32 : Circuit RLC série</h1>
+        <div class="sous-titre">Régimes libres : équation différentielle, pseudo-périodique, apériodique et critique</div>
+        <div class="meta">
+            <span>📅 Module 4 – Électrocinétique</span>
+            <span>🎯 Bac 2024 (Oscillations amorties)</span>
+            <span>⚡ 2<sup>ème</sup> trimestre</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Objectifs et notions clés -->
+        <div class="infos-cles">
+            <h3>🎯 Objectifs de la leçon</h3>
+            <ul>
+                <li>✅ Établir l'équation différentielle d'un circuit RLC série</li>
+                <li>✅ Distinguer les régimes : pseudo-périodique, apériodique, critique</li>
+                <li>✅ Définir le facteur d'amortissement et la pulsation propre</li>
+                <li>✅ Relier le régime aux valeurs de R, L, C</li>
+            </ul>
+        </div>
+
+        <!-- Partie 1 : schéma et équation diff -->
+        <div class="section">
+            <div class="section-title">🔧 1. Circuit RLC série – Équation différentielle</div>
+            <div class="card-notion">
+                <strong>📐 Schéma & loi des mailles</strong>
+                <p>Un circuit RLC série est constitué d'une résistance \(R\), d'une inductance \(L\) et d'un condensateur de capacité \(C\) montés en série. Après avoir initialement chargé le condensateur, on le ferme sur la bobine et la résistance (régime libre).</p>
+                <p>La loi des mailles donne :</p>
+                <div class="formule">
+                    \( u_L + u_R + u_C = 0 \) &nbsp;&nbsp;→&nbsp;&nbsp; \( L \frac{di}{dt} + R i + \frac{q}{C} = 0 \)
+                </div>
+                <p>Avec \( i = \frac{dq}{dt} \) et \( u_C = \frac{q}{C} \), on obtient l'équation différentielle en fonction de la charge \(q(t)\) ou de la tension \(u_C(t)\).</p>
+                <div class="formule">
+                    \[
+                    L \frac{d^2q}{dt^2} + R \frac{dq}{dt} + \frac{1}{C} q = 0
+                    \]
+                </div>
+                <p>Ou bien pour \(u_C(t)\) (car \(u_C = q/C\)) :</p>
+                <div class="formule">
+                    \[
+                    \frac{d^2 u_C}{dt^2} + \frac{R}{L} \frac{du_C}{dt} + \frac{1}{LC} u_C = 0
+                    \]
+                </div>
+                <p>On pose classiquement : <strong>pulsation propre</strong> \( \omega_0 = \frac{1}{\sqrt{LC}} \) et <strong>facteur d'amortissement</strong> \( \alpha = \frac{R}{2L} \).</p>
+                <p>L'équation devient : \( \ddot{u}_C + 2\alpha \dot{u}_C + \omega_0^2 u_C = 0 \).</p>
+                <div class="lien-bac">
+                    📌 <strong>Lien Bac 2024 :</strong> Savoir établir l'équation différentielle à partir de la loi d'Ohm et de la relation \( u_L = L\frac{di}{dt} \). C'est une question classique en épreuve de physique.
+                </div>
+            </div>
+        </div>
+
+        <!-- Partie 2 : solution et régimes -->
+        <div class="section">
+            <div class="section-title">📉 2. Les trois régimes de fonctionnement</div>
+            <p>La solution de l'équation différentielle dépend du discriminant de l'équation caractéristique \( r^2 + \frac{R}{L}r + \frac{1}{LC} = 0 \). On compare \( \alpha \) et \( \omega_0 \).</p>
+            
+            <div class="grid-2cols">
+                <div class="regime-card">
+                    <strong>🟢 1. Régime pseudo-périodique</strong>
+                    <p>Condition : \( R < 2\sqrt{\frac{L}{C}} \) &nbsp; soit &nbsp; \( \alpha < \omega_0 \)</p>
+                    <p>Le circuit oscille avec une amplitude décroissante exponentiellement.</p>
+                    <p>Tension : \( u_C(t) = U_m e^{-\alpha t} \cos(\omega t + \varphi) \)</p>
+                    <p>Pseudo-pulsation : \( \omega = \sqrt{\omega_0^2 - \alpha^2} \)</p>
+                    <p>Pseudo-période : \( T = \frac{2\pi}{\omega} \)</p>
+                </div>
+                <div class="regime-card">
+                    <strong>🔴 2. Régime apériodique</strong>
+                    <p>Condition : \( R > 2\sqrt{\frac{L}{C}} \) &nbsp; soit &nbsp; \( \alpha > \omega_0 \)</p>
+                    <p>Le condensateur se décharge sans oscillation, retour très lent vers zéro.</p>
+                    <p>Solution : somme de deux exponentielles réelles décroissantes.</p>
+                    <p>Pas d'oscillation, pas de pseudo-période.</p>
+                </div>
+                <div class="regime-card">
+                    <strong>🟡 3. Régime critique</strong>
+                    <p>Condition : \( R = 2\sqrt{\frac{L}{C}} \) &nbsp; soit &nbsp; \( \alpha = \omega_0 \)</p>
+                    <p>Retour à l'équilibre le plus rapide possible sans oscillation.</p>
+                    <p>Solution : \( u_C(t) = (A + Bt)e^{-\alpha t} \)</p>
+                    <p>Utilisé dans les systèmes électroniques pour éviter les dépassements.</p>
+                </div>
+            </div>
+            <div class="card-notion">
+                <strong>🧠 Interprétation physique :</strong> 
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>La résistance \(R\) dissipe de l'énergie par effet Joule.</li>
+                    <li>Si \(R\) est faible → oscillations quasi sinusoïdales lentement amorties.</li>
+                    <li>Si \(R\) est forte → pas d'oscillations, système bloqué.</li>
+                    <li>La résistance critique \(R_c = 2\sqrt{L/C}\) sépare les deux comportements.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Partie 3 : graphes & grandeurs caractéristiques -->
+        <div class="section">
+            <div class="section-title">📊 3. Représentation graphique et grandeurs</div>
+            <div class="grid-2cols">
+                <div class="card-notion">
+                    <strong>📈 Allure des courbes \(u_C(t)\)</strong>
+                    <p style="font-size:0.95rem">Régime pseudo-périodique : oscillations amorties enveloppées par \( \pm U_0 e^{-\alpha t} \).<br>
+                    Régime apériodique : décroissance monotone.<br>
+                    Régime critique : retour rapide sans dépassement (situation optimale pour certains appareils).</p>
+                    <div class="formule" style="background:#e6f7ff;">
+                        ⚡ Décrément logarithmique : \( \delta = \ln\left(\frac{u_n}{u_{n+1}}\right) = \alpha T \)
+                    </div>
+                </div>
+                <div class="card-notion">
+                    <strong>📐 Facteur de qualité \(Q\)</strong>
+                    <p>En régime faible amortissement, on définit :</p>
+                    <div class="formule">
+                        \( Q = \frac{\omega_0}{2\alpha} = \frac{1}{R}\sqrt{\frac{L}{C}} \)
+                    </div>
+                    <p>Plus \(Q\) est grand, plus les oscillations persistent longtemps (amortissement faible).</p>
+                    <p>📌 \( Q = \pi / \delta \) avec \(\delta\) décrément logarithmique.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Méthode & astuces examen -->
+        <div class="section">
+            <div class="section-title">✍️ 4. Méthodologie pour le Bac (Cameroun)</div>
+            <div class="card-notion">
+                <strong>🎓 Résoudre un exercice type sur RLC série :</strong>
+                <ol style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li><strong>Établir l'équation différentielle</strong> à partir de la loi des mailles et des relations \(u_L = L\frac{di}{dt}\), \(u_R = Ri\) et \(i = C\frac{du_C}{dt}\).</li>
+                    <li><strong>Identifier \(\omega_0\) et \(\alpha\)</strong> : \(\omega_0 = \frac{1}{\sqrt{LC}}\) et \(\alpha = \frac{R}{2L}\).</li>
+                    <li><strong>Comparer \(\alpha\) et \(\omega_0\)</strong> pour déterminer le régime (pseudo-périodique si \(R < 2\sqrt{L/C}\), etc.).</li>
+                    <li><strong>Écrire la solution générale</strong> adaptée au régime trouvé.</li>
+                    <li><strong>Utiliser les conditions initiales</strong> (à \(t=0\), \(u_C(0)=U_0\) et \(i(0)=0\)) pour déterminer les constantes.</li>
+                    <li><strong>Calculer la pseudo-période ou le temps de relaxation</strong> si demandé.</li>
+                </ol>
+                <div class="lien-bac">
+                    📍 <strong>Exemple typique Bac 2024 :</strong> On donne \(L = 0,1\ \text{H}\), \(C = 10\ \mu\text{F}\), \(R = 50\ \Omega\). Calculer \(\omega_0\), \(\alpha\), en déduire le régime. Si régime pseudo-périodique, donner la nouvelle pulsation.  
+                    → Réponse : \(\omega_0 = 10^3\ \text{rad/s}\), \(\alpha = 250\ \text{s}^{-1}\), \(\alpha < \omega_0\) ⇒ pseudo-périodique ; \(\omega = \sqrt{\omega_0^2 - \alpha^2} \approx 968\ \text{rad/s}\).
+                </div>
+            </div>
+        </div>
+
+        <!-- Récapitulatif rapide -->
+        <div class="section">
+            <div class="section-title">📌 À retenir absolument</div>
+            <div class="grid-2cols">
+                <div class="card-notion">
+                    <strong>🔁 Équation différentielle</strong>
+                    <div class="formule">\(\ddot{u}_C + \frac{R}{L}\dot{u}_C + \frac{1}{LC}u_C = 0\)</div>
+                    <strong>📌 Pulsation propre</strong>
+                    <div class="formule">\(\omega_0 = \frac{1}{\sqrt{LC}}\)</div>
+                </div>
+                <div class="card-notion">
+                    <strong>⚙️ Facteur d'amortissement</strong>
+                    <div class="formule">\(\alpha = \frac{R}{2L}\)</div>
+                    <strong>🔎 Régime critique :</strong>
+                    <div class="formule">\(R_c = 2\sqrt{\frac{L}{C}}\)</div>
+                </div>
+            </div>
+            <div class="lien-bac" style="margin-top: 0.5rem;">
+                🧪 <strong>Expérience clé au laboratoire :</strong> Visualiser à l'oscilloscope la tension aux bornes du condensateur pour différentes valeurs de R. On observe le passage du régime pseudo-périodique au régime apériodique via la valeur critique.
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span>© Enseignant de Physique – Terminale C & D (Programme Officiel Cameroun 2025-2026)</span>
+        <span>📖 Leçon 32 : Circuit RLC série – Régimes libres</span>
+    </footer>
+</div>
+</body>
+</html>

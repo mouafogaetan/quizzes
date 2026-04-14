@@ -1,0 +1,137 @@
+[
+  {
+    "intitule": "Recherche séquentielle : principe et trace d'exécution",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>On considère l'algorithme de recherche séquentielle suivant écrit en pseudo-code :</p>\n<pre>\nALGORITHME rechercheSequentielle\nVAR\n    tab : TABLEAU[1..7] D'ENTIERS\n    i, taille, cherche, position : ENTIER\n    trouve : BOOLEEN\nDEBUT\n    taille ← 7\n    tab[1] ← 12, tab[2] ← 8, tab[3] ← 5, tab[4] ← 12\n    tab[5] ← 9, tab[6] ← 3, tab[7] ← 7\n    Ecrire(\"Entrer la valeur à chercher : \")\n    Lire(cherche)\n    trouve ← FAUX\n    i ← 1\n    TANT QUE (i <= taille) ET (NON trouve) FAIRE\n        SI tab[i] = cherche ALORS\n            trouve ← VRAI\n            position ← i\n        SINON\n            i ← i + 1\n        FINSI\n    FINTANTQUE\n    SI trouve ALORS\n        Ecrire(\"Valeur \", cherche, \" trouvée à la position \", position)\n    SINON\n        Ecrire(\"Valeur \", cherche, \" non trouvée\")\n    FINSI\nFIN\n</pre>\n<p>Le tableau tab contient les entiers : [12, 8, 5, 12, 9, 3, 7].</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier la condition d'arrêt de la boucle TANT QUE. Quels sont les deux cas qui permettent de sortir de la boucle ?",
+        "niveau": "medium",
+        "reponse": "La condition d'arrêt est (i > taille) OU (trouve = VRAI). La boucle s'arrête soit quand on a parcouru tout le tableau sans trouver l'élément (i > taille), soit quand l'élément recherché est trouvé (trouve = VRAI).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Réaliser la trace d'exécution pas à pas de l'algorithme pour cherche = 12. Pour chaque itération, indiquer la valeur de i, la condition (i <= taille) ET (NON trouve), la comparaison tab[i] = cherche, et l'état des variables trouve et position en fin d'itération.",
+        "niveau": "medium",
+        "reponse": "Itération 1 : i=1, condition VRAIE, tab[1]=12 = cherche → trouve=VRAI, position=1. La boucle s'arrête car trouve=VRAI. Résultat : trouvé à la position 1.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Réaliser la trace d'exécution pour cherche = 10. Combien d'itérations sont effectuées ? Expliquer.",
+        "niveau": "medium",
+        "reponse": "Les 7 itérations sont effectuées car aucune valeur ne correspond à 10. i parcourt 1 à 7, trouve reste FAUX. À la fin i=8, condition (i<=taille) fausse, sortie de boucle. Le message 'Valeur 10 non trouvée' s'affiche.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Expliquer le rôle de la variable booléenne 'trouve' dans cet algorithme. Que se passerait-il si on supprimait cette variable et sa condition dans la boucle ?",
+        "niveau": "hard",
+        "reponse": "La variable 'trouve' est un indicateur (drapeau) qui permet d'arrêter la recherche dès que l'élément est trouvé, évitant ainsi de parcourir inutilement le reste du tableau. Si on supprimait 'trouve' et sa condition, la boucle continuerait jusqu'à la fin du tableau même après avoir trouvé l'élément, ce qui est inefficace (complexité toujours maximale).",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Recherche d'un élève dans une liste de notes",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un professeur du lycée de Mbalmayo souhaite automatiser la recherche des notes de ses élèves. Il dispose d'un tableau contenant les noms des élèves et d'un tableau parallèle contenant leurs moyennes trimestrielles sur 20. Le professeur saisit le nom d'un élève, et le programme doit afficher sa moyenne ou un message d'erreur s'il n'est pas trouvé.</p>\n<p>Voici les données :</p>\n<pre>\nNoms : [\"NDJOCK\", \"MBALLA\", \"ATANGANA\", \"BELA\", \"ESSOMBA\"]\nMoyennes : [12.5, 15.0, 10.75, 8.5, 14.0]\n</pre>\n<p>Le tableau contient 5 élèves.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Décomposer le problème : Quelles sont les entrées, les sorties et les étapes nécessaires pour résoudre ce problème ?",
+        "niveau": "easy",
+        "reponse": "Entrées : le nom de l'élève à chercher, les deux tableaux (noms et moyennes). Sorties : la moyenne correspondante ou message 'élève non trouvé'. Étapes : 1) parcourir le tableau des noms, 2) comparer chaque nom avec la valeur cherchée, 3) si égalité, mémoriser la position et afficher la moyenne du tableau parallèle, 4) si fin de parcours sans trouver, afficher message d'erreur.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire l'algorithme en pseudo-code de la fonction rechercherMoyenne qui prend en paramètres le tableau noms, le tableau moyennes, la taille et le nomCherche, et retourne la moyenne si trouvée ou -1 sinon.",
+        "niveau": "hard",
+        "reponse": "FONCTION rechercherMoyenne(noms, moyennes, taille, nomCherche)\n    i ← 1\n    trouve ← FAUX\n    TANT QUE (i <= taille) ET (NON trouve) FAIRE\n        SI noms[i] = nomCherche ALORS\n            trouve ← VRAI\n            position ← i\n        SINON\n            i ← i + 1\n        FINSI\n    FINTANTQUE\n    SI trouve ALORS\n        RETOURNER moyennes[position]\n    SINON\n        RETOURNER -1\n    FINSI\nFIN",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Analyser la complexité de cet algorithme en nombre de comparaisons dans le meilleur des cas et dans le pire des cas pour un tableau de taille n.",
+        "niveau": "hard",
+        "reponse": "Meilleur cas : l'élément cherché est en première position → 1 seule comparaison. Pire cas : l'élément n'est pas dans le tableau ou est en dernière position → n comparaisons. La complexité est donc O(n) en moyenne (linéaire).",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Application à la gestion d'un stock en magasin",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un supermarché à Douala possède un stock de produits. Chaque produit est identifié par un code unique (entier) et possède une quantité en stock et un prix unitaire. Un client souhaite acheter un produit : il donne son code et la quantité désirée.</p>\n<p>Le gérant doit implémenter un programme qui :</p>\n<ol>\n<li>Recherche le produit par son code dans le stock</li>\n<li>Si trouvé, vérifie que la quantité demandée est disponible</li>\n<li>Calcule le prix total (quantité × prix unitaire) et affiche la facture</li>\n<li>Si le produit n'existe pas ou si la quantité demandée dépasse le stock, affiche un message d'erreur approprié</li>\n</ol>\n<p>Les tableaux du stock (10 produits maximum) sont :</p>\n<pre>\nCodes : [101, 105, 110, 115, 120, 125, 130, 135, 140, 145]\nQuantités : [50, 30, 20, 0, 15, 40, 10, 25, 5, 60]\nPrix unitaires : [250, 500, 1000, 750, 300, 150, 2000, 800, 1200, 100]\n</pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la structure de données (déclarations en pseudo-code) nécessaire pour représenter le stock en mémoire.",
+        "niveau": "easy",
+        "reponse": "CONST taille_max ← 10\nVAR\n    codes : TABLEAU[1..taille_max] D'ENTIERS\n    quantites : TABLEAU[1..taille_max] D'ENTIERS\n    prix : TABLEAU[1..taille_max] D'ENTIERS (ou REEL)\n    taille_reelle : ENTIER",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Imaginer un scénario de test pour le code 115 (quantité demandée = 3) et un autre pour le code 115 (quantité demandée = 1). Expliquer ce qui doit se passer dans chaque cas.",
+        "niveau": "medium",
+        "reponse": "Pour code 115 : quantite[4]=0 (en supposant indice 4).\nScénario 1 (qté=3) : produit trouvé mais quantité disponible =0 < 3 → message 'Stock insuffisant'.\nScénario 2 (qté=1) : produit trouvé mais stock =0 → message 'Stock insuffisant' également. La condition doit vérifier quantite_disponible >= quantite_demandee.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Proposer une amélioration de l'algorithme pour gérer plusieurs achats dans une même session (le client peut acheter plusieurs produits différents). Quelles modifications structurelles sont nécessaires ?",
+        "niveau": "very hard",
+        "reponse": "Il faut encapsuler la recherche dans une fonction réutilisable, puis dans une boucle principale qui demande à chaque fois un code produit et une quantité, accumule le total, et soustrait les quantités du stock. On ajoute une condition d'arrêt (ex: code = 0 pour terminer). À la fin, afficher la facture récapitulative (liste des produits achetés et total général). Il faut également gérer les mises à jour du tableau des quantités après chaque vente.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Comparaison des performances : recherche séquentielle vs recherche dichotomique",
+    "type": "ressource",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>On souhaite comparer la recherche séquentielle avec la recherche dichotomique (recherche par dichotomie). La recherche dichotomique nécessite que le tableau soit trié au préalable. Son principe est le suivant :</p>\n<pre>\nALGORITHME rechercheDichotomique(trié, taille, cherche)\n    debut ← 1\n    fin ← taille\n    TANT QUE debut <= fin FAIRE\n        milieu ← (debut + fin) DIV 2\n        SI trié[milieu] = cherche ALORS\n            RETOURNER milieu\n        SINON SI trié[milieu] < cherche ALORS\n            debut ← milieu + 1\n        SINON\n            fin ← milieu - 1\n        FINSI\n    FINTANTQUE\n    RETOURNER -1\nFIN\n</pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Calculer le nombre maximal de comparaisons effectuées par la recherche dichotomique pour un tableau de taille n=1024. Comparer avec la recherche séquentielle.",
+        "niveau": "medium",
+        "reponse": "Recherche dichotomique : log₂(1024) = 10 comparaisons dans le pire cas. Recherche séquentielle : 1024 comparaisons dans le pire cas. La dichotomique est beaucoup plus efficace pour les grandes tailles.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Identifier une situation concrète où la recherche séquentielle reste préférable malgré sa complexité plus élevée. Justifier.",
+        "niveau": "hard",
+        "reponse": "La recherche séquentielle est préférable quand :\n1) Le tableau est petit (moins de 20 éléments), l'avantage de la dichotomique est négligeable.\n2) Le tableau n'est pas trié et on ne peut pas/veut pas le trier (le tri a un coût O(n log n) ou O(n²)).\n3) Les recherches sont peu fréquentes et les insertions/délétions nombreuses (maintenir le tri coûte cher).\n4) On recherche souvent des éléments au début du tableau (meilleur cas O(1)).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Décider, pour une application de recherche de numéro de téléphone dans un annuaire papier de 500 pages, quel algorithme utiliser. Argumenter.",
+        "niveau": "easy",
+        "reponse": "La recherche dichotomique est adaptée car l'annuaire est trié alphabétiquement. On ouvre au milieu, on compare, on élimine la moitié inutile. La recherche séquentielle consisterait à parcourir page par page depuis le début, ce qui serait beaucoup trop long.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

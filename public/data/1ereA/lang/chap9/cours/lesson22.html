@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Figures d'insistance et d'amplification</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (non nécessaire ici mais gardé pour compatibilité template) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* style.css intégré pour un fichier autonome */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        .image-illustration {
+            margin: 1rem 0;
+            text-align: center;
+            background-color: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 0.5rem;
+        }
+        .image-illustration img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .fig-caption {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 0.3rem;
+        }
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">📢 Leçon 22 : Figures d'insistance et d'amplification</h1>
+            <p class="lesson-subtitle">Français · Première (Séries A, C, D, E, TI) · Révision Probatoire</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Figures à maîtriser</h2>
+                
+                <!-- Carte : Répétition -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🔁 La répétition</h3>
+                    <p class="card-description">
+                        <strong>Définition :</strong> Figure qui consiste à reprendre un même mot ou un groupe de mots pour renforcer une idée, créer un effet d'insistance ou marteler une émotion.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Exemple :</strong> « <em>Viens, viens, je t'attends.</em> » → insistance sur l'appel.</li>
+                        <li><strong>Effet produit :</strong> renforcement pathétique, obsession, acharnement, emphase.</li>
+                    </ul>
+                </div>
+
+                <!-- Carte : Anaphore -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🎤 L'anaphore</h3>
+                    <p class="card-description">
+                        <strong>Définition :</strong> Répétition d'un même mot ou d'un même groupe de mots en début de phrases, de vers ou de propositions successives. Très employée en poésie et dans le discours oratoire.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Exemple célèbre :</strong> « <em>Ici, des palais, ici, des portiques, ici, des colonnes.</em> » (Victor Hugo).</li>
+                        <li><strong>Effet :</strong> rythme, amplification, obsession, solennité, puissance persuasive.</li>
+                    </ul>
+                    <div class="image-illustration">
+                        <img src="" alt="Schéma expliquant l'anaphore avec répétition en début de phrase : 'Je t'aime... Je t'aime... Je t'aime...' pour une IA générative">
+                        <div class="fig-caption">Illustration : L'anaphore crée une cadence et martèle l'émotion.</div>
+                    </div>
+                </div>
+
+                <!-- Carte : Hyperbole -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🚀 L'hyperbole</h3>
+                    <p class="card-description">
+                        <strong>Définition :</strong> Figure d'amplification qui consiste à exagérer une idée, un sentiment ou une réalité pour produire un effet de démesure, d'emphase ou d'ironie.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Exemple :</strong> « <em>Je l’ai attendu mille ans.</em> » → exagération de la durée.</li>
+                        <li><strong>Effet :</strong> intensification, émotion forte, admiration, critique ou comique.</li>
+                    </ul>
+                </div>
+
+                <!-- Carte : Accumulation -->
+                <div class="card concept-card">
+                    <h3 class="card-title">📚 L'accumulation (ou énumération)</h3>
+                    <p class="card-description">
+                        <strong>Définition :</strong> Figure qui juxtapose ou coordonne plusieurs termes de même nature ou fonction pour dresser un inventaire, insister sur l'abondance ou la diversité.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Exemple :</strong> « <em>Il était courageux, loyal, généreux, infatigable.</em> »</li>
+                        <li><strong>Effet :</strong> plénitude, force de persuasion, richesse descriptive, saturation.</li>
+                    </ul>
+                </div>
+
+                <!-- Carte : Gradation -->
+                <div class="card concept-card">
+                    <h3 class="card-title">📈 La gradation</h3>
+                    <p class="card-description">
+                        <strong>Définition :</strong> Succession de termes de même nature dont l’intensité est croissante (<em>gradation ascendante</em>) ou décroissante (<em>gradation descendante</em>). Elle peut porter sur le sens, le volume ou l’émotion.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Exemple ascendante :</strong> « <em>Je le crains, je le fuis, je l’aime, je l’adore.</em> »</li>
+                        <li><strong>Exemple descendante :</strong> « <em>Une foule immense, une multitude, quelques personnes.</em> » (effet d’atténuation ironique).</li>
+                        <li><strong>Effet :</strong> dynamisme, progression dramatique, renforcement du pathos ou mise en valeur d’une idée.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section Exemples approfondis -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Applications & analyses</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Anaphore et hyperbole dans un discours</h3>
+                    <p class="exemple-context">Extrait fictif d’un plaidoyer : <em>« Jamais, jamais je n’oublierai cette injustice. Jamais je ne pardonnerai cet affront. Jamais la vérité ne cessera de briller ! »</em></p>
+                    <p class="exemple-correction">
+                        <strong>🔍 Analyse :</strong> Le mot « jamais » est répété en début de chaque phrase (anaphore). Cette insistance crée un effet d’acharnement et de détermination absolue. L’hyperbole « jamais je n’oublierai » amplifie l’engagement émotionnel. L’ensemble donne une tonalité pathétique et polémique.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce : Pour repérer l’anaphore, examinez le début des phrases ou des vers. Pour l’hyperbole, cherchez les mots comme « tous, toujours, jamais, infini, éternel » ou des chiffres exagérés.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Gradation ascendante et accumulation</h3>
+                    <p class="exemple-context">Description d’un personnage dans un roman : <em>« C’était un homme ordinaire, puis un chef compétent, bientôt un stratège redoutable, enfin un véritable conquérant. Il aimait le pouvoir, la gloire, la foule, l’ivresse de la victoire. »</em></p>
+                    <p class="exemple-correction">
+                        <strong>📖 Décryptage :</strong> La gradation « ordinaire → compétent → redoutable → conquérant » montre l’évolution croissante du personnage, soulignant son ascension. L’accumulation « pouvoir, gloire, foule, ivresse » insiste sur l’étendue de ses désirs. Effet d’amplification héroïque.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 À retenir : L’accumulation peut être une liste sans ordre particulier, tandis que la gradation impose une progression logique ou émotionnelle.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Répétition pour exprimer une émotion intense</h3>
+                    <p class="exemple-context">Dialogue théâtral : <em>« Va-t’en ! Laisse-moi ! Pars, je te hais, hais, hais ! »</em></p>
+                    <p class="exemple-correction">
+                        <strong>🎭 Interprétation :</strong> La répétition du verbe « hais » (trois fois) traduit la rage et la déchirure intérieure. Chaque répétition enfonce le sentiment de rejet. La ponctuation exclamative et la brièveté des phrases renforcent la violence passionnelle. Figure d’insistance au service du pathos.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Tableau récapitulatif des figures avec exemples express -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 Tableau récapitulatif</h2>
+                <div class="card" style="overflow-x: auto;">
+                    <table style="width:100%; border-collapse: collapse; font-size:0.95rem;">
+                        <thead style="background-color:#eef2ff;">
+                            <tr>
+                                <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #cbd5e1;">Figure</th>
+                                <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #cbd5e1;">Définition courte</th>
+                                <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #cbd5e1;">Exemple</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;"><strong>Répétition</strong></td><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Reprise d’un même mot ou groupe</td><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;"><em>« Douce, douce, douce nuit. »</em></td></tr>
+                            <tr><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;"><strong>Anaphore</strong></td><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Répétition en début de phrase/vers</td><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;"><em>« Pour qui ? Pour quoi ? Pourquoi ? »</em></td></tr>
+                            <tr><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;"><strong>Hyperbole</strong></td><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Exagération expressive</td><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;"><em>« Il pleut des cordes. »</em></td></tr>
+                            <tr><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;"><strong>Accumulation</strong></td><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;">Juxtaposition de termes semblables</td><td style="padding: 0.6rem; border-bottom: 1px solid #e2e8f0;"><em>« Il était beau, riche, célèbre, respecté. »</em></td></tr>
+                            <tr><td style="padding: 0.6rem;"><strong>Gradation</strong></td><td style="padding: 0.6rem;">Succession par ordre d’intensité</td><td style="padding: 0.6rem;"><em>« Je le regarde, je l’admire, je l’idolâtre. »</em></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Pièges à éviter et astuces -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges fréquents & conseils</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Ne pas confondre anaphore et répétition simple :</span> L’anaphore concerne le début de segments distincts. La répétition peut être interne ou finale.</li>
+                        <li><span class="bold">Attention à l’hyperbole mal interprétée :</span> Toute exagération n’est pas forcément hyperbole; il faut qu’elle soit manifestement impossible ou excessive pour produire un effet stylistique.</li>
+                        <li><span class="bold">Distinguer accumulation et gradation :</span> L’accumulation énumère sans progression nécessaire ; la gradation suit une échelle (croissante ou décroissante).</li>
+                        <li><span class="bold">Conseil pour l’analyse :</span> Pour justifier l’effet, posez-vous la question : « Que cherche à provoquer l’auteur ? Une émotion forte (hyperbole), une obsession (répétition), un rythme martelé (anaphore), une abondance (accumulation), un mouvement (gradation) ? »</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Image globale pour illustrer l'amplification -->
+            <div class="image-illustration" style="margin-top: 1rem;">
+                <img src="" alt="Représentation visuelle des figures d'amplification : un mégaphone pour l'hyperbole, des mots en cascade pour la gradation et des échos pour la répétition – à générer par IA">
+                <div class="fig-caption">Synthèse visuelle : L’amplification grossit, répète, accumule ou élève le discours.</div>
+            </div>
+
+            <!-- Exercice rapide type Probatoire -->
+            <section class="exemple-section">
+                <h2 class="section-title">✍️ Exercice d'entraînement</h2>
+                <div class="card" style="background-color:#f9f9ff;">
+                    <h3 class="card-title">Identifiez les figures d'insistance / amplification</h3>
+                    <p class="exemple-context">Texte : <em>« Je l’ai cherché partout, dans la ville, dans les bois, dans mes souvenirs, dans mes nuits sans sommeil. Toujours, toujours, je l’appelle. Il est mon souffle, ma raison, ma flamme. »</em></p>
+                    <p class="exemple-correction">
+                        <strong>Réponse :</strong> 
+                        <br>– Accumulation : « dans la ville, dans les bois, dans mes souvenirs, dans mes nuits sans sommeil ».
+                        <br>– Répétition : « toujours, toujours ».
+                        <br>– Gradation ascendante possible : « mon souffle, ma raison, ma flamme » (croissance affective).
+                        <br>– Anaphore implicite avec la reprise de « dans » (anaphore de structure). 
+                    </p>
+                    <div class="exemple-astuce">
+                        🎯 Pour le bac/probatoire : Commentez toujours l’effet produit (émotion, rythme, emphase) et reliez-le à l’intention de l’auteur.
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme officiel du Cameroun - Première (Probatoire) · Figures de style : insistance et amplification · <a href="#">Télécharger PDF</a> ✨</p>
+        </footer>
+    </div>
+</body>
+</html>

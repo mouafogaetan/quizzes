@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 28 : Association de condensateurs</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie professionnelle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9edf2 100%);
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        .fiche-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        /* En-tête avec bande colorée */
+        .header {
+            background: linear-gradient(135deg, #0f2b3d 0%, #1b4a6e 100%);
+            color: white;
+            padding: 2rem 2.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            border-left: 3px solid #ffb347;
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .info-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.2rem;
+            font-size: 0.85rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 2.5rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1.5rem;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f2b3d;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-title .emoji {
+            font-size: 1.8rem;
+        }
+
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            flex: 1;
+            min-width: 220px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1e4a6e;
+        }
+
+        .formula {
+            background: #ffffff;
+            padding: 0.8rem 1rem;
+            border-radius: 14px;
+            font-family: monospace;
+            font-size: 1rem;
+            text-align: center;
+            border-left: 4px solid #ffb347;
+            margin: 0.8rem 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .example-box {
+            background: #f1f5f9;
+            border-radius: 18px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .example-box strong {
+            color: #1e4a6e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #e6f0fa;
+            font-weight: 600;
+        }
+
+        .bac-link {
+            background: #fef9e6;
+            border-left: 4px solid #f59e0b;
+            padding: 0.8rem 1.2rem;
+            border-radius: 14px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: #f1f5f9;
+            padding: 1rem 2.5rem;
+            font-size: 0.75rem;
+            color: #475569;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 700px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .card-grid {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <!-- En-tête de la fiche -->
+    <div class="header">
+        <div class="badge">📐 Terminale C & D | Module 4 : Électrocinétique</div>
+        <h1>Leçon 28 : Association de condensateurs</h1>
+        <div class="subtitle">Calculer la capacité équivalente en série, parallèle et dans des circuits mixtes</div>
+        <div class="info-bar">
+            <div class="info-item">🔗 Chapitre 9 : Le condensateur</div>
+            <div class="info-item">⏱️ Durée estimée : 45 min</div>
+            <div class="info-item">🎯 Bac 2023 - 2025</div>
+        </div>
+    </div>
+
+    <!-- Corps de la fiche -->
+    <div class="content">
+        <!-- 1. OBJECTIFS -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">🎯</span>
+                <span>Objectifs d’apprentissage</span>
+            </div>
+            <ul style="margin-left: 1.8rem; list-style-type: '✓   '; line-height: 1.6;">
+                <li>Distinguer une association en série d’une association en parallèle de condensateurs.</li>
+                <li>Établir et appliquer les formules de la capacité équivalente pour des groupements simples.</li>
+                <li>Calculer la capacité équivalente d’un circuit mixte (série + parallèle).</li>
+                <li>Résoudre des problèmes du Baccalauréat impliquant l’association de condensateurs.</li>
+            </ul>
+            <div class="bac-link">
+                📌 <strong>Lien Bac 2024-2025 :</strong> Les sujets officiels comportent souvent un exercice sur le calcul de la capacité équivalente, la charge et la tension aux bornes de chaque condensateur.
+            </div>
+        </div>
+
+        <!-- 2. RAPPELS FONDAMENTAUX -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">⚡</span>
+                <span>Rappels : grandeur caractéristique</span>
+            </div>
+            <p>Un condensateur est caractérisé par sa <strong>capacité C</strong> (en farads, F). La relation fondamentale est :</p>
+            <div class="formula">
+                $ Q = C \cdot U $ &nbsp;&nbsp; où &nbsp; $Q$ = charge (C), $U$ = tension (V)
+            </div>
+            <p>L'énergie stockée : $E = \frac{1}{2} C U^2$.</p>
+            <p><em>En association, on cherche un condensateur unique (capacité équivalente $C_{eq}$) qui aurait le même comportement électrique.</em></p>
+        </div>
+
+        <!-- 3. ASSOCIATION EN SÉRIE -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">🔗</span>
+                <span>Association en série</span>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>📐 Montage</h3>
+                    <p>Les condensateurs sont placés les uns à la suite des autres. La même charge $Q$ apparaît sur chaque armature (par influence).</p>
+                    <div style="background:#eef2ff; border-radius:12px; padding:8px; text-align:center; margin-top:10px;">
+                        <span style="font-family:monospace;">C₁ ── C₂ ── C₃ ── ...</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>📐 Formule</h3>
+                    <div class="formula" style="background:#eef2ff;">
+                        $\displaystyle \frac{1}{C_{eq}} = \frac{1}{C_1} + \frac{1}{C_2} + \dots + \frac{1}{C_n}$
+                    </div>
+                    <p>Pour deux condensateurs : $C_{eq} = \dfrac{C_1 \cdot C_2}{C_1 + C_2}$</p>
+                    <p><strong>Remarque :</strong> $C_{eq}$ est <u>inférieure</u> à la plus petite capacité.</p>
+                </div>
+                <div class="card">
+                    <h3>📐 Tensions</h3>
+                    <p>$U_{total} = U_1 + U_2 + \dots$<br>
+                    La charge est identique : $Q = C_{eq} \cdot U_{total} = C_1 U_1 = C_2 U_2$</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. ASSOCIATION EN PARALLÈLE -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">⚡⚡</span>
+                <span>Association en parallèle</span>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>📐 Montage</h3>
+                    <p>Les condensateurs sont reliés par leurs deux bornes. Tous sont soumis à la <strong>même tension</strong> $U$.</p>
+                    <div style="background:#eef2ff; border-radius:12px; padding:8px; text-align:center; margin-top:10px;">
+                        <span style="font-family:monospace;">C₁ ─┬─ C₂ ─┬─ ...</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>📐 Formule</h3>
+                    <div class="formula" style="background:#eef2ff;">
+                        $\displaystyle C_{eq} = C_1 + C_2 + \dots + C_n$
+                    </div>
+                    <p><strong>Remarque :</strong> $C_{eq}$ est <u>supérieure</u> à chaque capacité individuelle.</p>
+                </div>
+                <div class="card">
+                    <h3>📐 Charges</h3>
+                    <p>$Q_{total} = Q_1 + Q_2 + \dots$<br>
+                    Avec $Q_1 = C_1 U$, $Q_2 = C_2 U$, etc.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. ASSOCIATIONS MIXTES -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">🧩</span>
+                <span>Circuits mixtes (série + parallèle)</span>
+            </div>
+            <p><strong>Méthode de résolution :</strong> Simplifier progressivement le schéma en remplaçant les groupements parallèles ou série par leur capacité équivalente jusqu'à obtenir un seul condensateur.</p>
+            <div class="example-box">
+                <strong>📌 Exemple type :</strong> Soit C₁ = 2 µF, C₂ = 3 µF en parallèle, le tout en série avec C₃ = 5 µF. <br>
+                &nbsp;&nbsp;1. Parallèle (C₁ // C₂) → C₁₂ = 2 + 3 = 5 µF.<br>
+                &nbsp;&nbsp;2. Série (C₁₂ avec C₃) → C_eq = (5 × 5)/(5 + 5) = 25/10 = 2,5 µF.<br>
+                <strong>Interprétation :</strong> Le dipôle équivalent se comporte comme un condensateur de 2,5 µF.
+            </div>
+        </div>
+
+        <!-- 6. TABLEAU SYNTHÈSE -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">📋</span>
+                <span>Tableau récapitulatif</span>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>Association</th><th>Schéma type</th><th>Capacité équivalente $C_{eq}$</th><th>Tension / Charge</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Série</strong></td><td>C₁ – C₂ – ...</td><td>$\frac{1}{C_{eq}} = \sum \frac{1}{C_i}$</td><td>$U = U_1+U_2$ ; $Q$ identique</td></tr>
+                    <tr><td><strong>Parallèle</strong></td><td>bornes communes</td><td>$C_{eq} = \sum C_i$</td><td>$U$ commune ; $Q = Q_1+Q_2$</td></tr>
+                </tbody>
+            </table>
+            <p class="bac-link" style="margin-top:0.8rem;">
+                💡 <strong>Astuce Bac :</strong> Dans un exercice, repérez d’abord les condensateurs qui ont la même tension (parallèle) puis ceux qui ont la même charge (série).
+            </p>
+        </div>
+
+        <!-- 7. EXERCICE CORRIGÉ TYPE BAC -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">✍️</span>
+                <span>Application : exercice type Bac</span>
+            </div>
+            <div class="example-box">
+                <strong>📝 Énoncé :</strong><br>
+                On associe trois condensateurs : C₁ = 4,7 µF, C₂ = 10 µF, C₃ = 6,8 µF. <br>
+                1) Calculer la capacité équivalente lorsque C₁ et C₂ sont en série, le tout en parallèle avec C₃.<br>
+                2) On applique une tension U = 12 V à l’ensemble. Déterminer la charge totale emmagasinée.<br><br>
+                <strong>✅ Correction :</strong><br>
+                • <u>Étape 1 (série C₁-C₂) :</u> $C_{12} = \frac{C_1 \cdot C_2}{C_1+C_2} = \frac{4,7 \times 10}{4,7+10} = \frac{47}{14,7} \approx 3,197\ \mu F$.<br>
+                • <u>Étape 2 (parallèle avec C₃) :</u> $C_{eq} = C_{12} + C_3 = 3,197 + 6,8 \approx 9,997\ \mu F \approx 10\ \mu F$.<br>
+                • <u>Charge totale :</u> $Q_{tot} = C_{eq} \times U = 10 \times 10^{-6} \times 12 = 1,2 \times 10^{-4}\ C = 120\ \mu C$.<br>
+                <strong>Réponse :</strong> $C_{eq} \approx 10\ \mu F$ ; $Q_{tot} = 120\ \mu C$.
+            </div>
+            <p style="margin-top: 0.6rem; font-size: 0.9rem;">🔁 On retrouve ce type de question dans les épreuves de Baccalauréat C et D (électrocinétique).</p>
+        </div>
+
+        <!-- 8. PIÈGES ET ERREURS COURANTES -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">⚠️</span>
+                <span>Erreurs fréquentes à éviter</span>
+            </div>
+            <ul style="margin-left: 1.8rem; list-style-type: '❌ '; line-height: 1.6;">
+                <li>Confondre les formules : additionner les capacités en série (c’est l’inverse qu’il faut additionner).</li>
+                <li>Oublier l’unité : toujours convertir en farads (1 µF = 10⁻⁶ F).</li>
+                <li>Négliger les calculs intermédiaires dans les montages mixtes – procéder par étapes.</li>
+                <li>Appliquer la formule de série à trois condensateurs directement sans vérifier la topologie.</li>
+            </ul>
+        </div>
+
+        <!-- 9. APPLICATIONS CONCRÈTES -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">🔧</span>
+                <span>Applications technologiques</span>
+            </div>
+            <p>Les associations de condensateurs sont utilisées pour :</p>
+            <ul style="margin-left: 1.8rem; list-style-type: '🔹 ';">
+                <li><strong>Augmenter la capacité totale</strong> (parallèle) – filtrage d’alimentation.</li>
+                <li><strong>Augmenter la tension de service</strong> (série) – on répartit la tension.</li>
+                <li><strong>Adapter une valeur standard</strong> en électronique (circuits RC, oscillateurs).</li>
+            </ul>
+        </div>
+
+        <!-- 10. MÉTHODOLOGIE POUR L’EXAMEN -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">📘</span>
+                <span>Méthodologie Bac</span>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>🔍 Analyse du schéma</h3>
+                    <p>Identifier les nœuds et branches. Repérer les condensateurs ayant deux bornes communes (//) et ceux qui sont en série (même courant de déplacement).</p>
+                </div>
+                <div class="card">
+                    <h3>🧮 Calcul par étapes</h3>
+                    <p>Simplifier progressivement : remplacer chaque groupement par $C_{eq}$ et redessiner le circuit équivalent.</p>
+                </div>
+                <div class="card">
+                    <h3>✅ Vérification</h3>
+                    <p>Pour une association série : $C_{eq}$ < min(Cᵢ). Pour parallèle : $C_{eq}$ > max(Cᵢ). Test cohérent.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11. NOTIONS CLÉS À RETENIR -->
+        <div class="section">
+            <div class="section-title">
+                <span class="emoji">🧠</span>
+                <span>Synthèse flash</span>
+            </div>
+            <div style="background: #eef2ff; border-radius: 20px; padding: 1.2rem;">
+                <p>✔️ <strong>Parallèle :</strong> $C_{eq} = C_1 + C_2 + \dots$ &nbsp;&nbsp; Même tension.</p>
+                <p>✔️ <strong>Série :</strong> $\frac{1}{C_{eq}} = \frac{1}{C_1} + \frac{1}{C_2} + \dots$ &nbsp;&nbsp; Même charge.</p>
+                <p>✔️ <strong>Mixte :</strong> décomposer en étapes, respecter l’ordre des opérations.</p>
+                <p>✔️ <strong>Unité pratique :</strong> 1 µF = 10⁻⁶ F, 1 nF = 10⁻⁹ F, 1 pF = 10⁻¹² F.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>© Enseignant de Physique – Cameroun | Programme officiel Terminale C & D (2025-2026) | Leçon 28 – Association de condensateurs</p>
+        <p style="margin-top: 6px;">📚 Fiche conforme aux attendus du Baccalauréat – Utilisation libre pour révisions.</p>
+    </footer>
+</div>
+</body>
+</html>

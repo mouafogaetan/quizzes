@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - L'Europe de la Renaissance</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        .image-illustration {
+            margin: 1rem 0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background-color: #f1f5f9;
+            display: flex;
+            justify-content: center;
+        }
+        .image-illustration img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .image-caption {
+            font-size: 0.8rem;
+            text-align: center;
+            color: #64748b;
+            margin-top: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 1 : L'Europe de la Renaissance</h1>
+            <p class="lesson-subtitle">Histoire · Première A, C, D, E, TI · Module I : L'Europe émergente</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section éléments clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Illustration suggérée : carte de l'Europe ou fresque de la Renaissance -->
+                <div class="image-illustration">
+                    <img src="" alt="Carte de l'Europe à la Renaissance montrant l'Italie comme point de départ et la diffusion vers le reste du continent">
+                    <div class="image-caption">Fig. 1 : Diffusion de la Renaissance en Europe (XVIe siècle).</div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Définition et cadre spatio-temporel</h3>
+                    <p class="card-description">
+                        La <strong>Renaissance</strong> est une période de renouveau culturel, scientifique et artistique majeure en Europe. 
+                        Elle marque la transition entre le Moyen Âge et les Temps modernes.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Point de départ :</strong> Italie (Florence, Venise, Rome) au <strong>XVI<sup>e</sup> siècle</strong>.</li>
+                        <li><strong>Caractéristique essentielle :</strong> Retour aux sources de l'Antiquité gréco-romaine (littérature, philosophie, sciences).</li>
+                        <li>L'<strong>Humanisme</strong> : mouvement intellectuel qui place l'homme au centre des préoccupations.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Les facteurs de l'émergence de la Renaissance</h3>
+                    <p class="card-description">
+                        Plusieurs causes expliquent ce bouleversement intellectuel et culturel en Europe :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Redécouverte de l'Antiquité :</strong> Les textes grecs et latins (philosophie, science, art) sont étudiés à nouveau grâce aux manuscrits byzantins et arabes.</li>
+                        <li><strong>Développement des méthodes scientifiques :</strong> Observation, expérimentation et remise en cause des savoirs traditionnels (précurseurs de la science moderne).</li>
+                        <li><strong>Progrès des mathématiques :</strong> Perfectionnement des calculs numériques et algébriques, essentiels pour l'astronomie, la physique et le commerce.</li>
+                        <li><strong>Affaiblissement du contrôle de l'Église :</strong> La Réforme protestante (dès 1517) et les critiques de l'autorité pontificale libèrent la pensée.</li>
+                        <li><strong>Mécénat :</strong> Les grandes familles italiennes (Médicis) et les souverains européens financent artistes et savants.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Les grandes inventions de la Renaissance</h3>
+                    <p class="card-description">
+                        Des innovations techniques majeures transforment la société et la diffusion des savoirs :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Imprimerie (vers 1455) :</strong> Johannes Gutenberg. Permet la diffusion massive des livres (Bible, textes scientifiques). Accélère la propagation des idées humanistes.</li>
+                        <li><strong>Poudre à canon :</strong> Utilisée en Europe pour l'artillerie, modifie l'art de la guerre et le rapport de force entre noblesse et monarchies.</li>
+                        <li><strong>Montre :</strong> Apparition des premiers mécanismes portables, meilleure mesure du temps, essor du commerce et de la productivité.</li>
+                        <li><strong>Microscope (Zacharias Janssen, vers 1590) :</strong> Ouvre la voie à la biologie et à la découverte des micro-organismes.</li>
+                        <li><strong>Baromètre (Torricelli, 1643) :</strong> Mesure de la pression atmosphérique, progrès en météorologie et en physique.</li>
+                    </ul>
+                    <div class="image-illustration">
+                        <img src="" alt="Dessin d'une presse à imprimer de Gutenberg au XVe siècle">
+                        <div class="image-caption">L'imprimerie : une révolution technique et culturelle.</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">L'expansion de la Renaissance en Europe</h3>
+                    <p class="card-description">
+                        Depuis l'Italie, le mouvement se diffuse grâce aux guerres d'Italie, aux échanges commerciaux et aux voyages d'études :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>France :</strong> Campagnes de Charles VIII puis François I<sup>er</sup> (châteaux de la Loire, Léonard de Vinci invité).</li>
+                        <li><strong>Pays-Bas :</strong> École flamande (Van Eyck, Brueghel) et humanisme d'Érasme.</li>
+                        <li><strong>Angleterre :</strong> Thomas More (<em>Utopie</em>) et Shakespeare (théâtre élisabéthain).</li>
+                        <li><strong>Allemagne :</strong> Albrecht Dürer (arts plastiques) et la Réforme luthérienne.</li>
+                        <li><strong>Espagne :</strong> Influence de la Renaissance italienne via la cour des Rois Catholiques.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">L'Humanisme : une rupture avec la pensée médiévale</h3>
+                    <p class="exemple-context">
+                        Au Moyen Âge, la pensée était principalement théocentrique (Dieu au centre). Les humanistes comme Érasme ou Pic de la Mirandole remettent l'homme au centre.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> La Renaissance promeut l'idée que l'homme est doté d'une raison et d'une liberté qui lui permettent d'agir sur le monde. 
+                        Les textes antiques (Cicéron, Platon) deviennent des modèles. L'éducation et la connaissance sont valorisées. 
+                        Ce changement de regard favorise les découvertes scientifiques et l'épanouissement artistique.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Pour retenir le passage du théocentrisme à l'humanisme, pensez à l'œuvre <em>L'Homme de Vitruve</em> de Léonard de Vinci : l'homme devient la mesure de toutes choses.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">L'impact de l'imprimerie sur la Réforme protestante</h3>
+                    <p class="exemple-context">
+                        En 1517, Martin Luther affiche ses 95 thèses contre les abus de l'Église catholique. Grâce à l'imprimerie, ses idées se répandent en quelques semaines dans toute l'Allemagne.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Raisonnement :</strong> Avant l'imprimerie, les livres étaient copiés à la main, rares et chers. L'imprimerie permet de produire des pamphlets, des traductions de la Bible et des écrits en langue vernaculaire. 
+                        Les idées de Luther sont ainsi largement diffusées, affaiblissant le monopole de l'Église sur l'interprétation des textes sacrés et accélérant la Réforme.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 L'imprimerie est à la Renaissance ce qu'Internet est à notre époque : une révolution dans la circulation de l'information.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Léonard de Vinci : artiste et scientifique de la Renaissance</h3>
+                    <p class="exemple-context">
+                        Léonard de Vinci (1452-1519) incarne l'esprit de la Renaissance : il est à la fois peintre (<em>La Joconde</em>, <em>La Cène</em>), inventeur (machines volantes, ponts), anatomiste et mathématicien.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Analyse :</strong> Cet exemple montre la volonté de dépasser les frontières entre disciplines. Léonard observe la nature, dissèque des corps pour comprendre le mouvement, et applique les mathématiques à la perspective en peinture. 
+                        Il symbolise l'idéal de l'<strong>homme universel</strong>, capable d'exceller dans tous les domaines.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 À retenir : La Renaissance casse les barrières entre arts, sciences et techniques.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges courants / à ne pas confondre -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Ne pas confondre Renaissance et Réforme :</span> La Renaissance est un mouvement culturel et artistique (XVIe siècle). La Réforme protestante (à partir de 1517) est un mouvement religieux qui a profité du contexte de la Renaissance mais ne se limite pas à lui.</li>
+                        <li><span class="bold">Attention aux dates :</span> La Renaissance ne commence pas au XIVe siècle en Italie ? Les historiens s'accordent sur un <strong>XVIe siècle</strong> pour son apogée, même si des prémisses apparaissent au Trecento (Pétrarque, Boccace). Restez centrés sur le XVIe siècle pour le programme.</li>
+                        <li><span class="bold">Ne pas limiter la Renaissance à l'Italie :</span> Bien que l'Italie soit le berceau, la Renaissance concerne toute l'Europe (France, Angleterre, Allemagne, Pays-Bas, Espagne).</li>
+                        <li><span class="bold">L'imprimerie n'est pas la seule invention :</span> Beaucoup d'élèves ne retiennent que Gutenberg. Mais la poudre à canon, la montre, le microscope et le baromètre sont aussi essentiels à connaître.</li>
+                        <li><span class="bold">Affaiblissement de l'Église ≠ disparition :</span> L'Église reste très puissante, mais son autorité intellectuelle est contestée (ex : procès de Galilée plus tard).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Petit résumé pour la mémorisation -->
+            <section class="concept-section">
+                <div class="card concept-card" style="background-color: #fefce8;">
+                    <h3 class="card-title" style="border-left-color: #eab308;">🎯 Résumé express pour la révision</h3>
+                    <ul class="concept-list">
+                        <li><strong>Définition :</strong> Renaissance = renouveau culturel, scientifique et artistique (XVIe siècle, Italie → Europe).</li>
+                        <li><strong>Causes :</strong> retour à l'Antiquité, progrès scientifiques, affaiblissement de l'Église, mécénat.</li>
+                        <li><strong>Inventions majeures :</strong> imprimerie, poudre, montre, microscope, baromètre.</li>
+                        <li><strong>Conséquences :</strong> diffusion des idées humanistes, développement des États modernes, préparation de la révolution scientifique.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche de révision basée sur le programme officiel de Première (Cameroun) · Module I : L'Europe émergente · 📚 À relire régulièrement</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Monohybridisme et brassage interchromosomique</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Style pour les schémas (placeholders IA) */
+        .schema-placeholder {
+            background-color: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px dashed #94a3b8;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+        .schema-caption {
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #2563eb;
+        }
+        .gene-symbol {
+            font-family: monospace;
+            font-weight: bold;
+            background-color: #e2e8f0;
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 5 : Monohybridisme et brassage interchromosomique</h1>
+            <p class="lesson-subtitle">SVTEEHB · Terminale C · Session 2025 (porc, génétique formelle)</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Le monohybridisme : étude d’un seul caractère</h3>
+                    <p class="card-description">
+                        Le monohybridisme analyse la transmission d’un seul caractère héréditaire contrôlé par un <strong>gène</strong> possédant deux <strong>allèles</strong> (versions du gène). 
+                        Les croisements entre individus différant par un seul caractère permettent de mettre en évidence les lois de Mendel (uniformité des F1, ségrégation 3:1 en F2).
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="gene-symbol">Allèle dominant</span> : s’exprime même à l’état hétérozygote (ex: <strong>A</strong>). Noté par une lettre majuscule.</li>
+                        <li><span class="gene-symbol">Allèle récessif</span> : ne s’exprime qu’à l’état homozygote (ex: <strong>a</strong>). Noté par une lettre minuscule.</li>
+                        <li><span class="gene-symbol">Génotype</span> : combinaison d’allèles (ex: AA, Aa, aa).</li>
+                        <li><span class="gene-symbol">Phénotype</span> : caractère observable (ex: robe noire ou blanche chez le porc).</li>
+                        <li>Première loi de Mendel (loi d’uniformité) : croisement de deux lignées pures → hybrides F1 tous identiques (hétérozygotes).</li>
+                        <li>Deuxième loi de Mendel (loi de ségrégation) : en F2, les allèles se séparent dans les gamètes → proportions génotypiques 1:2:1 et phénotypiques 3:1 (dominance complète).</li>
+                    </ul>
+                    <!-- Schéma explicatif du croisement monohybride -->
+                    <div class="schema-placeholder">
+                        <img src="" alt="Schéma d’un croisement monohybride entre deux porcs : lignée pure noire (AA) × lignée pure blanche (aa) → F1 tous noirs (Aa) → F2 3 noirs : 1 blanc." style="max-width:100%; border-radius:0.5rem;">
+                        <div class="schema-caption">📷 Figure 1 : Exemple de monohybridisme chez le porc (référence examen session 2025).</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Brassage interchromosomique : source majeure de diversité</h3>
+                    <p class="card-description">
+                        Le <strong>brassage interchromosomique</strong> (ou indépendance des chromosomes) résulte de la <strong>ségrégation indépendante</strong> des paires de chromosomes homologues lors de la méiose (anaphase I). 
+                        Chaque paire de chromosomes se distribue aléatoirement dans les gamètes, créant $2^n$ combinaisons possibles (n = nombre de paires de chromosomes).
+                    </p>
+                    <ul class="concept-list">
+                        <li>Pour un individu double hétérozygote (<span class="gene-symbol">AaBb</span>) avec gènes sur chromosomes différents → production de 4 types de gamètes équiprobables : <strong>AB, Ab, aB, ab</strong>.</li>
+                        <li>Ce brassage explique la diversité génétique des descendants et la recombinaison des caractères indépendants.</li>
+                        <li>Contrairement au <strong>brassage intrachromosomique</strong> (crossing-over) qui mélange les allèles d’une même paire de chromosomes.</li>
+                        <li>Conséquence : dans un croisement dihybride (deux caractères), on obtient des proportions 9:3:3:1 si les gènes sont indépendants.</li>
+                    </ul>
+                    <div class="schema-placeholder">
+                        <img src="" alt="Schéma de la méiose montrant deux paires de chromosomes homologues se séparant indépendamment : deux dispositions possibles en métaphase I conduisant à 4 gamètes différents." style="max-width:100%; border-radius:0.5rem;">
+                        <div class="schema-caption">📷 Figure 2 : Brassage interchromosomique – disjonction aléatoire des chromosomes homologues en anaphase I.</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Lien avec les examens (Session 2025 – Monohybridisme chez le porc)</h3>
+                    <p class="card-description">
+                        L’épreuve de SVTEEHB 2025 Partie A a porté sur l’étude d’un croisement monohybride chez le porc (caractère « couleur de la robe »). 
+                        Les résultats montraient une dominance de l’allèle « noir » sur l’allèle « blanc ». L’analyse des effectifs F2 permettait de vérifier la ségrégation 3:1 et de calculer les probabilités génotypiques.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Étape 1 : Déterminer l’allèle dominant et récessif à partir des résultats F1 (tous identiques).</li>
+                        <li>Étape 2 : Écrire l’échiquier de croisement (croisement de deux hétérozygotes F1 × F1).</li>
+                        <li>Étape 3 : Calculer les fréquences phénotypiques et génotypiques attendues.</li>
+                        <li>Formule clé : $ \text{Effectif théorique} = \text{Total} \times \frac{\text{proportion}}{1} $</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples concrets -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Examen 2025 : Monohybridisme chez le porc (couleur noire dominante)</h3>
+                    <p class="exemple-context">
+                        On croise une truie de race pure noire (AA) avec un verrat de race pure blanc (aa). 
+                        Les descendants F1 sont tous noirs. En croisant deux F1 entre eux, on obtient 120 porcelets F2.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong><br>
+                        1. Phénotypes et génotypes : Noir dominant (A), blanc récessif (a). F1 = Aa (noirs).<br>
+                        2. Croisement F1 × F1 : Aa × Aa → échiquier : 
+                        <br>&nbsp;&nbsp;Gamètes : 1/2 A, 1/2 a. 
+                        <br>&nbsp;&nbsp;Génotypes F2 : 1/4 AA (noir), 1/2 Aa (noir), 1/4 aa (blanc).<br>
+                        3. Proportions phénotypiques : 3/4 noirs (AA + Aa), 1/4 blancs (aa).<br>
+                        4. Sur 120 porcelets : noirs = $120 \times 3/4 = 90$ ; blancs = $120 \times 1/4 = 30$.<br>
+                        ✅ <strong>Interprétation génétique :</strong> les résultats confirment la ségrégation mendélienne et le brassage des allèles lors de la formation des gamètes.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce bac : Pour tout croisement monohybride avec dominance complète, retenez les rapports phénotypiques 3:1 en F2. Utilisez un échiquier de croisement pour éviter les erreurs.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Application du brassage interchromosomique</h3>
+                    <p class="exemple-context">
+                        Chez le porc, supposons deux gènes indépendants : gène A (couleur robe : A noir, a blanc) et gène B (forme oreille : B droite dominante, b tombante). 
+                        Un individu double hétérozygote (AaBb) est croisé avec un individu homozygote récessif (aabb). Quels sont les phénotypes attendus chez les descendants ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Démarche :</strong><br>
+                        - L’individu AaBb produit 4 types de gamètes en proportions égales grâce au brassage interchromosomique : AB, Ab, aB, ab (25% chacun).<br>
+                        - L’individu aabb ne produit qu’un seul type de gamète : ab.<br>
+                        - Union des gamètes :<br>
+                        &nbsp;&nbsp;AB × ab → AaBb (noir, oreille droite)<br>
+                        &nbsp;&nbsp;Ab × ab → Aabb (noir, oreille tombante)<br>
+                        &nbsp;&nbsp;aB × ab → aaBb (blanc, oreille droite)<br>
+                        &nbsp;&nbsp;ab × ab → aabb (blanc, oreille tombante)<br>
+                        - Proportion : 1/4 pour chaque combinaison phénotypique. C’est le résultat typique d’un test-cross avec gènes indépendants.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 À retenir : Le brassage interchromosomique augmente considérablement la diversité des gamètes et donc des descendants. Deux gènes indépendants produisent $2^2 = 4$ gamètes différents.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges fréquents -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & à ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>brassage interchromosomique</strong> (indépendance des paires de chromosomes) et <strong>brassage intrachromosomique</strong> (crossing-over). Le premier concerne les gènes portés par des chromosomes différents, le second les gènes liés sur un même chromosome.</li>
+                        <li><span class="bold">Attention :</span> Dans un monohybridisme, ne jamais oublier de préciser le type de dominance (complète, incomplète, codominance). L’examen évalue souvent la dominance complète avec les rapports 3:1.</li>
+                        <li><span class="bold">Piège classique :</span> Oublier que le brassage interchromosomique n’a lieu que si les gènes sont situés sur des <strong>paires de chromosomes différentes</strong>. Si les gènes sont liés, les proportions diffèrent.</li>
+                        <li><span class="bold">Erreur de calcul :</span> mal appliquer le test statistique du χ² pour valider les proportions théoriques. Vérifiez que la somme des effectifs observés correspond bien au total.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section récapitulative des formules et schémas utiles -->
+            <section class="concept-section">
+                <h2 class="section-title">📐 Formules & outils pratiques</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Échiquier de croisement (monohybridisme)</h3>
+                    <p class="card-description">
+                        Pour deux parents hétérozygotes Aa × Aa :
+                    </p>
+                    <div style="overflow-x: auto; margin: 1rem 0;">
+                        <table style="width:100%; border-collapse: collapse; text-align: center; background: #f8fafc;">
+                            <tr><td style="border:1px solid #cbd5e1; padding:8px;"></td><td style="border:1px solid #cbd5e1; padding:8px;"><strong>½ A</strong></td><td style="border:1px solid #cbd5e1; padding:8px;"><strong>½ a</strong></td></tr>
+                            <tr><td style="border:1px solid #cbd5e1; padding:8px;"><strong>½ A</strong></td><td style="border:1px solid #cbd5e1; padding:8px;">¼ AA</td><td style="border:1px solid #cbd5e1; padding:8px;">¼ Aa</td></tr>
+                            <tr><td style="border:1px solid #cbd5e1; padding:8px;"><strong>½ a</strong></td><td style="border:1px solid #cbd5e1; padding:8px;">¼ Aa</td><td style="border:1px solid #cbd5e1; padding:8px;">¼ aa</td></tr>
+                        </table>
+                    </div>
+                    <p>Rapport génotypique : <span class="formule">1 AA : 2 Aa : 1 aa</span> &nbsp;&nbsp;|&nbsp;&nbsp; Rapport phénotypique (dominance complète) : <span class="formule">3 [A] : 1 [a]</span></p>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Nombre de gamètes différents produits</h3>
+                    <p class="card-description">
+                        Pour un individu possédant n paires de gènes hétérozygotes sur des chromosomes différents, le nombre de types de gamètes = <span class="formule">$2^n$</span>.
+                        Exemple : AaBbCc → $2^3 = 8$ gamètes différents.
+                    </p>
+                    <div class="schema-placeholder">
+                        <img src="" alt="Illustration : pour 2 paires de chromosomes homologues (n=2), métaphase I montrant les deux arrangements possibles conduisant à 4 combinaisons gamétiques différentes." style="max-width:100%; border-radius:0.5rem;">
+                        <div class="schema-caption">📷 Figure 3 : Brassage interchromosomique – disposition aléatoire des bivalents en plaque équatoriale.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lien avec le contexte camerounais et conseils examen -->
+            <section class="exemple-section">
+                <h2 class="section-title">🎯 Focus examen & conseils pratiques</h2>
+                <div class="card exemple-card" style="border-left-color: #f59e0b;">
+                    <h3 class="card-title" style="color: #b45309;">Sujet type session 2025 (porc)</h3>
+                    <p class="exemple-context">
+                        L’épreuve de SVTEEHB évalue votre capacité à interpréter des résultats de croisements, calculer des proportions, et justifier le brassage génétique.
+                    </p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 0.5rem;">
+                        <li>✔ Lisez attentivement le tableau des effectifs (parents, F1, F2).</li>
+                        <li>✔ Déterminez le mode de transmission (dominant/récessif) en comparant F1 et parents.</li>
+                        <li>✔ Pour le brassage interchromosomique, on attend une explication de la disjonction indépendante des chromosomes en anaphase I de méiose.</li>
+                        <li>✔ N’oubliez pas de citer l’échiquier de croisement et les proportions théoriques.</li>
+                    </ul>
+                    <div class="exemple-astuce">
+                        💬 Rédigez toujours une phrase de conclusion qui relie les résultats observés aux mécanismes cellulaires (méiose, ségrégation des allèles).
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme SVTEEHB Terminale C (2025-2026) · Révision pour l’examen · 🔬 Brassage génétique & Monohybridisme</p>
+        </footer>
+    </div>
+</body>
+</html>

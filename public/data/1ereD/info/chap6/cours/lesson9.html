@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Bases de données (Leçon 9)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petit style supplémentaire pour les illustrations fictives */
+        .db-schema {
+            background-color: #f1f5f9;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            font-family: monospace;
+            font-size: 0.85rem;
+            border: 1px solid #cbd5e1;
+            margin: 1rem 0;
+        }
+        .db-schema span {
+            background-color: #e2e8f0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 0.2rem;
+        }
+        .schema-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">📀 Leçon 9 : Généralités sur les bases de données</h1>
+            <p class="lesson-subtitle">Informatique · Première C, D, E (Cameroun) · Module 1 - Unité d’apprentissage 6</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+
+                <!-- Carte : Qu'est-ce qu'une base de données ? -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🗄️ Base de données (BD) : définition</h3>
+                    <p class="card-description">
+                        Une <strong>base de données</strong> est un <span class="formule">ensemble structuré de données</span> stockées de façon organisée, permettant de conserver, consulter, modifier et gérer efficacement des informations.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Elle évite la redondance (données dupliquées) et garantit la cohérence.</li>
+                        <li>Exemple : la base de données d’un lycée contient les élèves, les professeurs, les notes, les classes.</li>
+                        <li>Les données sont indépendantes des programmes qui les utilisent.</li>
+                    </ul>
+                    <!-- Image illustrative (générée par IA / schéma conceptuel) -->
+                    <img src="" alt="Schéma conceptuel d'une base de données montrant plusieurs tables liées (élèves, classes, notes)" style="max-width: 100%; margin-top: 0.75rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+                </div>
+
+                <!-- Carte : SGBD (Système de Gestion de Base de Données) -->
+                <div class="card concept-card">
+                    <h3 class="card-title">⚙️ SGBD : le moteur de la base</h3>
+                    <p class="card-description">
+                        Un <strong>Système de Gestion de Base de Données (SGBD)</strong> est un logiciel qui permet de créer, manipuler et administrer une base de données. 
+                        Il sert d’<strong>interface</strong> entre les utilisateurs (ou applications) et les données stockées.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Exemples de SGBD :</strong> MySQL, PostgreSQL, Oracle, Microsoft Access, SQLite.</li>
+                        <li><strong>Fonctions principales :</strong> ajout, modification, suppression, recherche, sécurisation des accès, gestion des sauvegardes.</li>
+                        <li>Un SGBD garantit les propriétés ACID (Atomicité, Cohérence, Isolation, Durabilité).</li>
+                    </ul>
+                    <div class="db-schema">
+                        <div class="schema-title">📁 Utilisateur ⇄ SGBD ⇄ Base de données</div>
+                        <span>👨‍💻 Application</span> → <span>🛢️ SGBD (MySQL)</span> → <span>💾 Fichiers .ibd / .mdf</span>
+                    </div>
+                </div>
+
+                <!-- Carte : Organisation des données - tables, enregistrements, champs -->
+                <div class="card concept-card">
+                    <h3 class="card-title">📊 Organisation : tables, lignes, colonnes</h3>
+                    <p class="card-description">
+                        Dans une base de données relationnelle, les données sont organisées en <strong>tables</strong> (comme des classeurs Excel). 
+                        Chaque table contient des <strong>lignes (enregistrements)</strong> et des <strong>colonnes (champs)</strong>.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Champ (colonne)</strong> : une catégorie d’information (ex: Nom, Prénom, Date de naissance).</li>
+                        <li><strong>Enregistrement (ligne)</strong> : un ensemble de valeurs correspondant à un élément unique (ex: les infos d’un élève).</li>
+                        <li><strong>Clé primaire (Primary Key)</strong> : champ (ou combinaison) qui identifie chaque enregistrement de façon unique. Ne peut pas être nul.</li>
+                    </ul>
+                    <!-- Petit tableau d'exemple en HTML -->
+                    <div style="overflow-x: auto; margin-top: 0.75rem;">
+                        <table style="width: 100%; border-collapse: collapse; background-color: #f8fafc; border-radius: 12px; overflow: hidden;">
+                            <thead style="background-color: #2563eb; color: white;">
+                                <tr>
+                                    <th style="padding: 8px; border: 1px solid #cbd5e1;">📌 ID_Élève (clé primaire)</th>
+                                    <th style="padding: 8px; border: 1px solid #cbd5e1;">Nom</th>
+                                    <th style="padding: 8px; border: 1px solid #cbd5e1;">Prénom</th>
+                                    <th style="padding: 8px; border: 1px solid #cbd5e1;">Classe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="padding: 8px; border: 1px solid #cbd5e1;">101</td><td style="padding: 8px; border: 1px solid #cbd5e1;">Djoumessi</td><td style="padding: 8px; border: 1px solid #cbd5e1;">Léa</td><td style="padding: 8px; border: 1px solid #cbd5e1;">Première C</td></tr>
+                                <tr><td style="padding: 8px; border: 1px solid #cbd5e1;">102</td><td style="padding: 8px; border: 1px solid #cbd5e1;">Fouda</td><td style="padding: 8px; border: 1px solid #cbd5e1;">Kevin</td><td style="padding: 8px; border: 1px solid #cbd5e1;">Première D</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="card-description" style="margin-top: 0.75rem; font-size: 0.9rem;">
+                        🔑 <strong>Clé primaire</strong> : la colonne <code>ID_Élève</code> est unique pour chaque ligne (101, 102...). On ne peut pas avoir deux fois le même ID.
+                    </p>
+                </div>
+
+                <!-- Carte : Intérêt et avantages d'une base de données -->
+                <div class="card concept-card">
+                    <h3 class="card-title">✅ Pourquoi utiliser une base de données ?</h3>
+                    <ul class="concept-list">
+                        <li><strong>Centralisation</strong> : les données sont regroupées au même endroit.</li>
+                        <li><strong>Réduction des redondances</strong> : on évite de stocker plusieurs fois la même information.</li>
+                        <li><strong>Sécurité</strong> : contrôle d’accès (mots de passe, droits utilisateurs).</li>
+                        <li><strong>Intégrité des données</strong> : respect de contraintes (ex: âge positif, unicité d’un email).</li>
+                        <li><strong>Interrogation puissante</strong> : avec le langage SQL (SELECT, INSERT, UPDATE, DELETE).</li>
+                        <li><strong>Indépendance</strong> : les données persistent même si l’application est fermée.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">🏫 Exemple 1 : Base de données d’un collège</h3>
+                    <p class="exemple-context">
+                        Dans un établissement scolaire, on souhaite stocker les informations suivantes : 
+                        <strong>élèves</strong> (matricule, nom, prénom, date de naissance, classe) et <strong>professeurs</strong> (id_prof, nom, matière, téléphone).
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>🔍 Analyse :</strong> On crée deux tables distinctes : <code>Élèves</code> et <code>Professeurs</code>. 
+                        La table <code>Élèves</code> utilise <strong>matricule</strong> comme clé primaire (chaque élève a un matricule unique). 
+                        La table <code>Professeurs</code> utilise <strong>id_prof</strong> comme clé primaire. 
+                        Les deux tables sont indépendantes mais peuvent être reliées par une troisième table <code>Cours</code> (non détaillée ici).
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Toujours chercher l’identifiant unique (naturel ou créé) pour chaque ligne. 
+                        Un nom ne suffit jamais (plusieurs élèves peuvent s’appeler "Marie").
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">🛒 Exemple 2 : Base de données d’un site e-commerce</h3>
+                    <p class="exemple-context">
+                        Un site de vente en ligne gère des produits, des clients et des commandes. 
+                        Pour chaque produit, on a : <strong>référence</strong>, <strong>désignation</strong>, <strong>prix</strong>, <strong>stock</strong>.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>✅ Solution :</strong> Table <code>Produits</code> avec la colonne <strong>référence</strong> comme clé primaire (valeur unique : "P102", "P203"...). 
+                        Le champ <code>prix</code> doit être un nombre décimal positif ; le <code>stock</code> un entier positif (contrainte d’intégrité).
+                    </p>
+                    <div class="db-schema" style="background-color: #eef2ff;">
+                        <span>📦 Produits (référence PK, désignation, prix, stock)</span> ← lié à → <span>🧾 Commandes (num_cmd PK, date, client_id)</span>
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 À retenir : Les bases de données évitent la saisie redondante. 
+                        Dans une commande, on stocke seulement la référence du produit, pas toutes ses caractéristiques.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">📝 Exercice-type (examen)</h3>
+                    <p class="exemple-context">
+                        On donne la table suivante nommée <code>Employés</code> :<br>
+                        | ID (PK) | Nom      | Salaire | Service       |<br>
+                        | 1       | Manga    | 250 000 | Informatique  |<br>
+                        | 2       | Njikam   | 300 000 | Comptabilité  |<br>
+                        | 3       | Atangana | 275 000 | Informatique  |
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Questions :</strong><br>
+                        1. Quel est le champ clé primaire ? <span class="formule">ID</span> (car chaque valeur est différente et non nulle).<br>
+                        2. Combien d’enregistrements contient la table ? <span class="formule">3 enregistrements</span> (chaque ligne).<br>
+                        3. Citer deux champs de la table : <span class="formule">Salaire, Service</span>.<br>
+                        4. Proposer une contrainte d’intégrité : <span class="formule">Salaire > 0</span> et <span class="formule">Service non vide</span>.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Pièges courants / à ne pas confondre -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & erreurs fréquentes</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre base de données et SGBD :</span> La base de données est le <strong>contenu</strong> (les données), le SGBD est le <strong>logiciel</strong> qui la gère (MySQL, Access…).</li>
+                        <li><span class="bold">Négliger la clé primaire :</span> Chaque table doit idéalement avoir une clé primaire ; sans elle, on risque des doublons.</li>
+                        <li><span class="bold">Stockage d’informations calculées :</span> Dans une bonne base, on évite de stocker l’âge (qui change chaque année) ; on stocke la date de naissance.</li>
+                        <li><span class="bold">Redondance incontrôlée :</span> Exemple : stocker le nom du service dans chaque ligne d’employés au lieu d’une table séparée "Services".</li>
+                        <li><span class="bold">Ne pas respecter le type de données :</span> Mettre du texte dans une colonne prévue pour des nombres (ex: "dix" au lieu de 10).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section mémo rapide : vocabulaire essentiel -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 Glossaire express (à mémoriser)</h2>
+                <div class="card concept-card">
+                    <ul class="concept-list">
+                        <li><strong>Base de données (BD)</strong> : ensemble structuré de données.</li>
+                        <li><strong>SGBD</strong> : Système de Gestion de Base de Données (logiciel).</li>
+                        <li><strong>Table</strong> : structure en lignes et colonnes.</li>
+                        <li><strong>Champ (colonne)</strong> : propriété ou attribut (ex: "Nom").</li>
+                        <li><strong>Enregistrement (ligne, tuple)</strong> : instance concrète (ex: "Durand, Paul").</li>
+                        <li><strong>Clé primaire (Primary Key)</strong> : identifiant unique d’un enregistrement.</li>
+                        <li><strong>Contrainte d’intégrité</strong> : règle assurant la cohérence des données (ex: "note comprise entre 0 et 20").</li>
+                    </ul>
+                    <!-- image illustrative schéma relation -->
+                    <img src="" alt="Illustration d'une base de données relationnelle avec trois tables (Clients, Commandes, Produits) et des flèches représentant les clés primaires/étrangères" style="max-width: 100%; margin-top: 1rem; border-radius: 12px; border: 1px solid #e2e8f0;">
+                </div>
+            </section>
+
+            <!-- Lien avec le programme officiel (UE9) -->
+            <div style="background-color: #eef2ff; border-radius: 1rem; padding: 1rem; margin: 1rem 0 0.5rem; text-align: center; font-size: 0.85rem; border-left: 5px solid #2563eb;">
+                🎯 <strong>Objectifs UE9 atteints :</strong> Définir une base de données, définir un SGBD, connaître la structuration en tables, comprendre l’importance des clés primaires et des contraintes.
+            </div>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📚 Fiche de révision – Leçon 9 : Généralités sur les bases de données · Probatoire C, D, E (Cameroun) · Inspiré du programme officiel de l'Informatique · ✨</p>
+            <p style="margin-top: 0.3rem;">🔁 Relisez ces concepts, testez-vous avec les exemples, et pratiquez la création de petites tables sur papier !</p>
+        </footer>
+    </div>
+</body>
+</html>

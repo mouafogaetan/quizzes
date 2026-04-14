@@ -1,0 +1,112 @@
+[
+  {
+    "intitule": "Fonctions conditionnelles et statistiques de base",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Un enseignant a saisi les notes de sa classe de Terminale D dans un tableur. Les colonnes sont les suivantes : Nom, Prénom, Note1 (coefficient 2), Note2 (coefficient 3), Note3 (coefficient 1). Les notes sont sur 20.</p><p>Voici un extrait des données :</p><ul><li>Cellule A2 : DUPONT, B2 : Jean, C2 : 12, D2 : 14, E2 : 10</li><li>Cellule A3 : MBIAM, B3 : Paul, C3 : 8, D3 : 11, E3 : 9</li><li>Cellule A4 : NDJOCK, B4 : Alice, C4 : 15, D4 : 16, E4 : 14</li></ul><p>En utilisant les fonctions vues en cours (SI, SOMME.SI, NB.SI, MOYENNE), répondez aux questions suivantes. Les formules doivent être écrites comme si vous les tapiez dans le tableur (exemple : <code>=SOMME(A1:A10)</code>).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier la formule à écrire dans la cellule F2 pour calculer la moyenne pondérée de Jean DUPONT (Note1 coef 2, Note2 coef 3, Note3 coef 1).",
+        "niveau": "easy",
+        "reponse": "<p><code>=(C2*2 + D2*3 + E2*1)/(2+3+1)</code> ou <code>=SOMME(C2*2; D2*3; E2*1)/6</code></p><p><strong>Explication :</strong> La moyenne pondérée se calcule en multipliant chaque note par son coefficient, en additionnant ces produits, puis en divisant par la somme des coefficients.</p>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire la formule utilisant la fonction conditionnelle SI pour afficher le message \"Admis\" dans la colonne G si la moyenne (colonne F) est supérieure ou égale à 10, et \"Non admis\" sinon. On suppose que la moyenne de Jean DUPONT est en F2.",
+        "niveau": "easy",
+        "reponse": "<p><code>=SI(F2>=10; \"Admis\"; \"Non admis\")</code></p><p><strong>Explication :</strong> La fonction SI teste une condition logique. Si la condition (F2>=10) est vraie, elle retourne \"Admis\" ; sinon, elle retourne \"Non admis\".</p>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Expliquer la différence entre une référence relative (ex: C2) et une référence absolue (ex: $C$2). Donner un exemple d'utilisation de la référence absolue.",
+        "niveau": "medium",
+        "reponse": "<p><strong>Référence relative (C2) :</strong> Lorsqu'on recopie la formule vers le bas ou vers la droite, la référence s'ajuste automatiquement (C2 devient C3, C4, etc.).</p><p><strong>Référence absolue ($C$2) :</strong> La référence reste fixe, quelle que soit la direction de recopie. On utilise le symbole $ devant la colonne et la ligne.</p><p><strong>Exemple :</strong> Pour multiplier chaque note d'une colonne par un coefficient fixe situé en $B$1, on écrira <code>=C2*$B$1</code> dans la première cellule. En recopiant la formule, $B$1 reste constant.</p>",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Analyse des résultats d'un examen",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans le cadre de la préparation au baccalauréat, vous êtes chargé(e) d'analyser les résultats d'un examen de Mathématiques pour 50 élèves de Terminale C. Vous disposez d'un tableur contenant les notes sur 20 dans la colonne B (de B2 à B51).</p><p>La moyenne de la classe est de 10,5. Vous devez produire des statistiques pour le conseil de classe.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la formule permettant de compter le nombre d'élèves ayant obtenu une note strictement supérieure à 12/20.",
+        "niveau": "easy",
+        "reponse": "<p><code>=NB.SI(B2:B51; \">12\")</code></p><p><strong>Explication :</strong> NB.SI compte le nombre de cellules dans une plage qui satisfont un critère donné. Ici, on compte les notes >12.</p>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire la formule permettant de calculer la somme des notes des élèves qui ont échoué (note < 10/20).",
+        "niveau": "medium",
+        "reponse": "<p><code>=SOMME.SI(B2:B51; \"<10\")</code></p><p><strong>Explication :</strong> SOMME.SI additionne les cellules d'une plage qui répondent à un critère. Ici, on additionne toutes les notes inférieures à 10.</p>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Le professeur souhaite attribuer une mention : \"Excellent\" pour une note >= 16, \"Bien\" pour une note entre 14 et 15,99, \"Assez bien\" entre 12 et 13,99, \"Passable\" entre 10 et 11,99, et \"Insuffisant\" pour note < 10. Écrire la formule utilisant la fonction SI imbriquée pour déterminer la mention d'un élève dont la note est en B2.",
+        "niveau": "hard",
+        "reponse": "<p><code>=SI(B2>=16;\"Excellent\";SI(B2>=14;\"Bien\";SI(B2>=12;\"Assez bien\";SI(B2>=10;\"Passable\";\"Insuffisant\"))))</code></p><p><strong>Explication :</strong> On utilise des SI imbriqués (un SI à l'intérieur d'un autre). La fonction évalue les conditions de la plus restrictive à la moins restrictive. Notez que l'ordre des conditions est crucial.</p>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Calculer le pourcentage d'élèves ayant obtenu la mention \"Bien\" ou plus (note >= 14). Donner la formule complète.",
+        "niveau": "medium",
+        "reponse": "<p><code>=NB.SI(B2:B51;\">=14\") / NBVAL(B2:B51) * 100</code></p><p><strong>Explication :</strong> NB.SI compte les notes >=14. NBVAL compte le nombre total de notes (élèves). On divise puis on multiplie par 100 pour obtenir le pourcentage.</p>",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Gestion des stocks dans une petite entreprise",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Vous êtes stagiaire dans une PME camerounaise de vente de fournitures informatiques. On vous confie le fichier de gestion des stocks. Le tableau ci-dessous présente une partie des données.</p><table border=\"1\" style=\"border-collapse: collapse; width: 100%;\"><tr><th>Produit</th><th>Catégorie</th><th>Stock initial</th><th>Ventes du mois</th><th>Prix unitaire (FCFA)</th><th>Stock final</th><th>Réapprovisionnement ?</th></tr><tr><td>Souris USB</td><td>Périphérique</td><td>50</td><td>30</td><td>2500</td><td></td><td></td></tr><tr><td>Clavier AZERTY</td><td>Périphérique</td><td>25</td><td>15</td><td>5000</td><td></td><td></td></tr><tr><td>Disque dur 1To</td><td>Stockage</td><td>10</td><td>8</td><td>55000</td><td></td><td></td></tr><tr><td>Clé USB 32Go</td><td>Stockage</td><td>100</td><td>45</td><td>3500</td><td></td><td></td></tr></table><p>Les données commencent à la ligne 2. Les colonnes sont : A (Produit), B (Catégorie), C (Stock initial), D (Ventes), E (Prix unitaire), F (Stock final), G (Réapprovisionnement ?).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Calculer le stock final (Stock initial - Ventes) dans la colonne F pour le premier produit (ligne 2). Écrire la formule.",
+        "niveau": "easy",
+        "reponse": "<p><code>=C2-D2</code></p><p><strong>Explication :</strong> Le stock final est la différence entre le stock initial et les ventes.</p>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Dans la colonne G, on veut afficher \"Oui\" si le stock final est inférieur au seuil d'alerte de 20 unités pour les périphériques et 15 unités pour le stockage, sinon \"Non\". Écrire la formule pour la ligne 2 (Produit : Souris USB, Catégorie : Périphérique).",
+        "niveau": "hard",
+        "reponse": "<p><code>=SI( ET(B2=\"Périphérique\"; F2<20); \"Oui\"; SI( ET(B2=\"Stockage\"; F2<15); \"Oui\"; \"Non\"))</code></p><p><strong>Explication :</strong> On utilise la fonction ET pour vérifier deux conditions simultanément : la catégorie et le seuil. On imbrique deux SI pour gérer les deux catégories. Si aucune condition n'est vraie, on affiche \"Non\".</p>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Le gérant veut connaître le chiffre d'affaires total généré par la catégorie \"Stockage\". Le chiffre d'affaires par produit est (Ventes * Prix unitaire). Écrire la formule unique utilisant SOMME.SI.",
+        "niveau": "hard",
+        "reponse": "<p><code>=SOMME.SI(B2:B5; \"Stockage\"; D2:D5*E2:E5)</code> n'est pas valide directement. Il faut soit :</p><p><strong>Solution 1 (avec une colonne intermédiaire) :</strong> En H2 : <code>=D2*E2</code> puis recopier. Ensuite <code>=SOMME.SI(B2:B5; \"Stockage\"; H2:H5)</code></p><p><strong>Solution 2 (formule matricielle) :</strong> <code>=SOMME( (B2:B5=\"Stockage\") * (D2:D5) * (E2:E5) )</code> à valider par Ctrl+Maj+Entrée selon le tableur.</p><p><strong>Explication :</strong> SOMME.SI standard ne permet pas de multiplier deux plages dans le critère. On utilise une colonne auxiliaire ou une formule matricielle.</p>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Calculer la moyenne des prix unitaires des produits de la catégorie \"Périphérique\" en utilisant la fonction MOYENNE.SI.",
+        "niveau": "medium",
+        "reponse": "<p><code>=MOYENNE.SI(B2:B5; \"Périphérique\"; E2:E5)</code></p><p><strong>Explication :</strong> MOYENNE.SI calcule la moyenne des cellules d'une plage (E2:E5) qui correspondent à un critère (\"Périphérique\") dans une autre plage (B2:B5).</p><p><strong>Résultat :</strong> (2500 + 5000) / 2 = 3750 FCFA.</p>",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

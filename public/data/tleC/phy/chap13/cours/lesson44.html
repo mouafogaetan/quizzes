@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 44 : Loi de décroissance radioactive</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            line-height: 1.5;
+            color: #0f172a;
+        }
+
+        .fiche {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 1.8rem 2.5rem;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.01em;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badge {
+            background-color: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1.5rem;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 5px solid #3b82f6;
+            padding-left: 15px;
+        }
+
+        .section-title i {
+            font-style: normal;
+            font-size: 1.5rem;
+        }
+
+        .card-concept {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            transition: 0.1s;
+        }
+
+        .card-concept h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .formula {
+            background: #eef2ff;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 1.05rem;
+            margin: 0.8rem 0;
+            text-align: center;
+            font-weight: 500;
+            color: #1e40af;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .list-styled {
+            padding-left: 1.2rem;
+            margin: 0.8rem 0;
+        }
+
+        .list-styled li {
+            margin-bottom: 0.4rem;
+        }
+
+        .remark {
+            background: #fef9c3;
+            border-left: 4px solid #eab308;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .link-bac {
+            background: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background-color: #f1f5f9;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.75rem;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 700px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .header {
+                padding: 1.2rem 1.5rem;
+            }
+            .grid-2cols {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche">
+    <div class="header">
+        <h1>📘 Leçon 44 : Loi de décroissance radioactive & Activité</h1>
+        <div class="subtitle">
+            <span>⚛️ Module 5 – Physique Nucléaire</span>
+            <span class="badge">🎯 Baccalauréat 2023-2025</span>
+        </div>
+        <div style="margin-top: 12px; font-size: 0.85rem;">🔬 Terminale C & D – Programme officiel Cameroun</div>
+    </div>
+
+    <div class="content">
+        <!-- OBJECTIFS -->
+        <div class="section">
+            <div class="section-title">
+                <span>🎯 OBJECTIFS PÉDAGOGIQUES</span>
+            </div>
+            <ul class="list-styled">
+                <li>✅ Énoncer et appliquer la <strong>loi de décroissance radioactive</strong> \( N(t) = N_0 e^{-\lambda t} \).</li>
+                <li>✅ Définir la <strong>constante radioactive</strong> \( \lambda \), la <strong>demi-vie</strong> \( T_{1/2} \) et la <strong>constante de temps</strong> \( \tau \).</li>
+                <li>✅ Calculer le nombre de noyaux restants, l’activité \( A(t) \) d’une source radioactive.</li>
+                <li>✅ Résoudre des exercices type Bac sur la datation, la masse restante ou l’activité.</li>
+            </ul>
+            <div class="link-bac">
+                📌 <strong>Lien Bac 2023 – 2025 :</strong> Calcul de masse restante, âge d’un échantillon, activité et demi-vie.
+            </div>
+        </div>
+
+        <!-- NOTIONS CLÉS -->
+        <div class="section">
+            <div class="section-title">
+                <span>🧠 NOTIONS CLÉS & DÉFINITIONS</span>
+            </div>
+            <div class="grid-2cols">
+                <div class="card-concept">
+                    <h3>📉 Loi de décroissance exponentielle</h3>
+                    <p>Le nombre de noyaux radioactifs diminue au cours du temps selon une exponentielle décroissante :</p>
+                    <div class="formula">\( N(t) = N_0 \cdot e^{-\lambda t} \)</div>
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li>\( N_0 \) : nombre initial de noyaux (à \( t = 0 \))</li>
+                        <li>\( N(t) \) : nombre à l’instant \( t \)</li>
+                        <li>\( \lambda \) : constante radioactive (\( s^{-1} \))</li>
+                    </ul>
+                </div>
+                <div class="card-concept">
+                    <h3>⏳ Demi-vie \( T_{1/2} \)</h3>
+                    <p>Temps au bout duquel la moitié des noyaux initialement présents se sont désintégrés.</p>
+                    <div class="formula">\( N(T_{1/2}) = \dfrac{N_0}{2} \)</div>
+                    <div class="formula">\( T_{1/2} = \dfrac{\ln 2}{\lambda} = \dfrac{0,693}{\lambda} \)</div>
+                    <p><strong>📌 Unité :</strong> seconde, année, etc. selon le nucléide.</p>
+                </div>
+                <div class="card-concept">
+                    <h3>⏱️ Constante de temps \( \tau \)</h3>
+                    <p>Durée caractéristique de la décroissance. Après \( t = \tau \), \( N(\tau) = N_0 / e \approx 0,37 N_0 \).</p>
+                    <div class="formula">\( \tau = \dfrac{1}{\lambda} \)</div>
+                    <p>Relation : \( T_{1/2} = \tau \cdot \ln 2 \).</p>
+                </div>
+                <div class="card-concept">
+                    <h3>⚡ Activité radioactive \( A(t) \)</h3>
+                    <p>Nombre de désintégrations par seconde. Exprimée en <strong>Becquerel (Bq)</strong>.</p>
+                    <div class="formula">\( A(t) = \lambda \cdot N(t) = A_0 \cdot e^{-\lambda t} \)</div>
+                    <p>Avec \( A_0 = \lambda N_0 \) l’activité initiale.</p>
+                    <p><em>1 Bq = 1 désintégration/seconde.</em></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DÉMONSTRATION ET ÉQUATIONS -->
+        <div class="section">
+            <div class="section-title">
+                <span>📐 LOI DE DÉCROISSANCE – DÉMARCHE MATHÉMATIQUE</span>
+            </div>
+            <div class="card-concept">
+                <h3>🔁 Équation différentielle de la décroissance</h3>
+                <p>La vitesse de disparition des noyaux est proportionnelle au nombre de noyaux présents :</p>
+                <div class="formula">\( \dfrac{dN}{dt} = -\lambda \, N(t) \)</div>
+                <p>La solution de cette équation différentielle donne la loi exponentielle :</p>
+                <div class="formula">\( N(t) = N_0 \, e^{-\lambda t} \)</div>
+                <div class="remark">
+                    💡 <strong>Méthode Bac :</strong> Retrouver \( \lambda \) à partir de \( T_{1/2} \) ou du graphique \(\ln(N) = f(t)\) (pente = \(-\lambda\)).
+                </div>
+            </div>
+
+            <div class="card-concept">
+                <h3>🧪 Activité et décroissance</h3>
+                <p>L’activité suit la même loi exponentielle :</p>
+                <div class="formula">\( A(t) = A_0 \, e^{-\lambda t} \)</div>
+                <p>On utilise souvent les relations :</p>
+                <ul class="list-styled">
+                    <li>\( \lambda = \dfrac{\ln 2}{T_{1/2}} \)</li>
+                    <li>\( N(t) = N_0 \cdot 2^{-t / T_{1/2}} \) (forme utile pour les calculs de demi-vies entières).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- APPLICATIONS & EXEMPLES BAC -->
+        <div class="section">
+            <div class="section-title">
+                <span>✍️ APPLICATIONS TYPIQUES (SUJETS BAC)</span>
+            </div>
+            <div class="grid-2cols">
+                <div class="card-concept">
+                    <h3>📆 Datation par le carbone 14</h3>
+                    <p>\( T_{1/2}(^{14}C) = 5730 \, \text{ans} \)</p>
+                    <p>On mesure l’activité résiduelle \( A \) et on compare à \( A_0 \) (activité d’un échantillon vivant).</p>
+                    <div class="formula">\( t = \dfrac{T_{1/2}}{\ln 2} \cdot \ln\left(\dfrac{A_0}{A}\right) \)</div>
+                </div>
+                <div class="card-concept">
+                    <h3>🧪 Calcul de masse restante</h3>
+                    <p>La masse d’un échantillon radioactif est proportionnelle au nombre de noyaux :</p>
+                    <div class="formula">\( m(t) = m_0 \cdot e^{-\lambda t} \)</div>
+                    <p>On peut déterminer la masse initiale ou le temps écoulé.</p>
+                </div>
+            </div>
+            <div class="card-concept">
+                <h3>📊 Représentation graphique</h3>
+                <p>Courbe \( N(t) \) exponentielle décroissante. Courbe \( \ln N(t) \) = droite affine : \( \ln N(t) = \ln N_0 - \lambda t \).<br>
+                La pente donne \( -\lambda \), l’ordonnée à l’origine \( \ln N_0 \).</p>
+                <div class="formula">\( \lambda = - \text{pente} \)</div>
+            </div>
+        </div>
+
+        <!-- EXERCICE RAPIDE + MÉTHODE -->
+        <div class="section">
+            <div class="section-title">
+                <span>⚙️ EXERCICE GUIDÉ (STYLE BAC)</span>
+            </div>
+            <div class="card-concept">
+                <p><strong>Énoncé :</strong> Le radon 222 (\( ^{222}_{86}Rn \)) a une demi-vie \( T_{1/2} = 3,8 \, \text{jours} \). Un échantillon contient initialement \( N_0 = 2,0 \times 10^{15} \) noyaux.</p>
+                <ol class="list-styled">
+                    <li>Calculer la constante radioactive \( \lambda \) en \( s^{-1} \).</li>
+                    <li>Combien de noyaux restent après 7,6 jours ?</li>
+                    <li>Déterminer l’activité initiale \( A_0 \) en Becquerel.</li>
+                </ol>
+                <div style="background:#eef2ff; border-radius: 12px; padding: 12px; margin-top: 12px;">
+                    <p><strong>✔️ Correction :</strong></p>
+                    <p>1. \( \lambda = \dfrac{\ln 2}{T_{1/2}} = \dfrac{0,693}{3,8 \times 24 \times 3600} \approx \dfrac{0,693}{328320} \approx 2,11 \times 10^{-6} \, s^{-1} \).</p>
+                    <p>2. Après 7,6 j = 2 × 3,8 j → 2 demi-vies : \( N = N_0 / 2^2 = 2,0 \times 10^{15} / 4 = 5,0 \times 10^{14} \) noyaux.</p>
+                    <p>3. \( A_0 = \lambda N_0 = (2,11 \times 10^{-6}) \times (2,0 \times 10^{15}) \approx 4,22 \times 10^{9} \, Bq \).</p>
+                </div>
+                <div class="remark">
+                    💡 <strong>Astuce Bac :</strong> Quand le temps est un multiple entier de \( T_{1/2} \), utilisez \( N = N_0 / 2^{n} \). Sinon, utilisez la forme exponentielle.
+                </div>
+            </div>
+        </div>
+
+        <!-- POINTS DE VIGILANCE -->
+        <div class="section">
+            <div class="section-title">
+                <span>⚠️ ERREURS FRÉQUENTES À ÉVITER</span>
+            </div>
+            <ul class="list-styled">
+                <li>❌ Confondre <strong>constante de temps \( \tau \)} et demi-vie \( T_{1/2} \)} : \( T_{1/2} = \tau \ln 2 \).</li>
+                <li>❌ Oublier de convertir les unités de temps (secondes, jours, années) pour calculer \( \lambda \) correctement.</li>
+                <li>❌ Utiliser \( A(t) = \lambda N(t) \) mais donner l’activité sans unité (Bq).</li>
+                <li>❌ Penser que l’activité diminue plus vite que le nombre de noyaux : c’est la même loi exponentielle.</li>
+            </ul>
+        </div>
+
+        <!-- SYNTHÈSE FINALE -->
+        <div class="section">
+            <div class="section-title">
+                <span>📌 SYNTHÈSE À RETENIR POUR LE BAC</span>
+            </div>
+            <div class="card-concept" style="background:#dbeafe;">
+                <ul class="list-styled">
+                    <li>✔️ Loi fondamentale : \( N(t) = N_0 e^{-\lambda t} \) et \( A(t) = A_0 e^{-\lambda t} \).</li>
+                    <li>✔️ Demi-vie : \( T_{1/2} = \frac{\ln 2}{\lambda} \).</li>
+                    <li>✔️ Activité : \( A(t) = \lambda N(t) \), unité : Becquerel (Bq).</li>
+                    <li>✔️ Représentation graphique : \( \ln N(t) \) affine de pente \( -\lambda \).</li>
+                    <li>✔️ Savoir calculer un âge à partir d’un rapport d’activité ou de nombre de noyaux.</li>
+                </ul>
+                <div class="link-bac" style="margin-top: 12px;">
+                    🧠 <strong>Compétences évaluées au Bac :</strong> Déterminer \( \lambda \), \( T_{1/2} \), activité, temps de demi-vie, âge d’un fossile, résoudre une équation différentielle simple.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        Fiche conforme au programme de Physique Terminale C & D (Cameroun) – Année 2025-2026 – Leçon 44 : Loi de décroissance radioactive et activité.
+    </footer>
+</div>
+</body>
+</html>

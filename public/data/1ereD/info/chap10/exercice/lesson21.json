@@ -1,0 +1,118 @@
+[
+  {
+    "intitule": "Quiz : Les bases de la programmation JavaScript",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Répondez par Vrai ou Faux aux affirmations suivantes concernant le langage JavaScript.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "JavaScript est un langage de programmation qui s'exécute principalement côté serveur, comme PHP.",
+        "niveau": "easy",
+        "reponse": "Faux. JavaScript est un langage côté client (navigateur) même si on peut l'utiliser côté serveur avec Node.js, son rôle principal en première est l'interactivité dans le navigateur.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "La fonction `parseInt()` permet de convertir une chaîne de caractères en un nombre entier.",
+        "niveau": "easy",
+        "reponse": "Vrai. `parseInt(\"42\")` retourne l'entier 42.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Un tableau en JavaScript ne peut contenir que des éléments d'un seul et même type (ex: uniquement des nombres).",
+        "niveau": "easy",
+        "reponse": "Faux. En JavaScript, un tableau peut contenir des éléments de types variés : nombre, chaîne, booléen, objet, etc.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Analyse de code JavaScript",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Observez attentivement le code JavaScript suivant et répondez aux questions.</p><pre><code>function calculerMoyenne() {\n  let notes = [12, 15, 8, 10, 14];\n  let somme = 0;\n  \n  for (let i = 0; i < notes.length; i++) {\n    somme = somme + notes[i];\n  }\n  \n  let moyenne = somme / notes.length;\n  \n  if (moyenne >= 10) {\n    document.write(\"Mention: Admis\");\n  } else {\n    document.write(\"Mention: Non admis\");\n  }\n}</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifiez la structure de contrôle itérative utilisée dans ce code. Justifiez votre réponse en nommant son type (boucle `for`, `while` ou `do...while`).",
+        "niveau": "easy",
+        "reponse": "Il s'agit d'une boucle `for`. La justification est la présence de l'initialisation `let i = 0`, de la condition `i < notes.length` et de l'incrémentation `i++`, ce qui correspond à la syntaxe de la boucle `for` en JavaScript.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquez le rôle de la variable `somme` et comment sa valeur évolue à la première itération (i=0) du programme.",
+        "niveau": "medium",
+        "reponse": "La variable `somme` sert d'accumulateur pour additionner toutes les notes du tableau. À la première itération (i=0), `notes[0]` vaut 12. La ligne `somme = somme + notes[i]` devient `somme = 0 + 12`. La variable `somme` passe donc de 0 à 12.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Évaluez le résultat final affiché par ce programme. Quelle mention sera affichée à l'écran ? Justifiez.",
+        "niveau": "medium",
+        "reponse": "La mention 'Admis' sera affichée. Justification : La somme des notes (12+15+8+10+14) est égale à 59. La moyenne est 59 / 5 = 11.8. La condition `if (moyenne >= 10)` est vraie, donc le bloc correspondant s'exécute.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Application : Gestion des notes d'une classe",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Vous êtes enseignant et souhaitez créer une petite application web interactive pour gérer les notes de vos 5 élèves de Première. Vous devez écrire un script JavaScript qui :</p><ol><li>Déclare un tableau vide pour stocker les notes.</li><li>À l'aide d'une boucle `for` et de la fonction `prompt()`, demande à l'utilisateur de saisir les 5 notes une par une et les range dans le tableau.</li><li>Calcule la somme des notes à l'aide d'une boucle.</li><li>Calcule la moyenne de la classe.</li><li>Affiche chaque note, la somme et la moyenne dans la page web à l'aide de `document.write()`.</li><li>À l'aide d'une structure conditionnelle, affiche un message spécifique : 'Excellent groupe !' si la moyenne est supérieure ou égale à 14, 'Groupe moyen.' si la moyenne est comprise entre 10 et 14 (exclu), et 'Besoin de révision.' si la moyenne est inférieure à 10.</li></ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrivez le code complet de la fonction `gererNotes()` qui réalise toutes les tâches décrites ci-dessus.",
+        "niveau": "hard",
+        "reponse": "```javascript\nfunction gererNotes() {\n  let notes = [];\n  let somme = 0;\n  \n  // 1. Saisie des notes\n  for (let i = 0; i < 5; i++) {\n    let note = parseFloat(prompt(\"Entrez la note de l'élève \" + (i+1)));\n    notes.push(note);\n  }\n  \n  document.write(\"<h2>Relevé des notes</h2>\");\n  \n  // 2. Affichage des notes et calcul de la somme\n  for (let i = 0; i < notes.length; i++) {\n    document.write(\"Note de l'élève \" + (i+1) + \" : \" + notes[i] + \"<br>\");\n    somme = somme + notes[i];\n  }\n  \n  // 3. Calcul de la moyenne\n  let moyenne = somme / notes.length;\n  \n  document.write(\"<br>Somme des notes : \" + somme + \"<br>\");\n  document.write(\"Moyenne de la classe : \" + moyenne + \"<br><br>\");\n  \n  // 4. Appréciation\n  if (moyenne >= 14) {\n    document.write(\"<strong>Appréciation : Excellent groupe !</strong>\");\n  } else if (moyenne >= 10) {\n    document.write(\"<strong>Appréciation : Groupe moyen.</strong>\");\n  } else {\n    document.write(\"<strong>Appréciation : Besoin de révision.</strong>\");\n  }\n}\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Dans votre code, vous avez utilisé `parseFloat()`. Expliquez pourquoi son utilisation est indispensable après un `prompt()` dans ce contexte.",
+        "niveau": "medium",
+        "reponse": "La fonction `prompt()` retourne toujours une chaîne de caractères (string). Pour effectuer des calculs mathématiques (addition, division), nous avons besoin de nombres. `parseFloat()` convertit cette chaîne en un nombre décimal, ce qui permet d'additionner correctement les notes. Sans cela, l'opérateur `+` ferait une concaténation de chaînes (ex: '12' + '15' = '1215').",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Défi : Création d'un mini correcteur de QCM",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Un professeur souhaite automatiser la correction d'un QCM de 3 questions. Il vous demande de créer un programme JavaScript. Le programme doit :</p><ul><li>Définir un tableau contenant les bonnes réponses. Exemple : `const reponsesCorrectes = ['A', 'C', 'B'];`.</li><li>À l'aide d'une boucle, poser chaque question à l'utilisateur via `prompt('Question 1 : Réponse (A, B, C ou D) ?')`.</li><li>Stocker les réponses de l'utilisateur dans un autre tableau.</li><li>Comparer les deux tableaux pour calculer le score (chaque bonne réponse donne 1 point).</li><li>En utilisant une structure conditionnelle `if...else if...else`, afficher une mention : 'Excellent' (score = 3), 'Assez bien' (score = 2), 'Peu satisfaisant' (score = 1), 'À réviser' (score = 0).</li><li>Afficher un récapitulatif détaillé pour chaque question (Numéro, réponse donnée, bonne réponse, statut).</li></ul>",
+      "images": [
+        "Diagramme d'un flux utilisateur pour un correcteur de QCM, montrant les étapes de saisie, comparaison et affichage des résultats."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Proposez un code JavaScript structuré en fonction pour résoudre ce problème. La fonction devra s'appeler `corrigerQCM` et ne prendre aucun paramètre.",
+        "niveau": "very hard",
+        "reponse": "```javascript\nfunction corrigerQCM() {\n  const reponsesCorrectes = ['A', 'C', 'B'];\n  let reponsesUtilisateur = [];\n  let score = 0;\n  \n  // Saisie des réponses\n  for (let i = 0; i < reponsesCorrectes.length; i++) {\n    let reponse = prompt('Question ' + (i+1) + ' (Réponse A, B, C ou D) :');\n    reponse = reponse.toUpperCase(); // Pour éviter les erreurs de casse\n    reponsesUtilisateur.push(reponse);\n  }\n  \n  // Affichage en-tête\n  document.write(\"<h2>Résultats du QCM</h2>\");\n  document.write(\"<table border='1'>\");\n  document.write(\"<tr><th>Question</th><th>Votre réponse</th><th>Bonne réponse</th><th>Statut</th></tr>\");\n  \n  // Comparaison et affichage\n  for (let i = 0; i < reponsesCorrectes.length; i++) {\n    let estCorrect = (reponsesUtilisateur[i] === reponsesCorrectes[i]);\n    if (estCorrect) {\n      score++;\n      document.write(\"<tr><td>Q\" + (i+1) + \"</td><td>\" + reponsesUtilisateur[i] + \"</td><td>\" + reponsesCorrectes[i] + \"</td><td bgcolor='lightgreen'>Correct</td></tr>\");\n    } else {\n      document.write(\"<tr><td>Q\" + (i+1) + \"</td><td>\" + reponsesUtilisateur[i] + \"</td><td>\" + reponsesCorrectes[i] + \"</td><td bgcolor='lightcoral'>Incorrect</td></tr>\");\n    }\n  }\n  document.write(\"</table><br>\");\n  \n  // Mention\n  document.write(\"<strong>Score : \" + score + \" / \" + reponsesCorrectes.length + \"</strong><br>\");\n  \n  if (score === 3) {\n    document.write(\"Mention : Excellent\");\n  } else if (score === 2) {\n    document.write(\"Mention : Assez bien\");\n  } else if (score === 1) {\n    document.write(\"Mention : Peu satisfaisant\");\n  } else {\n    document.write(\"Mention : À réviser\");\n  }\n}\n```",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Pourquoi utilisez-vous la méthode `.toUpperCase()` sur la réponse de l'utilisateur ?",
+            "niveau": "medium",
+            "reponse": "Pour normaliser la saisie. Si l'utilisateur entre 'a' (minuscule) au lieu de 'A' (majuscule), la comparaison `===` échouerait car les chaînes sont strictement différentes. `toUpperCase()` convertit toutes les lettres en majuscules, rendant la comparaison insensible à la casse."
+          }
+        ]
+      }
+    ]
+  }
+]

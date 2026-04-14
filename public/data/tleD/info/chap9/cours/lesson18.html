@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 18 : Insertion et modification (DML)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petit style additionnel pour les blocs SQL */
+        .sql-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            border-left: 4px solid #3b82f6;
+        }
+        .sql-keyword {
+            color: #facc15;
+            font-weight: bold;
+        }
+        .sql-string {
+            color: #a7f3d0;
+        }
+        .sql-number {
+            color: #fda4af;
+        }
+        .inline-sql {
+            background-color: #f1f5f9;
+            font-family: 'Courier New', monospace;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+            color: #0f172a;
+            font-weight: 500;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 0.5rem;
+            text-align: left;
+        }
+        th {
+            background-color: #eef2ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 18 : Insertion et modification des données (DML)</h1>
+            <p class="lesson-subtitle">Informatique · Terminale C & D · Unité 4 – Implémentation des bases de données (SQL)</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- SECTION ÉLÉMENTS CLÉS -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Langage DML (Data Manipulation Language)</h3>
+                    <p class="card-description">
+                        Le DML est la partie du SQL qui permet de <strong>manipuler les données</strong> déjà présentes dans les tables : 
+                        ajout, modification, suppression. Les trois commandes fondamentales sont :
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="formule">INSERT INTO</span> : Ajouter de nouvelles lignes (enregistrements) dans une table.</li>
+                        <li><span class="formule">UPDATE</span> : Modifier les valeurs d'une ou plusieurs lignes existantes.</li>
+                        <li><span class="formule">DELETE</span> : Supprimer des lignes (vue en complément, mais essentielle).</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.75rem;">
+                        💡 À l'examen (session 2025, 2024), les requêtes <strong>INSERT INTO</strong> et <strong>UPDATE ... SET ... WHERE</strong> sont fréquentes.
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. INSERT INTO : syntaxe complète</h3>
+                    <p class="card-description">
+                        Deux formes principales pour insérer des données :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Insérer toutes les colonnes (dans l'ordre de la table) :</strong><br>
+                            <span class="inline-sql">INSERT INTO table VALUES (valeur1, valeur2, ...);</span>
+                        </li>
+                        <li><strong>Insérer seulement certaines colonnes :</strong><br>
+                            <span class="inline-sql">INSERT INTO table (colonneA, colonneC) VALUES (valA, valC);</span>
+                            (les colonnes omises reçoivent NULL ou leur valeur par défaut)
+                        </li>
+                        <li><strong>Insertion multiple :</strong> depuis SQLite/MySQL récent, on peut chaîner : <span class="inline-sql">INSERT INTO table VALUES (…), (…), (…);</span></li>
+                    </ul>
+                    <p><strong>Contraintes :</strong> Respecter les types de données (INT, VARCHAR, DATE) et les clés primaires (unicité).</p>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. UPDATE : modifier des enregistrements</h3>
+                    <p class="card-description">
+                        La commande <span class="formule">UPDATE</span> modifie des lignes existantes. La clause <span class="formule">WHERE</span> est <strong>cruciale</strong> pour cibler les bonnes lignes.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Syntaxe générale :</strong><br>
+                            <span class="inline-sql">UPDATE nom_table SET colonne1 = nouvelle_valeur, colonne2 = ... WHERE condition ;</span>
+                        </li>
+                        <li><strong>Sans WHERE :</strong> toutes les lignes de la table sont modifiées → danger !</li>
+                        <li><strong>Exemple :</strong> <span class="inline-sql">UPDATE Etudiants SET moyenne = 15.5 WHERE id = 102;</span></li>
+                    </ul>
+                    <div class="exemple-astuce">
+                        ⚠️ Toujours tester la condition avec un SELECT avant d'exécuter un UPDATE critique.
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. DELETE (rappel essentiel)</h3>
+                    <p class="card-description">
+                        Bien que la leçon soit centrée sur INSERT/UPDATE, la manipulation inclut la suppression. <span class="formule">DELETE FROM table WHERE condition ;</span> supprime des lignes.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Sans WHERE :</strong> vide complètement la table (mais garde la structure).</li>
+                        <li>La commande <span class="formule">TRUNCATE</span> est une variante plus rapide mais pas toujours au programme.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION EXEMPLES CONCRETS -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Insertion dans une table "Élèves"</h3>
+                    <p class="exemple-context">
+                        Soit la table <strong>Élèves</strong> définie par : <br>
+                        <code>CREATE TABLE Eleves (id INT PRIMARY KEY, nom VARCHAR(50), prenom VARCHAR(50), age INT, classe CHAR(2));</code>
+                    </p>
+                    <p><strong>Insertion classique (toutes colonnes) :</strong></p>
+                    <div class="sql-block">
+                        <span class="sql-keyword">INSERT INTO</span> Eleves <span class="sql-keyword">VALUES</span> (101, <span class="sql-string">'Djibril'</span>, <span class="sql-string">'Fatima'</span>, 18, <span class="sql-string">'C'</span>);
+                    </div>
+                    <p><strong>Insertion avec colonnes spécifiques (on omet l'âge) :</strong></p>
+                    <div class="sql-block">
+                        <span class="sql-keyword">INSERT INTO</span> Eleves (id, nom, prenom, classe) <br>
+                        <span class="sql-keyword">VALUES</span> (102, <span class="sql-string">'Tchouang'</span>, <span class="sql-string">'Kevin'</span>, <span class="sql-string">'D'</span>);
+                        <span style="display: block; font-size: 0.8rem; color: #94a3b8;">-- l'âge sera NULL (aucune valeur)</span>
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Pour insérer plusieurs élèves d’un coup : <span class="inline-sql">INSERT INTO Eleves VALUES (103,'Nana','Aicha',17,'D'), (104,'Mbarga','Paul',18,'C');</span>
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Mise à jour (UPDATE) avec condition</h3>
+                    <p class="exemple-context">
+                        Dans la table <strong>Employes</strong> (id, nom, salaire, service). On souhaite augmenter le salaire de 10% pour tous les employés du service 'Informatique'.
+                    </p>
+                    <div class="sql-block">
+                        <span class="sql-keyword">UPDATE</span> Employes <br>
+                        <span class="sql-keyword">SET</span> salaire = salaire * 1.10 <br>
+                        <span class="sql-keyword">WHERE</span> service = <span class="sql-string">'Informatique'</span>;
+                    </div>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> La clause <span class="inline-sql">WHERE</span> filtre les lignes concernées. Seuls les employés du service 'Informatique' verront leur salaire modifié.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Pensez à vérifier avec un <span class="inline-sql">SELECT * FROM Employes WHERE service = 'Informatique';</span> avant de lancer l'UPDATE.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Mise à jour avec plusieurs colonnes</h3>
+                    <p class="exemple-context">
+                        Table <strong>Produits</strong> (ref, nom, prix, stock). On veut modifier le prix et le stock du produit dont la référence est 'P101'.
+                    </p>
+                    <div class="sql-block">
+                        <span class="sql-keyword">UPDATE</span> Produits <br>
+                        <span class="sql-keyword">SET</span> prix = 2500, stock = stock + 50 <br>
+                        <span class="sql-keyword">WHERE</span> ref = <span class="sql-string">'P101'</span>;
+                    </div>
+                    <p class="exemple-correction">
+                        On peut lister plusieurs colonnes séparées par des virgules dans la clause SET. Ici, le stock est incrémenté de 50 unités.
+                    </p>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Examen type : Session 2025 (sujet adapté)</h3>
+                    <p class="exemple-context">
+                        On vous donne la table <strong>Livres</strong> (code INT PK, titre VARCHAR, auteur VARCHAR, annee INT). <br>
+                        Écrire la requête SQL qui insère un nouveau livre : code=210, titre="Algorithmique avancée", auteur="Dupont", année=2024.
+                    </p>
+                    <div class="sql-block">
+                        <span class="sql-keyword">INSERT INTO</span> Livres (code, titre, auteur, annee) <br>
+                        <span class="sql-keyword">VALUES</span> (210, <span class="sql-string">'Algorithmique avancée'</span>, <span class="sql-string">'Dupont'</span>, 2024);
+                    </div>
+                    <p>Puis modifier l'année de ce livre pour la passer à 2025 :</p>
+                    <div class="sql-block">
+                        <span class="sql-keyword">UPDATE</span> Livres <span class="sql-keyword">SET</span> annee = 2025 <span class="sql-keyword">WHERE</span> code = 210;
+                    </div>
+                    <div class="exemple-astuce">
+                        🎯 À l'examen, on attend une syntaxe précise : majuscules pour les mots-clés SQL, point-virgule final, guillemets simples pour les chaînes.
+                    </div>
+                </div>
+            </section>
+
+            <!-- TABLEAU RÉCAPITULATIF DES COMMANDES DML -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Récapitulatif des commandes DML</h2>
+                <div class="card" style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr><th>Commande</th><th>Rôle</th><th>Exemple minimal</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>INSERT INTO</strong></td><td>Ajouter une ligne</td><td><span class="inline-sql">INSERT INTO Clients (nom, ville) VALUES ('Mbarga','Douala');</span></td></tr>
+                            <tr><td><strong>UPDATE</strong></td><td>Modifier des lignes</td><td><span class="inline-sql">UPDATE Clients SET ville='Yaoundé' WHERE nom='Mbarga';</span></td></tr>
+                            <tr><td><strong>DELETE</strong></td><td>Supprimer des lignes</td><td><span class="inline-sql">DELETE FROM Clients WHERE nom='Mbarga';</span></td></tr>
+                        </tbody>
+                    </table>
+                    <p class="card-description" style="margin-top: 0.5rem;">
+                        🔑 <strong>Règle d'or :</strong> toujours spécifier une condition <span class="inline-sql">WHERE</span> pour UPDATE et DELETE sauf si on veut agir sur toutes les lignes.
+                    </p>
+                </div>
+            </section>
+
+            <!-- PIÈGES COURANTS / ERREURS FRÉQUENTES -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Oublier les guillemets simples pour les chaînes de caractères ou les dates. Ex : <span class="inline-sql">'2025-04-07'</span> au lieu de 2025-04-07 (invalide).</li>
+                        <li><span class="bold">Attention :</span> Utiliser <span class="inline-sql">INSERT INTO table VALUES (…)</span> sans préciser les colonnes → il faut fournir une valeur pour <strong>toutes</strong> les colonnes dans l'ordre défini.</li>
+                        <li><span class="bold">Piège UPDATE :</span> Ne pas mettre de WHERE → modification de toute la table ! Exemple catastrophique : <span class="inline-sql">UPDATE Eleves SET age = 20;</span> (tous les élèves auront 20 ans).</li>
+                        <li><span class="bold">Violation de clé primaire :</span> Insérer une ligne avec un identifiant déjà existant → rejet par le SGBD (erreur). Toujours vérifier l'unicité.</li>
+                        <li><span class="bold">Confusion DDL / DML :</span> <span class="inline-sql">CREATE, ALTER, DROP</span> sont DDL (structure). <span class="inline-sql">INSERT, UPDATE, DELETE</span> sont DML (données).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- IMAGE ILLUSTRATIVE (IA générée) -->
+            <section class="concept-section">
+                <h2 class="section-title">🖼️ Illustration – Schéma du flux DML</h2>
+                <div class="card" style="text-align: center; background-color: #f8fafc;">
+                    <img src="" alt="Schéma explicatif du processus INSERT et UPDATE en SQL : flèches représentant l'ajout d'enregistrement dans une table et la modification conditionnelle via WHERE" style="max-width:100%; border-radius:12px; border: 1px solid #e2e8f0; margin-bottom: 0.5rem;">
+                    <p class="card-description" style="font-size: 0.9rem;">Figure 1 : Vue d’ensemble des opérations DML : INSERT (ajout) et UPDATE (mise à jour) avec condition WHERE.</p>
+                </div>
+            </section>
+
+            <!-- EXERCICE RAPIDE D'APPLICATION (pour auto-évaluation) -->
+            <section class="exemple-section">
+                <h2 class="section-title">✏️ Mini-exercice (auto-évaluation)</h2>
+                <div class="card exemple-card" style="background-color: #fefce8;">
+                    <h3 class="card-title">À vous de jouer !</h3>
+                    <p class="exemple-context">
+                        Soit la table <strong>Stagiaires</strong> (matricule INT PRIMARY KEY, nom VARCHAR(30), formation VARCHAR(50), note_finale INT). <br>
+                        1. Insérez un stagiaire avec matricule 405, nom "Etonde", formation "Réseaux", note_finale 15.<br>
+                        2. Augmentez la note_finale de 2 points pour tous les stagiaires de la formation "Réseaux".<br>
+                        3. Modifiez la formation du stagiaire matricule 405 pour qu'elle devienne "Cybersécurité".
+                    </p>
+                    <details style="margin-top: 1rem; cursor: pointer;">
+                        <summary style="font-weight: 600; color: #2563eb;">🔍 Voir les solutions</summary>
+                        <div class="sql-block" style="margin-top: 0.8rem;">
+                            -- 1. Insertion <br>
+                            INSERT INTO Stagiaires (matricule, nom, formation, note_finale) <br>
+                            VALUES (405, 'Etonde', 'Réseaux', 15); <br><br>
+                            -- 2. Mise à jour conditionnelle <br>
+                            UPDATE Stagiaires SET note_finale = note_finale + 2 WHERE formation = 'Réseaux'; <br><br>
+                            -- 3. Modification ciblée <br>
+                            UPDATE Stagiaires SET formation = 'Cybersécurité' WHERE matricule = 405;
+                        </div>
+                    </details>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        💪 Pensez à toujours utiliser WHERE pour éviter des modifications massives involontaires.
+                    </div>
+                </div>
+            </section>
+
+            <!-- LIEN AVEC L'EXAMEN (sessions précédentes) -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 Lien avec l’examen (Baccalauréat)</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        D’après les sessions 2025, 2024, 2022 : les questions de type DML sont fréquentes dans la <strong>Partie II (Bases de données)</strong>.
+                        On demande souvent d’écrire des requêtes <span class="inline-sql">INSERT INTO</span> ou <span class="inline-sql">UPDATE</span> à partir d’un énoncé simple.
+                        Exemple typique (session 2024) : "Insérer un nouveau client dans la table Client" ou "Modifier le prix d’un produit dont l’identifiant est donné".
+                    </p>
+                    <ul class="concept-list">
+                        <li>Maîtriser la syntaxe sans ambiguïté (parenthèses, guillemets, point-virgule).</li>
+                        <li>Savoir que la clause WHERE peut utiliser plusieurs critères (AND, OR).</li>
+                        <li>Ne pas confondre UPDATE et ALTER TABLE (qui modifie la structure).</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche de révision créée pour les Terminales C & D (Cameroun) · Programme officiel 2025-2026 · Leçon 18 : Insertion et modification (DML) · 📚 Baccalauréat session 2025</p>
+        </footer>
+    </div>
+</body>
+</html>

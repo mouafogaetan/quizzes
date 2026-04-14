@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 6 : Loi de Coulomb</title>
+    <style>
+        /* Style.css intégré pour un affichage optimal */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fc;
+            color: #1e2a3e;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        /* Conteneur principal simulant une fiche A4 */
+        .fiche-revision {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête de la fiche */
+        .header {
+            background: linear-gradient(135deg, #0b3b5f 0%, #1b4f72 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+            border-bottom: 5px solid #f39c12;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background-color: #f39c12;
+            color: #1e2a3e;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .header .sous-titre {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .header .sous-titre span {
+            background-color: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* Corps de la fiche */
+        .content {
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
+
+        /* Grille pour les sections principales */
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Cartes de contenu */
+        .card {
+            background: #f9fafc;
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e9edf2;
+            transition: all 0.2s;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #0b3b5f;
+            border-left: 5px solid #f39c12;
+            padding-left: 0.8rem;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2c3e50;
+        }
+
+        .card ul, .card ol {
+            padding-left: 1.5rem;
+            margin: 0.75rem 0;
+        }
+
+        .card li {
+            margin: 0.5rem 0;
+        }
+
+        /* Formules et zones mathématiques */
+        .formule-box {
+            background: #eef2fa;
+            border-left: 4px solid #f39c12;
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            font-family: 'Courier New', 'SF Mono', monospace;
+            font-weight: 500;
+        }
+
+        .formule-box p {
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #fef5e8;
+            padding: 0.2rem 0.4rem;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #c0392b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #dce3ec;
+            padding: 0.6rem;
+            text-align: left;
+            vertical-align: top;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: #e9f0f5;
+            font-weight: 600;
+        }
+
+        .exemple-box {
+            background-color: #e8f0fe;
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            margin-top: 1.5rem;
+            border: 1px solid #cbdff2;
+        }
+
+        .exemple-box h4 {
+            font-weight: 700;
+            color: #004080;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            background-color: #f0f4f8;
+            padding: 1rem 2rem;
+            border-top: 1px solid #dce3ec;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a627a;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 700px) {
+            .grid-2cols {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .content {
+                padding: 1.2rem;
+            }
+        }
+
+        .rappel-bac {
+            background-color: #fdf2e9;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #f7d9c4;
+            margin-top: 1rem;
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fiche-revision">
+        <!-- En-tête avec identification de la leçon -->
+        <div class="header">
+            <div class="badge">🇨🇲 Terminale C & D | Programme officiel 2025-2026</div>
+            <h1>Leçon 6 : Forces électrostatiques<br>Loi de Coulomb</h1>
+            <div class="sous-titre">
+                <span>📚 Module 1 : Mesures et interactions fondamentales</span>
+                <span>⚡ Chapitre 3 : Interaction électrique</span>
+                <span>🎯 Bac 2023 - 2025</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Objectifs généraux de la leçon -->
+            <div class="card" style="margin-bottom: 1.8rem; background: linear-gradient(120deg, #fff, #fafcff);">
+                <h3>🎯 Objectifs de la leçon</h3>
+                <ul>
+                    <li>✅ Énoncer et appliquer la loi de Coulomb pour deux charges ponctuelles.</li>
+                    <li>✅ Calculer la force d’interaction électrostatique (attractive ou répulsive).</li>
+                    <li>✅ Représenter sur un schéma la force agissant sur chaque charge.</li>
+                    <li>✅ <strong>Lien Bac :</strong> Résoudre des problèmes de superposition de forces électrostatiques.</li>
+                </ul>
+            </div>
+
+            <!-- Grille principale : Définition + Formules -->
+            <div class="grid-2cols">
+                <!-- Colonne gauche : Loi de Coulomb -->
+                <div class="card">
+                    <h3>📐 Loi de Coulomb (1785)</h3>
+                    <p>La force électrostatique entre deux charges ponctuelles $q_1$ et $q_2$, séparées par une distance $d$, est :</p>
+                    <div class="formule-box">
+                        $$ F = k \cdot \frac{|q_1 \cdot q_2|}{d^{2}} $$
+                        <p style="margin-top: 0.5rem; font-size:0.9rem;">Avec : <br>
+                        - $F$ : intensité de la force (en newton, N)<br>
+                        - $k = 9 \times 10^{9} \, \text{N·m}^{2}\cdot \text{C}^{-2}$ (constante de Coulomb)<br>
+                        - $d$ : distance entre les centres (en mètres)
+                        </p>
+                    </div>
+                    <p><strong>Direction :</strong> suivant la droite joignant les deux charges.<br>
+                    <strong>Sens :</strong>
+                    <ul>
+                        <li>🔴 <span class="highlight">Répulsive</span> si $q_1 \times q_2 > 0$ (mêmes signes).</li>
+                        <li>🔵 <span class="highlight">Attractive</span> si $q_1 \times q_2 < 0$ (signes opposés).</li>
+                    </ul>
+                    </p>
+                    <div class="rappel-bac">
+                        📌 <strong>BAC 2023 :</strong> L'expression vectorielle s'écrit $\displaystyle \vec{F}_{1\to2} = k \frac{q_1 q_2}{d^{2}} \, \vec{u}_{12}$ où $\vec{u}_{12}$ est le vecteur unitaire de 1 vers 2.
+                    </div>
+                </div>
+
+                <!-- Colonne droite : Analogie avec la gravitation et constante -->
+                <div class="card">
+                    <h3>⚖️ Analogie & Constantes</h3>
+                    <p><strong>Comparaison gravitation / électrostatique :</strong></p>
+                    <ul>
+                        <li>Loi de Newton : $F_G = G \dfrac{m_1 m_2}{d^2}$ , $G = 6,67\times 10^{-11}$.</li>
+                        <li>Loi de Coulomb : $F_E = k \dfrac{|q_1 q_2|}{d^2}$ , $k = 9\times 10^{9}$.</li>
+                        <li>La force électrique est <strong>beaucoup plus intense</strong> que la force gravitationnelle à l'échelle atomique.</li>
+                    </ul>
+                    <p><strong>Charge élémentaire :</strong> $e = 1,6 \times 10^{-19} \, \text{C}$<br>
+                    Toute charge $q$ est un multiple entier de $e$ : $q = n \times e$.</p>
+                    <div class="formule-box" style="background:#eef2fa;">
+                        💡 <strong>Constante de Coulomb :</strong> $k = \dfrac{1}{4\pi\varepsilon_0}$ avec $\varepsilon_0 = 8,85 \times 10^{-12} \, \text{F·m}^{-1}$.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deuxième ligne : Principe de superposition et méthode de résolution -->
+            <div class="card" style="margin-bottom: 1.5rem;">
+                <h3>🧩 Principe de superposition</h3>
+                <p>Lorsqu’une charge $q_0$ est soumise à plusieurs forces électrostatiques provenant de charges $q_1, q_2, \dots, q_n$, la force résultante est la <strong>somme vectorielle</strong> des forces individuelles :</p>
+                <div class="formule-box">
+                    $$ \vec{F}_{\text{total}} = \vec{F}_{1\to0} + \vec{F}_{2\to0} + \dots + \vec{F}_{n\to0} $$
+                </div>
+                <p><strong>Méthode :</strong> 1) Calculer chaque force avec la loi de Coulomb, 2) Décomposer selon les axes, 3) Additionner les composantes.</p>
+                <div class="exemple-box">
+                    <h4>📘 Exemple type bac :</h4>
+                    <p>Deux charges $q_1 = +2\,\mu\text{C}$ et $q_2 = -3\,\mu\text{C}$ sont placées à $d = 10\,\text{cm}$. Calculer la force exercée par $q_1$ sur $q_2$.</p>
+                    <p><strong>Solution :</strong><br>
+                    $F = 9\times10^9 \times \dfrac{|2\times10^{-6} \times (-3\times10^{-6})|}{(0,10)^2} = 9\times10^9 \times \dfrac{6\times10^{-12}}{0,01} = 5,4\,\text{N}$.<br>
+                    Attractive car signes opposés. La force $\vec{F}_{1\to2}$ est dirigée de $q_2$ vers $q_1$.</p>
+                </div>
+            </div>
+
+            <!-- Tableau récapitulatif : analogie et unités -->
+            <div class="card">
+                <h3>📊 Tableau récapitulatif – Interaction électrique</h3>
+                 te
+                    <thead>
+                        <tr><th>Grandeur</th><th>Symbole</th><th>Unité (SI)</th><th>Expression / Valeur</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Force électrostatique</td><td>$F$</td><td>Newton (N)</td><td>$F = k \dfrac{|q_1 q_2|}{d^2}$</td></tr>
+                        <tr><td>Constante de Coulomb</td><td>$k$</td><td>N·m²·C⁻²</td><td>$9\times10^9$</td></tr>
+                        <tr><td>Permittivité du vide</td><td>$\varepsilon_0$</td><td>F·m⁻¹</td><td>$8,85\times10^{-12}$</td></tr>
+                        <tr><td>Charge électrique</td><td>$q$</td><td>Coulomb (C)</td><td>$q = n e$ ; $e = 1,6\times10^{-19}$ C</td></tr>
+                    </tbody>
+                </table>
+                <div class="rappel-bac">
+                    🧠 <strong>Erreurs fréquentes au Bac :</strong> Oublier la valeur absolue dans le calcul de l'intensité, ne pas convertir la distance en mètres, mal orienter la force sur le schéma. La force est vectorielle : toujours représenter $\vec{F}_{A\to B}$ et $\vec{F}_{B\to A}$ opposées.
+                </div>
+            </div>
+
+            <!-- Exercice d'application directe type Bac -->
+            <div class="exemple-box" style="margin-top: 1.8rem;">
+                <h4>⚡ Exercice d'application (Bac 2024 – inspiration)</h4>
+                <p>On place trois charges ponctuelles : $q_A = +4\,\text{nC}$ en $A(0,0)$, $q_B = -2\,\text{nC}$ en $B(3\,\text{cm}, 0)$ et $q_C = +5\,\text{nC}$ en $C(0,4\,\text{cm})$.<br>
+                Calculer la force électrostatique résultante exercée sur $q_A$ par $q_B$ et $q_C$.</p>
+                <details style="margin-top: 0.6rem; cursor: pointer;">
+                    <summary style="font-weight: 600; color:#0b3b5f;">📌 Voir la correction succincte</summary>
+                    <p style="margin-top: 0.8rem;">- Force $F_{B\to A} = 9\times10^9 \times \dfrac{|4\times10^{-9} \times (-2\times10^{-9})|}{(0,03)^2} = 8\times10^{-5}\,\text{N}$ (attractive, vers la droite selon $\overrightarrow{AB}$).<br>
+                    - Force $F_{C\to A} = 9\times10^9 \times \dfrac{|4\times10^{-9} \times 5\times10^{-9}|}{(0,04)^2} = 1,125\times10^{-4}\,\text{N}$ (répulsive, orientée vers le haut selon $\overrightarrow{AC}$).<br>
+                    - $\vec{F}_{\text{res}} = (8\times10^{-5}, 1,125\times10^{-4})\,\text{N}$ ; norme = $\sqrt{(8e-5)^2+(1,125e-4)^2} \approx 1,38\times10^{-4}\,\text{N}$.</p>
+                </details>
+            </div>
+
+            <!-- Lien avec la suite du programme -->
+            <div class="card" style="margin-top: 1rem; background: #eef2fa;">
+                <h3>🔗 Notions clés pour la suite</h3>
+                <ul>
+                    <li>Le champ électrostatique $\vec{E}$ est défini à partir de la force de Coulomb : $\vec{E} = \dfrac{\vec{F}}{q}$ (Leçon 7).</li>
+                    <li>Principe de superposition des champs électriques.</li>
+                    <li>Mouvement d’une particule chargée dans un champ électrique uniforme (Chapitre 7).</li>
+                </ul>
+                <p style="margin-top: 0.6rem;">📌 <em>À retenir :</em> La loi de Coulomb est fondamentale pour toute interaction électrique entre particules chargées.</p>
+            </div>
+        </div>
+
+        <!-- Pied de page avec informations et crédits -->
+        <div class="footer">
+            <span>© Enseignant Physique – Terminale C & D (Cameroun)</span>
+            <span>📖 Programme officiel 2025-2026 | Révision Bac</span>
+            <span>⚡ Fiche générée conforme à la leçon 6 – Loi de Coulomb</span>
+        </div>
+    </div>
+</body>
+</html>

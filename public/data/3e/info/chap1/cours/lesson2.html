@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Architecture de Von Neumann (3e)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (utile si jamais on insère des formules) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Intégration du style CSS directement pour une fiche autonome */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .schema-container {
+            margin: 1rem 0;
+            text-align: center;
+            background: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .schema-caption {
+            font-size: 0.85rem;
+            color: #475569;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .inline-code {
+            background-color: #f1f5f9;
+            font-family: monospace;
+            padding: 0.2rem 0.3rem;
+            border-radius: 0.3rem;
+            font-weight: 500;
+            color: #1e40af;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête : UE2 - Architecture de Von Neumann -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">🏛️ Architecture de Von Neumann</h1>
+            <p class="lesson-subtitle">UE 2 · Architecture d’un microordinateur · Troisième (3ᵉ) · Programme officiel Cameroun</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- ================= SECTION CONCEPTS CLÉS ================= -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+
+                <!-- Concept 1 : Le modèle de Von Neumann -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🔹 Le modèle « programme enregistré »</h3>
+                    <p class="card-description">
+                        Proposé par <strong>John von Neumann</strong> en 1945, ce modèle est à la base de la majorité des ordinateurs modernes. 
+                        Son principe fondamental est que <strong>les données ET le programme (instructions) sont stockés dans la même mémoire</strong>.
+                        Cela permet à l’ordinateur d’exécuter des séquences d’instructions sans intervention humaine continue.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Mémoire unique :</strong> contient à la fois les données à traiter et les instructions du programme.</li>
+                        <li><strong>Cycle fondamental :</strong> « Fetch – Decode – Execute » (lecture de l’instruction, décodage, exécution).</li>
+                        <li><strong>Avantage :</strong> souplesse et programmabilité – on peut changer de programme sans modifier le matériel.</li>
+                        <li><strong>Limite :</strong> « goulot d’étranglement de Von Neumann » (bus unique ralentit l’accès simultané aux données et instructions).</li>
+                    </ul>
+                </div>
+
+                <!-- Concept 2 : Les 5 grandes unités fonctionnelles -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🔹 Les composants de l’architecture Von Neumann</h3>
+                    <p class="card-description">
+                        L’architecture se compose de 5 blocs interconnectés par un bus de communication :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>📀 Mémoire (RAM) :</strong> Stocke les données et les instructions. Chaque emplacement possède une adresse.</li>
+                        <li><strong>🧠 Unité de Contrôle (UC) :</strong> Coordonne les échanges, décode les instructions et génère les signaux de commande.</li>
+                        <li><strong>⚙️ Unité Arithmétique et Logique (UAL) :</strong> Effectue les calculs (+, −, ×, ÷) et les opérations logiques (ET, OU, NON).</li>
+                        <li><strong>⌨️ Entrées :</strong> Périphériques permettant d’introduire des données (clavier, souris, scanner…).</li>
+                        <li><strong>🖥️ Sorties :</strong> Périphériques qui restituent les résultats (écran, imprimante, haut-parleurs).</li>
+                    </ul>
+                    <div class="schema-container">
+                        <!-- Image représentant le schéma fonctionnel de l'architecture de Von Neumann -->
+                        <img src="" alt="Schéma de l'architecture de Von Neumann : Mémoire centrale reliée à l'unité de contrôle et à l'UAL, avec des flèches pour les entrées/sorties" style="max-width:100%; border-radius: 8px; background:#eef2ff;">
+                        <div class="schema-caption">📐 Schéma simplifié : les échanges se font via le bus système (adresses, données et contrôle).</div>
+                    </div>
+                </div>
+
+                <!-- Concept 3 : Principe de fonctionnement (cycle) -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🔹 Cycle d’exécution d’une instruction</h3>
+                    <p class="card-description">
+                        Le processeur répète sans cesse un cycle en trois phases :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>1. Lecture (Fetch) :</strong> L’unité de contrôle va chercher l’instruction suivante dans la mémoire (à l’adresse indiquée par le compteur ordinal).</li>
+                        <li><strong>2. Décodage (Decode) :</strong> L’instruction est analysée pour comprendre l’opération à réaliser et les données concernées.</li>
+                        <li><strong>3. Exécution (Execute) :</strong> L’UAL effectue l’opération (calcul, comparaison…) ou un transfert de données. Le résultat peut être stocké en mémoire ou envoyé en sortie.</li>
+                    </ul>
+                    <p class="card-description" style="margin-top: 0.5rem;">
+                        💡 Ce cycle se répète des milliards de fois par seconde (fréquence du processeur).
+                    </p>
+                </div>
+            </section>
+
+            <!-- ================= SECTION EXEMPLES ================= -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <!-- Exemple 1 : Simulation d’un calcul simple -->
+                <div class="card exemple-card">
+                    <h3 class="card-title">🧮 Exemple : Calcul de la somme 5 + 3</h3>
+                    <p class="exemple-context">
+                        Un programme simple est chargé en mémoire : « charger 5 dans registre A, charger 3 dans registre B, additionner, afficher résultat ».
+                        Déroulement selon l’architecture Von Neumann.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Étapes :</strong><br>
+                        1️⃣ <span class="inline-code">Fetch</span> : L’unité de contrôle lit l’instruction "CHARGER 5" à l’adresse mémoire #100.<br>
+                        2️⃣ <span class="inline-code">Decode</span> : L’instruction est décodée → opération = chargement d’une donnée vers un registre interne.<br>
+                        3️⃣ <span class="inline-code">Execute</span> : L’UAL (via l’unité de contrôle) transfère la valeur 5 dans un registre.<br>
+                        🔁 Le cycle se répète pour "CHARGER 3" puis pour l’instruction "ADD". Enfin, "AFFICHER" envoie le résultat (8) vers un périphérique de sortie.
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Astuce : C’est le <strong>programme en mémoire</strong> qui dicte l’ordre des opérations. On peut changer le programme sans changer le circuit électronique.
+                    </div>
+                </div>
+
+                <!-- Exemple 2 : analogie cuisine -->
+                <div class="card exemple-card">
+                    <h3 class="card-title">🍳 Analogie de la recette de cuisine</h3>
+                    <p class="exemple-context">
+                        Pour mieux comprendre le rôle de chaque composant, comparons l’ordinateur à une cuisine.
+                    </p>
+                    <div class="exemple-correction">
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>📖 Livre de recettes (Mémoire) :</strong> contient la recette (programme) et la liste des ingrédients (données).</li>
+                            <li><strong>👨‍🍳 Chef cuisinier (Unité de contrôle) :</strong> lit la recette étape par étape et donne des ordres.</li>
+                            <li><strong>🔪 Batterie de cuisine / Robot (UAL) :</strong> exécute les actions : couper, mélanger, cuire (calculer, comparer).</li>
+                            <li><strong>🍅 Ingrédients entrants (Entrées) :</strong> ce qu’on apporte du marché.</li>
+                            <li><strong>🍽️ Plat final (Sortie) :</strong> résultat présenté à table.</li>
+                        </ul>
+                        <p>Le chef utilise la même fiche recette (mémoire) pour chaque plat ; il suit la séquence d’instructions.</p>
+                    </div>
+                    <div class="exemple-astuce">
+                        🔁 Le « goulot » dans une cuisine : le chef doit souvent revenir lire la recette (accès mémoire) – c’est le goulot de Von Neumann.
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= SECTION PIÈGES / À NE PAS CONFONDRE ================= -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & idées reçues</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">❌ « La mémoire RAM contient uniquement les données de l’utilisateur » :</span> Faux, elle contient aussi les instructions du système d’exploitation et des programmes.</li>
+                        <li><span class="bold">❌ « L’UAL est la même chose que le processeur » :</span> Le processeur (CPU) regroupe l’UAL ET l’unité de contrôle. L’UAL n’est qu’une partie.</li>
+                        <li><span class="bold">❌ « Dans Von Neumann, les entrées/sorties sont gérées uniquement par le CPU » :</span> Elles communiquent via le bus, mais certains ordinateurs modernes utilisent des contrôleurs spécialisés ; le modèle de base reste valable.</li>
+                        <li><span class="bold">❌ « Le programme enregistré signifie qu’on ne peut exécuter qu’un seul programme à la fois » :</span> Dans les ordinateurs actuels, le système d’exploitation permet le multitâche (partage du temps) mais la base conceptuelle reste la même.</li>
+                        <li><span class="bold">⚠️ Attention :</span> Ne pas confondre <strong>Architecture de Von Neumann</strong> et <strong>Architecture Harvard</strong> (dans Harvard, instructions et données ont des bus et mémoires séparés). Au programme, on retient le modèle classique.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section supplémentaire : Résumé des symboles / Rôle du bus -->
+            <section class="concept-section">
+                <div class="card concept-card">
+                    <h3 class="card-title">🔌 Rôle du bus système</h3>
+                    <p class="card-description">
+                        Dans l’architecture de Von Neumann, tous les échanges entre la mémoire, l’unité de contrôle et l’UAL passent par un ensemble de lignes appelé <strong>bus</strong>. On distingue :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Bus de données :</strong> transporte les informations (valeurs, instructions).</li>
+                        <li><strong>Bus d’adresses :</strong> indique l’emplacement mémoire concerné.</li>
+                        <li><strong>Bus de contrôle :</strong> envoie les signaux de commande (lecture/écriture, horloge).</li>
+                    </ul>
+                    <p class="card-description">
+                        Ce bus unique crée un goulot d’étranglement (le processeur peut être ralenti car il ne peut pas lire instruction et données simultanément). C’est un point faible du modèle.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Petit encart pour ancrer les notions clés -->
+            <div style="background-color: #eef2ff; border-radius: 1rem; padding: 1rem 1.5rem; margin-top: 1rem; border: 1px solid #cbd5e1;">
+                <p style="font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">🧠 À mémoriser absolument :</p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>✔️ Von Neumann = <strong>mémoire unique</strong> contenant données + programme.</li>
+                    <li>✔️ 5 composants : Mémoire, UC, UAL, Entrées, Sorties.</li>
+                    <li>✔️ Cycle : <strong>Fetch – Decode – Execute</strong>.</li>
+                    <li>✔️ C’est le modèle des ordinateurs actuels (PC, smartphones, serveurs).</li>
+                </ul>
+            </div>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision 3ᵉ – Module 1 : Architecture d’un microordinateur (UE 2) · Inspiré du programme officiel du Cameroun · 📚 Révision créée pour les élèves · <a href="#">Ressources complémentaires</a></p>
+        </footer>
+    </div>
+</body>
+</html>

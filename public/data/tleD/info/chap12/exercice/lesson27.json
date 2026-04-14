@@ -1,0 +1,113 @@
+[
+  {
+    "intitule": "Maitrise des fonctions conditionnelles et statistiques (Ressource)",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un professeur souhaite automatiser le suivi des notes de sa classe de Terminale D. Il utilise un tableur avec les colonnes suivantes : <strong>NOM</strong>, <strong>PRENOM</strong>, <strong>MOYENNE</strong> (sur 20). Il souhaite attribuer une appréciation et un statut à chaque élève en fonction de sa moyenne.</p>\n\n<p>Voici un extrait du tableau :</p>\n\n<table border='1' style='border-collapse: collapse; width: 80%; text-align: center;'>\n  <tr><th>NOM</th><th>PRENOM</th><th>MOYENNE</th><th>APPRECIATION</th><th>STATUT</th></tr>\n  <tr><td>DIOP</td><td>Aminata</td><td>14,5</td><td></td><td></td></tr>\n  <tr><td>FOFANA</td><td>Koffi</td><td>8,0</td><td></td><td></td></tr>\n  <tr><td>NDONGO</td><td>Jacques</td><td>11,0</td><td></td><td></td></tr>\n  <tr><td>MBALLA</td><td>Claire</td><td>5,5</td><td></td><td></td></tr>\n</table>\n\n<p><strong>Règles de gestion :</strong><br>\n- Si la moyenne est supérieure ou égale à 10, l'appréciation est <strong>\"Admis\"</strong> ; sinon <strong>\"Non admis\"</strong>.<br>\n- Si la moyenne est supérieure ou égale à 16, le statut est <strong>\"Très bien\"</strong> ; si la moyenne est comprise entre 14 et 16 (16 exclu), le statut est <strong>\"Bien\"</strong> ; entre 12 et 14 (14 exclu), <strong>\"Assez bien\"</strong> ; entre 10 et 12 (12 exclu), <strong>\"Passable\"</strong> ; sinon <strong>\"Insuffisant\"</strong>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier la fonction à utiliser pour automatiser le calcul de la colonne APPRECIATION. Justifier votre choix.",
+        "niveau": "easy",
+        "reponse": "Il faut utiliser la fonction SI. C'est une fonction conditionnelle qui permet de renvoyer une valeur différente selon qu'une condition est vraie ou fausse. Ici, la condition est 'Moyenne >= 10'."
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire la formule à saisir dans la cellule correspondant à l'APPRECIATION d'Aminata (premier élève) en utilisant la référence relative.",
+        "niveau": "easy",
+        "reponse": "=SI(C2>=10;\"Admis\";\"Non admis\")\n(En supposant que la colonne MOYENNE est la colonne C et que la première ligne de données est la ligne 2)."
+      },
+      {
+        "numero": 3,
+        "texte": "Déterminer la fonction la mieux adaptée pour calculer le STATUT (avec plusieurs conditions). Justifier.",
+        "niveau": "medium",
+        "reponse": "On peut utiliser la fonction SI imbriquée (SI dans un SI) car il y a plusieurs conditions exclusives (>=16, entre 14 et 16, entre 12 et 14, entre 10 et 12, <10).\nFormule pour Aminata (moyenne 14,5) : =SI(C2>=16;\"Très bien\";SI(C2>=14;\"Bien\";SI(C2>=12;\"Assez bien\";SI(C2>=10;\"Passable\";\"Insuffisant\"))))"
+      },
+      {
+        "numero": 4,
+        "texte": "Évaluer l'impact sur le résultat final si on modifie l'ordre des conditions dans la fonction SI imbriquée pour le statut. Proposer un ordre correct et expliquer pourquoi.",
+        "niveau": "hard",
+        "reponse": "L'ordre est crucial car la fonction SI s'arrête à la première condition vraie. Un ordre incorrect donnera des statuts faux.\n- Ordre correct : décroissant (de la note la plus haute à la plus basse).\n- Ordre incorrect : croissant (ex: commencer par C2>=10). Dans ce cas, un élève avec 17/20 aura 'Passable' car la condition C2>=10 est vraie en premier, et on ne vérifiera jamais C2>=16.\nL'ordre proposé (>=16, puis >=14, puis >=12, puis >=10, puis <10) est le seul correct."
+      }
+    ]
+  },
+  {
+    "intitule": "Gestion des notes et statistiques par matière (Compétence)",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Vous êtes enseignant au Lycée de Bafoussam. Vous disposez d'un tableur contenant les notes de 30 élèves de Terminale C dans trois matières : Mathématiques, Physique et Informatique.</p>\n\n<p>Le tableau a la structure suivante (colonnes) : <strong>A</strong>: NOM, <strong>B</strong>: PRENOM, <strong>C</strong>: MATHEMATIQUES, <strong>D</strong>: PHYSIQUE, <strong>E</strong>: INFORMATIQUE.</p>\n\n<p>Les notes sont sur 20. Vous devez analyser ces données pour le conseil de classe. Un élève est considéré comme <strong>\"en difficulté\"</strong> dans une matière si sa note est strictement inférieure à 8/20. Un élève a une <strong>\"mention TB\"</strong> si sa moyenne générale (sur 20) est supérieure ou égale à 16/20.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Créer une formule permettant de calculer la moyenne générale de chaque élève dans la colonne F (MOYENNE_GENERALE).",
+        "niveau": "medium",
+        "reponse": "=MOYENNE(C2:E2) ou =(C2+D2+E2)/3. Cela calcule la moyenne arithmétique des trois notes de la ligne."
+      },
+      {
+        "numero": 2,
+        "texte": "Utiliser une fonction pour compter, dans la colonne G (NB_DIFFICULTES), le nombre de matières où l'élève est en difficulté (note < 8).",
+        "niveau": "hard",
+        "reponse": "On peut utiliser la fonction NB.SI sur les trois colonnes. Mais NB.SI ne travaille pas sur une plage discontinue facilement. Une solution élégante :\n= (C2<8) + (D2<8) + (E2<8)\nCela additionne les booléens (VRAI=1, FAUX=0).\nOu avec NB.SI sur une plage continue si on reorganise les notes, mais ici ce n'est pas le cas."
+      },
+      {
+        "numero": 3,
+        "texte": "Déterminer le nombre total d'élèves qui ont obtenu la mention TB dans la classe en utilisant une seule fonction. Écrire la formule.",
+        "niveau": "hard",
+        "reponse": "=NB.SI(F2:F31;\">=16\")\nOn suppose que la moyenne générale de chaque élève est en colonne F, de la ligne 2 à la ligne 31. NB.SI compte le nombre de cellules dans cette plage dont la valeur est supérieure ou égale à 16."
+      },
+      {
+        "numero": 4,
+        "texte": "Calculer la somme des notes d'Informatique pour les élèves dont la moyenne en Physique est supérieure à 12. Justifier le choix de la fonction.",
+        "niveau": "very hard",
+        "reponse": "Il faut utiliser la fonction SOMME.SI. Elle permet de sommer des valeurs (colonne E - Informatique) en fonction d'un critère portant sur une autre plage (colonne D - Physique).\nFormule : =SOMME.SI(D2:D31;\">12\";E2:E31)\n- D2:D31 : plage critère (notes de Physique)\n- \">12\" : condition\n- E2:E31 : plage somme (notes d'Informatique)\nCette fonction est idéale car elle évite de créer une colonne intermédiaire."
+      },
+      {
+        "numero": 5,
+        "texte": "Proposer une méthode pour calculer la moyenne en Mathématiques des élèves qui ne sont pas en difficulté en Informatique (c'est-à-dire note d'Info >= 8). Quelle fonction utiliser ?",
+        "niveau": "very hard",
+        "reponse": "On peut utiliser MOYENNE.SI. C'est la fonction statistique conditionnelle adaptée.\n=MOYENNE.SI(E2:E31;\">=8\";C2:C31)\n- E2:E31 : plage critère (notes d'Informatique)\n- \">=8\" : condition (non difficile)\n- C2:C31 : plage moyenne (notes de Maths)\nOn peut aussi le faire avec SOMME.SI et NB.SI, mais MOYENNE.SI est plus directe et efficace."
+      }
+    ]
+  },
+  {
+    "intitule": "Optimisation d'un système de bourses (Compétence avancée)",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Le ministère de l'Éducation du Cameroun souhaite automatiser l'attribution de bourses d'excellence. Les critères sont les suivants :</p>\n<ul>\n  <li>L'élève doit avoir une moyenne générale >= 14/20.</li>\n  <li>L'élève ne doit avoir aucune note (<strong>dans toutes les matières</strong>) inférieure à 10/20.</li>\n  <li>La bourse est de <strong>50 000 FCFA</strong> si la moyenne est entre 14 et 16 (16 exclu), et de <strong>100 000 FCFA</strong> si la moyenne est >= 16.</li>\n</ul>\n<p>Les données sont organisées comme suit : colonne A (NOM), colonne B (MOYENNE), colonne C (NOTE_ANGLAIS), colonne D (NOTE_FRANCAIS), colonne E (NOTE_MATHS), colonne F (NOTE_PHYSIQUE), colonne G (NOTE_INFO). Toutes les notes sont sur 20.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Combiner des fonctions pour créer une colonne H (BOURSABLE) qui affiche \"OUI\" si l'élève remplit les deux premières conditions (moyenne >=14 ET toutes notes >=10), et \"NON\" sinon.",
+        "niveau": "very hard",
+        "reponse": "Formule (à mettre en H2) :\n=SI(ET(B2>=14; C2>=10; D2>=10; E2>=10; F2>=10; G2>=10); \"OUI\"; \"NON\")\nOn utilise la fonction ET pour vérifier la conjonction de toutes les conditions. Si toutes sont vraies, on affiche \"OUI\", sinon \"NON\"."
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire une formule (dans la colonne I) qui calcule le montant de la bourse pour chaque élève (0 FCFA, 50 000 FCFA ou 100 000 FCFA) en une seule fois, sans utiliser de colonne intermédiaire \"Boursable\".",
+        "niveau": "very hard",
+        "reponse": "Formule en I2 :\n=SI(ET(B2>=14; C2>=10; D2>=10; E2>=10; F2>=10; G2>=10); SI(B2>=16; 100000; 50000); 0)\nExplication :\n1. Le premier SI vérifie l'éligibilité (moyenne>=14 ET toutes notes>=10).\n2. Si vrai, on utilise un second SI (imbriqué) pour déterminer le montant selon la moyenne : 100000 si moyenne>=16, sinon 50000.\n3. Si l'élève n'est pas éligible, on renvoie 0."
+      },
+      {
+        "numero": 3,
+        "texte": "Calculer le montant total des bourses que le ministère devra payer pour cette série d'élèves. Écrire la formule et expliquer brièvement.",
+        "niveau": "medium",
+        "reponse": "=SOMME(I2:I<derniere_ligne>)\nExemple : =SOMME(I2:I31) si 30 élèves.\nLa fonction SOMME additionne simplement tous les montants individuels calculés dans la colonne I."
+      },
+      {
+        "numero": 4,
+        "texte": "Proposer une formule unique (sans colonne supplémentaire) pour calculer directement le montant total des bourses pour tous les élèves. Expliquer la logique.",
+        "niveau": "very hard",
+        "reponse": "On peut utiliser SOMME.SI.ENS (ou SOMMEPROD selon les tableurs) mais la logique est complexe car il faut combiner des critères multiples. Une solution possible avec SOMME.SI.ENS en créant deux termes :\n= SOMME.SI.ENS(B2:B31; B2:B31;\">=16\"; C2:C31;\">=10\"; D2:D31;\">=10\"; E2:E31;\">=10\"; F2:F31;\">=10\"; G2:G31;\">=10\") * 100000 + SOMME.SI.ENS(B2:B31; B2:B31;\">=14\"; B2:B31;\"<16\"; C2:C31;\">=10\"; D2:D31;\">=10\"; E2:E31;\">=10\"; F2:F31;\">=10\"; G2:G31;\">=10\") * 50000\nCette formule calcule séparément le nombre d'élèves avec moyenne>=16 et toutes notes>=10 (multiplié par 100000) et le nombre d'élèves avec moyenne entre 14 et 16 et toutes notes>=10 (multiplié par 50000).\n\n*Note : Sur certains tableurs (Excel, LibreOffice), cette formule est valide. Sur Google Sheets, il faut utiliser SOMMEPROD avec des conditions.*"
+      }
+    ]
+  }
+]

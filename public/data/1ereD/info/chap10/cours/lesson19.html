@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Introduction au JavaScript (Leçon 19)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Optionnel: Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petit style additionnel pour la coloration syntaxique simulée */
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid #fbbf24;
+        }
+        .code-inline {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.375rem;
+            font-family: monospace;
+            font-weight: 600;
+            color: #0f3b5c;
+            font-size: 0.9rem;
+        }
+        .schema-js {
+            background: #fefce8;
+            border-radius: 1rem;
+            padding: 0.75rem;
+            border: 1px solid #fde047;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 19 : Introduction au JavaScript</h1>
+            <p class="lesson-subtitle">Informatique · Première C, D, E (Probatoire) · Module 2 : Programmation en JavaScript</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Qu’est-ce que JavaScript ?</h3>
+                    <p class="card-description">
+                        <strong>JavaScript (JS)</strong> est un langage de programmation <strong>côté client</strong> qui permet de rendre les pages web <strong>interactives et dynamiques</strong>. 
+                        Contrairement au HTML (structure) et CSS (style), JavaScript exécute des actions : calculs, validation de formulaires, animations, réactions aux clics, etc.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Rôle principal :</strong> dynamiser les pages web (réagir aux événements utilisateur).</li>
+                        <li>Exécuté directement par le navigateur (pas besoin de compilation séparée).</li>
+                        <li>Peut modifier le contenu HTML/CSS en temps réel.</li>
+                        <li>Langage <strong>interprété</strong>, flexible et orienté objet.</li>
+                    </ul>
+                    <div class="schema-js" style="margin-top: 10px;">
+                        💡 <strong>Analogies :</strong> HTML = squelette, CSS = peau/vêtements, JavaScript = muscles et mouvements.
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Intégration de JS dans une page HTML</h3>
+                    <p class="card-description">
+                        On utilise la balise <span class="code-inline">&lt;SCRIPT&gt;</span> pour insérer du code JavaScript directement dans une page web.
+                        La balise indique au navigateur que le code qu’elle contient est du JavaScript et doit être interprété.
+                    </p>
+                    <div class="code-block">
+                        &lt;SCRIPT language="Javascript"&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;// Code JavaScript ici<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;alert("Bienvenue sur ma page !");<br>
+                        &lt;/SCRIPT&gt;
+                    </div>
+                    <ul class="concept-list">
+                        <li>On peut placer <span class="code-inline">&lt;SCRIPT&gt;</span> dans <span class="code-inline">&lt;head&gt;</span> ou <span class="code-inline">&lt;body&gt;</span>.</li>
+                        <li>Attribut <span class="code-inline">language="Javascript"</span> (historique) ; on utilise souvent simplement <span class="code-inline">&lt;script&gt;</span>.</li>
+                        <li>Possibilité de lier un fichier externe : <span class="code-inline">&lt;script src="monScript.js"&gt;&lt;/script&gt;</span> (bonne pratique).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Rôle de la balise &lt;SCRIPT&gt;</h3>
+                    <p class="card-description">
+                        La balise <span class="code-inline">&lt;SCRIPT&gt;</span> est l’élément HTML qui délimite une zone de script exécutable. 
+                        Son rôle est essentiel car :
+                    </p>
+                    <ul class="concept-list">
+                        <li>✅ Elle indique au navigateur d’interpréter le contenu comme du code (JavaScript par défaut).</li>
+                        <li>✅ Elle permet d’interagir avec le DOM (Document Object Model) et les éléments de la page.</li>
+                        <li>✅ Sans <span class="code-inline">&lt;script&gt;</span>, le navigateur afficherait le code comme du texte brut.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Premières instructions JavaScript</h3>
+                    <p class="card-description">
+                        Voici quelques commandes fondamentales pour débuter en JavaScript :
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="code-inline">alert("message")</span> : affiche une boîte de dialogue avec un message.</li>
+                        <li><span class="code-inline">console.log("info")</span> : envoie un message dans la console du navigateur (débogage).</li>
+                        <li><span class="code-inline">document.write("texte")</span> : écrit directement dans le flux HTML de la page.</li>
+                        <li>Les commentaires : <span class="code-inline">// commentaire sur une ligne</span> ou <span class="code-inline">/* commentaire multi-lignes */</span>.</li>
+                    </ul>
+                    <div class="code-block">
+                        &lt;script&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;// Ceci est un commentaire<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;alert("Bonjour, chers élèves du Cameroun !");<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.log("Leçon 19 : introduction JS");<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;document.write("&lt;h2&gt;JavaScript rend la page vivante&lt;/h2&gt;");<br>
+                        &lt;/script&gt;
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section exemples concrets -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Intégration simple dans une page web</h3>
+                    <p class="exemple-context">
+                        Une page HTML affiche "Bienvenue" et un message d’alerte au chargement.
+                    </p>
+                    <div class="code-block">
+                        &lt;!DOCTYPE html&gt;<br>
+                        &lt;html&gt;<br>
+                        &lt;head&gt;&lt;title&gt;Ma première page JS&lt;/title&gt;&lt;/head&gt;<br>
+                        &lt;body&gt;<br>
+                        &nbsp;&nbsp;&lt;h1&gt;Apprentissage JavaScript&lt;/h1&gt;<br>
+                        &nbsp;&nbsp;&lt;script&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;alert("Bienvenue sur ma page !");<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;document.write("&lt;p&gt;JavaScript fonctionne parfaitement !&lt;/p&gt;");<br>
+                        &nbsp;&nbsp;&lt;/script&gt;<br>
+                        &lt;/body&gt;<br>
+                        &lt;/html&gt;
+                    </div>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> Lorsque la page se charge, le navigateur rencontre la balise <span class="code-inline">&lt;script&gt;</span> et exécute les instructions : 
+                        affiche une alerte, puis écrit un paragraphe dans la page.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : L'alerte bloque l'affichage tant que l'utilisateur ne clique pas sur OK. Pour des affichages discrets, préférez <span class="code-inline">console.log()</span> ou <span class="code-inline">document.write()</span>.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Interaction avec l'utilisateur (prompt)</h3>
+                    <p class="exemple-context">
+                        On veut demander le nom de l'utilisateur et afficher un message personnalisé.
+                    </p>
+                    <div class="code-block">
+                        &lt;script&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;let nom = prompt("Quel est ton nom ?");<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;document.write("&lt;p&gt;Bonjour, " + nom + " ! Prêt(e) à coder en JS ?&lt;/p&gt;");<br>
+                        &lt;/script&gt;
+                    </div>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong> La fonction <span class="code-inline">prompt()</span> ouvre une boîte de saisie, stocke la valeur dans la variable <span class="code-inline">nom</span>, 
+                        puis <span class="code-inline">document.write()</span> affiche un message personnalisé.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 <strong>À retenir :</strong> <span class="code-inline">prompt()</span> renvoie toujours une chaîne de caractères (string). Pensez à convertir avec <span class="code-inline">parseInt()</span> ou <span class="code-inline">parseFloat()</span> si besoin de nombres.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Différence entre fichier interne et externe</h3>
+                    <p class="exemple-context">
+                        Organisation du code pour un projet propre : séparer le JavaScript dans un fichier <span class="code-inline">script.js</span>.
+                    </p>
+                    <div class="code-block">
+                        &lt;!-- Fichier HTML --&gt;<br>
+                        &lt;script src="script.js"&gt;&lt;/script&gt;
+                    </div>
+                    <div class="code-block">
+                        // Contenu du fichier script.js<br>
+                        alert("Ce code provient d'un fichier externe !");<br>
+                        console.log("Bonjour depuis le fichier externe");
+                    </div>
+                    <p class="exemple-correction">
+                        <strong>Avantages :</strong> meilleure organisation, réutilisabilité du code, et possibilité de mise en cache par le navigateur.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section pièges / à ne pas confondre -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Oublier les parenthèses après <span class="code-inline">alert</span> ou <span class="code-inline">prompt</span> → <span class="code-inline">alert</span> seul ne déclenche rien, il faut <span class="code-inline">alert()</span>.</li>
+                        <li><span class="bold">Confusion :</span> <span class="code-inline">document.write()</span> après le chargement complet de la page peut effacer le contenu existant (si utilisé dans un événement). Préférer d’autres méthodes (manipulation du DOM).</li>
+                        <li><span class="bold">Attention :</span> JavaScript est sensible à la casse : <span class="code-inline">alert()</span> fonctionne, <span class="code-inline">Alert()</span> ou <span class="code-inline">ALERT()</span> déclenchent une erreur.</li>
+                        <li><span class="bold">Piège :</span> Placer le script <strong>avant</strong> les éléments HTML qu’il veut modifier sans attendre le chargement (utiliser <span class="code-inline">window.onload</span> ou placer le script en fin de <span class="code-inline">&lt;body&gt;</span>).</li>
+                        <li><span class="bold">À ne pas confondre :</span> JavaScript ≠ Java (ce sont deux langages complètement différents).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section schéma récapitulatif (interaction HTML / JS) -->
+            <section class="concept-section">
+                <h2 class="section-title">🖥️ Récapitulatif : Interaction HTML & JavaScript</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Cycle de vie d’un script dans une page web</h3>
+                    <p class="card-description">
+                        <strong>1. Le navigateur charge le fichier HTML.</strong><br>
+                        <strong>2. Il rencontre la balise <span class="code-inline">&lt;script&gt;</span> (ou src externe).</strong><br>
+                        <strong>3. Le code JavaScript est interprété immédiatement (sauf si attribut defer/async).</strong><br>
+                        <strong>4. JavaScript peut lire/modifier la structure HTML (DOM), répondre aux événements, etc.</strong>
+                    </p>
+                    <div class="schema-js">
+                        📌 <strong>Exemple visuel conceptuel :</strong><br>
+                        [Fichier HTML] → (balise &lt;script&gt;) → [Moteur JS du navigateur] → Exécution → (affichage dynamique, alertes, etc.)
+                        <br><br>
+                        <img src="" alt="Schéma d'interaction entre une page HTML et JavaScript : le navigateur interprète la balise script et exécute le code pour rendre la page interactive." style="max-width:100%; border-radius:12px; margin-top:8px;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mini-section rappel : mots-clés importants -->
+            <section class="exemple-section">
+                <h2 class="section-title">📝 Mots-clés de la leçon à retenir</h2>
+                <div class="card" style="background:#eef2ff;">
+                    <ul class="concept-list" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                        <li><strong>JavaScript</strong> : langage interactif côté client</li>
+                        <li><strong>Balise &lt;script&gt;</strong> : conteneur de code JS</li>
+                        <li><strong>alert()</strong> : boîte de dialogue d'information</li>
+                        <li><strong>prompt()</strong> : boîte de dialogue avec saisie</li>
+                        <li><strong>document.write()</strong> : écriture dans la page HTML</li>
+                        <li><strong>console.log()</strong> : débogage dans la console</li>
+                        <li><strong>Interprété</strong> : exécuté ligne par ligne par le navigateur</li>
+                        <li><strong>Événement</strong> (aperçu) : onClick, onLoad, etc. (vu en leçon 22)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Exercice pratique pour auto-évaluation (optionnel mais pédagogique) -->
+            <section class="warning-section">
+                <h2 class="section-title">🧪 Auto-évaluation / Petit exercice</h2>
+                <div class="card warning-card" style="background-color: #e6f7ec; border-left-color: #2ecc71;">
+                    <ul style="list-style-type: decimal; margin-left: 1.2rem;">
+                        <li>Écris le code HTML minimal pour afficher une alerte "Bienvenue en Première C" au chargement de la page.</li>
+                        <li>Quelle balise utilise-t-on pour insérer du JavaScript dans une page ?</li>
+                        <li>Que se passe-t-il si on écrit <span class="code-inline">alert("Test")</span> sans les parenthèses ?</li>
+                        <li>Crée un script qui demande l'âge de l'utilisateur via <span class="code-inline">prompt()</span> et affiche "Tu as X ans" dans la page.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        ✅ <strong>Correction rapide :</strong> (1) &lt;script&gt;alert("Bienvenue en Première C");&lt;/script&gt; (2) &lt;script&gt; (3) erreur, il manque l'appel de fonction. (4) let age = prompt("Âge ?"); document.write("Tu as " + age + " ans");
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision créée selon le programme officiel du Cameroun (Probatoire C, D, E) · 📚 Leçon 19 : Introduction au JavaScript</p>
+            <p>🔗 Références : MDN Web Docs, Cours d'informatique – Utiliser la balise &lt;script&gt; et les fonctions de base.</p>
+        </footer>
+    </div>
+</body>
+</html>

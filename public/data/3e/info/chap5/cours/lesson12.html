@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - UE12 : Généralités sur les formules (Tableur)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 950px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        code {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #0f3b5e;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Tableau simple pour illustration */
+        .mini-table {
+            background: white;
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .mini-table th, .mini-table td {
+            border: 1px solid #cbd5e1;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        .mini-table th {
+            background-color: #eef2ff;
+            font-weight: 600;
+        }
+        .reference-highlight {
+            background-color: #fef9c3;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">UE 12 : Généralités sur les formules dans un tableur</h1>
+            <p class="lesson-subtitle">Module 2 · Production de contenus numériques · Classe de 3ème</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Qu’est-ce qu’une formule dans un tableur ?</h3>
+                    <p class="card-description">
+                        Une formule est une expression qui effectue des calculs à partir de données contenues dans des cellules. 
+                        Elle commence toujours par le signe <code>=</code>. Sans le signe <code>=</code>, le tableur interprète la saisie comme du texte.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Opérateurs de base</strong> : <code>+</code> (addition), <code>-</code> (soustraction), <code>*</code> (multiplication), <code>/</code> (division), <code>^</code> (puissance).</li>
+                        <li>Exemple de formule : <code>=A2 + B2</code> additionne les valeurs des cellules A2 et B2.</li>
+                        <li>Une formule peut combiner des nombres, des références de cellules et des opérateurs.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Références relatives et absolues</h3>
+                    <p class="card-description">
+                        Les références de cellules sont fondamentales pour recopier efficacement des formules.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Référence relative</strong> (ex: <code>A1</code>) : quand on copie la formule, la référence s’ajuste automatiquement par rapport à la position de la nouvelle cellule.</li>
+                        <li><strong>Référence absolue</strong> (ex: <code>$A$1</code>) : la colonne et la ligne sont fixes. Elle ne change pas lors d’une copie. On utilise la touche <kbd>F4</kbd> pour basculer rapidement.</li>
+                        <li><strong>Référence mixte</strong> (<code>$A1</code> ou <code>A$1</code>) : soit la colonne est fixe, soit la ligne est fixe.</li>
+                    </ul>
+                    <p><span class="formule">Exemple :</span> <code>=B2*$C$1</code> — B2 est relative, $C$1 reste constante même en recopiant la formule.</p>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Utilisation des plages de cellules</h3>
+                    <p class="card-description">
+                        Une plage est un ensemble de cellules contiguës. On la note par la cellule en haut à gauche, deux-points et la cellule en bas à droite. 
+                        Exemple : <code>A1:A10</code> (colonne A, lignes 1 à 10) ou <code>B2:D5</code>.
+                        Les plages sont souvent utilisées avec des fonctions prédéfinies (SOMME, MOYENNE) vues dans l'UE13, mais elles peuvent aussi être employées dans des formules simples.
+                    </p>
+                    <div class="exemple-astuce" style="margin-top: 0.5rem;">
+                        💡 <strong>Astuce :</strong> Pour sélectionner rapidement une plage, cliquer sur la première cellule, maintenir <kbd>Shift</kbd> et cliquer sur la dernière cellule.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section des exemples concrets -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Calcul d’un total avec opérateurs simples</h3>
+                    <p class="exemple-context">
+                        Une librairie souhaite calculer le prix total d’un lot de livres. Colonne A = nom du livre, colonne B = quantité, colonne C = prix unitaire (FCFA).
+                        Dans la cellule D2, on veut obtenir la somme pour le premier livre (Prix total = Quantité × Prix unitaire).
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Formule à saisir :</strong> <code>=B2 * C2</code><br>
+                        Si B2 = 3 et C2 = 1500, la formule affiche <strong>4500</strong> FCFA.<br>
+                        Ensuite, on peut recopier la formule vers le bas (poignée de recopie) : dans D3, la formule deviendra automatiquement <code>=B3 * C3</code> grâce à la référence relative.
+                    </p>
+                    <div class="exemple-astuce">
+                        🖱️ <strong>À savoir :</strong> Pour recopier une formule sur plusieurs lignes, double-cliquer sur le petit carré en bas à droite de la cellule (poignée de recopie) ou faire glisser.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Différence entre référence relative et absolue (TVA)</h3>
+                    <p class="exemple-context">
+                        Une facture contient des montants hors taxe (HT) dans la colonne A (A2 à A5). Le taux de TVA est 19.25% et se trouve dans la cellule C1.
+                        On veut calculer le montant TTC (Toutes Taxes Comprises) pour chaque article.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Formule en B2 (TTC) :</strong> <code>=A2 * (1 + $C$1)</code><br>
+                        Explication : <br>
+                        - <code>A2</code> est relative → en recopiant vers B3, elle deviendra A3, etc.<br>
+                        - <code>$C$1</code> est absolue (colonne C et ligne 1 bloquées) → le taux reste toujours le même quel que soit l’emplacement de la copie.<br>
+                        <strong>Résultat :</strong> Si A2 = 10000, alors TTC = 10000 × 1.1925 = 11925 FCFA.
+                    </p>
+                    <div class="exemple-astuce">
+                        🧠 <strong>Mémo technique :</strong> Appuyez sur <kbd>F4</kbd> après avoir sélectionné une référence dans la barre de formule pour basculer entre relative, absolue, mixte.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Calcul d’une moyenne pondérée avec opérateurs et parenthèses</h3>
+                    <p class="exemple-context">
+                        Dans un bulletin, les notes sont affectées de coefficients. Mathématiques : note 15 (coef 4), Physique : note 12 (coef 3), Anglais : 14 (coef 2). 
+                        Calculer la moyenne pondérée.
+                    </p>
+                    <p class="exemple-correction">
+                        Organiser les données : <br>
+                        - Cellule A1 : "Maths", B1 : 15, C1 : 4 <br>
+                        - Cellule A2 : "Physique", B2 : 12, C2 : 3 <br>
+                        - Cellule A3 : "Anglais", B3 : 14, C3 : 2 <br>
+                        Formule : <code>=(B1*C1 + B2*C2 + B3*C3) / (C1+C2+C3)</code> <br>
+                        Calcul : (15×4 + 12×3 + 14×2) / (4+3+2) = (60 + 36 + 28) / 9 = 124 / 9 ≈ <strong>13,78</strong>.
+                    </p>
+                    <div class="exemple-astuce">
+                        📌 <strong>Priorité des opérateurs :</strong> Le tableur respecte les priorités mathématiques : multiplication/division avant addition/soustraction. Utilisez des parenthèses pour contrôler l’ordre.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges courants et bonnes pratiques -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & Bonnes pratiques</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Oublier le signe <code>=</code> au début d’une formule. Dans ce cas, le tableur affiche le texte saisi au lieu du calcul.</li>
+                        <li><span class="bold">Attention :</span> Utiliser des références absolues inutilement peut bloquer l’adaptation des formules lors d’une copie. Bien réfléchir aux cellules qui doivent rester fixes.</li>
+                        <li><span class="bold">Piège :</span> Ne pas utiliser de parenthèses dans une formule combinant +, -, *, /. Exemple : <code>=A1+B1*C1</code> ne donnera pas le résultat escompté si on souhaitait (A1+B1)*C1. Pensez à parenthéser !</li>
+                        <li><span class="bold">Conseil :</span> Pour vérifier une formule, double-cliquer sur la cellule ou regarder la barre de formule. Les cellules référencées sont entourées de couleurs différentes.</li>
+                        <li><span class="bold">Bonnes pratiques :</span> Organiser ses données en colonnes avec des titres, utiliser des noms de plage (avancé) pour plus de lisibilité, et toujours tester ses formules sur quelques valeurs.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section visuelle supplémentaire : tableau récapitulatif des références -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Tableau récapitulatif : références relatives / absolues</h2>
+                <div class="card">
+                    <h3 class="card-title">Comment se comportent les références lors d’une copie ?</h3>
+                    <table class="mini-table">
+                        <thead>
+                            <tr><th>Type de référence</th><th>Exemple</th><th>Effet lors du glissement vers la droite / vers le bas</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Relative</td><td><code>A1</code></td><td>La colonne et la ligne s’ajustent automatiquement.</td></tr>
+                            <tr><td>Absolue</td><td><code>$A$1</code></td><td>Ne change jamais, reste toujours A1.</td></tr>
+                            <tr><td>Mixte (colonne fixe)</td><td><code>$A1</code></td><td>La colonne A est fixe, la ligne s’ajuste.</td></tr>
+                            <tr><td>Mixte (ligne fixe)</td><td><code>A$1</code></td><td>La ligne 1 est fixe, la colonne s’ajuste.</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        🧪 <strong>Petite expérience mentale :</strong> Si en cellule D2 j’écris <code>=B2*$C$2</code> et que je copie vers E3, la formule deviendra <code>=C3*$C$2</code>. La référence absolue reste inchangée.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Illustration conceptuelle simple : image IA d'un tableur -->
+            <section class="concept-section">
+                <h2 class="section-title">🖼️ Représentation visuelle d’une formule</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Barre de formule et saisie</h3>
+                    <p>
+                        Une feuille de calcul typique (LibreOffice Calc, Excel, Google Sheets) affiche la formule en haut dans la <strong>barre de formule</strong>. 
+                        La cellule active affiche le résultat du calcul.
+                    </p>
+                    <!-- Image générique générée par l'IA -->
+                    <img src="" alt="Capture d’écran schématique d’un tableur avec une formule =B2*C2 dans la barre de formule et la cellule D2 sélectionnée" style="width:100%; max-width:400px; border-radius:12px; margin:1rem auto; display:block; border:1px solid #ccc;">
+                    <p class="card-description" style="margin-top:0.5rem; font-size:0.9rem;">
+                        🔍 Sur l’image : colonne B = quantités, colonne C = prix unitaire, formule <code>=B2*C2</code> calculant le total.
+                    </p>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision créée pour les élèves de 3ème (Cameroun) · Programme officiel UE12 · <a href="#">Tableur : formules et références</a> · 📘 Réviser régulièrement</p>
+        </footer>
+    </div>
+</body>
+</html>

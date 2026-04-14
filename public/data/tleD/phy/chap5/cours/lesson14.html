@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 14 : Lois de Newton (Terminale)</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts & Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+            color: #0f172a;
+        }
+        .fiche-container {
+            max-width: 1100px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+            text-align: center;
+        }
+        .badge {
+            background-color: #fbbf24;
+            color: #1e293b;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        .objectifs-bac {
+            background-color: #eef2ff;
+            border-left: 6px solid #2a5298;
+            padding: 0.75rem 1.2rem;
+            margin: 1.5rem 2rem;
+            border-radius: 0.8rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #1e3c72;
+        }
+        .section {
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-left: 5px solid #2a5298;
+            padding-left: 1rem;
+        }
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        .card {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .card h3 {
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #2a5298;
+            font-size: 1.1rem;
+        }
+        .formula-box {
+            background-color: #eef2ff;
+            padding: 0.8rem 1rem;
+            border-radius: 0.8rem;
+            font-family: monospace;
+            font-weight: 500;
+            text-align: center;
+            margin: 0.8rem 0;
+            font-size: 1rem;
+            border: 1px solid #cbd5e1;
+        }
+        .liste-points {
+            padding-left: 1.2rem;
+            margin: 0.8rem 0;
+        }
+        .liste-points li {
+            margin-bottom: 0.5rem;
+        }
+        .warning {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 0.6rem 1rem;
+            border-radius: 0.6rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .exemple {
+            background-color: #f1f5f9;
+            border-radius: 0.8rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-left: 4px solid #10b981;
+        }
+        .exemple p:first-child {
+            font-weight: 700;
+            color: #065f46;
+        }
+        .footer-note {
+            background-color: #f1f5f9;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #475569;
+            border-top: 1px solid #cbd5e1;
+        }
+        @media (max-width: 700px) {
+            .grid-2cols {
+                grid-template-columns: 1fr;
+            }
+            .section {
+                padding: 1rem 1.2rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+        .methode-step {
+            background: white;
+            border-radius: 0.6rem;
+            padding: 0.5rem 0.8rem;
+            margin-bottom: 0.6rem;
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <div class="header">
+        <div class="badge">📌 RÉVISION BAC 2025 - TERMINALE C & D</div>
+        <h1>LEÇON 14 : ÉNONCÉ DES LOIS DE NEWTON</h1>
+        <div class="subtitle">Principe d'inertie, Principe fondamental de la dynamique (PFD) & Principe des actions réciproques</div>
+    </div>
+
+    <div class="objectifs-bac">
+        🎯 <strong>Objectifs & lien Bac :</strong> Énoncer et appliquer les trois lois de Newton. Résoudre des problèmes de dynamique en utilisant le PFD.  
+        <span style="display: inline-block; background: #1e3c72; color: white; padding: 0.1rem 0.6rem; border-radius: 20px; font-size: 0.7rem; margin-left: 0.5rem;">Sujets Bac 2023, 2024</span>
+    </div>
+
+    <!-- SECTION 1 : RAPPEL DES LOIS -->
+    <div class="section">
+        <div class="section-title">
+            <span>⚖️</span> Les trois lois fondamentales
+        </div>
+        <div class="grid-2cols">
+            <div class="card">
+                <h3>🔹 1ère loi – Principe d'inertie</h3>
+                <p>Dans un référentiel galiléen, si la somme vectorielle des forces extérieures s'exerçant sur un solide est nulle, alors le centre d'inertie du solide est soit au repos, soit animé d'un mouvement rectiligne uniforme.</p>
+                <div class="formula-box">
+                    $$\sum \vec{F}_{ext} = \vec{0} \quad \Longleftrightarrow \quad \vec{v}_G = \text{constante (vecteur)}$$
+                </div>
+                <ul class="liste-points">
+                    <li><strong>Corollaire :</strong> conservation du vecteur vitesse (norme et direction).</li>
+                    <li>Cas particuliers : repos ($\vec{v}=0$) ou MRU.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🔸 2ème loi – Principe fondamental de la dynamique (PFD)</h3>
+                <p>Dans un référentiel galiléen, la somme des forces extérieures appliquées à un solide est égale au produit de sa masse par l'accélération de son centre d'inertie.</p>
+                <div class="formula-box">
+                    $$\boxed{\sum \vec{F}_{ext} = m \, \vec{a}_G}$$
+                </div>
+                <ul class="liste-points">
+                    <li>$\vec{a}_G$ : accélération du centre d'inertie (m/s²).</li>
+                    <li>m : masse inerte (kg).</li>
+                    <li>Relation fondamentale qui relie cause (forces) et effet (mouvement).</li>
+                </ul>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 0.2rem;">
+            <h3>🔹 3ème loi – Principe des actions réciproques (ou mutuelles)</h3>
+            <p>Si un corps A exerce une force $\vec{F}_{A/B}$ sur un corps B, alors B exerce simultanément sur A une force $\vec{F}_{B/A}$ telle que :</p>
+            <div class="formula-box">
+                $$\vec{F}_{A/B} = - \,\vec{F}_{B/A}$$
+            </div>
+            <ul class="liste-points">
+                <li>Les deux forces ont la même droite d'action, des sens opposés et la même intensité.</li>
+                <li>Elles s'appliquent sur des corps différents (ne se compensent jamais).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECTION 2 : CONDITIONS ET MISE EN GARDE -->
+    <div class="section">
+        <div class="section-title">
+            <span>📐</span> Référentiel galiléen & mise en garde
+        </div>
+        <div class="grid-2cols">
+            <div class="card">
+                <h3>🌍 Qu'est-ce qu'un référentiel galiléen ?</h3>
+                <p>Référentiel dans lequel le principe d'inertie s'applique. En Terminale, on considère souvent :</p>
+                <ul class="liste-points">
+                    <li><strong>Référentiel terrestre</strong> (pour des durées courtes, en négligeant la rotation de la Terre).</li>
+                    <li><strong>Référentiel géocentrique</strong> (pour l'étude des satellites).</li>
+                    <li><strong>Référentiel héliocentrique</strong> (pour les planètes).</li>
+                </ul>
+                <div class="warning">
+                    ⚠️ Attention : Le PFD n'est valable que dans un référentiel galiléen.
+                </div>
+            </div>
+            <div class="card">
+                <h3>📌 Étapes clés pour appliquer le PFD</h3>
+                <div class="methode-step">1. Définir le système (solide étudié).</div>
+                <div class="methode-step">2. Choisir un référentiel galiléen adapté.</div>
+                <div class="methode-step">3. Faire le bilan des forces extérieures : poids, réaction, tension, frottement, etc.</div>
+                <div class="methode-step">4. Appliquer $\sum \vec{F}_{ext} = m \vec{a}_G$ et projeter sur les axes.</div>
+                <div class="methode-step">5. Obtenir l'équation différentielle du mouvement puis intégrer.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3 : EXEMPLES TYPES BAC -->
+    <div class="section">
+        <div class="section-title">
+            <span>📝</span> Applications directes & exemples types (Bac)
+        </div>
+        <div class="exemple">
+            <p>✅ Exemple 1 – Mouvement rectiligne avec force constante (chute libre)</p>
+            <p>Un solide de masse m est lâché sans vitesse initiale dans le champ de pesanteur (g constant). Forces : uniquement le poids $\vec{P}=m\vec{g}$.<br>
+            PFD : $m\vec{g} = m\vec{a} \Rightarrow \vec{a} = \vec{g}$.<br>
+            En projection verticale : $a_z = g$, après intégration $v_z(t)=gt$ et $z(t)=\frac12 gt^2$. (On retrouve la chute libre).</p>
+        </div>
+        <div class="exemple">
+            <p>✅ Exemple 2 – Application avec frottements (plan incliné)</p>
+            <p>Un solide glisse sur un plan incliné d'angle $\alpha$ avec frottement $\vec{f}$ (coefficient $\mu$). Bilan : Poids, réaction normale $\vec{R}_N$, frottement $\vec{f}$.<br>
+            PFD selon l'axe parallèle au plan : $m g \sin\alpha - f = m a$ et $f = \mu R_N$ avec $R_N = m g \cos\alpha$.<br>
+            D'où $a = g(\sin\alpha - \mu \cos\alpha)$.</p>
+        </div>
+        <div class="exemple">
+            <p>✅ Exemple 3 – Principe des actions réciproques (personne qui marche)</p>
+            <p>Un marcheur pousse le sol vers l'arrière : $\vec{F}_{pied/sol}$. Le sol exerce sur le marcheur une force $\vec{F}_{sol/pied}$ vers l'avant, ce qui permet l'avancée.</p>
+        </div>
+    </div>
+
+    <!-- SECTION 4 : LOI DE NEWTON ET QUANTITÉ DE MOUVEMENT (variante) -->
+    <div class="section">
+        <div class="section-title">
+            <span>🔄</span> Forme intégrale du PFD (quantité de mouvement)
+        </div>
+        <div class="card">
+            <p>Le PFD s'écrit aussi : $\displaystyle \sum \vec{F}_{ext} = \frac{d\vec{p}}{dt}$ où $\vec{p} = m\vec{v}$ est la quantité de mouvement.</p>
+            <div class="formula-box">
+                $$\sum \vec{F}_{ext} = \frac{d(m\vec{v})}{dt}$$
+            </div>
+            <p>Si la masse est constante, on retrouve $m\vec{a}$. Cette forme est utile pour les systèmes à masse variable (propulsion).</p>
+            <div class="warning">
+                💡 <strong>À retenir pour le BAC :</strong> souvent le PFD permet d'établir une équation différentielle en x(t) ou v(t), puis de déterminer la nature du mouvement.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 5 : EXERCICE RAPIDE D'APPLICATION -->
+    <div class="section">
+        <div class="section-title">
+            <span>✏️</span> Mini-exercice (entraînement Bac)
+        </div>
+        <div class="card" style="background: #fefce8;">
+            <p><strong>Énoncé :</strong> Un solide de masse $m = 2,0\ kg$ se déplace sur une table horizontale. On le tire avec une force horizontale constante $F = 8,0\ N$. La force de frottement vaut $f = 2,0\ N$. Calculer l'accélération du solide.</p>
+            <details style="margin-top: 12px; cursor: pointer;">
+                <summary style="font-weight: 700; color: #2a5298;">Voir la correction détaillée</summary>
+                <div style="margin-top: 10px; background: #f1f5f9; padding: 10px; border-radius: 8px;">
+                    <p>1. Système : solide de masse m.<br>
+                    2. Référentiel terrestre supposé galiléen.<br>
+                    3. Forces : $ \vec{F}$ (traction), $\vec{f}$ (frottement opposé au mouvement), $\vec{P}$ et $\vec{R}_N$ (se compensent verticalement).<br>
+                    4. PFD selon l'axe horizontal : $F - f = m\, a$.<br>
+                    5. $a = \dfrac{F-f}{m} = \dfrac{8,0 - 2,0}{2,0} = \dfrac{6,0}{2,0} = 3,0\ m·s^{-2}$.<br>
+                    L'accélération est de $3,0\ m/s^2$ dans le sens de la force F.
+                    </p>
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <!-- SECTION 6 : ERREURS COURANTES & CONSEILS EXAMEN -->
+    <div class="section">
+        <div class="section-title">
+            <span>⚠️</span> Pièges fréquents au Baccalauréat
+        </div>
+        <ul class="liste-points" style="margin-left: 2rem;">
+            <li><strong>Oublier le caractère vectoriel :</strong> les lois de Newton sont des relations vectorielles. Il faut projeter sur des axes bien choisis.</li>
+            <li><strong>Confondre inertie et quantité de mouvement :</strong> le principe d'inertie (1ère loi) est un cas particulier du PFD quand $\sum \vec{F}=0$.</li>
+            <li><strong>Négliger les forces :</strong> toujours faire un bilan exhaustif (poids, réaction, tension, frottement, poussée...).</li>
+            <li><strong>Référentiel non galiléen :</strong> le PFD ne s'applique pas directement dans un référentiel accéléré (sauf à ajouter des forces d'inertie).</li>
+            <li><strong>Action/réciproque :</strong> les deux forces ne s'annulent pas car elles s'exercent sur deux objets différents.</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 7 : TABLEAU RÉCAPITULATIF -->
+    <div class="section">
+        <div class="section-title">
+            <span>📋</span> Synthèse visuelle
+        </div>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; background: #fff; border-radius: 1rem;">
+                <thead style="background: #e2e8f0;">
+                    <tr><th style="padding: 12px; border: 1px solid #cbd5e1;">Loi</th><th style="padding: 12px; border: 1px solid #cbd5e1;">Énoncé symbolique</th><th style="padding: 12px; border: 1px solid #cbd5e1;">Conséquence immédiate</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td style="padding: 10px; border: 1px solid #cbd5e1;"><strong>1ère loi</strong></td><td style="padding: 10px; border: 1px solid #cbd5e1;">$\sum \vec{F}=0$</td><td style="padding: 10px; border: 1px solid #cbd5e1;">$\vec{v}_G = \text{constante}$ (MRU ou repos)</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #cbd5e1;"><strong>2ème loi (PFD)</strong></td><td style="padding: 10px; border: 1px solid #cbd5e1;">$\sum \vec{F}=m\vec{a}$</td><td style="padding: 10px; border: 1px solid #cbd5e1;">L'accélération est proportionnelle à la résultante</td></tr>
+                    <tr><td style="padding: 10px; border: 1px solid #cbd5e1;"><strong>3ème loi</strong></td><td style="padding: 10px; border: 1px solid #cbd5e1;">$\vec{F}_{A/B} = -\vec{F}_{B/A}$</td><td style="padding: 10px; border: 1px solid #cbd5e1;">Les forces d'interaction sont égales en intensité et opposées</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- SECTION 8 : LIENS AVEC LES AUTRES CHAPITRES -->
+    <div class="section">
+        <div class="section-title">
+            <span>🔗</span> Liens inter-chapitres (Module 3)
+        </div>
+        <p>La maîtrise des lois de Newton est indispensable pour :</p>
+        <ul class="liste-points">
+            <li><strong>Chapitre 6 :</strong> Mouvements dans le champ de pesanteur (chute verticale, projectile).</li>
+            <li><strong>Chapitre 7 :</strong> Mouvement de particules chargées (forces électrique ou magnétique).</li>
+            <li><strong>Chapitre 8 :</strong> Pendules (élastique, simple) → établissement des équations différentielles.</li>
+            <li><strong>Mouvement des satellites :</strong> application de la loi de gravitation + PFD.</li>
+        </ul>
+        <div class="warning">
+            💡 <strong>Conseil Bac :</strong> Les exercices de mécanique au baccalauréat commencent souvent par un rappel du PFD. Savoir l'appliquer proprement et projeter les forces est la clé pour réussir la partie "Dynamique".
+        </div>
+    </div>
+
+    <div class="footer-note">
+        📚 Fiche conforme au programme officiel du Cameroun – Terminale C & D (Année 2025-2026) – Révision Baccalauréat.  
+        🔬 Relire les énoncés, s'entraîner sur des sujets types. Les lois de Newton sont le socle de la mécanique classique.
+    </div>
+</div>
+</body>
+</html>

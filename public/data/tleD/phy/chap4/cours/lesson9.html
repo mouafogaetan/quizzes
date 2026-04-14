@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 9 : Force magnétique et champ magnétique</title>
+    <style>
+        /* --- CSS Intégré (pour le respect du template) --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e9f0f5;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+            color: #1a2c3e;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* En-tête de la leçon */
+        .lesson-header {
+            background: linear-gradient(135deg, #0B2B40 0%, #144d6b 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+        }
+
+        .lesson-badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .lesson-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        /* Grille principale */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            gap: 0;
+        }
+
+        /* Colonne gauche : notions clés / formules */
+        .col-left {
+            background: #fefefe;
+            border-right: 1px solid #e2edf2;
+            padding: 1.8rem 1.8rem 2rem 2rem;
+        }
+
+        /* Colonne droite : objectifs, compétences, lien bac */
+        .col-right {
+            background: #fbfefd;
+            padding: 1.8rem 2rem 2rem 1.8rem;
+        }
+
+        /* Blocs stylisés */
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0B2B40;
+            border-left: 5px solid #1e88b0;
+            padding-left: 0.8rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title i {
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .notion-card {
+            background: #F2F7FA;
+            border-radius: 18px;
+            padding: 0.9rem 1.2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #1e88b0;
+        }
+
+        .notion-term {
+            font-weight: 800;
+            color: #0a4b6e;
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .formula {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 0.8rem 1.2rem;
+            margin: 0.8rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #d9e5ea;
+            font-family: monospace;
+            font-size: 1rem;
+            overflow-x: auto;
+        }
+
+        .formula p {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 500;
+            color: #004070;
+        }
+
+        .highlight {
+            background: #eef4fc;
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0;
+            font-size: 0.9rem;
+        }
+
+        .bac-link {
+            background: #fef7e0;
+            border-left: 5px solid #f5b042;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+
+        .competence-badge {
+            display: inline-block;
+            background: #1e88b0;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            margin-right: 0.5rem;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, #cbdde4, transparent);
+        }
+
+        .footer-note {
+            background: #eef2f5;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #2c5a74;
+            border-top: 1px solid #cde0e8;
+        }
+
+        @media (max-width: 780px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .col-left {
+                border-right: none;
+                border-bottom: 1px solid #e2edf2;
+            }
+            .lesson-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .vector-example {
+            font-family: monospace;
+            background: #fff;
+            border-radius: 10px;
+            padding: 0.5rem;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="fiche-container">
+    <!-- En-tête : Leçon 9 -->
+    <div class="lesson-header">
+        <div class="lesson-badge">MODULE 2 – ÉLECTROMAGNÉTISME | CHAPITRE 4 : INTERACTIONS MAGNÉTIQUES</div>
+        <div class="lesson-title">📡 Leçon 9 : Force magnétique et notion de champ magnétique</div>
+        <div class="lesson-subtitle">Mise en évidence d’une force magnétique – Définition et propriétés du champ $ \mathbf{B} $ – Lien Bac 2025 (Force de Lorentz)</div>
+    </div>
+
+    <div class="content-grid">
+        <!-- COLONNE GAUCHE : Notions clés & formules -->
+        <div class="col-left">
+            <div class="section">
+                <div class="section-title">🧲 NOTIONS CLÉS & DÉFINITIONS</div>
+                <div class="notion-card">
+                    <span class="notion-term">🔹 Champ magnétique $ \mathbf{B} $</span>
+                    Champ vectoriel qui règne en tout point de l’espace. Il modélise l’influence magnétique d’un aimant ou d’un courant. <br>
+                    <strong>Unité :</strong> le Tesla (T) – $1 \, \text{T} = 1 \, \text{N} / (\text{A} \cdot \text{m})$.
+                </div>
+                <div class="notion-card">
+                    <span class="notion-term">🔹 Lignes de champ magnétique</span>
+                    Courbes tangentes au vecteur $ \mathbf{B} $ en chaque point. Orientées du pôle Nord vers le pôle Sud à l’extérieur d’un aimant. Elles ne se croisent jamais.
+                </div>
+                <div class="notion-card">
+                    <span class="notion-term">🔹 Aiguille aimantée</span>
+                    Petit aimant mobile (boussole) qui s’oriente suivant la direction du champ magnétique local. Le pôle Nord de l’aiguille indique la direction de $ \mathbf{B} $.
+                </div>
+                <div class="notion-card">
+                    <span class="notion-term">🔹 Force magnétique (force de Laplace sur un courant)</span>
+                    Un conducteur parcouru par un courant $I$ placé dans un champ $ \mathbf{B} $ subit une force : <br>
+                    $ \mathbf{F} = I \, (\mathbf{L} \times \mathbf{B}) $, avec $\mathbf{L}$ vecteur longueur orienté dans le sens du courant.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">📐 FORMULES ESSENTIELLES</div>
+                <div class="formula">
+                    <p>🌐 <strong>Force de Lorentz (composante magnétique) :</strong></p>
+                    $$ \boxed{ \mathbf{F}_m = q \, (\mathbf{v} \times \mathbf{B}) } $$
+                    <p style="font-size:0.85rem; margin-top:5px;">$q$ : charge (C) ; $\mathbf{v}$ : vitesse (m/s) ; $\mathbf{B}$ : champ magnétique (T).<br>La force est perpendiculaire à $\mathbf{v}$ et à $\mathbf{B}$.</p>
+                </div>
+                <div class="formula">
+                    <p>⚡ <strong>Force de Laplace (sur un tronçon rectiligne) :</strong></p>
+                    $$ \boxed{ F = I \, L \, B \, \sin\theta } $$
+                    <p>où $\theta$ est l’angle entre le conducteur (sens du courant) et $\mathbf{B}$. Direction : règle des trois doigts de la main droite.</p>
+                </div>
+                <div class="highlight">
+                    <strong>🧭 Règle d’orientation (main droite) :</strong><br>
+                    • Pouce = sens du courant ($I$) ou vitesse ($\mathbf{v}$ pour une charge).<br>
+                    • Index = champ magnétique $\mathbf{B}$.<br>
+                    • Majeur = force magnétique $\mathbf{F}$ (pour une charge positive).
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">📈 PROPRIÉTÉS DU CHAMP MAGNÉTIQUE</div>
+                <ul style="margin-left: 1.2rem; color: #1f3b4a;">
+                    <li>Le champ $\mathbf{B}$ est un champ vectoriel (direction, sens, intensité).</li>
+                    <li>Les lignes de champ sont fermées (contrairement au champ électrostatique).</li>
+                    <li>Principe de superposition : $\mathbf{B}_{\text{total}} = \sum \mathbf{B}_i$.</li>
+                    <li>Une particule chargée au repos ($\mathbf{v}=0$) ne subit <strong>aucune force magnétique</strong>.</li>
+                    <li>La force magnétique ne travaille pas → elle modifie la direction de la vitesse sans changer sa norme.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- COLONNE DROITE : objectifs, compétences, liens bac, exemples -->
+        <div class="col-right">
+            <div class="section">
+                <div class="section-title">🎯 OBJECTIFS PÉDAGOGIQUES</div>
+                <ul style="margin-left: 1.2rem; margin-bottom: 0.5rem;">
+                    <li>✔ Mettre en évidence expérimentalement l’existence d’une force magnétique.</li>
+                    <li>✔ Définir le champ magnétique $\mathbf{B}$ en un point de l’espace.</li>
+                    <li>✔ Représenter les lignes de champ magnétique (aimant droit, aimant en U, courant).</li>
+                    <li>✔ Déterminer la direction et le sens du champ magnétique à l’aide d’une aiguille aimantée.</li>
+                    <li>✔ Relier la force magnétique subie par une charge mobile à l’expression de Lorentz.</li>
+                </ul>
+                <div class="bac-link">
+                    📌 <strong>Lien Bac 2025 :</strong> La force de Lorentz (partie magnétique) est souvent évaluée dans les exercices de mécanique (déviation d’électrons, cyclotron) ou dans l’étude des fils parcourus par un courant. Savoir orienter $\mathbf{F}$, $\mathbf{B}$ et $\mathbf{v}$ est un attendu majeur.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🧠 COMPÉTENCES À MAÎTRISER</div>
+                <div class="competence-badge">Compétence 1</div> Déterminer la direction et le sens de $\mathbf{B}$ à partir de l’orientation d’une aiguille aimantée.<br><br>
+                <div class="competence-badge">Compétence 2</div> Calculer l’intensité de la force magnétique sur une charge ponctuelle en mouvement ($F = |q| v B \sin\alpha$).<br><br>
+                <div class="competence-badge">Compétence 3</div> Appliquer la règle de la main droite pour trouver le sens de la force de Lorentz ou de Laplace.<br><br>
+                <div class="competence-badge">Compétence 4</div> Expliquer pourquoi une particule chargée dévie dans un champ magnétique uniforme (mouvement circulaire ou hélicoïdal).
+            </div>
+
+            <div class="section">
+                <div class="section-title">📖 EXEMPLE TYPIQUE (BAC)</div>
+                <div class="highlight">
+                    <strong>Énoncé simplifié :</strong><br>
+                    Un électron ($q = -1,6 \times 10^{-19}\,\text{C}$) pénètre avec une vitesse $v = 2,0 \times 10^6 \, \text{m/s}$ horizontalement dans une région où règne un champ magnétique uniforme $B = 0,05 \, \text{T}$ perpendiculaire à la vitesse. Calculer l’intensité de la force magnétique et préciser son effet sur le mouvement.<br><br>
+                    <strong>✔ Correction :</strong><br>
+                    $F = |q| v B \sin 90° = (1,6\times10^{-19}) \times (2,0\times10^6) \times 0,05 = 1,6 \times 10^{-14} \, \text{N}$.<br>
+                    La force est perpendiculaire à $\mathbf{v}$ → déviation circulaire uniforme ; l’électron tourne dans le plan perpendiculaire à $\mathbf{B}$.
+                </div>
+                <hr>
+                <div class="section-title">⚠️ POINTS DE VIGILANCE</div>
+                <ul style="margin-left: 1.2rem;">
+                    <li>Ne pas confondre champ magnétique $\mathbf{B}$ (Tesla) avec champ électrique $\mathbf{E}$ (N/C).</li>
+                    <li>La force magnétique s’annule si $\mathbf{v}$ est parallèle à $\mathbf{B}$ ($\sin 0 = 0$).</li>
+                    <li>Pour une charge <strong>négative</strong> (électron), le sens de $\mathbf{F}$ est opposé à celui donné par la règle de la main droite.</li>
+                    <li>Le champ magnétique n’est pas défini en un point par une aiguille aimantée seule : il faut aussi connaître l’intensité $B$ (via mesure ou calcul).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pied de fiche : récapitulatif bac / méthode -->
+    <div class="footer-note">
+        🔍 <strong>Méthodologie pour l’épreuve :</strong> Dans un exercice sur la force magnétique, commencez par identifier la nature de la particule ($q$), représentez $\mathbf{v}$ et $\mathbf{B}$, appliquez la règle d’orientation, puis écrivez $ \mathbf{F}_m = q(\mathbf{v}\times\mathbf{B}) $ en justifiant la direction. N’oubliez pas : le travail de $\mathbf{F}_m$ est nul → $v$ constante, seule la trajectoire change.<br>
+        📚 Conforme au programme de Terminale C/D – Cameroun (Année 2025-2026) – Révision Baccalauréat.
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+[
+  {
+    "intitule": "Identifier les types de références",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Observe attentivement le tableau ci-dessous qui représente une feuille de calcul d'un tableur (LibreOffice Calc ou Microsoft Excel).</p>",
+      "images": [
+        "Tableau simple de 4 colonnes (A, B, C, D) et 5 lignes. La ligne 1 contient les titres : 'Produit', 'Prix Unitaire (FCFA)', 'Quantité', 'Total'. Les lignes 2 à 4 contiennent des données : Ligne 2: 'Stylo', 250, 10, '' ; Ligne 3: 'Cahier', 500, 5, '' ; Ligne 4: 'Gomme', 100, 20, '' . La ligne 5 contient 'TOTAL' en colonne A, et les autres cellules vides."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Classe les formules suivantes selon leur type : référence relative, référence absolue ou référence mixte.",
+        "niveau": "easy",
+        "reponse": "",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "`=A2`",
+            "niveau": "easy",
+            "reponse": "Référence relative. Explication : Ni le numéro de ligne ni la lettre de colonne ne sont fixes. Si on copie cette formule, les références s'ajusteront."
+          },
+          {
+            "numero": "1.b",
+            "texte": "`=$B$3`",
+            "niveau": "easy",
+            "reponse": "Référence absolue. Explication : Le symbole $ bloque à la fois la colonne B et la ligne 3. La référence ne changera pas lors de la copie."
+          },
+          {
+            "numero": "1.c",
+            "texte": "`=C$2`",
+            "niveau": "easy",
+            "reponse": "Référence mixte (ligne absolue, colonne relative). Explication : Le symbole $ bloque la ligne 2, mais la colonne C est relative. En copiant, la colonne peut changer, mais la ligne restera 2."
+          },
+          {
+            "numero": "1.d",
+            "texte": "`=$D4`",
+            "niveau": "easy",
+            "reponse": "Référence mixte (colonne absolue, ligne relative). Explication : Le symbole $ bloque la colonne D, mais la ligne 4 est relative. En copiant, la ligne peut changer, mais la colonne restera D."
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "texte": "Explique l'effet de la copie de la formule `=A2+5` de la cellule B2 vers la cellule B3.",
+        "niveau": "medium",
+        "reponse": "Lors de la copie de la formule `=A2+5` de B2 vers B3, le tableur décale la référence relative A2 d'une ligne vers le bas. La formule devient donc `=A3+5`. Le résultat sera la valeur de la cellule A3 augmentée de 5.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Calculer le montant total des ventes",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Tu gères la petite librairie 'Savoirs & Partage' à Douala. Pour la fête de la rentrée, tu souhaites calculer automatiquement le chiffre d'affaires par produit et le chiffre d'affaires total.</p>",
+      "images": [
+        "Tableau 'Ventes de la semaine' avec les colonnes : A: 'Produit', B: 'Prix unitaire (FCFA)', C: 'Quantité vendue', D: 'Total par produit (FCFA)'. Les lignes : 1: en-têtes ; 2: 'Roman', 2000, 15 ; 3: 'Dictionnaire', 5000, 5 ; 4: 'Atlas', 7500, 8 ; 5: 'TOTAL'."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifie la cellule dans laquelle doit être saisie la formule pour calculer le 'Total par produit' pour le 'Roman'.",
+        "niveau": "easy",
+        "reponse": "La formule doit être saisie dans la cellule D2.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Construis la formule à saisir dans cette cellule en utilisant les références de cellules (ne donne pas les valeurs numériques directement) pour obtenir le montant correct.",
+        "niveau": "medium",
+        "reponse": "`=B2 * C2` ou `=B2*C2`",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Après avoir validé la formule en D2, tu souhaites calculer automatiquement les totaux pour le 'Dictionnaire' (D3) et l'Atlas (D4). Décris la procédure à suivre pour ne pas avoir à retaper la formule à chaque fois.",
+        "niveau": "medium",
+        "reponse": "Il faut utiliser la poignée de recopie. On sélectionne la cellule D2, puis on clique sur le petit carré en bas à droite de la cellule (poignée de recopie) et on fait glisser vers le bas jusqu'à la cellule D4. Grâce au principe de référence relative, le tableur ajustera automatiquement les formules : D3 deviendra `=B3*C3` et D4 deviendra `=B4*C4`.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Propose la formule à écrire dans la cellule D5 pour obtenir le chiffre d'affaires total de la semaine.",
+        "niveau": "medium",
+        "reponse": "`=SOMME(D2:D4)`",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Appliquer une TVA avec une référence absolue",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Le gouvernement camerounais applique un taux de TVA (Taxe sur la Valeur Ajoutée) de 19,25% sur certains produits numériques. Dans ton entreprise de services informatiques, tu dois calculer le prix TTC (Toutes Taxes Comprises) de plusieurs prestations.</p>",
+      "images": [
+        "Tableau 'Factures clients' avec les colonnes : A: 'Service', B: 'Prix HT (FCFA)', C: 'TVA (19,25%)', D: 'Prix TTC (FCFA)'. La cellule F1 contient la valeur '0.1925' et le texte 'Taux TVA' en E1."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Analyse la situation. Pourquoi est-il intéressant de placer le taux de TVA (0,1925) dans une cellule séparée (F1) plutôt que de l'écrire directement dans la formule de calcul de la TVA ?",
+        "niveau": "hard",
+        "reponse": "Placer le taux dans une cellule séparée permet de le modifier facilement (si le gouvernement change le taux) sans avoir à corriger toutes les formules une par une. Il suffit de changer la valeur en F1, et tous les calculs sont automatiquement mis à jour. De plus, cela rend le tableau plus clair et évite les erreurs de saisie.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écris la formule à saisir dans la cellule C2 pour calculer le montant de la TVA (Prix HT * Taux TVA) en utilisant une référence absolue pour le taux de TVA situé en F1.",
+        "niveau": "hard",
+        "reponse": "`=B2 * $F$1`",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Justifie l'utilisation de la référence absolue `$F$1` dans ta formule.",
+        "niveau": "hard",
+        "reponse": "On utilise la référence absolue `$F$1` pour bloquer la référence à la cellule contenant le taux de TVA. Ainsi, lorsque nous recopierons cette formule vers le bas (pour C3, C4, etc.), la référence `$F$1` restera toujours la même. Sans le symbole $, le tableur décalerait la référence (F2, F3, etc.) et la formule deviendrait fausse.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Déduis-en la formule qui sera automatiquement générée dans la cellule C3 après recopie de la formule de C2 vers le bas.",
+        "niveau": "medium",
+        "reponse": "La formule dans C3 deviendra `=B3 * $F$1`.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 5,
+        "texte": "Calcule le prix TTC (Prix HT + TVA) dans la cellule D2 à l'aide d'une formule.",
+        "niveau": "medium",
+        "reponse": "`=B2 + C2` ou `= B2 * (1 + $F$1)`",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Diagnostiquer une erreur de référence",
+    "type": "ressource",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Ton ami, élève en série littéraire, a créé un tableau pour gérer son budget mensuel. Il a saisi la formule `=B2 * 0.1` dans la cellule C2 pour calculer 10% de son salaire. Ensuite, il a recopié cette formule vers le bas. Les résultats dans les cellules C3, C4, etc., sont aberrants. Analyse la situation et aide-le à corriger son erreur.</p>",
+      "images": [
+        "Tableur avec colonnes : A: 'Mois', B: 'Salaire (FCFA)', C: 'Épargne (10%)'. Lignes : 1: en-têtes ; 2: 'Janvier', 100000 ; 3: 'Février', 105000 ; 4: 'Mars', 102000. La formule en C3 affichée est '=B3*0.1' (correcte), mais l'élève explique qu'il a d'abord écrit '=B2*0.1' en C2 et recopié."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "L'ami affirme que sa formule initiale `=B2*0.1` est correcte. Décris ce qui se passe techniquement lorsqu'il recopie cette formule de C2 vers C3.",
+        "niveau": "very hard",
+        "reponse": "Lorsqu'il recopie la formule `=B2*0.1` de C2 vers C3, le tableur décale les références relatives d'une ligne. La formule en C3 devient `=B3*0.1`. Ceci est correct en apparence. L'erreur pourrait provenir du fait qu'il a recopié la formule sur une plage qui n'était pas alignée verticalement avec les salaires, ou qu'il a mal sélectionné la zone de recopie.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Imagine que son tableau contienne une ligne de total en ligne 5. Il a recopié sa formule jusqu'en C5. Explique pourquoi la cellule C5 affiche `=B5*0.1` et pourquoi cela pourrait poser problème si B5 contient une somme ou un texte.",
+        "niveau": "very hard",
+        "reponse": "Si la ligne 5 contient un total (par exemple `=SOMME(B2:B4)`), alors la formule en C5 sera `=B5*0.1`, soit 'Total des salaires * 0.1'. Ce n'est pas une erreur mathématique, mais logique : on calcule 10% du total, pas la somme des épargnes mensuelles. Si B5 contient du texte comme 'TOTAL', le tableur affichera une erreur `#VALEUR!`. Le problème est qu'il a appliqué la formule à une ligne qui ne contient pas un salaire individuel.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Propose une méthode plus robuste pour que la formule ne soit appliquée qu'aux cellules contenant effectivement des salaires.",
+        "niveau": "very hard",
+        "reponse": "Plusieurs méthodes : 1) Ne recopier la formule que sur la plage des salaires (C2:C4) et laisser C5 vide ou y mettre une formule différente comme `=SOMME(C2:C4)`. 2) Utiliser une formule conditionnelle avec `SI` : `=SI(ESTNUM(B2); B2*0.1; \"\")`. Cette formule vérifie si B2 contient un nombre. Si c'est le cas, elle calcule 10%, sinon elle laisse la cellule vide. 3) Convertir la plage des salaires en 'Tableau structuré' (fonction 'Format en tableau' dans Excel/Calc), où les formules se dupliquent automatiquement uniquement sur les lignes de données.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

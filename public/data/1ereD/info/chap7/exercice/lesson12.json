@@ -1,0 +1,126 @@
+[
+  {
+    "intitule": "Les boucles : Identifier et corriger les erreurs",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Un élève de première a écrit l'algorithme et le programme C suivants pour afficher les nombres de 1 à 5. Malheureusement, il contient des erreurs.</p>\n<p><strong>Algorithme :</strong></p>\n<pre>\npour i allant de 1 à 5 pas=1 faire\n    Ecrire(i)\nfinpour\n</pre>\n<p><strong>Code C :</strong></p>\n<pre>\n#include <stdio.h>\nint main() {\n    int i;\n    for (i = 0; i <= 5; i++); {\n        printf(\"%d\", i);\n    }\n    return 0;\n}\n</pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Analyser l'algorithme et le code C, puis identifier et corriger les erreurs dans le code C.",
+        "niveau": "medium",
+        "reponse": "L'algorithme est correct. Le code C contient deux erreurs :\n1. Le point-virgule (;) après la parenthèse fermante de la boucle `for` qui termine la boucle prématurément.\n2. L'indice de départ est 0 au lieu de 1.\n\n**Code corrigé :**\n```c\n#include <stdio.h>\nint main() {\n    int i;\n    for (i = 1; i <= 5; i++) {\n        printf(\"%d\", i);\n    }\n    return 0;\n}\n```",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Calcul de la moyenne d'une classe",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un professeur du lycée de Mbalmayo souhaite automatiser le calcul de la moyenne de sa classe de 30 élèves. Il vous demande d'écrire un programme en langage C qui :</p>\n<ul>\n<li>Demande la note de chaque élève (une note réelle comprise entre 0 et 20).</li>\n<li>Calcule et affiche la moyenne de la classe.</li>\n<li>Affiche le nombre d'élèves ayant obtenu une note supérieure ou égale à 10.</li>\n</ul>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire un algorithme (en langage naturel ou pseudo-code) qui résout ce problème en utilisant une boucle POUR.",
+        "niveau": "medium",
+        "reponse": "```\nAlgorithme MoyenneClasse\nVariables\n    note, somme, moyenne : reel\n    compteur, i, nbSup10 : entier\nDebut\n    somme ← 0\n    nbSup10 ← 0\n    pour i allant de 1 a 30 pas=1 faire\n        Ecrire(\"Entrer la note de l'élève \", i)\n        Lire(note)\n        somme ← somme + note\n        Si note >= 10 alors\n            nbSup10 ← nbSup10 + 1\n        FinSi\n    finpour\n    moyenne ← somme / 30\n    Ecrire(\"La moyenne de la classe est : \", moyenne)\n    Ecrire(\"Nombre d'élèves ayant la moyenne : \", nbSup10)\nFin\n```",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Traduire cet algorithme en un programme C complet.",
+            "niveau": "hard",
+            "reponse": "```c\n#include <stdio.h>\n\nint main() {\n    float note, somme = 0, moyenne;\n    int nbSup10 = 0, i;\n\n    for (i = 1; i <= 30; i++) {\n        printf(\"Entrer la note de l'eleve %d : \", i);\n        scanf(\"%f\", &note);\n        somme = somme + note;\n        if (note >= 10) {\n            nbSup10++;\n        }\n    }\n\n    moyenne = somme / 30;\n    printf(\"La moyenne de la classe est : %.2f\\n\", moyenne);\n    printf(\"Nombre d'eleves ayant la moyenne : %d\\n\", nbSup10);\n\n    return 0;\n}\n```"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Authentification sécurisée avec tentative limitée",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Dans le cadre de la sécurisation de son ordinateur, un utilisateur souhaite mettre en place un système d'authentification. Le mot de passe est 'CAMEROUN2024'.</p>\n<p>Vous devez concevoir un programme qui :</p>\n<ul>\n<li>Autorise l'utilisateur à saisir son mot de passe.</li>\n<li>Lui donne un maximum de 3 tentatives.</li>\n<li>Si le mot de passe est correct, affiche \"Accès autorisé\" et sort du programme.</li>\n<li>Si après 3 tentatives le mot de passe est toujours faux, affiche \"Compte bloqué\" et termine le programme.</li>\n</ul>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Choisir la structure itérative la plus adaptée pour ce problème. Justifier votre choix.",
+        "niveau": "medium",
+        "reponse": "La boucle TANT QUE (WHILE) ou REPETER JUSQU'A (DO...WHILE) est plus adaptée car le nombre d'itérations n'est pas fixe à l'avance. Il dépend de la condition de réussite de l'authentification. Une boucle POUR (FOR) serait moins appropriée car elle ne permet pas de sortir facilement avant la 3ème tentative si le mot de passe est correct.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Implémenter la solution en langage C en utilisant la boucle choisie.",
+            "niveau": "hard",
+            "reponse": "```c\n#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char motDePasse[20];\n    int tentatives = 0;\n    int accesOk = 0;\n\n    while (tentatives < 3 && !accesOk) {\n        printf(\"Entrez votre mot de passe : \");\n        scanf(\"%s\", motDePasse);\n\n        if (strcmp(motDePasse, \"CAMEROUN2024\") == 0) {\n            printf(\"Acces autorise.\\n\");\n            accesOk = 1;\n        } else {\n            tentatives++;\n            printf(\"Mot de passe incorrect. Tentative %d/3\\n\", tentatives);\n        }\n    }\n\n    if (!accesOk) {\n        printf(\"Compte bloque.\\n\");\n    }\n\n    return 0;\n}\n```\n\n**Alternative avec do...while :**\n```c\n#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char motDePasse[20];\n    int tentatives = 0;\n    int accesOk = 0;\n\n    do {\n        printf(\"Entrez votre mot de passe : \");\n        scanf(\"%s\", motDePasse);\n\n        if (strcmp(motDePasse, \"CAMEROUN2024\") == 0) {\n            printf(\"Acces autorise.\\n\");\n            accesOk = 1;\n        } else {\n            tentatives++;\n            printf(\"Mot de passe incorrect. Tentative %d/3\\n\", tentatives);\n        }\n    } while (tentatives < 3 && !accesOk);\n\n    if (!accesOk) {\n        printf(\"Compte bloque.\\n\");\n    }\n\n    return 0;\n}\n```"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Simulation d'un investissement bancaire",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Un client place un capital initial de 500 000 FCFA sur un compte d'épargne avec un taux d'intérêt annuel de 5%. Les intérêts sont ajoutés au capital chaque année (intérêts composés).</p>\n<p>Le client souhaite savoir après combien d'années son capital aura doublé (c'est-à-dire atteindre ou dépasser 1 000 000 FCFA).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Déterminer le type de boucle le plus approprié pour résoudre ce problème.",
+        "niveau": "easy",
+        "reponse": "La boucle TANT QUE (WHILE) est la plus appropriée car on ne sait pas à l'avance combien d'années seront nécessaires. La condition d'arrêt est \"tant que le capital est inférieur à 1 000 000 FCFA\".",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Écrire un programme en C qui calcule et affiche le nombre d'années nécessaires pour que le capital double, ainsi que le capital final obtenu.",
+            "niveau": "very hard",
+            "reponse": "```c\n#include <stdio.h>\n\nint main() {\n    float capital = 500000.0;\n    const float objectif = 1000000.0;\n    const float taux = 0.05;\n    int annees = 0;\n\n    while (capital < objectif) {\n        capital = capital + (capital * taux);\n        annees++;\n        printf(\"Annee %d : Capital = %.2f FCFA\\n\", annees, capital);\n    }\n\n    printf(\"\\nIl faudra %d annees pour doubler le capital.\\n\", annees);\n    printf(\"Capital final : %.2f FCFA\\n\", capital);\n\n    return 0;\n}\n```\n\n**Sortie du programme :**\n```\nAnnee 1 : Capital = 525000.00 FCFA\nAnnee 2 : Capital = 551250.00 FCFA\nAnnee 3 : Capital = 578812.50 FCFA\nAnnee 4 : Capital = 607753.12 FCFA\nAnnee 5 : Capital = 638140.78 FCFA\nAnnee 6 : Capital = 670047.82 FCFA\nAnnee 7 : Capital = 703550.21 FCFA\nAnnee 8 : Capital = 738727.72 FCFA\nAnnee 9 : Capital = 775664.11 FCFA\nAnnee 10 : Capital = 814447.31 FCFA\nAnnee 11 : Capital = 855169.68 FCFA\nAnnee 12 : Capital = 897928.16 FCFA\nAnnee 13 : Capital = 942824.57 FCFA\nAnnee 14 : Capital = 989965.80 FCFA\nAnnee 15 : Capital = 1039464.09 FCFA\n\nIl faudra 15 annees pour doubler le capital.\nCapital final : 1039464.09 FCFA\n```"
+          },
+          {
+            "numero": "1.b",
+            "texte": "Modifier le programme pour que l'utilisateur puisse saisir son propre capital initial et son propre taux d'intérêt.",
+            "niveau": "hard",
+            "reponse": "```c\n#include <stdio.h>\n\nint main() {\n    float capital, objectif, taux;\n    int annees = 0;\n\n    printf(\"Entrez le capital initial (FCFA) : \");\n    scanf(\"%f\", &capital);\n    printf(\"Entrez le taux d'interet annuel (en pourcentage) : \");\n    scanf(\"%f\", &taux);\n\n    taux = taux / 100;  // Convertir le pourcentage en décimal\n    objectif = capital * 2;\n\n    while (capital < objectif) {\n        capital = capital + (capital * taux);\n        annees++;\n    }\n\n    printf(\"\\nIl faudra %d annees pour doubler le capital.\\n\", annees);\n    printf(\"Capital final : %.2f FCFA\\n\", capital);\n\n    return 0;\n}\n```"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Table de multiplication personnalisée",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>On souhaite écrire un programme qui affiche la table de multiplication d'un nombre saisi par l'utilisateur.</p>\n<p>Exemple pour N=5 :</p>\n<pre>\n5 x 1 = 5\n5 x 2 = 10\n5 x 3 = 15\n...\n5 x 10 = 50\n</pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier quelle structure itérative utiliser et justifier votre réponse.",
+        "niveau": "easy",
+        "reponse": "Il faut utiliser la boucle POUR (FOR) car le nombre d'itérations est connu à l'avance : 10 itérations (de 1 à 10).",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Compléter le code C suivant pour qu'il fonctionne correctement :\n```c\n#include <stdio.h>\nint main() {\n    int n, i;\n    printf(\"Entrez un nombre : \");\n    scanf(\"%d\", &n);\n    // COMPLETER ICI\n    return 0;\n}\n```",
+            "niveau": "medium",
+            "reponse": "```c\n#include <stdio.h>\nint main() {\n    int n, i;\n    printf(\"Entrez un nombre : \");\n    scanf(\"%d\", &n);\n    for (i = 1; i <= 10; i++) {\n        printf(\"%d x %d = %d\\n\", n, i, n * i);\n    }\n    return 0;\n}\n```"
+          }
+        ]
+      }
+    ]
+  }
+]

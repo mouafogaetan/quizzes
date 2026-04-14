@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Friedel & Crafts (Alkylation)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 31 : Réaction de Friedel et Crafts (Alkylation)</h1>
+            <p class="lesson-subtitle">Chimie Organique · Composés Aromatiques · 1ère C & D (Cameroun)</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">Définition de l'alkylation de Friedel & Crafts</h3>
+                    <p class="card-description">
+                        L'alkylation de Friedel & Crafts est une <strong>réaction de substitution électrophile aromatique</strong> qui permet d'introduire un groupe alkyle ($-CH_3$, $-C_2H_5$, ...) sur un noyau benzénique. Elle a été découverte par Charles Friedel et James Crafts en 1877.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Réactifs :</strong> Benzène ($C_6H_6$) + Halogénoalcane ($R-X$) (ex: $CH_3Cl$)</li>
+                        <li><strong>Catalyseur :</strong> Chlorure d'aluminium ($AlCl_3$) anhydre (indispensable)</li>
+                        <li><strong>Produits :</strong> Alkylbenzène ($C_6H_5-R$) + Acide halogénique ($HX$)</li>
+                        <li><strong>Type de réaction :</strong> Substitution électrophile aromatique (SEAr)</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Équation bilan générale et mécanisme simplifié</h3>
+                    <p class="card-description">
+                        L'équation générale de l'alkylation de Friedel & Crafts s'écrit :
+                    </p>
+                    <div style="text-align: center; margin: 1rem 0; font-weight: 600; background-color: #f1f5f9; padding: 0.75rem; border-radius: 0.5rem;">
+                        $$ C_6H_6 + R-X \xrightarrow{AlCl_3} C_6H_5-R + HX $$
+                    </div>
+                    <p class="card-description">
+                        <strong>Mécanisme simplifié :</strong>
+                        <ol style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Le catalyseur $AlCl_3$ active l'halogénoalcane $R-X$ en formant un complexe $[R^+ \cdots AlCl_4^-]$.</li>
+                            <li>Le carbocation $R^+$ (espèce électrophile) attaque le noyau benzénique riche en électrons.</li>
+                            <li>Un intermédiaire de type "complexe σ" (carbocation cyclohexadiényle) se forme.</li>
+                            <li>Le complexe perd un proton $H^+$ pour régénérer l'aromaticité, formant ainsi l'alkylbenzène.</li>
+                        </ol>
+                    </p>
+                    <div class="exemple-astuce" style="margin-top: 0.75rem;">
+                        💡 <strong>À retenir :</strong> $AlCl_3$ est un acide de Lewis qui capte l'ion halogénure ($X^-$) pour générer un carbocation électrophile.
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Rôle et importance du catalyseur $AlCl_3$</h3>
+                    <p class="card-description">
+                        Le chlorure d'aluminium ($AlCl_3$) anhydre joue un rôle crucial :
+                    </p>
+                    <ul class="concept-list">
+                        <li>C'est un <strong>acide de Lewis puissant</strong> (il possède une lacune électronique).</li>
+                        <li>Il se lie à l'atome d'halogène de $R-X$ pour former un complexe $R-X-AlCl_3$.</li>
+                        <li>Il facilite le départ de l'ion halogénure $X^-$ (souvent $Cl^-$ ou $Br^-$), générant ainsi un carbocation $R^+$ (très électrophile).</li>
+                        <li>Il est utilisé en <strong>quantité catalytique</strong> (petite quantité) car il est régénéré en fin de réaction.</li>
+                        <li><strong>Condition impérative :</strong> $AlCl_3$ doit être <strong>anhydre</strong> (sans eau), car l'eau détruit le catalyseur.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Limites et particularités de la réaction</h3>
+                    <p class="card-description">
+                        Bien que très utile, l'alkylation de Friedel & Crafts présente plusieurs limitations importantes :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Polyalkylation :</strong> Le produit formé ($C_6H_5-R$) est plus réactif que le benzène de départ. Il subit donc une seconde, voire une troisième alkylation, donnant un mélange de dialkylbenzènes.</li>
+                        <li><strong>Réarrangement :</strong> Si l'halogénoalcane possède une chaîne de plus de 3 atomes de carbone, le carbocation formé peut se réarranger (par migration d'hydrure ou de méthyle) pour donner un carbocation plus stable. L'alkylbenzène obtenu a alors une chaîne ramifiée, même si l'halogénoalcane de départ était linéaire.</li>
+                        <li><strong>Incompatibilité :</strong> La réaction échoue si le noyau aromatique porte des substituants fortement électroattracteurs (ex: $-NO_2$, $-COOH$, $-SO_3H$, $-CN$).</li>
+                        <li><strong>Non applicable avec :</strong> Les halogénoalcènes (type $CH_2=CH-Cl$) car le carbocation vinylique est trop instable.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Alkylation du benzène par le chlorométhane (chlorure de méthyle)</h3>
+                    <p class="exemple-context">
+                        On fait réagir du benzène avec du chlorométhane ($CH_3Cl$) en présence de chlorure d'aluminium ($AlCl_3$) anhydre. Quel produit principal obtient-on ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution / Explication :</strong> C'est une alkylation classique. Le groupe méthyle ($-CH_3$) se fixe sur le noyau benzénique.
+                        <div style="text-align: center; margin: 1rem 0; font-weight: 500;">
+                            $$ C_6H_6 + CH_3Cl \xrightarrow{AlCl_3} C_6H_5-CH_3 + HCl $$
+                        </div>
+                        <p>Le produit obtenu est le <strong>toluène</strong> (méthylbenzène). C'est une réaction très importante industriellement.</p>
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Le toluène ($C_6H_5-CH_3$) est un composé aromatique très utilisé comme solvant et comme intermédiaire de synthèse.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Alkylation par le 1-chloropropane ($CH_3CH_2CH_2Cl$) - Phénomène de réarrangement</h3>
+                    <p class="exemple-context">
+                        On fait réagir du benzène avec le 1-chloropropane (chlorure de n-propyle, $CH_3-CH_2-CH_2Cl$) en présence de $AlCl_3$. Quel est le produit majoritaire ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution / Explication :</strong> Le carbocation primaire $CH_3CH_2CH_2^+$ formé initialement est très instable. Il se réarrange rapidement en carbocation secondaire plus stable par migration d'un ion hydrure $H^-$ :
+                        $$ CH_3-CH_2-CH_2^+ \rightarrow CH_3-CH^+-CH_3 $$
+                        <p>Le carbocation secondaire (isopropyle) attaque ensuite le benzène. Le produit majoritaire est donc le <strong>cumène</strong> (isopropylbenzène) et non le n-propylbenzène.</p>
+                        <div style="text-align: center; margin: 1rem 0; font-weight: 500;">
+                            $$ C_6H_6 + CH_3-CH_2-CH_2Cl \xrightarrow{AlCl_3} C_6H_5-CH(CH_3)_2 + HCl $$
+                        </div>
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Penser à la stabilité des carbocations : tertiaire > secondaire > primaire. Un réarrangement se produit toujours pour former le carbocation le plus stable.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Schéma du dispositif expérimental (simplifié)</h3>
+                    <p class="exemple-context">
+                        Montage typique pour réaliser une alkylation de Friedel & Crafts au laboratoire.
+                    </p>
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <img src="" alt="Schéma d'un montage pour alkylation de Friedel & Crafts : ballon bicol à reflux avec ajout goutte-à-goutte, réfrigérant à eau, et garde chlorure de calcium pour l'atmosphère anhydre" style="max-width: 100%; border-radius: 0.5rem; border: 1px solid #e2e8f0;">
+                        <p style="font-size: 0.8rem; color: #64748b;">Figure : Montage à reflux avec garde anhydre pour la réaction de Friedel & Crafts</p>
+                    </div>
+                    <p class="exemple-correction">
+                        <strong>Points importants du montage :</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li>Chauffage à reflux modéré (la réaction est exothermique).</li>
+                            <li>Ajout lent de l'halogénoalcane pour contrôler l'exothermie.</li>
+                            <li>Utilisation d'une garde au chlorure de calcium ($CaCl_2$) pour éviter l'entrée d'humidité (détruit $AlCl_3$).</li>
+                            <li>Dégagement de $HCl$ gazeux : travail sous hotte aspirante.</li>
+                        </ul>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Optionnel: section "À ne pas confondre" ou "Pièges à éviter" -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Oublier le réarrangement du carbocation. Pour un halogénoalcane linéaire avec 3 carbones ou plus, le produit n'est <strong>pas</strong> l'alkylbenzène à chaîne linéaire.</li>
+                        <li><span class="bold">Attention :</span> Ne pas confondre alkylation (Friedel & Crafts) et acylation de Friedel & Crafts (qui introduit un groupe $R-CO-$ et nécessite un chlorure d'acyle).</li>
+                        <li><span class="bold">Piège :</span> La polyalkylation est difficile à éviter. Pour la limiter, on utilise un <strong>large excès de benzène</strong> par rapport à l'halogénoalcane.</li>
+                        <li><span class="bold">Condition critique :</span> $AlCl_3$ doit être absolument anhydre. La présence d'eau provoque sa décomposition et inhibe la réaction.</li>
+                        <li><span class="bold">À ne pas faire :</span> Utiliser un halogénoalcène ($CH_2=CH-Cl$) car la réaction ne fonctionne pas (carbocation vinylique trop instable).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section synthèse / tableau récapitulatif -->
+            <section class="exemple-section">
+                <h2 class="section-title">📊 Tableau récapitulatif</h2>
+                <div class="card" style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                        <thead style="background-color: #eef2ff;">
+                            <tr>
+                                <th style="border: 1px solid #cbd5e1; padding: 0.75rem; text-align: left;">Élément</th>
+                                <th style="border: 1px solid #cbd5e1; padding: 0.75rem; text-align: left;">Détail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid #cbd5e1; padding: 0.5rem 0.75rem;">Réactifs</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 0.5rem 0.75rem;">Benzène ($C_6H_6$) + Halogénoalcane ($R-X$) + $AlCl_3$ (cat.)</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #cbd5e1; padding: 0.5rem 0.75rem;">Produits</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 0.5rem 0.75rem;">Alkylbenzène ($C_6H_5-R$) + $HX$</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #cbd5e1; padding: 0.5rem 0.75rem;">Type réaction</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 0.5rem 0.75rem;">Substitution électrophile aromatique (SEAr)</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #cbd5e1; padding: 0.5rem 0.75rem;">Catalyseur</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 0.5rem 0.75rem;">$AlCl_3$ anhydre (acide de Lewis)</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #cbd5e1; padding: 0.5rem 0.75rem;">Principales limites</td>
+                                <td style="border: 1px solid #cbd5e1; padding: 0.5rem 0.75rem;">Polyalkylation, réarrangement, incompatibilité avec groupements électroattracteurs</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision générée pour les élèves de 1ère C & D (Cameroun) · Leçon 31 : Réaction de Friedel et Crafts (Alkylation) · 📚 Chimie Organique</p>
+        </footer>
+    </div>
+</body>
+</html>

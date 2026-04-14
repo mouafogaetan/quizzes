@@ -1,0 +1,70 @@
+[
+  {
+    "intitule": "Chaîne électronique : Capteur de température et affichage",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans une usine de transformation alimentaire, on souhaite contrôler en continu la température d'un four à 150 °C. Pour cela, on utilise une chaîne de mesure électronique composée des éléments suivants :</p><ul><li>Une thermistance CTN (résistance à coefficient de température négatif) dont la résistance varie avec la température.</li><li>Un conditionneur (pont de Wheatstone) qui convertit la variation de résistance en une tension électrique.</li><li>Un amplificateur opérationnel monté en amplificateur non-inverseur.</li><li>Un afficheur numérique (voltmètre) qui indique la température.</li></ul><p>Le schéma-bloc de la chaîne est le suivant :</p>",
+      "images": [
+        "Diagramme de la chaîne électronique : blocs reliés par des flèches. Premier bloc : Capteur (Thermistance CTN) -> flèche -> Deuxième bloc : Conditionneur (Pont de Wheatstone) -> flèche -> Troisième bloc : Amplificateur -> flèche -> Quatrième bloc : Afficheur (Voltmètre gradué en °C)."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier le rôle de chaque bloc de la chaîne électronique décrite.",
+        "niveau": "easy",
+        "reponse": "- Capteur (Thermistance CTN) : Convertit la grandeur physique (température) en une grandeur électrique (résistance).\n- Conditionneur (Pont de Wheatstone) : Convertit la variation de résistance en une tension électrique exploitable.\n- Amplificateur : Augmente l'amplitude du signal électrique pour qu'il soit compatible avec l'afficheur.\n- Afficheur : Visualise la valeur de la grandeur mesurée (température) après étalonnage.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquer pourquoi on ne peut pas brancher directement la thermistance sur l'afficheur.",
+        "niveau": "medium",
+        "reponse": "L'afficheur est généralement un voltmètre numérique qui nécessite une tension d'entrée dans une certaine plage (ex: 0-10V). La thermistance fournit une résistance, et non une tension. De plus, la variation de résistance en fonction de la température n'est pas linéaire et son amplitude est faible. Le conditionneur (pont de Wheatstone) permet d'obtenir une tension différentielle liée à la variation de résistance, et l'amplificateur ajuste le niveau de cette tension pour qu'elle corresponde à la pleine échelle de l'afficheur (ex: 150°C -> 10V).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Proposer un capteur alternatif à la thermistance pour mesurer la température et justifier le choix.",
+        "niveau": "hard",
+        "reponse": "Un autre capteur possible est un thermocouple (ex: type K, chromel-alumel). Il fonctionne par l'effet Seebeck : une tension (force électromotrice) apparaît entre deux métaux différents lorsque leurs jonctions sont à des températures différentes. Justification : Les thermocouples sont robustes, peu coûteux, et peuvent mesurer une très large gamme de températures (de -200°C à plus de 1000°C), ce qui les rend adaptés aux fours industriels. Cependant, ils nécessitent une soudure froide de référence et une linéarisation, ce qui complexifie le conditionneur par rapport à une simple thermistance.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Schématisation et analyse d'une chaîne électronique pour une alarme",
+    "type": "ressource",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>On désire réaliser un détecteur de lumière pour déclencher une alarme dès que l'éclairement dans une pièce dépasse un certain seuil. La chaîne électronique est constituée des éléments suivants :</p><ul><li>Une photorésistance (LDR) dont la résistance diminue quand l'éclairement augmente.</li><li>Un montage diviseur de tension (résistance fixe R = 10 kΩ et LDR) qui sert de conditionneur.</li><li>Un comparateur à hystérésis (Trigger de Schmitt) réalisé avec un amplificateur opérationnel.</li><li>Un relais qui commande une sirène (alarme).</li></ul><p>La LDR a une résistance de 100 kΩ dans l'obscurité et de 1 kΩ en pleine lumière.</p>",
+      "images": [
+        "Schéma électrique : Un générateur Vcc de 12V alimente un diviseur de tension composé d'une résistance fixe R et d'une LDR. La tension au point milieu du diviseur est envoyée sur l'entrée non-inverseuse (+) d'un amplificateur opérationnel (Trigger de Schmitt). L'entrée inverseuse (-) reçoit une tension de référence Vref fixe (ex: 6V). La sortie de l'AOp commande la bobine d'un relais. Les contacts du relais sont en série avec une sirène et une source d'alimentation."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Schématiser la chaîne électronique en identifiant clairement les quatre blocs : Capteur, Conditionneur, Traitement (comparateur) et Interface/actionneur (relais + sirène).",
+        "niveau": "medium",
+        "reponse": "Le schéma doit faire apparaître : \n- Bloc Capteur : La LDR.\n- Bloc Conditionneur : La résistance R et la LDR formant le diviseur de tension.\n- Bloc Traitement : L'amplificateur opérationnel monté en comparateur à hystérésis.\n- Bloc Interface/actionneur : Le relais et la sirène (alarme).\nLes connexions entre les blocs doivent être représentées (tension du diviseur vers l'AOp, sortie de l'AOp vers le relais, et le relais commandant la sirène).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Analyser le fonctionnement du conditionneur (diviseur de tension). Calculer la tension d'entrée Ve sur l'entrée (+) du comparateur lorsque la pièce est obscure, puis lorsqu'elle est éclairée. Conclure.",
+        "niveau": "hard",
+        "reponse": "Le diviseur de tension est alimenté par Vcc = 12V. La tension Ve = Vcc * (R_LDR) / (R + R_LDR).\n- À l'obscurité : R_LDR = 100 kΩ. Ve_obscur = 12 * (100.10^3) / (10.10^3 + 100.10^3) = 12 * (100/110) ≈ 10,9 V.\n- En pleine lumière : R_LDR = 1 kΩ. Ve_clair = 12 * (1.10^3) / (10.10^3 + 1.10^3) = 12 * (1/11) ≈ 1,09 V.\nConclusion : Lorsque la lumière augmente, la résistance de la LDR diminue, ce qui fait chuter la tension Ve aux bornes de la LDR. Ce signal (Ve) est une image électrique (tension) de la grandeur physique (éclairement). Le conditionneur a bien converti une variation de résistance en une variation de tension.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Justifier l'utilisation d'un comparateur à hystérésis (Trigger de Schmitt) plutôt qu'un simple comparateur sans hystérésis.",
+        "niveau": "hard",
+        "reponse": "Le signal issu de la LDR peut être légèrement fluctuant ou bruité. Avec un simple comparateur, si la tension d'entrée fluctue autour de la tension de seuil, la sortie va basculer très rapidement d'un état à l'autre (effet de 'rebond'), ce qui actionnerait et désactionnerait le relais de manière intempestive. L'hystérésis introduit deux seuils de commutation différents (un pour la montée, un pour la descente). Cela crée une 'zone morte' qui rend le système insensible aux petites fluctuations et garantit une commutation propre et unique du relais lorsque le seuil d'éclairement est franchi.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

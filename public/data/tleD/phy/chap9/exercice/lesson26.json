@@ -1,0 +1,137 @@
+[
+  {
+    "intitule": "Charge et décharge d'un condensateur à travers une résistance",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>On réalise le circuit électrique schématisé ci-dessous. Il comporte :</p><ul><li>Un générateur de force électromotrice $E = 12\\ \\text{V}$ et de résistance interne négligeable ;</li><li>Un conducteur ohmique de résistance $R = 10\\ \\text{k}\\Omega$ ;</li><li>Un condensateur de capacité $C = 1000\\ \\mu\\text{F}$ ;</li><li>Un interrupteur $K$ à deux positions (1 et 2).</li></ul><p>Initialement, le condensateur est déchargé et l'interrupteur est en position 0 (circuit ouvert).</p><p>À la date $t = 0$, on bascule l'interrupteur en position 1.</p>",
+      "images": [
+        "Schéma d'un circuit RC série avec un générateur E=12V, une résistance R=10kΩ, un condensateur C=1000μF et un interrupteur à deux positions. Position 1 : générateur connecté au circuit (charge). Position 2 : générateur court-circuité (décharge)."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Établir l'équation différentielle vérifiée par la tension $u_C(t)$ aux bornes du condensateur pendant la charge.",
+        "niveau": "medium",
+        "reponse": "D'après la loi des mailles : $E = u_R + u_C = R\\cdot i + u_C$. Avec $i = C\\dfrac{du_C}{dt}$, on obtient $E = RC\\dfrac{du_C}{dt} + u_C$. Soit $\\dfrac{du_C}{dt} + \\dfrac{1}{RC}u_C = \\dfrac{E}{RC}$.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Vérifier que l'expression $u_C(t) = E\\left(1 - e^{-t/\\tau}\\right)$ est solution de l'équation différentielle. Déterminer l'expression de la constante de temps $\\tau$.",
+        "niveau": "medium",
+        "reponse": "Dérivons : $\\dfrac{du_C}{dt} = \\dfrac{E}{\\tau}e^{-t/\\tau}$. Reportons : $\\dfrac{E}{\\tau}e^{-t/\\tau} + \\dfrac{1}{RC}E\\left(1 - e^{-t/\\tau}\\right) = \\dfrac{E}{RC}$. Cette égalité est vérifiée si $\\dfrac{1}{\\tau} = \\dfrac{1}{RC}$, soit $\\tau = RC$. Numériquement : $\\tau = 10\\cdot10^3 \\times 1000\\cdot10^{-6} = 10\\ \\text{s}$.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Calculer la valeur de la tension aux bornes du condensateur aux dates $t = \\tau$, $t = 5\\tau$ et $t \\to +\\infty$.",
+        "niveau": "easy",
+        "reponse": "$u_C(\\tau) = E(1-e^{-1}) = 12\\times(1-0,368) = 7,58\\ \\text{V}$ ; $u_C(5\\tau) = 12(1-e^{-5}) \\approx 12\\times0,993 = 11,92\\ \\text{V}$ ; $\\lim_{t\\to+\\infty} u_C(t) = E = 12\\ \\text{V}$.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Déterminer l'expression de l'intensité $i(t)$ du courant pendant la charge. Tracer l'allure de sa courbe en fonction du temps.",
+        "niveau": "medium",
+        "reponse": "$i(t) = C\\dfrac{du_C}{dt} = C\\times\\dfrac{E}{RC}e^{-t/RC} = \\dfrac{E}{R}e^{-t/RC}$. C'est une fonction exponentielle décroissante de $\\dfrac{E}{R}=1,2\\ \\text{mA}$ à 0. La courbe est décroissante avec une asymptote horizontale à 0.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 5,
+        "texte": "À la date $t_1 = 20\\ \\text{s}$, on bascule l'interrupteur en position 2 (décharge). Établir la nouvelle équation différentielle et donner l'expression de $u_C(t)$ pour $t \\ge t_1$.",
+        "niveau": "hard",
+        "reponse": "En position 2, la maille donne : $0 = u_R + u_C = RC\\dfrac{du_C}{dt} + u_C$, soit $\\dfrac{du_C}{dt} + \\dfrac{1}{RC}u_C = 0$. La solution est $u_C(t) = U_0\\,e^{-(t-t_1)/\\tau}$ où $U_0 = u_C(t_1) = E(1-e^{-t_1/\\tau}) = 12(1-e^{-2}) = 12\\times0,865 = 10,38\\ \\text{V}$. Soit $u_C(t) = 10,38\\,e^{-(t-20)/10}$ pour $t \\ge 20\\ \\text{s}$.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Interprétation graphique et énergie d'un condensateur",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un laboratoire d'électronique réalise l'acquisition informatisée de la tension aux bornes d'un condensateur lors de sa charge et de sa décharge. Les courbes obtenues sont représentées ci-dessous.</p><p>La courbe (1) correspond à la charge, la courbe (2) à la décharge. La capacité du condensateur est $C = 470\\ \\mu\\text{F}$.</p>",
+      "images": [
+        "Graphique montrant deux courbes exponentielle. Courbe (1) : croissance de 0 à 5V avec une asymptote horizontale à 5V. Courbe (2) : décroissance de 5V à 0V. L'axe des abscisses est le temps (0 à 0,5 s). La tangente à l'origine de la courbe (1) coupe l'asymptote à t = τ."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "À l'aide du graphique, déterminer graphiquement la constante de temps $\\tau$ du circuit. Justifier la méthode utilisée.",
+        "niveau": "medium",
+        "reponse": "Méthode de la tangente à l'origine : tracer la tangente à la courbe (1) à t=0 ; elle coupe l'asymptote horizontale (uC = 5V) à t = τ. Lecture graphique : τ ≈ 0,1 s. Méthode de 63% : à t=τ, uC = 0,63×5 = 3,15 V ; on lit l'abscisse correspondante, environ 0,1 s.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Déduire de la valeur de $\\tau$ la résistance $R$ du circuit. Exprimer puis calculer l'énergie maximale emmagasinée par le condensateur.",
+        "niveau": "medium",
+        "reponse": "$\\tau = RC \\Rightarrow R = \\dfrac{\\tau}{C} = \\dfrac{0,1}{470\\times10^{-6}} \\approx 212,8\\ \\Omega$. Énergie maximale : $E_{max} = \\dfrac{1}{2}CU_{max}^2 = \\dfrac{1}{2}\\times470\\cdot10^{-6}\\times5^2 = 5,875\\cdot10^{-3}\\ \\text{J} = 5,875\\ \\text{mJ}$.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Expliquer pourquoi la courbe de décharge (2) est symétrique de la courbe de charge (1) par rapport à une transformation temporelle. Quelle est la principale cause de différence entre charge et décharge dans un cas réel ?",
+        "niveau": "hard",
+        "reponse": "Les équations différentielles de charge et décharge sont du même type (1er ordre) mais avec un second membre nul pour la décharge. Mathématiquement, $u_C^{d\\'ech}(t) = U_0 - u_C^{charge}(t)$ si on décale l'origine. Dans la réalité, la symétrie parfaite n'existe pas à cause des pertes ohmiques dans le générateur, de la résistance interne du condensateur, ou de la résistance de l'interrupteur.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Déterminer la durée nécessaire pour que le condensateur soit considéré comme complètement chargé (à 1% près). Justifier.",
+        "niveau": "easy",
+        "reponse": "À $t = 5\\tau$, $u_C = E(1-e^{-5}) \\approx 0,993E$, soit 99,3% de la charge finale, donc l'écart est inférieur à 1%. $t_{charge} = 5\\tau = 0,5\\ \\text{s}$.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Vérification expérimentale de la loi de décharge",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un étudiant réalise le montage suivant : un condensateur de capacité $C = 220\\ \\mu\\text{F}$ initialement chargé sous une tension $U_0 = 10\\ \\text{V}$ est relié à une résistance $R = 1\\ \\text{k}\\Omega$. Il mesure la tension $u_C$ à différentes dates et obtient le tableau ci-dessous :</p><table border='1'><tr><th>$t\\ (\\text{s})$</th><td>0</td><td>0,5</td><td>1,0</td><td>1,5</td><td>2,0</td><td>2,5</td><td>3,0</td></tr><tr><th>$u_C\\ (\\text{V})$</th><td>10,0</td><td>6,07</td><td>3,68</td><td>2,23</td><td>1,35</td><td>0,82</td><td>0,50</td></tr></table>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Rappeler l'expression théorique de $u_C(t)$ lors de la décharge d'un condensateur à travers une résistance.",
+        "niveau": "easy",
+        "reponse": "$u_C(t) = U_0\\,e^{-t/\\tau}$ avec $\\tau = RC$.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Montrer que $\\ln\\left(\\dfrac{U_0}{u_C}\\right)$ est une fonction linéaire du temps. Exprimer son coefficient directeur en fonction de $\\tau$.",
+        "niveau": "medium",
+        "reponse": "$u_C = U_0 e^{-t/\\tau} \\Rightarrow \\dfrac{U_0}{u_C} = e^{t/\\tau} \\Rightarrow \\ln\\left(\\dfrac{U_0}{u_C}\\right) = \\dfrac{1}{\\tau}\\cdot t$. C'est une droite passant par l'origine, de pente $1/\\tau$.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Compléter le tableau suivant puis tracer le graphique $\\ln(U_0/u_C) = f(t)$ sur une feuille de papier millimétré (ou la décrire précisément).",
+        "niveau": "medium",
+        "reponse": "Tableau : $\\ln(10/10)=0$ ; $\\ln(10/6,07)=\\ln(1,647)=0,500$ ; $\\ln(10/3,68)=\\ln(2,717)=1,000$ ; $\\ln(10/2,23)=\\ln(4,484)=1,500$ ; $\\ln(10/1,35)=\\ln(7,407)=2,002$ ; $\\ln(10/0,82)=\\ln(12,195)=2,501$ ; $\\ln(10/0,50)=\\ln(20)=2,996$. Graphique : points alignés sur une droite passant par l'origine.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Déterminer graphiquement la valeur de la constante de temps $\\tau$ expérimentale. En déduire une valeur expérimentale de la capacité $C$.",
+        "niveau": "hard",
+        "reponse": "La pente de la droite est $1/\\tau = \\dfrac{\\Delta y}{\\Delta x} = \\dfrac{2,996}{3,0} \\approx 0,999\\ \\text{s}^{-1}$. Donc $\\tau \\approx 1,00\\ \\text{s}$. Or $\\tau = RC \\Rightarrow C = \\dfrac{\\tau}{R} = \\dfrac{1,00}{1000} = 1000\\ \\mu\\text{F}$. Comparer avec $C_{th}=220\\ \\mu\\text{F}$ : un écart important indique une erreur dans les valeurs fournies (probablement $R=4,55\\ \\text{k}\\Omega$ pour obtenir 220 µF). L'exercice met en évidence la vérification expérimentale.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 5,
+        "texte": "Évaluer la pertinence des mesures. Si l'écart entre $C_{exp}$ et $C_{th}$ est grand, proposer une source d'erreur possible.",
+        "niveau": "hard",
+        "reponse": "Les mesures semblent parfaitement exponentielles (coefficient de corrélation proche de 1). L'écart vient soit d'une erreur d'étalonnage du voltmètre, soit d'une méconnaissance de la valeur réelle de R (tolérance des composants), soit d'une erreur de lecture du tableau. En travaux pratiques, on vérifie la linéarité du graphe semi-logarithmique pour valider le modèle.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

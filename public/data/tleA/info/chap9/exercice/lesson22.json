@@ -1,0 +1,123 @@
+[
+  {
+    "intitule": "Exercice 1 : Identifier la structure de la requête UPDATE (Ressource)",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Observe attentivement la requête SQL suivante :</p><pre><code>UPDATE Eleves<br>SET Adresse = 'Douala', Telephone = '699887755'<br>WHERE Matricule = 'A123';</code></pre><p>En te basant sur cette requête, réponds aux questions ci-dessous.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Rappeler quel est le rôle principal de la commande `UPDATE` en SQL.",
+        "niveau": "easy",
+        "reponse": "La commande `UPDATE` est utilisée pour modifier les données existantes dans une ou plusieurs colonnes d'une table d'une base de données.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Identifier dans la requête le nom de la table concernée par la modification.",
+        "niveau": "easy",
+        "reponse": "La table concernée est `Eleves`.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Citer les noms des deux colonnes dont les valeurs seront modifiées.",
+        "niveau": "easy",
+        "reponse": "Les colonnes modifiées sont `Adresse` et `Telephone`.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Expliquer à quoi sert la clause `WHERE` dans cette requête.",
+        "niveau": "medium",
+        "reponse": "La clause `WHERE` sert à filtrer les enregistrements. Dans cette requête, elle permet de ne modifier que l'enregistrement de l'élève dont le `Matricule` est exactement 'A123'. Sans cette clause, tous les enregistrements de la table `Eleves` seraient modifiés.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 2 : Analyser un besoin de mise à jour (Compétence)",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Une petite bibliothèque municipale utilise une base de données pour gérer ses adhérents. Voici un extrait de la table <strong>Adherents</strong> :</p><table border='1'><tr><th>ID_Adherent</th><th>Nom</th><th>Prenom</th><th>Ville</th><th>Telephone</th></tr><tr><td>1</td><td>DIOP</td><td>Aminata</td><td>Dakar</td><td>771234567</td></tr><tr><td>2</td><td>NDOYE</td><td>Mamadou</td><td>Thies</td><td>775556677</td></tr><tr><td>3</td><td>MBAYE</td><td>Fatou</td><td>Dakar</td><td>778889900</td></tr></table><p>L'adhérent Mamadou NDOYE vient de déménager à <strong>Mbour</strong> et a changé son numéro de téléphone pour <strong>781122334</strong>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la requête SQL utilisant la commande `UPDATE` pour modifier les informations de Mamadou NDOYE dans la base de données.",
+        "niveau": "medium",
+        "reponse": "```sql\nUPDATE Adherents\nSET Ville = 'Mbour', Telephone = '781122334'\nWHERE Nom = 'NDOYE' AND Prenom = 'Mamadou';\n```\n*(On peut aussi utiliser `WHERE ID_Adherent = 2` qui est plus précis et plus sûr, surtout s'il y a des homonymes.)*",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Justifier l'importance d'avoir utilisé la clause `WHERE` dans la requête que tu as écrite.",
+            "niveau": "medium",
+            "reponse": "La clause `WHERE` est cruciale pour cibler précisément l'enregistrement de Mamadou NDOYE. Sans elle, la commande `UPDATE` modifierait la ville et le téléphone de <strong>tous les adhérents</strong> de la table, ce qui serait une erreur catastrophique pour la base de données."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 3 : Formuler une requête UPDATE pour un problème réel (Compétence)",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Dans le cadre d'un projet de fin d'année, ta classe doit gérer une petite librairie collaborative. La table <strong>Livres</strong> contient les colonnes suivantes : `ID_Livre` (clé primaire), `Titre`, `Auteur`, `Prix`, `Quantite_Stock`.</p><p>Le libraire te donne deux consignes de mise à jour pour le catalogue.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Formuler la requête SQL pour appliquer une augmentation de 500 FCFA sur le prix de tous les livres écrits par l'auteur 'Ahmadou Kourouma'.",
+        "niveau": "hard",
+        "reponse": "```sql\nUPDATE Livres\nSET Prix = Prix + 500\nWHERE Auteur = 'Ahmadou Kourouma';\n```\n*(Cette requête utilise le champ `Prix` dans la partie `SET` pour incrémenter sa valeur actuelle.)*",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Proposer une requête SQL pour mettre à jour la quantité en stock. La librairie a reçu 10 nouveaux exemplaires du livre dont le `ID_Livre` est 25. Il faut donc ajouter 10 à la quantité actuelle.",
+        "niveau": "hard",
+        "reponse": "```sql\nUPDATE Livres\nSET Quantite_Stock = Quantite_Stock + 10\nWHERE ID_Livre = 25;\n```",
+        "sousQuestions": [
+          {
+            "numero": "2.a",
+            "texte": "Expliquer ce qui se passerait si on omettait la clause `WHERE` dans la requête de la question 2.",
+            "niveau": "hard",
+            "reponse": "Si la clause `WHERE` est omise, la commande `UPDATE` ajouterait 10 exemplaires à la quantité en stock de <strong>tous les livres</strong> de la librairie. Cela fausserait complètement la gestion des stocks, car seuls les livres dont l'ID est 25 devaient être mis à jour."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 4 : Évaluer les risques d'une mauvaise requête (Ressource)",
+    "type": "ressource",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Un stagiaire a écrit et exécuté la requête SQL suivante sur la base de données des notes d'un lycée :</p><pre><code>UPDATE Eleves SET Moyenne_Annuelle = 0;</code></pre><p>Il pensait ne cibler que les élèves de la classe de Seconde A.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Analyser l'erreur commise par le stagiaire. Quel est l'impact réel de cette requête sur l'intégrité des données ?",
+        "niveau": "very hard",
+        "reponse": "L'erreur du stagiaire est d'avoir omis la clause `WHERE`. La requête, telle qu'elle est écrite, ne cible pas une classe spécifique. Son impact est massif et destructeur : elle va <strong>mettre la `Moyenne_Annuelle` à zéro (0) pour tous les élèves de toutes les classes</strong> présents dans la table `Eleves`.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Proposer une méthode simple pour éviter ce genre d'erreur grave avant d'exécuter une commande `UPDATE` ou `DELETE`.",
+            "niveau": "very hard",
+            "reponse": "Une méthode simple et très efficace est de d'abord écrire et exécuter une requête `SELECT` avec la même clause `WHERE` pour visualiser les enregistrements qui seront affectés.\n\nPar exemple, au lieu d'écrire directement `UPDATE Eleves SET Moyenne_Annuelle = 0 WHERE Classe = 'Seconde A';`, le stagiaire aurait d'abord dû exécuter `SELECT * FROM Eleves WHERE Classe = 'Seconde A';`. En voyant la liste des élèves, il aurait confirmé qu'il cible les bons avant de lancer la modification.\n\nSi on oublie le `WHERE` dans le `SELECT`, on voit toutes les lignes, ce qui alerte sur le risque."
+          }
+        ]
+      }
+    ]
+  }
+]

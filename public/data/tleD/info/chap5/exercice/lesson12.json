@@ -1,0 +1,123 @@
+[
+  {
+    "intitule": "Comprendre le rôle de l'IDE et de la compilation",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Un \u00e9l\u00e8ve de Terminale affirme : <em>\u00ab Un IDE (Environnement de D\u00e9veloppement Int\u00e9gr\u00e9) est simplement un logiciel qui permet d'\u00e9crire du code. La compilation est une \u00e9tape optionnelle pour ex\u00e9cuter un programme en C. \u00bb</em></p><p>En te basant sur tes connaissances en informatique, analyse cette affirmation et corrige les \u00e9ventuelles erreurs.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "D\u00e9finis pr\u00e9cis\u00e9ment un IDE et cite trois exemples d'IDE utilis\u00e9s pour le langage C.",
+        "niveau": "easy",
+        "reponse": "Un IDE (Integrated Development Environment) est un logiciel qui regroupe plusieurs outils pour faciliter le d\u00e9veloppement logiciel : \u00e9diteur de code avec coloration syntaxique, compilateur/int\u00e9pr\u00e9teur, d\u00e9bogueur, et parfois des outils de gestion de versions. Exemples : Code::Blocks, Dev-C++, Visual Studio Code (avec extensions), Eclipse CDT.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Explique l'affirmation suivante : <em>\u00ab La compilation n'est PAS une \u00e9tape optionnelle pour un programme \u00e9crit en C. \u00bb</em>",
+        "niveau": "medium",
+        "reponse": "Le langage C est un langage compil\u00e9. Cela signifie que le code source (texte lisible par l'humain) doit \u00eatre traduit en langage machine (binaire ex\u00e9cutable) par un compilateur. Sans compilation, le syst\u00e8me d'exploitation ne peut pas comprendre ni ex\u00e9cuter les instructions. La compilation est donc obligatoire.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Classe les \u00e9tapes suivantes dans l'ordre chronologique du processus de d\u00e9veloppement : D\u00e9bogage, Compilation, \u00c9dition du code source, Ex\u00e9cution.",
+        "niveau": "easy",
+        "reponse": "1. \u00c9dition du code source (dans l'IDE), 2. Compilation (g\u00e9n\u00e9ration de l'ex\u00e9cutable), 3. Ex\u00e9cution (test du programme), 4. D\u00e9bogage (correction des erreurs si le programme ne fonctionne pas).",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Distinguer les types d'erreurs en programmation",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Observe attentivement les trois extraits de code C suivants. Pour chacun, identifie le type d'erreur (syntaxique, s\u00e9mantique ou d'ex\u00e9cution) et justifie ta r\u00e9ponse.</p><pre><code>// Extrait 1\nint main() \n{\n    int x = 10\n    printf(\"%d\", x);\n    return 0;\n}\n\n// Extrait 2\nint main() \n{\n    int a = 5, b = 0;\n    int c = a / b;\n    printf(\"%d\", c);\n    return 0;\n}\n\n// Extrait 3\nint main() \n{\n    int note = 15;\n    if (note = 10) {\n        printf(\"Moyenne\");\n    }\n    return 0;\n}\n</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Analyse l'extrait 1 : quelle est la nature de l'erreur et o\u00f9 se situe-t-elle pr\u00e9cis\u00e9ment ?",
+        "niveau": "medium",
+        "reponse": "Il s'agit d'une erreur syntaxique. Le point-virgule `;` est manquant \u00e0 la fin de la ligne `int x = 10`. Le compilateur ne pourra pas traduire le code.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Analyse l'extrait 2 : pourquoi le compilateur ne d\u00e9tecte-t-il pas d'erreur, mais le programme posera probl\u00e8me ?",
+        "niveau": "hard",
+        "reponse": "C'est une erreur d'ex\u00e9cution (ou erreur \u00e0 l'ex\u00e9cution). Syntaxiquement le code est correct (points-virgules pr\u00e9sents, types corrects). Cependant, la division par z\u00e9ro (b=0) est une op\u00e9ration math\u00e9matiquement ind\u00e9finie. \u00c0 l'ex\u00e9cution, cela provoquera une exception (ou un crash).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Analyse l'extrait 3 : explique en quoi l'utilisation de l'op\u00e9rateur = est un pi\u00e8ge fr\u00e9quent en C.",
+        "niveau": "hard",
+        "reponse": "C'est une erreur s\u00e9mantique (logique). L'op\u00e9rateur `=` est une affectation, tandis que l'op\u00e9rateur `==` est la comparaison. Ici, `if (note = 10)` ne compare pas note \u00e0 10 ; il affecte la valeur 10 \u00e0 note. Cette expression vaut 10 (vrai dans un contexte bool\u00e9en), donc la condition sera toujours vraie. Le compilateur ne signalera pas d'erreur, mais le comportement n'est pas celui attendu.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Utiliser un IDE pour d\u00e9boguer un programme",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Tu es stagiaire dans une petite entreprise de Douala. Ton responsable te confie le programme C ci-dessous, cens\u00e9 calculer la moyenne de trois notes. Cependant, le programme affiche toujours <strong>0.00</strong> comme r\u00e9sultat. En utilisant les fonctionnalit\u00e9s d'un IDE (points d'arr\u00eat, ex\u00e9cution pas \u00e0 pas, inspection des variables), explique d\u00e9marche et corrige le code.</p><pre><code>#include <stdio.h>\n\nint main() {\n    int note1, note2, note3;\n    float moyenne;\n\n    printf(\"Entrez trois notes : \");\n    scanf(\"%d %d %d\", note1, note2, note3);\n\n    moyenne = note1 + note2 + note3 / 3;\n\n    printf(\"La moyenne est : %.2f\", moyenne);\n    return 0;\n}\n</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifie la premi\u00e8re erreur flagrante dans la fonction <code>scanf</code>. Que manque-t-il ?",
+        "niveau": "medium",
+        "reponse": "Dans `scanf`, il manque l'op\u00e9rateur d'adresse `&` avant chaque variable. Il faut \u00e9crire `scanf(\"%d %d %d\", &note1, &note2, &note3);`. Sans cela, `scanf` re\u00e7oit les valeurs des variables au lieu de leurs adresses m\u00e9moire, ce qui provoque un comportement ind\u00e9fini.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Analyse l'erreur de priorit\u00e9 des op\u00e9rateurs dans le calcul de la moyenne. Propose une correction.",
+        "niveau": "medium",
+        "reponse": "L'op\u00e9rateur `/` a priorit\u00e9 sur `+`. Ainsi `note1 + note2 + note3 / 3` est \u00e9quivalent \u00e0 `note1 + note2 + (note3 / 3)`. Pour additionner d'abord les trois notes, il faut utiliser des parenth\u00e8ses : `(note1 + note2 + note3) / 3`. De plus, pour obtenir une moyenne d\u00e9cimale, il faut que la division soit entre r\u00e9els (ou utiliser un cast). Correction : `moyenne = (note1 + note2 + note3) / 3.0;`",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "En utilisant la fonctionnalit\u00e9 de <strong>d\u00e9bogage</strong> de ton IDE (exemple : Code::Blocks), d\u00e9cris la proc\u00e9dure que tu suivrais pour observer la valeur de la variable <code>moyenne</code> juste avant l'affichage.",
+        "niveau": "very hard",
+        "reponse": "Proc\u00e9dure type : 1) Placer un point d'arr\u00eat (cliquer \u00e0 gauche du num\u00e9ro de ligne) sur la ligne du `printf`. 2) Lancer le programme en mode 'D\u00e9bogage' (F8 sur Code::Blocks). 3) Le programme s'ex\u00e9cute normalement jusqu'au point d'arr\u00eat. 4) Utiliser la fen\u00eatre 'Watches' (surveillance) ou passer la souris sur la variable `moyenne` pour voir sa valeur courante. 5) On constate alors que la valeur est fausse (0.00 ou une valeur enti\u00e8re tronqu\u00e9e). 6) On peut aussi utiliser l'ex\u00e9cution pas \u00e0 pas ('Step Next' ou F7) pour voir l'\u00e9volution des variables ligne par ligne.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Choisir un IDE adapt\u00e9 pour un projet \u00e9tudiant",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans le cadre de ton projet de fin d'ann\u00e9e, tu dois d\u00e9velopper un programme en C d'environ 800 lignes (gestion d'une biblioth\u00e8que). Tu h\u00e9sites entre trois environnements : <strong>Dev-C++</strong>, <strong>Code::Blocks</strong> et <strong>Visual Studio Code</strong> (avec extension C/C++).</p><p>En t'appuyant sur les crit\u00e8res suivants : facilit\u00e9 de d\u00e9bogage, gestion de projets multi-fichiers, aide \u00e0 l'\u00e9criture (auto-compl\u00e9tion), et l\u00e9g\u00e8ret\u00e9, argumente ton choix final.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Compare les trois IDE en listant pour chacun un avantage et un inconv\u00e9nient majeur dans le cadre de ce projet.",
+        "niveau": "medium",
+        "reponse": "<ul><li><strong>Dev-C++</strong> : Avantage = tr\u00e8s l\u00e9ger et simple pour des petits programmes. Inconv\u00e9nient = d\u00e9bogueur peu performant et auto-compl\u00e9tion limit\u00e9e, gestion moyenne des projets multi-fichiers.</li><li><strong>Code::Blocks</strong> : Avantage = d\u00e9bogueur int\u00e9gr\u00e9 puissant (points d'arr\u00eat, watches), gestion native des projets C avec plusieurs fichiers. Inconv\u00e9nient = interface un peu d\u00e9pass\u00e9e.</li><li><strong>VS Code</strong> : Avantage = excellent auto-compl\u00e9tion (IntelliSense), tr\u00e8s personnalisable, bon d\u00e9bogueur visuel. Inconv\u00e9nient = n\u00e9cessite d'installer et configurer manuellement le compilateur (MinGW) et les extensions, plus gourmand en m\u00e9moire.</li></ul>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Justifie ton choix final pour le projet de gestion de biblioth\u00e8que (800 lignes, multi-fichiers).",
+        "niveau": "medium",
+        "reponse": "Je choisirais <strong>Code::Blocks</strong>. Pour un projet \u00e9tudiant de cette taille, le d\u00e9bogueur fiable est essentiel. La gestion des projets multi-fichiers est imm\u00e9diate (fichiers .h et .c). Il est sp\u00e9cialis\u00e9 pour C/C++ et fonctionne 'out of the box' sous Windows sans configuration complexe, contrairement \u00e0 VS Code. Dev-C++ serait trop limit\u00e9 pour le d\u00e9bogage.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 1 : Principes généraux de la contraction de texte</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (utile si jamais on ajoute des formules littéraires ou des schémas) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie professionnelle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== STYLES SPÉCIFIQUES EN PLUS DU TEMPLATE ===== */
+        /* Ces styles complètent le template original pour la cohérence visuelle */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 950px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .image-illustration {
+            margin: 1rem 0 0.5rem;
+            text-align: center;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background-color: #f1f5f9;
+        }
+        .image-illustration img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 0.5rem;
+        }
+        .image-caption {
+            font-size: 0.75rem;
+            color: #4b5563;
+            margin-top: 0.25rem;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem; }
+            .fiche-content { padding: 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">📘 Leçon 1 : Principes généraux de la contraction de texte</h1>
+            <p class="lesson-subtitle">Littérature / Culture générale · Première · Probatoire · Révision officielle</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- SECTION ÉLÉMENTS CLÉS À RETENIR -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Fondamentaux de la contraction</h2>
+                
+                <!-- Image explicative générée par IA : schéma des étapes clés -->
+                <div class="image-illustration">
+                    <img src="" alt="Schéma didactique des étapes de la contraction de texte : lecture, repérage des idées, reformulation, comptage des mots. Fond bleu clair, icônes de loupe, crayon, règle.">
+                    <div class="image-caption">✨ Étapes essentielles pour réussir une contraction fidèle (Image générée par IA)</div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🎯 Qu'est-ce qu'une contraction de texte ?</h3>
+                    <p class="card-description">
+                        La contraction de texte (ou résumé) est une <strong>reformulation condensée et fidèle</strong> d'un texte source. 
+                        Elle consiste à exprimer les idées essentielles de l’auteur avec vos propres mots, tout en respectant rigoureusement le nombre de mots imposé.
+                    </p>
+                    <ul class="concept-list">
+                        <li>✅ <span class="bold">Condensée</span> : plus courte que l’original (environ 25 % du texte source, selon les sujets).</li>
+                        <li>✅ <span class="bold">Fidèle</span> : aucune déformation de la pensée de l’auteur.</li>
+                        <li>✅ <span class="bold">Neutre et objective</span> : pas de commentaire personnel, pas de jugement.</li>
+                        <li>✅ <span class="bold">Autonome</span> : le résumé doit se comprendre sans avoir lu le texte original.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">📏 Respect du nombre de mots : marge tolérée et indication obligatoire</h3>
+                    <p class="card-description">
+                        D’après les sujets de Probatoire (2021, 2023, 2024, 2025), le nombre de mots du résumé varie entre 128 et 135 mots, avec une <strong>marge de ±10 %</strong> (environ ±13-14 mots). 
+                        Pour le sujet 2022 (analyse), la production est de 180 mots (±18 mots).
+                    </p>
+                    <ul class="concept-list">
+                        <li>🔢 <strong>Indication obligatoire</strong> : à la fin de votre résumé, notez le nombre exact de mots entre parenthèses, ex. <em class="formule">(134 mots)</em>.</li>
+                        <li>⚠️ Un résumé trop long ou trop court est pénalisé.</li>
+                        <li>📝 Le comptage suit les règles classiques : un mot = une unité orthographique séparée par des espaces (les chiffres comptent pour un mot, les signes de ponctuation sont ignorés).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🧠 Conserver le plan et les idées essentielles</h3>
+                    <p class="card-description">
+                        Un bon résumé respecte l’architecture logique du texte original : introduction, développement, conclusion (ou progression thématique). 
+                        Il ne s’agit pas de juxtaposer des phrases au hasard, mais de reconstruire un texte cohérent.
+                    </p>
+                    <ul class="concept-list">
+                        <li>📌 Identifier la <strong>thèse principale</strong> et les arguments majeurs.</li>
+                        <li>✂️ Supprimer les exemples secondaires, les redondances, les illustrations trop précises.</li>
+                        <li>🔁 Conserver les connecteurs logiques essentiels (cependant, donc, en conséquence) pour garder le fil argumentatif.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🚫 Interdiction formelle : pas d’idées personnelles ni de commentaires</h3>
+                    <p class="card-description">
+                        La contraction n’est <strong>ni une critique</strong>, ni une prise de position. Même si vous n’êtes pas d’accord avec l’auteur, vous devez restituer sa pensée sans la juger. 
+                        Aucune formule comme « je pense que », « selon moi » ou « cet argument est intéressant » n’a sa place dans le résumé.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION EXEMPLES DE COMPRÉHENSION -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">📄 Exemple 1 : Passage original vs résumé bien construit</h3>
+                    <div class="exemple-context">
+                        <strong>Texte original (extrait, 85 mots) :</strong><br>
+                        « Aujourd’hui, de nombreux jeunes Camerounais peinent à s’insérer sur le marché du travail. Ce phénomène s’explique d’abord par un décalage entre les formations proposées et les besoins réels des entreprises. Par ailleurs, le manque d’expérience professionnelle constitue un frein supplémentaire. Enfin, les difficultés économiques liées à la conjoncture internationale réduisent les opportunités d’embauche dans plusieurs secteurs. Il est donc urgent de repenser l’orientation scolaire et de développer l’apprentissage en entreprise. »
+                    </div>
+                    <div class="exemple-correction">
+                        <strong>Résumé correct (32 mots) :</strong><br>
+                        Au Cameroun, l’insertion professionnelle des jeunes est entravée par l’inadéquation formation-emploi, le manque d’expérience et le contexte économique difficile. Une refonte de l’orientation et l’apprentissage sont nécessaires. <em class="formule">(32 mots)</em>
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Astuce : On a supprimé les exemples détaillés (« conjoncture internationale ») et gardé l’essentiel : causes + solution. Le nombre de mots est respecté et aucune opinion n’est ajoutée.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">📝 Exemple 2 : Distinguer idée principale et exemple secondaire</h3>
+                    <div class="exemple-context">
+                        <strong>Texte :</strong> « Les émissions de gaz à effet de serre augmentent dangereusement. Par exemple, entre 2000 et 2020, le CO₂ dans l’atmosphère a grimpé de 40 % dans certaines zones industrielles d’Asie. Cette hausse menace directement l’équilibre climatique. »
+                    </div>
+                    <div class="exemple-correction">
+                        <strong>Résumé idéal (20 mots) :</strong><br>
+                        La forte augmentation des gaz à effet de serre, illustrée par la hausse du CO₂, menace l’équilibre climatique. <em class="formule">(20 mots)</em>
+                    </div>
+                    <div class="exemple-astuce">
+                        📌 On conserve la <strong>donnée chiffrée symbolique</strong> mais on évite la précision « Asie » ou « 2000-2020 » si le nombre de mots est serré. L’essentiel (cause + conséquence) reste présent.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">✖️ Exemple 3 : Ce qu’il ne faut PAS faire (erreurs fréquentes)</h3>
+                    <div class="exemple-context">
+                        <strong>Texte source (idée) :</strong> « La lecture développe l’empathie chez les adolescents. »
+                    </div>
+                    <div class="exemple-correction">
+                        <strong>❌ Mauvais résumé :</strong> « Je trouve que la lecture est vraiment bénéfique pour les ados, c’est évident qu’elle développe l’empathie. » <br>
+                        <strong>Problèmes :</strong> ajout de jugement personnel (« je trouve », « c’est évident »), style relâché, mots inutiles.
+                    </div>
+                    <div class="exemple-astuce">
+                        ✅ Version correcte : « La lecture favorise le développement de l’empathie chez les adolescents. » (Neutre, objectif, sans commentaire).
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION PIÈGES COURANTS ET CONSEILS PRATIQUES -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges à éviter & Conseils méthodologiques</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">❌ Recopier des fragments du texte :</span> La reformulation totale est exigée. Copier plus de trois mots identiques consécutifs (hors noms propres ou termes techniques) est considéré comme un défaut.</li>
+                        <li><span class="bold">📏 Oublier de compter les mots :</span> Beaucoup de candidats perdent des points car ils n’indiquent pas le nombre de mots à la fin du résumé. Pensez-y systématiquement !</li>
+                        <li><span class="bold">✍️ Introduire une conclusion personnelle :</span> Ne terminez jamais par « En conclusion, l’auteur a raison… » Le résumé s’arrête là où s’arrête la pensée de l’auteur.</li>
+                        <li><span class="bold">🔄 Changer l’ordre logique des idées :</span> Respectez la progression du texte original. Inverser les arguments peut trahir la pensée de l’auteur.</li>
+                        <li><span class="bold">📖 Négliger les connecteurs :</span> Un résumé sans articulation (donc, cependant, par ailleurs) devient une liste d’idées décousues.</li>
+                    </ul>
+                </div>
+                <div class="card concept-card" style="margin-top: 0.5rem;">
+                    <h3 class="card-title">✅ Procédure résumée en 7 étapes (d’après le programme officiel)</h3>
+                    <ul class="concept-list">
+                        <li>1️⃣ Lecture attentive + compréhension globale du texte.</li>
+                        <li>2️⃣ Repérage de la structure (introduction, développement, conclusion).</li>
+                        <li>3️⃣ Identification des idées principales de chaque paragraphe.</li>
+                        <li>4️⃣ Distinction entre essentiel et accessoire (exemples secondaires, répétitions).</li>
+                        <li>5️⃣ Rédaction du résumé dans vos propres mots, en respectant le plan.</li>
+                        <li>6️⃣ Comptage précis des mots et ajustement si nécessaire.</li>
+                        <li>7️⃣ Relecture finale : vérifier fidélité, clarté et objectivité.</li>
+                    </ul>
+                    <div class="image-illustration" style="margin-top: 1rem;">
+                        <img src="" alt="Infographie représentant les 7 étapes de la contraction : livre ouvert, loupe, crayon, calculatrice, œil. Style moderne, couleurs bleues et jaunes.">
+                        <div class="image-caption">📖 Les 7 étapes clés pour maîtriser la contraction (support IA)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION RAPPEL DES TEXTES OFFICIELS (TABLEAU) -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Données officielles (Probatoire 2021-2025)</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Spécificités selon les années</h3>
+                    <p class="card-description">
+                        Le tableau ci-dessous récapitule la longueur des textes proposés et le nombre de mots attendus pour la contraction ou l’analyse. 
+                        À connaître pour adapter votre entraînement.
+                    </p>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 1rem;">
+                            <thead style="background-color: #eef2ff;">
+                                <tr>
+                                    <th style="border: 1px solid #cbd5e1; padding: 8px; text-align: left;">Année</th>
+                                    <th style="border: 1px solid #cbd5e1; padding: 8px; text-align: left;">Thème</th>
+                                    <th style="border: 1px solid #cbd5e1; padding: 8px; text-align: left;">Mots texte</th>
+                                    <th style="border: 1px solid #cbd5e1; padding: 8px; text-align: left;">Mots résumé / analyse</th>
+                                    <th style="border: 1px solid #cbd5e1; padding: 8px; text-align: left;">Marge ±</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="border: 1px solid #cbd5e1; padding: 6px;">2021</td><td style="border: 1px solid #cbd5e1; padding: 6px;">Rôle famille/école éducation</td><td style="border: 1px solid #cbd5e1; padding: 6px;">534</td><td style="border: 1px solid #cbd5e1; padding: 6px;">133</td><td style="border: 1px solid #cbd5e1; padding: 6px;">±13</td></tr>
+                                <tr style="background-color: #f9fafb;"><td style="border: 1px solid #cbd5e1; padding: 6px;">2022</td><td style="border: 1px solid #cbd5e1; padding: 6px;">Condition de la femme africaine</td><td style="border: 1px solid #cbd5e1; padding: 6px;">542</td><td style="border: 1px solid #cbd5e1; padding: 6px;"><strong>180 (analyse)</strong></td><td style="border: 1px solid #cbd5e1; padding: 6px;">±18</td></tr>
+                                <tr><td style="border: 1px solid #cbd5e1; padding: 6px;">2023</td><td style="border: 1px solid #cbd5e1; padding: 6px;">Réinventer l'école du IIIe millénaire</td><td style="border: 1px solid #cbd5e1; padding: 6px;">511</td><td style="border: 1px solid #cbd5e1; padding: 6px;">128</td><td style="border: 1px solid #cbd5e1; padding: 6px;">±13</td></tr>
+                                <tr style="background-color: #f9fafb;"><td style="border: 1px solid #cbd5e1; padding: 6px;">2024</td><td style="border: 1px solid #cbd5e1; padding: 6px;">Problème des faux médicaments</td><td style="border: 1px solid #cbd5e1; padding: 6px;">538</td><td style="border: 1px solid #cbd5e1; padding: 6px;">135</td><td style="border: 1px solid #cbd5e1; padding: 6px;">±14</td></tr>
+                                <tr><td style="border: 1px solid #cbd5e1; padding: 6px;">2025</td><td style="border: 1px solid #cbd5e1; padding: 6px;">Vandalisme en milieu scolaire</td><td style="border: 1px solid #cbd5e1; padding: 6px;">538</td><td style="border: 1px solid #cbd5e1; padding: 6px;">135</td><td style="border: 1px solid #cbd5e1; padding: 6px;">±14</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem;">
+                        💡 <strong>À retenir :</strong> sauf pour l’année 2022 où une analyse structurée est demandée (180 mots), les autres années exigent un résumé simple d’environ 130-135 mots. 
+                        La marge tolérée est de ±10 %, soit environ 13 à 14 mots.
+                    </p>
+                </div>
+            </section>
+
+            <!-- CONSEIL SUPPLÉMENTAIRE POUR L’EXAMEN -->
+            <div class="card" style="background-color: #f0f9ff; border-left: 6px solid #0284c7;">
+                <h3 class="card-title" style="color:#0369a1;">🎓 Conseils du correcteur (Probatoire)</h3>
+                <p>
+                    - La <strong>présentation</strong> compte pour 2 points sur 20. Aérez votre copie, sautez des lignes entre le résumé et la discussion.<br>
+                    - Mentionnez <strong>toujours le nombre exact de mots</strong> à la fin de la contraction.<br>
+                    - Entraînez-vous à reformuler des articles de presse ou des extraits d’essais en comptant vos mots. La régularité paie !<br>
+                    - Relisez-vous pour traquer les répétitions inutiles ou les jugements personnels cachés (« heureusement », « malheureusement »…).
+                </p>
+            </div>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>📚 Fiche conforme au programme officiel de Littérature / Culture générale - Probatoire (Première) · Enseignant : M. (votre nom) · ✍️ Révision créée pour les élèves du Cameroun · <a href="#">Retour au sommaire des leçons</a></p>
+        </footer>
+    </div>
+</body>
+</html>

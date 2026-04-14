@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 40 : Effet Photoélectrique</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Style CSS intégré pour une meilleure compatibilité */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .badge {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 0.75rem;
+        }
+
+        /* Corps */
+        .content {
+            padding: 2rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1.25rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            font-size: 1.4rem;
+        }
+
+        .concept-card {
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+
+        .concept-card:hover {
+            border-color: #94a3b8;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .concept-title {
+            font-weight: 700;
+            color: #1e40af;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .formula {
+            background-color: #eef2ff;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            font-family: monospace;
+            font-size: 1rem;
+            text-align: center;
+            margin: 0.75rem 0;
+            border: 1px solid #cbd5e1;
+            overflow-x: auto;
+        }
+
+        .important-note {
+            background-color: #fef9c3;
+            border-left: 4px solid #eab308;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .example-box {
+            background-color: #f1f5f9;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px dashed #64748b;
+        }
+
+        .example-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #334155;
+        }
+
+        .method-step {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            background-color: #3b82f6;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 0.125rem;
+        }
+
+        .bac-link {
+            background-color: #e0f2fe;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: #f1f5f9;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+            .content {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête -->
+        <div class="header">
+            <h1>📘 Leçon 40 : Effet photoélectrique</h1>
+            <div class="subtitle">Aspect corpusculaire de la lumière – Terminales C & D (Cameroun)</div>
+            <div class="badge">🎯 Programme officiel 2025-2026 | Bac 2024-2025</div>
+        </div>
+
+        <div class="content">
+            <!-- Lien avec le Bac -->
+            <div class="bac-link">
+                🔗 <strong>Lien Bac 2024-2025 :</strong> L'effet photoélectrique est un sujet classique (définition, équation d'Einstein, calcul du potentiel d'arrêt).
+            </div>
+
+            <!-- Section Objectifs -->
+            <div class="section">
+                <div class="section-title">
+                    🎯 Objectifs d'apprentissage
+                </div>
+                <ul style="margin-left: 1.5rem; list-style-type: disc; display: flex; flex-direction: column; gap: 0.4rem;">
+                    <li>Décrire et interpréter qualitativement l'effet photoélectrique.</li>
+                    <li>Introduire la notion de <strong>photon</strong> comme quantum d'énergie lumineuse.</li>
+                    <li>Énoncer et appliquer <strong>l'équation d'Einstein</strong> de l'effet photoélectrique.</li>
+                    <li>Calculer l'énergie cinétique maximale des photoélectrons et le potentiel d'arrêt.</li>
+                    <li>Expliquer l'existence d'une <strong>fréquence seuil</strong> et d'un <strong>travail d'extraction</strong>.</li>
+                </ul>
+            </div>
+
+            <!-- Notions clés / Cours -->
+            <div class="section">
+                <div class="section-title">
+                    📖 Notions fondamentales
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">🌟 1. Dualité onde-corpuscule</div>
+                    <p>La lumière possède une double nature :</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li><strong>Ondulatoire</strong> : interférences, diffraction (Leçons 37-38).</li>
+                        <li><strong>Corpusculaire</strong> : constituée de grains d'énergie appelés <strong>photons</strong>.</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">💡 2. Photon et énergie</div>
+                    <p>Un photon transporte une énergie \(E\) proportionnelle à la fréquence \( \nu \) de l'onde associée.</p>
+                    <div class="formula">
+                        \[
+                        E = h \cdot \nu = \frac{h \cdot c}{\lambda}
+                        \]
+                    </div>
+                    <ul>
+                        <li>\(h = 6,63 \times 10^{-34} \, \text{J·s}\) : constante de Planck.</li>
+                        <li>\(c = 3,00 \times 10^8 \, \text{m/s}\) : célérité de la lumière.</li>
+                        <li>\( \nu \) (Hz) : fréquence, \( \lambda \) (m) : longueur d'onde.</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">🔬 3. Description de l'effet photoélectrique</div>
+                    <p>Lorsqu'une lumière de fréquence suffisante éclaire une surface métallique, elle peut arracher des électrons (photoélectrons).</p>
+                    <p><strong>Observations expérimentales :</strong></p>
+                    <ul>
+                        <li>L'émission d'électrons est <strong>instantanée</strong> (pas de délai).</li>
+                        <li>Il existe une <strong>fréquence seuil</strong> \( \nu_0 \) (ou longueur d'onde seuil \( \lambda_0 \)) en dessous de laquelle il n'y a pas d'effet, quelle que soit l'intensité lumineuse.</li>
+                        <li>L'énergie cinétique maximale des photoélectrons augmente linéairement avec la fréquence de la lumière.</li>
+                        <li>L'intensité lumineuse (nombre de photons) augmente le <strong>nombre</strong> d'électrons émis, mais pas leur énergie maximale.</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">📐 4. Équation d'Einstein (1905)</div>
+                    <p>L'énergie du photon incident est utilisée pour :</p>
+                    <ol style="margin-left: 1.5rem;">
+                        <li>Extraire l'électron du métal : <strong>travail d'extraction</strong> \( W_0 \) (en J ou eV).</li>
+                        <li>Communiquer de l'énergie cinétique maximale \( E_{c,\text{max}} \) à l'électron.</li>
+                    </ol>
+                    <div class="formula">
+                        \[
+                        h\nu = W_0 + E_{c,\text{max}}
+                        \]
+                    </div>
+                    <p>Avec \(E_{c,\text{max}} = \frac{1}{2} m_e v_{\text{max}}^2\).</p>
+                    <p><strong>Fréquence seuil :</strong> pour \(E_{c,\text{max}} = 0\), on a \( h\nu_0 = W_0 \) soit \( \nu_0 = \frac{W_0}{h} \).</p>
+                </div>
+
+                <div class="concept-card">
+                    <div class="concept-title">⚡ 5. Potentiel d'arrêt</div>
+                    <p>Pour mesurer \(E_{c,\text{max}}\), on oppose une tension \(U_0\) (potentiel d'arrêt) qui stoppe les photoélectrons les plus rapides.</p>
+                    <div class="formula">
+                        \[
+                        e \cdot U_0 = E_{c,\text{max}} = h\nu - W_0
+                        \]
+                    </div>
+                    <p>\(e = 1,6 \times 10^{-19} \, \text{C}\) (charge élémentaire). \(U_0\) en volts, \(E_c\) en joules.</p>
+                    <div class="important-note">
+                        📌 <strong>À retenir :</strong> La pente de la droite \(U_0 = f(\nu)\) donne \(h/e\), permettant de déterminer expérimentalement la constante de Planck.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Méthodologie -->
+            <div class="section">
+                <div class="section-title">
+                    🧠 Méthodologie pour les exercices
+                </div>
+                <div class="method-step">
+                    <div class="step-number">1</div>
+                    <div><strong>Identifier les données</strong> : longueur d'onde \(\lambda\) ou fréquence \(\nu\), travail d'extraction \(W_0\) (souvent en eV, convertir en J : \(1 \, \text{eV} = 1,6 \times 10^{-19} \, \text{J}\)).</div>
+                </div>
+                <div class="method-step">
+                    <div class="step-number">2</div>
+                    <div><strong>Calculer l'énergie du photon</strong> : \(E = h\nu = \frac{hc}{\lambda}\).</div>
+                </div>
+                <div class="method-step">
+                    <div class="step-number">3</div>
+                    <div><strong>Appliquer l'équation d'Einstein</strong> : \(E_{c,\text{max}} = h\nu - W_0\).</div>
+                </div>
+                <div class="method-step">
+                    <div class="step-number">4</div>
+                    <div><strong>Potentiel d'arrêt</strong> : \(U_0 = \frac{E_{c,\text{max}}}{e}\).</div>
+                </div>
+                <div class="method-step">
+                    <div class="step-number">5</div>
+                    <div><strong>Fréquence seuil</strong> : \(\nu_0 = \frac{W_0}{h}\) ou \(\lambda_0 = \frac{hc}{W_0}\).</div>
+                </div>
+            </div>
+
+            <!-- Exemple type Bac -->
+            <div class="section">
+                <div class="section-title">
+                    ✏️ Exercice type (Bac)
+                </div>
+                <div class="example-box">
+                    <div class="example-title">📌 Énoncé simplifié :</div>
+                    <p>Une cellule photoélectrique est éclairée par une radiation de longueur d'onde \(\lambda = 400 \, \text{nm}\). Le travail d'extraction du métal est \(W_0 = 2,0 \, \text{eV}\).</p>
+                    <ol>
+                        <li>Calculer l'énergie du photon incident en joules et en eV.</li>
+                        <li>Déterminer l'énergie cinétique maximale des photoélectrons (en eV et J).</li>
+                        <li>Calculer le potentiel d'arrêt \(U_0\).</li>
+                        <li>Trouver la longueur d'onde seuil \(\lambda_0\).</li>
+                    </ol>
+                    <div class="example-title">✅ Correction :</div>
+                    <p><strong>1.</strong> \(E = \frac{hc}{\lambda} = \frac{6,63\cdot10^{-34} \times 3\cdot10^{8}}{400\cdot10^{-9}} = 4,97 \times 10^{-19} \, \text{J}\). <br>
+                    En eV : \( \frac{4,97\cdot10^{-19}}{1,6\cdot10^{-19}} \approx 3,11 \, \text{eV}\).</p>
+                    <p><strong>2.</strong> \(E_{c,\text{max}} = E - W_0 = 3,11 - 2,0 = 1,11 \, \text{eV}\) soit \(1,11 \times 1,6\cdot10^{-19} = 1,78 \times 10^{-19} \, \text{J}\).</p>
+                    <p><strong>3.</strong> \(U_0 = \frac{E_{c,\text{max}}}{e} = \frac{1,11 \, \text{eV}}{e} = 1,11 \, \text{V}\) (car \(1 \, \text{eV} = e \times 1 \, \text{V}\)).</p>
+                    <p><strong>4.</strong> \(\lambda_0 = \frac{hc}{W_0} = \frac{6,63\cdot10^{-34} \times 3\cdot10^{8}}{2,0 \times 1,6\cdot10^{-19}} = 6,22 \times 10^{-7} \, \text{m} = 622 \, \text{nm}\).</p>
+                </div>
+            </div>
+
+            <!-- Synthèse visuelle et astuces -->
+            <div class="section">
+                <div class="section-title">
+                    📝 Synthèse & Astuces
+                </div>
+                <div class="important-note">
+                    ⚠️ <strong>Erreurs fréquentes :</strong>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.2rem;">
+                        <li>Confondre intensité lumineuse et fréquence : l'intensité augmente le nombre de photons (donc le courant photoélectrique) mais pas l'énergie des électrons.</li>
+                        <li>Oublier de convertir les eV en joules pour utiliser \(h\) en J·s.</li>
+                        <li>Ne pas justifier l'absence d'effet si \(\lambda > \lambda_0\).</li>
+                    </ul>
+                </div>
+                <div class="concept-card">
+                    <div class="concept-title">📌 À mémoriser absolument</div>
+                    <ul>
+                        <li>\(E_{\text{photon}} = h\nu\)</li>
+                        <li>\(h\nu = W_0 + \frac{1}{2} m v_{\text{max}}^2\)</li>
+                        <li>Condition d'effet photoélectrique : \(\nu \ge \nu_0\) ou \(\lambda \le \lambda_0\).</li>
+                        <li>\(U_0 = \frac{h\nu - W_0}{e}\)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Applications / Contexte Cameroun -->
+            <div class="section">
+                <div class="section-title">
+                    🌍 Applications dans la vie courante
+                </div>
+                <p>L'effet photoélectrique est utilisé dans :</p>
+                <ul>
+                    <li><strong>Capteurs photovoltaïques</strong> (panneaux solaires) : conversion directe de la lumière en électricité.</li>
+                    <li><strong>Détecteurs de mouvement</strong> (cellules photoélectriques).</li>
+                    <li><strong>Photomultiplicateurs</strong> pour la détection de très faibles intensités lumineuses.</li>
+                    <li><strong>Révélateur de dualité</strong> : a valu le prix Nobel à Einstein en 1921.</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            Fiche conforme au programme de Physique – Terminale C & D (Cameroun) | Année 2025-2026 | Enseignant : M. [Nom] <br>
+            Révision Bac – Leçon 40 : Effet photoélectrique – Revoir aussi les interférences (Leçon 37) et la diffraction (Leçon 38) pour la partie ondulatoire.
+        </footer>
+    </div>
+</body>
+</html>

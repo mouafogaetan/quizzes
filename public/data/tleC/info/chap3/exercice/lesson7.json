@@ -1,0 +1,130 @@
+[
+  {
+    "intitule": "Analyse de la structure d'un programme C",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Soit le programme en langage C suivant :</p><pre><code>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;<br><br>int main(void)<br>{<br>    int age;<br>    printf(\"Entrez votre âge : \");<br>    scanf(\"%d\", &age);<br>    printf(\"Vous avez %d ans.\\n\", age);<br>    return 0;<br>}</code></pre><p>Analyser ce programme en répondant aux questions ci-dessous.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier les différentes parties du programme (bibliothèques, déclarations, corps de la fonction, retour).",
+        "niveau": "easy",
+        "reponse": "Bibliothèques : #include <stdio.h> et #include <stdlib.h> ; Déclaration : int age; ; Corps de la fonction : tout ce qui se trouve entre { et } après int main(void) ; Retour : return 0;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquer le rôle de la ligne <code>#include &lt;stdio.h&gt;</code>.",
+        "niveau": "easy",
+        "reponse": "Elle permet d'inclure la bibliothèque standard d'entrée/sortie (Standard Input Output) qui contient les prototypes des fonctions printf() et scanf().",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Décrire ce que réalise la fonction <code>printf</code> dans ce programme.",
+        "niveau": "easy",
+        "reponse": "La première printf affiche le message \"Entrez votre âge : \". La deuxième printf affiche le texte \"Vous avez X ans.\" où X est la valeur saisie par l'utilisateur. \\n permet un retour à la ligne.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Justifier la présence de <code>return 0;</code> à la fin du programme.",
+        "niveau": "medium",
+        "reponse": "return 0; indique au système d'exploitation que le programme s'est terminé avec succès. C'est une convention. Une valeur différente de 0 signale généralement une erreur.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Correction des erreurs dans un programme C",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un élève a écrit le programme suivant qui ne compile pas. Identifier et corriger les erreurs.</p><pre><code>#include &lt;stdio&gt;<br><br>void main()<br>{<br>    string nom;<br>    printf(\"Quel est ton nom ? \");<br>    scanf(\"%s\", nom);<br>    print(\"Bonjour %s\", nom);<br>    return 0;<br>}</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Lister toutes les erreurs présentes dans ce code en précisant leur nature (syntaxique, sémantique ou logique).",
+        "niveau": "medium",
+        "reponse": "1. #include <stdio> : devrait être #include <stdio.h> (erreur syntaxique). 2. void main() : selon la norme, on utilise int main(void) (erreur de convention). 3. string nom : le type string n'existe pas en C standard ; il faut utiliser char nom[100] (erreur sémantique). 4. print(...) : la fonction d'affichage est printf, pas print (erreur syntaxique). 5. return 0 dans une fonction void : incohérent (erreur sémantique).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Réécrire le programme corrigé en respectant la structure standard d'un programme C.",
+        "niveau": "medium",
+        "reponse": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void)\n{\n    char nom[100];\n    printf(\"Quel est ton nom ? \");\n    scanf(\"%s\", nom);\n    printf(\"Bonjour %s\\n\", nom);\n    return 0;\n}",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Écrire un programme de calcul de moyenne",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans le cadre du suivi des résultats scolaires, on souhaite écrire un programme en C qui :</p><ul><li>Demande à l'utilisateur trois notes (entiers) obtenues par un élève ;</li><li>Calcule la moyenne de ces trois notes ;</li><li>Affiche la moyenne avec un message approprié.</li></ul><p>La moyenne doit être un nombre réel (décimal).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire l'algorithme correspondant à ce problème en pseudocode.",
+        "niveau": "easy",
+        "reponse": "Algorithme CalculMoyenne\nVariables : note1, note2, note3 : Entiers ; moyenne : Réel\nDébut\n    Ecrire(\"Entrer la première note : \")\n    Lire(note1)\n    Ecrire(\"Entrer la deuxième note : \")\n    Lire(note2)\n    Ecrire(\"Entrer la troisième note : \")\n    Lire(note3)\n    moyenne ← (note1 + note2 + note3) / 3.0\n    Ecrire(\"La moyenne est : \", moyenne)\nFin",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Traduire cet algorithme en un programme C complet et correctement structuré.",
+        "niveau": "hard",
+        "reponse": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void)\n{\n    int note1, note2, note3;\n    float moyenne;\n\n    printf(\"Entrer la première note : \");\n    scanf(\"%d\", &note1);\n    printf(\"Entrer la deuxième note : \");\n    scanf(\"%d\", &note2);\n    printf(\"Entrer la troisième note : \");\n    scanf(\"%d\", &note3);\n\n    moyenne = (note1 + note2 + note3) / 3.0;\n\n    printf(\"La moyenne est : %.2f\\n\", moyenne);\n\n    return 0;\n}",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Justifier l'utilisation de <code>3.0</code> au lieu de <code>3</code> dans le calcul de la moyenne.",
+        "niveau": "medium",
+        "reponse": "Si on utilise 3 (entier), la division sera entière (même si la variable moyenne est float). L'expression (note1+note2+note3)/3 donne un entier, puis converti en float. Avec 3.0, le compilateur effectue une division réelle (flottante) et conserve les décimales.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Système de validation d'accès",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un cybercafé souhaite automatiser l'accès à ses ordinateurs. Le gérant vous demande d'écrire un programme en C qui :</p><ul><li>Demande un code d'accès (nombre entier) à l'utilisateur ;</li><li>Si le code est <strong>1234</strong>, afficher \"Accès autorisé. Bonne navigation !\" ;</li><li>Si le code est incorrect, afficher \"Code erroné. Accès refusé.\" ;</li><li>Le programme ne doit pas planter si l'utilisateur saisit autre chose qu'un nombre (on suppose une saisie correcte pour cet exercice).</li></ul>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Dessiner l'organigramme (schéma bloc) de l'algorithme de ce programme.",
+        "niveau": "hard",
+        "reponse": "L'organigramme doit comporter : un début, une saisie du code, un test conditionnel (si code == 1234) avec deux branches : affichage du message de succès ou affichage du message d'erreur, puis une fin commune.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire le programme C complet correspondant à ce système.",
+        "niveau": "hard",
+        "reponse": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void)\n{\n    int code;\n\n    printf(\"Entrez le code d'acces : \");\n    scanf(\"%d\", &code);\n\n    if (code == 1234)\n    {\n        printf(\"Acces autorise. Bonne navigation !\\n\");\n    }\n    else\n    {\n        printf(\"Code errone. Acces refuse.\\n\");\n    }\n\n    return 0;\n}",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Modifier le programme pour qu'il autorise <strong>trois tentatives maximum</strong>. Si le code est toujours incorrect après trois essais, afficher \"Compte bloqué. Contactez l'administrateur.\"",
+        "niveau": "very hard",
+        "reponse": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void)\n{\n    int code, tentatives = 0;\n    int acces = 0;  // drapeau : 0 = refusé, 1 = autorisé\n\n    while (tentatives < 3 && acces == 0)\n    {\n        printf(\"Entrez le code d'acces (tentative %d/3) : \", tentatives+1);\n        scanf(\"%d\", &code);\n\n        if (code == 1234)\n        {\n            acces = 1;\n        }\n        else\n        {\n            tentatives++;\n            if (tentatives < 3)\n                printf(\"Code errone. Reessayez.\\n\");\n        }\n    }\n\n    if (acces == 1)\n        printf(\"Acces autorise. Bonne navigation !\\n\");\n    else\n        printf(\"Compte bloque. Contactez l'administrateur.\\n\");\n\n    return 0;\n}",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

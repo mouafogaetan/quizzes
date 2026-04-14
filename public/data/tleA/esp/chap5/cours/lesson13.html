@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Lección 13 : Problemas del mundo laboral</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax (utile si besoin de formules, mais pas central pour cette leçon) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour typographie moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petite adaptation locale si besoin, mais on reprend majoritairement le style fourni */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+        .vocab-box {
+            background-color: #eef2ff;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0 0.5rem;
+        }
+        .vocab-word {
+            font-weight: 700;
+            color: #1e40af;
+        }
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+        img {
+            max-width: 100%;
+            border-radius: 0.75rem;
+            margin: 0.75rem 0;
+            border: 1px solid #e2e8f0;
+        }
+        .img-caption {
+            font-size: 0.8rem;
+            text-align: center;
+            color: #5b6e8c;
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">📘 Lección 13 : Los problemas del mundo laboral en el siglo XXI</h1>
+        <p class="lesson-subtitle">Español – Terminale A4 / ABI (Camerún) · Módulo 4: Economía y mundo laboral</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section concepts clés -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Conceptos clave / Elementos a retener</h2>
+
+            <!-- Carte 1 : Desempleo y precariedad -->
+            <div class="card concept-card">
+                <h3 class="card-title">1. Desempleo y precariedad laboral</h3>
+                <p class="card-description">
+                    El <strong>desempleo</strong> (chômage) es una de las mayores lacras del siglo XXI, especialmente entre los jóvenes. 
+                    La <strong>precariedad laboral</strong> se refiere a trabajos inestables, mal pagados y sin protección social suficiente.
+                </p>
+                <ul class="concept-list">
+                    <li><span class="bold">Desempleo estructural</span> : causado por cambios tecnológicos o económicos profundos.</li>
+                    <li><span class="bold">Desempleo coyuntural</span> : vinculado a crisis económicas pasajeras (COVID-19, crisis financieras).</li>
+                    <li><span class="bold">Trabajo precario</span> : contratos temporales, tiempo parcial no deseado, salarios bajos, ausencia de cobertura médica.</li>
+                    <li><span class="bold">Consecuencias</span> : exclusión social, problemas de salud mental (estrés, ansiedad), emigración juvenil.</li>
+                </ul>
+                <!-- Image suggestive sur le chômage des jeunes (générée par IA) -->
+                <img src="" alt="Illustration représentant des jeunes diplômés cherchant un emploi sans succès, affichage de estadísticas de paro juvenil en países hispanohablantes" style="margin-top: 0.75rem;">
+                <div class="img-caption">📸 Jóvenes en busca de empleo – desafío global del siglo XXI</div>
+            </div>
+
+            <!-- Carte 2 : Nuevas formas de trabajo -->
+            <div class="card concept-card">
+                <h3 class="card-title">2. Nuevas formas de trabajo: economía digital y « gig economy »</h3>
+                <p class="card-description">
+                    La revolución tecnológica ha transformado el mercado laboral. Aparecen modelos como el teletrabajo, las plataformas digitales (Uber, Rappi, Amazon Mechanical Turk) y los <strong>« nómadas digitales »</strong>.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Teletrabajo</strong> : trabajar desde casa gracias a Internet. Ventajas: flexibilidad, ahorro de tiempo. Desventajas: aislamiento, dificultad para desconectar.</li>
+                    <li><strong>Economía de plataformas (gig economy)</strong> : trabajos por encargo, sin contrato fijo, a menudo sin derechos laborales básicos (vacaciones, baja por enfermedad).</li>
+                    <li><strong>Autoempleo / Freelance</strong> : cada vez más común entre los jóvenes, pero con ingresos irregulares.</li>
+                </ul>
+                <div class="vocab-box">
+                    💡 <span class="vocab-word">Vocabulario útil</span> : <em>el desempleo juvenil</em> (chômage des jeunes), <em>la conciliación laboral y familiar</em> (conciliation travail-famille), <em>la formación continua</em> (formation continue).
+                </div>
+            </div>
+
+            <!-- Carte 3 : Equilibrio vida-trabajo y salud mental -->
+            <div class="card concept-card">
+                <h3 class="card-title">3. Equilibrio vida personal / trabajo y salud mental</h3>
+                <p class="card-description">
+                    El siglo XXI ha puesto en primer plano la importancia del bienestar en el trabajo. El <strong>burnout</strong> (agotamiento extremo) y el estrés laboral son problemas crecientes.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Sobrecarga laboral</strong> : jornadas excesivas, falta de descanso, presión por resultados.</li>
+                    <li><strong>Conciliación</strong> : políticas empresariales que permiten cuidar de los hijos o familiares sin perder el empleo.</li>
+                    <li><strong>Salud mental</strong> : la ansiedad y la depresión vinculadas al trabajo afectan a millones de personas. Empresas empiezan a ofrecer apoyo psicológico.</li>
+                </ul>
+                <!-- image sur el equilibrio -->
+                <img src="" alt="Infografía sobre equilibrio entre la vida laboral y personal: reloj, familia, trabajo remoto, salud mental" style="margin-top: 0.5rem;">
+                <div class="img-caption">⚖️ Claves para un equilibrio saludable</div>
+            </div>
+        </section>
+
+        <!-- Section ejemplos de comprensión -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Ejemplos de comprensión y aplicación</h2>
+
+            <!-- Exemple 1 : texto corto + análisis -->
+            <div class="card exemple-card">
+                <h3 class="card-title">Ejemplo 1 : Análisis de un testimonio</h3>
+                <div class="exemple-context">
+                    « Trabajo como repartidor para una aplicación. No tengo contrato fijo, me pagan por pedido. A veces trabajo 12 horas al día, pero si me enfermo, no cobro nada. Mis amigos me dicen que esto es trabajo precario, pero necesito el dinero. »
+                </div>
+                <p class="exemple-correction">
+                    <strong>Pregunta tipo Bac :</strong> ¿Qué problemas del mundo laboral del siglo XXI se reflejan en este testimonio? <br>
+                    <strong>Respuesta modelo:</strong> Este testimonio ilustra la <strong>precariedad laboral</strong> (falta de contrato estable, ausencia de protección por enfermedad) y la <strong>economía de plataformas</strong> (trabajo por pedido sin derechos sociales). También muestra la <strong>jornada excesiva</strong> (12 horas) que perjudica la salud y el equilibrio personal.
+                </p>
+                <div class="exemple-astuce">
+                    💬 <strong>Consejo para el examen :</strong> Para argumentar, usa conectores como <em>por un lado / por otro lado</em>, <em>además</em>, <em>en consecuencia</em>. Cita ejemplos concretos del texto.
+                </div>
+            </div>
+
+            <!-- Exemple 2 : expresión escrita semi-guiada -->
+            <div class="card exemple-card">
+                <h3 class="card-title">Ejemplo 2 : Redacción semi-guiada (tema frecuente en el Bac)</h3>
+                <div class="exemple-context">
+                    <strong>Consigna :</strong> « A partir de los elementos siguientes, redacta un texto de 20 líneas aproximadamente sobre las ventajas y desventajas del teletrabajo para los jóvenes cameruneses. Causas: desarrollo de Internet, pandemia; consecuencias: autonomía, aislamiento. »
+                </div>
+                <p class="exemple-correction">
+                    <strong>Estructura sugerida :</strong> <br>
+                    - <strong>Introducción</strong> : presentar el teletrabajo como realidad en auge. <br>
+                    - <strong>Ventajas</strong> : flexibilidad horaria, ahorro en transporte, posibilidad de trabajar para empresas extranjeras. <br>
+                    - <strong>Desventajas</strong> : soledad, dificultad para separar casa y trabajo, riesgo de sobrecarga. <br>
+                    - <strong>Conclusión</strong> : necesidad de formación digital y políticas de apoyo para un teletrabajo saludable.
+                </p>
+                <div class="exemple-astuce">
+                    ✍️ <strong>Astuce rédaction</strong> : Utilise le subjonctif après <em>es necesario que</em> ou <em>es importante que</em> (ej: <em>Es necesario que los empresarios protejan la salud mental de sus empleados</em>).
+                </div>
+            </div>
+
+            <!-- Exemple 3 : débat sur l'avenir du travail -->
+            <div class="card exemple-card">
+                <h3 class="card-title">Ejemplo 3 : Debate – ¿El futuro del trabajo será sin empleo estable?</h3>
+                <div class="exemple-context">
+                    Algunos economistas predicen que la inteligencia artificial y la automatización eliminarán muchos puestos tradicionales. Otros creen que surgirán nuevos empleos más creativos.
+                </div>
+                <p class="exemple-correction">
+                    <strong>Argumentos a favor de la tesis pesimista:</strong> pérdida de empleos manufactureros y administrativos, aumento de la desigualdad. <br>
+                    <strong>Argumentos optimistas:</strong> aparición de trabajos verdes, sector tecnológico, necesidad de reciclaje profesional permanente. <br>
+                    <strong>Conclusión personal (para expresión libre):</strong> Es fundamental invertir en educación y protección social para acompañar estas transiciones.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section : pièges courants / erreurs fréquentes -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Atención : errores comunes y falsos amigos</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">No confundir :</span> <em>paro</em> (chômage) avec <em>parada</em> (arrêt, halte). En el contexto laboral, "estar en paro" = estar desempleado.</li>
+                    <li><span class="bold">Falso amigo :</span> <em>actualmente</em> (en français « actuellement » se dice <strong>actualmente</strong> igual, pero ojo con <em>realmente</em> qui signifie « vraiment »). En los textos sobre trabajo, "actualmente" significa "de nos jours".</li>
+                    <li><span class="bold">Error frecuente en expresión escrita :</span> usar el verbo <em>haber</em> en plural. Ej: <em>Habían muchos desempleados</em> → ❌ ; correcto: <em>Había muchos desempleados</em> o <em>Hubo muchos desempleados</em>.</li>
+                    <li><span class="bold">Olvidar los matices :</span> no confundir <em>trabajo precario</em> con <em>trabajo informal</em> (sin registrar). El precario puede ser legal pero inestable.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section Vocabulario esencial y expresiones útiles -->
+        <section class="concept-section">
+            <h2 class="section-title">📖 Vocabulario esencial para la lección 13</h2>
+            <div class="card concept-card" style="background-color: #f0f9ff;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <div><span class="bold">Español</span></div><div><span class="bold">Français</span></div>
+                    <div>el desempleo / el paro</div><div>le chômage</div>
+                    <div>la precariedad laboral</div><div>la précarité au travail</div>
+                    <div>el contrato indefinido</div><div>le contrat à durée indéterminée (CDI)</div>
+                    <div>el contrato temporal</div><div>le contrat à durée déterminée (CDD)</div>
+                    <div>el teletrabajo</div><div>le télétravail</div>
+                    <div>la conciliación familiar</div><div>la conciliation familiale / vie pro-perso</div>
+                    <div>el síndrome de burnout</div><div>le syndrome d'épuisement professionnel</div>
+                    <div>la economía de plataformas</div><div>l'économie des plateformes</div>
+                    <div>la formación profesional</div><div>la formation professionnelle</div>
+                    <div>el salario mínimo</div><div>le salaire minimum</div>
+                    <div>la jornada laboral</div><div>la journée de travail</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Expresión personal: lo que debes saber para el examen -->
+        <section class="exemple-section">
+            <h2 class="section-title">🎯 Preparación para el Baccalauréat (redacción libre)</h2>
+            <div class="card exemple-card">
+                <h3 class="card-title">Tema frecuente en las pruebas de expresión escrita</h3>
+                <div class="exemple-context">
+                    « ¿Crees que las nuevas tecnologías mejoran o empeoran las condiciones laborales de los jóvenes? Desarrolla tu opinión con argumentos y ejemplos. » (máximo 25 líneas)
+                </div>
+                <p class="exemple-correction">
+                    <strong>Plan sugerido :</strong> <br>
+                    1️⃣ <strong>Introducción</strong> : Presentar el debate (tecnología como aliada o amenaza). <br>
+                    2️⃣ <strong>Argumentos a favor</strong> : flexibilidad, acceso a trabajos remotos, nuevas profesiones (community manager, data analyst). <br>
+                    3️⃣ <strong>Argumentos en contra</strong> : vigilancia digital, presión por disponibilidad 24/7, destrucción de empleos tradicionales. <br>
+                    4️⃣ <strong>Conclusión equilibrada</strong> : Depende del uso que se haga; es necesario un marco legal que proteja a los trabajadores. <br>
+                </p>
+                <div class="exemple-astuce">
+                    📌 <strong>Astuce grammaticale</strong> : Para expresar hipótesis o deseos, usa el condicional (<em>sería interesante que...</em>) y el subjuntivo (<em>Es importante que los gobiernos regulen la economía de plataformas</em>).
+                </div>
+            </div>
+        </section>
+
+        <!-- Petit rappel des enjeux pour le Cameroun : contexte local -->
+        <section class="concept-section">
+            <h2 class="section-title">🌍 Contexto local: Camerún y los problemas laborales</h2>
+            <div class="card concept-card">
+                <p class="card-description">
+                    En Camerún, el sector informal representa más del 80% del empleo. Los jóvenes enfrentan <strong>subempleo</strong> y <strong>precariedad</strong>. 
+                    La falta de oportunidades obliga a muchos a emigrar o aceptar trabajos mal remunerados. Sin embargo, las nuevas tecnologías abren puertas al 
+                    teletrabajo y al emprendimiento digital. La formación en idiomas (español, inglés) y competencias digitales es clave para mejorar la empleabilidad.
+                </p>
+                <img src="" alt="Jóvenes cameruneses en un taller de formación profesional en tecnologías digitales, bandera de Camerún y elementos hispanohablantes">
+                <div class="img-caption">📌 Camerún: la juventud busca soluciones innovadoras frente al desempleo.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Fiche de révision créée par l'enseignant – Español Terminale (Camerún) · Basada en el programa oficial y exámenes del Bac 2023-2025 · 📚 ¡A estudiar con esfuerzo y motivación!</p>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+[
+  {
+    "intitule": "Prérequis et Partitionnement",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Vous souhaitez installer le système d'exploitation Windows 11 sur un nouvel ordinateur. Les spécifications minimales requises sont les suivantes : Processeur 1 GHz ou plus rapide avec 2 cœurs ou plus, 4 Go de RAM, 64 Go de stockage, carte graphique compatible DirectX 12, TPM 2.0.</p>",
+      "images": [
+        "Diagramme simple montrant la structure d'un disque dur partitionné en deux partitions primaires (C: et D:) et une partition étendue contenant deux lecteurs logiques (E: et F:)"
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Définir un système d'exploitation et citer trois types de systèmes d'exploitation couramment utilisés.",
+        "niveau": "easy",
+        "reponse": "Un système d'exploitation (SE) est un ensemble de programmes qui gère les ressources matérielles et logicielles d'un ordinateur et fournit des services aux applications. Trois types couramment utilisés sont : Windows, Linux (comme Ubuntu ou Fedora) et macOS.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Identifier les prérequis matériels mentionnés qui pourraient poser problème si l'ordinateur date de 2015, et justifier votre réponse.",
+        "niveau": "medium",
+        "reponse": "Les prérequis susceptibles de poser problème sur un ordinateur de 2015 sont : la présence d'une puce TPM 2.0 (Trusted Platform Module), qui n'était pas standard à l'époque, et la capacité de stockage de 64 Go (les anciens ordinateurs avaient souvent des disques de 500 Go, ce n'est pas un problème de taille mais de vitesse). Le point critique est surtout le TPM 2.0 et la compatibilité avec DirectX 12 pour la carte graphique.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Expliquer la différence entre une partition primaire et une partition logique en vous aidant de l'image fournie.",
+        "niveau": "medium",
+        "reponse": "Une partition primaire est une section du disque dur qui peut héberger un système d'exploitation et qui est directement reconnue par le BIOS/UEFI. On peut en créer jusqu'à 4 maximum. Une partition logique, en revanche, réside à l'intérieur d'une partition étendue. Elle permet de contourner la limite des 4 partitions primaires et sert principalement au stockage de données. Sur l'image, C: et D: sont des partitions primaires, tandis que E: et F: sont des partitions logiques à l'intérieur d'une partition étendue.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Décrire les étapes générales d'installation d'un système d'exploitation à partir d'une clé USB amorçable.",
+        "niveau": "hard",
+        "reponse": "Les étapes générales sont : 1) Télécharger l'ISO du système d'exploitation. 2) Créer une clé USB amorçable avec un outil comme Rufus. 3) Redémarrer l'ordinateur et accéder au BIOS/UEFI (touche F2, Del, ou F12). 4) Modifier l'ordre de démarrage pour démarrer sur la clé USB. 5) Sauvegarder et quitter le BIOS. 6) Suivre l'assistant d'installation : choisir la langue, accepter les conditions, choisir 'installation personnalisée'. 7) Partitionner le disque dur (créer, formater les partitions). 8) Sélectionner la partition d'installation. 9) Attendre la copie des fichiers et les redémarrages. 10) Effectuer la configuration initiale (compte utilisateur, fuseau horaire, etc.).",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Vérification des prérequis",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un collège reçoit un don de 20 ordinateurs d'occasion. Le responsable informatique doit installer un système d'exploitation Linux léger sur ces machines. Voici la configuration d'un ordinateur : Processeur Intel Core 2 Duo (2 cœurs) à 1,8 GHz, RAM 2 Go, Disque dur 80 Go, pas de carte graphique dédiée.</p>",
+      "images": [
+        "Photo d'une salle informatique avec des ordinateurs plus anciens, montrant des étiquettes de spécifications collées sur les moniteurs."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Calculer l'espace de stockage total disponible après avoir créé trois partitions : une partition système de 20 Go, une partition de données de 40 Go, et une partition de sauvegarde de 10 Go. En déduire l'espace non partitionné restant.",
+        "niveau": "easy",
+        "reponse": "Espace total utilisé : 20 Go + 40 Go + 10 Go = 70 Go. L'espace non partitionné restant est de 80 Go - 70 Go = 10 Go.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Justifier si ces 10 Go restants peuvent être utilisés pour créer une nouvelle partition.",
+            "niveau": "easy",
+            "reponse": "Oui, cet espace non alloué peut être utilisé pour créer une ou plusieurs nouvelles partitions, soit primaires (si moins de 4 existent) soit logiques."
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "texte": "Analyser la configuration de l'ordinateur pour déterminer si elle respecte les prérequis minimaux d'installation d'un système d'exploitation moderne comme Windows 10. Justifier chaque point.",
+        "niveau": "hard",
+        "reponse": "Non, cette configuration ne respecte pas les prérequis de Windows 10. Justification : Processeur (1,8 GHz Core 2 Duo) : acceptable mais lent. RAM (2 Go) : insuffisant, Windows 10 nécessite 4 Go pour 64 bits. Stockage (80 Go) : suffisant mais serré. Carte graphique : pas de problème. Linux est donc un choix judicieux. De plus, le processeur est compatible avec Linux.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Concevoir une stratégie de partitionnement pour ce disque de 80 Go afin d'installer Linux. Vous devez inclure une partition pour le système (/), une partition pour les données personnelles (/home), et une partition pour la mémoire virtuelle (swap). Proposer des tailles pour chacune.",
+        "niveau": "very hard",
+        "reponse": "Stratégie proposée : Partition système (/) : 25 Go - pour le système d'exploitation et les applications. Partition /home : 50 Go - pour les documents, téléchargements et configurations des utilisateurs. Partition swap (mémoire virtuelle) : 5 Go - pour étendre la RAM lorsque le système manque de mémoire. Justification : Le swap de 5 Go est suffisant car la RAM est faible (2 Go) ; cela aidera à éviter les plantages. La partition /home est grande car elle contient les données importantes des élèves.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Diagnostic d'installation",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Lors de l'installation d'un système d'exploitation, un message d'erreur apparaît : \"Impossible d'installer sur le disque sélectionné. Le disque est du style de partition GPT.\" L'ordinateur démarre en mode BIOS legacy (ancien mode).</p>",
+      "images": [
+        "Capture d'écran d'un message d'erreur d'installation Windows indiquant un problème de style de partition disque."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Expliquer la cause de cette erreur en reliant les concepts de partitionnement (MBR vs GPT) et de mode de démarrage (BIOS/Legacy vs UEFI).",
+        "niveau": "hard",
+        "reponse": "La cause est une incompatibilité entre le style de partition du disque (GPT) et le mode de démarrage de l'ordinateur (BIOS legacy). Le BIOS legacy ne peut démarrer que sur des disques utilisant le style de partition MBR (Master Boot Record). Le style GPT (GUID Partition Table) est conçu pour être utilisé avec le mode UEFI (Unified Extensible Firmware Interface). Comme l'ordinateur est configuré en mode legacy, il ne reconnaît pas le disque GPT.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Proposer deux solutions possibles pour résoudre ce problème sans remplacer le disque dur.",
+            "niveau": "hard",
+            "reponse": "Solution 1 : Changer le mode de démarrage dans le BIOS de 'Legacy' à 'UEFI' (si le matériel le supporte). Solution 2 : Supprimer toutes les partitions du disque, convertir le disque de GPT à MBR (en utilisant diskpart ou un outil d'installation), puis recommencer l'installation."
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "texte": "Évaluer les conséquences du choix de la solution 1 (passage en UEFI) sur un ordinateur qui contient déjà un autre système d'exploitation sur un disque MBR.",
+        "niveau": "very hard",
+        "reponse": "Le passage en mode UEFI empêchera probablement le démarrage du système d'exploitation existant installé sur le disque MBR, car le mode UEFI nécessite un disque GPT pour démarrer. L'ordinateur deviendra incapable de démarrer sur l'ancien système. Pour corriger cela, il faudrait soit reconvertir le disque en GPT (ce qui efface les données), soit réinstaller le système d'exploitation en mode UEFI, soit rebasculer en mode legacy. La meilleure pratique est d'être cohérent : tous les systèmes d'exploitation sur un même ordinateur doivent utiliser le même mode (soit tous legacy/MBR, soit tous UEFI/GPT).",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

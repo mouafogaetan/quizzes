@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 2 : Équations aux dimensions</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie professionnelle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(98deg, #0f2b3d 0%, #1b4a6e 100%);
+            color: white;
+            padding: 2rem 2rem 1.8rem 2rem;
+            border-bottom: 6px solid #fbbf24;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #fbbf24;
+            color: #0f2b3d;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        .header .sous-titre {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 500;
+            border-left: 3px solid #fbbf24;
+            padding-left: 1rem;
+            margin-top: 0.25rem;
+        }
+
+        .objectif-bac {
+            background-color: rgba(251, 191, 36, 0.18);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        /* Corps */
+        .content {
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            border-left: 4px solid #e2e8f0;
+            padding-left: 1.2rem;
+            transition: border-color 0.2s;
+        }
+
+        .section:hover {
+            border-left-color: #1b4a6e;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f2b3d;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span {
+            background-color: #eef2ff;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1b4a6e;
+        }
+
+        .grid-cartes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+            margin-top: 0.8rem;
+        }
+
+        .carte {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eef2ff;
+            transition: all 0.2s;
+        }
+
+        .carte h3 {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1b4a6e;
+            margin-bottom: 0.6rem;
+            border-bottom: 2px dotted #cbd5e1;
+            display: inline-block;
+        }
+
+        .carte p, .carte li {
+            font-size: 0.9rem;
+            color: #334155;
+        }
+
+        .formule {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+            font-family: monospace;
+            font-weight: 500;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .highlight {
+            background-color: #fef9e3;
+            border-left: 5px solid #fbbf24;
+            padding: 1rem;
+            border-radius: 14px;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #f8fafc;
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 0.8rem 0;
+        }
+
+        th, td {
+            padding: 0.7rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #eef2ff;
+            font-weight: 600;
+            color: #0f2b3d;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            background: #f1f5f9;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            color: #475569;
+        }
+
+        @media (max-width: 680px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <div class="header">
+        <div class="badge">📐 PHYSIQUE - TERMINALE C & D</div>
+        <h1>Leçon 2 : Équations aux dimensions</h1>
+        <div class="sous-titre">Vérifier l'homogénéité d'une relation & analyser la cohérence des formules</div>
+        <div class="objectif-bac">🎯 Lien Bac 2025 : Vérification d’homogénéité et analyse dimensionnelle</div>
+    </div>
+
+    <div class="content">
+        <!-- OBJECTIFS PÉDAGOGIQUES -->
+        <div class="section">
+            <div class="section-title">
+                📌 Objectifs de la leçon <span>Savoir-faire exigibles</span>
+            </div>
+            <div class="grid-cartes">
+                <div class="carte">
+                    <h3>🔬 1. Maîtriser le SI</h3>
+                    <p>Utiliser les unités fondamentales du Système International (kg, m, s, A, K).</p>
+                </div>
+                <div class="carte">
+                    <h3>📏 2. Dimension d'une grandeur</h3>
+                    <p>Déterminer la dimension d’une grandeur physique quelconque à partir de sa définition.</p>
+                </div>
+                <div class="carte">
+                    <h3>⚖️ 3. Homogénéité</h3>
+                    <p>Vérifier si une relation physique est homogène (même dimension des deux membres).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- NOTIONS CLÉS -->
+        <div class="section">
+            <div class="section-title">
+                🧠 Notions fondamentales <span>À retenir absolument</span>
+            </div>
+            <div class="highlight">
+                💡 <strong>Principe essentiel :</strong> Une équation physique correcte doit être <strong>homogène</strong> : les deux membres ont la même dimension. Cela permet de détecter des erreurs et de retrouver des formules.
+            </div>
+            <div class="grid-cartes">
+                <div class="carte">
+                    <h3>📐 Dimensions fondamentales</h3>
+                    <ul style="margin-left: 1rem; margin-top: 0.3rem;">
+                        <li><strong>M</strong> : Masse (kg)</li>
+                        <li><strong>L</strong> : Longueur (m)</li>
+                        <li><strong>T</strong> : Temps (s)</li>
+                        <li><strong>I</strong> : Intensité électrique (A)</li>
+                        <li><strong>θ</strong> : Température (K)</li>
+                    </ul>
+                </div>
+                <div class="carte">
+                    <h3>✍️ Écriture d’une dimension</h3>
+                    <p>La dimension d’une grandeur s’écrit entre crochets : [Grandeur].<br>
+                    Exemple : $[F] = M \cdot L \cdot T^{-2}$ (force).</p>
+                </div>
+                <div class="carte">
+                    <h3>🔁 Homogénéité</h3>
+                    <p>Une relation $A = B + C$ est homogène si $[A] = [B] = [C]$.<br>
+                    Une relation $A = B \times C$ est homogène si $[A] = [B] \times [C]$.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABLEAU DES DIMENSIONS USUELLES -->
+        <div class="section">
+            <div class="section-title">
+                📊 Dimensions des grandeurs courantes <span>À connaître par cœur</span>
+            </div>
+            <table>
+                <thead>
+                    <tr><th>Grandeur</th><th>Symbole</th><th>Dimension</th><th>Unité SI</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Longueur</td><td>$L$</td><td>$L$</td><td>mètre (m)</td></tr>
+                    <tr><td>Masse</td><td>$m$</td><td>$M$</td><td>kilogramme (kg)</td></tr>
+                    <tr><td>Temps</td><td>$t$</td><td>$T$</td><td>seconde (s)</td></tr>
+                    <tr><td>Vitesse</td><td>$v$</td><td>$L \cdot T^{-1}$</td><td>m/s</td></tr>
+                    <tr><td>Accélération</td><td>$a$</td><td>$L \cdot T^{-2}$</td><td>m/s²</td></tr>
+                    <tr><td>Force</td><td>$F$</td><td>$M \cdot L \cdot T^{-2}$</td><td>Newton (N)</td></tr>
+                    <tr><td>Énergie / Travail</td><td>$E$, $W$</td><td>$M \cdot L^{2} \cdot T^{-2}$</td><td>Joule (J)</td></tr>
+                    <tr><td>Puissance</td><td>$P$</td><td>$M \cdot L^{2} \cdot T^{-3}$</td><td>Watt (W)</td></tr>
+                    <tr><td>Charge électrique</td><td>$q$</td><td>$I \cdot T$</td><td>Coulomb (C)</td></tr>
+                    <tr><td>Potentiel / tension</td><td>$U$, $V$</td><td>$M \cdot L^{2} \cdot T^{-3} \cdot I^{-1}$</td><td>Volt (V)</td></tr>
+                    <tr><td>Capacité</td><td>$C$</td><td>$M^{-1} \cdot L^{-2} \cdot T^{4} \cdot I^{2}$</td><td>Farad (F)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- MÉTHODES & EXEMPLES BAC -->
+        <div class="section">
+            <div class="section-title">
+                🛠️ Méthode : Vérifier l’homogénéité <span>Démarche type Bac</span>
+            </div>
+            <div class="carte" style="background:#ffffff; margin-bottom: 1rem;">
+                <h3>✅ Étapes à suivre</h3>
+                <ol style="margin-left: 1.2rem; margin-top: 0.5rem;">
+                    <li>Identifier chaque grandeur physique de la relation.</li>
+                    <li>Écrire la dimension de chaque grandeur (en utilisant M, L, T, I, θ).</li>
+                    <li>Appliquer les règles d’algèbre des dimensions (produit = somme des exposants, division = soustraction).</li>
+                    <li>Comparer la dimension du membre de gauche et du membre de droite.</li>
+                    <li>Conclure : homogène (vérifiée) ou non homogène (erreur certaine).</li>
+                </ol>
+            </div>
+
+            <div class="formule">
+                📌 <strong>Exemple type Bac 2025 :</strong> Vérifier que la période d’un pendule simple $T = 2\pi \sqrt{\frac{L}{g}}$ est homogène.
+            </div>
+            <div style="background: #eef2ff; border-radius: 16px; padding: 1rem;">
+                <p><strong>Résolution :</strong><br>
+                - $[T] = T$ (temps)<br>
+                - $[L] = L$ (longueur)<br>
+                - $[g] = L \cdot T^{-2}$ (accélération)<br>
+                - $[\frac{L}{g}] = \frac{L}{L T^{-2}} = T^{2}$<br>
+                - $\left[ \sqrt{\frac{L}{g}} \right] = (T^{2})^{1/2} = T$<br>
+                - La constante $2\pi$ est sans dimension. Donc $[T] = T$ → la formule est homogène ✔️.
+                </p>
+            </div>
+        </div>
+
+        <!-- EXERCICE RAPIDE & ASTUCES -->
+        <div class="section">
+            <div class="section-title">
+                ✏️ Application directe <span>Entraînement Bac</span>
+            </div>
+            <div class="grid-cartes">
+                <div class="carte">
+                    <h3>🔍 Vérification d’homogénéité</h3>
+                    <p>Soit la relation : $v^2 = v_0^2 + 2 a x$ (mouvement uniformément accéléré).<br>
+                    ➜ Montrer qu’elle est homogène.<br>
+                    <strong>Indice :</strong> $[v^2] = (L T^{-1})^2 = L^2 T^{-2}$ ; $[a x] = (L T^{-2}) \times L = L^2 T^{-2}$.</p>
+                </div>
+                <div class="carte">
+                    <h3>💡 Astuce examen</h3>
+                    <p>Une relation non homogène est <strong>fausse</strong>. Utilisez l’analyse dimensionnelle pour retrouver une expression inconnue (ex: période d’un ressort $T \propto \sqrt{m/k}$).</p>
+                </div>
+            </div>
+            <div class="highlight" style="margin-top: 0.5rem;">
+                ⚠️ <strong>Erreur fréquente :</strong> Oublier que les angles, les constantes pures ($\pi$, $e$) et les fonctions trigonométriques sont sans dimension.
+            </div>
+        </div>
+
+        <!-- SYNTHÈSE BAC & SAVOIR ESSENTIEL -->
+        <div class="section">
+            <div class="section-title">
+                🎓 Synthèse Bac <span>Ce qu’il faut maîtriser le jour J</span>
+            </div>
+            <div class="carte" style="background: #fefce8; border-left: 6px solid #eab308;">
+                <ul style="margin-left: 1rem;">
+                    <li>Savoir déterminer la dimension d’une grandeur à partir de sa définition (force, travail, pression, champ électrique…).</li>
+                    <li>Vérifier systématiquement l’homogénéité des équations (PFD, énergie cinétique, lois électriques).</li>
+                    <li>Utiliser l’analyse dimensionnelle pour <strong>prévoir</strong> l’expression d’une grandeur (ex: vitesse limite, constante de temps).</li>
+                    <li>Lire un énoncé de Bac et repérer les questions du type : "La relation est-elle homogène ? Justifier."</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- RAPPEL PROGRAMME OFFICIEL CAMEROUN -->
+        <div class="footer-note">
+            📚 Programme officiel Terminale C & D – Module 1 : Mesures et incertitudes <br>
+            ✅ Compétences exigibles : Déterminer la dimension d’une grandeur, vérifier l’homogénéité d’une relation, utiliser le système international.<br>
+            🧪 Lien avec les sujets du Baccalauréat 2023-2025 : vérification dimensionnelle systématique dans les parties "Application des savoirs".
+        </div>
+    </div>
+</div>
+</body>
+</html>

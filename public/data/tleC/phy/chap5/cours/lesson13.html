@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 13 : Paramètres cinématiques du mouvement</title>
+    <style>
+        /* style.css - Intégré pour un affichage autonome */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+            color: #1e2a3e;
+        }
+
+        /* Conteneur principal type fiche A4 */
+        .fiche-revision {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* En-tête avec bande couleur */
+        .header {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1a4a6f 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: #ffb347;
+            color: #1e2a3e;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .header .sous-titre {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 500;
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .header .sous-titre span {
+            background: rgba(255,255,255,0.15);
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 2rem 2rem 2.5rem;
+        }
+
+        /* Grille pour les notions clés / infos */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: #f9fbfd;
+            border-left: 5px solid #1a4a6f;
+            padding: 1.2rem 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            transition: 0.1s;
+        }
+
+        .card h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #0f3b4f;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3 i {
+            font-weight: 400;
+            font-size: 1.3rem;
+        }
+
+        .definition {
+            background: #eef4fc;
+            padding: 1rem 1.2rem;
+            border-radius: 18px;
+            margin: 1rem 0;
+            border: 1px solid #cbdde9;
+        }
+
+        .formule {
+            background: #eaf5e8;
+            padding: 0.8rem 1.2rem;
+            border-radius: 16px;
+            font-family: 'Courier New', 'SF Mono', monospace;
+            font-weight: 500;
+            border-left: 4px solid #2b7a3e;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .formule p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: #1d4d1d;
+        }
+
+        .exemple {
+            background: #fff7e5;
+            border-left: 4px solid #e6a017;
+            padding: 0.8rem 1.2rem;
+            border-radius: 16px;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            border: 1px solid #cddfe7;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #e2edf2;
+            font-weight: 600;
+            color: #153e51;
+        }
+
+        .highlight {
+            background: #fff0db;
+            font-weight: 500;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            border-top: 2px dashed #bdd3e0;
+            padding-top: 1.2rem;
+            font-size: 0.85rem;
+            text-align: center;
+            color: #4f6f8a;
+        }
+
+        @media (max-width: 700px) {
+            .content {
+                padding: 1.2rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="fiche-revision">
+    <div class="header">
+        <div class="badge">📌 Leçon 13 – Terminale C & D (Cameroun)</div>
+        <h1>Paramètres cinématiques du mouvement</h1>
+        <div class="sous-titre">
+            <span>⚡ Vecteurs position, vitesse, accélération</span>
+            <span>📐 Mouvement rectiligne / curviligne</span>
+            <span>🎓 Bac 2023-2025</span>
+        </div>
+    </div>
+    <div class="content">
+        <!-- Objectifs généraux -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+            <h3>🎯 Objectifs de la leçon</h3>
+            <ul style="margin-left: 1.4rem; display: flex; flex-direction: column; gap: 0.3rem;">
+                <li>✓ Définir et calculer les vecteurs position $\vec{r}(t)$, vitesse $\vec{v}(t)$ et accélération $\vec{a}(t)$.</li>
+                <li>✓ Distinguer mouvement rectiligne (accélération tangentielle seule) et mouvement curviligne (accélérations tangentielle + normale).</li>
+                <li>✓ Établir les équations horaires à partir de l’accélération.</li>
+                <li>✓ <strong>Lien Baccalauréat :</strong> exploitation de graphes, détermination de vecteurs vitesse par dérivation ou méthode graphique.</li>
+            </ul>
+        </div>
+
+        <div class="grid-2">
+            <!-- Colonne gauche : définitions essentielles -->
+            <div class="card">
+                <h3>📐 Définitions clés</h3>
+                <div class="definition">
+                    <strong>📍 Vecteur position $\vec{r}(t)$ :</strong> repère la position d’un point M dans l’espace à l’instant t.<br>
+                    $\vec{r}(t) = x(t)\,\vec{i} + y(t)\,\vec{j} + z(t)\,\vec{k}$ (coordonnées cartésiennes).
+                </div>
+                <div class="definition">
+                    <strong>🏃 Vecteur vitesse $\vec{v}(t)$ :</strong> dérivée du vecteur position par rapport au temps.<br>
+                    $$\vec{v}(t) = \frac{d\vec{r}}{dt} = \dot{x}\,\vec{i} + \dot{y}\,\vec{j} + \dot{z}\,\vec{k}$$
+                    La vitesse est <strong>tangente</strong> à la trajectoire.
+                </div>
+                <div class="definition">
+                    <strong>⚡ Vecteur accélération $\vec{a}(t)$ :</strong> dérivée du vecteur vitesse par rapport au temps.<br>
+                    $$\vec{a}(t) = \frac{d\vec{v}}{dt} = \frac{d^2\vec{r}}{dt^2} = \ddot{x}\,\vec{i} + \ddot{y}\,\vec{j} + \ddot{z}\,\vec{k}$$
+                </div>
+                <div class="formule">
+                    <p>🧠 À retenir (mouvement quelconque) :</p>
+                    $$ \vec{v} = \frac{d\vec{r}}{dt} \quad ; \quad \vec{a} = \frac{d\vec{v}}{dt} $$
+                </div>
+            </div>
+
+            <!-- Colonne droite : composantes / cas particuliers -->
+            <div class="card">
+                <h3>📈 Composantes de l’accélération (intrinsèques)</h3>
+                <p>Dans la base de Frenet $(\vec{T}, \vec{N})$ :</p>
+                $$\vec{a} = \frac{dv}{dt}\,\vec{T} \;+\; \frac{v^2}{R}\,\vec{N}$$
+                <ul style="margin-top: 10px;">
+                    <li><strong>Composante tangentielle</strong> $a_t = \dfrac{dv}{dt}$ : responsable de la variation de la <strong>norme</strong> de la vitesse.</li>
+                    <li><strong>Composante normale (centripète)</strong> $a_n = \dfrac{v^2}{R}$ : responsable du <strong>changement de direction</strong> (R = rayon de courbure).</li>
+                </ul>
+                <div class="exemple">
+                    🔄 <strong>Cas particuliers :</strong><br>
+                    • <strong>Mvt rectiligne</strong> : $R \to \infty$ ⇒ $a_n = 0$ ⇒ $\vec{a} = a_t\,\vec{T}$ (accélération uniquement tangentielle).<br>
+                    • <strong>Mvt circulaire uniforme</strong> : $v = \text{cte}$ ⇒ $a_t = 0$ ⇒ $\vec{a} = \frac{v^2}{R}\,\vec{N}$ (accélération centripète).<br>
+                    • <strong>Mvt rectiligne uniforme</strong> : $a_t = 0$ et $a_n = 0$ ⇒ $\vec{a} = \vec{0}$.
+                </div>
+            </div>
+        </div>
+
+        <!-- Tableau : Équations horaires et cinématique -->
+        <div class="card" style="margin-top: 0.5rem;">
+            <h3>📝 Équations horaires & intégration (cas d’un mouvement rectiligne)</h3>
+            <p>Pour un mouvement selon l’axe $(Ox)$ avec accélération constante $a_x = a_0$ :</p>
+            <table>
+                <thead>
+                    <tr><th>Grandeur</th><th>Relation (à partir de l’accélération)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Vitesse</td><td>$v_x(t) = \int a_x(t)\,dt + v_{0x}$</td></tr>
+                    <tr><td>Position</td><td>$x(t) = \int v_x(t)\,dt + x_0$</td></tr>
+                    <tr class="highlight"><td>Cas $a_x = \text{cte}$</td><td>$v_x(t) = a_0 t + v_{0x}$ &nbsp;&nbsp; ; &nbsp;&nbsp; $x(t) = \frac12 a_0 t^2 + v_{0x}t + x_0$</td></tr>
+                </tbody>
+            </table>
+            <div class="formule">
+                <p>📌 Mouvement curviligne : il faut projeter les vecteurs sur les axes (par ex. chute parabolique).<br>
+                La vitesse est obtenue par dérivation de $\vec{r}(t)$, l’accélération par dérivation de $\vec{v}(t)$.</p>
+            </div>
+        </div>
+
+        <!-- Exemple type Bac & lien avec le programme -->
+        <div class="grid-2" style="margin-top: 0.2rem;">
+            <div class="card">
+                <h3>✍️ Exemple type (Bac Cameroun)</h3>
+                <p>Soit un point mobile dont les équations horaires sont :<br>
+                $x(t) = 2t^2 + 3$, $\, y(t) = -5t + 1$ (unités SI).</p>
+                <ul style="margin-top: 8px;">
+                    <li><strong>1.</strong> Déterminer les composantes du vecteur vitesse $\vec{v}(t)$.<br>
+                    $v_x = \frac{dx}{dt}=4t$ ; $v_y = \frac{dy}{dt}=-5$ ⇒ $\vec{v}(t) = 4t\,\vec{i} -5\,\vec{j}$.</li>
+                    <li><strong>2.</strong> Calculer l’accélération $\vec{a}(t)$.<br>
+                    $a_x = \frac{dv_x}{dt}=4$ ; $a_y = 0$ ⇒ $\vec{a} = 4\,\vec{i}$ (mouvement rectiligne selon Ox ? Non, trajectoire parabolique mais accélération constante).</li>
+                    <li><strong>3.</strong> Nature du mouvement : l’accélération est constante, direction fixe, la trajectoire est une parabole → mouvement <strong>uniformément varié</strong>.</li>
+                </ul>
+                <div class="exemple" style="margin-top: 12px;">
+                    💡 <strong>Astuce examen :</strong> pour trouver l’équation de la trajectoire, éliminer $t$ entre $x(t)$ et $y(t)$.
+                </div>
+            </div>
+            <div class="card">
+                <h3>🎯 Compétences exigibles (Bac)</h3>
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li>✅ À partir d’une équation horaire, calculer $\vec{v}$ et $\vec{a}$ par dérivation.</li>
+                    <li>✅ Reconnaître un mouvement rectiligne (vecteur accélération colinéaire à la vitesse).</li>
+                    <li>✅ Distinguer $a_t$ et $a_n$ sur un mouvement curviligne.</li>
+                    <li>✅ Déterminer la distance parcourue grâce à l’intégration de $v(t)$.</li>
+                    <li>✅ Interpréter les graphiques $(t, x)$ et $(t, v)$ : pente = vitesse, pente = accélération.</li>
+                </ul>
+                <div class="definition" style="background:#eaf2f9;">
+                    ⚠️ <strong>Erreurs fréquentes :</strong> confondre vitesse moyenne et vitesse instantanée ; oublier que l’accélération normale existe même si $v$ est constante (cas circulaire).<br>
+                    📖 Référence programme : Lien Bac – Mouvement rectiligne / curviligne.
+                </div>
+            </div>
+        </div>
+
+        <!-- Synthèse visuelle rapide -->
+        <div class="footer-note">
+            🔗 <strong>Synthèse à retenir</strong> : Le vecteur vitesse est toujours tangent à la trajectoire, sa norme est $v = \|\vec{v}\|$. L’accélération mesure le taux de variation du vecteur vitesse (direction ET norme). <br>
+            📌 <em>Fiche conforme au programme officiel de la Terminale C & D – Module 3, Chapitre 5 : Cinématique et Lois de Newton</em>.
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 16 : Dosage Acide Faible / Base Forte</title>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;  /* Fond très clair pour contraster avec les cards */
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24; /* petite touche de couleur vive */
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* Style pour les formules et astuces */
+        .formule {
+            background-color: #f1f5f9;
+            font-family: monospace;
+            font-weight: 600;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.375rem;
+            color: #0f172a;
+            font-size: 0.9rem;
+        }
+
+        .exemple-astuce {
+            margin-top: 0.75rem;
+            padding: 0.75rem;
+            background-color: #fef9c3;
+            border-left: 4px solid #facc15;
+            border-radius: 0.5rem;
+            color: #854d0e;
+            font-size: 0.9rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-color: #fecaca;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .bold {
+            font-weight: 700;
+            color: #dc2626;
+        }
+
+        .image-placeholder {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 0.25rem;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .fiche-footer {
+            background-color: #f8fafc;
+            border-top: 1px solid #e9eef2;
+            padding: 1rem 2rem;
+            font-size: 0.8rem;
+            color: #475569;
+            text-align: center;
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 16 : Dosage d'un acide faible par une base forte</h1>
+            <p class="lesson-subtitle">Chimie · Terminale C & D · Programme 2025-2026 (Bac 2023-2025)</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section de concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Principe du dosage</h3>
+                    <p class="card-description">
+                        On dose une solution d'acide faible (AH) de concentration $C_a$ et de volume $V_a$ par une solution de base forte (HO⁻) de concentration $C_b$. La réaction support du dosage est totale : 
+                        $$AH + HO^- \rightarrow A^- + H_2O$$
+                        À l'équivalence, les réactifs ont été introduits dans les proportions stœchiométriques.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Relation à l'équivalence :</strong> $C_a V_a = C_b V_{bE}$</li>
+                        <li>La constante de réaction $K = 10^{pKa - pKe} \gg 1$ (totale).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Caractéristiques de la courbe pH = f($V_b$)</h3>
+                    <p class="card-description">
+                        La courbe de dosage présente une forme sigmoïde avec un saut de pH à l'équivalence, mais moins marqué que pour un acide fort.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Avant l'équivalence :</strong> Solution contenant le mélange AH / A⁻ (solution tampon). Le pH est donné par : $pH = pKa + \log\left(\frac{[A^-]}{[AH]}\right)$.</li>
+                        <li><strong>Point de demi-équivalence :</strong> Pour $V_b = V_{bE}/2$, alors $[AH] = [A^-]$ d'où $pH = pKa$.</li>
+                        <li><strong>À l'équivalence :</strong> La solution contient la base faible A⁻ (issue de la réaction). Le pH est basique : $pH_E > 7$.</li>
+                        <li><strong>Après l'équivalence :</strong> Excès de base forte HO⁻. Le pH est calculé comme pour une base forte en tenant compte de la dilution.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Détermination graphique du pKa</h3>
+                    <p class="card-description">
+                        Le pKa du couple AH/A⁻ est directement obtenu à partir de la courbe de dosage en relevant le pH au point de demi-équivalence.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Méthode : Tracer la courbe, déterminer $V_{bE}$ (méthode des tangentes), puis lire $pH = pKa$ pour $V_b = V_{bE}/2$.</li>
+                        <li>Le pKa est indépendant des concentrations initiales.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple : Dosage de l'acide éthanoïque (acide acétique) par la soude</h3>
+                    <p class="exemple-context">
+                        On dose un volume $V_a = 20,0\ mL$ d'acide éthanoïque ($CH_3COOH$) de concentration $C_a = 0,10\ mol.L^{-1}$ par une solution de soude $(Na^+ + HO^-)$ de concentration $C_b = 0,10\ mol.L^{-1}$. Le $pKa$ du couple $CH_3COOH / CH_3COO^-$ est 4,8 à 25°C.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>1. Volume à l'équivalence :</strong> $C_a V_a = C_b V_{bE} \Rightarrow V_{bE} = \frac{C_a V_a}{C_b} = \frac{0,10 \times 20,0}{0,10} = 20,0\ mL$.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>2. pH à la demi-équivalence ($V_b = 10,0\ mL$) :</strong> $pH = pKa = 4,8$.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>3. pH à l'équivalence :</strong> La solution contient $CH_3COO^-$ (base faible) de concentration $C' = \frac{C_a V_a}{V_a + V_{bE}} = \frac{0,10 \times 20,0}{40,0} = 0,050\ mol.L^{-1}$.<br>
+                        Pour une base faible : $[HO^-] = \sqrt{\frac{K_e}{K_a} \times C'} = \sqrt{\frac{10^{-14}}{10^{-4,8}} \times 0,050} \approx \sqrt{10^{-9,2} \times 0,050}$.<br>
+                        $pOH = \frac{1}{2}(pK_e - pK_a - \log C') = \frac{1}{2}(14 - 4,8 - \log(0,05)) \approx \frac{1}{2}(9,2 + 1,3) = 5,25$<br>
+                        D'où $pH_E = 14 - 5,25 = 8,75 > 7$.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce : Retenir qu'à l'équivalence d'un acide faible / base forte, le pH est toujours supérieur à 7 car la base conjuguée formée réagit avec l'eau.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Détermination du pKa à partir d'une courbe</h3>
+                    <p class="exemple-context">
+                        On réalise le dosage d'un acide faible AH par une base forte. La courbe pH = f($V_b$) est fournie. On lit $V_{bE} = 12,0\ mL$.
+                    </p>
+                    <div class="image-placeholder">
+                        <img src="" alt="Courbe de dosage pH en fonction du volume de base versé, montrant le point d'équivalence à 12,0 mL et le point de demi-équivalence à 6,0 mL avec pH = pKa." style="max-width:100%; border-radius:0.75rem; border:1px solid #e2e8f0;">
+                    </div>
+                    <div class="image-caption">Figure 1 : Allure typique de la courbe de dosage d'un acide faible par une base forte.</div>
+                    <p class="exemple-correction">
+                        <strong>Point de demi-équivalence :</strong> $V_{1/2} = V_{bE}/2 = 6,0\ mL$. On lit sur la courbe le pH correspondant : $pH = pKa = 4,6$.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 À retenir : La méthode des tangentes permet de trouver précisément $V_{bE}$ même si le saut de pH est moins net que pour acide fort.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section "À ne pas confondre" -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li><span class="bold">Erreur fréquente :</span> Confondre le pH à l'équivalence d'un acide faible avec celui d'un acide fort. Pour un acide faible, $pH_E > 7$ (basique) alors que pour un acide fort $pH_E = 7$.</li>
+                        <li><span class="bold">Attention :</span> Le pKa se lit au point de demi-équivalence, pas au point d'équivalence. La relation $pH = pKa + \log([A^-]/[AH])$ n'est valable qu'en zone tampon (avant équivalence).</li>
+                        <li><span class="bold">Piège classique Bac :</span> Oublier la dilution lors du calcul de la concentration à l'équivalence. Utiliser $C_{A^-} = \frac{C_a V_a}{V_a + V_{bE}}$.</li>
+                        <li><span class="bold">Confusion possible :</span> La constante d'acidité $Ka$ ne varie pas pendant le dosage ; c'est le rapport $[A^-]/[AH]$ qui change.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Lien avec le Bac et exercice type -->
+            <section class="exemple-section">
+                <h2 class="section-title">🎯 Lien Baccalauréat (2023-2025)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Compétences évaluées</h3>
+                    <ul class="concept-list">
+                        <li>Savoir déterminer graphiquement $V_{bE}$ et $pKa$.</li>
+                        <li>Calculer la concentration d'un acide faible par dosage.</li>
+                        <li>Choisir un indicateur coloré adapté (zone de virage incluant $pH_E$).</li>
+                        <li>Interpréter l'influence de la dilution ou de la température sur la courbe.</li>
+                    </ul>
+                    <p class="exemple-correction" style="margin-top: 0.75rem;">
+                        <strong>Exemple type de question Bac :</strong> "On dose 20 mL d'une solution d'acide lactique ($pKa = 3,9$) par de la soude à 0,1 mol/L. Le volume à l'équivalence est 8,2 mL. Calculer la concentration de l'acide lactique. Déterminer le pH à la demi-équivalence. Justifier le choix de la phénolphtaléine comme indicateur."
+                    </p>
+                    <div class="exemple-astuce">
+                        📌 Réponse rapide : $C_a = (C_b V_{bE})/V_a = (0,1 \times 8,2)/20 = 0,041\ mol/L$ ; pH demi-équivalence = $pKa = 3,9$ ; la phénolphtaléine vire entre 8,2 et 10,0, ce qui encadre $pH_E$ (environ 8,5) donc convient.
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision générée pour les élèves de Terminale C & D (Cameroun) · Programme officiel 2025-2026 · <a href="#" style="color:#2563eb; text-decoration:none;">Révisions Bac</a> 📚</p>
+        </footer>
+    </div>
+</body>
+</html>

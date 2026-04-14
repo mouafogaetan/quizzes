@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 26 : Condensateur (Charge et Décharge)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        /* Carte principale */
+        .fiche-revision {
+            max-width: 1100px;
+            width: 100%;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête avec bandeau */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2b4c7c 100%);
+            color: white;
+            padding: 1.8rem 2.5rem;
+            border-bottom: 5px solid #ffb347;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background-color: #ffb347;
+            color: #1e3c72;
+            font-weight: 700;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.5px;
+        }
+
+        .header h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .objectif-bac {
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 0.7rem 1.2rem;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2rem;
+            border-left: 4px solid #2b4c7c;
+            padding-left: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 1.4rem;
+        }
+
+        .card-notion {
+            background: #f9fbfd;
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e2edf7;
+            transition: 0.1s;
+        }
+
+        .card-notion strong {
+            color: #2b4c7c;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .formule-card {
+            background: #eef3fc;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #cde1f0;
+        }
+
+        .formule-card .formule {
+            font-family: monospace;
+            font-size: 1.1rem;
+            background: white;
+            display: inline-block;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            margin-top: 0.5rem;
+            font-weight: 700;
+            color: #c4450c;
+        }
+
+        .courbe {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 0.8rem;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e0e9f0;
+        }
+
+        .courbe img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .simulation {
+            background-color: #eef2fa;
+            border-radius: 20px;
+            padding: 0.8rem 1.5rem;
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .btn-bac {
+            background: #ffb34720;
+            border-left: 4px solid #ffb347;
+            padding: 0.8rem 1.2rem;
+            border-radius: 16px;
+            margin-top: 0.8rem;
+        }
+
+        footer {
+            background: #f8fafc;
+            padding: 1rem 2.5rem;
+            border-top: 1px solid #dce5ec;
+            font-size: 0.75rem;
+            color: #4a627a;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-revision">
+    <div class="header">
+        <div class="badge">📘 Terminale C & D – Module 4 : Électrocinétique</div>
+        <h1>Leçon 26 : Condensateur</h1>
+        <h2>⚡ Symbole, charge et décharge d’un condensateur</h2>
+        <div class="objectif-bac">
+            🎯 Lien Bac 2024 – Charge / Décharge d’un condensateur · Constante de temps τ = RC
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- 1. Définition et symbole -->
+        <div class="section">
+            <div class="section-title">
+                <span>🔷</span> 1. Symbole et constitution
+            </div>
+            <div class="card-notion">
+                <p>Un <strong>condensateur</strong> est un dipôle capable de stocker des charges électriques et de restituer l’énergie emmagasinée.</p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.6rem;">
+                    <li>Il est constitué de <strong>deux armatures conductrices</strong> séparées par un isolant (diélectrique).</li>
+                    <li><strong>Symbole normalisé</strong> : deux traits parallèles (⚫ || ⚫) ou avec polarité pour les condensateurs chimiques.</li>
+                </ul>
+                <div style="margin-top: 12px; background: #eef2fa; border-radius: 14px; padding: 8px; text-align: center; font-family: monospace; font-weight: bold;">
+                    ═══||═══   &nbsp;&nbsp; ou &nbsp;&nbsp;   ┤├
+                </div>
+                <p style="margin-top: 8px;"><strong>Capacité C</strong> : mesure de l’aptitude à stocker des charges. <br>Unité : le Farad (F) – souvent µF, nF, pF.</p>
+            </div>
+        </div>
+
+        <!-- 2. Charge et décharge (circuit RC) -->
+        <div class="section">
+            <div class="section-title">
+                <span>⏱️</span> 2. Charge et décharge d’un condensateur à travers une résistance
+            </div>
+            <div class="grid-2cols">
+                <div class="card-notion">
+                    <strong>🔋 Charge (interrupteur en position 1)</strong>
+                    <p>La tension $u_C(t)$ augmente exponentiellement de 0 à $E$ (tension du générateur).</p>
+                    <p>$$u_C(t) = E \left(1 - e^{-t/\tau}\right)$$</p>
+                    <p>Courant de charge : $i(t) = \dfrac{E}{R} \, e^{-t/\tau}$</p>
+                </div>
+                <div class="card-notion">
+                    <strong>🔌 Décharge (interrupteur bascule en position 2)</strong>
+                    <p>Le condensateur se décharge dans la résistance $R$. La tension $u_C(t)$ décroît exponentiellement de $E$ à 0.</p>
+                    <p>$$u_C(t) = E \, e^{-t/\tau}$$</p>
+                    <p>Courant de décharge : $i(t) = -\dfrac{E}{R} \, e^{-t/\tau}$</p>
+                </div>
+            </div>
+            <div class="courbe">
+                <p style="font-weight: 600; margin-bottom: 8px;">📈 Courbes $u_C(t)$ lors de la charge (rouge) et décharge (bleue)</p>
+                <svg width="100%" height="180" viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" style="background: #fff; border-radius: 12px;">
+                    <!-- Axes -->
+                    <line x1="40" y1="130" x2="470" y2="130" stroke="#333" stroke-width="1.5"/>
+                    <line x1="40" y1="20" x2="40" y2="140" stroke="#333" stroke-width="1.5"/>
+                    <text x="460" y="145" font-size="10">t (s)</text>
+                    <text x="20" y="25" font-size="10">u<sub>C</sub></text>
+                    <!-- Courbe charge rouge -->
+                    <path d="M40,130 L70,128 L100,118 L130,100 L160,80 L190,62 L220,48 L260,35 L310,26 L370,20 L430,18 L460,17" stroke="#d9534f" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <text x="320" y="45" fill="#d9534f" font-size="11">Charge</text>
+                    <!-- Courbe décharge bleue depuis E -->
+                    <path d="M40,20 L70,32 L100,52 L130,76 L160,96 L190,111 L220,120 L260,127 L310,130 L370,130 L430,130 L460,130" stroke="#2c6e9e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <text x="340" y="115" fill="#2c6e9e" font-size="11">Décharge</text>
+                    <!-- ligne asymptote -->
+                    <line x1="40" y1="20" x2="470" y2="20" stroke="#aaa" stroke-dasharray="4" stroke-width="0.8"/>
+                    <text x="475" y="23" font-size="9">E</text>
+                </svg>
+                <p class="simulation">🎯 À $t = \tau$, la tension atteint $63\%$ de sa valeur finale (charge) ou $37\%$ de sa valeur initiale (décharge).</p>
+            </div>
+        </div>
+
+        <!-- 3. Constante de temps -->
+        <div class="section">
+            <div class="section-title">
+                <span>⏲️</span> 3. Constante de temps $\tau = RC$
+            </div>
+            <div class="grid-2cols">
+                <div class="formule-card">
+                    <strong>Expression</strong>
+                    <div class="formule">$$ \tau = R \times C $$</div>
+                    <p>$\tau$ en secondes (s) si $R$ en ohms ($\Omega$) et $C$ en farads (F).</p>
+                </div>
+                <div class="formule-card">
+                    <strong>Interprétation physique</strong>
+                    <p>Durée caractéristique de l'évolution du régime transitoire.</p>
+                    <p>À $t = \tau$ : $u_C = 0,63\,E$ (charge) ou $u_C = 0,37\,E$ (décharge).</p>
+                    <p>Régime permanent atteint après $5\tau$.</p>
+                </div>
+            </div>
+            <div class="btn-bac">
+                💡 <strong>Méthode Bac :</strong> Détermination graphique de $\tau$ – Méthode de la tangente à l'origine (intersection avec l'asymptote $y = E$) ou lecture à $t = \tau$ pour $u_C = 0,63E$.
+            </div>
+        </div>
+
+        <!-- 4. Équation différentielle -->
+        <div class="section">
+            <div class="section-title">
+                <span>📐</span> 4. Établissement de l’équation différentielle (charge)
+            </div>
+            <div class="card-notion">
+                <p>Loi des mailles (circuit série R – C avec générateur de fem $E$):</p>
+                <p>$$E = u_R(t) + u_C(t)$$</p>
+                <p>Avec $u_R = R \cdot i$ et $i = C \dfrac{du_C}{dt}$ → $u_R = R C \dfrac{du_C}{dt}$</p>
+                <p>D'où l'équation différentielle : $$\boxed{RC \frac{du_C}{dt} + u_C = E}$$</p>
+                <p>Solution : $u_C(t) = E(1-e^{-t/RC})$ (charge).</p>
+                <p>Pour la <strong>décharge</strong> ($E=0$) : $RC \frac{du_C}{dt} + u_C = 0$ → $u_C(t) = E e^{-t/RC}$.</p>
+            </div>
+        </div>
+
+        <!-- 5. Lien Bac et applications -->
+        <div class="section">
+            <div class="section-title">
+                <span>📌</span> 5. Points clés pour l’examen
+            </div>
+            <div class="grid-2cols">
+                <div class="card-notion">
+                    <strong>✅ Savoir faire</strong>
+                    <ul style="margin-left: 1.2rem; margin-top: 6px;">
+                        <li>Déterminer $\tau$ par analyse graphique.</li>
+                        <li>Calculer $C$ ou $R$ à partir de $\tau$.</li>
+                        <li>Tracer l'allure de $u_C(t)$ et $i(t)$.</li>
+                        <li>Utiliser la loi d'Ohm et la relation $i = C\frac{du_C}{dt}$.</li>
+                    </ul>
+                </div>
+                <div class="card-notion">
+                    <strong>⚠️ Erreurs fréquentes</strong>
+                    <ul style="margin-left: 1.2rem; margin-top: 6px;">
+                        <li>Confondre charge et décharge (signes, exponentielle croissante/décroissante).</li>
+                        <li>Oublier que $i(t)$ est discontinue à $t=0$ lors de la charge.</li>
+                        <li>Ne pas vérifier l'homogénéité de $\tau = RC$ : $[R] = \Omega$, $[C] = F$ → $[RC]=s$.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="simulation" style="margin-top: 8px;">
+                🔬 <strong>Expérience type baccalauréat Cameroun</strong> : Étude expérimentale de la charge d’un condensateur à l’oscilloscope ou avec un système d’acquisition. Détermination de la constante de temps et de la capacité $C$.
+            </div>
+        </div>
+
+        <!-- 6. Formulaire rapide -->
+        <div class="section">
+            <div class="section-title">
+                <span>📝</span> 6. Formulaire – Charge et décharge
+            </div>
+            <div style="overflow-x: auto;">
+                <table style="width:100%; border-collapse: collapse; background:#fafcff; border-radius: 20px;">
+                    <thead style="background: #2b4c7c; color: white;">
+                        <tr><th style="padding: 10px;">Régime</th><th style="padding: 10px;">$u_C(t)$</th><th style="padding: 10px;">$i(t)$</th><th style="padding: 10px;">Condition initiale</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #cddfec;"><td style="padding: 8px;"><strong>Charge</strong></td><td>$E(1-e^{-t/RC})$</td><td>$\frac{E}{R} e^{-t/RC}$</td><td>$u_C(0)=0$</td></tr>
+                        <tr><td style="padding: 8px;"><strong>Décharge</strong></td><td>$E\,e^{-t/RC}$</td><td>$-\frac{E}{R} e^{-t/RC}$</td><td>$u_C(0)=E$</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- astuce supplémentaire -->
+        <div class="btn-bac" style="margin-top: 10px;">
+            🧠 <strong>Astuce calcul Bac :</strong> Pour trouver $\tau$ à partir d’une courbe $u_C=f(t)$ : repérer l’instant où $u_C = 0,63\,E$ (charge) ou $u_C = 0,37\,E$ (décharge). Vérifier l’unité.
+        </div>
+    </div>
+
+    <footer>
+        🇨🇲 Programme officiel de Physique – Terminale C & D (2025-2026) – Module 4 : Électrocinétique – Leçon 26 : Condensateur, charge et décharge.<br>
+        Révision conforme aux attendus du Baccalauréat Camerounais (sessions 2024-2025).
+    </footer>
+</div>
+</body>
+</html>

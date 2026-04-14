@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Conduite à tenir en cas d'arrêt cardiaque</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax (utile pour d'éventuelles formules, mais peu nécessaire ici) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== STYLES SPÉCIFIQUES À LA FICHE (inspirés du template) ========== */
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #dc2626, #991b1b); /* Rouge pour l'urgence cardiaque */
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #fee2e2;
+        }
+
+        /* Contenu principal */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #b91c1c;
+            border-left: 4px solid #b91c1c;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes stylisées */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #b91c1c;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .step-list {
+            list-style-type: none;
+            counter-reset: step-counter;
+            padding-left: 0;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+            padding-left: 2.2rem;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            background-color: #dc2626;
+            color: white;
+            font-weight: bold;
+            width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes exemples (urgence) */
+        .exemple-card {
+            background-color: #fefaf5;
+            border-left: 6px solid #f97316;
+        }
+
+        .exemple-card .card-title {
+            color: #c2410c;
+            border-left-color: #f97316;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #ffedd5;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section pièges / avertissements */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Image placeholder */
+        .schema-placeholder {
+            background-color: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px dashed #94a3b8;
+        }
+        .schema-placeholder img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+        }
+        .figcaption {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 0.5rem;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 26 : Conduite à tenir en cas d’arrêt cardiaque</h1>
+            <p class="lesson-subtitle">SVTEEHB – Terminale D | Éducation à la santé · Gestes de premiers secours</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section Éléments clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Qu'est-ce qu'un arrêt cardiaque -->
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Définition de l'arrêt cardiaque</h3>
+                    <p class="card-description">
+                        L’<strong>arrêt cardiaque</strong> (ou arrêt cardio-respiratoire) correspond à la cessation brutale et inattendue de l’activité mécanique du cœur. 
+                        La victime ne répond plus, ne respire pas normalement (ou présente des gasps), et il n’y a pas de pouls. Sans action rapide, les lésions cérébrales 
+                        surviennent en quelques minutes. Les causes peuvent être cardiaques (infarctus, trouble du rythme) ou extra-cardiaques (noyade, électrocution, hypothermie…).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Chaque minute sans réanimation</strong> diminue les chances de survie de 10 % environ.</li>
+                        <li>La <strong>chaîne de survie</strong> : alerte précoce, RCP précoce, défibrillation précoce, prise en charge médicale rapide.</li>
+                    </ul>
+                    <!-- Image d'illustration : schéma de la chaîne de survie -->
+                    <div class="schema-placeholder">
+                        <img src="" alt="Schéma de la chaîne de survie : alerte, RCP, défibrillation, soins intensifs – décrire les quatre maillons essentiels pour la révision" style="width:100%; max-width:280px;">
+                        <div class="figcaption">Figure 1 : Les maillons de la chaîne de survie (alerte, massage, défibrillation, soins)</div>
+                    </div>
+                </div>
+
+                <!-- La conduite pratique : ALERTE + RCP + DAE -->
+                <div class="card concept-card">
+                    <h3 class="card-title">2. La conduite à tenir : l’algorithme de survie</h3>
+                    <p class="card-description">
+                        Devant une victime potentiellement en arrêt cardiaque, il faut suivre la séquence <strong>PROTÉGER – ALERTER – SECOURIR</strong> (PAS). 
+                        L’accent est mis sur la <strong>réanimation cardio-pulmonaire (RCP)</strong> et l’utilisation d’un <strong>défibrillateur automatisé externe (DAE)</strong>.
+                    </p>
+                    <ul class="step-list">
+                        <li><strong>Évaluer la sécurité :</strong> s’assurer qu’il n’y a pas de danger pour soi-même ni pour la victime (circulation, électricité, gaz…).</li>
+                        <li><strong>Vérifier la conscience :</strong> secouer doucement les épaules, parler fort « Madame/Monsieur, vous m’entendez ? »</li>
+                        <li><strong>Appeler les secours :</strong> composer le 15 (SAMU), 18 (pompiers) ou 112 (numéro d’urgence européen). Rester calme et donner la position exacte, l’état de la victime, suivre les instructions.</li>
+                        <li><strong>Vérifier la respiration :</strong> regarder le thorax (pas plus de 10 secondes). Si la victime ne respire pas normalement (ou gasps = respiration anormale), suspecter arrêt cardiaque.</li>
+                        <li><strong>Commencer les compressions thoraciques :</strong> au centre du thorax, main sur l’autre, bras tendus, enfoncer 5–6 cm à une fréquence de 100–120 compressions/minute.</li>
+                        <li><strong>Associer les insufflations (bouche-à-bouche)</strong> : 30 compressions / 2 insufflations si formé et sans risque. En cas de doute, faire des compressions en continu (compressions only).</li>
+                        <li><strong>Utiliser un DAE dès que possible :</strong> mettre les électrodes, suivre les instructions vocales. Ne pas toucher la victime pendant l’analyse/choc.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Massage cardiaque et bouche-à-bouche : les bons gestes</h3>
+                    <p class="card-description">
+                        La qualité de la RCP est primordiale. Les mains doivent être placées sur la moitié inférieure du sternum. 
+                        Les compressions doivent permettre un bon retour thoracique après chaque pression.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Fréquence :</strong> 100 à 120 compressions par minute (rythme du « Staying Alive » des Bee Gees).</li>
+                        <li><strong>Profondeur :</strong> au moins 5 cm chez l’adulte, ne pas dépasser 6 cm.</li>
+                        <li><strong>Rapport compression/insufflation :</strong> 30:2 (adulte, enfant).</li>
+                        <li><strong>Bouche-à-bouche :</strong> basculer la tête en arrière, pincer le nez, souffler doucement jusqu’à voir le thorax se soulever.</li>
+                    </ul>
+                    <!-- Image geste de compression -->
+                    <div class="schema-placeholder">
+                        <img src="" alt="Position des mains pour le massage cardiaque externe : une main sur l’autre, bras tendus, compression au centre de la poitrine – schéma clair pour l’apprentissage" style="max-width:220px;">
+                        <div class="figcaption">Position correcte des mains lors du massage cardiaque</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Position Latérale de Sécurité (PLS)</h3>
+                    <p class="card-description">
+                        La PLS s’applique chez une victime <strong>inconsciente mais qui respire normalement</strong>. 
+                        Elle permet de préserver la liberté des voies aériennes et d’éviter l’inhalation du contenu gastrique. En arrêt cardiaque, 
+                        on ne l’utilise qu’après reprise d’une respiration normale spontanée ou dans l’attente des secours si la victime respire mais reste inconsciente.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Mettre la victime en position latérale : bras supérieur à 90°, genou fléchi.</li>
+                        <li>Surveiller la respiration jusqu’à l’arrivée des secours.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples concrets (mise en situation) -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Situation d’urgence : homme de 60 ans effondré sur un terrain de sport</h3>
+                    <p class="exemple-context">
+                        Contexte : Un joueur de football s’écroule soudainement. Il ne répond pas aux appels, ne respire pas normalement (absence de mouvement thoracique après 10 secondes). Un témoin alerte immédiatement.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Conduite à adopter :</strong><br>
+                        1️⃣ Mettre la victime sur le dos, s’assurer de l’absence de danger (terrain dégagé).<br>
+                        2️⃣ Appeler le 112 / 15, signaler un arrêt cardiaque présumé.<br>
+                        3️⃣ Débuter les compressions thoraciques (centre du thorax, 100/min).<br>
+                        4️⃣ Un DAE est disponible dans le club : demander à un assistant d’aller le chercher.<br>
+                        5️⃣ Placer les électrodes sur le torse nu, suivre les instructions vocales.<br>
+                        6️⃣ Alterner 30 compressions / 2 insufflations jusqu’à reprise de conscience ou arrivée des secours.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Ne pas interrompre les compressions plus de 10 secondes (pour placer le DAE, changement de relais). La continuité du massage est cruciale.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Arrêt cardiaque chez un bébé / enfant (rappel différences)</h3>
+                    <p class="exemple-context">
+                        Un nourrisson de 10 mois est retrouvé inerte après une noyade. Il ne réagit pas, ne respire pas. Que faire ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Spécificités pédiatriques :</strong><br>
+                        - Compressions : utiliser deux doigts (pour nourrisson) ou une main (enfant) ; profondeur ~4 cm.<br>
+                        - Fréquence : 100-120/min, rapport 30:2 si seul secouriste.<br>
+                        - Bouche-à-bouche : bouche couvrant nez et bouche du bébé, souffler doucement.<br>
+                        - Alerter rapidement : noyade = appeler les secours après 1 minute de RCP si seul.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Penser à la protection : retirer la victime de l’eau, sécher le thorax avant de placer les électrodes du DAE si disponible.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pièges courants et à ne pas confondre -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre une respiration agonique (gasps) avec une respiration normale. <strong>Les gasps</strong> ne sont pas une respiration efficace : il faut débuter la RCP.</li>
+                        <li><span class="bold">Attention :</span> Arrêter les compressions pour vérifier le pouls ou la respiration. Ne pas perdre de temps : seulement 10 secondes max pour la vérification initiale.</li>
+                        <li><span class="bold">Piège :</span> Ne pas utiliser le DAE par peur de mal faire. Le DAE analyse automatiquement et ne délivre un choc que si nécessaire ; il est sécurisé.</li>
+                        <li><span class="bold">Confusion :</span> Position latérale de sécurité appliquée alors que la victime ne respire pas (arrêt cardiaque). Une victime en arrêt cardiaque nécessite un massage immédiat, pas la PLS.</li>
+                        <li><span class="bold">Erreur :</span> Placer les mains trop haut ou trop bas sur le thorax (risque de fracture ou compression inefficace). La zone est au centre de la poitrine, entre les mamelons.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section mémo supplémentaire / plan d'action simplifié -->
+            <section class="concept-section">
+                <h2 class="section-title">🧠 Synthèse visuelle : Les 4 étapes clés</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Algorithme “Adulte en arrêt cardiaque”</h3>
+                    <div class="schema-placeholder">
+                        <img src="" alt="Algorithme décisionnel simple : Victime inconsciente → ne respire pas → alerte 112 → RCP 30:2 → DAE → poursuivre jusqu’à reprise ou secours" style="max-width:100%">
+                        <div class="figcaption">Organigramme de la conduite à tenir en cas d’arrêt cardiaque (niveau secouriste)</div>
+                    </div>
+                    <ul class="concept-list" style="margin-top: 1rem;">
+                        <li>✅ <strong>Sécurité</strong> – Protéger la victime et soi-même</li>
+                        <li>✅ <strong>Conscience & Respiration</strong> – Vérifier (ne pas dépasser 10s)</li>
+                        <li>✅ <strong>Alerte</strong> – 112 / 15 / 18 (décrire précisément la situation)</li>
+                        <li>✅ <strong>Massage cardiaque</strong> – 30 compressions / 2 insufflations</li>
+                        <li>✅ <strong>Défibrillateur</strong> – Dès que disponible, suivre les commandes vocales</li>
+                        <li>✅ <strong>Répéter</strong> – Jusqu’à l’arrivée des secours ou reprise de signes de vie</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Liens avec l'examen (mention officielle) -->
+            <div style="background-color: #eef2ff; padding: 1rem; border-radius: 1rem; margin: 1rem 0 0 0;">
+                <p style="font-size: 0.9rem; margin: 0;"><strong>📖 Lien avec l'examen (Session 2024 D) :</strong> Les gestes de premiers secours en cas d'arrêt cardiaque (massage cardiaque, bouche-à-bouche, PLS) sont explicitement cités dans le programme. 
+                L’élève doit savoir décrire la conduite à tenir, réaliser un schéma des positions ou argumenter une situation problème. La maîtrise de la chaîne de survie est un attendu majeur.</p>
+            </div>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme SVTEEHB Terminale D – Éducation à la santé · Révision créée pour les examens 2026 · 📚 <a href="#">Annexes : démonstration vidéo des gestes (ressource conseillée)</a></p>
+        </footer>
+    </div>
+</body>
+</html>

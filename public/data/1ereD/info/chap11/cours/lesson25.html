@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Les tableaux en C (Leçon 25)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* petite personnalisation supplémentaire pour les blocs de code */
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 0.8rem 1rem;
+            border-radius: 0.75rem;
+            font-family: 'Courier New', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .code-inline {
+            background-color: #f1f5f9;
+            font-family: 'Courier New', monospace;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+            color: #0f172a;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .table-index {
+            margin: 1rem 0;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .table-index th, .table-index td {
+            border: 1px solid #cbd5e1;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        .table-index th {
+            background-color: #2563eb20;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">📊 Les tableaux en C (Leçon 25)</h1>
+            <p class="lesson-subtitle">Informatique · Première (Séries C, D, E) · Algorithmique et programmation</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">🔹 Définition et utilité d’un tableau en C</h3>
+                    <p class="card-description">
+                        Un <strong>tableau</strong> est une structure de données qui permet de stocker plusieurs valeurs de <strong>même type</strong> 
+                        dans des cases contiguës en mémoire. Chaque élément est accessible via un <strong>indice</strong> (ou index).
+                        En C, les indices commencent toujours à <span class="code-inline">0</span> et vont jusqu’à <span class="code-inline">taille-1</span>.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Avantage :</strong> éviter de déclarer des centaines de variables séparées (ex: <span class="code-inline">note1, note2, … note100</span>).</li>
+                        <li><strong>Déclaration type :</strong> <span class="code-inline">type nomTableau[taille];</span> avec taille fixe (constante entière).</li>
+                        <li><strong>Exemple concret :</strong> <span class="code-inline">float notes[30];</span> → 30 notes de type réel.</li>
+                        <li><strong>Mémoire :</strong> la taille totale = <span class="code-inline">taille × sizeof(type)</span> octets.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🔹 Déclaration et initialisation d’un tableau</h3>
+                    <p class="card-description">
+                        On peut déclarer un tableau sans l’initialiser (contenant alors des valeurs aléatoires), ou l’initialiser lors de la déclaration.
+                    </p>
+                    <div class="code-block">
+// Déclaration simple
+int ages[10];          // tableau de 10 entiers (indices 0 à 9)
+
+// Initialisation avec une liste de valeurs
+double coefficients[5] = {1.5, 2.0, 3.2, 4.1, 5.0};
+
+// Initialisation partielle : les autres sont mis à 0
+int tableau[8] = {0};  // tous les 8 éléments valent 0
+
+// Sans préciser la taille, elle est déduite
+char reponses[] = {'O', 'N', 'O'};  // taille 3
+                    </div>
+                    <ul class="concept-list">
+                        <li><span class="formule">Astuce :</span> <span class="code-inline">int t[100] = {0};</span> met tous les éléments à zéro.</li>
+                        <li>Les chaînes de caractères sont des tableaux de <span class="code-inline">char</span> terminés par <span class="code-inline">'\0'</span> (mais nous nous concentrons sur les tableaux numériques).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🔹 Accès et modification des éléments</h3>
+                    <p class="card-description">
+                        On accède à un élément en utilisant son indice entre crochets <span class="code-inline">[ ]</span>. L’indice peut être une constante, une variable ou une expression.
+                        En langage C, l’indice du premier élément est <strong>0</strong> (contrairement à l’algorithmique où il commence parfois à 1).
+                    </p>
+                    <div class="code-block">
+int notes[5] = {12, 15, 10, 18, 14};
+// Afficher la première note
+printf("%d", notes[0]);   // affiche 12
+
+// Modifier la troisième note (indice 2)
+notes[2] = 16;            // maintenant le tableau vaut {12,15,16,18,14}
+
+// Parcours avec une boucle for
+for(int i = 0; i < 5; i++) {
+    printf("Note %d : %d\n", i+1, notes[i]);
+}
+                    </div>
+                    <p class="card-description">
+                        ⚠️ <strong>Piège fréquent :</strong> En C, on ne vérifie pas automatiquement les limites du tableau. 
+                        Accéder à l’indice <span class="code-inline">notes[5]</span> (alors que la taille est 5) provoque un comportement indéfini (risque de crash ou données corrompues).
+                    </p>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🔹 Tableaux et algorithmique : traduction du pseudo-code vers C</h3>
+                    <p class="card-description">
+                        En algorithmique, on déclare souvent : <span class="code-inline">Tableau Notes[1..N] de réels</span>. 
+                        En C, cela devient un tableau de taille <strong>N</strong> avec des indices allant de <strong>0 à N-1</strong>. L’élément d’indice algorithmique <span class="code-inline">i</span> correspond à l’indice <span class="code-inline">i-1</span> en C.
+                    </p>
+                    <div class="code-block">
+// Algo : Notes : tableau[1..10] d'entiers
+// En C :
+int Notes[10];   // indices 0 à 9
+Notes[0] = 18;   // correspond à Notes[1] en algo
+Notes[9] = 15;   // correspond à Notes[10] en algo
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>Règle de traduction :</strong> pour une boucle <span class="code-inline">pour i de 1 à N faire</span> en algo, on écrit en C <span class="code-inline">for(i=0; i&lt;N; i++)</span> et on accède à <span class="code-inline">tab[i]</span> pour l’élément algorithmique <span class="code-inline">tab[i+1]</span>.</li>
+                        <li>Il est conseillé d’utiliser une constante pour la taille : <span class="code-inline">#define TAILLE 100</span> ou <span class="code-inline">const int TAILLE = 100;</span> afin de rendre le code plus maintenable.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🔹 Parcours et opérations classiques sur les tableaux</h3>
+                    <p class="card-description">
+                        Les boucles <span class="code-inline">for</span> sont idéales pour parcourir tous les éléments d’un tableau. Voici quelques exemples typiques :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Calcul de la somme :</strong> <span class="code-inline">int somme = 0; for(i=0; i&lt;N; i++) somme += tab[i];</span></li>
+                        <li><strong>Recherche du maximum :</strong> initialiser <span class="code-inline">max = tab[0]</span>, puis comparer avec chaque élément.</li>
+                        <li><strong>Affichage inversé :</strong> <span class="code-inline">for(i=N-1; i>=0; i--)</span>.</li>
+                        <li><strong>Copie d’un tableau vers un autre :</strong> <span class="code-inline">for(i=0; i&lt;N; i++) copie[i] = original[i];</span></li>
+                    </ul>
+                    <div class="code-block">
+// Exemple : calcul de la moyenne des notes
+#define NB_NOTES 8
+float notes[NB_NOTES] = {10.5, 12.0, 15.5, 8.0, 14.0, 16.5, 9.5, 13.0};
+float somme = 0.0;
+for(int i = 0; i < NB_NOTES; i++) {
+    somme = somme + notes[i];
+}
+float moyenne = somme / NB_NOTES;
+printf("Moyenne de la classe : %.2f\n", moyenne);
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Saisie et affichage d’un tableau d’entiers</h3>
+                    <p class="exemple-context">
+                        On souhaite écrire un programme C qui demande à l’utilisateur de saisir 5 entiers, les stocke dans un tableau, puis les affiche à l’envers.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Correction détaillée :</strong>
+                    </p>
+                    <div class="code-block">
+#include <stdio.h>
+
+int main() {
+    int T[5];  // déclaration du tableau de taille 5
+    
+    // Saisie des éléments (indices 0 à 4)
+    printf("Saisissez 5 entiers :\n");
+    for(int i = 0; i < 5; i++) {
+        printf("T[%d] = ", i);
+        scanf("%d", &T[i]);
+    }
+    
+    // Affichage dans l'ordre inverse
+    printf("Affichage inversé : ");
+    for(int i = 4; i >= 0; i--) {
+        printf("%d ", T[i]);
+    }
+    printf("\n");
+    return 0;
+}
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Utilisez toujours une variable constante pour la taille (<span class="code-inline">#define SIZE 5</span>) afin de modifier facilement la taille du tableau sans tout réécrire.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Traduction d’un algorithme de tableau en C</h3>
+                    <p class="exemple-context">
+                        Algorithme : <br>
+                        Variables : Notes : tableau[1..4] de réels ; i : entier ; somme : réel <br>
+                        Début <br>
+                        &nbsp;&nbsp;Pour i de 1 à 4 faire <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Lire(Notes[i]) <br>
+                        &nbsp;&nbsp;FinPour <br>
+                        &nbsp;&nbsp;Somme ← 0 <br>
+                        &nbsp;&nbsp;Pour i de 1 à 4 faire <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Somme ← Somme + Notes[i] <br>
+                        &nbsp;&nbsp;FinPour <br>
+                        &nbsp;&nbsp;Ecrire("La somme est : ", Somme) <br>
+                        Fin
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Traduction en C :</strong>
+                    </p>
+                    <div class="code-block">
+#include <stdio.h>
+
+int main() {
+    float Notes[4];   // indices 0,1,2,3 → correspondent à Notes[1] à Notes[4] en algo
+    int i;
+    float somme = 0.0;
+    
+    // Lecture : i de 0 à 3 en C
+    for(i = 0; i < 4; i++) {
+        printf("Note %d : ", i+1);
+        scanf("%f", &Notes[i]);
+    }
+    
+    // Calcul somme
+    for(i = 0; i < 4; i++) {
+        somme = somme + Notes[i];
+    }
+    
+    printf("La somme est : %.2f\n", somme);
+    return 0;
+}
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 À retenir : l’indice algorithmique k correspond à l’indice C k-1. La boucle <span class="code-inline">pour i de 1 à N faire</span> devient <span class="code-inline">for(i=0; i&lt;N; i++)</span>.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Recherche de la plus grande valeur dans un tableau</h3>
+                    <p class="exemple-context">
+                        Soit le tableau d’entiers <span class="code-inline">valeurs[7] = {45, 12, 89, 23, 77, 56, 91}</span>. Écrire un programme pour trouver le maximum et sa position (indice).
+                    </p>
+                    <div class="code-block">
+#include <stdio.h>
+
+int main() {
+    int valeurs[7] = {45, 12, 89, 23, 77, 56, 91};
+    int max = valeurs[0];     // on suppose que le premier est le max
+    int position = 0;         // indice du maximum
+    
+    for(int i = 1; i < 7; i++) {   // on commence à i=1
+        if(valeurs[i] > max) {
+            max = valeurs[i];
+            position = i;
+        }
+    }
+    
+    printf("La valeur maximale est %d à l'indice %d (position %d).\n", max, position, position+1);
+    return 0;
+}
+                    </div>
+                    <div class="exemple-astuce">
+                        ⚙️ <strong>Raisonnement :</strong> On initialise <span class="code-inline">max</span> avec le premier élément, puis on parcourt le reste. Si on trouve un élément plus grand, on met à jour <span class="code-inline">max</span> et l’indice.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section : Pièges à éviter et erreurs fréquentes -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">❌ Erreur n°1 :</span> Utiliser l’indice <span class="code-inline">taille</span> au lieu de <span class="code-inline">taille-1</span> → accès hors limites. Ex : <span class="code-inline">int t[5]; t[5]=10;</span> est interdit (indices valides : 0..4).</li>
+                        <li><span class="bold">❌ Erreur n°2 :</span> Confondre l’indice de départ en algorithmique (souvent 1) et en C (toujours 0). Penser à décaler systématiquement.</li>
+                        <li><span class="bold">❌ Erreur n°3 :</span> Oublier d’initialiser les éléments avant de les lire ou de les utiliser (les valeurs par défaut sont indéterminées).</li>
+                        <li><span class="bold">❌ Erreur n°4 :</span> Utiliser une variable non constante pour la taille du tableau lors de la déclaration (en C classique, la taille doit être une constante connue à la compilation). Pour les tailles dynamiques, on utilise l’allocation mémoire (<span class="code-inline">malloc</span> – vu plus tard).</li>
+                        <li><span class="bold">💡 Bonne pratique :</span> Définir la taille avec <span class="code-inline">#define TAILLE 100</span> en haut du programme pour éviter les “nombres magiques”.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section : Tableau récapitulatif des correspondances -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Tableau de correspondance : Algorithmique ↔ C</h2>
+                <div class="card concept-card">
+                    <table class="table-index">
+                        <thead>
+                            <tr><th>Concept algorithmique</th><th>Traduction en langage C</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Tableau[1..N] d’entiers</td><td><span class="code-inline">int tableau[N];</span> (indices 0..N-1)</td></tr>
+                            <tr><td>Accès à l’élément i (i de 1 à N)</td><td><span class="code-inline">tableau[i-1]</span></td></tr>
+                            <tr><td>Pour i de 1 à N faire ...</td><td><span class="code-inline">for(i=0; i&lt;N; i++) { ... }</span></td></tr>
+                            <tr><td>Lire(tableau[i])</td><td><span class="code-inline">scanf("%d", &tableau[i-1]);</span></td></tr>
+                            <tr><td>Ecrire(tableau[i])</td><td><span class="code-inline">printf("%d", tableau[i-1]);</span></td></tr>
+                        </tbody>
+                    </table>
+                    <p class="card-description" style="margin-top: 0.5rem;">
+                        ⚡ <strong>Astuce mémoire :</strong> L’indice C = indice algorithmique − 1. La boucle commence à 0 et se termine à taille-1.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Schéma mémoire conceptuel (illustration avec une image générée par IA) -->
+            <section class="concept-section">
+                <h2 class="section-title">🧠 Visualisation d’un tableau en mémoire</h2>
+                <div class="card concept-card">
+                    <p>Un tableau est stocké dans des cases mémoires contiguës. Voici une représentation pour un tableau de 5 entiers <span class="code-inline">int notes[5];</span> :</p>
+                    <img src="" alt="Schéma d'un tableau en mémoire avec des cases adjacentes numérotées de 0 à 4, chaque case contenant une valeur entière. Illustration pour visualiser la contiguïté et l'accès par indice." style="max-width:100%; margin: 1rem 0; border-radius: 0.75rem; background-color: #f1f5f9; padding: 0.5rem; border: 1px solid #cbd5e1;">
+                    <p class="card-description">L’accès à <span class="code-inline">notes[2]</span> correspond à la troisième case. Le compilateur calcule l’adresse : <span class="code-inline">adresse_base + 2 * sizeof(int)</span>.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📚 Fiche de révision - Leçon 25 : Les tableaux en C | Probatoire Séries C, D, E | 📅 Révision personnalisée · <a href="#">Retour au sommaire</a></p>
+            <p>💻 Entraînez-vous à écrire des petits programmes avec des tableaux : saisie, affichage, recherche de maximum, calcul de moyenne.</p>
+        </footer>
+    </div>
+</body>
+</html>

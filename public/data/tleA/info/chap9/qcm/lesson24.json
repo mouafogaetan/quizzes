@@ -1,0 +1,122 @@
+[
+  {
+    "questionText": "Quel est le rôle principal de la commande SQL <code>DELETE</code> ?",
+    "options": [
+      "Supprimer une table entière d'une base de données",
+      "Supprimer une ou plusieurs lignes (enregistrements) d'une table",
+      "Supprimer une colonne d'une table",
+      "Supprimer la structure d'une base de données"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "easy",
+    "explanation": "La commande <code>DELETE</code> en SQL est utilisée pour supprimer des lignes (enregistrements) existantes dans une table. Contrairement à <code>DROP</code> qui supprime la table ou la base de données, <code>DELETE</code> agit uniquement sur les données, pas sur la structure."
+  },
+  {
+    "questionText": "Quelle est la syntaxe correcte pour supprimer un enregistrement spécifique dans une table nommée <code>Eleves</code> ?",
+    "options": [
+      "DELETE Eleves WHERE id = 5;",
+      "DELETE FROM Eleves WHERE id = 5;",
+      "REMOVE FROM Eleves WHERE id = 5;",
+      "DELETE FROM Eleves IF id = 5;"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "easy",
+    "explanation": "La syntaxe standard de la commande <code>DELETE</code> est : <code>DELETE FROM nom_table WHERE condition;</code>. La clause <code>WHERE</code> est essentielle pour cibler l'enregistrement spécifique (ici, celui dont l'id est 5)."
+  },
+  {
+    "questionText": "Que se passe-t-il si on exécute la requête <code>DELETE FROM Clients;</code> <strong>sans</strong> clause <code>WHERE</code> ?",
+    "options": [
+      "La requête génère une erreur car WHERE est obligatoire.",
+      "Seul le premier enregistrement de la table est supprimé.",
+      "Tous les enregistrements de la table <code>Clients</code> sont supprimés.",
+      "La table <code>Clients</code> est entièrement supprimée de la base de données."
+    ],
+    "correctAnswer": 2,
+    "difficulty": "medium",
+    "explanation": "C'est un point de vigilance majeur. <code>DELETE FROM Clients;</code> sans clause <code>WHERE</code> supprime <strong>toutes</strong> les lignes de la table. La table existe toujours mais devient vide. Pour supprimer la table elle-même, on utilise <code>DROP TABLE Clients;</code>."
+  },
+  {
+    "questionText": "Dans une base de données d'une bibliothèque, on souhaite supprimer tous les livres dont le nombre d'exemplaires est nul. Quelle requête SQL faut-il écrire ?",
+    "options": [
+      "DELETE FROM Livres WHERE exemplaires = 0;",
+      "DELETE Livres WHERE exemplaires = 0;",
+      "DELETE FROM Livres IF exemplaires = 0;",
+      "REMOVE FROM Livres WHERE exemplaires = 0;"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "medium",
+    "explanation": "La bonne syntaxe est <code>DELETE FROM Livres WHERE exemplaires = 0;</code>. La clause <code>WHERE exemplaires = 0</code> permet de cibler uniquement les livres sans aucun exemplaire. On supprime ainsi les lignes répondant à la condition."
+  },
+  {
+    "questionText": "Quelle est la principale différence entre les commandes SQL <code>DELETE</code> et <code>DROP</code> ?",
+    "options": [
+      "<code>DELETE</code> supprime les lignes alors que <code>DROP</code> supprime la structure de l'objet (table ou base).",
+      "<code>DELETE</code> est une commande de définition (DDL) alors que <code>DROP</code> est une commande de manipulation (DML).",
+      "Il n'y a pas de différence, les deux suppriment des lignes.",
+      "<code>DELETE</code> nécessite une condition alors que <code>DROP</code> ne peut jamais être utilisé avec <code>WHERE</code>."
+    ],
+    "correctAnswer": 0,
+    "difficulty": "hard",
+    "explanation": "La différence fondamentale est leur objet : <code>DELETE</code> (DML - Data Manipulation Language) agit sur les données (lignes) tandis que <code>DROP</code> (DDL - Data Definition Language) agit sur la structure (supprime une table, une base, etc.). Bien que <code>DROP</code> ne prenne pas de <code>WHERE</code>, ce n'est pas la différence principale."
+  },
+  {
+    "questionText": "Quel mot-clé doit obligatoirement accompagner <code>DELETE FROM</code> pour supprimer <strong>une seule ligne spécifique</strong> et éviter une catastrophe de données ?",
+    "options": [
+      "SET",
+      "VALUES",
+      "WHERE",
+      "HAVING"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "easy",
+    "explanation": "La clause <code>WHERE</code> est indispensable pour cibler une ou des lignes spécifiques. Sans elle, on supprime toutes les lignes de la table. <code>SET</code> est utilisé avec <code>UPDATE</code>, <code>VALUES</code> avec <code>INSERT</code>, et <code>HAVING</code> avec <code>GROUP BY</code>."
+  },
+  {
+    "questionText": "Après avoir supprimé plusieurs enregistrements d'une table avec <code>DELETE</code>, que se passe-t-il pour les index ou les identifiants auto-incrémentés (comme une clé primaire) ?",
+    "options": [
+      "Les identifiants des nouveaux enregistrements repartent toujours de 1.",
+      "Les identifiants des enregistrements supprimés sont réutilisés immédiatement.",
+      "Généralement, la séquence d'auto-incrémentation ne se réinitialise pas ; les nouveaux enregistrements continuent avec l'ID suivant.",
+      "La table doit être recréée pour que l'auto-incrémentation fonctionne à nouveau."
+    ],
+    "correctAnswer": 2,
+    "difficulty": "hard",
+    "explanation": "C'est une nuance importante. En général (selon les SGBD comme MySQL), <code>DELETE</code> ne réinitialise pas le compteur d'auto-incrémentation. Si le dernier ID était 10 et que vous supprimez l'enregistrement 10, le prochain enregistrement aura l'ID 11. Pour réinitialiser le compteur, on utilise des commandes spécifiques comme <code>ALTER TABLE ... AUTO_INCREMENT = 1;</code>."
+  },
+  {
+    "questionText": "Qu'est-ce qu'une 'suppression en cascade' (<code>ON DELETE CASCADE</code>) dans une base de données relationnelle ?",
+    "options": [
+      "Une méthode pour supprimer toutes les tables en une seule requête.",
+      "Une contrainte qui permet de supprimer automatiquement les enregistrements d'une table 'enfant' lorsqu'on supprime l'enregistrement correspondant dans la table 'parent'.",
+      "Un type de requête <code>DELETE</code> qui s'exécute plus rapidement que la normale.",
+      "Une commande qui supprime les doublons dans une table."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "hard",
+    "explanation": "<code>ON DELETE CASCADE</code> est une contrainte de clé étrangère. Exemple : Si vous supprimez un 'Auteur' (parent), tous ses 'Livres' (enfant) seront automatiquement supprimés pour éviter des enregistrements orphelins. C'est une fonctionnalité puissante mais risquée si mal utilisée."
+  },
+  {
+    "questionText": "Vous êtes enseignant et vous voulez supprimer les notes de tous les élèves qui ont eu moins de 5/20 à un examen, sauf s'ils sont en 'rattrapage'. Quelle requête correspond à cette logique ?",
+    "options": [
+      "DELETE FROM Notes WHERE note < 5 AND statut != 'rattrapage';",
+      "DELETE FROM Notes WHERE note < 5 OR statut = 'rattrapage';",
+      "DELETE FROM Notes IF note < 5 AND statut = 'rattrapage';",
+      "DELETE FROM Notes WHERE note < 5 EXCEPT statut = 'rattrapage';"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "hard",
+    "explanation": "Il faut utiliser l'opérateur logique <code>AND</code>. La condition doit être : note inférieure à 5 <strong>ET</strong> (AND) statut différent de 'rattrapage'. L'opérateur <code>!=</code> signifie 'différent de'. On cible ainsi les mauvaises notes des élèves non-rattrapage."
+  },
+  {
+    "questionText": "Pour des raisons de sécurité et de performance, que recommande-t-on avant d'exécuter une commande <code>DELETE</code> sur une table importante ?",
+    "options": [
+      "Redémarrer le serveur de base de données.",
+      "Exécuter un <code>INSERT</code> pour tester la connexion.",
+      "Faire une sauvegarde (backup) ou utiliser <code>BEGIN TRANSACTION</code> pour pouvoir annuler (<code>ROLLBACK</code>) en cas d'erreur.",
+      "Désactiver tous les mots de passe de la base de données."
+    ],
+    "correctAnswer": 2,
+    "difficulty": "medium",
+    "explanation": "<code>DELETE</code> est une opération irréversible sans sauvegarde. La bonne pratique est de faire un <code>BACKUP</code> ou d'utiliser une transaction (<code>BEGIN TRANSACTION; DELETE ... ; ROLLBACK;</code> ou <code>COMMIT;</code>). Cela permet de vérifier le résultat avant de valider définitivement la suppression."
+  }
+]

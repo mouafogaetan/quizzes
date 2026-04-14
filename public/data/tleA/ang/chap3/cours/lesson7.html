@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 7 : Health Advice (Anglais Tle)</title>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;  /* Fond très clair pour contraster avec les cards */
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24; /* petite touche de couleur vive */
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981; /* vert pour distinguer */
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Lesson 7: Giving and Receiving Health Advice</h1>
+            <p class="lesson-subtitle">Anglais · Terminale A (Littéraire) · Module 2 : Santé et prévention</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Vocabulaire essentiel : santé et symptômes</h3>
+                    <p class="card-description">
+                        Voici les mots et expressions les plus importants pour décrire des problèmes de santé et parler des soins. 
+                        Apprenez-les par cœur pour pouvoir jouer le rôle d’un patient ou d’un médecin.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="bold">Symptoms</span> : les symptômes (ex : headache, fever, cough, sore throat, runny nose, fatigue, nausea).</li>
+                        <li><span class="bold">Illnesses / diseases</span> : maladies (malaria, flu, COVID-19, stomach ache, allergy).</li>
+                        <li><span class="bold">Medical treatment</span> : prescription, medicine, tablets, syrup, vaccine, injection.</li>
+                        <li><span class="bold">Advice expressions</span> : "You should rest", "You must see a doctor", "You shouldn't smoke".</li>
+                        <li><span class="bold">At the doctor's</span> : "What's the matter?", "I have a temperature", "Take this prescription to the pharmacy".</li>
+                    </ul>
+                    <img src="" alt="Illustration d’une consultation médicale avec un médecin et un patient, symboles de santé (thermomètre, ordonnance, médicaments)" style="width:100%; max-width:250px; margin-top:15px; border-radius:12px; display:block; margin-left:auto; margin-right:auto;">
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Grammaire : les modaux de conseil (must / should / have to)</h3>
+                    <p class="card-description">
+                        Pour donner ou recevoir des conseils en anglais, on utilise principalement <strong>should / shouldn’t</strong> (conseil faible ou recommandation) 
+                        et <strong>must / mustn’t</strong> (obligation forte, interdiction). On utilise aussi <strong>have to / don’t have to</strong> pour exprimer une obligation externe.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="bold">Should + base verbale</span> : conseil / suggestion (→ <em>Tu devrais…</em>)<br>
+                        Ex: <em>You should drink more water if you have a fever.</em></li>
+                        <li><span class="bold">Shouldn’t + base verbale</span> : conseil négatif (→ <em>Tu ne devrais pas…</em>)<br>
+                        Ex: <em>You shouldn’t ignore a persistent cough.</em></li>
+                        <li><span class="bold">Must + base verbale</span> : obligation forte, règle (→ <em>Tu dois absolument…</em>)<br>
+                        Ex: <em>You must take your antibiotics every 8 hours.</em></li>
+                        <li><span class="bold">Mustn’t + base verbale</span> : interdiction formelle (→ <em>Il ne faut pas…</em>)<br>
+                        Ex: <em>You mustn’t share your prescription with others.</em></li>
+                        <li><span class="bold">Have to + base verbale</span> : obligation (souvent externe, comme une règle médicale)<br>
+                        Ex: <em>You have to finish the whole treatment even if you feel better.</em></li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top:12px;">
+                        💡 <strong>Astuce :</strong> “Should” est plus poli et moins fort que “must”. Pour un conseil simple, utilisez “should”. 
+                        Pour une règle de santé importante, utilisez “must” ou “have to”.
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Structure de la conversation médecin-patient</h3>
+                    <p class="card-description">
+                        Lors d’une simulation (jeu de rôle), il faut savoir poser des questions sur les symptômes, décrire son état et recevoir des conseils.
+                        Voici les phrases types à maîtriser.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Le docteur demande :</strong> <em>"What's the problem?" / "How long have you been feeling this way?" / "Do you have a fever?"</em></li>
+                        <li><strong>Le patient décrit :</strong> <em>"I have a splitting headache." / "I feel dizzy and nauseous." / "I've had a cough for three days."</em></li>
+                        <li><strong>Le docteur conseille :</strong> <em>"You should get some rest." / "You must avoid cold drinks." / "You have to take this syrup twice a day."</em></li>
+                        <li><strong>Le patient demande des précisions :</strong> <em>"How often should I take the medicine?" / "Do I have to come back for a check-up?"</em></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples concrets -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Dialogue simple à la clinique</h3>
+                    <p class="exemple-context">
+                        <strong>Contexte :</strong> Un patient arrive avec des symptômes de grippe. Le médecin l’écoute et lui donne des conseils.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Doctor:</strong> Good morning. What’s the matter?<br>
+                        <strong>Patient:</strong> I have a sore throat, a runny nose and I feel very tired. I think I have the flu.<br>
+                        <strong>Doctor:</strong> You should drink warm tea with honey and rest for two days. You must avoid going to work to prevent spreading the virus. Also, you shouldn’t take antibiotics without a prescription.<br>
+                        <strong>Patient:</strong> Thank you, doctor. Should I take paracetamol?<br>
+                        <strong>Doctor:</strong> Yes, you can take paracetamol for the fever, but you have to respect the dose.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 <strong>Analyse :</strong> Le médecin utilise “should” (conseil doux), “must” (obligation forte) et “shouldn’t” (conseil négatif). 
+                        “Have to” exprime une obligation liée à la posologie.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Donner des conseils de prévention (campagne santé)</h3>
+                    <p class="exemple-context">
+                        <strong>Situation :</strong> Rédiger trois conseils pour éviter le paludisme (malaria) à l’intention des élèves.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>✔️ Conseils en anglais :</strong><br>
+                        1. You <strong>should</strong> sleep under a mosquito net every night.<br>
+                        2. You <strong>mustn’t</strong> leave stagnant water around your house because it attracts mosquitoes.<br>
+                        3. If you have a high fever, you <strong>have to</strong> go to the nearest health centre for a malaria test.<br>
+                        4. You <strong>should</strong> use insect repellent when you go out in the evening.
+                    </p>
+                    <div class="exemple-astuce">
+                        📝 <strong>À retenir :</strong> Pour une petite affiche ou un discours de sensibilisation, alternez should (recommandation) et must (règle importante).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Exercice type examen - Complétez avec un modal</h3>
+                    <p class="exemple-context">
+                        <strong>Consigne :</strong> Complétez chaque phrase par “should”, “shouldn’t”, “must” ou “mustn’t”.<br>
+                        1. If you have a headache, you _______ take medicine without reading the instructions.<br>
+                        2. You _______ wash your hands regularly to avoid infections.<br>
+                        3. A patient _______ stop the treatment early, even if he feels better.<br>
+                        4. You _______ drink enough water when you have a fever.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Correction :</strong><br>
+                        1. <span class="formule">shouldn’t</span> (ne pas prendre de médicaments sans lire la notice)<br>
+                        2. <span class="formule">should</span> ou <span class="formule">must</span> (conseil fort pour l’hygiène)<br>
+                        3. <span class="formule">mustn’t</span> (interdiction formelle d’arrêter le traitement)<br>
+                        4. <span class="formule">should</span> (recommandation)
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section "Pièges courants" -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>must</strong> et <strong>should</strong>. “Must” exprime une obligation très forte (souvent une règle médicale ou de sécurité), alors que “should” est un conseil plus léger. 
+                        <em>Exemple : “You must take your medicine” (le médecin ordonne) / “You should drink orange juice” (simple recommandation).</em></li>
+                        <li><span class="bold">Attention à la construction :</span> Après les modaux (should, must, shouldn’t, mustn’t), on utilise <strong>toujours la base verbale (sans to)</strong>. Ne dites pas <em>“You should to rest”</em> mais <em>“You should rest”</em>.</li>
+                        <li><span class="bold">Piège avec “have to” :</span> “Have to” exprime une obligation externe. Ne le confondez pas avec “must” qui exprime souvent une obligation personnelle ou une règle absolue. <br>
+                        Ex: <em>“I have to go to the hospital because the doctor told me”</em> (obligation extérieure) / <em>“I must stop smoking for my health”</em> (décision personnelle forte).</li>
+                        <li><span class="bold">Confusion sur les symptômes :</span> Ne dites pas <em>“I have fever”</em> mais <em>“I have a fever”</em> (indénombrable → a fever). Utilisez “a headache”, “a cough”, “a sore throat”.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section vocabulaire pratique supplémentaire (mini-lexique) -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 Mini-lexique de la consultation</h2>
+                <div class="card concept-card">
+                    <ul class="concept-list">
+                        <li><span class="bold">to prescribe</span> : prescrire (un médicament)</li>
+                        <li><span class="bold">prescription</span> : ordonnance</li>
+                        <li><span class="bold">pharmacy</span> : pharmacie</li>
+                        <li><span class="bold">dose</span> : dose / posologie</li>
+                        <li><span class="bold">side effects</span> : effets secondaires</li>
+                        <li><span class="bold">to recover</span> : guérir / se rétablir</li>
+                        <li><span class="bold">appointment</span> : rendez-vous (médical)</li>
+                        <li><span class="bold">to examine</span> : examiner</li>
+                    </ul>
+                    <img src="" alt="Infographie d’une ordonnance médicale et d’une boîte de médicaments avec le texte 'Prescription' et 'Dosage' pour illustrer le vocabulaire de la pharmacie" style="width:100%; max-width:200px; margin-top:15px; border-radius:12px; display:block; margin-left:auto; margin-right:auto;">
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision créée pour les élèves de Terminale A (Cameroun) · Module Santé & Prévention · 📚 Révisez les modaux et le vocabulaire des symptômes.</p>
+        </footer>
+    </div>
+</body>
+</html>

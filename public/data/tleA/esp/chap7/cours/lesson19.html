@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Évaluations finales (Espagnol Terminale)</title>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Style supplémentaire pour la grille des compétences */
+        .competencias-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .competencia-item {
+            background: #eef2ff;
+            border-radius: 2rem;
+            padding: 0.3rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1e40af;
+        }
+        .mini-badge {
+            display: inline-block;
+            background: #dbeafe;
+            border-radius: 0.5rem;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            color: #1e3a8a;
+        }
+    </style>
+    <!-- MathJax Configuration (au cas où) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="fiche-container">
+    <!-- En-tête -->
+    <header class="fiche-header">
+        <h1 class="lesson-title">Lección 19 : Evaluaciones finales</h1>
+        <p class="lesson-subtitle">Español · Terminal A4 / ABI · Módulo 6 (Síntesis y preparación para exámenes)</p>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="fiche-content">
+        <!-- Objectif général -->
+        <section class="concept-section">
+            <h2 class="section-title">🎯 Objetivo de la lección</h2>
+            <div class="card concept-card">
+                <p class="card-description">
+                    Esta lección te prepara para las <strong>evaluaciones finales del Baccalauréat</strong> (comprensión de textos, 
+                    traducción y expresión escrita). Repasamos los tres tipos de pruebas, las estrategias para afrontarlas con éxito 
+                    y los criterios de corrección. ¡Es el momento de demostrar todo lo que has aprendido durante el año!
+                </p>
+                <div class="competencias-grid">
+                    <span class="competencia-item">📖 Comprensión lectora</span>
+                    <span class="competencia-item">🔄 Traducción (versión / tema)</span>
+                    <span class="competencia-item">✍️ Expresión escrita (semi-guiada y libre)</span>
+                </div>
+                <img src="" alt="Imagen que representa a estudiantes escribiendo el examen final con banderas de países hispanohablantes" style="width:100%; max-width:280px; margin-top: 1rem; border-radius: 1rem; display: block;">
+            </div>
+        </section>
+
+        <!-- Section : compétences évaluées -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Competencias evaluadas en el Baccalaureate</h2>
+            
+            <div class="card concept-card">
+                <h3 class="card-title">1. Comprensión de textos (recepción)</h3>
+                <p class="card-description">
+                    Leerás un artículo de prensa, un ensayo o un texto literario (tema actual: medio ambiente, familia, género, tecnología, etc.). 
+                    Deberás identificar la <strong>tesis del autor</strong>, los argumentos y las informaciones explícitas e implícitas. 
+                    Las preguntas exigen respuestas desarrolladas y argumentadas en español.
+                </p>
+                <ul class="concept-list">
+                    <li><span class="mini-badge">Estrategia</span> Lee el título, subtítulos y primeras líneas para captar el tema general.</li>
+                    <li><span class="mini-badge">Clave</span> Subraya las ideas principales y las palabras claves (conectores, opiniones).</li>
+                    <li><span class="mini-badge">Ejemplo</span> ¿Cuál es la postura del autor sobre el empoderamiento de la mujer? Justifica con citas.</li>
+                </ul>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">2. Traducción: versión (español → francés) y tema (francés → español)</h3>
+                <p class="card-description">
+                    La versión consiste en traducir un fragmento del español al francés respetando el sentido, el registro de lengua y la estructura. 
+                    El tema es traducir frases del francés al español con corrección gramatical y léxica. 
+                    ¡Cuidado con los falsos amigos, los tiempos verbales y las preposiciones!
+                </p>
+                <ul class="concept-list">
+                    <li><span class="mini-badge">Consejo</span> Para la versión: identifica primero el tiempo verbal y el sujeto.</li>
+                    <li><span class="mini-badge">Atención</span> Evita las traducciones literales: “actualmente” ≠ “actuellement” (significa “en la actualidad”).</li>
+                    <li><span class="mini-badge">Práctica</span> Repasa las conjugaciones (presente, pretérito indefinido, imperfecto, subjuntivo).</li>
+                </ul>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">3. Expresión escrita (redacción)</h3>
+                <p class="card-description">
+                    Dos tipos de ejercicios: <strong>redacción semi-guiada</strong> (a partir de elementos dados: causas, consecuencias, soluciones) 
+                    y <strong>redacción libre</strong> (argumentar sobre un tema de actualidad presentando ventajas/desventajas o defendiendo un punto de vista personal). 
+                    Máximo 25 líneas.
+                </p>
+                <ul class="concept-list">
+                    <li><span class="mini-badge">Estructura</span> Introducción (presentación del tema + tesis), desarrollo (2-3 argumentos con ejemplos), conclusión (síntesis y apertura).</li>
+                    <li><span class="mini-badge">Conectores</span> Usa <em>por un lado / por otro lado, además, sin embargo, en conclusión</em>.</li>
+                    <li><span class="mini-badge">Temas frecuentes Bac</span> Sucesión familiar, medio ambiente (campaña de sensibilización), nuevas tecnologías en la escuela, derechos de la mujer, empoderamiento femenino.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Exemples concrets inspirés des sessions 2023-2025 -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Ejemplos de ejercicios tipo Bac (Camerún)</h2>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Ejemplo 1 – Comprensión de textos (sesión 2025)</h3>
+                <div class="exemple-context">
+                    <strong>Tema:</strong> Derechos de la mujer, acceso a la justicia, discriminación y estereotipos. <br>
+                    <strong>Extracto (ficticio inspirado en examen real):</strong> “A pesar de los avances legislativos, muchas mujeres siguen enfrentando barreras culturales para denunciar la violencia doméstica. La falta de educación jurídica y el miedo al rechazo social perpetúan la desigualdad.”
+                </div>
+                <div class="exemple-correction">
+                    <strong>📝 Pregunta tipo:</strong> ¿Cuáles son los dos obstáculos principales que menciona el texto para que las mujeres accedan a la justicia? <br>
+                    <strong>✅ Respuesta modelo:</strong> El texto señala dos obstáculos principales: primero, la falta de educación jurídica que impide a las mujeres conocer sus derechos; segundo, el miedo al rechazo social, debido a los estereotipos y prejuicios culturales que aún persisten en la sociedad.
+                </div>
+                <div class="exemple-astuce">
+                    💬 Astucia: Siempre cita una frase del texto para justificar tu respuesta (entre comillas). Demuestra que has comprendido bien.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Ejemplo 2 – Traducción (tema francés → español)</h3>
+                <div class="exemple-context">
+                    <strong>Frase en francés:</strong> “Il est essentiel que les jeunes prennent conscience des dangers d’Internet pour éviter la cybercriminalité.”
+                </div>
+                <div class="exemple-correction">
+                    <strong>🔁 Traducción correcta al español:</strong> “Es esencial que los jóvenes tomen conciencia de los peligros de Internet para evitar la ciberdelincuencia.” <br>
+                    <em>Análisis:</em> Uso del subjuntivo (<strong>tomen</strong>) porque “es esencial que” expresa una necesidad. “Prendre conscience” → “tomar conciencia”. “Cybercriminalité” → “ciberdelincuencia”.
+                </div>
+                <div class="exemple-astuce">
+                    💡 Recuerda: después de expresiones como “es necesario que”, “es importante que” → subjuntivo. ¡No lo olvides!
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Ejemplo 3 – Redacción libre (inspirado Bac 2024)</h3>
+                <div class="exemple-context">
+                    <strong>Consigna:</strong> “¿Se puede vivir sin televisión hoy en día? Presenta los pros y los contras y da tu opinión argumentada.”
+                </div>
+                <div class="exemple-correction">
+                    <strong>📝 Estructura sugerida:</strong> <br>
+                    - <strong>Introducción:</strong> La televisión sigue siendo un medio influyente, pero con Internet surgen nuevas formas de consumo. <br>
+                    - <strong>Desarrollo (ventajas):</strong> Entretenimiento, información en directo, programas educativos. <br>
+                    - <strong>Desarrollo (inconvenientes):</strong> Publicidad excesiva, contenido pasivo, pérdida de tiempo. <br>
+                    - <strong>Opinión personal:</strong> Se puede vivir sin ella si se sustituye por lecturas o plataformas selectivas, pero requiere disciplina. <br>
+                    - <strong>Conclusión:</strong> La clave es un consumo responsable.
+                </div>
+                <div class="exemple-astuce">
+                    💬 Usa conectores variados: “por una parte… por otra parte”, “no obstante”, “en mi opinión”, “para concluir”.
+                </div>
+            </div>
+        </section>
+
+        <!-- Pièges courants et conseils -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants & consejos de último minuto</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Error frecuente en comprensión:</span> Copiar frases enteras sin reformular. Siempre demuestra que entiendes parafraseando.</li>
+                    <li><span class="bold">En traducción (versión):</span> No traducir palabra por palabra. Ejemplo: “estar de acuerdo” ≠ “être d’accord” literalmente igual, pero cuidado con la preposición: “Estoy de acuerdo con…” → “Je suis d’accord avec…”.</li>
+                    <li><span class="bold">En expresión escrita:</span> Olvidar los párrafos. Un texto sin estructura se penaliza. Salta líneas entre introducción, desarrollo y conclusión.</li>
+                    <li><span class="bold">Atención a la concordancia:</span> “Las personas *es* consciente” ❌ → “Las personas *son* conscientes” ✅.</li>
+                    <li><span class="bold">Falsos amigos clásicos:</span> “Éxito” ≠ “exito” (en francés sería succès), “actualmente” ≠ “actuellement” (significa “en la actualidad / hoy día”).</li>
+                </ul>
+                <img src="" alt="Imagen que muestra una lista de errores comunes en español con una cruz roja y consejos con un visto bueno" style="width:100%; max-width:240px; margin-top: 1rem; border-radius: 0.8rem;">
+            </div>
+        </section>
+
+        <!-- Consejos de organización para el día del examen -->
+        <section class="concept-section">
+            <h2 class="section-title">⏳ Organización del examen (3 horas)</h2>
+            <div class="card concept-card">
+                <p class="card-description">
+                    El examen del Baccalauréat de Español suele estructurarse así (según los documentos oficiales de Camerún):
+                </p>
+                <ul class="concept-list">
+                    <li><strong>1. Comprensión de textos (1h - 10 puntos):</strong> Lee el texto dos veces, subraya ideas clave, responde con frases completas.</li>
+                    <li><strong>2. Traducción (45 min - 6 puntos):</strong> Versión o tema. Empieza por lo que domines mejor. Relee para evitar errores de concordancia.</li>
+                    <li><strong>3. Expresión escrita (1h15 - 10 puntos):</strong> Elige el sujeto que más domines. Haz un esquema rápido (5 min) antes de redactar. Controla la longitud (máx. 25 líneas).</li>
+                </ul>
+                <div class="exemple-astuce" style="margin-top: 1rem;">
+                    🕒 Reparte bien tu tiempo: guarda al menos 10 minutos al final para releer y corregir faltas de ortografía y tildes (acentos).
+                </div>
+            </div>
+        </section>
+
+        <!-- Grille récapitulative des critères de correction -->
+        <section class="concept-section">
+            <h2 class="section-title">📊 Criterios de corrección (lo que el profesor evaluará)</h2>
+            <div class="card concept-card">
+                <table style="width:100%; border-collapse: collapse; font-size: 0.9rem;">
+                    <thead>
+                        <tr style="background-color:#eef2ff; border-bottom:2px solid #cbd5e1;">
+                            <th style="padding: 0.5rem; text-align:left;">Competencia</th>
+                            <th style="padding: 0.5rem; text-align:left;">Criterios</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid #e2e8f0;">
+                            <td style="padding: 0.5rem;">Comprensión</td>
+                            <td style="padding: 0.5rem;">Identificación de ideas principales, justificación con citas, coherencia de las respuestas.</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid #e2e8f0;">
+                            <td style="padding: 0.5rem;">Traducción</td>
+                            <td style="padding: 0.5rem;">Fidelidad al sentido original, corrección gramatical, uso adecuado del vocabulario, respeto del registro.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem;">Expresión escrita</td>
+                            <td style="padding: 0.5rem;">Estructura (introducción-desarrollo-conclusión), riqueza léxica, conectores, argumentación personal, ortografía y acentuación.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <img src="" alt="Imagen de una tabla de evaluación con una lupa y una nota A+, ilustración educativa" style="width:100%; max-width:200px; margin-top: 1rem; border-radius: 0.5rem;">
+            </div>
+        </section>
+
+        <!-- Derniers conseils motivationnels -->
+        <section class="warning-section">
+            <h2 class="section-title">🌟 Últimos consejos para triunfar</h2>
+            <div class="card warning-card" style="background-color:#e6f7ec; border-left-color:#2e7d32;">
+                <ul>
+                    <li><span class="bold">✔️ Repasa los temas que han salido en los últimos años:</span> familia (sucesión), medio ambiente (contaminación, reciclaje), tecnologías, igualdad de género.</li>
+                    <li><span class="bold">✔️ Practica la escritura a mano:</span> acostúmbrate a escribir sin ordenador, cuida la presentación (limpia y ordenada).</li>
+                    <li><span class="bold">✔️ Haz una lista de 10 conectores y 10 expresiones útiles:</span> “en primer lugar”, “por consiguiente”, “a mi juicio”, “cabe destacar que”…</li>
+                    <li><span class="bold">✔️ La noche anterior: descansa bien, desayuna ligero y lleva material (bolígrafos azul/negro, corrector, agua).</span></li>
+                    <li><span class="bold">✔️ Durante el examen: lee bien las consignas, no te precipites, ¡confía en tu preparación!</span></li>
+                </ul>
+                <div style="margin-top: 1rem; font-size: 1rem; font-weight: 600; text-align: center;">🎓 ¡Tú puedes! ¡Mucha suerte y a brillar en el Baccalauréat de Español! 🎓</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="fiche-footer">
+        <p>Fiche de révision créée pour les élèves de Terminale (Camerún) · Basada en el programa oficial y exámenes 2023-2025 · 📚 ¡Repasa con confianza!</p>
+        <p style="margin-top: 0.3rem;">📧 Contacto: profesor(a) de español · <a href="#">Recursos adicionales en línea</a></p>
+    </footer>
+</div>
+</body>
+</html>

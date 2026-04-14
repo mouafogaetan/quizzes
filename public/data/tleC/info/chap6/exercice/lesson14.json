@@ -1,0 +1,139 @@
+[
+  {
+    "intitule": "Exercice 1 : Définition et identification des cardinalités",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Une bibliothèque souhaite modéliser le prêt de livres. Voici deux extraits de son cahier des charges :</p><ul><li>Un <strong>Adhérent</strong> peut emprunter plusieurs <strong>Livres</strong>.</li><li>Un <strong>Livre</strong> est emprunté par au plus un <strong>Adhérent</strong> à la fois.</li></ul><p>On souhaite modéliser l'association <strong>EMPRUNTER</strong> entre l'entité <strong>ADHÉRENT</strong> et l'entité <strong>LIVRE</strong>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Définir la notion de cardinalité dans le contexte de la modélisation Merise (MCD).",
+        "niveau": "easy",
+        "reponse": "Une cardinalité est un couple (minimum, maximum) qui exprime le nombre de fois qu'une entité participe à une association. Elle définit la contrainte de passage d'une entité à l'association.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Identifier, pour l'association EMPRUNTER, la cardinalité du côté de l'entité ADHÉRENT.",
+        "niveau": "easy",
+        "reponse": "(1,1) ou (1,1) – Un adhérent peut emprunter 1 ou plusieurs livres, mais pour participer à l'association 'Emprunter', il doit emprunter au moins un livre. Cependant, l'énoncé dit 'peut emprunter', donc on considère qu'un adhérent peut n'emprunter aucun livre. La cardinalité est donc (0,n).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Identifier, pour la même association, la cardinalité du côté de l'entité LIVRE.",
+        "niveau": "easy",
+        "reponse": "(0,1) – Un livre est emprunté par au plus un adhérent (donc maximum 1) et peut ne pas être emprunté (donc minimum 0).",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 2 : Analyse de contexte et détermination des cardinalités",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous êtes consultant en base de données. Un client vous décrit le fonctionnement de sa petite entreprise de livraison :</p><ul><li>« Un <strong>Chauffeur</strong> conduit un seul <strong>Véhicule</strong> attitré. Un véhicule est conduit par un seul chauffeur. »</li><li>« Une <strong>Livraison</strong> est effectuée par un seul véhicule. Un véhicule peut effectuer plusieurs livraisons au cours du temps. »</li><li>« Un <strong>Client</strong> peut passer plusieurs commandes. Une <strong>Commande</strong> est passée par un seul client. »</li></ul><p>Pour chaque phrase, identifiez les entités concernées et déterminez les cardinalités de l'association.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Analyser la première phrase pour déterminer les cardinalités de l'association entre CHAUFFEUR et VÉHICULE.",
+        "niveau": "medium",
+        "reponse": "Association : 'CONDUIRE' (ou 'AFFECTER'). Côté CHAUFFEUR : (1,1) car un chauffeur conduit un seul véhicule. Côté VÉHICULE : (1,1) car un véhicule est conduit par un seul chauffeur.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Analyser la deuxième phrase pour déterminer les cardinalités de l'association entre VÉHICULE et LIVRAISON.",
+        "niveau": "medium",
+        "reponse": "Association : 'EFFECTUER'. Côté VÉHICULE : (0,n) car un véhicule peut effectuer plusieurs livraisons (maximum n) mais peut n'en effectuer aucune pour l'instant (minimum 0). Côté LIVRAISON : (1,1) car une livraison est effectuée par un seul véhicule.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Analyser la troisième phrase pour déterminer les cardinalités de l'association entre CLIENT et COMMANDE.",
+        "niveau": "medium",
+        "reponse": "Association : 'PASSER'. Côté CLIENT : (0,n) car un client peut passer plusieurs commandes (maximum n) ou n'en passer aucune (minimum 0). Côté COMMANDE : (1,1) car une commande est passée par un seul client.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 3 : Modélisation complète d'un système de gestion d'étudiants",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>L'Université de Yaoundé I souhaite modéliser son système de gestion des cours. Voici les règles de gestion :</p><ol><li>Un <strong>Étudiant</strong> suit plusieurs <strong>UE</strong> (Unités d'Enseignement). Une UE est suivie par plusieurs étudiants.</li><li>Pour chaque UE suivie, l'étudiant obtient une <strong>Note</strong> (une seule note par UE).</li><li>Une <strong>UE</strong> est enseignée par un seul <strong>Enseignant</strong> (chargé de cours). Un enseignant peut enseigner plusieurs UE.</li></ol><p>On vous demande de produire le Modèle Conceptuel des Données (MCD) en identifiant les entités et les associations avec leurs cardinalités.</p>",
+      "images": [
+        "Diagramme MCD avec trois entités (ETUDIANT, UE, ENSEIGNANT) et deux associations (SUIVRE, ENSEIGNER). L'association SUIVRE a une propriété NOTE. Les cardinalités sont indiquées : ETUDIANT (0,n) vers SUIVRE, UE (0,n) vers SUIVRE, et pour ENSEIGNER : ENSEIGNANT (0,n) vers UE, UE (1,1) vers ENSEIGNANT."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Déterminer et justifier les cardinalités de l'association 'SUIVRE' entre ETUDIANT et UE.",
+        "niveau": "hard",
+        "reponse": "Côté ETUDIANT : (0,n) – Un étudiant peut suivre plusieurs UE (maximum n) et peut n'en suivre aucune au moment de l'inscription (minimum 0). Côté UE : (0,n) – Une UE peut être suivie par plusieurs étudiants (maximum n) et peut ne pas avoir d'étudiants inscrits (minimum 0). C'est une association de type 'plusieurs-à-plusieurs'.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Analyser la spécificité de la propriété 'Note' dans l'association SUIVRE. Justifier pourquoi il s'agit d'une propriété de l'association et non d'une propriété de l'entité ETUDIANT ou UE.",
+        "niveau": "hard",
+        "reponse": "La note n'est ni une caractéristique intrinsèque de l'étudiant (indépendante du cours), ni du cours (indépendante de l'étudiant). Elle dépend du couple (Étudiant, UE). C'est donc une propriété de l'association 'SUIVRE'.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Déterminer et justifier les cardinalités de l'association 'ENSEIGNER' entre ENSEIGNANT et UE.",
+        "niveau": "hard",
+        "reponse": "Côté ENSEIGNANT : (0,n) – Un enseignant peut enseigner plusieurs UE (maximum n) ou n'enseigner aucune UE (minimum 0). Côté UE : (1,1) – Chaque UE est enseignée par un seul enseignant.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 4 : Évaluation complète – Gestion de commandes en ligne",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Une plateforme de e-commerce au Cameroun vous fournit le cahier des charges suivant :</p><ul><li>Un <strong>Client</strong> peut passer 0 à plusieurs <strong>Commandes</strong>.</li><li>Une <strong>Commande</strong> est obligatoirement passée par un seul client.</li><li>Une <strong>Commande</strong> est composée d'un ou plusieurs <strong>Produits</strong>.</li><li>Un <strong>Produit</strong> peut apparaître dans plusieurs commandes.</li><li>Pour chaque produit dans une commande, on enregistre la <strong>Quantité</strong> commandée.</li></ul><p>Réalisez le MCD complet correspondant à ce cahier des charges.</p>",
+      "images": [
+        "Diagramme MCD avec trois entités (CLIENT, COMMANDE, PRODUIT). Deux associations : 'PASSER' entre CLIENT et COMMANDE, et 'COMPOSER' entre COMMANDE et PRODUIT. L'association COMPOSER possède une propriété QUANTITE. Cardinalités : PASSER : CLIENT (0,n), COMMANDE (1,1). COMPOSER : COMMANDE (1,n), PRODUIT (0,n)."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Construire le MCD en identifiant clairement les entités, associations, propriétés et les cardinalités de chaque association.",
+        "niveau": "very hard",
+        "reponse": "Entités : CLIENT, COMMANDE, PRODUIT. Associations : PASSER (entre CLIENT et COMMANDE), COMPOSER (entre COMMANDE et PRODUIT) avec propriété QUANTITE. Cardinalités : PASSER : CLIENT (0,n) et COMMANDE (1,1). COMPOSER : COMMANDE (1,n) et PRODUIT (0,n).",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Expliquer pourquoi la cardinalité de COMMANDE côté PASSER est (1,1).",
+            "niveau": "very hard",
+            "reponse": "Parce qu'une commande est obligatoirement passée par un seul client (minimum 1) et ne peut pas être passée par plusieurs clients (maximum 1). C'est une contrainte d'unicité forte."
+          },
+          {
+            "numero": "1.b",
+            "texte": "Expliquer pourquoi la cardinalité de PRODUIT côté COMPOSER est (0,n).",
+            "niveau": "very hard",
+            "reponse": "Un produit peut ne jamais être commandé (minimum 0) ou apparaître dans plusieurs commandes (maximum n). La plateforme peut avoir des produits en catalogue qui ne sont pas encore achetés."
+          },
+          {
+            "numero": "1.c",
+            "texte": "Justifier la présence de la propriété QUANTITÉ dans l'association COMPOSER.",
+            "niveau": "very hard",
+            "reponse": "La quantité commandée d'un produit dépend spécifiquement d'une commande particulière. Ce n'est ni une propriété fixe du produit, ni une propriété de la commande indépendante du produit. Elle décrit la relation entre un produit et une commande spécifique."
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Philosophie Tle A : Période Patristique et Médiévale</title>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;  /* Fond très clair pour contraster avec les cards */
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 950px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #1e3a8a, #0f172a);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #eab308; /* jaune médiéval */
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #cbd5e1;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1e3a8a;
+            border-left: 4px solid #1e3a8a;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #1e3a8a;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .badge-philo {
+            background-color: #e0e7ff;
+            color: #1e3a8a;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.7rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #1e3a8a;
+            text-decoration: none;
+            border-bottom: 1px dotted #1e3a8a;
+        }
+
+        .fiche-footer a:hover {
+            color: #0f172a;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+    <!-- MathJax pour formules symboliques si besoin (non utilisé ici mais gardé) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">📜 Leçon 1 : Période patristique & médiévale<br>Dieu, la foi, la raison</h1>
+        <p class="lesson-subtitle">Philosophie – Terminale A4 & ABI (Cameroun) · Programme officiel</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section des concepts clés -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Éléments clés à retenir</h2>
+            
+            <div class="card concept-card">
+                <div class="badge-philo">Contexte historique</div>
+                <h3 class="card-title">Philosophie patristique (Ier – VIIIe siècle)</h3>
+                <p class="card-description">
+                    Période des « Pères de l’Église » qui cherchent à concilier la foi chrétienne avec la pensée grecque (Platon, Aristote). 
+                    Deux grands noms : <strong>Saint Augustin</strong> (Afrique du Nord) et, plus tard, <strong>Jean Scot Érigène</strong>. 
+                    L’objectif est de défendre la foi par la raison, mais en reconnaissant la primauté de la Révélation.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Foi précède la raison</strong> : « Crois pour comprendre » (Augustin). La foi éclaire l’intelligence.</li>
+                    <li><strong>Création ex nihilo</strong> : Dieu crée le monde à partir de rien, par amour.</li>
+                    <li><strong>La Cité de Dieu</strong> oppose la cité terrestre (amour de soi) à la cité céleste (amour de Dieu).</li>
+                </ul>
+                <img src="" alt="Icône de Saint Augustin, évêque d'Hippone, penseur majeur de la patristique" style="display:none;">
+            </div>
+
+            <div class="card concept-card">
+                <div class="badge-philo">Scolastique & apogée médiévale</div>
+                <h3 class="card-title">Philosophie scolastique (IXe – XIVe siècle) & Saint Thomas d’Aquin</h3>
+                <p class="card-description">
+                    La scolastique systématise la réflexion en s’appuyant sur la logique aristotélicienne. <strong>Thomas d’Aquin</strong> (XIIIe s.) réalise la grande synthèse entre foi chrétienne et philosophie d’Aristote.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Harmonie foi/raison</strong> : La raison peut préparer à la foi et démontrer certaines vérités (existence de Dieu), mais les mystères (Trinité, Incarnation) relèvent de la révélation.</li>
+                    <li><strong>Les cinq voies</strong> : preuves de l’existence de Dieu (mouvement, causalité, contingence, degrés de perfection, finalité).</li>
+                    <li><strong>Loi naturelle</strong> : participation de la créature raisonnable à la loi éternelle. Bien = ce qui est conforme à la raison humaine.</li>
+                </ul>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">Problème des universaux</h3>
+                <p class="card-description">
+                    Débat central du Moyen Âge : les idées générales (ex. « humanité », « beauté ») existent-elles réellement ou sont-elles de simples noms ?
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Réalisme (Platonisme)</strong> : Les universaux existent en soi, avant les choses (Guillaume de Champeaux).</li>
+                    <li><strong>Nominalisme</strong> : Les universaux ne sont que des mots, des étiquettes créées par l’esprit (Roscelin, Ockham).</li>
+                    <li><strong>Conceptualisme</strong> : Position moyenne d’Abélard : l’universel existe dans l’esprit mais a un fondement dans la réalité.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section figures majeures -->
+        <section class="concept-section">
+            <h2 class="section-title">🏛️ Les grands penseurs à connaître</h2>
+            <div class="card concept-card">
+                <h3 class="card-title">Saint Augustin (354-430) – Foi et quête de vérité</h3>
+                <p class="card-description">
+                    Né à Thagaste (Algérie actuelle). Influence platonicienne. Pour Augustin, la raison humaine est limitée par le péché ; seule la grâce divine permet d’accéder à la vérité. 
+                    Sa célèbre formule : <strong>« Credo ut intelligam » (je crois pour comprendre).</strong> 
+                    La vérité intérieure est éclairée par Dieu, source de toute lumière. Le temps est une « distension de l’âme ».
+                </p>
+            </div>
+            <div class="card concept-card">
+                <h3 class="card-title">Thomas d’Aquin (1225-1274) – La raison au service de la foi</h3>
+                <p class="card-description">
+                    Dominicain italien, auteur de la <em>Somme théologique</em>. Distingue la vérité de raison (existence de Dieu, âme immortelle) de la vérité de foi (Trinité). 
+                    Il affirme que la philosophie et la théologie sont deux sciences complémentaires. <br>
+                    <strong>Preuve par la contingence :</strong> tout être contingent a besoin d’un être nécessaire, Dieu.
+                </p>
+            </div>
+            <div class="card concept-card">
+                <h3 class="card-title">Pierre Abélard (1079-1142) – La dialectique & Sic et Non</h3>
+                <p class="card-description">
+                    Philosophe français célèbre pour sa méthode du doute systématique. Dans <em>Sic et Non</em>, il confronte des autorités contradictoires pour inviter à l’usage de la raison. 
+                    Pour lui, comprendre la foi passe par l’examen rationnel.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section des exemples de compréhension -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Exemples de compréhension (Baccalauréat)</h2>
+            
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 1 : Commentaire d’une phrase de Saint Augustin</h3>
+                <p class="exemple-context">
+                    « Ne cherche pas à comprendre pour croire, mais crois pour comprendre. En effet, si vous ne croyez pas, vous ne comprendrez pas. » (Augustin, <em>Homélies sur l’Évangile de Jean</em>)
+                </p>
+                <div class="exemple-correction">
+                    <strong>Démarche d’analyse :</strong><br>
+                    → <strong>Problème :</strong> Faut-il soumettre la foi à la raison ou bien la foi est-elle une condition préalable à toute connaissance vraie ?<br>
+                    → <strong>Thèse d’Augustin :</strong> La foi n’est pas un obstacle, mais un fondement qui purifie l’intention et donne accès à l’intelligence des réalités divines.<br>
+                    → <strong>Réfutation possible (objection rationaliste) :</strong> Une telle position risque de justifier le dogmatisme. La raison doit conserver son autonomie.<br>
+                    → <strong>Réinterprétation :</strong> Augustin ne nie pas la raison, il en montre les limites et l’importance de l’humilité cognitive.
+                </div>
+                <div class="exemple-astuce">
+                    💬 Astuce Bac : Pour tout commentaire sur le rapport foi/raison, distinguer le plan théorique (peut-on prouver Dieu ?) et le plan existentiel (engagement personnel).
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 2 : Sujet de dissertation possible</h3>
+                <p class="exemple-context">
+                    <strong>Sujet :</strong> « La raison peut-elle se passer de la foi selon la pensée médiévale ? »
+                </p>
+                <div class="exemple-correction">
+                    <strong>Plan dialectique :</strong><br>
+                    <strong>I – Oui, la raison peut construire une métaphysique sans la foi (ex. preuves de l’existence de Dieu chez Thomas d’Aquin).</strong><br>
+                    <strong>II – Non, sans la foi, la raison reste imparfaite :</strong> Augustin montre que le péché obscurcit l’esprit ; la foi guérit la raison.<br>
+                    <strong>III – Dépassement :</strong> La raison médiévale ne s’oppose pas à la foi, elle reconnaît des domaines distincts mais complémentaires (philosophie et théologie).
+                </div>
+                <div class="exemple-astuce">
+                    📚 Mobilisez les références : Augustin (le Christ comme Vérité intérieure), Thomas d’Aquin (les cinq voies), et pour la critique, pensez à la philosophie des Lumières.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 3 : Illustration du problème des universaux</h3>
+                <p class="exemple-context">
+                    « L’humanité existe-t-elle indépendamment des hommes ? Si tous les hommes disparaissaient, l’essence “homme” subsisterait-elle ? »
+                </p>
+                <div class="exemple-correction">
+                    → <strong>Réalisme extrême</strong> : Oui, l’universel « humanité » est une réalité séparée (Platon).<br>
+                    → <strong>Nominalisme</strong> : Non, ce n’est qu’un mot commode pour désigner des individus.<br>
+                    → <strong>Solution de Thomas d’Aquin</strong> : L’universel existe dans l’intellect (universale post rem) mais a son fondement dans la ressemblance réelle des choses.
+                </div>
+            </div>
+        </section>
+
+        <!-- Pièges et distinctions importantes -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Ne pas confondre :</span> <strong>Patristique</strong> (Pères de l’Église, approche plus néoplatonicienne) et <strong>Scolastique</strong> (universités, méthode dialectique et aristotélisme).</li>
+                    <li><span class="bold">Attention :</span> Augustin n’est pas un irrationaliste ; il valorise la raison intérieure, mais subordonnée à la foi. Thomas d’Aquin accorde plus d’autonomie à la raison naturelle.</li>
+                    <li><span class="bold">Erreur fréquente :</span> Réduire la pensée médiévale à une « nuit obscure » ou à une répétition dogmatique. En réalité, des débats intenses sur la liberté, le mal, les universaux animent cette époque.</li>
+                    <li><span class="bold">À retenir pour le commentaire :</span> Un texte médiéval utilise souvent la logique aristotélicienne. Ne pas négliger les distinctions (essence/existence, substance/accident).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Tableau récapitulatif des thèses -->
+        <section class="concept-section">
+            <h2 class="section-title">📖 Synthèse : foi & raison selon les auteurs</h2>
+            <div class="card concept-card">
+                <table style="width:100%; border-collapse: collapse; background:#f8fafc; border-radius:0.75rem;">
+                    <thead style="background-color:#e2e8f0;">
+                        <tr><th style="padding:0.75rem; text-align:left;">Auteur</th><th style="padding:0.75rem; text-align:left;">Position sur le couple foi/raison</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;"><strong>Saint Augustin</strong></td><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;">« Croire pour comprendre » : la foi est une condition d’accès à la vérité. Raison illuminée par Dieu.</td></tr>
+                        <tr><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;"><strong>Thomas d’Aquin</strong></td><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;">Autonomie relative de la raison : démonstration de l’existence de Dieu sans la foi, mais certains mystères dépassent la raison.</td></tr>
+                        <tr><td style="padding:0.5rem;"><strong>Abélard</strong></td><td style="padding:0.5rem;">La raison critique les autorités pour parvenir à une foi éclairée ; dialectique essentielle.</td></tr>
+                    </tbody>
+                </table>
+                <p class="card-description" style="margin-top:1rem;">
+                    ✨ <strong>Conclusion médiévale générale</strong> : La philosophie n’est pas une ennemie de la théologie, mais une servante (<em>philosophia ancilla theologiae</em>) qui aide à penser Dieu et la création.
+                </p>
+            </div>
+        </section>
+
+        <!-- Citations importantes à retenir -->
+        <section class="exemple-section">
+            <h2 class="section-title">📜 Citations à mobiliser pour le Bac</h2>
+            <div class="card concept-card">
+                <ul class="concept-list">
+                    <li><strong>Augustin :</strong> « Tu ne chercherais pas si tu ne possédais déjà la vérité. » (<em>De la vraie religion</em>) – indice de l’illumination divine.</li>
+                    <li><strong>Augustin :</strong> « Le cœur a ses raisons que la raison ne connaît point. » (à nuancer, souvent mal attribuée ; mais exprime la primauté de l’amour).</li>
+                    <li><strong>Thomas d’Aquin :</strong> « La grâce ne détruit pas la nature, mais la perfectionne. » – harmonie entre raison et foi.</li>
+                    <li><strong>Anselme de Cantorbéry :</strong> « Fides quaerens intellectum » (la foi en quête d’intelligence).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Images suggérées pour IA (illustration) -->
+        <section class="warning-section" style="margin-top: 1rem;">
+            <h2 class="section-title">🎨 Supports visuels (générés par IA)</h2>
+            <div class="card" style="background:#fff9e6;">
+                <p><strong>Suggestions d’images pour enrichir la fiche :</strong></p>
+                <ul style="margin-left: 1.5rem;">
+                    <li><img src="" alt="Représentation de Saint Augustin écrivant, avec un rayon de lumière divin, style enluminure médiévale" style="display:inline-block; width:80px; opacity:0.6;"> – Saint Augustin dans son étude, lumière symbolique.</li>
+                    <li><img src="" alt="Thomas d’Aquin enseignant à l’université de Paris, tenant la Somme théologique, avec Aristote en arrière-plan"> – Thomas d’Aquin et la synthèse avec Aristote.</li>
+                    <li><img src="" alt="Schéma des cinq voies de Thomas d’Aquin: mouvement, cause, contingence, perfection, finalité"> – Cinq voies schématisées pour la démonstration de Dieu.</li>
+                </ul>
+                <p class="card-description" style="font-size:0.85rem;">Ces visuels aident à mémoriser les personnages et les concepts. Vous pouvez les générer avec un outil d’IA.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Fiche de révision basée sur le programme officiel de Philosophie – Terminale A4 & ABI (Cameroun) · Leçon 1 : Patristique et Moyen Âge · 📚 Préparez le commentaire et la dissertation !</p>
+        <p>🔗 Révision créée par Enseignant certifié · <a href="#">Consulter la progression du 1er trimestre</a></p>
+    </footer>
+</div>
+</body>
+</html>

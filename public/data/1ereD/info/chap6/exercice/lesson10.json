@@ -1,0 +1,130 @@
+[
+  {
+    "intitule": "Le vocabulaire d'une table",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Observe attentivement la table <strong>ÉTUDIANTS</strong> ci-dessous :</p><table border='1'><tr><th>Matricule</th><th>Nom</th><th>Prénom</th><th>Moyenne</th></tr><tr><td>24C001</td><td>DIOP</td><td>Aïcha</td><td>15.5</td></tr><tr><td>24C002</td><td>NGUEMA</td><td>Hugo</td><td>12.0</td></tr><tr><td>24C003</td><td>FOZING</td><td>Bertille</td><td>16.0</td></tr></table><p>Réponds aux questions suivantes en utilisant le vocabulaire spécifique aux bases de données.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifie et nomme chaque élément suivant dans la table ÉTUDIANTS : une ligne, une colonne, une cellule, la clé primaire.",
+        "niveau": "easy",
+        "reponse": "Ligne : (24C001, DIOP, Aïcha, 15.5) par exemple. Colonne : 'Nom' ou 'Matricule' par exemple. Cellule : la valeur 'Hugo' par exemple. Clé primaire : la colonne 'Matricule' car chaque valeur est unique.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Explique pourquoi la colonne 'Nom' ne peut pas servir de clé primaire dans cette table.",
+        "niveau": "medium",
+        "reponse": "Parce qu'il pourrait y avoir des homonymes (deux étudiants avec le même nom), ce qui violerait la règle d'unicité de la clé primaire.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Analyse de la structure d'une table",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Voici la structure de la table <strong>PRODUITS</strong> d'une base de données commerciale :</p><ul><li>CodeProd (chaîne de 5 caractères)</li><li>Libellé (chaîne de 50 caractères)</li><li>PrixUnitaire (nombre décimal)</li><li>QuantiteStock (nombre entier)</li><li>Categorie (chaîne de 20 caractères)</li></ul><p>On précise que chaque produit a un code unique et que le stock ne peut pas être négatif.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Définis ce qu'est une clé primaire et indique quel champ de la table PRODUITS peut jouer ce rôle. Justifie.",
+        "niveau": "easy",
+        "reponse": "Une clé primaire est un champ dont la valeur est unique pour chaque enregistrement et ne peut pas être nulle. Ici, 'CodeProd' est la clé primaire car chaque produit a un code unique.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Propose une contrainte d'intégrité (règle de cohérence) pour le champ 'QuantiteStock'.",
+        "niveau": "medium",
+        "reponse": "La contrainte pourrait être : 'QuantiteStock doit être un nombre entier supérieur ou égal à 0' (valeur par défaut 0 si non renseignée).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Si on ajoute l'enregistrement suivant : ('A100', 'Cahier', 500, -5, 'Fourniture'), quelle règle d'intégrité est violée ? Justifie.",
+        "niveau": "hard",
+        "reponse": "La contrainte d'intégrité sur 'QuantiteStock' est violée car la valeur -5 est négative alors que le stock ne peut pas être négatif.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Application : Création d'une table pour une bibliothèque",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Tu es chargé de concevoir une base de données pour la bibliothèque de ton lycée. Une table <strong>LIVRES</strong> doit contenir les informations suivantes : un identifiant unique pour chaque livre, le titre, l'auteur, l'année de publication, le nombre d'exemplaires disponibles (qui ne peut pas être négatif).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Construis la structure de la table LIVRES : nomme chaque champ et précise son type de données (texte, nombre entier, nombre décimal, date).",
+        "niveau": "easy",
+        "reponse": "idLivre (nombre entier ou texte unique), Titre (texte), Auteur (texte), AnneePub (nombre entier ou date), NbExemplaires (nombre entier).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Identifie la clé primaire parmi les champs que tu as définis. Explique ton choix.",
+        "niveau": "easy",
+        "reponse": "La clé primaire est 'idLivre' car elle est unique pour chaque livre et ne peut pas être nulle.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Écris deux contraintes d'intégrité pour cette table.",
+        "niveau": "medium",
+        "reponse": "1. 'idLivre' doit être unique et non nul. 2. 'NbExemplaires' doit être un nombre entier supérieur ou égal à 0.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Imagine que l'on saisit deux livres avec le même 'idLivre'. Quelle opération serait impossible ? Pourquoi ?",
+        "niveau": "hard",
+        "reponse": "L'insertion du deuxième livre serait impossible (refusée par le SGBD) car la clé primaire exige l'unicité. On ne peut pas avoir deux enregistrements avec la même clé primaire.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Situation problème : Gestion des notes d'une classe",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Ton professeur d'informatique te demande de concevoir une base de données pour gérer les notes des évaluations. La table <strong>NOTES</strong> doit contenir : l'identifiant de l'élève, l'identifiant de l'épreuve, la note obtenue (sur 20), et la date de l'épreuve. Un élève ne peut avoir qu'une seule note par épreuve.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Détermine la clé primaire de cette table. Justifie ta réponse en t'appuyant sur les règles d'unicité et de non-nullité.",
+        "niveau": "hard",
+        "reponse": "La clé primaire est le couple (idEleve, idEpreuve) car c'est la combinaison unique qui identifie une ligne : un couple (élève, épreuve) ne peut apparaître qu'une seule fois.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Propose une contrainte d'intégrité pour le champ 'note'.",
+        "niveau": "medium",
+        "reponse": "La note doit être un nombre décimal compris entre 0 et 20 (inclus).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Évalue la cohérence de cet enregistrement : (E001, EP02, 25, '2025-03-10'). Que se passerait-il lors de la saisie ?",
+        "niveau": "hard",
+        "reponse": "La contrainte d'intégrité sur 'note' serait violée car 25 dépasse la valeur maximale autorisée (20). Le SGBD devrait rejeter l'enregistrement.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

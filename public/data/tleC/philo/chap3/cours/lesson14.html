@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 14 : Principes logiques</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 14 : Les principes logiques de la pensée</h1>
+            <p class="lesson-subtitle">Philosophie · Terminale C & D · Baccalauréat 2025-2026</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Les quatre piliers de la logique</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Principe d'identité (A = A)</h3>
+                    <p class="card-description">
+                        Un être, un objet ou un concept est identique à lui-même. Il possède des caractéristiques qui le définissent et le rendent reconnaissable dans le temps.
+                        Formulé par Aristote, ce principe interdit qu'une chose soit en même temps autre chose qu'elle-même.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Formulation logique :</strong> « Ce qui est, est. » / « A est A ».</li>
+                        <li><strong>Exemple :</strong> Un arbre est un arbre ; il ne peut pas être en même temps et sous le même rapport un cheval.</li>
+                        <li><strong>Rôle :</strong> Garantit la stabilité des concepts et permet la pensée cohérente.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Principe de non-contradiction (A n'est pas non-A)</h3>
+                    <p class="card-description">
+                        Il est impossible qu'une chose soit et ne soit pas en même temps et sous le même rapport. Aucune proposition ne peut être à la fois vraie et fausse.
+                        Ce principe est le fondement de toute argumentation valide.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Formulation :</strong> « On ne peut pas dire à la fois "il pleut" et "il ne pleut pas" dans les mêmes conditions. »</li>
+                        <li><strong>Conséquence :</strong> La contradiction est signe d'erreur. Un discours qui se contredit est invalide.</li>
+                        <li><strong>Référence :</strong> Aristote, <em>Métaphysique</em>, livre Γ.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Principe du tiers exclu (A ou non-A)</h3>
+                    <p class="card-description">
+                        Pour toute proposition, soit elle est vraie, soit sa négation est vraie. Il n'existe pas de troisième option (un « tiers ») entre les deux.
+                        Ce principe évite l'indécision et impose une alternative nette.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Formulation :</strong> « Ou bien A, ou bien non-A ; il n'y a pas de milieu. »</li>
+                        <li><strong>Illustration :</strong> Une affirmation mathématique comme « 2 + 2 = 4 » est vraie ; « 2 + 2 ≠ 4 » est fausse. Pas de statut intermédiaire.</li>
+                        <li><strong>Limite (philosophie moderne) :</strong> En physique quantique ou logique intuitionniste, certains rejettent ce principe, mais en logique classique il reste fondamental.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Principe de raison suffisante (Tout a une raison d'être)</h3>
+                    <p class="card-description">
+                        Énoncé par Leibniz : rien n'arrive sans qu'il y ait une raison (cause ou justification) pour que cela soit ainsi plutôt qu'autrement.
+                        Ce principe oriente la recherche scientifique et la réflexion métaphysique.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Formulation :</strong> « Rien n'est sans raison. » / « Tout phénomène a une cause ou une explication. »</li>
+                        <li><strong>Application :</strong> Pourquoi le verre s'est brisé ? Parce qu'il est tombé (raison efficiente). Pourquoi 2+2=4 ? Parce que c'est conforme aux définitions des nombres (raison logique).</li>
+                        <li><strong>Auteur :</strong> Leibniz (<em>Monadologie</em>, §31-32).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples pratiques -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Applications concrètes pour le bac</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple n°1 : Détecter une contradiction dans un texte</h3>
+                    <p class="exemple-context">
+                        Extrait : « La liberté est absolue, mais l’homme ne peut jamais choisir contre les lois de la nature. »
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Analyse avec le principe de non-contradiction :</strong> 
+                        Si la liberté est <strong>absolue</strong>, alors rien ne peut la limiter. Or l’affirmation « ne peut jamais choisir contre les lois de la nature » pose une restriction. Il y a contradiction : la liberté est à la fois sans limite et limitée. Le raisonnement de l’auteur est donc invalide sous ce rapport.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce bac : Pour l’explication de texte ou la dissertation, repérez les termes qui s’opposent (ex: « tous » vs « certains » ; « toujours » vs « parfois »). C’est souvent une contradiction cachée.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple n°2 : Utiliser le principe du tiers exclu dans une argumentation</h3>
+                    <p class="exemple-context">
+                        Sujet de dissertation : « Peut-on démontrer l’existence de Dieu ? »
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Raisonnement logique :</strong> Selon le tiers exclu, soit Dieu existe, soit Dieu n’existe pas. Il n’y a pas d’état mitoyen. 
+                        Le débat philosophique ne peut pas se contenter d’un « peut-être ». L’argumentation doit trancher ou montrer pourquoi la raison ne peut pas trancher (agnosticisme). 
+                        Ce principe oblige à prendre parti ou à justifier l’impossibilité de décider.
+                    </p>
+                    <div class="exemple-astuce">
+                        📌 À retenir : Le tiers exclu est souvent mobilisé pour critiquer les positions floues ou les « entre-deux » non justifiés. 
+                        En dissertation, l’introduction doit éviter les fausses alternatives : il faut montrer que le problème est bien posé selon A ou non-A.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple n°3 : Raison suffisante en histoire des sciences</h3>
+                    <p class="exemple-context">
+                        « Pourquoi la Terre tourne-t-elle autour du Soleil et non l’inverse ? »
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Démarche :</strong> Le principe de raison suffisante exige une explication. Copernic et Galilée ont cherché la raison (mécanique céleste, simplicité des équations) pour justifier l’héliocentrisme. 
+                        À l’inverse, l’astrologie ou les croyances sans cause violeraient ce principe. 
+                        En philosophie des sciences, toute théorie doit donner des raisons suffisantes pour ses affirmations.
+                    </p>
+                    <div class="exemple-astuce">
+                        🧠 Bac : Quand vous discutez du déterminisme ou de la causalité (leçon 17 sur la liberté), invoquez Leibniz et le principe de raison suffisante pour montrer que tout événement a une cause.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pièges et erreurs fréquentes -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants et confusions à éviter</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre identité et tautologie :</span> « A = A » n’est pas une phrase vide ; c’est la condition de toute pensée déterminée. Une tautologie est une répétition inutile (« un célibataire est un homme non marié »), mais le principe d’identité est le socle de la logique.</li>
+                        <li><span class="bold">Oublier le "sous le même rapport" dans la non-contradiction :</span> Une chose peut être à la fois chaude et froide si on considère des parties différentes (ex: une boisson glacée à l’intérieur et tiède à l’extérieur). La contradiction n’apparaît que si le point de vue et le temps sont identiques.</li>
+                        <li><span class="bold">Croire que le tiers exclu interdit le doute :</span> Le doute philosophique (Descartes) ne viole pas le tiers exclu. Douter de « Dieu existe » revient à examiner la valeur de vérité ; on n’affirme pas un troisième état, on suspend son jugement (épochè). Le principe dit seulement que la proposition est ou vraie ou fausse, même si nous ne savons pas laquelle.</li>
+                        <li><span class="bold">Abus du principe de raison suffisante :</span> Tout n’a pas nécessairement une cause <em>déterminée</em> accessible (quantique, libre arbitre ?). Leibniz pensait que la raison peut être une « raison de convenance » (choix du meilleur). Attention à ne pas le transformer en déterminisme absolu mécaniste.</li>
+                        <li><span class="bold">Dans la dissertation :</span> Ne pas appliquer mécaniquement les principes sans les expliquer. Un bon devoir montre <em>comment</em> le principe d’identité ou de non-contradiction structure l’argumentation.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Schéma ou image conceptuelle (l'IA pourra générer une illustration) -->
+            <section class="concept-section">
+                <h2 class="section-title">🖼️ Représentation visuelle (synthèse)</h2>
+                <div class="card concept-card" style="text-align: center;">
+                    <img src="" alt="Diagramme des quatre principes logiques : identité, non-contradiction, tiers exclu, raison suffisante avec flèches reliant pensée cohérente et argumentation valide" style="max-width:100%; border-radius: 12px; margin-top: 0.5rem; background: #f8fafc;">
+                    <p class="card-description" style="margin-top: 1rem;">
+                        <em>Les quatre principes forment le squelette de la rationalité. Ils garantissent la cohérence, l’absence de contradiction, la décision binaire et l’exigence d’explication. Tout discours philosophique digne de ce nom s’y réfère implicitement.</em>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Auteurs et citations clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 Auteurs et références essentielles</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Aristote (384-322 av. J.-C.)</h3>
+                    <p class="card-description">
+                        « Le principe le plus certain de tous est celui qui ne saurait être faux : il consiste à dire que la même chose ne peut à la fois être et n’être pas. » (<em>Métaphysique</em>, Γ, 3).  
+                        Aristote fonde la logique formelle et pose les trois premiers principes.
+                    </p>
+                </div>
+                <div class="card concept-card">
+                    <h3 class="card-title">Gottfried Wilhelm Leibniz (1646-1716)</h3>
+                    <p class="card-description">
+                        « Notre raisonnement est fondé sur deux grands principes : celui de contradiction et celui de raison suffisante. » (<em>Monadologie</em>, §31-32).  
+                        Leibniz ajoute le principe de raison suffisante pour expliquer la contingence du monde.
+                    </p>
+                </div>
+                <div class="card concept-card">
+                    <h3 class="card-title">Lien avec Kant et la logique transcendantale</h3>
+                    <p class="card-description">
+                        Kant reprend ces principes comme conditions de possibilité de l’entendement. Dans la <em>Critique de la raison pure</em>, il montre qu’ils ne sont pas empiriques mais a priori.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Rappel pour l'épreuve du Bac -->
+            <section class="exemple-section">
+                <h2 class="section-title">🎯 Utilisation dans l'épreuve de philosophie</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Explication de texte</h3>
+                    <p class="exemple-context">
+                        Question type : « Dégagez la structure logique du texte (postulats, arguments, conclusion). »
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Application :</strong> Vérifiez que l’auteur respecte le principe de non-contradiction. Repérez si l’argumentation repose sur le principe d’identité (définitions stables) ou sur le principe de raison suffisante (recherche des causes). 
+                        Une bonne analyse montrera comment les principes logiques organisent la démonstration.
+                    </p>
+                </div>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Dissertation (Essai personnel)</h3>
+                    <p class="exemple-context">
+                        Exemple de sujet : « Faut-il toujours avoir raison ? »
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Piste d’argumentation :</strong> 
+                        - <strong>Thèse :</strong> Oui, la logique exige la non-contradiction (principe d’identité) → donc chercher la vérité, c’est éviter l’erreur.  
+                        - <strong>Antithèse :</strong> L’excès de logique peut négliger les dimensions affectives ou pratiques (Pascal, « le cœur a ses raisons »).  
+                        - <strong>Synthèse :</strong> La raison suffisante n’est pas exclusive : accepter des opinions provisoires sans violer les principes fondamentaux.  
+                        Utilisez les principes comme grille critique de vos propres arguments.
+                    </p>
+                    <div class="exemple-astuce">
+                        ✍️ Conseil rédaction : N’hésitez pas à citer les noms d’Aristote et Leibniz. Montrer que vous maîtrisez ces principes logiques est un gage de rigueur.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme officiel Cameroun - Terminale C & D (2025-2026) · <a href="#">Révision leçon 14 : principes logiques</a> · 📚 Baccalauréat</p>
+        </footer>
+    </div>
+</body>
+</html>

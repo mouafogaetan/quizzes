@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 12 : Lentilles sphériques minces</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (inclus dans le fichier style.css original) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Style pour les images et schémas */
+        .schema-img {
+            display: block;
+            max-width: 100%;
+            margin: 1rem auto;
+            border-radius: 0.75rem;
+            background-color: #f8fafc;
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .img-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+        }
+        .definition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .definition-table td, .definition-table th {
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem;
+            vertical-align: top;
+        }
+        .definition-table th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 12 : Lentilles sphériques minces</h1>
+            <p class="lesson-subtitle">Physique · Première C & E · Optique géométrique</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Concept 1 : Types de lentilles -->
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Lentilles convergentes et divergentes</h3>
+                    <p class="card-description">
+                        Une <strong>lentille sphérique mince</strong> est un milieu transparent (verre, plastique) limité par deux calottes sphériques dont l'épaisseur est petite devant les rayons de courbure. On distingue :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Lentille convergente</strong> (bords minces) : elle fait converger un faisceau parallèle en un point. Symbole : <span class="formule">⟷</span> avec des flèches sortantes.</li>
+                        <li><strong>Lentille divergente</strong> (bords épais) : elle diverge un faisceau parallèle. Symbole : <span class="formule">⟷</span> avec des flèches rentrantes.</li>
+                    </ul>
+                    <!-- Schéma comparatif -->
+                    <img src="" alt="Schéma comparatif d'une lentille convergente (bords minces) et d'une lentille divergente (bords épais) avec représentation des rayons lumineux parallèles incidents et émergents." class="schema-img">
+                    <div class="img-caption">Figure 1 : Lentille convergente (gauche) et divergente (droite) – comportement des rayons lumineux.</div>
+                </div>
+
+                <!-- Concept 2 : Caractéristiques et éléments -->
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Éléments caractéristiques d'une lentille mince</h3>
+                    <p class="card-description">
+                        Toute lentille mince possède des points et plans remarquables qu'il faut connaître pour construire les images.
+                    </p>
+                    <table class="definition-table">
+                        <tr><th>Élément</th><th>Symbole / Notation</th><th>Définition</th></tr>
+                        <tr><td>Centre optique</td><td>$O$</td><td>Point central de la lentille. Tout rayon passant par $O$ n'est pas dévié.</td></tr>
+                        <tr><td>Foyer principal image</td><td>$F'$</td><td>Point de convergence des rayons incidents parallèles à l'axe optique. Pour une convergente, $F'$ est réel ; pour une divergente, $F'$ est virtuel (du côté de l'incidence).</td></tr>
+                        <tr><td>Foyer principal objet</td><td>$F$</td><td>Point dont l'image est à l'infini (rayons émergents parallèles à l'axe). $F$ et $F'$ sont symétriques par rapport à $O$.</td></tr>
+                        <tr><td>Distance focale</td><td>$f' = \overline{OF'}$</td><td>Distance algébrique entre le centre optique et le foyer image. $f' > 0$ pour une convergente, $f' < 0$ pour une divergente.</td></tr>
+                        <tr><td>Vergence</td><td>$C$</td><td>$C = \dfrac{1}{f'}$ (en dioptries $\delta$). $C>0$ (convergente), $C<0$ (divergente).</td></tr>
+                    </table>
+                    <img src="" alt="Schéma d'une lentille convergente avec axe optique, centre optique O, foyers F et F', distance focale f'." class="schema-img">
+                    <div class="img-caption">Figure 2 : Éléments caractéristiques d'une lentille convergente.</div>
+                    <p class="card-description" style="margin-top:0.75rem;">
+                        <strong>À retenir :</strong> La vergence s'exprime en dioptries ($\delta$) et vaut $C = \frac{1}{f'}$ avec $f'$ en mètres.
+                    </p>
+                </div>
+
+                <!-- Concept 3 : Conditions de Gauss -->
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Conditions de Gauss</h3>
+                    <p class="card-description">
+                        Pour que les formules des lentilles minces soient valables et que l'image soit nette (sans aberration), on doit se placer dans les <strong>conditions de Gauss</strong> :
+                    </p>
+                    <ul class="concept-list">
+                        <li>L'objet doit être proche de l'axe optique (rayons peu inclinés).</li>
+                        <li>Les rayons incidents sont peu inclinés par rapport à l'axe (angles petits).</li>
+                        <li>On utilise uniquement la partie centrale de la lentille.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top:0.75rem;">
+                        💡 En pratique, on diaphragme la lentille pour limiter les rayons marginaux et respecter Gauss.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section des exemples concrets -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Déterminer la vergence d'une lentille convergente</h3>
+                    <p class="exemple-context">
+                        Une lentille convergente possède une distance focale $f' = +10,0\ \text{cm}$. Calculer sa vergence $C$.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong> On utilise la relation $C = \dfrac{1}{f'}$ avec $f'$ en mètres.<br>
+                        $f' = 10,0\ \text{cm} = 0,100\ \text{m}$<br>
+                        $C = \dfrac{1}{0,100} = 10,0\ \delta$ (dioptries).<br>
+                        La vergence est positive, confirmant que la lentille est convergente.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Toujours convertir la distance focale en mètres avant de calculer la vergence.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Identifier le type de lentille à partir de sa vergence</h3>
+                    <p class="exemple-context">
+                        Une lentille a une vergence $C = -5,0\ \delta$. Que vaut sa distance focale ? Est-elle convergente ou divergente ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Calcul :</strong> $f' = \dfrac{1}{C} = \dfrac{1}{-5,0} = -0,20\ \text{m} = -20\ \text{cm}$.<br>
+                        La distance focale est négative : la lentille est <strong>divergente</strong> (ses bords sont épais). Le foyer image $F'$ est virtuel, situé du côté de l'objet.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Une lentille divergente a toujours $f' < 0$ et $C < 0$.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Construction rapide : rayon passant par le centre optique</h3>
+                    <p class="exemple-context">
+                        Un rayon lumineux incident arrive sur une lentille convergente en passant par le centre optique $O$. Que se passe-t-il ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Propriété :</strong> Tout rayon lumineux passant par le centre optique $O$ n'est pas dévié. Il traverse la lentille en ligne droite. Cette règle est valable pour les lentilles convergentes comme divergentes.
+                    </p>
+                    <img src="" alt="Schéma montrant un rayon passant par le centre optique O d'une lentille convergente sans déviation." class="schema-img">
+                </div>
+            </section>
+
+            <!-- Section Pièges à éviter -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre les foyers $F$ (objet) et $F'$ (image). Rappel : $F$ est du côté de l'objet, $F'$ du côté de l'image. Pour une convergente, $F'$ est réel (après la lentille).</li>
+                        <li><span class="bold">Attention :</span> Une lentille divergente ne donne jamais d'image réelle d'un objet réel (image toujours virtuelle, droite et réduite).</li>
+                        <li><span class="bold">Piège :</span> La distance focale $f'$ est une grandeur algébrique : positive pour convergente, négative pour divergente. Beaucoup oublient le signe dans les calculs de vergence.</li>
+                        <li><span class="bold">Important :</span> Les conditions de Gauss sont obligatoires pour appliquer les formules de conjugaison (Descartes) vues à la Leçon 13. Hors Gauss, l'image est floue.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section Récapitulatif des formules -->
+            <section class="concept-section">
+                <h2 class="section-title">📐 Formulaire essentiel</h2>
+                <div class="card" style="background-color:#fefce8;">
+                    <ul class="concept-list">
+                        <li><strong>Vergence</strong> : $C = \dfrac{1}{f'}$ avec $f'$ en mètres, $C$ en dioptries ($\delta$).</li>
+                        <li><strong>Relation entre foyers</strong> : $\overline{OF'} = -\overline{OF}$ (symétrie par rapport à $O$).</li>
+                        <li><strong>Nature de l'image (convergente)</strong> : Si l'objet est au-delà de $F$, image réelle renversée ; si objet entre $O$ et $F$, image virtuelle droite.</li>
+                        <li><strong>Nature de l'image (divergente)</strong> : Pour un objet réel, l'image est toujours virtuelle, droite et plus petite que l'objet.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Annexe : schéma de synthèse des trois rayons particuliers -->
+            <section class="exemple-section">
+                <h2 class="section-title">🔍 Rayons particuliers (à maîtriser pour la construction)</h2>
+                <div class="card">
+                    <p class="card-description">
+                        Pour construire l'image d'un objet, on utilise <strong>trois rayons particuliers</strong> issus du point $B$ (extrémité de l'objet) :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Rayon 1 :</strong> parallèle à l'axe optique → émerge en passant par le foyer image $F'$ (convergente) ou semble provenir de $F'$ (divergente).</li>
+                        <li><strong>Rayon 2 :</strong> passant par le centre optique $O$ → n'est pas dévié.</li>
+                        <li><strong>Rayon 3 :</strong> passant par le foyer objet $F$ (convergente) ou dirigé vers $F$ (divergente) → émerge parallèlement à l'axe.</li>
+                    </ul>
+                    <img src="" alt="Construction d'image d'un objet AB pour une lentille convergente avec les trois rayons particuliers : rayon parallèle à l'axe, rayon passant par O, rayon passant par F." class="schema-img">
+                    <div class="img-caption">Figure 3 : Méthode des rayons pour une lentille convergente (objet réel au-delà de F).</div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="fiche-footer">
+            <p>Fiche de révision basée sur le programme officiel de Première C & E (Cameroun) · Leçon 12 : Lentilles sphériques minces | ✨ Relire les conditions de Gauss avant les exercices de construction.</p>
+        </footer>
+    </div>
+</body>
+</html>

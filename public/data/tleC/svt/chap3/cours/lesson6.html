@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Hérédité autosomique chez l'Humain</title>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Image stylée */
+        .illustration {
+            margin: 1rem 0;
+            text-align: center;
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .illustration img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .legend {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Hérédité autosomique chez l'Humain</h1>
+            <p class="lesson-subtitle">SVTEEHB · Terminale C · Module I : Le monde vivant · Chapitre 3 : Génétique formelle</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section Éléments clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Qu'est-ce qu'un caractère autosomique ?</h3>
+                    <p class="card-description">
+                        Un caractère autosomique est porté par les chromosomes non sexuels (autosomes, paires 1 à 22 chez l'humain). 
+                        Son hérédité ne dépend pas du sexe de l'individu. On distingue deux grands modes : <strong>autosomique dominant</strong> et <strong>autosomique récessif</strong>.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Autosomique récessif :</strong> Le caractère ne s'exprime que si l'individu possède deux allèles mutés (homozygote récessif). Les parents sains peuvent être porteurs sains.</li>
+                        <li><strong>Autosomique dominant :</strong> Le caractère s'exprime dès qu'un seul allèle muté est présent (homozygote dominant ou hétérozygote).</li>
+                        <li>Exemples de maladies : <strong>Albinisme</strong> (récessif), <strong>Drépanocytose</strong> (récessif, avec hétérozygote avantageux), <strong>Chorée de Huntington</strong> (dominant).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Analyse des arbres généalogiques</h3>
+                    <p class="card-description">
+                        L'arbre généalogique (ou pedigree) permet de retracer la transmission d'un caractère sur plusieurs générations. 
+                        Les symboles : carré = homme, cercle = femme, noirci = individu atteint, barré = décédé, etc.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Indices d'une transmission autosomique récessive :</strong>
+                            <ul style="margin-top: 5px; margin-left: 1.5rem;">
+                                <li>Les deux sexes sont atteints de façon équivalente.</li>
+                                <li>Les enfants atteints peuvent avoir des parents sains (porteurs hétérozygotes).</li>
+                                <li>Le caractère peut sauter une génération (phénomène de "saut").</li>
+                                <li>Les mariages consanguins augmentent la probabilité d'enfants atteints.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Indices d'une transmission autosomique dominante :</strong>
+                            <ul style="margin-top: 5px; margin-left: 1.5rem;">
+                                <li>Les deux sexes sont également touchés.</li>
+                                <li>Le caractère apparaît à chaque génération (transmission directe).</li>
+                                <li>Un enfant atteint a au moins un parent atteint (sauf mutation nouvelle).</li>
+                                <li>Un parent atteint transmet l'allèle à environ 50% de ses enfants.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="illustration">
+                        <!-- Image générée par IA pour illustrer un arbre généalogique type -->
+                        <img src="" alt="Arbre généalogique symbolisant une transmission autosomique récessive avec parents porteurs sains et enfant atteint. Carrés et cercles noirs pour les malades, croix pour décédé.">
+                        <div class="legend">Figure 1 : Exemple d'arbre généalogique – transmission autosomique récessive (parents sains porteurs, enfant malade).</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Probabilités et calculs</h3>
+                    <p class="card-description">
+                        À partir du génotype des parents, on peut calculer le risque pour un enfant d'être malade ou porteur sain.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Croisement de deux hétérozygotes (Aa × Aa) :</strong> probabilité enfant malade (aa) = 1/4, porteur sain (Aa) = 1/2, sain non porteur (AA) = 1/4.</li>
+                        <li><strong>Croisement hétérozygote × sain homozygote (Aa × AA) :</strong> 0% enfant malade, 50% porteurs sains.</li>
+                        <li><strong>Croisement hétérozygote × malade (Aa × aa) :</strong> 50% malades, 50% porteurs sains.</li>
+                        <li>Formule pour la consanguinité : risque augmenté si les parents partagent un ancêtre commun.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section Exemples concrets -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension (inspirés du baccalauréat)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : L'albinisme (transmission autosomique récessive)</h3>
+                    <p class="exemple-context">
+                        Dans une famille, les deux parents ont une pigmentation normale. Ils ont trois enfants : deux enfants normaux et un enfant albinos. 
+                        L'albinisme est dû à un allèle récessif (a) ; l'allèle normal (A) domine.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong> Puisque l'enfant albinos est aa (homozygote récessif), il a reçu un allèle a de chaque parent. 
+                        Les parents, bien que sains, possèdent donc le génotype Aa (hétérozygotes). 
+                        Croisement Aa × Aa → 1/4 aa (albinos), 1/2 Aa (porteurs sains), 1/4 AA (sains non porteurs). 
+                        L'enfant albinos confirme la transmission récessive.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Dans un arbre, si deux parents sains donnent naissance à un enfant malade, le caractère est forcément récessif (et les parents sont hétérozygotes).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : La chorée de Huntington (maladie autosomique dominante)</h3>
+                    <p class="exemple-context">
+                        Un homme est atteint de la chorée de Huntington (allèle dominant H). Sa femme est saine (homozygote récessif hh). 
+                        Ils ont 4 enfants. Quelle est la probabilité qu'un enfant donné soit atteint ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Calcul :</strong> L'homme atteint peut être HH ou Hh. Cependant, dans la majorité des cas familiaux, le sujet atteint est hétérozygote (Hh) car la forme homozygote est très rare et souvent létale. 
+                        Croisement Hh × hh → 1/2 Hh (atteint) et 1/2 hh (sain). Donc pour chaque enfant, risque = 50%. 
+                        Si l'homme était HH (rare), tous les enfants seraient atteints.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 En transmission dominante, tout individu atteint a au moins un parent atteint (sauf mutation nouvelle). L'absence de saut de génération est caractéristique.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : La drépanocytose et l'hétérozygote avantageux (paludisme)</h3>
+                    <p class="exemple-context">
+                        Dans une région impaludée, des parents porteurs sains (AS) du gène de la drépanocytose (S = allèle anormal, A = normal) ont plusieurs enfants. 
+                        Quelle est la proportion d'enfants résistants au paludisme sans être gravement malades ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> Croisement AS × AS → 1/4 AA (sensible paludisme), 1/2 AS (porteurs résistants au paludisme, pas de drépanocytose sévère), 1/4 SS (drépanocytose sévère). 
+                        Les individus AS présentent un avantage sélectif en zone impaludée. Cela illustre le maintien d'un allèle délétère dans la population.
+                    </p>
+                    <div class="exemple-astuce">
+                        🌍 Lien avec l'environnement : La sélection naturelle peut maintenir un allèle récessif quand l'hétérozygote est avantagé.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Ne pas confondre :</span> Une maladie autosomique récessive peut apparaître alors que les parents sont sains (porteurs hétérozygotes). <br>
+                        → Erreur fréquente : croire qu’il y a forcément un antécédent familial direct.</li>
+                        <li><span class="bold">Attention :</span> Dans un arbre généalogique, l’absence de malades sur plusieurs générations ne signifie pas forcément une transmission récessive. Il peut s’agir d’une pénétrance incomplète (rare) ou d’un petit effectif.</li>
+                        <li><span class="bold">Piège :</span> Confondre hérédité autosomique et hérédité liée au sexe. Pour l’autosomique, les deux sexes sont touchés de façon équivalente. Si seuls les hommes sont malades, penser à l’hérédité liée à l’X.</li>
+                        <li><span class="bold">À retenir :</span> Pour une maladie dominante, un enfant atteint a obligatoirement un parent atteint (sauf mutation de novo). Ne pas oublier de vérifier la présence du caractère à chaque génération.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section Méthodologie - Résolution d’arbre -->
+            <section class="exemple-section">
+                <h2 class="section-title">📊 Méthodologie : analyser un arbre généalogique</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Étapes clés pour l'examen (Partie A ou B)</h3>
+                    <ul class="concept-list">
+                        <li><strong>1. Observer la répartition par sexe :</strong> Hommes et femmes sont-ils également touchés ? Si oui, autosomique probable ; si majoritairement hommes, penser à l'hérédité liée à l'X.</li>
+                        <li><strong>2. Chercher un saut de génération :</strong> Si deux parents sains donnent un enfant malade → récessif. Si chaque génération compte des malades et qu’un parent malade a des enfants malades → dominant.</li>
+                        <li><strong>3. Déduire les génotypes :</strong> Attribuer des lettres (A/a). Partir des individus malades (aa pour récessif ; A_ pour dominant). Remonter chez les parents.</li>
+                        <li><strong>4. Calculer les probabilités :</strong> Utiliser un échiquier de croisement pour déterminer la probabilité pour un enfant à naître.</li>
+                        <li><strong>5. Rédiger une conclusion :</strong> « Le caractère étudié est autosomique récessif/dominant car ... ».</li>
+                    </ul>
+                    <div class="illustration">
+                        <img src="" alt="Schéma méthodologique : arbre généalogique avec légendes pour chaque étape d'analyse (carré/cercle, noircis, double trait = consanguinité).">
+                        <div class="legend">Figure 2 : Exemple d'arbre avec consanguinité (mariage entre cousins) augmentant le risque d’expression récessive.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lien avec l'examen : Session 2024, Partie A -->
+            <div class="card" style="background-color: #eff6ff; border: 1px solid #bfdbfe;">
+                <h3 class="card-title" style="border-left-color: #f59e0b;">📌 Lien avec l'examen officiel</h3>
+                <p style="margin-bottom: 0;">
+                    <strong>Session 2024, Partie A :</strong> exploitation d'un arbre généalogique pour déterminer le mode de transmission d'une maladie autosomique (albinisme ou drépanocytose). 
+                    Savoir calculer les risques pour les générations suivantes. Entraînez-vous sur des pedigrees avec consanguinité.
+                </p>
+                <p style="margin-top: 0.5rem;">
+                    <strong>Session 2023, Partie B :</strong> conseil génétique à partir d’un arbre familial (situation problème). 
+                    Il faut argumenter en utilisant les probabilités et proposer une conduite à tenir.
+                </p>
+            </div>
+
+            <!-- Révision rapide des symboles -->
+            <section class="concept-section">
+                <h2 class="section-title">🧬 Symboles d'un arbre généalogique</h2>
+                <div class="card concept-card">
+                    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-around;">
+                        <div style="text-align: center;"><span style="font-size: 2rem;">□</span><br>Homme sain</div>
+                        <div style="text-align: center;"><span style="font-size: 2rem;">○</span><br>Femme saine</div>
+                        <div style="text-align: center;"><span style="font-size: 2rem; color: black; background: #000; display: inline-block; width: 30px; height: 30px; border-radius: 4px;"></span><br>Individu atteint</div>
+                        <div style="text-align: center;"><span style="font-size: 2rem;">◊</span><br>Sexe inconnu</div>
+                        <div style="text-align: center;"><span style="font-size: 2rem;">□̸</span><br>Décédé</div>
+                        <div style="text-align: center;">⟷<br>Mariage</div>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem; text-align: center;">
+                        <strong>Ligne horizontale</strong> = union ; <strong>ligne verticale</strong> = descendance ; <strong>chiffre romain</strong> = génération.
+                    </p>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="fiche-footer">
+            <p>Fiche de révision générée par Enseignant SVTEEHB – Terminale C | Programme officiel 2025-2026 | <a href="#">Télécharger la fiche PDF</a> · 📚 Basé sur les épreuves 2023-2024-2025</p>
+        </footer>
+    </div>
+</body>
+</html>

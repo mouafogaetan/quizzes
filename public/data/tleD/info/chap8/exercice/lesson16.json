@@ -1,0 +1,182 @@
+[
+  {
+    "intitule": "Modifier la structure d'une table (QCM)",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Cet exercice évalue vos connaissances sur la commande SQL <code>ALTER TABLE</code> utilisée pour modifier la structure d'une table existante. Chaque question comporte une seule bonne réponse.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier la commande SQL utilisée pour ajouter une nouvelle colonne nommée `adresse` de type `VARCHAR(100)` à une table `client`.",
+        "niveau": "easy",
+        "reponse": "ALTER TABLE client ADD adresse VARCHAR(100);",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Parmi les requêtes suivantes, laquelle est correcte ?",
+            "niveau": "easy",
+            "reponse": "ALTER TABLE client ADD adresse VARCHAR(100);"
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "texte": "Reconnaître la syntaxe correcte pour modifier le type de données d'une colonne existante (`telephone`) de `VARCHAR(10)` à `VARCHAR(15)`.",
+        "niveau": "easy",
+        "reponse": "ALTER TABLE client MODIFY telephone VARCHAR(15); (MySQL) ou ALTER TABLE client ALTER COLUMN telephone TYPE VARCHAR(15); (PostgreSQL/SQLite)",
+        "sousQuestions": [
+          {
+            "numero": "2.a",
+            "texte": "Quelle commande utiliseriez-vous ?",
+            "niveau": "easy",
+            "reponse": "ALTER TABLE client MODIFY telephone VARCHAR(15); (en MySQL) ou ALTER TABLE client ALTER COLUMN telephone TYPE VARCHAR(15); (en PostgreSQL)."
+          }
+        ]
+      },
+      {
+        "numero": 3,
+        "texte": "Choisir l'instruction permettant de supprimer la colonne `date_naissance` de la table `employe`.",
+        "niveau": "easy",
+        "reponse": "ALTER TABLE employe DROP COLUMN date_naissance;",
+        "sousQuestions": [
+          {
+            "numero": "3.a",
+            "texte": "Laquelle de ces requêtes est valide ?",
+            "niveau": "easy",
+            "reponse": "ALTER TABLE employe DROP COLUMN date_naissance;"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Ajouter des contraintes avec ALTER TABLE",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Une table <code>commande</code> a déjà été créée sans clé étrangère vers la table <code>client</code>. Vous devez ajouter cette contrainte après la création de la table.</p>\n<p>Structure actuelle de <code>commande</code> :</p>\n<pre>\ncommande (\n    id_commande INT PRIMARY KEY,\n    date_commande DATE,\n    id_client INT\n);\n</pre>\n<p>La table <code>client</code> possède une clé primaire <code>id_client</code>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Rédiger la commande SQL pour ajouter une clé étrangère sur `id_client` dans la table `commande` qui référence `client(id_client)`.",
+        "niveau": "medium",
+        "reponse": "ALTER TABLE commande ADD CONSTRAINT fk_commande_client FOREIGN KEY (id_client) REFERENCES client(id_client);",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Justifier l'utilité d'ajouter cette contrainte de clé étrangère a posteriori plutôt que lors de la création de la table.",
+        "niveau": "medium",
+        "reponse": "Cela permet d'adapter la structure de la base de données à de nouveaux besoins (évolution du schéma), ou de corriger une conception initiale incomplète, tout en préservant les données existantes."
+      }
+    ]
+  },
+  {
+    "intitule": "Gestion des erreurs lors de la modification",
+    "type": "ressource",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>On exécute la requête suivante sur une table `produit` contenant déjà des enregistrements :</p>\n<pre>ALTER TABLE produit MODIFY prix INT;</pre>\n<p>La colonne `prix` était initialement de type `VARCHAR(10)` et contient des valeurs comme '100', '200', 'abc'.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Analyser le résultat probable de cette requête et expliquer pourquoi.",
+        "niveau": "hard",
+        "reponse": "La requête échouera (ou pourra convertir les valeurs numériques et planter sur 'abc' selon le SGBD). Le type VARCHAR ne peut pas être automatiquement converti en INT si certaines valeurs ne sont pas numériques ('abc'). Le SGBD génère une erreur de conversion.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Proposer une solution pour modifier le type de la colonne `prix` en INT tout en évitant les erreurs.",
+        "niveau": "hard",
+        "reponse": "Il faut d'abord nettoyer les données :\n1. Mettre à jour les valeurs non numériques (ex: SET prix = '0' WHERE prix NOT REGEXP '^[0-9]+$').\n2. Ou créer une nouvelle colonne, y copier les valeurs convertibles, supprimer l'ancienne et renommer la nouvelle.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Refonte d'une base de données scolaire",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous êtes stagiaire dans un lycée camerounais. La base de données des élèves, nommée `eleve`, a été créée simplement avec les colonnes : `id` (INT, clé primaire), `nom` (VARCHAR(50)), `classe` (VARCHAR(10)).</p>\n<p>La direction souhaite enrichir cette base pour mieux suivre les élèves.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la commande SQL pour ajouter une colonne `date_naissance` de type `DATE` à la table `eleve`.",
+        "niveau": "easy",
+        "reponse": "ALTER TABLE eleve ADD date_naissance DATE;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire la commande SQL pour modifier la colonne `nom` afin qu'elle puisse contenir jusqu'à 100 caractères (VARCHAR(100)).",
+        "niveau": "medium",
+        "reponse": "ALTER TABLE eleve MODIFY nom VARCHAR(100); (MySQL) ou ALTER TABLE eleve ALTER COLUMN nom TYPE VARCHAR(100); (PostgreSQL)",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Écrire la commande SQL pour supprimer la colonne `classe` (car on va créer une table `classe` séparée).",
+        "niveau": "easy",
+        "reponse": "ALTER TABLE eleve DROP COLUMN classe;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Ajouter une contrainte pour que la colonne `nom` ne puisse jamais être vide (NOT NULL).",
+        "niveau": "hard",
+        "reponse": "ALTER TABLE eleve MODIFY nom VARCHAR(100) NOT NULL; (MySQL) ou ALTER TABLE eleve ALTER COLUMN nom SET NOT NULL; (PostgreSQL)",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Gestion des stocks dans une PME",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Une petite entreprise de vente de fournitures informatiques à Douala a une table `produit` avec :</p>\n<pre>\nproduit (\n    ref VARCHAR(20) PRIMARY KEY,\n    nom VARCHAR(100),\n    prix_unitaire DECIMAL(10,2)\n);\n</pre>\n<p>Avec le temps, ils veulent ajouter la gestion des stocks et des remises.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Ajouter une colonne `quantite_stock` de type INT (valeur par défaut 0) à la table `produit`.",
+        "niveau": "easy",
+        "reponse": "ALTER TABLE produit ADD quantite_stock INT DEFAULT 0;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Ajouter une colonne `remise` de type DECIMAL(5,2) qui doit être comprise entre 0 et 100 (pourcentage).",
+        "niveau": "hard",
+        "reponse": "ALTER TABLE produit ADD remise DECIMAL(5,2) CHECK (remise BETWEEN 0 AND 100);",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "La direction veut que le prix unitaire ne puisse jamais être négatif. Modifier la table pour ajouter cette contrainte.",
+        "niveau": "hard",
+        "reponse": "ALTER TABLE produit ADD CONSTRAINT check_prix_positif CHECK (prix_unitaire >= 0); (Syntaxe peut varier selon SGBD)",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Un fournisseur demande d'ajouter la colonne `fournisseur_id` (INT) qui fera référence à une table `fournisseur`. Écrire la commande correspondante.",
+        "niveau": "medium",
+        "reponse": "ALTER TABLE produit ADD fournisseur_id INT;\nALTER TABLE produit ADD CONSTRAINT fk_fournisseur FOREIGN KEY (fournisseur_id) REFERENCES fournisseur(id);",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

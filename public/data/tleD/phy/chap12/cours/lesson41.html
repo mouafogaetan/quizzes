@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 41 : Effet Compton</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #e9f0f5;
+            color: #1a2c3e;
+            line-height: 1.5;
+            padding: 40px 20px;
+        }
+
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1a4a6f 100%);
+            color: white;
+            padding: 28px 32px;
+            border-bottom: 5px solid #f4c542;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: #f4c542;
+            color: #0b2b3b;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 40px;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .header .sous-titre {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .header .objectif {
+            margin-top: 18px;
+            background: rgba(255,255,255,0.15);
+            padding: 10px 16px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            border-left: 4px solid #f4c542;
+        }
+
+        /* Sections */
+        .content {
+            padding: 32px 36px;
+        }
+
+        .section {
+            margin-bottom: 32px;
+            border-bottom: 1px solid #e2edf2;
+            padding-bottom: 24px;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a4a6f;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title span {
+            background: #1a4a6f;
+            color: white;
+            width: 34px;
+            height: 34px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .card-notion {
+            background: #f8fbfd;
+            border-left: 6px solid #f4c542;
+            padding: 18px 22px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        .card-notion h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f3b5c;
+            margin-bottom: 12px;
+        }
+
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 8px;
+        }
+
+        .formula-box {
+            background: #eef3fa;
+            border-radius: 20px;
+            padding: 16px 20px;
+            font-family: monospace;
+            font-size: 1rem;
+            overflow-x: auto;
+        }
+
+        .formula-box p {
+            margin: 8px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 500;
+        }
+
+        .highlight {
+            background: #fef5e3;
+            padding: 10px 16px;
+            border-radius: 14px;
+            font-weight: 500;
+            border: 1px solid #ffe0a3;
+        }
+
+        .btn-bac {
+            background: #1e4663;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        footer {
+            background: #f1f6f9;
+            padding: 18px 32px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #4a6f8a;
+            border-top: 1px solid #dce9f0;
+        }
+
+        @media (max-width: 700px) {
+            .content {
+                padding: 24px 20px;
+            }
+            .grid-2cols {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        .comp-etape {
+            margin: 15px 0 0 20px;
+            list-style-type: square;
+        }
+        .comp-etape li {
+            margin: 8px 0;
+        }
+        kbd {
+            background: #ecf3f8;
+            border-radius: 6px;
+            padding: 2px 6px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <div class="header">
+        <div class="badge">📘 Terminale C & D – Physique</div>
+        <h1>Leçon 41 : Effet Compton</h1>
+        <div class="sous-titre">Module 5 – Ondes et Physique Moderne | Chapitre 12 : Optique Physique</div>
+        <div class="objectif">
+            🎯 <strong>Objectifs :</strong> Décrire l’effet Compton comme preuve de la nature corpusculaire de la lumière. 
+            Calculer la variation de longueur d’onde d’un photon diffusé par un électron libre. Maîtriser la notion de longueur d’onde Compton.
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- SECTION 1 : NOTIONS CLÉS -->
+        <div class="section">
+            <div class="section-title">
+                <span>🔑</span> Notions clés & rappels
+            </div>
+            <div class="card-notion">
+                <h3>📌 Contexte historique</h3>
+                <p>En 1923, Arthur Compton observe que des rayons X diffusés par un matériau voient leur longueur d’onde augmenter. 
+                Ce phénomène, inexplicable par la physique classique, confirme que la lumière se comporte comme un flux de particules (photons) possédant une énergie et une quantité de mouvement.</p>
+            </div>
+            <div class="card-notion">
+                <h3>💡 Modèle corpusculaire de la lumière</h3>
+                <p>Un photon est une particule élémentaire sans masse au repos, d’énergie $E = h\nu$ et de quantité de mouvement $p = \dfrac{h}{\lambda}$.<br>
+                Lors d’une collision avec un électron libre (faiblement lié), le photon transfère une partie de son énergie et de sa quantité de mouvement → sa longueur d’onde augmente (diffusion inélastique).</p>
+            </div>
+        </div>
+
+        <!-- SECTION 2 : LOI DE COMPTON -->
+        <div class="section">
+            <div class="section-title">
+                <span>⚡</span> Formule fondamentale – Décalage Compton
+            </div>
+            <div class="formula-box">
+                <p style="font-size:1.2rem; font-weight:700; margin-bottom:8px;">📐 Variation de longueur d’onde (décalage Compton) :</p>
+                $$ \Delta \lambda = \lambda' - \lambda = \frac{h}{m_e \, c} \left(1 - \cos \theta\right) $$
+                <p>avec :<br>
+                $\lambda$ : longueur d’onde du photon incident (m)<br>
+                $\lambda'$ : longueur d’onde du photon diffusé (m)<br>
+                $\theta$ : angle de diffusion du photon (angle entre directions incidente et diffusée)<br>
+                $h$ : constante de Planck ($6,626 \times 10^{-34} \, \text{J·s}$)<br>
+                $m_e$ : masse de l’électron ($9,109 \times 10^{-31} \, \text{kg}$)<br>
+                $c$ : célérité de la lumière dans le vide ($3,00 \times 10^8 \, \text{m·s}^{-1}$)</p>
+            </div>
+
+            <div class="grid-2cols" style="margin-top: 20px;">
+                <div class="card-notion" style="margin-bottom:0;">
+                    <h3>🧪 Longueur d’onde Compton de l’électron</h3>
+                    <p>Définie comme le décalage pour $\theta = 90^\circ$ (ou $\cos\theta = 0$) :</p>
+                    $$ \lambda_C = \frac{h}{m_e c} \approx 2,43 \times 10^{-12} \, \text{m} = 2,43 \, \text{pm} $$
+                    <p>C’est une constante universelle caractéristique de la particule cible (l’électron).</p>
+                </div>
+                <div class="card-notion" style="margin-bottom:0;">
+                    <h3>📈 Cas particuliers</h3>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>$\theta = 0$</strong> : $\Delta \lambda = 0$ → pas de diffusion (choc mou).</li>
+                        <li><strong>$\theta = 180^\circ$</strong> : $\Delta \lambda = \dfrac{2h}{m_e c} = 2\lambda_C \approx 4,86 \, \text{pm}$ (rétrodiffusion).</li>
+                        <li><strong>$\theta = 90^\circ$</strong> : $\Delta \lambda = \lambda_C \approx 2,43 \, \text{pm}$.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3 : INTERPRÉTATION & DUALITÉ -->
+        <div class="section">
+            <div class="section-title">
+                <span>🌊⚛️</span> Dualité onde-corpuscule : preuve par Compton
+            </div>
+            <div class="highlight" style="margin-bottom: 16px;">
+                🔍 L’effet Compton ne peut être expliqué par la théorie ondulatoire classique (qui prédit une simple diffusion sans changement de longueur d’onde). 
+                La conservation de l’énergie et de la quantité de mouvement appliquée au système {photon + électron} conduit exactement à $\Delta \lambda = \frac{h}{m_e c}(1-\cos\theta)$.
+            </div>
+            <div class="card-notion">
+                <h3>🔁 Conservation de l’énergie</h3>
+                <p>Avant collision : $h\nu + m_e c^2$ (énergie du photon + énergie de masse de l’électron)<br>
+                Après collision : $h\nu' + \gamma m_e c^2$ (photon diffusé + électron relativiste).<br>
+                La variation d’énergie du photon se traduit par une augmentation de $\lambda$.</p>
+                <h3 style="margin-top:12px;">📐 Conservation de la quantité de mouvement vectorielle</h3>
+                <p>$\vec{p}_{\gamma} = \vec{p}_{\gamma'} + \vec{p}_{e^-}$ → composition vectorielle d’où apparaît le terme $(1-\cos\theta)$.</p>
+            </div>
+        </div>
+
+        <!-- SECTION 4 : COMPÉTENCES & MÉTHODES -->
+        <div class="section">
+            <div class="section-title">
+                <span>🧠</span> Compétences exigibles (Bac)
+            </div>
+            <div class="grid-2cols">
+                <div>
+                    <div class="btn-bac">📖 SAVOIR-FAIRE</div>
+                    <ul class="comp-etape">
+                        <li>Calculer la variation de longueur d’onde $\Delta \lambda$ à partir de l’angle de diffusion $\theta$.</li>
+                        <li>Déterminer la longueur d’onde du photon diffusé connaissant $\lambda$ incident.</li>
+                        <li>Calculer l’énergie cinétique cédée à l’électron : $E_{c,e^-} = hc\left(\frac{1}{\lambda} - \frac{1}{\lambda'}\right)$.</li>
+                        <li>Relier l’effet Compton à la dualité onde-particule : argument expérimental fort.</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="btn-bac">🎯 EXEMPLE TYPIQUE BAC</div>
+                    <div class="formula-box" style="background:#fff6e8;">
+                        <p><strong>Énoncé :</strong> Un photon X de longueur d’onde $\lambda = 50 \, \text{pm}$ diffuse sur un électron libre sous un angle $\theta = 60^\circ$.</p>
+                        <p>1. Calculer $\Delta \lambda$. <br>
+                        2. En déduire $\lambda'$. <br>
+                        3. Quelle énergie l’électron a-t-il gagnée ?</p>
+                        <hr style="margin: 8px 0;">
+                        <p><strong>Correction :</strong><br>
+                        $\Delta \lambda = \frac{h}{m_e c}(1-\cos 60^\circ) = 2,43\,\text{pm} \times (1-0,5) = 1,215 \, \text{pm}$<br>
+                        $\lambda' = \lambda + \Delta \lambda = 50 + 1,215 = 51,215 \, \text{pm}$<br>
+                        $E_{c} = hc\left(\frac{1}{\lambda} - \frac{1}{\lambda'}\right) \approx$ ... (calcul numérique) → environ $9,5 \times 10^{-17}\,\text{J}$.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5 : LIENS BAC & IMPORTANCE -->
+        <div class="section">
+            <div class="section-title">
+                <span>🏆</span> Lien Baccalauréat 2023 – 2025
+            </div>
+            <div class="card-notion" style="background: #eef2f9;">
+                <p>✔ L’effet Compton est un thème régulièrement évalué en physique moderne (partie « dualité onde-corpuscule »).<br>
+                ✔ Les sujets de Bac peuvent demander :<br>
+                &nbsp;&nbsp;• De calculer $\Delta \lambda$ pour une diffusion donnée.<br>
+                &nbsp;&nbsp;• D’interpréter l’augmentation de longueur d’onde comme preuve de la nature granulaire de la lumière.<br>
+                &nbsp;&nbsp;• D’utiliser les lois de conservation pour retrouver l’expression de Compton.<br>
+                ✔ Savoir que la longueur d’onde Compton de l’électron $\lambda_C = 2,43 \,\text{pm}$ est une donnée caractéristique à connaître ou retrouver par $h/(m_e c)$.</p>
+            </div>
+            <div class="highlight" style="margin-top: 16px;">
+                ⚠️ <strong>À ne pas confondre :</strong> L’effet photoélectrique met en évidence la quantification de l’énergie (photon absorbé par un électron lié). 
+                L’effet Compton montre la quantification de l’impulsion (collision élastique entre photon et électron libre).
+            </div>
+        </div>
+
+        <!-- SECTION 6 : RÉSUMÉ VISUEL / TABLEAU -->
+        <div class="section">
+            <div class="section-title">
+                <span>📋</span> Synthèse – Effet Compton en bref
+            </div>
+            <table style="width:100%; border-collapse: collapse; background: #fafcfd; border-radius: 20px; overflow: hidden;">
+                <thead style="background:#1a4a6f; color:white;">
+                    <tr>
+                        <th style="padding: 12px; text-align:left;">Grandeur / Concept</th>
+                        <th style="padding: 12px; text-align:left;">Expression / Valeur</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom:1px solid #cde1ec;">
+                        <td style="padding: 12px;">Décalage Compton</td>
+                        <td style="padding: 12px;">$\Delta \lambda = \frac{h}{m_e c}(1-\cos\theta)$</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #cde1ec;">
+                        <td style="padding: 12px;">Longueur d’onde Compton de l’électron</td>
+                        <td style="padding: 12px;">$\lambda_C = \frac{h}{m_e c} \approx 2,43 \times 10^{-12}\,\text{m}$</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #cde1ec;">
+                        <td style="padding: 12px;">Nature de la diffusion</td>
+                        <td style="padding: 12px;">Inélastique (le photon perd de l’énergie)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px;">Preuve apportée</td>
+                        <td style="padding: 12px;">La lumière possède une quantité de mouvement $p = h/\lambda$ → aspect corpusculaire.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SECTION 7 : PETIT QCM D’AUTO-ÉVALUATION -->
+        <div class="section">
+            <div class="section-title">
+                <span>✅</span> Auto-évaluation (vérification des savoirs)
+            </div>
+            <div class="grid-2cols">
+                <div class="card-notion">
+                    <p><strong>1.</strong> L’effet Compton correspond à :<br>
+                    A – L’absorption totale d’un photon par un électron lié.<br>
+                    B – La diffusion d’un photon avec un électron libre, avec augmentation de $\lambda$.<br>
+                    C – La création d’une paire électron-positon.<br>
+                    <span style="color:#1a7f4b;">✔ Réponse : B</span></p>
+                </div>
+                <div class="card-notion">
+                    <p><strong>2.</strong> Pour $\theta = 90^\circ$, $\Delta \lambda$ vaut :<br>
+                    A – $\frac{h}{m_e c}$<br>
+                    B – $\frac{2h}{m_e c}$<br>
+                    C – 0<br>
+                    <span style="color:#1a7f4b;">✔ Réponse : A (car $1-\cos 90^\circ = 1$)</span></p>
+                </div>
+            </div>
+            <div class="card-notion" style="margin-top: 8px;">
+                <p><strong>3.</strong> Vrai ou faux ? L’effet Compton ne peut s’expliquer sans recours à la quantification de la quantité de mouvement du photon.<br>
+                ➜ <strong>VRAI</strong> – la variation de longueur d’onde résulte directement de la conservation de l’impulsion relativiste.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        📚 Fiche conforme au programme officiel du Cameroun – Terminale C & D (Bac 2023-2025) | Enseignant : Physique – Effet Compton (dualité onde-corpuscule)
+    </footer>
+</div>
+</body>
+</html>

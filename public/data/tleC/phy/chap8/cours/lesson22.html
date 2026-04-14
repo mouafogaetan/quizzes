@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 22 : Pendule Simple</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f9;
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            line-height: 1.5;
+            color: #1e293b;
+        }
+
+        .fiche-revision {
+            max-width: 1200px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 28px 32px;
+            border-bottom: 4px solid #f59e0b;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .badge {
+            background-color: #f59e0b;
+            color: #0f172a;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 32px;
+        }
+
+        /* Grille pour les sections */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-bottom: 28px;
+        }
+
+        .card {
+            background-color: #f8fafc;
+            border-radius: 20px;
+            padding: 20px 24px;
+            border: 1px solid #e2e8f0;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #0f172a;
+            border-left: 5px solid #f59e0b;
+            padding-left: 14px;
+        }
+
+        .definition, .propriete, .exemple {
+            margin-bottom: 20px;
+        }
+
+        .definition strong, .propriete strong, .exemple strong {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .formule {
+            background-color: #eef2ff;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-family: monospace;
+            font-size: 1rem;
+            margin: 16px 0;
+            text-align: center;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .attention {
+            background-color: #fffbeb;
+            border-left: 5px solid #f59e0b;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .methodo {
+            background-color: #ecfdf5;
+            border-left: 5px solid #10b981;
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+
+        .lien-bac {
+            background-color: #fee2e2;
+            border-left: 5px solid #ef4444;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        ul, ol {
+            padding-left: 24px;
+            margin: 12px 0;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .schema-placeholder {
+            background-color: #e2e8f0;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #475569;
+            margin: 16px 0;
+            border: 1px dashed #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-revision">
+        <div class="header">
+            <h1>📚 Leçon 22 : Pendule simple</h1>
+            <div class="subtitle">
+                <span>Module 3 – Mécanique : Systèmes oscillants</span>
+                <span class="badge">🎯 Bac 2025 (fréquent)</span>
+                <span>Terminale C & D</span>
+            </div>
+            <p style="margin-top: 12px;">Étude dynamique, équation différentielle, période propre et applications.</p>
+        </div>
+
+        <div class="content">
+            <!-- Lien avec le bac -->
+            <div class="lien-bac">
+                📌 <strong>Lien Baccalauréat 2025</strong> : Le pendule simple est un classique des épreuves de mécanique. On attend de vous la maîtrise de l'établissement de l'équation différentielle, la résolution dans l'approximation des petits angles, le calcul de la période, et parfois l'étude énergétique.
+            </div>
+
+            <div class="grid-2col">
+                <!-- Colonne gauche : Définitions et concepts clés -->
+                <div class="card">
+                    <div class="card-title">🔧 Définition & schématisation</div>
+                    <div class="definition">
+                        <strong>Pendule simple :</strong> Système mécanique idéal constitué d'une masse ponctuelle \( m \) suspendue à un fil inextensible, de masse négligeable et de longueur \( L \). Il oscille librement dans le champ de pesanteur \( \vec{g} \) sans frottement.
+                    </div>
+                    <div class="schema-placeholder">
+                        📐 <strong>Schéma du pendule simple</strong><br>
+                        [Fil vertical à l'équilibre] → position écartée d'un angle θ.<br>
+                        Forces : \( \vec{T} \) (tension du fil) et \( \vec{P} = m\vec{g} \).
+                    </div>
+                    <div class="propriete">
+                        <strong>Position de référence :</strong> La verticale passant par le point de suspension (O) est la position d'équilibre stable.
+                        <br><strong>Coordonnée de mouvement :</strong> L'angle \( \theta(t) \) que fait le fil avec la verticale.
+                    </div>
+                    <div class="attention">
+                        ⚠️ <strong>Condition essentielle :</strong> Approximation des petits oscillations (\( \theta \ll 1 \) rad) pour obtenir un mouvement harmonique simple.
+                    </div>
+                </div>
+
+                <!-- Colonne droite : Équation différentielle et forces -->
+                <div class="card">
+                    <div class="card-title">⚙️ Équation différentielle du mouvement</div>
+                    <div class="propriete">
+                        <strong>1. Bilan des forces :</strong> Poids \( \vec{P} \) et tension \( \vec{T} \).<br>
+                        <strong>2. Application du PFD (Théorème du moment cinétique ou projection sur l'axe tangentiel) :</strong>
+                        \[
+                        \sum \vec{F}_{\text{ext}} = m \vec{a}
+                        \]
+                        Sur la tangente à la trajectoire (repère de Frenet) :
+                        \[
+                        -mg\sin\theta = m L \ddot{\theta} \quad \text{car} \quad a_t = L \ddot{\theta}
+                        \]
+                        Soit :
+                        \[
+                        \ddot{\theta} + \frac{g}{L} \sin\theta = 0
+                        \]
+                    </div>
+                    <div class="formule">
+                        <strong>Équation non linéaire :</strong> \( \ddot{\theta} + \omega_0^2 \sin\theta = 0 \) avec \( \omega_0^2 = g/L \)
+                    </div>
+                    <div class="propriete">
+                        <strong>Approximation des petits angles :</strong> \( \sin\theta \approx \theta \) (θ en radians). L'équation devient :
+                        \[
+                        \ddot{\theta} + \frac{g}{L} \, \theta = 0
+                        \]
+                        C'est l'équation d'un <strong>oscillateur harmonique</strong> de pulsation propre :
+                        \[
+                        \omega_0 = \sqrt{\frac{g}{L}}
+                        \]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deuxième ligne : Période, solution horaire -->
+            <div class="grid-2col">
+                <div class="card">
+                    <div class="card-title">⏱️ Période propre & solution</div>
+                    <div class="propriete">
+                        La période propre \( T_0 \) est le temps mis pour effectuer une oscillation complète. Pour un pendule simple (petits angles) :
+                        \[
+                        T_0 = \frac{2\pi}{\omega_0} = 2\pi \sqrt{\frac{L}{g}}
+                        \]
+                        <ul>
+                            <li>✔ Indépendante de la masse \( m \) (contrairement au ressort).</li>
+                            <li>✔ Dépend uniquement de \( L \) et \( g \).</li>
+                            <li>✔ Valable pour de faibles amplitudes.</li>
+                        </ul>
+                    </div>
+                    <div class="formule">
+                        <strong>Solution horaire (mouvement harmonique) :</strong> \[ \theta(t) = \theta_{\text{max}} \cos\left( \sqrt{\frac{g}{L}}\, t + \varphi \right) \]
+                        où \( \theta_{\text{max}} \) est l'amplitude angulaire (rad) et \( \varphi \) la phase initiale déterminée par les conditions initiales.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">💡 Étude énergétique (rappel Bac)</div>
+                    <div class="propriete">
+                        <strong>Énergie mécanique (sans frottement) :</strong> \( E_m = E_c + E_{pp} = \text{constante} \).
+                        <ul>
+                            <li>Énergie cinétique : \( E_c = \frac{1}{2} m v^2 = \frac{1}{2} m L^2 \dot{\theta}^2 \)</li>
+                            <li>Énergie potentielle de pesanteur (référence au point bas) : \( E_{pp} = mgL(1 - \cos\theta) \)</li>
+                        </ul>
+                        Pour les petits angles : \( 1 - \cos\theta \approx \frac{\theta^2}{2} \) ⇒ \( E_{pp} \approx \frac{1}{2} mgL \theta^2 \), forme harmonique.
+                    </div>
+                    <div class="methodo">
+                        📝 <strong>Méthode pour retrouver l'équation différentielle :</strong> À partir de la conservation de l'énergie mécanique \( \frac{dE_m}{dt} = 0 \) → après dérivation, on obtient \( \ddot{\theta} + \frac{g}{L}\theta = 0 \).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section : Exemples et applications / pièges -->
+            <div class="card" style="margin-top: 8px;">
+                <div class="card-title">🎯 Applications typiques au Bac</div>
+                <div class="grid-2col" style="gap: 20px; margin-top: 0;">
+                    <div>
+                        <strong>📌 Calcul de g (gravité) :</strong> On mesure \( T_0 \) et \( L \) → \( g = \frac{4\pi^2 L}{T_0^2} \).<br><br>
+                        <strong>📌 Influence de l'amplitude :</strong> Pour θ > 15°, la période réelle \( T \) > \( T_0 \) (anharmonicité). La formule \( T_0 = 2\pi \sqrt{L/g} \) n'est plus exacte.<br><br>
+                        <strong>📌 Pendule dans un ascenseur :</strong> \( g_{\text{eff}} = g \pm a \) (accélération verticale) → période modifiée.
+                    </div>
+                    <div>
+                        <strong>🧪 Exemple typique :</strong><br>
+                        Un pendule simple de longueur \( L = 1,0 \ \text{m} \) à l’équateur (\( g = 9,78 \ \text{m/s}^2 \)) et au pôle (\( g = 9,83 \ \text{m/s}^2 \)). Comparer les périodes.<br>
+                        - \( T_{eq} = 2\pi\sqrt{1/9,78} \approx 2,007 \ \text{s} \)<br>
+                        - \( T_{pole} = 2\pi\sqrt{1/9,83} \approx 2,003 \ \text{s} \)<br>
+                        ➜ La période varie légèrement avec la latitude.
+                    </div>
+                </div>
+                <div class="attention">
+                    ❗ <strong>Erreur fréquente :</strong> Confondre la longueur \( L \) avec la hauteur ou utiliser la masse dans la période. La période du pendule simple ne dépend PAS de la masse.
+                </div>
+            </div>
+
+            <!-- Récapitulatif rapide pour les révisions -->
+            <div class="methodo" style="margin-top: 20px;">
+                <strong>📖 À retenir impérativement pour le Bac :</strong><br>
+                - Équation différentielle (avec et sans petit angle approximation).<br>
+                - Expression de \( T_0 = 2\pi \sqrt{L/g} \) et unités : \( L \) en mètre (m), \( g \) en m/s², \( T_0 \) en seconde (s).<br>
+                - Graphiquement : allure de \( \theta(t) \) sinusoïdale pour faibles amplitudes.<br>
+                - Savoir interpréter une expérience de mesure de \( g \) à l'aide d'un pendule.
+            </div>
+
+            <!-- Pied de page style évaluation -->
+            <div style="margin-top: 32px; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; font-size: 0.8rem; color: #64748b;">
+                Fiche de révision conforme au programme officiel du Cameroun – Terminale C & D | Année 2025-2026
+            </div>
+        </div>
+    </div>
+</body>
+</html>

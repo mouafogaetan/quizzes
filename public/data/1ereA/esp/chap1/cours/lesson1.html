@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 1 : Présentation des familles et conflits familiaux</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Pour l'intégration, on inclut le style directement dans la page */
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+        
+        /* Styles supplémentaires pour les images et petits éléments */
+        .family-tree {
+            background-color: #f9f9ff;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            margin: 15px 0;
+            border: 1px solid #e0e7ff;
+        }
+        .family-tree img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .highlight {
+            background-color: #fef9c3;
+            padding: 0 4px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        .spanish-word {
+            font-weight: 600;
+            color: #1e40af;
+            background-color: #dbeafe;
+            padding: 0.1rem 0.3rem;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 0.1rem 0;
+        }
+        .emojii {
+            font-size: 1.2rem;
+        }
+    </style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">📖 Lección 1: Presentación de las familias y conflictos familiares</h1>
+            <p class="lesson-subtitle">Español · Primera A4 / A BI (Camerún) · Primer trimestre</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- SECTION 1 : Éléments clés à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir (Puntos clave)</h2>
+                
+                <!-- Concept 1 : Vocabulaire de la famille -->
+                <div class="card concept-card">
+                    <h3 class="card-title">👨‍👩‍👧‍👦 1. Vocabulaire de la famille (El léxico de la familia)</h3>
+                    <p class="card-description">
+                        Pour parler de sa famille en espagnol, il faut connaître les noms des membres. Voici les plus importants :
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="spanish-word">El padre / la madre</span> → le père / la mère</li>
+                        <li><span class="spanish-word">El hermano / la hermana</span> → le frère / la sœur</li>
+                        <li><span class="spanish-word">El abuelo / la abuela</span> → le grand-père / la grand-mère</li>
+                        <li><span class="spanish-word">El tío / la tía</span> → l'oncle / la tante</li>
+                        <li><span class="spanish-word">El primo / la prima</span> → le cousin / la cousine</li>
+                        <li><span class="spanish-word">El hijo / la hija</span> → le fils / la fille</li>
+                        <li><span class="spanish-word">Los padres</span> → les parents</li>
+                        <li><span class="spanish-word">Los abuelos</span> → les grands-parents</li>
+                    </ul>
+                    <!-- Image générée par IA d'un arbre généalogique -->
+                    <div class="family-tree">
+                        <img src="" alt="Arbre généalogique simple avec les membres de la famille en espagnol : abuelos, padres, hijos, tíos, primos. Utile pour mémoriser les liens familiaux." style="max-width:100%; border-radius:12px;">
+                        <p style="font-size:0.8rem; color:#475569; margin-top:8px;">📸 <em>Arbre généalogique type : identifie chaque membre pour retenir le vocabulaire.</em></p>
+                    </div>
+                </div>
+
+                <!-- Concept 2 : Adjectifs possessifs -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🔑 2. Les adjectifs possessifs (Los adjetivos posesivos)</h3>
+                    <p class="card-description">
+                        Les adjectifs possessifs indiquent à qui appartient quelque chose ou quel lien de parenté on a. Ils s'accordent en <strong>nombre</strong> (singulier/pluriel) et parfois en <strong>genre</strong> (masculin/féminin). 
+                        En espagnol, on utilise surtout les formes courtes (devant le nom).<br>
+                        <span class="highlight">Attention :</span> contrairement au français, on dit <em>“mi padre”</em> (mon père) sans article.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="spanish-word">mi / mis</span> → mon, ma, mes</li>
+                        <li><span class="spanish-word">tu / tus</span> → ton, ta, tes</li>
+                        <li><span class="spanish-word">su / sus</span> → son, sa, ses (pour él/ella/usted)</li>
+                        <li><span class="spanish-word">nuestro / nuestra / nuestros / nuestras</span> → notre, nos</li>
+                        <li><span class="spanish-word">vuestro / vuestra / vuestros / vuestras</span> → votre, vos (Espagne)</li>
+                        <li><span class="spanish-word">su / sus</span> → leur, leurs (pour ellos/ellas/ustedes)</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top:0.8rem;">
+                        💡 <strong>Astuce :</strong> “Nuestro” et “vuestro” changent de terminaison : nuestro <span class="spanish-word">hermano</span> (notre frère) / nuestra <span class="spanish-word">hermana</span> (notre sœur). Les autres (mi, tu, su) restent invariables sauf pour le pluriel : mis, tus, sus.
+                    </div>
+                </div>
+
+                <!-- Concept 3 : Présent de l'indicatif (verbes réguliers et irréguliers fréquents) -->
+                <div class="card concept-card">
+                    <h3 class="card-title">⚡ 3. Le présent de l'indicatif (Presente de indicativo)</h3>
+                    <p class="card-description">
+                        Pour décrire la famille, exprimer des sentiments ou parler de conflits quotidiens, on utilise beaucoup le présent. 
+                        Voici les terminaisons pour les verbes réguliers :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Verbes en -AR</strong> (hablar → je parle) : <span class="spanish-word">hablo, hablas, habla, hablamos, habláis, hablan</span></li>
+                        <li><strong>Verbes en -ER</strong> (comer → je mange) : <span class="spanish-word">como, comes, come, comemos, coméis, comen</span></li>
+                        <li><strong>Verbes en -IR</strong> (vivir → je vis) : <span class="spanish-word">vivo, vives, vive, vivimos, vivís, viven</span></li>
+                    </ul>
+                    <p class="card-description">
+                        <strong>Verbes irréguliers fréquents dans les conflits familiaux :</strong>
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="spanish-word">Tener</span> (avoir) : tengo, tienes, tiene, tenemos, tenéis, tienen</li>
+                        <li><span class="spanish-word">Decir</span> (dire) : digo, dices, dice, decimos, decís, dicen</li>
+                        <li><span class="spanish-word">Salir</span> (sortir) : salgo, sales, sale, salimos, salís, salen</li>
+                        <li><span class="spanish-word">Hacer</span> (faire) : hago, haces, hace, hacemos, hacéis, hacen</li>
+                    </ul>
+                </div>
+
+                <!-- Concept 4 : Lexique des sentiments et conflits -->
+                <div class="card concept-card">
+                    <h3 class="card-title">💔 4. Lexique des sentiments et des conflits familiaux</h3>
+                    <p class="card-description">
+                        Pour analyser les disputes ou les tensions, voici des mots et expressions utiles :
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="spanish-word">El conflicto</span> → le conflit</li>
+                        <li><span class="spanish-word">La discusión</span> → la dispute</li>
+                        <li><span class="spanish-word">Enfadarse (con alguien)</span> → se fâcher (avec quelqu’un)</li>
+                        <li><span class="spanish-word">El desacuerdo</span> → le désaccord</li>
+                        <li><span class="spanish-word">La incomprensión</span> → l’incompréhension</li>
+                        <li><span class="spanish-word">El amor / el cariño</span> → l’amour / l’affection</li>
+                        <li><span class="spanish-word">El respeto</span> → le respect</li>
+                        <li><span class="spanish-word">La confianza</span> → la confiance</li>
+                        <li><span class="spanish-word">Sobreproteger</span> → surprotéger (cause fréquente de conflit parent-enfant)</li>
+                    </ul>
+                    <p>✏️ <strong>Exemple de phrase :</strong> <em>“Los padres a veces <span class="spanish-word">se enfadan</span> con sus hijos porque no <span class="spanish-word">obedecen</span>.”</em> (Les parents se fâchent parfois avec leurs enfants parce qu'ils n'obéissent pas.)</p>
+                </div>
+            </section>
+
+            <!-- SECTION 2 : Exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension (Ejemplos prácticos)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">📝 Exemple 1 : Décrire une relation familiale</h3>
+                    <p class="exemple-context">
+                        María dice: “Mi abuela es muy cariñosa. Vive con nosotros y me ayuda con mis tareas. Pero a veces mis padres discuten con ella porque ella me da demasiados dulces.”
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Analyse / Compréhension :</strong><br>
+                        • <span class="spanish-word">Mi abuela</span> → ma grand-mère (adjectif possessif <strong>mi</strong>).<br>
+                        • <span class="spanish-word">Vive</span> → verbe <strong>vivir</strong> conjugué au présent (elle vit).<br>
+                        • <span class="spanish-word">Discuten</span> → verbe <strong>discutir</strong> (ils/elles discutent).<br>
+                        • Conflit : les parents sont en désaccord avec la grand-mère à cause des bonbons. Le lexique utilisé : <span class="spanish-word">discuten</span>, <span class="spanish-word">demasiados dulces</span>.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 À retenir : Pour parler d'un conflit, on peut utiliser <span class="spanish-word">“discutir por algo”</span> (discuter à propos de quelque chose) ou <span class="spanish-word">“no estar de acuerdo”</span> (ne pas être d'accord).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">🏠 Exemple 2 : Exprimer un conflit entre parents et enfants</h3>
+                    <p class="exemple-context">
+                        Situation : Un adolescent, Pablo, rentre tard à la maison. Ses parents lui disent : “No tienes derecho a llegar tan tarde. Somos tus padres y nos preocupamos por ti.” Pablo répond : “Siempre me controláis, necesito mi libertad.”
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Analyse grammaticale et lexicale :</strong><br>
+                        • <span class="spanish-word">No tienes derecho</span> → expression d’interdiction (verbe <strong>tener</strong>).<br>
+                        • <span class="spanish-word">Nos preocupamos</span> → verbe pronominal <strong>preocuparse</strong> (s'inquiéter).<br>
+                        • <span class="spanish-word">Me controláis</span> → verbe <strong>controlar</strong> (vous me contrôlez).<br>
+                        • Le conflit naît du besoin de liberté de l’adolescent face à l’autorité parentale. C’est un exemple typique des leçons sur les conflits familiaux.
+                    </p>
+                    <div class="exemple-astuce">
+                        ✨ <strong>Production personnelle :</strong> Tu peux écrire une phrase comme <em>“Los jóvenes a menudo se sienten incomprendidos por sus padres.”</em> (Les jeunes se sentent souvent incompris par leurs parents.)
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3 : Pièges courants / À ne pas confondre -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & conseils (Errores frecuentes)</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre “mi” (mon) et “mí” (moi avec accent) :</span> <span class="spanish-word">Mi padre</span> (mon père) ≠ <span class="spanish-word">A mí me gusta</span> (moi, j’aime). L’accent change le sens !</li>
+                        <li><span class="bold">Oublier l’accord des possessifs “nuestro / vuestro” :</span> On dit <span class="spanish-word">nuestro hermano</span> mais <span class="spanish-word">nuestra hermana</span>. L’accord en genre est obligatoire.</li>
+                        <li><span class="bold">Mauvaise conjugaison des verbes irréguliers :</span> “Yo tengo” et pas “Yo teneo”. Il faut mémoriser les irrégularités du présent (tener, decir, hacer, etc.).</li>
+                        <li><span class="bold">Traduction littérale de “se disputer” :</span> On dit <span class="spanish-word">discutir</span> ou <span class="spanish-word">pelearse</span>, mais attention : <span class="spanish-word">discutir</span> en espagnol peut être neutre (discuter) ou vif. <span class="spanish-word">Reñir</span> est aussi possible.</li>
+                        <li><span class="bold">Ne pas utiliser l’article devant les possessifs :</span> En français on dit “mon frère”, en espagnol c’est <span class="spanish-word">mi hermano</span> (pas “el mi hermano”). C’est une erreur fréquente chez les débutants.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION 4 : Exercice d'application rapide -->
+            <section class="exemple-section">
+                <h2 class="section-title">✍️ Petit exercice d'application</h2>
+                <div class="card" style="background-color:#f0f9ff;">
+                    <h3 class="card-title" style="color:#0f5b7a;">À toi de jouer !</h3>
+                    <p><strong>Consigne :</strong> Complète les phrases avec le bon adjectif possessif ou la bonne forme du verbe au présent.</p>
+                    <ol style="margin-left: 1.8rem; margin-top: 0.5rem; margin-bottom: 1rem;">
+                        <li>______ (Mi / Su) hermano mayor siempre me protege.</li>
+                        <li>Nosotros ______ (tener) una familia numerosa con muchos primos.</li>
+                        <li>Los padres de Ana ______ (discutir) a menudo por el uso del móvil.</li>
+                        <li>______ (Nuestro / Nuestra) abuela nos cuenta historias cada noche.</li>
+                        <li>¿Tú ______ (sentir) que tus padres te comprenden?</li>
+                    </ol>
+                    <details style="margin-top: 10px; cursor: pointer;">
+                        <summary style="font-weight: bold; color: #2563eb;">🔍 Voir les réponses</summary>
+                        <p style="margin-top: 10px;">1. <strong>Mi</strong> hermano mayor... <br>2. <strong>tenemos</strong> <br>3. <strong>discuten</strong> <br>4. <strong>Nuestra</strong> abuela <br>5. <strong>sientes</strong> (verbo sentir – e→ie)</p>
+                    </details>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        💪 Astuce finale : Pour bien réussir l’examen, entraîne-toi à parler de ta propre famille et à décrire un petit conflit (heure de coucher, notes, sorties) en utilisant le présent et les possessifs.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Image illustrative d'une famille camerounaise (support culturel) -->
+            <div style="margin: 1rem 0 0.5rem; text-align:center;">
+                <img src="" alt="Famille camerounaise multigénérationnelle souriante, représentant la diversité des structures familiales en Afrique – pour illustrer la leçon sur la famille et les liens." style="max-width:100%; border-radius:16px; border:1px solid #d9e2ef;">
+                <p style="font-size:0.75rem; color:#475569;">🌍 Illustration : La famille élargie est très présente au Cameroun, ce qui offre des situations de conflits ou d’entraide. Pense à faire le lien avec ta réalité !</p>
+            </div>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision générée pour la classe de Première (A4/A BI) – Cours d’espagnol au Cameroun · Révision libre · 📚 Conforme au programme officiel (Lección 1 : Familias y conflictos)</p>
+        </footer>
+    </div>
+</body>
+</html>

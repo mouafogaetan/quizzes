@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Le potentiel de repos et le potentiel d'action</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Style pour les images simulées (lien avec IA) */
+        .img-placeholder {
+            background-color: #eef2ff;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px dashed #93c5fd;
+            font-size: 0.85rem;
+            color: #1e40af;
+        }
+        .img-placeholder img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .img-caption {
+            font-style: italic;
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Le potentiel de repos et le potentiel d'action</h1>
+            <p class="lesson-subtitle">SVTEEHB – Terminale D | Module I : Le monde vivant – Communication nerveuse</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Le potentiel de repos (PR)</h3>
+                    <p class="card-description">
+                        Le potentiel de repos est la différence de potentiel électrique constante qui existe entre la face interne et la face externe de la membrane d'une cellule excitable (neurone, fibre musculaire) au repos. Sa valeur est d'environ <strong>-70 mV</strong> (intérieur négatif par rapport à l'extérieur).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Origine :</strong> Inégalité de répartition des ions de part et d’autre de la membrane : forte concentration en K<sup>+</sup> à l’intérieur, forte concentration en Na<sup>+</sup> à l’extérieur.</li>
+                        <li><strong>Mécanisme :</strong> La pompe Na<sup>+</sup>/K<sup>+</sup> ATPase (3 Na<sup>+</sup> sortis / 2 K<sup>+</sup> entrés) maintient les gradients. Les canaux potassiques de fuite (ouverts en permanence) permettent la sortie passive de K<sup>+</sup>, créant une charge négative interne.</li>
+                        <li><strong>État :</strong> Membrane polarisée.</li>
+                    </ul>
+                    <!-- Image schématique pompe / répartition ionique -->
+                    <div class="img-placeholder">
+                        <img src="" alt="Schéma d'une membrane neuronale au repos : concentrations ioniques (K+ élevé intra, Na+ élevé extra), pompe Na+/K+, canaux potassiques de fuite. Potentiel de membrane -70mV.">
+                        <div class="img-caption">Figure 1 : Répartition ionique et origine du potentiel de repos (IA générée).</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Le potentiel d'action (PA)</h3>
+                    <p class="card-description">
+                        Le potentiel d'action est une inversion brève et localisée du potentiel de membrane (dépolarisation suivie d'une repolarisation) qui se propage le long de l'axone. Il obéit à la <strong>loi du tout-ou-rien</strong> : une stimulation sous-liminaire ne déclenche rien, une stimulation supraliminaire déclenche un PA de même amplitude maximale.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Seuil d'excitation :</strong> Valeur critique de dépolarisation (environ -55 mV) à atteindre pour déclencher un PA.</li>
+                        <li><strong>Phases du PA :</strong>
+                            <ul style="margin-left: 1.5rem; list-style: circle;">
+                                <li>Dépolarisation rapide : ouverture des canaux Na<sup>+</sup> voltage-dépendants, entrée massive de Na<sup>+</sup> → potentiel devient positif (+30 à +40 mV).</li>
+                                <li>Repolarisation : inactivation des canaux Na<sup>+</sup>, ouverture des canaux K<sup>+</sup> voltage-dépendants, sortie de K<sup>+</sup> → retour vers -70 mV.</li>
+                                <li>Hyperpolarisation (post-potentiel) : légère sous-polarisation due à la sortie excessive de K<sup>+</sup> avant retour à l'équilibre.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Période réfractaire :</strong> période durant laquelle un second PA ne peut pas être déclenché (absolue puis relative).</li>
+                    </ul>
+                    <!-- Image chronologie potentiel action -->
+                    <div class="img-placeholder">
+                        <img src="" alt="Courbe du potentiel d'action avec temps en abscisse et tension en mV : seuil -55mV, dépolarisation jusqu'à +40mV, repolarisation, hyperpolarisation. Indication des canaux Na+ et K+.">
+                        <div class="img-caption">Figure 2 : Les différentes phases du potentiel d'action (IA générée).</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Propagation du potentiel d'action</h3>
+                    <p class="card-description">
+                        Le PA se propage sans atténuation (tout-ou-rien) le long de l'axone. La vitesse de propagation dépend de :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Le diamètre de l'axone :</strong> plus le diamètre est grand, plus la vitesse est élevée.</li>
+                        <li><strong>La présence de gaine de myéline :</strong> la conduction saltatoire (de nœud de Ranvier en nœud de Ranvier) accélère la propagation (jusqu'à 100 m/s).</li>
+                        <li><strong>Propagation orthodromique :</strong> du corps cellulaire vers les terminaisons axonales.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Examen-type : Stimulation et loi du tout-ou-rien</h3>
+                    <p class="exemple-context">
+                        On réalise une expérience sur un axone géant de calmar. Des stimulations électriques d'intensité croissante sont appliquées. Pour des stimulations de 0 à 8 mV, aucun PA n'est enregistré. À 9 mV, un PA de 100 mV d'amplitude apparaît. Pour 10, 12 ou 15 mV, l'amplitude reste de 100 mV. Interprétez.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution :</strong> La stimulation de 8 mV est <strong>sous-liminaire</strong> (n'atteint pas le seuil d'excitation). À 9 mV, le seuil (~ -55 mV) est atteint, déclenchant un PA maximal (loi du tout-ou-rien). Augmenter l'intensité ne change pas l'amplitude du PA, mais peut augmenter sa fréquence de décharge. Cette expérience illustre le caractère « tout ou rien » du potentiel d'action.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Seuil = valeur critique de dépolarisation. Le potentiel d'action est stéréotypé : une fois déclenché, son amplitude est fixe, quelle que soit l'intensité supraliminaire.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Application clinique : Anesthésiques locaux</h3>
+                    <p class="exemple-context">
+                        Les anesthésiques locaux (ex : lidocaïne) bloquent les canaux sodium voltage-dépendants des neurones sensitifs. Expliquez pourquoi cela empêche la transmission du message douloureux.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Explication :</strong> Le potentiel d'action dépend de l'ouverture des canaux Na<sup>+</sup> voltage-dépendants lors de la dépolarisation. En bloquant ces canaux, l'anesthésique empêche l'entrée de Na<sup>+</sup> ; par conséquent, la dépolarisation ne peut pas atteindre le seuil, et aucun PA ne se propage. La sensation douloureuse n'est donc pas transmise au cerveau.
+                    </div>
+                    <div class="exemple-astuce">
+                        🧠 Rappel : Le PA ne peut se produire sans l'entrée rapide de sodium. C'est la cible de nombreux toxiques et médicaments.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges fréquents et rappels -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre potentiel de repos et potentiel d'action :</span> Le potentiel de repos est stable (-70 mV), le potentiel d'action est un événement transitoire (dépolarisation/repolarisation).</li>
+                        <li><span class="bold">Erreur :</span> Penser que l'amplitude du PA varie avec l'intensité du stimulus. <strong>Faux</strong> : c'est la loi du tout-ou-rien, l'amplitude est maximale dès le seuil franchi.</li>
+                        <li><span class="bold">Attention :</span> Le potentiel de repos est principalement dû à la perméabilité au K<sup>+</sup> (canaux de fuite) et à la pompe Na<sup>+</sup>/K<sup>+</sup>. Ne pas l'attribuer uniquement à la pompe.</li>
+                        <li><span class="bold">Piège :</span> Durant la dépolarisation, les canaux Na<sup>+</sup> s'ouvrent (pas les canaux K<sup>+</sup>). La repolarisation est due à l'ouverture des canaux K<sup>+</sup> voltage-dépendants et à l'inactivation des canaux Na<sup>+</sup>.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section pour aller plus loin : lien avec l'examen national -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 Lien avec l’examen (SVTEEHB)</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Cette leçon fait partie du <strong>Chapitre 2 (Communication nerveuse et contraction musculaire)</strong>. 
+                        Aux sessions du baccalauréat, les questions portent souvent sur :
+                    </p>
+                    <ul class="concept-list">
+                        <li>L'analyse de tracés de potentiel d'action (identifier les phases, seuil, période réfractaire).</li>
+                        <li>L'exploitation de résultats expérimentaux montrant l'effet de toxines (tétrodotoxine bloque canaux Na<sup>+</sup>, tétraéthylammonium bloque canaux K<sup>+</sup>).</li>
+                        <li>La comparaison entre fibre myélinisée et non myélinisée (vitesse de conduction saltatoire).</li>
+                        <li>Des QCM ou QRO sur les définitions (polarisation, dépolarisation, loi du tout-ou-rien).</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        📖 <strong>Révision express :</strong> Retenez les valeurs clés : PR = -70 mV, seuil ≈ -55 mV, pic du PA ≈ +30 à +40 mV. Le PA dure environ 1 à 2 ms.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schéma récapitulatif des canaux ioniques -->
+            <section class="exemple-section">
+                <h2 class="section-title">🔬 Récapitulatif schématique : Canaux ioniques impliqués</h2>
+                <div class="card exemple-card">
+                    <div class="img-placeholder">
+                        <img src="" alt="Tableau ou infographie : Phase de repos (canaux K+ fuite ouverts, canaux Na+ voltage-dépendants fermés). Dépolarisation (canaux Na+ voltage-dépendants ouverts, entrée Na+). Repolarisation (canaux Na+ inactivés, canaux K+ voltage-dépendants ouverts). Hyperpolarisation (canaux K+ encore ouverts).">
+                        <div class="img-caption">Figure 3 : États successifs des canaux ioniques au cours du potentiel d'action (IA générée).</div>
+                    </div>
+                    <p class="card-description">
+                        <strong>À mémoriser :</strong> 
+                        <ul>
+                            <li>Repos → canaux K<sup>+</sup> de fuite = ouverts ; canaux Na<sup>+</sup> voltage-dépendants = fermés.</li>
+                            <li>Dépolarisation → canaux Na<sup>+</sup> voltage-dépendants = ouverts.</li>
+                            <li>Repolarisation → canaux Na<sup>+</sup> inactivés ; canaux K<sup>+</sup> voltage-dépendants = ouverts.</li>
+                            <li>Hyperpolarisation → sortie persistante de K<sup>+</sup> puis retour état repos.</li>
+                        </ul>
+                    </p>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision conforme au programme SVTEEHB Terminale D (Session 2023-2025) · Leçon 3 : Potentiel de repos et potentiel d'action · <a href="#">Référence : épreuves nationales 2023 Partie A</a> · 📚 Mise à jour pour l'année 2025-2026</p>
+        </footer>
+    </div>
+</body>
+</html>

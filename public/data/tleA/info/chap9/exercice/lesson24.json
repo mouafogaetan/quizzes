@@ -1,0 +1,123 @@
+[
+  {
+    "intitule": "Comprendre le rôle de la requête DELETE",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>En base de données, on utilise le langage SQL pour manipuler les données. L'une des opérations fondamentales est la suppression d'informations.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Expliquez à quoi sert la commande SQL `DELETE FROM`.",
+        "niveau": "easy",
+        "reponse": "La commande `DELETE FROM` sert à supprimer une ou plusieurs lignes (enregistrements) d'une table dans une base de données.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Identifiez le risque principal que l'on court si on utilise la requête `DELETE FROM nom_table;` sans la clause `WHERE`.",
+        "niveau": "medium",
+        "reponse": "Le risque principal est de supprimer TOUS les enregistrements de la table de manière irréversible (sauf restauration d'une sauvegarde).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Rédigez la syntaxe SQL générale d'une requête `DELETE` permettant de supprimer uniquement l'enregistrement dont l'identifiant (colonne `id`) est égal à 10.",
+        "niveau": "medium",
+        "reponse": "```sql\nDELETE FROM nom_table WHERE id = 10;\n```",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Sauvegarde d'une bibliothèque municipale",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous êtes stagiaire à la bibliothèque municipale de Douala. On vous demande de nettoyer la base de données des adhérents nommée <strong>adherents</strong>. Vous devez supprimer les comptes des anciens membres.</p>\n<p>Voici la structure de la table <strong>adherents</strong> :</p>\n<ul>\n<li><strong>id</strong> (entier, clé primaire)</li>\n<li><strong>nom</strong> (texte)</li>\n<li><strong>prenom</strong> (texte)</li>\n<li><strong>date_inscription</strong> (date)</li>\n<li><strong>actif</strong> (booléen : 1 pour oui, 0 pour non)</li>\n</ul>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrivez la requête SQL pour supprimer l'adhérent dont l'identifiant (`id`) est 154.",
+        "niveau": "medium",
+        "reponse": "```sql\nDELETE FROM adherents WHERE id = 154;\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrivez la requête SQL pour supprimer tous les adhérents qui ne sont pas actifs (`actif = 0`).",
+        "niveau": "hard",
+        "reponse": "```sql\nDELETE FROM adherents WHERE actif = 0;\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Le bibliothécaire vous demande de supprimer les adhérents inscrits avant le 1er janvier 2020. Écrivez la requête SQL correspondante.",
+        "niveau": "hard",
+        "reponse": "```sql\nDELETE FROM adherents WHERE date_inscription < '2020-01-01';\n```\n(Note : Le format de date peut varier selon le SGBD, mais 'AAAA-MM-JJ' est le standard SQL.)",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Gestion des anciens élèves d'un lycée",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Le lycée bilingue de Yaoundé conserve une base de données de tous ses anciens élèves pour l'envoi de magazines. La table se nomme <strong>anciens_eleves</strong>. La direction décide de supprimer les profils des élèves qui ne souhaitent plus recevoir d'informations (colonne <strong>consentement</strong> = 'NON').</p>\n<p>Avant la suppression, un administrateur fait une erreur et exécute la requête : <code>DELETE FROM anciens_eleves;</code>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Analysez l'erreur commise par l'administrateur. Quel est l'impact de cette requête sur la base de données ?",
+        "niveau": "medium",
+        "reponse": "L'administrateur a oublié la clause `WHERE`. L'impact est que TOUS les enregistrements de la table `anciens_eleves` vont être supprimés définitivement.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Proposez une mesure de sécurité ou une bonne pratique qui aurait pu éviter cette suppression massive.",
+        "niveau": "hard",
+        "reponse": "Plusieurs réponses possibles :\n- Faire une sauvegarde (backup) avant d'exécuter une requête DELETE.\n- Utiliser une transaction (`BEGIN TRANSACTION` ... `ROLLBACK` en cas d'erreur).\n- Toujours écrire d'abord un `SELECT * FROM ... WHERE ...` pour visualiser les lignes concernées avant de transformer en `DELETE`.\n- Configurer les droits d'accès pour que certains utilisateurs n'aient pas le droit de faire des DELETE sans clause WHERE.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Écrivez la requête SQL correcte pour supprimer uniquement les élèves dont le champ `consentement` est égal à 'NON'.",
+        "niveau": "medium",
+        "reponse": "```sql\nDELETE FROM anciens_eleves WHERE consentement = 'NON';\n```",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Annuaire d'une association sportive",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Vous gérez la base de données d'une association sportive de football à Garoua. La table <strong>membres</strong> contient les colonnes suivantes :</p>\n<ul>\n<li><strong>id_membre</code> (entier, clé primaire)</li>\n<li><strong>nom</code> (texte)</li>\n<li><strong>age</code> (entier)</li>\n<li><strong>categorie</code> (texte : 'Junior', 'Senior', 'Veteran')</li>\n<li><strong>date_adhesion</code> (date)</li>\n</ul>\n<p>Le règlement intérieur stipule qu'un membre doit être supprimé de la base si son âge est inférieur à 18 ans (car il s'agit d'une association adulte) OU s'il est dans la catégorie 'Veteran' avec une date d'adhésion antérieure à 2015 (anciens membres non renouvelés).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrivez une seule requête SQL (en utilisant les opérateurs logiques `OR` et `AND`) qui supprime les membres correspondant aux critères du règlement.",
+        "niveau": "very hard",
+        "reponse": "```sql\nDELETE FROM membres\nWHERE age < 18\nOR (categorie = 'Veteran' AND date_adhesion < '2015-01-01');\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquez pourquoi l'utilisation de l'opérateur `OR` dans cette requête peut être dangereuse si on ne maîtrise pas bien les conditions.",
+        "niveau": "hard",
+        "reponse": "L'opérateur `OR` supprime les lignes qui vérifient AU MOINS UNE des conditions. Dans cet exemple, tous les membres de moins de 18 ans seront supprimés (peu importe leur catégorie), ET tous les vétérans adhérés avant 2015 seront aussi supprimés. Si on avait mal formulé la condition (ex : en utilisant `AND` à la place), on n'aurait rien supprimé. Il faut donc être très précis dans la logique.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

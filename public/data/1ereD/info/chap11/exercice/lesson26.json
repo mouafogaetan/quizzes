@@ -1,0 +1,130 @@
+[
+  {
+    "intitule": "Savoir identifier et compléter un sous-programme",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Un élève a écrit un programme en C pour calculer la surface d'un rectangle. Voici son code incomplet :</p>\n<pre><code>#include &lt;stdio.h&gt;\n\n// Déclaration de la fonction\nfloat calculerSurface(float longueur, float largeur) {\n    float surface;\n    surface = longueur * largeur;\n    ______________ ; // Instruction manquante\n}\n\nint main() {\n    float L, l, surface;\n    printf(\"Entrez la longueur : \");\n    scanf(\"%f\", &L);\n    printf(\"Entrez la largeur : \");\n    scanf(\"%f\", &l);\n    \n    surface = calculerSurface(L, l);\n    printf(\"La surface du rectangle est : %.2f\", surface);\n    return 0;\n}</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier le type de sous-programme (fonction ou procédure) présent dans ce code. Justifier la réponse.",
+        "niveau": "easy",
+        "reponse": "C'est une fonction car elle retourne une valeur (la surface) à l'aide de l'instruction <code>return</code>. De plus, elle est appelée dans une expression (<code>surface = calculerSurface(L, l);</code>).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Compléter la ligne manquante dans la fonction <code>calculerSurface</code>.",
+        "niveau": "easy",
+        "reponse": "L'instruction manquante est : <code>return surface;</code>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Déterminer la nature des variables <code>longueur</code> et <code>largeur</code> dans la fonction <code>calculerSurface</code> (variable locale ou globale). Expliquer pourquoi.",
+        "niveau": "medium",
+        "reponse": "Ce sont des variables locales à la fonction <code>calculerSurface</code>. Elles sont déclarées dans l'en-tête de la fonction et ne sont accessibles qu'à l'intérieur de cette fonction. Elles reçoivent les valeurs des arguments <code>L</code> et <code>l</code> lors de l'appel.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Distinguer fonction et procédure en situation",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans un magasin, on souhaite créer un programme de gestion de stock. Un stagiaire propose les deux sous-programmes suivants :</p>\n<ul>\n<li><strong>Sous-programme A</strong> : <code>float calculerTTC(float prixHT, float tva)</code> qui retourne le prix TTC.</li>\n<li><strong>Sous-programme B</strong> : <code>void afficherMessage(int codeErreur)</code> qui affiche un message d'erreur différent selon le code reçu.</li>\n</ul>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Déterminer pour chaque sous-programme s'il s'agit d'une fonction ou d'une procédure. Justifier en utilisant le vocabulaire spécifique (retour de valeur, type de retour).",
+        "niveau": "easy",
+        "reponse": "- Sous-programme A : c'est une fonction car son type de retour est <code>float</code> (différent de <code>void</code>) et elle retourne une valeur (le prix TTC).\n- Sous-programme B : c'est une procédure car son type de retour est <code>void</code>, ce qui signifie qu'elle ne retourne aucune valeur.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire l'en-tête (prototype) du sous-programme B tel qu'il serait déclaré avant le <code>main()</code>.",
+        "niveau": "easy",
+        "reponse": "<code>void afficherMessage(int codeErreur);</code>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Imaginer une situation dans la gestion du magasin où l'utilisation d'une procédure serait plus appropriée qu'une fonction. Proposer un exemple concret.",
+        "niveau": "hard",
+        "reponse": "Une procédure serait plus appropriée pour des actions qui ne nécessitent pas de retourner une valeur, comme :\n- Afficher un ticket de caisse (<code>void afficherTicket(Article a, int quantite)</code>)\n- Mettre à jour un fichier de stock (<code>void enregistrerVente(Produit p, int qteVendue)</code>)\n- Émettre un signal sonore en cas de stock faible (<code>void alerterUtilisateur()</code>)\n- Réinitialiser les variables d'une session de caisse (<code>void reinitialiserSession()</code>)\nCes actions sont réalisées pour leur effet (affichage, modification de fichier, action sur le matériel) et non pour la valeur qu'elles retourneraient.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Analyser la portée des variables dans un programme",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un programme C contient le code suivant :</p>\n<pre><code>#include &lt;stdio.h&gt;\n\nint compteurGlobal = 0;  // Variable A\n\nvoid incrementer() {\n    int compteurLocal = 0;  // Variable B\n    compteurGlobal++;\n    compteurLocal++;\n    printf(\"Dans incrementer - Global: %d, Local: %d\\n\", compteurGlobal, compteurLocal);\n}\n\nint main() {\n    printf(\"Au début - Global: %d\\n\", compteurGlobal);\n    incrementer();\n    incrementer();\n    // printf(\"Local: %d\", compteurLocal);  // Ligne commentée\n    return 0;\n}</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Déterminer le type (globale ou locale) de la variable A et de la variable B. Justifier pour chacune.",
+        "niveau": "easy",
+        "reponse": "- Variable A (<code>compteurGlobal</code>) : variable globale car elle est déclarée en dehors de toute fonction, avant le <code>main()</code>. Elle est accessible dans toutes les fonctions du programme.\n- Variable B (<code>compteurLocal</code>) : variable locale car elle est déclarée à l'intérieur de la fonction <code>incrementer()</code>. Elle n'est accessible qu'à l'intérieur de cette fonction.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Prédire l'affichage produit par l'exécution de ce programme. Expliquer l'évolution des valeurs.",
+        "niveau": "medium",
+        "reponse": "L'affichage sera :\n<code>Au début - Global: 0</code>\n<code>Dans incrementer - Global: 1, Local: 1</code>\n<code>Dans incrementer - Global: 2, Local: 1</code>\n\nExplication :\n- <code>compteurGlobal</code> est globale : sa valeur persiste entre les appels. Elle passe de 0 à 1 au premier appel, puis de 1 à 2 au second.\n- <code>compteurLocal</code> est locale : une nouvelle variable est créée à chaque appel avec initialisation à 0. Elle passe à 1 dans la fonction mais est détruite à la sortie.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Expliquer pourquoi la ligne commentée <code>// printf(\"Local: %d\", compteurLocal);</code> provoquerait une erreur de compilation si elle était décommentée. Proposer une modification pour afficher la valeur de <code>compteurLocal</code> depuis le <code>main()</code>.",
+        "niveau": "hard",
+        "reponse": "Cette ligne provoquerait une erreur car <code>compteurLocal</code> est une variable locale à la fonction <code>incrementer()</code> et n'est pas accessible depuis la fonction <code>main()</code>.\n\nPour afficher cette valeur depuis le <code>main()</code>, on peut modifier la fonction pour qu'elle retourne la valeur :\n<pre><code>int incrementer() {\n    int compteurLocal = 0;\n    compteurGlobal++;\n    compteurLocal++;\n    printf(\"Dans incrementer - Global: %d, Local: %d\\n\", compteurGlobal, compteurLocal);\n    return compteurLocal;\n}\n\nint main() {\n    int valeurLocale;\n    printf(\"Au début - Global: %d\\n\", compteurGlobal);\n    valeurLocale = incrementer();\n    printf(\"Local retournée: %d\", valeurLocale);\n    return 0;\n}</code></pre>",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Créer un sous-programme pour résoudre un problème de gestion de notes",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Dans un lycée, un professeur souhaite automatiser le calcul de la moyenne d'un élève. Les notes sont sur 20. Il vous demande d'écrire un programme C.</p>\n<p>Le programme doit :</p>\n<ol>\n<li>Demander le nombre de notes (N) à l'utilisateur (N > 0)</li>\n<li>Saisir les N notes une par une</li>\n<li>Calculer et afficher la moyenne de l'élève</li>\n<li>Afficher un message \"Félicitations !\" si la moyenne est ≥ 10, sinon \"Travaillez davantage.\"</li>\n</ol>\n<p>Contrainte : le calcul de la moyenne doit être effectué par une fonction.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire le prototype de la fonction qui calculera la moyenne.",
+        "niveau": "medium",
+        "reponse": "<code>float calculerMoyenne(float notes[], int n);</code>\nOu : <code>float calculerMoyenne(float *notes, int n);</code>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire la définition (le corps) de cette fonction.",
+        "niveau": "hard",
+        "reponse": "<pre><code>float calculerMoyenne(float notes[], int n) {\n    float somme = 0;\n    int i;\n    \n    for(i = 0; i < n; i++) {\n        somme = somme + notes[i];\n    }\n    \n    return somme / n;\n}</code></pre>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Écrire le programme complet en C intégrant la saisie, l'appel à la fonction et l'affichage des résultats.",
+        "niveau": "very hard",
+        "reponse": "<pre><code>#include &lt;stdio.h&gt;\n\n// Prototype de la fonction\nfloat calculerMoyenne(float notes[], int n);\n\nint main() {\n    int N, i;\n    float notes[100];  // Supposons maximum 100 notes\n    float moyenne;\n    \n    // Saisie du nombre de notes\n    printf(\"Entrez le nombre de notes : \");\n    scanf(\"%d\", &N);\n    \n    // Vérification que N > 0\n    if(N <= 0) {\n        printf(\"Le nombre de notes doit être positif !\\n\");\n        return 1;\n    }\n    \n    // Saisie des notes\n    for(i = 0; i < N; i++) {\n        do {\n            printf(\"Note %d (sur 20) : \", i+1);\n            scanf(\"%f\", &notes[i]);\n            if(notes[i] < 0 || notes[i] > 20) {\n                printf(\"Note invalide ! La note doit être entre 0 et 20.\\n\");\n            }\n        } while(notes[i] < 0 || notes[i] > 20);\n    }\n    \n    // Calcul de la moyenne\n    moyenne = calculerMoyenne(notes, N);\n    \n    // Affichage des résultats\n    printf(\"\\n--- RÉSULTATS ---\\n\");\n    printf(\"Moyenne : %.2f / 20\\n\", moyenne);\n    \n    if(moyenne >= 10) {\n        printf(\"Félicitations !\\n\");\n    } else {\n        printf(\"Travaillez davantage.\\n\");\n    }\n    \n    return 0;\n}\n\n// Définition de la fonction\nfloat calculerMoyenne(float notes[], int n) {\n    float somme = 0;\n    int i;\n    \n    for(i = 0; i < n; i++) {\n        somme = somme + notes[i];\n    }\n    \n    return somme / n;\n}</code></pre>",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

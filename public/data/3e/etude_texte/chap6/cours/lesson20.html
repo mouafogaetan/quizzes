@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Jouer avec les mots (3e)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (optionnel pour cette fiche, mais conservé) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* style.css intégré pour une fiche autonome */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Style spécifique pour les images explicatives */
+        .vocab-img {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .img-mock {
+            background-color: #eef2ff;
+            border-radius: 12px;
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #2563eb;
+            max-width: 100%;
+        }
+        .img-mock img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .def-badge {
+            background-color: #e0e7ff;
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+            display: inline-block;
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: #1e3a8a;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">🎭 Jouer avec les mots</h1>
+            <p class="lesson-subtitle">Français · 3ème · Module 3 – Chapitre 6 : Le vocabulaire et les champs lexicaux (Leçon 5)</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section Éléments clés à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Synonymes : enrichir son expression</h3>
+                    <p class="card-description">
+                        Les <strong>synonymes</strong> sont des mots qui ont une signification très proche ou identique. 
+                        Ils permettent d’éviter les répétitions et de varier le style (registre de langue).  
+                        Exemple : <em>content</em> → <em>joyeux, ravi, heureux, enchanté</em>.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Un synonyme peut appartenir à un registre différent : <em>bagnole</em> (familier) / <em>voiture</em> (courant) / <em>automobile</em> (soutenu).</li>
+                        <li>Attention au contexte : deux synonymes ne sont pas toujours interchangeables à 100%.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Antonymes : exprimer les contraires</h3>
+                    <p class="card-description">
+                        Les <strong>antonymes</strong> sont des mots de sens opposé. Ils créent des contrastes, des oppositions et aident à construire une argumentation.
+                        On forme souvent des antonymes à l’aide de préfixes (<em>in-, im-, dé-, mal-</em>…) : <em>possible / impossible</em>, <em>faire / défaire</em>.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Exemples d’antonymes : <em>chaud / froid</em> ; <em>riche / pauvre</em> ; <em>monter / descendre</em>.</li>
+                        <li>Dans un texte, les antonymes peuvent souligner un conflit, un dilemme ou une évolution.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Homophones : attention aux oreilles !</h3>
+                    <p class="card-description">
+                        Les <strong>homophones</strong> sont des mots qui se prononcent de la même manière mais s’écrivent différemment et n’ont pas le même sens.
+                        Ils sont une source fréquente de fautes d’orthographe.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="def-badge">a / à</span> : <em>a</em> = verbe avoir (il a) ; <em>à</em> = préposition (je vais à l’école).</li>
+                        <li><span class="def-badge">et / est</span> : <em>et</em> = conjonction de coordination ; <em>est</em> = verbe être (il est).</li>
+                        <li><span class="def-badge">ont / on</span> : <em>ont</em> = verbe avoir (ils ont) ; <em>on</em> = pronom indéfini.</li>
+                        <li><span class="def-badge">se / ce</span> : <em>se</em> = pronom réfléchi ; <em>ce</em> = déterminant démonstratif.</li>
+                    </ul>
+                    <div class="vocab-img">
+                        <!-- Image conceptuelle : homophones courants, description pour IA -->
+                        <img src="" alt="Infographie présentant les homophones fréquents : a/à, et/est, ont/on, se/ce avec des phrases exemples pour chaque paire" style="max-width: 100%; border-radius: 12px;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Exemples de compréhension et jeux de mots -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Jouer avec les mots : exemples et exercices types</h2>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Trouver synonymes et antonymes dans un texte</h3>
+                    <p class="exemple-context">
+                        « La pluie fine et <strong>persistante</strong> rendait la rue <strong>lugubre</strong>. Pourtant, il appréciait cette <strong>tranquillité</strong> oppressante. »
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong><br>
+                        • Synonyme de <em>persistante</em> → <em>continue, incessante</em>.<br>
+                        • Antonyme de <em>lugubre</em> → <em>gaie, lumineuse, joyeuse</em>.<br>
+                        • Synonyme de <em>tranquillité</em> → <em>calme, paix, sérénité</em>.<br>
+                        En variant les synonymes, on évite les répétitions et on affine le sens.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Pour un exercice, remplace un mot par un synonyme de registre soutenu pour enrichir ta rédaction.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Reconnaître et employer les homophones</h3>
+                    <p class="exemple-context">
+                        Complète les phrases par le bon homophone : <strong>a / à</strong> ; <strong>et / est</strong> ; <strong>ont / on</strong> ; <strong>se / ce</strong>.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Correction détaillée :</strong><br>
+                        1. Il <span class="formule">a</span> décidé de partir <span class="formule">à</span> huit heures. <br>
+                        2. Elle <span class="formule">est</span> fatiguée <span class="formule">et</span> veut dormir. <br>
+                        3. Les élèves <span class="formule">ont</span> bien travaillé, <span class="formule">on</span> les félicite. <br>
+                        4. Il <span class="formule">se</span> demande si <span class="formule">ce</span> voyage est réel.
+                    </p>
+                    <div class="exemple-astuce">
+                        🧠 Mnémo : « a » est un verbe, on peut le remplacer par « avait ». « à » est une préposition, on ne peut pas remplacer.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Jeu de mots – Créer un effet stylistique</h3>
+                    <p class="exemple-context">
+                        Observe cet extrait de slogan publicitaire : « Pour des dents saines, brossez-vous les dents, sinon gare au <strong>détartrage</strong> ! » <br>
+                        Quel jeu de mots est utilisé ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> Le mot « dents » est répété volontairement, mais surtout l’auteur joue avec l’homophonie entre « dents saines » et « dent-saines » ; l’humour repose sur la polysémie. Le jeu de mots attire l’attention et rend le message mémorable. <br>
+                        En littérature, on retrouve des <strong>calembours</strong>, des paronomases (mots proches par le son) pour créer des effets comiques ou poétiques.
+                    </p>
+                    <div class="vocab-img">
+                        <!-- Illustration pour jeu de mots: une bulle avec "Dents / Dents saines" -->
+                        <img src="" alt="Schéma humoristique montrant un personnage avec une brosse à dents et le jeu de mots sur dents/détartrage pour illustrer la création d’un effet stylistique par homophonie">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section : construire des champs lexicaux par synonymie / antonymie -->
+            <section class="concept-section">
+                <h2 class="section-title">🔁 Enrichir son vocabulaire : familles de mots et jeux</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">À partir d’un mot, crée réseau de synonymes & antonymes</h3>
+                    <p class="card-description">
+                        Prends un mot de base, trouve trois synonymes et deux antonymes. Exemple avec le mot <strong>« courageux »</strong> : 
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Synonymes :</strong> vaillant, intrépide, audacieux, brave.</li>
+                        <li><strong>Antonymes :</strong> lâche, peureux, timoré.</li>
+                    </ul>
+                    <p class="card-description">
+                        Cette technique est utile pour les rédactions et les commentaires composés. Elle affine l’expression des sentiments et des valeurs.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Pièges courants et astuces -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants à éviter</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre homophones :</span> « ses » (possessif) / « ces » (démonstratif) / « c’est » (démonstratif+verbe) → relire la phrase en remplaçant mentalement.</li>
+                        <li><span class="bold">Synonymes inappropriés :</span> utiliser un mot soutenu dans un contexte familier peut créer une incohérence de registre.</li>
+                        <li><span class="bold">Antonymes par préfixe erroné :</span> « dé » ne s’applique pas à tous les mots ; ex: « coller » → « décoller » (ok) mais « apprendre » → « désapprendre » (rare) → mieux « oublier ».</li>
+                        <li><span class="bold">Jeux de mots mal maîtrisés :</span> les calembours doivent rester compréhensibles ; en dissertation, on évite les jeux trop familiers.</li>
+                    </ul>
+                </div>
+                <div class="card concept-card" style="background-color: #fefce8;">
+                    <h3 class="card-title">📖 Fiche mémo : Comment trouver un synonyme ?</h3>
+                    <p>1. Identifie le mot. 2. Cherche son sens dans le contexte. 3. Remplace par un mot de sens proche. 4. Vérifie la correction grammaticale et le registre.</p>
+                    <p style="margin-top: 0.5rem;">Exemple : « Il <em>marche</em> lentement. » → synonyme possible : <em>déambule, chemine, avance</em>.</p>
+                </div>
+            </section>
+
+            <!-- Exercices pratiques ludiques -->
+            <section class="exemple-section">
+                <h2 class="section-title">✍️ S’entraîner : jeux de mots rapides</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">À toi de jouer ! (entraînement pour le brevet)</h3>
+                    <p class="exemple-context">
+                        1. Donne trois synonymes du verbe « parler » (en variant les registres). <br>
+                        2. Trouve l’antonyme de « générosité ». <br>
+                        3. Complète avec l’homophone qui convient : « Elle ___ (et/est) partie ___ (a/à) la campagne ___ (ou/où) elle retrouve ses amis. »
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Corrigés :</strong> <br>
+                        1. <em>discuter, causer (fam.), s’entretenir (soutenu)</em>.<br>
+                        2. <em>avarice, égoïsme</em>.<br>
+                        3. Elle <span class="formule">est</span> partie <span class="formule">à</span> la campagne <span class="formule">où</span> elle retrouve ses amis.
+                    </p>
+                    <div class="exemple-astuce">
+                        🎯 Objectif : Ces exercices aident à maîtriser les subtilités lexicales, exigibles en dictée et en rédaction.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section enrichissement : image d'une carte mentale des relations lexicales -->
+            <section class="concept-section">
+                <div class="card concept-card">
+                    <h3 class="card-title">🧠 Carte mentale : Jouer avec les mots (relations lexicales)</h3>
+                    <div class="vocab-img">
+                        <img src="" alt="Carte mentale avec au centre 'Jouer avec les mots' et trois branches principales : Synonymes (même sens), Antonymes (sens contraire), Homophones (même son). Chaque branche contient des exemples visuels et des astuces" style="max-width: 100%; border-radius: 16px;">
+                    </div>
+                    <p class="card-description" style="margin-top: 0.75rem;">
+                        Utilise cette carte pour réviser rapidement avant une évaluation. Les jeux de mots (calembours, paronomases) s’appuient sur ces relations pour produire des effets comiques ou poétiques.
+                    </p>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Révision créée pour les classes de 3ème (Cameroun) · Module 3 – Le vocabulaire au service du sens · 📚 Maîtriser synonymes, antonymes et homophones pour briller en français.</p>
+            <p style="margin-top: 0.4rem;">🔗 <a href="#">Consulter la leçon complète</a> · Exercices interactifs disponibles en classe</p>
+        </footer>
+    </div>
+</body>
+</html>

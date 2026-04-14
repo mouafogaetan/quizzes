@@ -1,0 +1,182 @@
+[
+  {
+    "intitule": "Exercice 1 : Identifier les structures de boucles (Ressource)",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Observez les trois extraits de code en langage C ci-dessous. Pour chacun, identifiez le type de boucle utilisé (<code>for</code>, <code>while</code> ou <code>do...while</code>) et décrivez son fonctionnement en une phrase.</p><pre><code>// Extrait A\nint i = 0;\nwhile (i < 5) {\n    printf(\"%d \", i);\n    i++;\n}\n\n// Extrait B\nint j;\nfor (j = 1; j <= 5; j++) {\n    printf(\"%d \", j);\n}\n\n// Extrait C\nint k = 0;\ndo {\n    printf(\"%d \", k);\n    k++;\n} while (k < 3);\n</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier le type de boucle pour chaque extrait.",
+        "niveau": "easy",
+        "reponse": "Extrait A : while. Extrait B : for. Extrait C : do...while.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Décrire le fonctionnement de la boucle dans l'extrait A.",
+            "niveau": "easy",
+            "reponse": "La boucle while vérifie d'abord la condition (i < 5). Si elle est vraie, elle exécute le bloc et incrémente i. Elle s'arrête quand i vaut 5."
+          },
+          {
+            "numero": "1.b",
+            "texte": "Décrire le fonctionnement de la boucle dans l'extrait B.",
+            "niveau": "easy",
+            "reponse": "La boucle for initialise j à 1, vérifie j <= 5 à chaque itération, exécute le bloc puis incrémente j de 1."
+          },
+          {
+            "numero": "1.c",
+            "texte": "Décrire le fonctionnement de la boucle dans l'extrait C.",
+            "niveau": "easy",
+            "reponse": "La boucle do...while exécute le bloc une première fois, puis vérifie la condition (k < 3). Elle répète tant que la condition est vraie."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 2 : Compléter une boucle `for` (Ressource)",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Complétez le code C suivant pour afficher les nombres pairs de 2 à 10 inclus (2, 4, 6, 8, 10) en utilisant une boucle <code>for</code>.</p><pre><code>#include <stdio.h>\n\nint main() {\n    int i;\n    for (______ ; ______ ; ______) {\n        printf(\"%d \", i);\n    }\n    return 0;\n}\n</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Compléter les trois parties de l'en-tête de la boucle for.",
+        "niveau": "easy",
+        "reponse": "i = 2 ; i <= 10 ; i = i + 2 ou i += 2",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Expliquer pourquoi la condition d'arrêt est i <= 10 et non i < 10.",
+            "niveau": "medium",
+            "reponse": "Parce que 10 est pair et doit être inclus dans l'affichage. i <= 10 permet d'inclure la valeur 10."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 3 : Calcul de somme avec boucle `while` (Compétence)",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Écrivez un programme en langage C qui demande à l'utilisateur de saisir des entiers positifs. Le programme calcule et affiche la somme de ces entiers. L'utilisateur peut arrêter la saisie en entrant un nombre négatif ou nul (qui ne sera pas ajouté à la somme). Utilisez une boucle <code>while</code>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Concevoir un algorithme en pseudocode pour résoudre ce problème.",
+        "niveau": "medium",
+        "reponse": "```\nVariables : nombre, somme : entiers\nDebut\n    somme ← 0\n    Lire nombre\n    Tant que nombre > 0 Faire\n        somme ← somme + nombre\n        Lire nombre\n    Fin Tant que\n    Afficher somme\nFin\n```",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Écrire le code C correspondant à l'algorithme.",
+            "niveau": "medium",
+            "reponse": "```c\n#include <stdio.h>\n\nint main() {\n    int nombre, somme = 0;\n    \n    printf(\"Entrez un nombre positif (negatif ou nul pour arreter) : \");\n    scanf(\"%d\", &nombre);\n    \n    while (nombre > 0) {\n        somme = somme + nombre;\n        printf(\"Entrez un autre nombre : \");\n        scanf(\"%d\", &nombre);\n    }\n    \n    printf(\"La somme des nombres positifs est : %d\\n\", somme);\n    return 0;\n}\n```"
+          },
+          {
+            "numero": "1.b",
+            "texte": "Tester mentalement le programme avec la saisie : 5, 3, 7, 0. Quelle est la valeur affichée ?",
+            "niveau": "medium",
+            "reponse": "La valeur affichée est 15 (5+3+7). Le 0 arrête la boucle et n'est pas ajouté."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 4 : Table de multiplication (Compétence - Vie courante)",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un professeur souhaite générer automatiquement les tables de multiplication pour ses élèves. Écrivez un programme en C qui demande à l'utilisateur un nombre entier $n$ et affiche sa table de multiplication de 1 à 10 dans le format suivant :</p><p><code>5 x 1 = 5<br>5 x 2 = 10<br>...<br>5 x 10 = 50</code></p><p>Utilisez une boucle <code>for</code>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire le programme C complet.",
+        "niveau": "medium",
+        "reponse": "```c\n#include <stdio.h>\n\nint main() {\n    int n, i;\n    \n    printf(\"Entrez un nombre : \");\n    scanf(\"%d\", &n);\n    \n    for (i = 1; i <= 10; i++) {\n        printf(\"%d x %d = %d\\n\", n, i, n * i);\n    }\n    \n    return 0;\n}\n```",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Modifier le programme pour que la table aille de 1 à 20 au lieu de 1 à 10.",
+            "niveau": "easy",
+            "reponse": "Il suffit de remplacer `i <= 10` par `i <= 20` dans l'en-tête de la boucle for."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 5 : Validation de saisie avec `do...while` (Compétence)",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Dans un système de caisse, un opérateur doit saisir un montant compris entre 100 et 1000 FCFA (inclus). Écrivez un programme en C qui utilise une boucle <code>do...while</code> pour redemander la saisie tant que le montant n'est pas valide. Le programme affiche ensuite \"Montant valide : X FCFA\".</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire le programme C en utilisant la boucle do...while.",
+        "niveau": "hard",
+        "reponse": "```c\n#include <stdio.h>\n\nint main() {\n    int montant;\n    \n    do {\n        printf(\"Entrez le montant (100 - 1000 FCFA) : \");\n        scanf(\"%d\", &montant);\n        if (montant < 100 || montant > 1000) {\n            printf(\"Montant invalide. Recommencez.\\n\");\n        }\n    } while (montant < 100 || montant > 1000);\n    \n    printf(\"Montant valide : %d FCFA\\n\", montant);\n    return 0;\n}\n```",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Justifier le choix de la boucle do...while plutôt qu'une boucle while.",
+            "niveau": "hard",
+            "reponse": "do...while garantit que le bloc est exécuté au moins une fois. C'est idéal pour la validation de saisie car on doit demander le montant au moins une fois avant de vérifier."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Exercice 6 : Comparaison des boucles (Ressource - Analyse)",
+    "type": "ressource",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Analysez le problème suivant : \"Afficher tous les entiers de 1 à 10\". Proposez trois solutions : une avec <code>for</code>, une avec <code>while</code>, une avec <code>do...while</code>. Pour chaque solution, écrivez le code C correspondant.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Discriminer les situations où chaque type de boucle est le plus approprié.",
+        "niveau": "hard",
+        "reponse": "for : quand on connaît à l'avance le nombre d'itérations. while : quand on ne connaît pas le nombre d'itérations et que la condition est vérifiée avant d'entrer. do...while : quand on doit exécuter au moins une fois avant de tester la condition.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Écrire le code C avec une boucle for.",
+            "niveau": "easy",
+            "reponse": "```c\nfor(int i=1; i<=10; i++) printf(\"%d \", i);\n```"
+          },
+          {
+            "numero": "1.b",
+            "texte": "Écrire le code C avec une boucle while.",
+            "niveau": "easy",
+            "reponse": "```c\nint i=1;\nwhile(i<=10) {\n    printf(\"%d \", i);\n    i++;\n}\n```"
+          },
+          {
+            "numero": "1.c",
+            "texte": "Écrire le code C avec une boucle do...while.",
+            "niveau": "easy",
+            "reponse": "```c\nint i=1;\ndo {\n    printf(\"%d \", i);\n    i++;\n} while(i<=10);\n```"
+          }
+        ]
+      }
+    ]
+  }
+]

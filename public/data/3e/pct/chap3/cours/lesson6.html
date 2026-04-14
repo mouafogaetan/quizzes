@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - La mole et la constante d'Avogadro</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 6 : La mole et la constante d'Avogadro</h1>
+            <p class="lesson-subtitle">PCT · 3ème · Unité de quantité de matière</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section de concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Qu'est-ce qu'une mole ?</h3>
+                    <p class="card-description">
+                        La mole (symbole <strong>mol</strong>) est l'unité de quantité de matière dans le Système International (SI). 
+                        C'est une "paquet" contenant un nombre fixe d'entités (atomes, molécules, ions, électrons…).
+                    </p>
+                    <ul class="concept-list">
+                        <li>Une mole correspond à <strong>6,02 × 10²³ entités</strong>.</li>
+                        <li>Ce nombre gigantesque permet de passer de l'échelle microscopique (atomes, molécules) à l'échelle macroscopique (grammes) que l'on peut manipuler en laboratoire.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Constante d'Avogadro (N<sub>A</sub>)</h3>
+                    <p class="card-description">
+                        La constante d'Avogadro, notée <strong>N<sub>A</sub></strong>, est le nombre d'entités contenues dans une mole.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="formule">N<sub>A</sub> = 6,02 × 10<sup>23</sup> mol<sup>-1</sup></span></li>
+                        <li>Elle a été nommée en l'honneur du scientifique italien Amedeo Avogadro.</li>
+                        <li>Elle permet de relier le nombre d'entités <em>N</em> à la quantité de matière <em>n</em>.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Relation fondamentale : n = N / N<sub>A</sub></h3>
+                    <p class="card-description">
+                        La relation qui lie la quantité de matière <em>n</em> (en mol), le nombre d'entités <em>N</em> (sans unité) et la constante d'Avogadro <em>N<sub>A</sub></em> est :
+                    </p>
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <span class="formule" style="font-size: 1.3rem; padding: 0.4rem 0.8rem;">n = N / N<sub>A</sub></span>
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>n</strong> : quantité de matière (en mol)</li>
+                        <li><strong>N</strong> : nombre d'entités (atomes, molécules, ions…)</li>
+                        <li><strong>N<sub>A</sub></strong> : constante d'Avogadro (≈ 6,02 × 10<sup>23</sup> mol<sup>-1</sup>)</li>
+                    </ul>
+                    <p class="card-description" style="margin-top: 0.8rem;">
+                        Cette formule permet de convertir un nombre d'atomes ou de molécules en quantité de matière (moles) et inversement.
+                    </p>
+                </div>
+
+                <!-- Schéma conceptuel : image générée par IA pour illustrer la mole -->
+                <div class="card concept-card">
+                    <h3 class="card-title">📸 Visualisation de la mole</h3>
+                    <p class="card-description">
+                        Voici une illustration qui aide à comprendre l'énormité du nombre d'Avogadro : une mole de billes (6,02×10²³ billes) recouvrirait la Terre d'une épaisseur de plusieurs kilomètres !
+                    </p>
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <img src="" alt="Diagramme comparant une mole d'atomes à une échelle macroscopique : tas de sucre contenant 6,02×10²³ molécules de saccharose, avec une balance et un compteur imaginaire" style="max-width: 100%; border-radius: 0.75rem; border: 1px solid #e2e8f0; background-color: #f9f9ff;">
+                        <p style="font-size: 0.8rem; color: #4b5563; margin-top: 0.5rem;">Illustration : une mole = 6,02 × 10²³ entités, un pont entre le microscopique et le macroscopique.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Du nombre d'atomes à la quantité de matière</h3>
+                    <p class="exemple-context">
+                        Un échantillon de fer contient <strong>1,806 × 10<sup>24</sup> atomes de fer (Fe)</strong>. Calculez la quantité de matière (en moles) correspondante.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong><br>
+                        On utilise la formule <span class="formule">n = N / N<sub>A</sub></span> avec N = 1,806 × 10<sup>24</sup> et N<sub>A</sub> = 6,02 × 10<sup>23</sup> mol<sup>-1</sup>.<br>
+                        n = (1,806 × 10<sup>24</sup>) / (6,02 × 10<sup>23</sup>) = (1,806 / 6,02) × 10<sup>(24-23)</sup> = 0,3 × 10<sup>1</sup> = <strong>3,0 mol</strong>.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Diviser les nombres puis soustraire les exposants. Ici 10<sup>24</sup> / 10<sup>23</sup> = 10<sup>1</sup> = 10.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : De la quantité de matière au nombre de molécules</h3>
+                    <p class="exemple-context">
+                        On dispose de <strong>0,25 mol</strong> de dioxyde de carbone (CO<sub>2</sub>). Combien de molécules de CO<sub>2</sub> cela représente-t-il ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong><br>
+                        On réorganise la relation : N = n × N<sub>A</sub>.<br>
+                        N = 0,25 mol × (6,02 × 10<sup>23</sup> mol<sup>-1</sup>) = 0,25 × 6,02 × 10<sup>23</sup> = <strong>1,505 × 10<sup>23</sup> molécules</strong>.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Pensez à vérifier l'unité : la mole s'annule, il reste le nombre d'entités.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Utilisation dans la vie courante (eau minérale)</h3>
+                    <p class="exemple-context">
+                        Une bouteille d'eau contient 1,5 L d'eau pure. Sachant que la masse d'eau est de 1,5 kg et que la masse molaire de l'eau est 18 g/mol, combien de molécules d'eau y a-t-il dans cette bouteille ? (On utilise le pont masse → quantité de matière → nombre de molécules)
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Démarche :</strong><br>
+                        - Quantité de matière : n = m / M = 1500 g / 18 g/mol ≈ 83,33 mol.<br>
+                        - Nombre de molécules : N = n × N<sub>A</sub> = 83,33 × (6,02×10<sup>23</sup>) ≈ <strong>5,02 × 10<sup>25</sup> molécules d'eau</strong>.
+                    </p>
+                    <div class="exemple-astuce">
+                        🌊 Remarque : Une simple bouteille d'eau contient un nombre astronomique de molécules. La mole permet de gérer ces immenses quantités.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section applications et schéma de conversion -->
+            <section class="concept-section">
+                <h2 class="section-title">🔄 Schéma de conversion : entités ↔ mole</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Pour passer du <strong>nombre d’entités (N)</strong> à la <strong>quantité de matière (n)</strong> et inversement, on utilise la constante d’Avogadro.
+                    </p>
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <img src="" alt="Schéma de conversion : d'un côté un ensemble de petits cercles représentant des atomes (N), une flèche marquée ÷ N_A mène à une mole (n), et une flèche marquée × N_A mène de n vers N" style="max-width: 100%; border-radius: 0.75rem; background: #f8fafc; border: 1px solid #e2e8f0;">
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>Pour obtenir n (mol) :</strong> diviser N par N<sub>A</sub>.</li>
+                        <li><strong>Pour obtenir N :</strong> multiplier n par N<sub>A</sub>.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section "À ne pas confondre" et pièges -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre N et N<sub>A</sub> :</span> N est le nombre d’entités (sans unité), N<sub>A</sub> est la constante (6,02×10²³ mol⁻¹). Ne jamais écrire n = N × N<sub>A</sub>.</li>
+                        <li><span class="bold">Oublier les unités :</span> N<sub>A</sub> est en mol⁻¹, donc n est bien en mol. Vérifier que la division est cohérente.</li>
+                        <li><span class="bold">Ne pas confondre mole (quantité) et masse molaire :</span> la mole ne dépend pas de la nature de l’espèce, c’est un nombre fixe d’entités.</li>
+                        <li><span class="bold">Erreur de puissance de 10 :</span> bien maîtriser les calculs avec les puissances (ex: 10²⁴ / 10²³ = 10¹).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section pour approfondir : tableau récapitulatif -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Récapitulatif des grandeurs</h2>
+                <div class="card concept-card">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 0.5rem;">
+                        <thead>
+                            <tr style="background-color: #eef2ff; border-bottom: 1px solid #cbd5e1;">
+                                <th style="padding: 0.6rem; text-align: left;">Grandeur</th>
+                                <th style="padding: 0.6rem; text-align: left;">Symbole</th>
+                                <th style="padding: 0.6rem; text-align: left;">Unité</th>
+                                <th style="padding: 0.6rem; text-align: left;">Signification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 0.6rem;">Quantité de matière</td>
+                                <td style="padding: 0.6rem;"><strong>n</strong></td>
+                                <td style="padding: 0.6rem;">mole (mol)</td>
+                                <td style="padding: 0.6rem;">Nombre de paquets d'entités</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #e2e8f0;">
+                                <td style="padding: 0.6rem;">Nombre d'entités</td>
+                                <td style="padding: 0.6rem;"><strong>N</strong></td>
+                                <td style="padding: 0.6rem;">sans unité</td>
+                                <td style="padding: 0.6rem;">Compte des atomes, molécules, ions…</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.6rem;">Constante d'Avogadro</td>
+                                <td style="padding: 0.6rem;"><strong>N<sub>A</sub></strong></td>
+                                <td style="padding: 0.6rem;">mol⁻¹</td>
+                                <td style="padding: 0.6rem;">Nombre d'entités par mole (6,02×10²³)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section défi / exercice rapide -->
+            <section class="exemple-section">
+                <h2 class="section-title">🧪 Teste-toi !</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exercice flash</h3>
+                    <p class="exemple-context">
+                        Un échantillon de glucose (C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>) contient <strong>1,2 × 10<sup>24</sup> molécules</strong>.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Question :</strong> Quelle est la quantité de matière correspondante ?<br>
+                        <em>Réponse (à vérifier) :</em> n = N / N<sub>A</sub> = (1,2×10²⁴) / (6,02×10²³) ≈ 1,99 mol ≈ <strong>2,0 mol</strong>.
+                    </p>
+                    <div class="exemple-astuce">
+                        🎯 Pour t’entraîner, change les nombres et refais le calcul. La maîtrise de la relation n = N / N<sub>A</sub> est essentielle pour les chapitres suivants (masse molaire, réactions chimiques).
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page optionnel -->
+        <footer class="fiche-footer">
+            <p>Révision créée pour les élèves de 3ème (PCT) · <a href="#">Constante d'Avogadro et mole</a> · 📚 <em>« Une mole, c’est 6,02 × 10²³ entités »</em></p>
+        </footer>
+    </div>
+</body>
+</html>

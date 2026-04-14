@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 26 : Fonctions du système d'information</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (intégré pour le rendu autonome) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 26 : Fonctions du système d'information</h1>
+            <p class="lesson-subtitle">Informatique · Terminale A (Littéraire) · Baccalauréat</p>
+        </header>
+
+        <!-- Contenu principal -->
+        <main class="fiche-content">
+            <!-- SECTION 1 : Concepts fondamentaux -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Les 4 fonctions essentielles du SI</h2>
+                <p class="card-description" style="margin-bottom: 1rem;">
+                    Un système d'information (SI) ne se limite pas à un ordinateur ou un logiciel. Il remplit quatre grandes fonctions 
+                    qui permettent à l'organisation de collecter, stocker, transformer et partager l'information. 
+                    Maîtriser ces fonctions est fondamental pour analyser n'importe quel SI (entreprise, association, administration).
+                </p>
+
+                <!-- Carte 1 : Collecte -->
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Collecte (ou saisie) des données</h3>
+                    <p class="card-description">
+                        La collecte consiste à <strong>acquérir des données brutes</strong> depuis l’environnement de l’organisation ou depuis les utilisateurs. 
+                        Ces données peuvent provenir de formulaires, de capteurs, de relevés manuels ou d’interfaces de saisie.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Exemples concrets :</strong> Saisie des notes des élèves dans un fichier, enregistrement d’une vente en caisse, remplissage d’un formulaire d’inscription en ligne.</li>
+                        <li><strong>Moyens :</strong> Clavier, souris, lecteur de code-barres, formulaire web, API.</li>
+                        <li><strong>À retenir :</strong> Sans collecte, le SI n’a aucune matière première à traiter.</li>
+                    </ul>
+                </div>
+
+                <!-- Carte 2 : Stockage -->
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Stockage des données</h3>
+                    <p class="card-description">
+                        Le stockage correspond à la <strong>conservation organisée et durable</strong> des données collectées. 
+                        Il permet de les retrouver, de les modifier ou de les réutiliser ultérieurement.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Supports :</strong> Bases de données (MySQL, Access), fichiers (Excel, CSV), disques durs, Cloud.</li>
+                        <li><strong>Importance :</strong> Évite la perte d’information et facilite l’historique.</li>
+                        <li><strong>Lien examen :</strong> Souvent associé aux tables et enregistrements (clé primaire, SGBD).</li>
+                    </ul>
+                </div>
+
+                <!-- Carte 3 : Traitement -->
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Traitement (transformation)</h3>
+                    <p class="card-description">
+                        Le traitement transforme les données brutes en <strong>informations utiles et exploitables</strong>. 
+                        Il s’agit d’opérations de calcul, de tri, de filtrage, d’analyse ou de mise en forme.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Exemples :</strong> Calcul de la moyenne d’une classe, génération d’un graphique de ventes, classement des meilleurs clients.</li>
+                        <li><strong>Outils :</strong> Formules Excel/Calc, requêtes SQL (SELECT, UPDATE), algorithmes.</li>
+                        <li><span class="formule">Formule typique : =MOYENNE(B2:B10)</span> dans un tableur.</li>
+                    </ul>
+                </div>
+
+                <!-- Carte 4 : Diffusion / communication -->
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Diffusion (communication) de l'information</h3>
+                    <p class="card-description">
+                        La diffusion consiste à <strong>transmettre les informations traitées</strong> aux bonnes personnes, au bon moment, sous une forme compréhensible (rapport, tableau de bord, notification).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Formes :</strong> Impression d’un état, envoi par e-mail, publication sur un portail collaboratif, affichage sur un tableau de bord.</li>
+                        <li><strong>Enjeu :</strong> Faciliter la prise de décision (système de pilotage).</li>
+                        <li><strong>Exemple :</strong> Un chef d’établissement reçoit chaque semaine un PDF récapitulatif des absences.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION 2 : Schéma fonctionnel illustré (aide visuelle) -->
+            <section class="concept-section">
+                <h2 class="section-title">🔄 Cycle de vie de l'information dans le SI</h2>
+                <div class="card" style="text-align: center; background-color: #fefce8;">
+                    <img src="" alt="Schéma du cycle des données : flèches partant de Collecte vers Stockage, puis Traitement, puis Diffusion avec retour d'information vers la collecte" style="max-width:100%; border-radius: 12px; margin: 0.5rem 0;">
+                    <p class="card-description" style="font-size:0.9rem; margin-top: 0.5rem;">
+                        <strong>Cycle type :</strong> Données brutes → Collecte → Stockage → Traitement → Information diffusée → (rétroaction possible vers la collecte)
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION 3 : Exemples contextualisés (sujets d'examen) -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples d'application (d'après les épreuves du Bac)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Association culturelle "Arts & Partage"</h3>
+                    <p class="exemple-context">
+                        L'association tient un registre de ses adhérents : noms, cotisations payées, activités préférées. 
+                        Chaque année, elle produit un rapport des membres actifs et calcule le montant total des cotisations.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Identification des fonctions du SI :</strong><br>
+                        ✔ <strong>Collecte</strong> : Saisie des coordonnées des nouveaux adhérents et du montant payé.<br>
+                        ✔ <strong>Stockage</strong> : Conservation du registre (fichier Excel ou base de données).<br>
+                        ✔ <strong>Traitement</strong> : Calcul du total des cotisations + filtre des membres actifs (ceux à jour).<br>
+                        ✔ <strong>Diffusion</strong> : Impression du rapport ou envoi par e-mail au bureau de l'association.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce examen : Quand on vous donne un texte décrivant une organisation, repérez les verbes d’action comme « saisir », « enregistrer », « calculer », « afficher », « envoyer » – ils correspondent chacun à une fonction.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Gestion des notes dans un lycée (session 2025)</h3>
+                    <p class="exemple-context">
+                        Dans un lycée, le système informatisé de gestion permet aux professeurs d’encoder les notes, de calculer automatiquement les moyennes par matière et de générer les bulletins trimestriels. Les parents reçoivent les bulletins par courrier électronique.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Associez chaque action à une fonction du SI :</strong><br>
+                        - L’enseignant saisit les notes d’évaluation → <strong>Collecte</strong>.<br>
+                        - Les notes sont conservées sur le serveur du lycée → <strong>Stockage</strong>.<br>
+                        - Le système calcule la moyenne générale de l’élève → <strong>Traitement</strong>.<br>
+                        - Le bulletin est envoyé par e-mail aux parents → <strong>Diffusion</strong>.
+                    </p>
+                    <div class="exemple-astuce">
+                        📌 À retenir : Une même donnée peut passer par plusieurs fonctions. Par exemple, une note collectée est stockée puis traitée.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Commande en ligne dans une boutique (cas pratique)</h3>
+                    <p class="exemple-context">
+                        Une librairie utilise un site Internet. Le client remplit un panier, passe commande, puis le système vérifie le stock, génère une facture et l’envoie au client.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Fonctions du SI :</strong><br>
+                        <span class="bold">Collecte</span> → Saisie des articles par le client.<br>
+                        <span class="bold">Stockage</span> → Base de données des commandes et des stocks.<br>
+                        <span class="bold">Traitement</span> → Vérification du stock, calcul du montant total.<br>
+                        <span class="bold">Diffusion</span> → Envoi de la facture par e-mail au client.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECTION 4 : Pièges fréquents et confusions -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & distinctions à maîtriser</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Ne pas confondre :</span> <strong>Donnée</strong> (brute, non interprétée : "15/20") vs <strong>Information</strong> (résultat traité : "Moyenne = 14,5 → élève au-dessus de la moyenne"). Le traitement transforme la donnée en information.</li>
+                        <li><span class="bold">Attention :</span> Le <strong>stockage</strong> n'est pas une fonction passive : il permet l’organisation (indexation, sauvegarde) indispensable au traitement.</li>
+                        <li><span class="bold">Erreur fréquente :</span> Oublier la fonction <strong>diffusion</strong> dans une analyse. Un SI ne sert à rien si l’information ne parvient pas aux décideurs.</li>
+                        <li><span class="bold">Piège examen :</span> Dans un texte, certains verbes comme « archiver », « conserver » relèvent du stockage ; « éditer », « afficher », « notifier » relèvent de la diffusion.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION 5 : Liens avec les sujets officiels + conseils -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 Objectif Bac : ce qu’il faut savoir faire</h2>
+                <div class="card">
+                    <p class="card-description">
+                        D’après les épreuves des sessions 2023, 2024 et 2025 (notamment la partie III), l’examinateur attend que vous soyez capable de :
+                    </p>
+                    <ul class="concept-list">
+                        <li>Lire un texte décrivant une situation organisationnelle (bibliothèque, association, école) et <strong>relever explicitement</strong> chaque fonction du système d’information (collecte, stockage, traitement, diffusion).</li>
+                        <li>Associer une action concrète (exemple : « calculer la moyenne des ventes ») à la fonction correspondante.</li>
+                        <li>Expliquer pourquoi une fonction est indispensable au bon fonctionnement du SI.</li>
+                        <li>Justifier qu’un SI sans diffusion ne permet pas la prise de décision (lien avec le système de pilotage).</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        🧠 Méthode mnémotechnique : <strong>C</strong>ollecte, <strong>S</strong>tockage, <strong>T</strong>raitement, <strong>D</strong>iffusion → « <strong>C’est Si Top, Diffuse !</strong> »
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6 : Exercice type pour s’entraîner -->
+            <section class="exemple-section">
+                <h2 class="section-title">✍️ Entraînement rapide (type Bac)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Énoncé : "Gestion d’une petite bibliothèque municipale"</h3>
+                    <p class="exemple-context">
+                        La bibliothèque utilise un logiciel. Les bibliothécaires saisissent les emprunts des lecteurs (code du livre, date). 
+                        Chaque soir, le système vérifie quels livres sont en retard et génère une liste des lecteurs concernés. 
+                        Le lendemain matin, cette liste est imprimée et affichée au tableau d’affichage. 
+                        De plus, les données des emprunts sont conservées pendant 3 ans pour statistiques.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Question :</strong> Identifiez les quatre fonctions du système d’information dans ce texte.<br>
+                        <strong>Réponse attendue :</strong><br>
+                        - <strong>Collecte</strong> : saisie des emprunts (code livre + date).<br>
+                        - <strong>Stockage</strong> : conservation des données d’emprunt pendant 3 ans.<br>
+                        - <strong>Traitement</strong> : vérification des livres en retard et génération de la liste.<br>
+                        - <strong>Diffusion</strong> : impression et affichage de la liste au tableau.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Pour vous préparer : relisez les textes des sessions antérieures (2023, 2024, 2025) et surlignez les phrases qui illustrent chaque fonction.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme officiel Terminale A (Littéraire) – Session 2026 · <a href="#">Revoir les chapitres sur le SI</a> · 📚 Révision ciblée Bac</p>
+        </footer>
+    </div>
+</body>
+</html>

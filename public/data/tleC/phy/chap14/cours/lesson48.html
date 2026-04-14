@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 48 : Dipôles commandés et capteurs</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques pour la fiche */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6;
+            color: #1a2a3a;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête de la fiche */
+        .fiche-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2b4a6e 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 4px solid #ffb347;
+        }
+
+        .fiche-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .fiche-header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #ffb347;
+            color: #1e3c72;
+            font-weight: 700;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 0.75rem;
+        }
+
+        /* Corps de la fiche */
+        .fiche-body {
+            padding: 2rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2rem;
+            border-left: 4px solid #ffb347;
+            padding-left: 1.2rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            font-size: 1.6rem;
+        }
+
+        .concept-card {
+            background-color: #f8fafc;
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.1s ease;
+        }
+
+        .concept-card strong {
+            color: #1e3c72;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+            border-left: 3px solid #ffb347;
+            padding-left: 0.75rem;
+        }
+
+        .formule {
+            background-color: #eef2ff;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 1rem;
+            margin: 0.75rem 0;
+            text-align: center;
+            border: 1px solid #cbd5e1;
+            overflow-x: auto;
+        }
+
+        .example-box {
+            background-color: #fef9e6;
+            border-left: 4px solid #ffb347;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+        }
+
+        .example-box p {
+            margin-bottom: 0.5rem;
+        }
+
+        .example-title {
+            font-weight: 700;
+            color: #b45309;
+        }
+
+        .list-bullet {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .list-bullet li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .list-bullet li::before {
+            content: "•";
+            color: #ffb347;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #cbd5e1;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #5b6e8c;
+        }
+
+        @media (max-width: 640px) {
+            .fiche-body {
+                padding: 1rem;
+            }
+            .fiche-header h1 {
+                font-size: 1.4rem;
+            }
+            .section-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec identification de la leçon -->
+        <div class="fiche-header">
+            <h1>📡 Leçon 48 : Dipôles commandés et capteurs</h1>
+            <div class="subtitle">Module 5 : Électronique – Terminale C & D (Cameroun)</div>
+            <div class="badge">📌 Bac 2024-2025 | Capteurs & Chaînes électroniques</div>
+        </div>
+
+        <div class="fiche-body">
+            <!-- OBJECTIFS -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🎯</span> Objectifs de la leçon
+                </div>
+                <ul class="list-bullet">
+                    <li>Définir un capteur et un dipôle commandé.</li>
+                    <li>Expliquer le principe de conversion d'une grandeur physique en signal électrique.</li>
+                    <li>Donner des exemples concrets : thermistance (CTN/CTP), photorésistance (LDR).</li>
+                    <li>Identifier le rôle des capteurs dans une chaîne électronique.</li>
+                    <li><strong>Lien Bac :</strong> Savoir interpréter des montages à base de capteurs résistifs.</li>
+                </ul>
+            </div>
+
+            <!-- NOTIONS CLÉS -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🧠</span> Notions clés & définitions
+                </div>
+
+                <div class="concept-card">
+                    <strong>🔌 Dipôle commandé</strong>
+                    <p>Composant électrique dont le comportement (résistance, courant, tension) dépend d'une grandeur physique externe : température, luminosité, pression, etc. Il agit comme un <strong>transducteur</strong> élémentaire.</p>
+                </div>
+
+                <div class="concept-card">
+                    <strong>🎛️ Capteur</strong>
+                    <p>Dispositif qui convertit une grandeur physique mesurande (température, lumière, force…) en un signal électrique exploitable (tension, courant, résistance). On distingue :</p>
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li><strong>Capteurs actifs :</strong> délivrent directement une tension (ex: thermocouple).</li>
+                        <li><strong>Capteurs passifs :</strong> leur impédance varie (thermistance, photorésistance).</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <strong>🌡️ Thermistance (CTN / CTP)</strong>
+                    <p>Résistance dont la valeur varie fortement avec la température.</p>
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        <li><strong>CTN (Coefficient de Température Négatif) :</strong> $R$ diminue quand $T$ augmente. Très utilisée pour la mesure de température.</li>
+                        <li><strong>CTP (Coefficient de Température Positif) :</strong> $R$ augmente quand $T$ augmente (protection des circuits).</li>
+                    </ul>
+                    <div class="formule">
+                        Loi approximative pour une CTN : $R(T) = R_0 \cdot \exp\left[ B \left( \frac{1}{T} - \frac{1}{T_0} \right) \right]$
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <strong>💡 Photorésistance (LDR : Light Dependent Resistor)</strong>
+                    <p>Résistance qui varie en fonction de l'éclairement $E$ (en lux). Plus la lumière est intense, plus la résistance diminue.</p>
+                    <div class="formule">
+                        $R_{LDR} = \frac{k}{E^\alpha}$ (avec $\alpha$ proche de 0.8 à 1)
+                    </div>
+                    <p>Utilisée dans les détecteurs de luminosité, lampadaires automatiques, etc.</p>
+                </div>
+
+                <div class="concept-card">
+                    <strong>⚙️ Principe de captage</strong>
+                    <p>La grandeur physique modifie une propriété électrique du dipôle commandé. On place ce dipôle dans un <strong>pont diviseur de tension</strong> ou un pont de Wheatstone pour obtenir une tension image de la grandeur.</p>
+                </div>
+            </div>
+
+            <!-- MONTAGES TYPIQUES ET CONDITIONNEMENT -->
+            <div class="section">
+                <div class="section-title">
+                    <span>🔧</span> Mise en œuvre & Conditionnement
+                </div>
+                <div class="concept-card">
+                    <strong>📐 Montage diviseur de tension avec capteur résistif</strong>
+                    <p>On associe la thermistance (ou LDR) $R_{capt}$ à une résistance fixe $R_0$. La tension de sortie $V_s$ varie avec la grandeur mesurée.</p>
+                    <div class="formule">
+                        $V_s = V_{cc} \times \frac{R_0}{R_{capt} + R_0}$   ou   $V_s = V_{cc} \times \frac{R_{capt}}{R_{capt} + R_0}$ selon la position.
+                    </div>
+                    <p><strong>Application :</strong> Si $R_{capt}$ diminue (plus de lumière ou température élevée pour CTN), $V_s$ évolue. Un amplificateur peut ensuite traiter ce signal.</p>
+                </div>
+
+                <div class="example-box">
+                    <p class="example-title">📘 Exemple type (Bac) : Détecteur de température à CTN</p>
+                    <p>Une CTN de 10 kΩ à 25°C a un coefficient B = 3500 K. On l'utilise dans un pont diviseur avec $R_0 = 10 k\Omega$ sous $V_{cc}=5V$. <br>
+                    Calculer $V_s$ à 25°C puis à 60°C. <br>
+                    → À 25°C, $R_{CTN}=10k\Omega$, $V_s = 5 \times \frac{10}{10+10} = 2,5V$. <br>
+                    À 60°C (313 K), $R_{CTN}$ diminue, la tension $V_s$ change, on mesure cette variation.</p>
+                </div>
+            </div>
+
+            <!-- CHAÎNE ÉLECTRONIQUE -->
+            <div class="section">
+                <div class="section-title">
+                    <span>📊</span> Place du capteur dans une chaîne électronique
+                </div>
+                <div class="concept-card">
+                    <p>Une chaîne de mesure électronique complète comprend :</p>
+                    <div class="formule" style="background: #e6f7ec;">
+                        Grandeur physique → Capteur → Conditionneur → Amplificateur → Afficheur / Actionneur
+                    </div>
+                    <ul class="list-bullet" style="margin-top: 12px;">
+                        <li><strong>Capteur :</strong> convertit la grandeur (ex: température → résistance).</li>
+                        <li><strong>Conditionneur :</strong> pont diviseur, pont de Wheatstone, adapte l'impédance.</li>
+                        <li><strong>Amplificateur :</strong> augmente le niveau du signal (AOP, transistor).</li>
+                        <li><strong>Afficheur :</strong> voltmètre numérique, écran LCD, ou actionneur (relais, alarme).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- COMPÉTENCES EXIGIBLES + BAC -->
+            <div class="section">
+                <div class="section-title">
+                    <span>✅</span> Compétences & liens avec le Baccalauréat
+                </div>
+                <ul class="list-bullet">
+                    <li><strong>Savoir identifier</strong> le type de capteur adapté à une grandeur (température → thermistance ; luminosité → photorésistance).</li>
+                    <li><strong>Savoir exploiter</strong> la caractéristique $R = f(T)$ ou $R = f(éclairement)$ pour déterminer une température ou un éclairement.</li>
+                    <li><strong>Maîtriser le calcul</strong> de la tension de sortie d'un pont diviseur intégrant un dipôle commandé.</li>
+                    <li><strong>Analyser une chaîne électronique</strong> simple et reconnaître le rôle de chaque bloc (capteur, conditionneur, afficheur).</li>
+                    <li><strong>Lien Bac 2024-2025 :</strong> exercices types sur les systèmes de régulation (chauffage, éclairage automatique) avec CTN ou LDR.</li>
+                </ul>
+            </div>
+
+            <!-- EXEMPLE DE SUJET TYPE BAC -->
+            <div class="section">
+                <div class="section-title">
+                    <span>📝</span> Exercice-type (préparation Bac)
+                </div>
+                <div class="example-box">
+                    <p class="example-title">🔦 Application : Allumage automatique d'un lampadaire</p>
+                    <p>Une photorésistance LDR a une résistance $R_{LDR} = 500\ k\Omega$ dans l'obscurité et $R_{LDR} = 5\ k\Omega$ en pleine lumière. On réalise le montage ci-contre (pont diviseur) avec $R_0 = 10\ k\Omega$ et $V_{cc}=12V$. La tension $V_s$ commande un comparateur à hystérésis (non étudié ici).</p>
+                    <p><strong>1.</strong> Calculer $V_s$ dans l'obscurité et en pleine lumière (position : $V_s$ aux bornes de la LDR). <br>
+                    <strong>2.</strong> Pourquoi utilise-t-on souvent un amplificateur entre le pont et le comparateur ?</p>
+                    <p><strong>Corrigé rapide :</strong> <br>
+                    - Obscurité : $V_s = 12 \times \frac{500}{500+10} \approx 11,76 V$. <br>
+                    - Pleine lumière : $V_s = 12 \times \frac{5}{5+10} = 4 V$. <br>
+                    - L'amplificateur permet d'adapter l'impédance et de commander directement un relais.</p>
+                </div>
+            </div>
+
+            <!-- À retenir absolument -->
+            <div class="section">
+                <div class="section-title">
+                    <span>⭐</span> À retenir pour l'examen
+                </div>
+                <ul class="list-bullet">
+                    <li>Un capteur transforme une grandeur physique en signal électrique.</li>
+                    <li>CTN : résistance diminue quand la température augmente.</li>
+                    <li>LDR : résistance diminue quand l'éclairement augmente.</li>
+                    <li>La chaîne électronique type : Capteur → Conditionneur → Amplificateur → Afficheur.</li>
+                    <li>La variation de résistance se traduit par une variation de tension dans un diviseur.</li>
+                </ul>
+            </div>
+
+            <!-- Pied de page avec référence programme -->
+            <div class="footer-note">
+                📖 Programme officiel de Physique Terminale C & D (Cameroun) – Module 5 : Électronique – Leçon 48 | Année scolaire 2025-2026 <br>
+                🔗 Conforme aux attendus du Baccalauréat 2024-2025.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

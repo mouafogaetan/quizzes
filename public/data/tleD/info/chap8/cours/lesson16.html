@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 16 : Création de tables (SQL)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petit style additionnel pour les blocs de code SQL */
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            border-left: 4px solid #3b82f6;
+        }
+        .code-block code {
+            background: none;
+            color: #facc15;
+        }
+        .inline-code {
+            background-color: #f1f5f9;
+            font-family: 'Courier New', monospace;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+            font-size: 0.9rem;
+            color: #0f172a;
+            font-weight: 500;
+        }
+        .keyword {
+            color: #7dd3fc;
+            font-weight: bold;
+        }
+        .comment {
+            color: #94a3b8;
+        }
+        table.type-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        table.type-table th, table.type-table td {
+            border: 1px solid #cbd5e1;
+            padding: 0.5rem;
+            text-align: left;
+        }
+        table.type-table th {
+            background-color: #eef2ff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 16 : Création de tables (DDL)</h1>
+            <p class="lesson-subtitle">Bases de données - SQL (Langage de Définition des Données) · Terminale C & D</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. La commande CREATE TABLE</h3>
+                    <p class="card-description">
+                        La commande <span class="inline-code">CREATE TABLE</span> appartient au langage de définition des données (DDL). Elle permet de créer une nouvelle table dans la base de données. On y définit le nom de la table, la liste des colonnes (attributs) avec leur type de données et éventuellement des contraintes d'intégrité.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Syntaxe générale :</strong> <span class="inline-code">CREATE TABLE nom_table (colonne1 type [contraintes], colonne2 type, ...);</span></li>
+                        <li>Chaque colonne est séparée par une virgule.</li>
+                        <li>Les noms de tables et colonnes doivent être significatifs et sans espaces (on utilise souvent le snake_case).</li>
+                        <li>Exemple concret : <span class="inline-code">CREATE TABLE Eleve (id INT, nom VARCHAR(50), prenom VARCHAR(50));</span></li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Les types de données courants en SQL</h3>
+                    <p class="card-description">
+                        Chaque colonne doit être associée à un type de données qui détermine la nature des valeurs qu'elle peut contenir. Voici les plus utilisés au baccalauréat :
+                    </p>
+                    <table class="type-table">
+                        <thead>
+                            <tr><th>Type SQL</th><th>Description</th><th>Exemple</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span class="inline-code">INT</span> ou <span class="inline-code">INTEGER</span></td><td>Nombre entier (positif ou négatif)</td><td>age, numéro, identifiant</td></tr>
+                            <tr><td><span class="inline-code">VARCHAR(n)</span></td><td>Chaîne de caractères de longueur variable (max n)</td><td>nom, adresse, téléphone</td></tr>
+                            <tr><td><span class="inline-code">CHAR(n)</span></td><td>Chaîne de longueur fixe (n caractères)</td><td>code postal (ex: '75000')</td></tr>
+                            <tr><td><span class="inline-code">DATE</span></td><td>Stocke une date (format AAAA-MM-JJ)</td><td>date_naissance, date_inscription</td></tr>
+                            <tr><td><span class="inline-code">DECIMAL(p,s)</span> ou <span class="inline-code">FLOAT</span></td><td>Nombre décimal (p = précision, s = échelle)</td><td>moyenne, prix</td></tr>
+                            <tr><td><span class="inline-code">BOOLEAN</span></td><td>Vrai ou Faux (TRUE/FALSE)</td><td>inscrit, valide</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="card-description" style="margin-top: 0.5rem;">
+                        <strong>À retenir :</strong> Pour les textes courts (noms, prénoms), on utilise <span class="inline-code">VARCHAR(50)</span> ou <span class="inline-code">VARCHAR(100)</span>. Pour les identifiants numériques, on utilise <span class="inline-code">INT</span>.
+                    </p>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Contraintes d'intégrité (Clé primaire, Clé étrangère, NOT NULL)</h3>
+                    <p class="card-description">
+                        Les contraintes garantissent la cohérence et l'intégrité des données. Elles se placent après le type de la colonne.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="inline-code">PRIMARY KEY</span> : identifiant unique d'une table. Une table ne peut avoir qu'une seule clé primaire. Elle ne peut pas contenir de valeur NULL.</li>
+                        <li><span class="inline-code">FOREIGN KEY</span> : référence la clé primaire d'une autre table. Elle assure l'intégrité référentielle (pas d'orphelin).</li>
+                        <li><span class="inline-code">NOT NULL</span> : impose qu'une colonne ne puisse pas être vide (obligatoire).</li>
+                        <li><span class="inline-code">UNIQUE</span> : garantit que toutes les valeurs d'une colonne sont différentes (ex: email).</li>
+                        <li><span class="inline-code">DEFAULT</span> : définit une valeur par défaut si aucune valeur n'est fournie.</li>
+                    </ul>
+                    <div class="code-block">
+                        <code>
+                            <span class="keyword">CREATE TABLE</span> Etudiant (<br>
+                            &nbsp;&nbsp; id_etudiant <span class="keyword">INT PRIMARY KEY</span>,<br>
+                            &nbsp;&nbsp; nom <span class="keyword">VARCHAR(50) NOT NULL</span>,<br>
+                            &nbsp;&nbsp; email <span class="keyword">VARCHAR(100) UNIQUE</span>,<br>
+                            &nbsp;&nbsp; date_naissance <span class="keyword">DATE</span><br>
+                            );
+                        </code>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Définition des clés étrangères</h3>
+                    <p class="card-description">
+                        Une clé étrangère se déclare au niveau de la colonne ou en fin de commande <span class="inline-code">CREATE TABLE</span> avec la syntaxe <span class="inline-code">FOREIGN KEY (colonne) REFERENCES autre_table(colonne_ref)</span>.
+                    </p>
+                    <div class="code-block">
+                        <code>
+                            <span class="keyword">CREATE TABLE</span> Inscription (<br>
+                            &nbsp;&nbsp; id_inscription <span class="keyword">INT PRIMARY KEY</span>,<br>
+                            &nbsp;&nbsp; date_inscription <span class="keyword">DATE</span>,<br>
+                            &nbsp;&nbsp; id_etudiant <span class="keyword">INT</span>,<br>
+                            &nbsp;&nbsp; <span class="keyword">FOREIGN KEY</span> (id_etudiant) <span class="keyword">REFERENCES</span> Etudiant(id_etudiant)<br>
+                            );
+                        </code>
+                    </div>
+                    <p class="card-description">
+                        Cela signifie que <span class="inline-code">id_etudiant</span> dans la table <span class="inline-code">Inscription</span> doit exister dans la colonne <span class="inline-code">id_etudiant</span> de la table <span class="inline-code">Etudiant</span>.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension (inspirés des sujets du Bac)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Examen blanc : Création d'une table "Professeur"</h3>
+                    <p class="exemple-context">
+                        Énoncé : On souhaite créer une table <strong>Professeur</strong> pour stocker les informations suivantes : un identifiant unique (entier), le nom (chaîne de 50 caractères max), le prénom (VARCHAR(50)), la spécialité (VARCHAR(30)), et l'année de recrutement (entier). La colonne "nom" ne doit jamais être vide. L'identifiant est la clé primaire.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Requête SQL :</strong>
+                        <div class="code-block">
+                            <code>
+                                <span class="keyword">CREATE TABLE</span> Professeur (<br>
+                                &nbsp;&nbsp; id_prof <span class="keyword">INT PRIMARY KEY</span>,<br>
+                                &nbsp;&nbsp; nom <span class="keyword">VARCHAR(50) NOT NULL</span>,<br>
+                                &nbsp;&nbsp; prenom <span class="keyword">VARCHAR(50)</span>,<br>
+                                &nbsp;&nbsp; specialite <span class="keyword">VARCHAR(30)</span>,<br>
+                                &nbsp;&nbsp; annee_recrutement <span class="keyword">INT</span><br>
+                                );
+                            </code>
+                        </div>
+                        <p><strong>Explication :</strong> La clé primaire <span class="inline-code">id_prof</span> garantit l'unicité de chaque professeur. La contrainte <span class="inline-code">NOT NULL</span> sur la colonne <span class="inline-code">nom</span> assure qu'on enregistre toujours le nom. Les autres colonnes peuvent être NULL si l'information est manquante.</p>
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Toujours nommer la clé primaire avec le préfixe "id_" suivi du nom de la table (ex: id_professeur) pour plus de clarté.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Modélisation MCD → MLD → SQL (Jointure implicite)</h3>
+                    <p class="exemple-context">
+                        D'après le MCD suivant : une <strong>Commande</strong> est passée par un <strong>Client</strong>. Un client peut avoir plusieurs commandes, mais une commande appartient à un seul client. On a les attributs : Client(num_client, nom, ville) et Commande(num_cmd, date_cmd, total). La clé étrangère est num_client dans la table Commande.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Création des tables :</strong>
+                        <div class="code-block">
+                            <code>
+                                <span class="keyword">CREATE TABLE</span> Client (<br>
+                                &nbsp;&nbsp; num_client <span class="keyword">INT PRIMARY KEY</span>,<br>
+                                &nbsp;&nbsp; nom <span class="keyword">VARCHAR(50) NOT NULL</span>,<br>
+                                &nbsp;&nbsp; ville <span class="keyword">VARCHAR(50)</span><br>
+                                );<br><br>
+                                <span class="keyword">CREATE TABLE</span> Commande (<br>
+                                &nbsp;&nbsp; num_cmd <span class="keyword">INT PRIMARY KEY</span>,<br>
+                                &nbsp;&nbsp; date_cmd <span class="keyword">DATE NOT NULL</span>,<br>
+                                &nbsp;&nbsp; total <span class="keyword">DECIMAL(10,2)</span>,<br>
+                                &nbsp;&nbsp; num_client <span class="keyword">INT</span>,<br>
+                                &nbsp;&nbsp; <span class="keyword">FOREIGN KEY</span> (num_client) <span class="keyword">REFERENCES</span> Client(num_client)<br>
+                                );
+                            </code>
+                        </div>
+                        <p><strong>Analyse :</strong> La clé étrangère <span class="inline-code">num_client</span> dans la table Commande fait référence à la clé primaire de la table Client. Cela garantit qu'on ne peut pas créer une commande avec un client inexistant.</p>
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Pensez à l'ordre de création : d'abord la table référencée (Client), puis celle qui contient la clé étrangère (Commande). Sinon, SQL génère une erreur.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Pièges courants / à ne pas confondre -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Oublier de déclarer la clé primaire ou la clé étrangère, ce qui fragilise l'intégrité des données. Toujours spécifier <span class="inline-code">PRIMARY KEY</span> pour l'identifiant unique.</li>
+                        <li><span class="bold">Confusion :</span> <span class="inline-code">VARCHAR</span> vs <span class="inline-code">CHAR</span>. <span class="inline-code">VARCHAR</span> économise de l'espace (taille variable) tandis que <span class="inline-code">CHAR</span> occupe toujours n caractères. Pour les noms, préférez <span class="inline-code">VARCHAR</span>.</li>
+                        <li><span class="bold">Attention :</span> Ne pas mettre de virgule après la dernière colonne ou la dernière contrainte dans la commande <span class="inline-code">CREATE TABLE</span>.</li>
+                        <li><span class="bold">Piège :</span> Créer une table avec une clé étrangère avant la table référencée → provoque une erreur. Ordre obligatoire : d'abord la table "parent", puis la table "enfant".</li>
+                        <li><span class="bold">Oubli fréquent :</span> Ne pas indiquer la taille pour <span class="inline-code">VARCHAR</span> (ex: <span class="inline-code">VARCHAR</span> seul au lieu de <span class="inline-code">VARCHAR(50)</span>). La taille est obligatoire dans la plupart des SGBD (MySQL, SQLite, etc.).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section schéma / illustration conceptuelle (optionnelle avec image IA) -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Schéma récapitulatif : Structure d'une table SQL</h2>
+                <div class="card concept-card" style="text-align: center;">
+                    <!-- Image illustrative générée par IA (concept de table relationnelle) -->
+                    <img src="" alt="Diagramme d'une table SQL avec ses colonnes, types de données et contraintes (clé primaire, clé étrangère, NOT NULL) pour illustrer la structure CREATE TABLE." style="max-width: 100%; border-radius: 1rem; margin: 1rem 0; border: 1px solid #e2e8f0;">
+                    <p class="card-description" style="font-size: 0.9rem;">
+                        <strong>Légende :</strong> Une table est un ensemble de lignes (enregistrements) et de colonnes (attributs). Chaque colonne possède un nom, un type et des contraintes. La clé primaire identifie chaque ligne de manière unique.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Exercice rapide d'auto-évaluation -->
+            <section class="exemple-section">
+                <h2 class="section-title">✏️ Auto-évaluation (type Bac)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">À vous de jouer !</h3>
+                    <p class="exemple-context">
+                        Écrire la requête SQL pour créer une table <strong>Note</strong> qui contient : <br>
+                        - id_note (entier, clé primaire) <br>
+                        - valeur (entier compris entre 0 et 20) <br>
+                        - id_eleve (entier, clé étrangère faisant référence à la colonne id_eleve de la table Eleve) <br>
+                        - matiere (VARCHAR de longueur 30, ne peut pas être NULL) <br>
+                        - date_evaluation (DATE) <br>
+                        <br>
+                        <strong>Rappel :</strong> La table <span class="inline-code">Eleve</span> existe déjà avec <span class="inline-code">id_eleve INT PRIMARY KEY</span>.
+                    </p>
+                    <details style="margin-top: 1rem; background-color: #f1f5f9; padding: 1rem; border-radius: 0.75rem;">
+                        <summary style="cursor: pointer; font-weight: 600; color: #2563eb;">Voir la solution</summary>
+                        <div class="code-block" style="margin-top: 0.8rem;">
+                            <code>
+                                <span class="keyword">CREATE TABLE</span> Note (<br>
+                                &nbsp;&nbsp; id_note <span class="keyword">INT PRIMARY KEY</span>,<br>
+                                &nbsp;&nbsp; valeur <span class="keyword">INT</span>,<br>
+                                &nbsp;&nbsp; id_eleve <span class="keyword">INT</span>,<br>
+                                &nbsp;&nbsp; matiere <span class="keyword">VARCHAR(30) NOT NULL</span>,<br>
+                                &nbsp;&nbsp; date_evaluation <span class="keyword">DATE</span>,<br>
+                                &nbsp;&nbsp; <span class="keyword">FOREIGN KEY</span> (id_eleve) <span class="keyword">REFERENCES</span> Eleve(id_eleve)<br>
+                                );
+                            </code>
+                        </div>
+                        <p class="exemple-astuce" style="margin-top: 0.5rem;">🔍 Remarque : La contrainte de la valeur entre 0 et 20 peut être vérifiée par une contrainte CHECK mais n'est pas exigée au programme Terminale. On peut la gérer dans l'application.</p>
+                    </details>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme officiel d'Informatique - Terminale C & D (Session 2025-2026) · Leçon 16 : Création de tables (DDL) · <a href="#">Revoir le chapitre sur le MCD/MLD</a> · 📚 Baccalauréat</p>
+        </footer>
+    </div>
+</body>
+</html>

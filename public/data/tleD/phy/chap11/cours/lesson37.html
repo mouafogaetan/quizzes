@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 37 : Interférences</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques pour la fiche */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f9;
+            color: #1a2a3a;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #0f2b3d 0%, #1b4a6e 100%);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background-color: #ff8c42;
+            color: #1a2a3a;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .chapitre {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .objectif-bac {
+            background-color: #ff8c42;
+            color: #1a2a3a;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 30px 40px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            border-left: 4px solid #1b4a6e;
+            padding-left: 20px;
+        }
+
+        .section h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #0f2b3d;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2 i {
+            font-size: 1.8rem;
+        }
+
+        .section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1b4a6e;
+            margin: 15px 0 10px 0;
+        }
+
+        .card-notion {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+
+        .card-notion:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .card-notion strong {
+            color: #ff8c42;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .formule {
+            background: #eef2ff;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 15px 0;
+            border-left: 4px solid #1b4a6e;
+            font-weight: 500;
+        }
+
+        .highlight {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid #ff8c42;
+            margin: 20px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .footer {
+            background: #eef2f5;
+            padding: 20px 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #4a627a;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        .btn-bac {
+            background: #0f2b3d;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn-bac:hover {
+            background: #ff8c42;
+            color: #1a2a3a;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête de la fiche -->
+        <div class="header">
+            <div class="badge">TERMINALE C & D - PHYSIQUE</div>
+            <h1>📡 Leçon 37 : Interférences</h1>
+            <div class="chapitre">CHAPITRE 11 : PHÉNOMÈNES ONDULATOIRES | MODULE 5 : ONDES ET PHYSIQUE MODERNE</div>
+            <div class="objectif-bac">🎯 Lien Bac 2025 : Fentes de Young - Interférences lumineuses</div>
+        </div>
+
+        <!-- Contenu principal -->
+        <div class="content">
+            <!-- Objectifs -->
+            <div class="section">
+                <h2>📌 Objectifs de la leçon</h2>
+                <ul>
+                    <li>Décrire et interpréter le phénomène d'interférences lumineuses.</li>
+                    <li>Énoncer les conditions nécessaires pour observer des interférences (sources cohérentes).</li>
+                    <li>Définir et calculer l'interfrange dans le dispositif des fentes de Young.</li>
+                    <li>Déterminer la nature d'un point (brillant ou sombre) sur un écran d'observation.</li>
+                    <li>Appliquer la relation $\delta = \frac{ax}{D}$ pour la différence de marche.</li>
+                </ul>
+            </div>
+
+            <!-- Notions clés et formules -->
+            <div class="section">
+                <h2>⚛️ Notions clés & Formules essentielles</h2>
+                
+                <div class="card-notion">
+                    <strong>🔹 Principe de superposition</strong>
+                    <p>Lorsque deux ondes synchrones (même fréquence et différence de phase constante) se rencontrent, l'amplitude résultante est la somme vectorielle des amplitudes. Les interférences sont la manifestation de ce principe.</p>
+                </div>
+
+                <div class="card-notion">
+                    <strong>🔹 Condition d'interférences</strong>
+                    <p>Pour obtenir des interférences stables, les sources doivent être <strong>cohérentes</strong> :</p>
+                    <ul>
+                        <li>Même fréquence (ou longueur d'onde).</li>
+                        <li>Différence de phase constante dans le temps.</li>
+                        <li>Même direction de polarisation (pour les ondes lumineuses).</li>
+                    </ul>
+                    <p>Le dispositif des <strong>fentes de Young</strong> (double fente) permet d'obtenir deux sources secondaires cohérentes à partir d'une source primaire.</p>
+                </div>
+
+                <div class="card-notion">
+                    <strong>🔹 Différence de marche (δ)</strong>
+                    <p>C'est la différence géométrique des chemins parcourus par les deux ondes pour arriver en un point M de l'écran.</p>
+                    <div class="formule">
+                        $$ \delta = S_2M - S_1M = \frac{a \cdot x}{D} $$
+                    </div>
+                    <p>Avec :</p>
+                    <ul>
+                        <li>$a$ : distance entre les deux fentes (en mètres).</li>
+                        <li>$D$ : distance entre le plan des fentes et l'écran (en mètres).</li>
+                        <li>$x$ : abscisse du point M sur l'écran (par rapport au centre).</li>
+                    </ul>
+                </div>
+
+                <div class="card-notion">
+                    <strong>🔹 Conditions d'interférences constructives et destructives</strong>
+                    <p>La nature de l'interférence dépend de la différence de marche $\delta$ et de la longueur d'onde $\lambda$.</p>
+                    <div class="grid-2">
+                        <div class="highlight">
+                            <strong>✅ Franges brillantes (constructives)</strong>
+                            <p>Les ondes arrivent en phase :</p>
+                            <div class="formule">$$ \delta = k \cdot \lambda $$</div>
+                            <p>avec $k \in \mathbb{Z}$ (ordre d'interférence).</p>
+                        </div>
+                        <div class="highlight">
+                            <strong>❌ Franges sombres (destructives)</strong>
+                            <p>Les ondes arrivent en opposition de phase :</p>
+                            <div class="formule">$$ \delta = (2k+1) \cdot \frac{\lambda}{2} $$</div>
+                            <p>avec $k \in \mathbb{Z}$.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-notion">
+                    <strong>🔹 Interfrange (i)</strong>
+                    <p>C'est la distance séparant deux franges brillantes (ou deux franges sombres) consécutives.</p>
+                    <div class="formule">
+                        $$ i = \frac{\lambda \cdot D}{a} $$
+                    </div>
+                    <p>L'interfrange est <strong>constant</strong> dans le cas des fentes de Young (franges équidistantes).</p>
+                    <p>La position de la frange brillante d'ordre $k$ est : $x_k = k \cdot i$.</p>
+                    <p>La position de la frange sombre d'ordre $k$ est : $x'_k = (k + \frac{1}{2}) \cdot i$.</p>
+                </div>
+            </div>
+
+            <!-- Schéma et application typique -->
+            <div class="section">
+                <h2>📐 Dispositif des fentes de Young</h2>
+                <div class="card-notion">
+                    <p><strong>Schéma de principe :</strong></p>
+                    <p style="text-align: center; background: #f0f4f8; padding: 15px; border-radius: 12px; font-family: monospace;">
+                        Source lumineuse → Fente unique (S) → Fentes secondaires (S₁, S₂) espacées de 'a' → Écran à distance 'D'<br>
+                        → Figure d'interférence : alternance de franges brillantes et sombres.
+                    </p>
+                    <p><strong>Observation :</strong> La lumière issue de S₁ et S₂ interfère. Au centre (x=0), $\delta = 0$ → frange brillante (ordre 0).</p>
+                </div>
+            </div>
+
+            <!-- Exemple résolu type Bac -->
+            <div class="section">
+                <h2>📝 Application type - Baccalauréat</h2>
+                <div class="highlight">
+                    <strong>🔎 Énoncé simplifié :</strong><br>
+                    On réalise l'expérience des fentes de Young avec une lumière de longueur d'onde $\lambda = 600\ nm$. La distance entre les fentes est $a = 0,50\ mm$ et la distance fentes-écran est $D = 2,0\ m$.<br>
+                    1. Calculer l'interfrange $i$.<br>
+                    2. Déterminer la position de la 3ème frange brillante (k=3).<br>
+                    3. La 5ème frange sombre se trouve à quelle abscisse ?
+                </div>
+                <div class="card-notion">
+                    <strong>📌 Correction :</strong><br>
+                    <strong>1. Interfrange :</strong><br>
+                    $$ i = \frac{\lambda D}{a} = \frac{600 \times 10^{-9} \times 2,0}{0,50 \times 10^{-3}} = \frac{1,2 \times 10^{-6}}{5 \times 10^{-4}} = 2,4 \times 10^{-3}\ m = 2,4\ mm $$
+                    <br><br>
+                    <strong>2. Position de la 3ème frange brillante :</strong><br>
+                    $$ x_{3} = k \cdot i = 3 \times 2,4 = 7,2\ mm $$
+                    <br>
+                    <strong>3. Position de la 5ème frange sombre :</strong><br>
+                    Pour une frange sombre, $x'_k = (k + \frac{1}{2}) i$. Ici $k = 5$ (attention : souvent on prend l'ordre à partir de 0, mais l'énoncé dit "5ème" donc $k=5$ pour la cinquième). <br>
+                    $$ x'_5 = (5 + 0,5) \times 2,4 = 5,5 \times 2,4 = 13,2\ mm $$
+                </div>
+                <div class="card-notion">
+                    <strong>⚠️ Astuce Bac :</strong> Vérifiez toujours les unités (convertir nm en m, mm en m). L'interfrange s'exprime souvent en mm. Maîtriser la relation $\delta = \frac{a x}{D}$ est fondamental pour relier géométrie et optique ondulatoire.
+                </div>
+            </div>
+
+            <!-- Compétences attendues -->
+            <div class="section">
+                <h2>🎯 Compétences à maîtriser pour le Bac</h2>
+                <ul>
+                    <li>Savoir expliquer qualitativement la formation des interférences (cohérence, différence de marche).</li>
+                    <li>Calculer l'interfrange $i$ à partir de $\lambda$, $D$ et $a$.</li>
+                    <li>Déterminer la longueur d'onde $\lambda$ à partir de mesures d'interfrange (travaux pratiques).</li>
+                    <li>Déterminer si un point sur l'écran correspond à une frange brillante ou sombre.</li>
+                    <li>Résoudre des problèmes inverses (trouver $a$ ou $D$ connaissant $i$ et $\lambda$).</li>
+                    <li>Interpréter des figures d'interférence (influence de $\lambda$, de $a$).</li>
+                </ul>
+            </div>
+
+            <!-- Lien avec les épreuves -->
+            <div class="section">
+                <h2>🧠 Synthèse pour l'examen</h2>
+                <div class="card-notion">
+                    <p><strong>Points clés à retenir :</strong></p>
+                    <ul>
+                        <li>Les interférences sont une preuve du <strong>caractère ondulatoire</strong> de la lumière.</li>
+                        <li>La lumière visible a des longueurs d'onde de l'ordre de 400 nm à 800 nm.</li>
+                        <li>L'expérience de Young : une onde lumineuse monochromatique éclairant deux fentes fines produit sur un écran des franges d'interférence.</li>
+                        <li>Relation fondamentale : $i = \frac{\lambda D}{a}$.</li>
+                        <li>Pour la lumière blanche, on observe une frange centrale blanche et des franges irisées (interférences en lumière polychromatique).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer avec mention -->
+        <div class="footer">
+            <p>Fiche conforme au programme officiel de Physique - Terminale C & D (Cameroun) | Année scolaire 2025-2026</p>
+            <p>✅ Révision pour le Baccalauréat - Leçon 37 : Interférences - Dispositif des fentes de Young</p>
+        </div>
+    </div>
+</body>
+</html>

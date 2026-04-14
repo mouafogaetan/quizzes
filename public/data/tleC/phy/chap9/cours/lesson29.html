@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 29 : Énergie d'un condensateur</title>
+    <!-- Configuration de MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une meilleure typographie -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles basés sur le template fourni */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        .fiche-revision {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 1.75rem 2rem;
+            border-bottom: 4px solid #f59e0b;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background-color: #f59e0b;
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header-subtitle {
+            font-size: 1rem;
+            color: #cbd5e1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 2rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2rem;
+            border-radius: 1rem;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .section:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            background-color: #f1f5f9;
+            padding: 0.85rem 1.5rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            border-bottom: 2px solid #e2e8f0;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            font-size: 1.3rem;
+        }
+
+        .section-content {
+            padding: 1.25rem 1.5rem;
+        }
+
+        /* Éléments de contenu */
+        .notion-card {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .formula {
+            background: #eef2ff;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            font-family: monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 1rem 0;
+            border: 1px solid #c7d2fe;
+            overflow-x: auto;
+        }
+
+        .demo-box {
+            background: #fefce8;
+            border: 1px solid #fde047;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e2e8f0;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .link-bac {
+            background-color: #fef2e8;
+            border-left: 4px solid #f97316;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        footer {
+            background-color: #f1f5f9;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+            .section-content {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-revision">
+    <!-- En-tête avec identification -->
+    <div class="header">
+        <div class="header-badge">📘 FICHE DE RÉVISION - TERMINALE C & D</div>
+        <h1>Leçon 29 : Énergie emmagasinée par un condensateur</h1>
+        <div class="header-subtitle">
+            <span>📐 Module 4 : Électrocinétique</span>
+            <span>⚡ Chapitre 9 : Le condensateur</span>
+            <span>🎓 Baccalauréat 2024-2025 (Cameroun)</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Lien avec le Bac -->
+        <div class="link-bac">
+            🎯 <strong>Lien avec le Bac 2024 :</strong> Cette leçon est régulièrement évaluée lors des épreuves de physique. 
+            Les sujets portent sur le calcul de l'énergie stockée, la détermination de la capacité ou l'utilisation 
+            des relations énergétiques dans les circuits (RC, RLC). Savoir exploiter $E = \frac{1}{2}CU^2$ est essentiel.
+        </div>
+
+        <!-- SECTION 1 : OBJECTIFS -->
+        <div class="section">
+            <div class="section-title">
+                <span>🎯</span> Objectifs d’apprentissage
+            </div>
+            <div class="section-content">
+                <ul style="margin-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                    <li>✓ Établir l'expression de l'énergie électrique stockée dans un condensateur.</li>
+                    <li>✓ Utiliser les trois formes de la formule d'énergie : $E = \frac{1}{2} C U^2 = \frac{1}{2} Q U = \frac{1}{2} \frac{Q^2}{C}$.</li>
+                    <li>✓ Résoudre des problèmes concrets impliquant la charge/décharge et le bilan énergétique.</li>
+                    <li>✓ Interpréter la continuité de l'énergie et les transferts dans un circuit RC.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 2 : NOTIONS CLÉS ET DÉMONSTRATION -->
+        <div class="section">
+            <div class="section-title">
+                <span>⚡</span> Notions clés & Démonstration
+            </div>
+            <div class="section-content">
+                <div class="notion-card">
+                    <strong>🔋 Énergie potentielle électrostatique :</strong> Pendant la charge, le générateur transfère de l'énergie au condensateur. 
+                    Cette énergie est stockée sous forme de champ électrique entre les armatures et peut être restituée lors de la décharge.
+                </div>
+
+                <p><strong>📐 Démonstration de la formule :</strong></p>
+                <p>À un instant $t$, la charge du condensateur est $q$ et la tension $u = q/C$. Pour transporter un incrément de charge $dq$ d'une armature à l'autre, le travail fourni est :</p>
+                <div class="formula">
+                    $dW = u \cdot dq = \frac{q}{C} \, dq$
+                </div>
+                <p>En intégrant de $q=0$ jusqu'à $q=Q$ (charge finale) :</p>
+                <div class="formula">
+                    $E = \int_0^Q \frac{q}{C} \, dq = \frac{1}{2} \frac{Q^2}{C}$
+                </div>
+                <p>En utilisant $Q = C \cdot U$, on obtient les trois formes équivalentes :</p>
+                <div class="formula">
+                    $$ E = \frac{1}{2} C U^2 = \frac{1}{2} Q U = \frac{1}{2} \frac{Q^2}{C} $$
+                </div>
+                <p>Avec :</p>
+                <ul style="margin-left: 1.5rem;">
+                    <li>$E$ : énergie stockée en joules (J)</li>
+                    <li>$C$ : capacité du condensateur en farads (F)</li>
+                    <li>$U$ : tension aux bornes en volts (V)</li>
+                    <li>$Q$ : charge de l'armature positive en coulombs (C)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECTION 3 : PROPRIÉTÉS ET ANALOGIE -->
+        <div class="section">
+            <div class="section-title">
+                <span>🧠</span> Propriétés importantes
+            </div>
+            <div class="section-content">
+                <div class="grid-2cols">
+                    <div class="notion-card" style="border-left-color: #10b981;">
+                        <strong>📈 Variation lors de la charge :</strong><br>
+                        L'énergie croît quadratiquement avec la tension. Si on double $U$, $E$ est multipliée par 4.
+                    </div>
+                    <div class="notion-card" style="border-left-color: #ef4444;">
+                        <strong>⚠️ Dissipation dans un circuit RC :</strong><br>
+                        Lors de la charge d'un condensateur à travers une résistance $R$, l'énergie fournie par le générateur est $E_{fournie} = QE$, dont la moitié seulement ($\frac{1}{2}CE^2$) est stockée ; l'autre moitié est dissipée par effet Joule dans $R$, quelle que soit la valeur de $R$.
+                    </div>
+                </div>
+                <div class="demo-box">
+                    <strong>💡 Analogie mécanique :</strong> Le condensateur chargé est analogue à un ressort comprimé. L'énergie $\frac{1}{2}kx^2$ pour le ressort correspond à $\frac{1}{2}CU^2$ pour le condensateur. La tension $U$ joue le rôle de l'élongation $x$, et la capacité $C$ celui de la constante de raideur $k$.
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4 : APPLICATIONS ET EXERCICE TYPE -->
+        <div class="section">
+            <div class="section-title">
+                <span>📝</span> Application type & Méthodologie
+            </div>
+            <div class="section-content">
+                <p><strong>🔧 Méthode de résolution pour un problème d'énergie :</strong></p>
+                <ol style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li>Identifier les grandeurs connues : $C$, $U$, $Q$ (deux suffisent).</li>
+                    <li>Choisir la formule adaptée : $E = \frac{1}{2}CU^2$ si on connaît $C$ et $U$.</li>
+                    <li>Si le condensateur est associé à d'autres dipôles, utiliser la conservation de l'énergie ou le bilan de puissance.</li>
+                    <li>Vérifier la cohérence des unités (Farad, Volt → Joule).</li>
+                </ol>
+                
+                <div class="demo-box">
+                    <strong>📌 Exercice type (Bac Cameroun) :</strong><br>
+                    Un condensateur de capacité $C = 470\ \mu F$ est chargé sous une tension $U = 12\ V$. <br>
+                    <strong>1.</strong> Calculer la charge $Q$ emmagasinée. <br>
+                    <strong>2.</strong> Déterminer l'énergie électrique stockée. <br><br>
+                    <strong>✔️ Correction :</strong><br>
+                    $Q = C \times U = 470 \times 10^{-6} \times 12 = 5,64 \times 10^{-3}\ C = 5,64\ mC$. <br>
+                    $E = \frac{1}{2} C U^2 = \frac{1}{2} \times 470 \times 10^{-6} \times (12)^2 = 0,5 \times 470 \times 10^{-6} \times 144 = 3,384 \times 10^{-2}\ J = 33,84\ mJ$. <br>
+                    On peut vérifier avec $E = \frac{1}{2} Q U = 0,5 \times 5,64\times10^{-3} \times 12 = 33,84\ mJ$.
+                </div>
+
+                <div class="demo-box" style="background: #e6f7e6; border-color: #2ecc71;">
+                    <strong>⚡ Cas particulier : Association de condensateurs</strong><br>
+                    Pour des condensateurs en parallèle : $C_{eq} = C_1 + C_2$ et l'énergie totale $E_{tot} = \frac{1}{2}C_{eq}U^2$.<br>
+                    Pour des condensateurs en série : $\frac{1}{C_{eq}} = \frac{1}{C_1} + \frac{1}{C_2}$ ; l'énergie stockée se répartit mais l'énergie totale reste $\frac{1}{2}C_{eq}U^2$ (avec $U$ tension aux bornes de l'association).
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5 : RÉSUMÉ ET ASTUCES BAC -->
+        <div class="section">
+            <div class="section-title">
+                <span>🏆</span> Synthèse & Astuces pour le Bac
+            </div>
+            <div class="section-content">
+                <div class="grid-2cols">
+                    <div>
+                        <span class="badge">📌 À retenir absolument</span>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.2rem;">
+                            <li>L'énergie dépend du carré de la tension.</li>
+                            <li>Un condensateur parfait ne dissipe pas d'énergie.</li>
+                            <li>Dans un circuit RC, l'énergie stockée à la fin de la charge est $\frac{1}{2}CE^2$.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <span class="badge">⚠️ Pièges fréquents</span>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.2rem;">
+                            <li>Confondre charge $Q$ et capacité $C$.</li>
+                            <li>Oublier le facteur $\frac{1}{2}$ dans la formule.</li>
+                            <li>Utiliser la tension crête au lieu de la tension efficace (en régime variable).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; background-color: #f1f5f9; padding: 0.75rem; border-radius: 0.5rem; text-align: center;">
+                    <strong>📖 Formule clé pour l'examen :</strong> $E = \frac{1}{2} C U^2$ &nbsp;&nbsp;|&nbsp;&nbsp; $[E] = M.L^2.T^{-2}$ (Joule)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        🇨🇲 Fiche conforme au programme officiel de Physique - Terminale C & D (Cameroun) | Année 2025-2026
+        <br>Révisez régulièrement et entraînez-vous sur des sujets du Bac !
+    </footer>
+</div>
+</body>
+</html>

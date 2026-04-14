@@ -1,0 +1,116 @@
+[
+  {
+    "intitule": "Tri de notes : Application du tri par sélection",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans le cadre de la gestion des résultats du baccalauréat, vous devez trier une liste de notes obtenues par les élèves à un examen blanc. Les notes sont stockées dans un tableau nommé `notes`.</p><p>Tableau initial : [12, 15, 09, 18, 10, 14]</p><p>On souhaite appliquer l'algorithme du <strong>tri par sélection</strong> pour organiser ce tableau dans l'<strong>ordre croissant</strong>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Expliquer le principe général de l'algorithme du tri par sélection.",
+        "niveau": "easy",
+        "reponse": "Le tri par sélection fonctionne en divisant le tableau en deux parties : une partie déjà triée (à gauche) et une partie non triée (à droite). À chaque étape, on recherche la plus petite valeur dans la partie non triée, puis on l'échange avec le premier élément de la partie non triée. La frontière entre les deux parties se décale ensuite d'un cran vers la droite.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Décrire les étapes de l'application du tri par sélection sur le tableau `notes`.",
+        "niveau": "medium",
+        "reponse": "Voici le détail des étapes pour le tableau [12, 15, 09, 18, 10, 14] :\n\n- **Étape 1 :** Recherche du minimum dans [12, 15, 09, 18, 10, 14]. Le minimum est 09 (indice 2). Échange avec l'élément à l'indice 0 (12) -> [09, 15, 12, 18, 10, 14].\n- **Étape 2 :** Recherche du minimum dans [15, 12, 18, 10, 14]. Le minimum est 10 (indice 4 du tableau d'origine, indice 1 de la sous-partie). Échange avec l'élément à l'indice 1 (15) -> [09, 10, 12, 18, 15, 14].\n- **Étape 3 :** Recherche du minimum dans [12, 18, 15, 14]. Le minimum est 12 (déjà à sa place). Échange avec lui-même -> [09, 10, 12, 18, 15, 14].\n- **Étape 4 :** Recherche du minimum dans [18, 15, 14]. Le minimum est 14 (indice 5). Échange avec l'élément à l'indice 3 (18) -> [09, 10, 12, 14, 15, 18].\n- **Étape 5 :** Recherche du minimum dans [15, 18]. Le minimum est 15 (déjà à sa place). Échange avec lui-même -> [09, 10, 12, 14, 15, 18].\n\nLe tableau est maintenant entièrement trié.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Rédiger un algorithme en pseudo-code qui implémente le tri par sélection pour un tableau `T` de taille `N`.",
+        "niveau": "hard",
+        "reponse": "```pseudo\ndebut tri_selection(T, N)\n    pour i de 0 à N-2 faire\n        min_index ← i\n        pour j de i+1 à N-1 faire\n            si T[j] < T[min_index] alors\n                min_index ← j\n            fin si\n        fin pour\n        si min_index ≠ i alors\n            temp ← T[i]\n            T[i] ← T[min_index]\n            T[min_index] ← temp\n        fin si\n    fin pour\nfin\n```",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Comparaison des tris par sélection et par insertion",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous disposez de deux algorithmes de tri : le tri par sélection et le tri par insertion.</p><p>Soit le tableau suivant partiellement trié : `[05, 12, 18, 25, 09, 30, 42]`.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Décrire, en une phrase, la différence fondamentale entre la façon dont le tri par insertion et le tri par sélection construisent la partie triée du tableau.",
+        "niveau": "easy",
+        "reponse": "Le tri par insertion construit la partie triée en insérant un à un les éléments de la partie non triée à leur place correcte dans la partie triée, tandis que le tri par sélection construit la partie triée en sélectionnant directement le plus petit (ou plus grand) élément de la partie non triée pour le placer à la fin de la partie triée.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Comparer le nombre d'opérations (comparaisons et déplacements) nécessaires pour trier ce tableau spécifique avec les deux algorithmes. Lequel serait potentiellement plus efficace et pourquoi ?",
+        "niveau": "hard",
+        "reponse": "**Tri par sélection :** Effectuera systématiquement $N \\times (N-1) / 2 = 7 \\times 6 / 2 = 21$ comparaisons, quel que soit l'état initial du tableau. Les échanges sont au maximum de $N-1 = 6$.\n\n**Tri par insertion :** Pour un tableau presque trié comme celui-ci, seules les valeurs mal placées nécessitent des déplacements. Ici, seul l'élément `09` doit être déplacé. Le nombre de comparaisons sera faible (environ 4 pour insérer `09`) et le nombre de décalages d'éléments également (environ 4).\n\n**Conclusion :** Le tri par insertion est **beaucoup plus efficace** sur ce tableau presque trié, car il s'adapte à l'ordre initial des données. Le tri par sélection est insensible à l'ordre initial et effectuera toujours le même nombre de comparaisons.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Détection d'erreur dans un tri par insertion",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un élève a écrit le pseudo-code suivant pour implémenter le tri par insertion sur un tableau `T` de taille `N`. Cependant, l'algorithme contient une erreur logique.</p>\n<pre>\ndebut tri_insertion_incorrect(T, N)\n    pour i de 1 à N-1 faire\n        cle ← T[i]\n        j ← i - 1\n        tant que (j >= 0 et T[j] < cle) faire // Erreur ici\n            T[j+1] ← T[j]\n            j ← j - 1\n        fin tant que\n        T[j+1] ← cle\n    fin pour\nfin\n</pre>\n<p>Testez mentalement cet algorithme avec le tableau initial `T = [3, 1, 4, 2]`.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier l'erreur logique dans la condition de la boucle `tant que` et expliquer son impact sur le résultat final.",
+        "niveau": "medium",
+        "reponse": "L'erreur est l'utilisation de l'opérateur `<` au lieu de `>` dans la condition `T[j] < cle`. Le symbole `<` signifie \"inférieur à\". Ainsi, la boucle `tant que` va décaler les éléments **tant qu'ils sont plus petits que la clé**, au lieu de les décaler quand ils sont plus grands.\n\n**Impact :** L'algorithme ne triera pas le tableau en ordre croissant. Il produira un tableau en ordre **décroissant** car il déplace tous les éléments plus petits pour faire de la place à la clé, ce qui inverse l'ordre.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Exécuter manuellement l'algorithme sur `T = [3, 1, 4, 2]` et écrire l'état du tableau à chaque fin d'itération de la boucle `pour`.",
+        "niveau": "hard",
+        "reponse": "- **État initial :** `[3, 1, 4, 2]`\n- **i = 1 :** `cle = 1`, `j = 0`. Condition : `j >= 0` et `T[0] (3) < 1`? Faux. Aucun décalage. `T[1] ← 1`. **Tableau :** `[3, 1, 4, 2]`\n- **i = 2 :** `cle = 4`, `j = 1`. Condition : `j >= 0` et `T[1] (1) < 4`? Vrai. Décalage : `T[2] ← T[1]` -> `[3, 1, 1, 2]`. `j = 0`. Condition : `j >= 0` et `T[0] (3) < 4`? Vrai. Décalage : `T[1] ← T[0]` -> `[3, 3, 1, 2]`. `j = -1`. Fin. `T[0] ← 4`. **Tableau :** `[4, 3, 1, 2]`\n- **i = 3 :** `cle = 2`, `j = 2`. Condition : `j >= 0` et `T[2] (1) < 2`? Vrai. Décalage : `T[3] ← T[2]` -> `[4, 3, 1, 1]`. `j = 1`. Condition : `j >= 0` et `T[1] (3) < 2`? Faux. Fin. `T[2] ← 2`. **Tableau :** `[4, 3, 2, 1]`\n\n**Résultat final :** `[4, 3, 2, 1]` (ordre décroissant).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Proposer la correction en modifiant une seule partie de la ligne incriminée pour que l'algorithme trie correctement en ordre croissant.",
+        "niveau": "easy",
+        "reponse": "Il faut remplacer le symbole `<` par `>` dans la condition de la boucle `tant que`.\n\n**Ligne corrigée :** `tant que (j >= 0 et T[j] > cle) faire`\n\nAinsi, on décale les éléments tant qu'ils sont **plus grands** que la clé `cle`, ce qui est le comportement correct pour un tri en ordre croissant.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Complexité des algorithmes de tri",
+    "type": "ressource",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>On souhaite trier un tableau de 10 000 entiers dans trois contextes différents :</p>\n<ul>\n    <li><strong>Cas A :</strong> Les entiers sont dans un ordre complètement aléatoire.</li>\n    <li><strong>Cas B :</strong> Les entiers sont déjà triés en ordre croissant.</li>\n    <li><strong>Cas C :</strong> Les entiers sont triés en ordre décroissant (cas le plus défavorable).</li>\n</ul>\n<p>On dispose de deux algorithmes : le tri par sélection et le tri par insertion.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Rappeler le nombre approximatif de comparaisons effectuées par le tri par sélection pour un tableau de taille $N$.",
+        "niveau": "easy",
+        "reponse": "Le tri par sélection effectue toujours $\\frac{N \\times (N-1)}{2}$ comparaisons, quel que soit l'ordre initial des éléments. Pour $N = 10 000$, cela représente environ 50 millions de comparaisons.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Justifier pour quel(s) cas parmi A, B et C le tri par insertion serait le plus performant et pour quel(s) cas il serait le moins performant.",
+        "niveau": "hard",
+        "reponse": "**Le plus performant :** Cas B (déjà trié en ordre croissant). Dans ce cas, la boucle interne ne fait qu'une seule comparaison par élément (vérification de la condition `T[j] > cle` qui est fausse immédiatement). La complexité est alors linéaire, soit environ $N = 10 000$ comparaisons.\n\n**Moyennement performant :** Cas A (ordre aléatoire). En moyenne, la boucle interne parcourt la moitié de la partie triée. La complexité est quadratique, soit environ $\\frac{N^2}{4} = 25$ millions de comparaisons.\n\n**Le moins performant :** Cas C (ordre décroissant). C'est le pire cas pour le tri par insertion. Chaque nouvel élément doit être décalé jusqu'au début de la partie triée. La complexité est alors quadratique maximale, soit $\\frac{N \\times (N-1)}{2} = 50$ millions de comparaisons, autant que le tri par sélection.\n\n**Conclusion :** Le tri par insertion s'adapte très bien aux données presque triées (cas B), tandis que le tri par sélection offre une performance prévisible et constante, indépendante des données.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

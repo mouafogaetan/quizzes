@@ -1,0 +1,130 @@
+[
+  {
+    "intitule": "Caractéristiques d'une image numérique",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Une photographe professionnelle vous fournit les spécifications techniques d'une photo qu'elle a prise :</p><ul><li>Dimensions : $34 \\times 22.67$ cm</li><li>Définition : $3840 \\times 2560$ pixels</li><li>Profondeur de couleurs : 24 bits par pixel</li></ul><p>Elle souhaite que vous l'aidiez à mieux comprendre les concepts liés à cette image.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Définir les termes suivants : définition, dimensions et résolution d'une image.",
+        "niveau": "easy",
+        "reponse": "La définition d'une image est le nombre total de pixels qui la composent (largeur x hauteur). Les dimensions sont la taille physique de l'image (ex: en cm ou en pouces). La résolution est le rapport entre la définition et les dimensions, exprimée en pixels par pouce (dpi ou ppp). Elle détermine la netteté de l'image.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Calculer la résolution de cette image en pixels par pouce (ppp). On rappelle que $1 \\text{ pouce} = 2.54 \\text{ cm}$.",
+        "niveau": "medium",
+        "reponse": "$\\text{Résolution} = \\frac{\\text{Définition horizontale}}{\\text{Dimension horizontale en pouces}} = \\frac{3840}{34 / 2.54} = \\frac{3840}{13.3858} \\approx 286.8 \\text{ ppp}$.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Expliquer l'impact d'une résolution élevée sur la qualité d'affichage et la taille du fichier image.",
+        "niveau": "medium",
+        "reponse": "Une résolution élevée offre une image plus nette et plus détaillée car la densité de pixels est plus grande. Cependant, cela augmente considérablement la taille du fichier image, car plus de pixels sont stockés, nécessitant plus d'espace de stockage et plus de bande passante pour le transfert.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Calcul de la taille d'une image",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>On considère une image numérique avec les caractéristiques suivantes :</p><ul><li>Largeur : $4096$ pixels</li><li>Hauteur : $2160$ pixels</li><li>Profondeur de couleurs : $32$ bits par pixel (format RVBA)</li></ul>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Calculer la définition totale de cette image.",
+        "niveau": "easy",
+        "reponse": "La définition est le produit de la largeur par la hauteur : $4096 \\times 2160 = 8\\,847\\,360$ pixels.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Déterminer la taille de l'image en bits, puis en octets.",
+        "niveau": "medium",
+        "reponse": "Taille en bits = Définition $\\times$ Profondeur = $8\\,847\\,360 \\times 32 = 283\\,115\\,520$ bits. Taille en octets = $\\frac{283\\,115\\,520}{8} = 35\\,389\\,440$ octets.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Convertir cette taille en kibioctets (Kio) et en mébioctets (Mio), sachant que $1\\, Kio = 1024\\, o$ et $1\\, Mio = 1024\\, Kio$.",
+        "niveau": "hard",
+        "reponse": "Taille en Kio = $\\frac{35\\,389\\,440}{1024} \\approx 34\\,560$ Kio. Taille en Mio = $\\frac{34\\,560}{1024} \\approx 33.75$ Mio.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Optimisation pour un site web",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Vous êtes chargé(e) de créer une galerie d'images pour le site web d'un club photo. Les membres envoient des photos de très haute qualité, mais le site web est lent à charger. Le cahier des charges impose que chaque image ne dépasse pas $500$ Kio et que la résolution d'affichage soit au moins de $72$ ppp.</p><p>Une photo soumise a les caractéristiques suivantes : définition $6000 \\times 4000$ pixels, profondeur $24$ bits, dimensions $50 \\times 33.33$ cm.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Justifier pourquoi cette photo, dans son format d'origine, ne peut pas être publiée directement sur le site web.",
+        "niveau": "medium",
+        "reponse": "La taille de l'image d'origine est bien trop grande. Sa taille en bits est $6000 \\times 4000 \\times 24 = 576\\,000\\,000$ bits, soit $72\\,000\\,000$ octets. En Mio, cela donne $\\frac{72\\,000\\,000}{1024 \\times 1024} \\approx 68.66$ Mio, ce qui est largement supérieur à la limite de 500 Kio (soit environ 0.5 Mio).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Proposer et expliquer deux modifications à apporter à l'image pour satisfaire le cahier des charges, en justifiant leur effet sur la taille du fichier.",
+        "niveau": "hard",
+        "reponse": "1. Réduire la définition (redimensionner l'image) : en diminuant le nombre de pixels (par exemple, à 800x600), on réduit drastiquement la définition et donc la taille du fichier, tout en conservant une qualité suffisante pour l'affichage web. 2. Réduire la profondeur de couleurs : passer de 24 bits (16.7 millions de couleurs) à 8 bits (256 couleurs) réduirait la taille d'un facteur 3, mais au détriment de la qualité. Pour le web, on utilise souvent la compression JPEG, qui n'est pas abordée ici mais qui est une autre méthode. La réduction de la définition est la méthode la plus efficace.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Calculer la nouvelle taille en Kio si l'on réduit cette image à une définition de $800 \\times 600$ pixels tout en gardant la profondeur de 24 bits. Conclure.",
+        "niveau": "hard",
+        "reponse": "Nouvelle définition = $800 \\times 600 = 480\\,000$ pixels. Taille en bits = $480\\,000 \\times 24 = 11\\,520\\,000$ bits. Taille en octets = $\\frac{11\\,520\\,000}{8} = 1\\,440\\,000$ octets. Taille en Kio = $\\frac{1\\,440\\,000}{1024} \\approx 1406.25$ Kio. Cette taille est encore supérieure à 500 Kio. Il faudrait donc soit réduire encore la définition (par exemple à 640x480), soit utiliser un format compressé comme le JPEG pour atteindre la taille cible, car une image non compressée de 800x600 en 24 bits est trop volumineuse.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Comparaison de supports d'affichage",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Un graphiste doit préparer une même image pour deux supports différents : un écran d'ordinateur (définition $1920 \\times 1080$ pixels, résolution d'affichage $96$ ppp) et une affiche imprimée (dimensions $60 \\times 90$ cm, résolution d'impression requise $300$ ppp).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Calculer la définition nécessaire pour que l'image soit imprimée sur l'affiche avec la résolution requise de 300 ppp.",
+        "niveau": "hard",
+        "reponse": "Convertissons les dimensions en pouces : Largeur = $60 / 2.54 \\approx 23.62$ pouces. Hauteur = $90 / 2.54 \\approx 35.43$ pouces. Définition nécessaire = Résolution x dimensions en pouces : Largeur en pixels = $300 \\times 23.62 \\approx 7086$ pixels. Hauteur en pixels = $300 \\times 35.43 \\approx 10630$ pixels. La définition est donc d'environ $7086 \\times 10630$ pixels.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquer pourquoi une image parfaite pour l'écran sera floue sur l'affiche imprimée.",
+        "niveau": "medium",
+        "reponse": "Une image parfaite pour l'écran a une définition adaptée à sa résolution d'affichage (96 ppp). Pour l'affiche, on a besoin d'une résolution beaucoup plus élevée (300 ppp) pour que l'image soit nette à l'impression. Si on prend l'image écran ($1920 \\times 1080$ pixels) et qu'on l'imprime sur un grand format, le logiciel d'impression va devoir \"étirer\" les pixels. La résolution réelle en impression sera de $1920 / 23.62 \\approx 81$ ppp, ce qui est bien inférieur aux 300 ppp requis, produisant une image aux pixels visibles (effet de pixellisation) et floue.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Comparer la taille de l'image pour l'écran (profondeur 24 bits) et celle pour l'affiche (profondeur 32 bits pour l'impression). Conclure sur la gestion des ressources.",
+        "niveau": "very hard",
+        "reponse": "Taille image écran = $1920 \\times 1080 \\times 24 = 49\\,766\\,400$ bits $= 6\\,220\\,800$ octets $\\approx 5.93$ Mio. Taille image affiche = $(7086 \\times 10630) \\times 32 \\approx 75\\,324\\,180 \\times 32 \\approx 2\\,410\\,373\\,760$ bits $= 301\\,296\\,720$ octets $\\approx 287$ Mio. L'image pour l'affiche est environ 48 fois plus volumineuse que celle pour l'écran. Cette comparaison montre l'importance d'adapter les caractéristiques de l'image (définition, profondeur) à son support final pour optimiser l'espace de stockage et la bande passante. On ne peut pas utiliser la même ressource pour deux usages différents sans une adaptation conséquente.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

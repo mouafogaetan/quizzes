@@ -1,0 +1,155 @@
+[
+  {
+    "intitule": "Identifier les structures de boucles en C",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>On considère les extraits de code C suivants. Pour chaque extrait :<br>1. Identifiez le type de boucle utilisé (<code>for</code>, <code>while</code>, <code>do...while</code>).<br>2. Dites combien de fois le bloc d'instructions est exécuté au maximum.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Extrait A : <code>for(i=0; i<5; i++) { printf(\"%d \", i); }</code>",
+        "niveau": "easy",
+        "reponse": "Type : for. Nombre d'itérations : 5 (i = 0,1,2,3,4).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Extrait B : <code>int x=10; while(x>0) { printf(\"%d \", x); x--; }</code>",
+        "niveau": "easy",
+        "reponse": "Type : while. Nombre d'itérations : 10 (x = 10 à 1).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Extrait C : <code>int a=1; do { printf(\"%d \", a); a++; } while(a<=3);</code>",
+        "niveau": "easy",
+        "reponse": "Type : do...while. Nombre d'itérations : 3 (a = 1,2,3).",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Compléter une boucle pour la somme des notes d'une classe",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans un lycée de Douala, un professeur saisit les notes de 20 élèves en Informatique. Il souhaite calculer la somme de toutes les notes pour obtenir la moyenne. Le code C ci-dessous est incomplet. Complétez les lignes manquantes pour que le programme fonctionne correctement.</p><pre><code>#include <stdio.h><br>int main() {<br>    int i;<br>    float note, somme = 0;<br>    // Complétez la ligne de la boucle<br>    _____________ {<br>        printf(\"Entrez la note de l'élève %d : \", i+1);<br>        scanf(\"%f\", &note);<br>        somme = _____________ ;<br>    }<br>    printf(\"La somme des notes est : %.2f\\n\", somme);<br>    return 0;<br>}</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Complétez la condition ou l'en-tête de la boucle pour qu'elle s'exécute exactement 20 fois.",
+        "niveau": "medium",
+        "reponse": "for(i=0; i<20; i++) ou i=0; while(i<20) { ... i++; }",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Complétez l'instruction d'affectation pour accumuler correctement la somme.",
+        "niveau": "medium",
+        "reponse": "somme = somme + note; ou somme += note;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Écrivez la ligne de code qui permet d'afficher la moyenne des notes (juste après l'affichage de la somme).",
+        "niveau": "medium",
+        "reponse": "printf(\"La moyenne est : %.2f\\n\", somme/20);",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Corriger les erreurs de boucles dans un programme de gestion de caisse",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un petit commerçant à Maroua utilise un programme en C pour enregistrer le montant des ventes de la journée. Le code ci-dessous contient des erreurs (boucle infinie, erreur de syntaxe, mauvaise initialisation). Corrigez chaque erreur et réécrivez le code fonctionnel. Le programme doit :<br>- Saisir les montants tant que l'utilisateur entre un montant positif (arrêt sur 0 ou négatif).<br>- Compter le nombre de ventes.<br>- Calculer le total des ventes.</p><pre><code>#include <stdio.h><br>int main() {<br>    int compteur = 0;<br>    float montant, total;<br>    while(montant > 0) {<br>        printf(\"Montant : \");<br>        scanf(\"%f\", &montant);<br>        total = total + montant;<br>        compteur++;<br>    }<br>    printf(\"Nb ventes : %d, Total : %.2f\\n\", compteur, total);<br>    return 0;<br>}</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifiez et corrigez l'erreur d'initialisation des variables.",
+        "niveau": "hard",
+        "reponse": "total n'est pas initialisé. Il faut faire : float montant, total = 0; De plus, montant doit être initialisé à une valeur >0 pour que la boucle démarre (ex: float montant=1;).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquez pourquoi la boucle actuelle peut mal fonctionner et proposez une correction de la condition.",
+        "niveau": "hard",
+        "reponse": "Si on initialise montant à 0, la boucle ne s'exécute pas. Si on ne l'initialise pas, comportement indéfini. Correction : utiliser do...while ou initialiser montant à 1. Version while : initialiser montant=1; puis while(montant>0). Version do...while plus adaptée.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Réécrivez le code entièrement corrigé en utilisant une boucle <code>do...while</code>.",
+        "niveau": "hard",
+        "reponse": "<pre><code>#include <stdio.h><br>int main() {<br>    int compteur = 0;<br>    float montant, total = 0;<br>    do {<br>        printf(\"Montant (0 ou negatif pour arreter) : \");<br>        scanf(\"%f\", &montant);<br>        if(montant > 0) {<br>            total += montant;<br>            compteur++;<br>        }<br>    } while(montant > 0);<br>    printf(\"Nb ventes : %d, Total : %.2f\\n\", compteur, total);<br>    return 0;<br>}</code></pre>",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Calcul de la puissance d'un nombre (simulation d'une culture de levure)",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>En laboratoire de biologie à Yaoundé, une culture de levure double de volume chaque heure. Initialement, le volume est de 1 unité. Écrire un programme en C qui calcule le volume après $n$ heures (où $n$ est saisi par l'utilisateur) en utilisant une boucle <code>for</code>. Vous ne devez pas utiliser la fonction <code>pow()</code>. Le programme affichera le résultat.</p><p><strong>Exemple :</strong> Si $n = 3$, le volume après 3 heures est $1 \\times 2^3 = 8$ unités.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrivez l'algorithme en pseudo-code correspondant à ce problème.",
+        "niveau": "medium",
+        "reponse": "Algorithme Puissance<br>Variables : n, i : entiers; volume : réel<br>Début<br>    Lire(n)<br>    volume ← 1<br>    Pour i de 1 à n faire<br>        volume ← volume * 2<br>    FinPour<br>    Afficher(volume)<br>Fin",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Traduisez cet algorithme en langage C en utilisant une boucle <code>for</code>.",
+        "niveau": "hard",
+        "reponse": "<pre><code>#include <stdio.h><br>int main() {<br>    int n, i;<br>    float volume = 1.0;<br>    printf(\"Nombre d'heures : \");<br>    scanf(\"%d\", &n);<br>    for(i=1; i<=n; i++) {<br>        volume = volume * 2;<br>    }<br>    printf(\"Volume apres %d heures : %.2f unites\\n\", n, volume);<br>    return 0;<br>}</code></pre>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Modifiez le programme pour gérer le cas où l'utilisateur entre une valeur négative (afficher un message d'erreur et demander une nouvelle saisie). Utilisez une boucle <code>while</code> pour la validation.",
+        "niveau": "hard",
+        "reponse": "<pre><code>#include <stdio.h><br>int main() {<br>    int n, i;<br>    float volume = 1.0;<br>    printf(\"Nombre d'heures : \");<br>    scanf(\"%d\", &n);<br>    while(n < 0) {<br>        printf(\"Erreur : valeur negative. Entrez un nombre >=0 : \");<br>        scanf(\"%d\", &n);<br>    }<br>    for(i=1; i<=n; i++) {<br>        volume *= 2;<br>    }<br>    printf(\"Volume : %.2f\\n\", volume);<br>    return 0;<br>}</code></pre>",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Recherche d'un seuil (économie d'épargne)",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Un étudiant à Bafoussam place 50 000 FCFA sur un compte épargne qui rapporte 5% d'intérêts par an (les intérêts sont ajoutés au capital chaque année). Il souhaite savoir dans combien d'années son capital dépassera 100 000 FCFA pour la première fois. Écrire un programme en C utilisant une boucle <code>while</code> qui calcule et affiche le nombre d'années nécessaires et le capital final.</p><p>$C_{n+1} = C_n \\times (1 + \\frac{5}{100})$</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrivez le programme C complet correspondant.",
+        "niveau": "very hard",
+        "reponse": "<pre><code>#include <stdio.h><br>int main() {<br>    float capital = 50000.0;<br>    int annees = 0;<br>    while(capital <= 100000) {<br>        capital = capital * 1.05;<br>        annees++;<br>    }<br>    printf(\"Apres %d annees, capital = %.2f FCFA\\n\", annees, capital);<br>    return 0;<br>}</code></pre>",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Ajoutez une sécurité : si le seuil n'est pas atteint après 100 ans, la boucle s'arrête et affiche \"Seuil non atteignable dans le temps imparti\".",
+        "niveau": "very hard",
+        "reponse": "<pre><code>#include <stdio.h><br>int main() {<br>    float capital = 50000.0;<br>    int annees = 0;<br>    while(capital <= 100000 && annees < 100) {<br>        capital *= 1.05;<br>        annees++;<br>    }<br>    if(annees == 100)<br>        printf(\"Seuil non atteignable dans le temps imparti\\n\");<br>    else<br>        printf(\"Apres %d annees, capital = %.2f FCFA\\n\", annees, capital);<br>    return 0;<br>}</code></pre>",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

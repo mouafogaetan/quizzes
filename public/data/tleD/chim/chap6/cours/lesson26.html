@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Les Esters : Estérification et Hydrolyse</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-family: monospace;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .exemple-correction strong {
+            color: #1e40af;
+        }
+
+        .exemple-astuce {
+            background-color: #fef9e3;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 5px solid #ef4444;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .highlight {
+            background-color: #dbeafe;
+            padding: 0.2rem 0.3rem;
+            border-radius: 0.3rem;
+            font-weight: 500;
+        }
+
+        .image-placeholder {
+            background-color: #f8fafc;
+            border: 1px dashed #94a3b8;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+            color: #475569;
+            font-style: italic;
+        }
+
+        .image-placeholder img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+        }
+
+        footer {
+            padding: 1rem 2rem;
+            background-color: #f8fafc;
+            border-top: 1px solid #e9eef2;
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 26 : Les esters – Estérification et hydrolyse</h1>
+            <p class="lesson-subtitle">Chimie · Terminale C & D · Programme 2025-2026 | Liens Bac : Synthèse d'un ester, calcul de rendement</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Définition et nomenclature d’un ester</h3>
+                    <p class="card-description">
+                        Un <strong class="highlight">ester</strong> est un dérivé d’acide carboxylique. Il résulte de la réaction entre un acide carboxylique et un alcool avec élimination d’eau. 
+                        Sa formule générale est : <strong>R–COO–R'</strong> où R et R' sont des groupes alkyles (ou aryles).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Nomenclature systématique</strong> : <span class="formule">-oate de -yle</span>. Exemple : CH<sub>3</sub>–COO–CH<sub>2</sub>–CH<sub>3</sub> → <strong>éthanoate d’éthyle</strong> (ou acétate d’éthyle).</li>
+                        <li>Le premier mot vient de l’acide (radical -oate), le second de l’alcool (radical -yle).</li>
+                        <li>Les esters sont souvent des liquides volatils, responsables des arômes de fruits (banane, poire, etc.).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Estérification : réaction acide + alcool</h3>
+                    <p class="card-description">
+                        L’<strong class="highlight">estérification</strong> est la réaction lente, limitée et réversible entre un acide carboxylique et un alcool, en milieu acide (généralement H<sub>2</sub>SO<sub>4</sub> concentré). Elle produit un ester et de l’eau.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Équation générale</strong> : <span class="formule">R–COOH + R'–OH ⇌ R–COO–R' + H<sub>2</sub>O</span>.</li>
+                        <li><strong>Caractéristiques</strong> : 
+                            <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                                <li>✔️ Lente (atteint l’équilibre après plusieurs heures).</li>
+                                <li>✔️ Limitée (taux d’avancement final &lt; 1).</li>
+                                <li>✔️ Athermique (faible effet thermique).</li>
+                                <li>✔️ Réversible (peut être inversée par hydrolyse).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Catalyseur</strong> : ions H<sup>+</sup> (acide sulfurique).</li>
+                    </ul>
+                    <!-- Schéma conceptuel simple (image générée par IA ou placeholder) -->
+                    <div class="image-placeholder">
+                        <img src="" alt="Schéma de l'estérification : un acide carboxylique réagit avec un alcool pour former un ester et de l'eau, catalyse acide">
+                        <p><em>Figure : Principe de l'estérification (R–COOH + R'–OH → R–COO–R' + H₂O).</em></p>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Hydrolyse d’un ester : retour à l’acide et l’alcool</h3>
+                    <p class="card-description">
+                        L’<strong class="highlight">hydrolyse</strong> est la réaction inverse de l’estérification. Elle consiste à décomposer un ester par action de l’eau, en présence d’un catalyseur acide ou basique.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Hydrolyse acide</strong> (réversible) : <span class="formule">R–COO–R' + H<sub>2</sub>O ⇌ R–COOH + R'–OH</span>.</li>
+                        <li><strong>Hydrolyse basique (saponification)</strong> : réaction totale, donne un ion carboxylate et un alcool. (Voir leçon 27).</li>
+                        <li>En milieu acide, l’équilibre est identique à celui de l’estérification ; on peut le déplacer en éliminant l’eau ou l’ester.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Rendement d’estérification</h3>
+                    <p class="card-description">
+                        Le <strong class="highlight">rendement</strong> (ou pourcentage d’estérification) caractérise l’efficacité de la synthèse. Il est défini par le rapport entre la quantité d’ester réellement obtenue et la quantité maximale théorique (si la réaction était totale).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Formule</strong> : <span class="formule">η = (n<sub>ester réel</sub> / n<sub>ester théorique</sub>) × 100</span>.</li>
+                        <li>Lorsque les réactifs sont en proportions stoechiométriques, le rendement maximal est limité par la constante d’équilibre K.</li>
+                        <li>Pour améliorer le rendement : éliminer l’eau (par distillation) ou utiliser un excès d’un réactif (loi de Le Chatelier).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension (avec calculs et raisonnement) -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Synthèse de l’éthanoate d’éthyle</h3>
+                    <p class="exemple-context">
+                        On fait réagir 12,0 g d’acide éthanoïque (CH<sub>3</sub>COOH, M = 60 g·mol<sup>-1</sup>) avec 13,8 g d’éthanol (C<sub>2</sub>H<sub>5</sub>OH, M = 46 g·mol<sup>-1</sup>) en présence d’acide sulfurique. À l’équilibre, on obtient 13,2 g d’ester (éthanoate d’éthyle, M = 88 g·mol<sup>-1</sup>). Calculer le rendement.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong><br>
+                        1. Calcul des quantités initiales :<br>
+                        n<sub>acide</sub> = 12,0 / 60 = 0,200 mol ; n<sub>alcool</sub> = 13,8 / 46 = 0,300 mol. L’acide est le réactif limitant (0,200 &lt; 0,300).<br>
+                        2. Quantité théorique d’ester (si totale) : n<sub>th</sub> = n<sub>acide</sub> = 0,200 mol.<br>
+                        3. Masse théorique = 0,200 × 88 = 17,6 g.<br>
+                        4. Quantité réelle obtenue : n<sub>réel</sub> = 13,2 / 88 = 0,150 mol.<br>
+                        <strong>Rendement</strong> : η = (0,150 / 0,200) × 100 = <span class="formule">75,0 %</span>.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce : Toujours identifier le réactif limitant avant de calculer le rendement théorique. Utiliser les masses molaires avec précision.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Déplacement d’équilibre par élimination d’eau</h3>
+                    <p class="exemple-context">
+                        On réalise l’estérification de l’acide propanoïque (C<sub>2</sub>H<sub>5</sub>COOH) par le méthanol (CH<sub>3</sub>OH). 
+                        À l’équilibre, le mélange contient 0,30 mol d’acide, 0,30 mol d’alcool, 0,20 mol d’ester et 0,20 mol d’eau. On élimine une partie de l’eau par distillation. Expliquer qualitativement l’évolution du système.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> La réaction d’estérification est limitée et suit la loi de modération (Le Chatelier). En éliminant l’eau (produit), l’équilibre se déplace dans le sens direct (formation d’ester) pour compenser cette diminution. Ainsi, la quantité d’ester augmente, le rendement s’améliore.
+                    </p>
+                    <div class="exemple-astuce">
+                        ⚖️ Retenir : Pour augmenter le rendement d’une estérification, on peut soit éliminer l’eau, soit utiliser un excès d’alcool (moins coûteux que l’acide en général).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Hydrolyse acide d’un ester</h3>
+                    <p class="exemple-context">
+                        On hydrolyse 0,50 mol de butanoate de méthyle (C<sub>3</sub>H<sub>7</sub>–COO–CH<sub>3</sub>) dans un grand volume d’eau acidifiée. À l’équilibre, il reste 0,20 mol d’ester. Calculer la constante d’équilibre K de la réaction d’hydrolyse (supposons volume = 1 L pour simplifier).
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Réaction :</strong> Ester + H<sub>2</sub>O ⇌ Acide + Alcool.<br>
+                        Initial : ester = 0,50 mol, acide = 0, alcool = 0.<br>
+                        Variation : – x, + x, + x avec x = ester consommé = 0,50 – 0,20 = 0,30 mol.<br>
+                        À l’équilibre : [Ester] = 0,20 M ; [Acide] = 0,30 M ; [Alcool] = 0,30 M ; [H<sub>2</sub>O] constante (solvant).<br>
+                        <span class="formule">K = ([Acide][Alcool])/[Ester] = (0,30×0,30)/0,20 = 0,45</span>. Cette constante est l’inverse de la constante d’estérification.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section "À ne pas confondre" et pièges -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li>🔴 <span class="bold">Confondre ester et éther :</span> Un ester possède la fonction –COO– (carbonyle + oxygène) ; un éther est R–O–R'.</li>
+                        <li>🔴 <span class="bold">Oublier la réversibilité :</span> En estérification, on n’obtient jamais 100% de rendement sans astuce (élimination d’eau).</li>
+                        <li>🔴 <span class="bold">Erreur de nomenclature :</span> L’alcool donne la terminaison –yle, l’acide donne –oate. Exemple : acide méthanoïque + éthanol → méthanoate d’éthyle, pas « éthanoate de méthyle ».</li>
+                        <li>🔴 <span class="bold">Négliger le catalyseur :</span> L’estérification nécessite un catalyseur acide (H<sub>2</sub>SO<sub>4</sub>) ; en son absence, la réaction est extrêmement lente.</li>
+                        <li>🔴 <span class="bold">Ne pas vérifier les unités lors du calcul de rendement :</span> Toujours convertir en moles avant d’appliquer la formule.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section supplémentaire : Méthodologie pour les exercices de Bac -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 Méthodologie Bac (synthèse d’ester)</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Démarche type pour un problème d’estérification/hydrolyse</h3>
+                    <ul class="concept-list">
+                        <li>1. Écrire l’équation bilan équilibrée de la réaction (acide + alcool ⇌ ester + eau).</li>
+                        <li>2. Calculer les quantités initiales (n = m/M ou C×V). Identifier le réactif limitant.</li>
+                        <li>3. Déterminer l’avancement maximal (théorique) et l’avancement final à partir des données expérimentales.</li>
+                        <li>4. Calculer le rendement : η = (avancement final / avancement maximal) × 100.</li>
+                        <li>5. Si on demande la constante d’équilibre K, utiliser les concentrations à l’équilibre : K = [ester][H₂O] / ([acide][alcool]) (en milieu dilué, [H₂O]≈ constante intégrée parfois dans K').</li>
+                        <li>6. Pour améliorer le rendement : justifier par l’élimination d’un produit ou l’excès d’un réactif (principe de Le Chatelier).</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        📌 <strong>Astuce examen :</strong> Lorsque l’on vous donne les masses d’ester obtenu, pensez à la purification (distillation) mais le calcul de rendement se fait toujours par rapport au réactif limitant.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lien avec le programme et notions complémentaires -->
+            <section class="exemple-section">
+                <h2 class="section-title">🔗 Liens avec le programme & sujets Bac</h2>
+                <div class="card">
+                    <p><strong>Bac 2023 (Cameroun) :</strong> Un exercice type portait sur la synthèse de l’éthanoate d’isoamyle (arôme de banane) avec calcul de rendement et choix de la méthode pour augmenter la transformation. La maîtrise de l’estérification et de l’hydrolyse est indispensable pour la partie « Chimie organique ».</p>
+                    <p><strong>Notions associées :</strong> Saponification (Leçon 27), fonction acide carboxylique (Leçon 24), alcools (Leçon 19-22).</p>
+                    <p><em>Savoir exploiter une courbe d’évolution temporelle et utiliser la constante d’équilibre.</em></p>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme de Terminale C & D (2025-2026) · Enseignant : Chimie Cameroun · 📚 Révision libre pour le Baccalauréat</p>
+            <p style="margin-top: 0.25rem;">⚡ Estérification & Hydrolyse : réactions jumelles, à maîtriser avec les calculs de rendement.</p>
+        </footer>
+    </div>
+</body>
+</html>

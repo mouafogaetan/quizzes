@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 12 : Force de Lorentz</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+
+        /* Conteneur principal */
+        .fiche-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* En-tête de la fiche */
+        .fiche-header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 2rem 2rem 1.5rem 2rem;
+            border-bottom: 5px solid #f59e0b;
+        }
+
+        .fiche-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        .fiche-header .subtitle {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .badge {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+            padding: 0.25rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-highlight {
+            background-color: #f59e0b;
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        /* Grille de contenu */
+        .fiche-grid {
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        /* Cartes */
+        .card {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            border-left: 5px solid #3b82f6;
+            padding-left: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 0.5rem;
+        }
+
+        .list-styled {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .list-styled li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .list-styled li::before {
+            content: "•";
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formula-block {
+            background-color: #eef2ff;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: 500;
+            border: 1px solid #cbd5e1;
+            overflow-x: auto;
+        }
+
+        .remark {
+            background-color: #fef9c3;
+            border-left: 4px solid #eab308;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background-color: #fee2e2;
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .info {
+            background-color: #dbeafe;
+            border-left: 4px solid #2563eb;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .method-step {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .method-step strong {
+            color: #1e40af;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .footer-note {
+            background: #f1f5f9;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 768px) {
+            .fiche-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            .fiche-header {
+                padding: 1.5rem;
+            }
+            .fiche-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <!-- En-tête -->
+    <div class="fiche-header">
+        <h1>📘 Leçon 12 : Force de Lorentz</h1>
+        <div class="subtitle">Module 2 – Électromagnétisme | Terminale C & D (Programme 2025-2026)</div>
+        <div class="badge-container">
+            <span class="badge">🔗 Liens Bac 2025</span>
+            <span class="badge">⚡ Interaction magnétique</span>
+            <span class="badge badge-highlight">🎯 Objectif : Appliquer la force de Lorentz</span>
+        </div>
+    </div>
+
+    <!-- Contenu principal en grille -->
+    <div class="fiche-grid">
+        <!-- Colonne gauche : définitions, formules, notions clés -->
+        <div class="left-column">
+            <!-- Carte Définition -->
+            <div class="card">
+                <div class="card-title">🧲 Force de Lorentz</div>
+                <p>La <strong>force de Lorentz</strong> est la force totale exercée sur une particule chargée en mouvement dans une région où règnent simultanément un champ électrique $\vec{E}$ et un champ magnétique $\vec{B}$.</p>
+                <div class="formula-block">
+                    $$ \boxed{\vec{F} = q \, \left( \vec{E} + \vec{v} \times \vec{B} \right)} $$
+                </div>
+                <ul class="list-styled">
+                    <li>$q$ : charge électrique de la particule (Coulomb, C)</li>
+                    <li>$\vec{v}$ : vecteur vitesse de la particule (m/s)</li>
+                    <li>$\vec{E}$ : champ électrique (V/m ou N/C)</li>
+                    <li>$\vec{B}$ : champ magnétique (Tesla, T)</li>
+                </ul>
+                <div class="remark">
+                    ✨ <strong>À retenir :</strong> La force magnétique est la composante $q\,\vec{v}\times\vec{B}$. Elle ne travaille pas (toujours perpendiculaire à $\vec{v}$) et ne modifie donc pas l'énergie cinétique de la particule.
+                </div>
+            </div>
+
+            <!-- Carte Composante magnétique (cas particulier fréquent au Bac) -->
+            <div class="card">
+                <div class="card-title">📐 Force magnétique : cas $\vec{E} = \vec{0}$</div>
+                <p>Lorsque le champ électrique est nul (ou négligé), la force se réduit à :</p>
+                <div class="formula-block">
+                    $$ \vec{F}_m = q \, (\vec{v} \times \vec{B}) $$
+                </div>
+                <ul class="list-styled">
+                    <li><strong>Direction :</strong> perpendiculaire au plan formé par $\vec{v}$ et $\vec{B}$.</li>
+                    <li><strong>Sens :</strong> donné par la règle de la main droite (ou règle des trois doigts) pour $q>0$; opposé si $q<0$.</li>
+                    <li><strong>Norme :</strong> $F_m = |q| \, v \, B \, \sin\theta$ où $\theta = (\widehat{\vec{v},\vec{B}})$.</li>
+                </ul>
+                <div class="info">
+                    💡 <strong>Conséquence importante :</strong> Une particule chargée pénétrant perpendiculairement ($\theta=90°$) dans un champ $\vec{B}$ uniforme décrit un mouvement circulaire uniforme. La force magnétique joue le rôle de force centripète.
+                </div>
+            </div>
+
+            <!-- Carte Mouvement dans un champ B uniforme -->
+            <div class="card">
+                <div class="card-title">🔄 Mouvement dans un champ magnétique uniforme</div>
+                <p><strong>1. Vecteur vitesse initial $\vec{v}_0 \perp \vec{B}$</strong></p>
+                <p>Trajectoire circulaire de rayon :</p>
+                <div class="formula-block">
+                    $$ R = \frac{m\,v_0}{|q|\,B} $$
+                </div>
+                <p>Période (indépendante de la vitesse) :</p>
+                <div class="formula-block">
+                    $$ T = \frac{2\pi m}{|q|\,B} \quad \text{et} \quad \omega_0 = \frac{|q|B}{m} $$
+                </div>
+                <p><strong>2. Cas général : $\vec{v}_0$ quelconque</strong> → mouvement hélicoïdal (superposition d’un mouvement circulaire et d’une translation uniforme le long de $\vec{B}$).</p>
+                <div class="warning">
+                    ⚠️ Attention : la force magnétique ne modifie pas la norme de la vitesse, seulement sa direction.
+                </div>
+            </div>
+        </div>
+
+        <!-- Colonne droite : applications, compétences, liens Bac -->
+        <div class="right-column">
+            <!-- Carte Applications typiques -->
+            <div class="card">
+                <div class="card-title">📡 Applications (Sujets Bac)</div>
+                <ul class="list-styled">
+                    <li><strong>Spectromètre de masse :</strong> séparation d’isotopes par déviation magnétique.</li>
+                    <li><strong>Cyclotron :</strong> accélérateur de particules utilisant la force de Lorentz.</li>
+                    <li><strong>Tube cathodique :</strong> déviation magnétique des électrons (oscilloscope).</li>
+                    <li><strong>Sélecteur de vitesse :</strong> croisement de champs $\vec{E}$ et $\vec{B}$ perpendiculaires ($v = E/B$).</li>
+                </ul>
+                <div class="formula-block" style="background:#e6f7ec;">
+                    🔹 <strong>Sélecteur de vitesse :</strong> $v = \dfrac{E}{B}$ (particules non déviées)
+                </div>
+            </div>
+
+            <!-- Carte Compétences Bac -->
+            <div class="card">
+                <div class="card-title">✅ Compétences exigibles (Bac 2023-2025)</div>
+                <ul class="list-styled">
+                    <li>Déterminer la direction, le sens et l’intensité de la force de Lorentz.</li>
+                    <li>Appliquer la deuxième loi de Newton pour établir l’équation différentielle du mouvement d’une particule chargée dans un champ $\vec{B}$ uniforme.</li>
+                    <li>Exprimer le rayon de courbure et la période du mouvement circulaire.</li>
+                    <li>Distinguer les rôles de $\vec{E}$ et $\vec{B}$ dans les dispositifs (cyclotron, sélecteur de vitesse).</li>
+                    <li>Analyser la nature du mouvement (rectiligne, circulaire, hélicoïdal).</li>
+                </ul>
+            </div>
+
+            <!-- Carte Méthodologie / résolution de problème -->
+            <div class="card">
+                <div class="card-title">📝 Méthode pour un problème type Bac</div>
+                <div class="method-step">
+                    <strong>🔹 1. Bilan des forces</strong><br>
+                    Identifier les forces : poids (souvent négligeable si particule légère) et force de Lorentz ($q\vec{E} + q\vec{v}\times\vec{B}$).
+                </div>
+                <div class="method-step">
+                    <strong>🔹 2. Appliquer le PFD (2ᵉ loi de Newton)</strong><br>
+                    $\sum \vec{F} = m\vec{a}$ et projeter dans la base adaptée (coordonnées cartésiennes ou repère de Frenet).
+                </div>
+                <div class="method-step">
+                    <strong>🔹 3. Intégrer ou utiliser les invariants</strong><br>
+                    Dans un champ magnétique seul, l’énergie cinétique est constante → la norme de la vitesse est constante. Utiliser $a_n = v^2/R = |q|vB/m$ pour trouver $R$.
+                </div>
+                <div class="method-step">
+                    <strong>🔹 4. Interpréter la trajectoire</strong><br>
+                    Si $\vec{v}_0 \parallel \vec{B}$ → MRU. Si $\vec{v}_0$ quelconque → hélice.
+                </div>
+            </div>
+
+            <!-- Carte analogie et erreurs fréquentes -->
+            <div class="card">
+                <div class="card-title">⚠️ Erreurs fréquentes & astuces</div>
+                <ul class="list-styled">
+                    <li><strong>Erreur :</strong> oublier le signe de la charge pour le sens de la force. → $q<0$ inverse le sens donné par la règle de la main droite.</li>
+                    <li><strong>Erreur :</strong> croire que la force magnétique accélère ou ralentit la particule → FAUX, elle dévie sans modifier la vitesse scalaire.</li>
+                    <li><strong>Astuce Bac :</strong> pour une charge négative (électron), la force magnétique est opposée à $\vec{v}\times\vec{B}$. Utilisez la main gauche ou inversez $\vec{B}$.</li>
+                    <li><strong>Piège :</strong> confondre période $T$ du mouvement circulaire avec la durée d’un tour dans un cyclotron. $T$ est indépendante de $v$ et $R$.</li>
+                </ul>
+                <div class="remark">
+                    🧠 <strong>Moyen mnémotechnique :</strong> Main droite : <strong>pouce</strong> = vitesse ($\vec{v}$), <strong>index</strong> = champ ($\vec{B}$), <strong>majeur</strong> = force ($\vec{F}$) pour charge positive.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ligne supplémentaire : exemple numérique type -->
+    <div style="padding: 0 2rem 1.5rem 2rem;">
+        <div class="card" style="background: linear-gradient(120deg, #f0f9ff, #ffffff);">
+            <div class="card-title">🔢 Examen blanc : Électron dans un champ magnétique</div>
+            <p><strong>Énoncé :</strong> Un électron ($m_e = 9,1\times10^{-31}\,\text{kg}$, $q = -1,6\times10^{-19}\,\text{C}$) pénètre avec une vitesse $v_0 = 2,0\times10^7\,\text{m/s}$ perpendiculairement à un champ $\vec{B}$ uniforme de module $B = 5,0\times10^{-4}\,\text{T}$. Calculer le rayon de sa trajectoire.</p>
+            <p><strong>Solution :</strong> $R = \dfrac{m_e\,v_0}{|q|\,B} = \dfrac{9,1\times10^{-31} \times 2,0\times10^7}{1,6\times10^{-19} \times 5,0\times10^{-4}} = \dfrac{1,82\times10^{-23}}{8,0\times10^{-23}} = 0,2275\,\text{m} \approx 23\,\text{cm}$.</p>
+            <p>✅ L’électron décrit un cercle de rayon 23 cm. La force magnétique est centripète, le sens du mouvement est donné par la règle adaptée à une charge négative.</p>
+        </div>
+    </div>
+
+    <!-- Pied de page avec mention programme officiel -->
+    <div class="footer-note">
+        📍 Programme de Physique – Terminale C & D (Cameroun) | Année 2025-2026 | Leçon 12 : Force de Lorentz – Conforme aux attendus du Baccalauréat
+    </div>
+</div>
+</body>
+</html>

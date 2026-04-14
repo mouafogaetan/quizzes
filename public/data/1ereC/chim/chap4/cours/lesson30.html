@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Sulfonation du benzène | 1ère C & D</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie soignée -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (intégré directement pour un fichier autonome) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule, .chem {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .image-placeholder {
+            background-color: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px dashed #94a3b8;
+            color: #475569;
+            font-size: 0.9rem;
+        }
+        
+        .image-placeholder img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 30 : Sulfonation du benzène</h1>
+            <p class="lesson-subtitle">Chimie organique · Composés aromatiques · 1ère C & D (Cameroun)</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Définition et principe de la sulfonation</h3>
+                    <p class="card-description">
+                        La <strong>sulfonation</strong> est une réaction de substitution électrophile aromatique au cours de laquelle un atome d'hydrogène du noyau benzénique est remplacé par un groupe <strong>-SO₃H</strong> (groupe sulfonique). 
+                        On obtient l'<strong>acide benzène sulfonique</strong> \( C_6H_5-SO_3H \). Le réactif est l'acide sulfurique concentré \( H_2SO_4 \), parfois fumant (oléum) pour accélérer la réaction.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Équation bilan : \( C_6H_6 + H_2SO_4 \xrightarrow{80^\circ C} C_6H_5-SO_3H + H_2O \)</li>
+                        <li>Mécanisme : attaque de l'électrophile \( SO_3 \) (ou \( HSO_3^+ \)) sur le cycle aromatique.</li>
+                        <li>Réaction équilibrée, mais en milieu fortement sulfurique, le rendement est bon.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Conditions opératoires et influence de la température</h3>
+                    <p class="card-description">
+                        La température joue un rôle déterminant dans la sulfonation. À <strong>80°C</strong>, la réaction s'effectue avec un bon rendement. 
+                        Une température trop élevée favorise les polysulfonations ou des réactions parasites. 
+                        L'<strong>acide sulfurique fumant (oléum)</strong> \( H_2SO_4 + SO_3 \) est plus réactif.
+                    </p>
+                    <div class="image-placeholder">
+                        <img src="" alt="Schéma du montage de sulfonation : ballon bicol avec benzène et H2SO4 concentré, chauffage à reflux vers 80°C, réfrigérant">
+                        <p><em>Figure 1 : Montage typique de la sulfonation du benzène (chauffage à reflux, agitation).</em></p>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Polysulfonation : acide benzène disulfonique et trisulfonique</h3>
+                    <p class="card-description">
+                        En utilisant un excès d'acide sulfurique fumant et en augmentant la température, on peut substituer plusieurs hydrogènes.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Acide benzène-1,3-disulfonique</strong> : deux groupes -SO₃H en positions méta (1,3). Équation : \( C_6H_6 + 2H_2SO_4 \rightarrow C_6H_4(SO_3H)_2 + 2H_2O \)</li>
+                        <li><strong>Acide benzène-1,3,5-trisulfonique</strong> : trois groupes -SO₃H (positions symétriques 1,3,5).</li>
+                        <li>La substitution se fait majoritairement en <strong>méta</strong> car le groupe -SO₃H est <strong>méta-directeur</strong> (effet attracteur d'électrons).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples détaillés -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Sulfonation simple du benzène</h3>
+                    <p class="exemple-context">
+                        On fait réagir 0,5 mol de benzène avec de l'acide sulfurique concentré à 80°C. Écrire l'équation et nommer le produit principal.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution :</strong><br>
+                        L'équation de la réaction : 
+                        \[
+                        C_6H_6 + H_2SO_4 \xrightarrow{80^\circ C} C_6H_5-SO_3H + H_2O
+                        \]
+                        Le produit obtenu est l'<strong>acide benzène sulfonique</strong> (aussi appelé acide benzènesulfonique). Il se présente sous forme d'un solide cristallin hygroscopique.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Le groupe -SO₃H rend la molécule très polaire et soluble dans l'eau, contrairement au benzène. Cela permet de le séparer par extraction.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Obtention de l'acide benzène-1,3-disulfonique</h3>
+                    <p class="exemple-context">
+                        À partir de benzène, comment obtenir l'acide benzène-1,3-disulfonique ? Quelles conditions ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Méthode :</strong><br>
+                        On utilise un excès d'<strong>oléum</strong> (acide sulfurique fumant contenant du SO₃) et on chauffe vers 150-200°C. Le deuxième groupe -SO₃H s'introduit en position <strong>méta</strong> par rapport au premier.
+                        \[
+                        C_6H_5SO_3H + H_2SO_4 \ (\text{excès}) \rightarrow C_6H_4(SO_3H)_2 \ (1,3) + H_2O
+                        \]
+                        La position 1,3 est favorisée car le substituant -SO₃H est orienteur méta.
+                    </div>
+                </div>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Comparaison avec la nitration</h3>
+                    <p class="exemple-context">
+                        Pourquoi la sulfonation est-elle réversible alors que la nitration ne l'est généralement pas ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Explication :</strong><br>
+                        La sulfonation est une réaction <strong>équilibrée</strong>. En milieu aqueux chaud, la réaction inverse (désulfonation) se produit : 
+                        \[
+                        C_6H_5SO_3H + H_2O \xrightarrow{\Delta} C_6H_6 + H_2SO_4
+                        \]
+                        Cette propriété est exploitée pour protéger/déprotéger des positions sur le cycle aromatique.
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 À retenir : La sulfonation est thermodynamiquement contrôlée ; à haute température, le produit le plus stable (souvent le para ou méta) est favorisé.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section mécanisme simplifié (optionnel mais pédagogique) -->
+            <section class="concept-section">
+                <h2 class="section-title">🔬 Aperçu du mécanisme (substitution électrophile)</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Formation de l'électrophile et attaque</h3>
+                    <p class="card-description">
+                        L'électrophile actif est le <strong>trioxyde de soufre SO₃</strong> ou l'ion \( HSO_3^+ \) généré à partir de H₂SO₄.
+                        \[
+                        2H_2SO_4 \rightleftharpoons SO_3 + H_3O^+ + HSO_4^-
+                        \]
+                        SO₃ est un électrophile puissant. Il attaque le nuage électronique du benzène, formant un intermédiaire (complexe σ), puis perte d'un proton H⁺ pour régénérer l'aromaticité.
+                    </p>
+                    <div class="image-placeholder">
+                        <img src="" alt="Schéma du mécanisme de sulfonation : formation de SO3, attaque sur le benzène, intermédiaire carbocationique, puis déprotonation">
+                        <p><em>Figure 2 : Étapes clés du mécanisme de sulfonation électrophile.</em></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges et points de vigilance -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confusion entre sulfonation et sulfonation réductrice :</span> La sulfonation classique introduit -SO₃H. Ne pas la confondre avec la formation de sulfonate de sodium (par neutralisation).</li>
+                        <li><span class="bold">Orientation :</span> Le groupe -SO₃H est <strong>méta-directeur</strong>. En cas de disubstitution, on obtient principalement l'isomère 1,3.</li>
+                        <li><span class="bold">Réversibilité :</span> Oublier que la sulfonation est réversible peut amener des erreurs dans la prévision des produits selon les conditions (température, présence d'eau).</li>
+                        <li><span class="bold">Conditions :</span> Utiliser de l'acide sulfurique concentré et non dilué ; l'eau déplace l'équilibre vers l'hydrolyse.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section applications / Importance -->
+            <section class="concept-section">
+                <h2 class="section-title">🏭 Applications industrielles</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Utilisation des acides benzène sulfoniques</h3>
+                    <p class="card-description">
+                        - Fabrication de <strong>détergents</strong> (les sulfonates d'alkyle) : les groupes sulfoniques confèrent un caractère hydrophile.<br>
+                        - Synthèse de <strong>colorants</strong> et de médicaments (sulfamides).<br>
+                        - Production de <strong>phénol</strong> par fusion alcaline (C₆H₅SO₃Na + NaOH → C₆H₅ONa + Na₂SO₃ puis acidification).<br>
+                        - Les résines échangeuses d'ions (polystyrène sulfoné).
+                    </p>
+                </div>
+            </section>
+
+            <!-- Exercice d'application rapide -->
+            <section class="exemple-section">
+                <h2 class="section-title">✏️ Petit exercice d'auto-évaluation</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Application directe</h3>
+                    <p class="exemple-context">
+                        On soumet le benzène à une sulfonation à 80°C avec H₂SO₄ concentré, puis on chauffe le produit obtenu avec de l'eau à 150°C. Que se passe-t-il ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Réponse :</strong> À 80°C, formation d'acide benzène sulfonique. Le chauffage avec de l'eau à haute température provoque la <strong>désulfonation</strong> (hydrolyse) régénérant le benzène et l'acide sulfurique.
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Cet exemple illustre la réversibilité de la sulfonation, utilisée en chimie organique pour "protéger" une position.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Révision créée pour la classe de Première C & D (Cameroun) · Programme officiel · Leçon 30 : Sulfonation des composés aromatiques</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">📚 Fiche conforme au programme de chimie organique - Module 1, Chapitre 4 : Composés aromatiques</p>
+        </footer>
+    </div>
+</body>
+</html>

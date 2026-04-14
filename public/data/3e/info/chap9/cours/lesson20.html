@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche Révision - UE20 : Sanctions nationales et internationales</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (optionnel mais gardé pour compatibilité) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* On reprend intégralement le style.css fourni pour que la fiche soit autonome */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+
+        /* Images de synthèse pour illustrer */
+        .illustration-box {
+            background-color: #eef2ff;
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            text-align: center;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 0.85rem;
+            color: #1e40af;
+            border: 1px solid #cbdff2;
+        }
+        .illustration-box img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .caption {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 0.3rem;
+        }
+        .legal-badge {
+            display: inline-block;
+            background-color: #f1f5f9;
+            border-radius: 0.5rem;
+            padding: 0.2rem 0.7rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.3rem;
+            color: #0c4a6e;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">UE 20 : Sanctions au niveau national et international</h1>
+            <p class="lesson-subtitle">Citoyenneté numérique · Troisième · Conformité et éthique numérique</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section Éléments clés à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Cadre juridique camerounais (National)</h3>
+                    <p class="card-description">
+                        Au Cameroun, la cybercriminalité et la protection des données sont régies par des textes spécifiques. 
+                        Les infractions sont sévèrement punies pour protéger les citoyens et l'intégrité du système numérique.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Loi n° 2010/012 du 21 décembre 2010</strong> relative à la cybersécurité et à la cybercriminalité au Cameroun. Elle définit les infractions : accès frauduleux, atteinte aux systèmes, usurpation d'identité, escroquerie en ligne, etc.</li>
+                        <li><strong>Sanctions prévues</strong> : amendes pouvant aller de 5 000 000 FCFA à 50 000 000 FCFA, peines d’emprisonnement de 2 à 10 ans selon la gravité (ex: utilisation frauduleuse de données personnelles).</li>
+                        <li><strong>Autorité de régulation</strong> : L’ANTIC (Agence Nationale des Technologies de l’Information et de la Communication) veille à l’application et mène des enquêtes.</li>
+                        <li><strong>Protection des données</strong> : loi n° 2020/009 du 18 mai 2020 sur la protection des données à caractère personnel (inspirée du RGPD). Toute collecte abusive expose à des sanctions financières.</li>
+                    </ul>
+                    <div class="illustration-box">
+                        🏛️ <em>Schéma synthétique des infractions courantes selon la loi camerounaise</em>
+                        <img src="" alt="Diagramme représentant les catégories d'infractions cyber : accès illégal, hameçonnage, diffusion de contenus illicites, et les peines associées (amendes, prison). Le logo ANTIC est présent ainsi que les références loi 2010/012.">
+                        <div class="caption">Infractions cyber au Cameroun : peines et autorités.</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Cadre international et législations majeures</h3>
+                    <p class="card-description">
+                        Plusieurs traités et lois extraterritoriales influencent la répression de la cybercriminalité et la protection de la vie privée à l'échelle mondiale.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Convention de Budapest (2001)</strong> : premier traité international sur la cybercriminalité. Le Cameroun en est signataire. Il harmonise les lois pénales et facilite la coopération entre États.</li>
+                        <li><strong>RGPD (Règlement Général sur la Protection des Données) – Union européenne</strong> : amendes administratives pouvant atteindre 20 millions d'euros ou 4 % du chiffre d’affaires mondial. Applicable à toute entreprise traitant des données de citoyens européens.</li>
+                        <li><strong>Loi américaine (CFAA) – Computer Fraud and Abuse Act</strong> : sanctionne l’accès non autorisé aux ordinateurs. Peines lourdes (jusqu’à 20 ans de prison).</li>
+                        <li><strong>Coopération Interpol / Afripol</strong> : dispositifs d’entraide judiciaire et de poursuites transnationales.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Propriété intellectuelle et sanctions associées</h3>
+                    <p class="card-description">
+                        Le piratage, la contrefaçon de logiciels et le partage illégal d'œuvres protégées sont punis tant au niveau national qu'international.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Cameroon :</strong> Loi n° 2000/011 du 19 décembre 2000 sur le droit d’auteur et les droits voisins. Toute reproduction non autorisée d’un logiciel ou d’une œuvre est passible d’amendes et d’emprisonnement (6 mois à 3 ans).</li>
+                        <li><strong>DMCA (Digital Millennium Copyright Act) – États-Unis</strong> : criminalise la contournement des mesures techniques de protection.</li>
+                        <li><strong>Directive européenne sur le droit d’auteur</strong> : responsabilité des plateformes et sanctions pour atteinte massive aux droits.</li>
+                        <li>Exemples de poursuites internationales : fermeture de sites de téléchargement illégal (MegaUpload, The Pirate Bay) et condamnations pénales des administrateurs.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Sanctions pour non-respect de la vie privée / atteinte aux données</h3>
+                    <p class="card-description">
+                        Divulgation non autorisée de données sensibles, violation de correspondance privée, ou non-conformité en matière de sécurité des données.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Au Cameroun : Article 84 de la loi 2010/012 -> atteinte à la vie privée via système informatique : peine d’emprisonnement de 6 mois à 2 ans et/ou amende de 500 000 à 5 000 000 FCFA.</li>
+                        <li>RGPD : amendes records infligées à des géants du numérique (ex : Amazon 746 M€, Meta 1,2 Md€) pour manquement à la transparence et consentement.</li>
+                        <li>En Afrique : des pays comme le Sénégal, le Nigeria ont également des lois sur la protection des données avec sanctions pécuniaires.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section Exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Cas concrets & études de cas</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Cas 1 : Usurpation d’identité et cyberharcèlement au Cameroun</h3>
+                    <p class="exemple-context">
+                        Un élève crée un faux compte sur les réseaux sociaux en utilisant le nom et la photo d’un camarade, et publie des messages diffamatoires. 
+                        Le camarade porte plainte auprès de l’ANTIC.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Sanctions applicables :</strong> Selon la loi camerounaise 2010/012 (art 83-84), l'usurpation d'identité numérique et le harcèlement en ligne sont punis de 1 à 5 ans d’emprisonnement et d’une amende pouvant atteindre 10 000 000 FCFA. 
+                        En plus, l’auteur peut être poursuivi pour diffamation selon le code pénal. Le tribunal peut ordonner la suppression des comptes et des dommages-intérêts.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : La conservation des preuves (captures d’écran, adresses IP) est essentielle pour les poursuites.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Cas 2 : Piratage de données personnelles par une multinationale (RGPD)</h3>
+                    <p class="exemple-context">
+                        Une plateforme de réseaux sociaux collecte sans consentement explicite les données biométriques des utilisateurs européens et les revend à des sociétés tierces.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Sanction internationale :</strong> La CNIL (autorité française) ou l’EDPB inflige une amende record pouvant atteindre 4% du chiffre d’affaires annuel mondial. 
+                        Exemple historique : Meta (Facebook) condamné à 1,2 milliard d’euros en 2023 pour transfert illégal de données vers les États-Unis. 
+                        Cette sanction montre l'extraterritorialité du RGPD.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 La protection des données personnelles est devenue un enjeu majeur ; les entreprises doivent nommer un DPO (Délégué à la protection des données).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Cas 3 : Contrefaçon de logiciels – vente illégale de copies Windows</h3>
+                    <p class="exemple-context">
+                        Un revendeur à Douala installe des versions non licenciées de logiciels sur des ordinateurs neufs et les commercialise.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Sanction nationale :</strong> Conformément à la loi sur le droit d’auteur au Cameroun, la contrefaçon de logiciels est passible de 6 mois à 3 ans d’emprisonnement et d’une amende de 1 000 000 à 10 000 000 FCFA. 
+                        Le procureur peut ordonner la saisie des équipements. En parallèle, le détenteur des droits (Microsoft) peut réclamer des dommages-intérêts civils.
+                    </p>
+                    <div class="illustration-box" style="margin-top: 0.75rem;">
+                        <img src="" alt="Infographie montrant les peines encourues pour piratage de logiciels au Cameroun : mentions des articles de loi, échelle d'amende et icônes de justice.">
+                        <div class="caption">Rappel des sanctions pour contrefaçon de logiciels (propriété intellectuelle).</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Pièges courants et précisions -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Ne pas confondre :</span> <strong>cybercriminalité</strong> (infractions pénales) et <strong>non-respect de l'éthique</strong> (manquement moral sans poursuite systématique). Tous les comportements toxiques en ligne ne sont pas automatiquement sanctionnés par la loi, mais peuvent le devenir selon leur gravité.</li>
+                        <li><span class="bold">Attention :</span> Une simple "blague" en ligne peut relever de l’usurpation d’identité ou du harcèlement et entraîner des sanctions pénales dès lors qu’elle porte atteinte à autrui.</li>
+                        <li><span class="bold">Erreur fréquente :</span> Penser que la protection des données personnelles ne s’applique qu’aux grandes entreprises. La loi camerounaise et le RGPD concernent aussi les particuliers traitant des données à caractère personnel.</li>
+                        <li><span class="bold">Méconnaissance des peines :</span> Beaucoup d’élèves ignorent que le téléchargement illégal (film, musique, logiciel) peut être poursuivi pénalement au Cameroun via la répression de la contrefaçon.</li>
+                        <li><span class="bold">Sanctions internationales :</span> Une entreprise basée au Cameroun mais traitant des données de citoyens européens est soumise au RGPD ; elle peut être sanctionnée par une amende européenne, même sans présence physique.</li>
+                    </ul>
+                </div>
+                <div class="card concept-card" style="margin-top: 0.5rem;">
+                    <h3 class="card-title">Tableau récapitulatif des sanctions types</h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width:100%; border-collapse: collapse; font-size: 0.9rem;">
+                            <thead style="background-color: #eef2ff;">
+                                <tr><th style="border:1px solid #cbd5e1; padding: 8px;">Infraction</th><th style="border:1px solid #cbd5e1; padding: 8px;">Cameroun (référence)</th><th style="border:1px solid #cbd5e1; padding: 8px;">Exemple international</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="border:1px solid #cbd5e1; padding: 8px;">Accès frauduleux / Hacking</td><td style="border:1px solid #cbd5e1; padding: 8px;">2 à 5 ans + amende (Loi 2010/012)</td><td style="border:1px solid #cbd5e1; padding: 8px;">USA (CFAA) jusqu’à 20 ans prison</td></tr>
+                                <tr><td style="border:1px solid #cbd5e1; padding: 8px;">Violation de données perso.</td><td style="border:1px solid #cbd5e1; padding: 8px;">500 000 - 5 000 000 FCFA + prison</td><td style="border:1px solid #cbd5e1; padding: 8px;">RGPD : jusqu'à 20 M€ ou 4% CA</td></tr>
+                                <tr><td style="border:1px solid #cbd5e1; padding: 8px;">Piratage / Contrefaçon</td><td style="border:1px solid #cbd5e1; padding: 8px;">6 mois - 3 ans + amende importante</td><td style="border:1px solid #cbd5e1; padding: 8px;">DMCA (USA) sanctions civiles lourdes</td></tr>
+                                <tr><td style="border:1px solid #cbd5e1; padding: 8px;">Cyberharcèlement / Usurpation</td><td style="border:1px solid #cbd5e1; padding: 8px;">1 à 5 ans + amende jusqu'à 10 M FCFA</td><td style="border:1px solid #cbd5e1; padding: 8px;">Directive européenne sur les droits numériques</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        🔍 À retenir : La loi évolue vite ; les sanctions nationales s’alignent de plus en plus sur les standards internationaux pour lutter contre la cybercriminalité.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ajout d'une section pour la sensibilisation éthique -->
+            <section class="concept-section">
+                <h2 class="section-title">🛡️ Conséquences & prévention</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Pourquoi ces sanctions existent-elles ?</h3>
+                    <p class="card-description">
+                        Les sanctions visent à dissuader les comportements illégaux, protéger l’intégrité des systèmes, les données personnelles et la propriété intellectuelle. 
+                        Chaque internaute a un rôle dans la construction d'un espace numérique sûr.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Bonnes pratiques :</strong> Utiliser des mots de passe robustes, ne pas partager ses identifiants, respecter les licences des logiciels, vérifier la fiabilité des sites avant de fournir ses données.</li>
+                        <li><strong>En cas de litige :</strong> Signaler à l’ANTIC (Cameroun) ou porter plainte auprès du procureur avec preuves.</li>
+                        <li><strong>Sanctions non seulement pénales :</strong> Dommages-intérêts, interdiction d’exercer certaines activités, fermeture de sites web.</li>
+                    </ul>
+                    <div class="illustration-box">
+                        <img src="" alt="Affiche de sensibilisation : 'Cybercriminalité : les sanctions sont réelles' avec logos ANTIC, police, gavel. Rappel des numéros d'urgence numérique.">
+                        <div class="caption">La prévention passe par la connaissance des risques et des peines encourues.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="fiche-footer">
+            <p>Révision conforme au programme officiel (Module 3 - Citoyenneté numérique, UE20) · Sources : Loi 2010/012, ANTIC, Convention de Budapest, RGPD · 📚 Réalisé pour les élèves de 3ème au Cameroun</p>
+            <p style="margin-top: 6px;">🔗 Ressources : <a href="#">antic.cm</a> · <a href="#">legicam.cm</a> · <a href="#">edpb.europa.eu</a></p>
+        </footer>
+    </div>
+</body>
+</html>

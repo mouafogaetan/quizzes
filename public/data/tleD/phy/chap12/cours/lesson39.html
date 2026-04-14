@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 39 : Effet Doppler</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles spécifiques pour la fiche */
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f9;
+            color: #1a2c3e;
+        }
+        .fiche-revision {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #0b3b5f 0%, #1b4f72 100%);
+            color: white;
+            padding: 25px 35px;
+            border-bottom: 5px solid #f39c12;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .header h2 {
+            margin: 8px 0 0;
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        .badge {
+            display: inline-block;
+            background-color: #f39c12;
+            color: #1a2c3e;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+        .content {
+            padding: 30px 35px;
+        }
+        .section {
+            margin-bottom: 30px;
+            border-left: 4px solid #1b4f72;
+            padding-left: 20px;
+        }
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0b3b5f;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title span {
+            background-color: #eaf2f8;
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #1b4f72;
+        }
+        .card {
+            background-color: #f8fafc;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #1b4f72;
+            font-weight: 600;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+        .formula {
+            background-color: #eef2f5;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 1.05rem;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .example {
+            background-color: #eafaf1;
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+        .example-title {
+            font-weight: 700;
+            color: #1e8449;
+            margin-bottom: 8px;
+        }
+        .attention {
+            background-color: #fef9e7;
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+        .footer {
+            background-color: #eaf2f8;
+            padding: 15px 35px;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #2c3e50;
+            border-top: 1px solid #cbd5e1;
+        }
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 20px;
+            }
+            .header {
+                padding: 20px;
+            }
+        }
+        ul, ol {
+            padding-left: 1.2rem;
+        }
+        li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-revision">
+        <div class="header">
+            <h1>📡 Leçon 39 : Effet Doppler</h1>
+            <h2>Module 5 – Ondes et Physique Moderne | Terminale C & D</h2>
+            <div class="badge">🎯 Baccalauréat 2023-2025 | Lien Bac : Effet Doppler</div>
+        </div>
+        <div class="content">
+            <!-- Objectifs -->
+            <div class="section">
+                <div class="section-title">
+                    🎯 Objectifs de la leçon
+                    <span>Savoir-faire exigibles</span>
+                </div>
+                <ul>
+                    <li>Expliquer qualitativement l'effet Doppler et le mettre en évidence dans des situations concrètes (ambulance, astronomie, radar).</li>
+                    <li>Distinguer les cas d'une source en mouvement et d'un observateur en mouvement.</li>
+                    <li>Appliquer les relations de l'effet Doppler pour calculer la fréquence perçue, la fréquence émise ou la vitesse relative.</li>
+                    <li>Utiliser l'effet Doppler pour déterminer une vitesse (ex: véhicule, étoile).</li>
+                </ul>
+            </div>
+
+            <!-- Notions clés -->
+            <div class="section">
+                <div class="section-title">
+                    🧠 Notions clés
+                    <span>À retenir absolument</span>
+                </div>
+                <div class="card">
+                    <h3>🔊 Définition</h3>
+                    <p>L’<strong>effet Doppler</strong> est le phénomène de variation de la fréquence perçue par un récepteur (observateur) lorsqu’il y a un mouvement relatif entre la source d’ondes et l’observateur. La fréquence perçue est <strong>plus élevée</strong> lors du rapprochement et <strong>plus faible</strong> lors de l’éloignement.</p>
+                    <div class="attention">
+                        💡 <strong>Exemple courant :</strong> La sirène d’une ambulance paraît plus aiguë (fréquence plus haute) quand elle s’approche, et plus grave (fréquence plus basse) quand elle s’éloigne.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📐 Formules fondamentales (milieu au repos, célérité c)</h3>
+                    <p><strong>Notations :</strong><br>
+                    \( f_E \) : fréquence émise par la source (Hz)<br>
+                    \( f_R \) : fréquence reçue par l’observateur (Hz)<br>
+                    \( c \) : célérité de l’onde dans le milieu (m/s)<br>
+                    \( v_S \) : vitesse de la source (positive si source se rapproche)<br>
+                    \( v_R \) : vitesse de l’observateur (positive si observateur se rapproche)</p>
+
+                    <div class="formula">
+                        📌 <strong>Cas 1 : Source mobile, observateur fixe</strong><br>
+                        $$ f_R = f_E \times \frac{c}{c \mp v_S} $$
+                        <ul style="margin-top: 8px;">
+                            <li>\( - \) (moins) : source se rapproche → \( f_R > f_E \)</li>
+                            <li>\( + \) (plus) : source s’éloigne → \( f_R < f_E \)</li>
+                        </ul>
+                    </div>
+
+                    <div class="formula">
+                        📌 <strong>Cas 2 : Observateur mobile, source fixe</strong><br>
+                        $$ f_R = f_E \times \frac{c \pm v_R}{c} $$
+                        <ul style="margin-top: 8px;">
+                            <li>\( + \) (plus) : observateur se rapproche → \( f_R > f_E \)</li>
+                            <li>\( - \) (moins) : observateur s’éloigne → \( f_R < f_E \)</li>
+                        </ul>
+                    </div>
+
+                    <div class="formula">
+                        📌 <strong>Cas général (source et observateur mobiles sur la même droite)</strong><br>
+                        $$ f_R = f_E \times \frac{c \pm v_R}{c \mp v_S} $$
+                        <br>Règle des signes : On choisit les signes pour que \( f_R \) augmente lors du rapprochement.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>🌌 Applications importantes (sujets de Bac)</h3>
+                    <ul>
+                        <li><strong>Astronomie (effet Doppler-Fizeau) :</strong> Décalage spectral des étoiles et galaxies vers le rouge (redshift) pour l’éloignement → preuve de l’expansion de l’Univers.</li>
+                        <li><strong>Radars de contrôle routier :</strong> Mesure de la vitesse des véhicules par variation de fréquence d’une onde électromagnétique réfléchie.</li>
+                        <li><strong>Échographie Doppler :</strong> Mesure de la vitesse du sang dans les vaisseaux.</li>
+                        <li><strong>Sismologie :</strong> Détection des mouvements du sol.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Méthodologie et exemples -->
+            <div class="section">
+                <div class="section-title">
+                    ✏️ Méthodologie & Exemples types
+                    <span>Appliquer les formules</span>
+                </div>
+                <div class="grid-2">
+                    <div class="example">
+                        <div class="example-title">📝 Exemple 1 : Source sonore en mouvement</div>
+                        <p>Une voiture émet un son de fréquence \( f_E = 500 \, \text{Hz} \) à l’arrêt. Elle se déplace à \( v_S = 30 \, \text{m/s} \) vers un observateur fixe. Célérité du son \( c = 340 \, \text{m/s} \).</p>
+                        <p><strong>Calcul de la fréquence perçue :</strong><br>
+                        La source se rapproche → utiliser \( f_R = f_E \times \frac{c}{c - v_S} \)<br>
+                        $$ f_R = 500 \times \frac{340}{340 - 30} = 500 \times \frac{340}{310} \approx 548,4 \, \text{Hz} $$<br>
+                        La fréquence perçue est plus élevée.
+                        </p>
+                    </div>
+                    <div class="example">
+                        <div class="example-title">📝 Exemple 2 : Observateur en mouvement</div>
+                        <p>Un observateur court à \( v_R = 5 \, \text{m/s} \) vers une source fixe émettant \( f_E = 440 \, \text{Hz} \). \( c = 340 \, \text{m/s} \).</p>
+                        <p><strong>Calcul :</strong><br>
+                        Observateur se rapproche → \( f_R = f_E \times \frac{c + v_R}{c} \)<br>
+                        $$ f_R = 440 \times \frac{340 + 5}{340} = 440 \times \frac{345}{340} \approx 446,5 \, \text{Hz} $$</p>
+                    </div>
+                </div>
+                <div class="example" style="margin-top: 0;">
+                    <div class="example-title">📡 Exemple type Bac : Radar routier</div>
+                    <p>Un radar émet une onde de fréquence \( f_E = 24 \, \text{GHz} \). L’onde se réfléchit sur un véhicule s’approchant à \( v = 20 \, \text{m/s} \). La fréquence reçue par le radar après réflexion est \( f_R \). On utilise deux fois l’effet Doppler (aller et retour). La variation de fréquence \( \Delta f = f_R - f_E \approx \frac{2v}{c} f_E \). <br>
+                    <strong>Calcul :</strong> \( \Delta f = \frac{2 \times 20}{3 \times 10^8} \times 24 \times 10^9 = \frac{40}{3 \times 10^8} \times 24 \times 10^9 = 3200 \, \text{Hz} \).</p>
+                </div>
+            </div>
+
+            <!-- Lien Bac et Conseils -->
+            <div class="section">
+                <div class="section-title">
+                    🧪 Lien Baccalauréat
+                    <span>Ce qui tombe souvent</span>
+                </div>
+                <div class="card">
+                    <ul>
+                        <li><strong>Questions de cours :</strong> Énoncer et expliquer l’effet Doppler, donner des exemples concrets (sirène, étoiles).</li>
+                        <li><strong>Exercices calculatoires :</strong> Déterminer une fréquence perçue ou une vitesse à partir des formules, en choisissant le bon signe.</li>
+                        <li><strong>Contextes fréquents :</strong> Voiture avec sirène, échographie Doppler, astronomie (décalage spectral).</li>
+                        <li><strong>Pièges à éviter :</strong> 
+                            <ul>
+                                <li>Ne pas confondre \( v_S \) et \( v_R \).</li>
+                                <li>Bien vérifier si la source ou l’observateur se rapproche ou s’éloigne pour choisir le signe correct.</li>
+                                <li>Pour les ondes électromagnétiques (radar, lumière), la célérité \( c = 3 \times 10^8 \, \text{m/s} \) (dans le vide).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="attention">
+                    ⚠️ <strong>Attention :</strong> Dans le cas des ondes électromagnétiques (lumière, radar), les formules relativistes doivent être utilisées si les vitesses sont proches de \( c \). Mais au niveau terminale, on utilise souvent l’approximation non relativiste \( \frac{\Delta f}{f} \approx \frac{v}{c} \) pour des vitesses faibles devant \( c \).
+                </div>
+            </div>
+
+            <!-- Synthèse visuelle -->
+            <div class="section">
+                <div class="section-title">
+                    📌 Synthèse à retenir
+                    <span>Mémorisez ces points</span>
+                </div>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>✅ Rapprochement</h3>
+                        <p style="font-size: 1.2rem; text-align: center; color: #1e8449;">\( f_R > f_E \)</p>
+                        <p>→ Son plus aigu (lumière décalée vers le bleu)</p>
+                    </div>
+                    <div class="card">
+                        <h3>✅ Éloignement</h3>
+                        <p style="font-size: 1.2rem; text-align: center; color: #c0392b;">\( f_R < f_E \)</p>
+                        <p>→ Son plus grave (lumière décalée vers le rouge)</p>
+                    </div>
+                </div>
+                <div class="formula" style="text-align: center;">
+                    🔔 <strong>Astuce mnémotechnique :</strong> <br>
+                    « Rapprochement = Plus haut ; Éloignement = Plus bas »
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Fiche de révision conforme au programme officiel du Cameroun - Terminale C & D | Année scolaire 2025-2026</p>
+            <p>📚 Enseignant : Physique - Lycée du Cameroun | ✨ Révision pour le Baccalauréat</p>
+        </div>
+    </div>
+</body>
+</html>

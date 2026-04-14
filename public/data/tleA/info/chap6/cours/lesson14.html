@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 14 : Fonctions MOYENNE et RANG</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        code {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #0c4a6e;
+            font-size: 0.9rem;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Tableau style */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #cbd5e1;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        .data-table th {
+            background-color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 14 : Fonctions de calcul - MOYENNE() et RANG()</h1>
+            <p class="lesson-subtitle">Informatique · Terminale A (Littéraire) · Tableur</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Fonction MOYENNE()</h3>
+                    <p class="card-description">
+                        La fonction <strong>MOYENNE()</strong> permet de calculer la moyenne arithmétique d'une série de nombres dans une plage de cellules. 
+                        Elle additionne toutes les valeurs de la plage et divise le résultat par le nombre de cellules contenant des valeurs numériques.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Syntaxe :</strong> <code>=MOYENNE(plage_de_cellules)</code></li>
+                        <li><strong>Exemple :</strong> <code>=MOYENNE(B2:B10)</code> calcule la moyenne des valeurs comprises entre B2 et B10.</li>
+                        <li><strong>Attention :</strong> Les cellules vides ou contenant du texte sont ignorées. Les zéros (0) sont comptés.</li>
+                        <li><strong>Utilité :</strong> Calculer la moyenne des notes d’un élève, le salaire moyen, la température moyenne, etc.</li>
+                    </ul>
+                    <img src="" alt="Schéma illustrant le calcul d'une moyenne avec la fonction MOYENNE dans un tableur, montrant une plage de cellules et le résultat" style="width:100%; max-width:300px; margin-top:12px; border-radius:8px;">
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Fonction RANG()</h3>
+                    <p class="card-description">
+                        La fonction <strong>RANG()</strong> (ou <strong>RANG.EQ()</strong> selon les versions) détermine la position (le rang) d'une valeur dans une liste de valeurs. 
+                        Le rang 1 correspond généralement à la plus grande valeur (ordre décroissant) ou à la plus petite (ordre croissant selon paramètre).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Syntaxe :</strong> <code>=RANG(valeur; plage_de_référence; [ordre])</code></li>
+                        <li><strong>valeur :</strong> la cellule ou la valeur dont on veut connaître le rang.</li>
+                        <li><strong>plage_de_référence :</strong> l'ensemble des valeurs à comparer.</li>
+                        <li><strong>ordre :</strong> 0 ou omis = décroissant (le plus grand a rang 1) ; 1 = croissant (le plus petit a rang 1).</li>
+                        <li><strong>Exemple :</strong> <code>=RANG(B2; $B$2:$B$10; 0)</code> donne le rang de B2 dans la liste B2:B10 en ordre décroissant.</li>
+                    </ul>
+                    <img src="" alt="Illustration de la fonction RANG dans un tableau de classement : une valeur encadrée et son rang attribué parmi d'autres nombres" style="width:100%; max-width:300px; margin-top:12px; border-radius:8px;">
+                </div>
+            </section>
+
+            <!-- Section exemples concrets -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Calcul de la moyenne des notes d’une classe</h3>
+                    <p class="exemple-context">
+                        Dans un relevé de notes d’informatique pour 5 élèves : Ali (12), Béatrice (15), Charles (9), Diana (14), Éric (11). 
+                        Ces notes sont saisies dans les cellules A2 à A6. Quel est le résultat de la formule <code>=MOYENNE(A2:A6)</code> ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution :</strong> On additionne 12 + 15 + 9 + 14 + 11 = 61. Il y a 5 élèves. La moyenne = 61 / 5 = <strong>12,2</strong>.
+                        <br>La formule affichera donc <strong>12,2</strong>.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Pour éviter les erreurs, vérifiez que la plage ne contient pas de texte. Si une note est absente, ne pas laisser de cellule vide avec un zéro implicite, soit on met 0, soit on l'exclut.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Classer les ventes avec RANG()</h3>
+                    <p class="exemple-context">
+                        Une petite entreprise au Cameroun a réalisé les ventes mensuelles suivantes (en milliers de FCFA) : 
+                        Janvier (450), Février (620), Mars (380), Avril (590), Mai (710). 
+                        On souhaite attribuer le rang 1 au mois le plus performant (vente la plus élevée).
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Procédure :</strong> Supposons que les ventes sont en B2:B6. Pour obtenir le rang de Février (620) on écrit : <code>=RANG(B3; $B$2:$B$6; 0)</code>.<br>
+                        Résultats : 710 (Mai) → rang 1 ; 620 (Fév) → rang 2 ; 590 (Avr) → rang 3 ; 450 (Jan) → rang 4 ; 380 (Mar) → rang 5.<br>
+                        On peut tirer la formule pour chaque mois afin d’obtenir le classement automatique.
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Important : Utiliser des références absolues (<code>$B$2:$B$6</code>) pour que la plage de référence ne bouge pas lors de la copie de la formule.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Combinaison MOYENNE et RANG</h3>
+                    <p class="exemple-context">
+                        On a les notes de quatre étudiants en Mathématiques : 
+                        <strong>Paul (14), Rose (11), Jean (16), Alice (9)</strong>. Calculez la moyenne du groupe, puis déterminez le rang de Jean parmi les quatre notes (ordre décroissant).
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Moyenne :</strong> (14+11+16+9)/4 = 50/4 = <strong>12,5</strong> → <code>=MOYENNE(B2:B5)</code>.<br>
+                        <strong>Rang de Jean :</strong> sa note est 16. La plage contient {14;11;16;9}. La plus grande valeur est 16 (rang 1). Jean a donc <strong>rang 1</strong>.<br>
+                        Formule : <code>=RANG(16; B2:B5; 0)</code> ou <code>=RANG(B4; B2:B5; 0)</code> donne 1.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 À retenir : La fonction RANG peut aider à déterminer rapidement le meilleur élève ou le dernier d’un classement.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau récapitulatif avec données -->
+            <section class="exemple-section">
+                <h2 class="section-title">📊 Tableau d'application type (Examen)</h2>
+                <div class="card">
+                    <h3 class="card-title">Sujet fréquent au Baccalauréat</h3>
+                    <p class="card-description">
+                        On donne le relevé des notes trimestrielles de cinq élèves en Lettres et en Informatique. 
+                        Utilisez les fonctions du tableur pour répondre aux questions.
+                    </p>
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Élève</th><th>Note Lettres</th><th>Note Informatique</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Moussa</td><td>13</td><td>15</td></tr>
+                            <tr><td>Fatima</td><td>11</td><td>14</td></tr>
+                            <tr><td>Jacques</td><td>15</td><td>12</td></tr>
+                            <tr><td>Clarisse</td><td>9</td><td>16</td></tr>
+                            <tr><td>Steeve</td><td>14</td><td>10</td></tr>
+                        </tbody>
+                    </table>
+                    <ul class="concept-list">
+                        <li>Question 1 : Quelle formule permet de calculer la moyenne des notes en Informatique ? <code>=MOYENNE(C2:C6)</code> → Résultat = 13,4.</li>
+                        <li>Question 2 : Quel est le rang de Jacques en Lettres parmi les cinq élèves (ordre décroissant) ? <code>=RANG(B4; $B$2:$B$6; 0)</code> → La note 15 est la plus haute ex-aequo ? Ici 15 (Jacques et Moussa ? Non Moussa 13). Donc 15 est le meilleur → rang 1.</li>
+                        <li>Question 3 : Quelle est la moyenne générale de la classe en additionnant les deux matières ? On peut créer une colonne supplémentaire puis faire <code>=MOYENNE(D2:D6)</code>.</li>
+                    </ul>
+                    <img src="" alt="Capture d’écran fictive d’un tableur montrant l’application des fonctions MOYENNE et RANG sur des notes d’élèves" style="width:100%; max-width:400px; border-radius:8px; margin-top:8px;">
+                </div>
+            </section>
+
+            <!-- Pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente 1 :</span> Oublier de convertir les références en absolues (<code>$</code>) pour la plage dans RANG(). Si on utilise <code>=RANG(B2; B2:B6; 0)</code> et qu'on étire la formule, la plage se décale et fausse les résultats.</li>
+                        <li><span class="bold">Erreur fréquente 2 :</span> Confondre l'ordre de RANG : 0 (ou omis) donne un rang décroissant (le plus grand = 1) ; 1 donne un rang croissant (le plus petit = 1). En entreprise ou concours, on utilise souvent l'ordre décroissant pour le podium.</li>
+                        <li><span class="bold">Attention :</span> La fonction MOYENNE ignore les cellules vides mais pas les zéros. Si un élève a 0 à un devoir, la moyenne sera impactée. Ne pas laisser vide pour signifier "absent", mieux vaut noter "Abs" ou gérer avec une autre formule.</li>
+                        <li><span class="bold">À ne pas confondre :</span> RANG() avec la fonction EQUIV() qui cherche une position mais sans classement statistique. RANG est spécifique au classement.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Récapitulatif des bonnes pratiques -->
+            <section class="concept-section">
+                <h2 class="section-title">✅ Bonnes pratiques dans un tableur</h2>
+                <div class="card concept-card">
+                    <ul class="concept-list">
+                        <li>Pour calculer une moyenne rapidement : sélectionner la plage et utiliser l'icône somme déroulante (moyenne) ou taper <code>=MOYENNE()</code>.</li>
+                        <li>Pour RANG : toujours verrouiller la plage de référence avec <code>$</code> avant de copier la formule vers d'autres cellules.</li>
+                        <li>Privilégier l'utilisation de plages nommées (ex: "Notes") pour améliorer la lisibilité : <code>=MOYENNE(Notes)</code>.</li>
+                        <li>Vérifier l'absence d'erreur #DIV/0! dans MOYENNE : cela signifie qu'aucune cellule numérique n'est présente.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Petit exercice type examen -->
+            <section class="exemple-section">
+                <h2 class="section-title">📝 Exercice type (préparation Bac)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Situation : Classement d’une compétition littéraire</h3>
+                    <p class="exemple-context">
+                        Lors d’un concours de poésie, les juges attribuent des notes sur 20 à 6 participants. Voici les scores : 
+                        Aicha (17), Brice (12), Carine (15), Didier (14), Elsa (18), Frank (10). Les notes sont en colonne B (B2:B7).
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Question 1 :</strong> Quelle formule donne la moyenne des participants ? <br>
+                        → <code>=MOYENNE(B2:B7)</code> (résultat = (17+12+15+14+18+10)/6 = 86/6 ≈ 14,33)<br>
+                        <strong>Question 2 :</strong> Quelle formule donne le rang d’Elsa (18) en ordre décroissant ? <br>
+                        → <code>=RANG(B6; $B$2:$B$7; 0)</code> → Rang 1.<br>
+                        <strong>Question 3 :</strong> Si on ajoute un 7ème candidat avec 14, comment évolue le rang de Carine (15) ? Il faut recalculer la plage étendue. 
+                        Le rang peut changer s’il y a des ex-aequos. En cas d’égalité, RANG attribue le même rang aux valeurs identiques, puis saute le rang suivant.
+                    </div>
+                    <div class="exemple-astuce">
+                        📌 Conseil examen : Lisez bien l’énoncé pour savoir si le classement est croissant ou décroissant. Pour les moyennes, n’oubliez pas d’inclure toutes les valeurs demandées.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche de révision basée sur le programme officiel (Terminale A) - Leçon 14 : Fonctions MOYENNE et RANG · <a href="#">Réviser avec des exercices interactifs</a> · 📚 Baccalauréat 2025-2026</p>
+        </footer>
+    </div>
+</body>
+</html>

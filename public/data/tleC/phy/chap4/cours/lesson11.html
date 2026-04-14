@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 11 : Interaction entre conducteurs parcourus par des courants</title>
+    <style>
+        /* ---------- STYLES PRINCIPAUX ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            padding: 40px 20px;
+            color: #1a2c3e;
+            line-height: 1.5;
+        }
+
+        /* Conteneur principal (feuille A4-like) */
+        .fiche {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* En-tête avec bande couleur */
+        .header {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1a4a6f 100%);
+            color: white;
+            padding: 1.8rem 2.2rem;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.3rem;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 500;
+            border-left: 3px solid #ffcd7e;
+            padding-left: 12px;
+            margin-top: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ffcd7e;
+            color: #1a4a6f;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 12px;
+            letter-spacing: 0.3px;
+        }
+
+        /* Grille principale */
+        .content {
+            padding: 2rem 2.2rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1.2rem;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f3b4f;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 5px solid #ff9f4a;
+            padding-left: 15px;
+        }
+
+        .section-title i {
+            font-style: normal;
+            font-size: 1.3rem;
+        }
+
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .card {
+            background: #f9fbfd;
+            border-radius: 20px;
+            padding: 1.2rem 1.4rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02), 0 1px 2px rgba(0,0,0,0.03);
+            border: 1px solid #eef2f8;
+            transition: transform 0.1s ease;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #1e4a6e;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .formula {
+            background: #eef3fc;
+            padding: 0.9rem 1rem;
+            border-radius: 16px;
+            font-family: 'Courier New', 'SF Mono', monospace;
+            font-weight: 500;
+            margin: 1rem 0;
+            text-align: center;
+            font-size: 1.05rem;
+            border-left: 4px solid #ff9f4a;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            background: #fff1e0;
+            padding: 0.8rem 1rem;
+            border-radius: 14px;
+            font-weight: 500;
+            margin: 0.8rem 0;
+        }
+
+        .list-styled {
+            padding-left: 1.4rem;
+            margin: 0.8rem 0;
+        }
+        .list-styled li {
+            margin: 0.5rem 0;
+        }
+
+        .schema-placeholder {
+            background: #f0f4f9;
+            border-radius: 18px;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            border: 1px dashed #acc9e0;
+        }
+        .schema-img {
+            max-width: 100%;
+            border-radius: 12px;
+        }
+
+        .footer-note {
+            background: #eef2fa;
+            border-radius: 18px;
+            padding: 1rem 1.4rem;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            text-align: center;
+            color: #2c577c;
+            border: 1px solid #d9e2ef;
+        }
+
+        @media (max-width: 700px) {
+            .content {
+                padding: 1.5rem;
+            }
+            .grid-2cols {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        hr {
+            margin: 0.8rem 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, #ccc, transparent);
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="fiche">
+    <div class="header">
+        <h1>⚡ Leçon 11 : Interaction entre conducteurs parcourus par des courants</h1>
+        <div class="subtitle">Force de Laplace – Interaction entre deux fils parallèles – Applications</div>
+        <div class="badge">📘 Terminale C & D | Programme officiel Cameroun | Lien Bac 2025</div>
+    </div>
+    <div class="content">
+        <!-- SECTION OBJECTIFS & NOTIONS CLES -->
+        <div class="section">
+            <div class="section-title">
+                <span>🎯</span> Objectifs & Compétences Bac
+            </div>
+            <div class="grid-2cols">
+                <div class="card">
+                    <h3>📌 Objectifs d’apprentissage</h3>
+                    <ul class="list-styled">
+                        <li>✔ Énoncer la loi de Laplace et calculer la force magnétique subie par un conducteur rectiligne parcouru par un courant.</li>
+                        <li>✔ Calculer la force d’interaction entre deux conducteurs rectilignes parallèles.</li>
+                        <li>✔ Déterminer le caractère attractif ou répulsif selon le sens des courants.</li>
+                        <li>✔ Appliquer ces notions à des situations concrètes (rails de Laplace, moteur électrique).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🏁 Compétences évaluées (Bac)</h3>
+                    <ul class="list-styled">
+                        <li>✅ Calculer l’intensité de la force de Laplace sur un tronçon de fil.</li>
+                        <li>✅ Déterminer la force linéique entre deux conducteurs parallèles.</li>
+                        <li>✅ Prévoir le sens du mouvement ou la déformation d’un circuit dans un champ magnétique.</li>
+                        <li>✅ Résoudre des problèmes intégrant la superposition de forces magnétiques.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION NOTIONS CLES ET FORMULAIRES -->
+        <div class="section">
+            <div class="section-title">
+                <span>🧲</span> Force de Laplace & Interaction entre courants
+            </div>
+            <div class="grid-2cols">
+                <div class="card">
+                    <h3>🔹 Force de Laplace sur un conducteur</h3>
+                    <p>Un conducteur rectiligne de longueur <strong>L</strong>, parcouru par un courant <strong>I</strong>, placé dans un champ magnétique uniforme <strong>$\vec{B}$</strong> subit la force :</p>
+                    <div class="formula">
+                        $$\boxed{\vec{F} = I \cdot (\vec{L} \times \vec{B})}$$
+                    </div>
+                    <ul class="list-styled">
+                        <li><strong>Intensité</strong> : $F = I \cdot L \cdot B \cdot \sin(\theta)$ où $\theta = (\vec{L}, \vec{B})$.</li>
+                        <li><strong>Direction</strong> : perpendiculaire au plan formé par $\vec{L}$ et $\vec{B}$.</li>
+                        <li><strong>Règle des trois doigts (main droite)</strong> : pouce = courant, index = champ, majeur = force.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>⚡ Interaction entre deux fils parallèles</h3>
+                    <p>Deux conducteurs rectilignes, parallèles, distants de <strong>d</strong>, parcourus par $I_1$ et $I_2$ exercent l’un sur l’autre une force magnétique.</p>
+                    <div class="formula">
+                        $$\boxed{F = \frac{\mu_0 \cdot I_1 \cdot I_2 \cdot L}{2\pi d}}$$
+                    </div>
+                    <p>Avec $\mu_0 = 4\pi \times 10^{-7}\ \text{H/m}$ (perméabilité du vide).</p>
+                    <div class="highlight">
+                        💡 <strong>Attraction / Répulsion</strong> :<br>
+                        - Courants de <strong>même sens</strong> → force attractive.<br>
+                        - Courants de <strong>sens opposés</strong> → force répulsive.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEMONSTRATION ET ANALYSE -->
+        <div class="section">
+            <div class="section-title">
+                <span>📐</span> Analyse & Démonstration (Bac)
+            </div>
+            <div class="card" style="background:#f7f9fe;">
+                <h3>🔍 D’où vient la formule d’interaction ?</h3>
+                <p>Le premier fil crée un champ magnétique $B_1 = \dfrac{\mu_0 I_1}{2\pi d}$ au niveau du second fil. Ce champ exerce sur le second fil une force de Laplace : $F = I_2 \cdot L \cdot B_1$. En substituant $B_1$ :</p>
+                <div class="formula">
+                    $$F = I_2 \cdot L \cdot \left( \frac{\mu_0 I_1}{2\pi d} \right) = \frac{\mu_0 I_1 I_2 L}{2\pi d}$$
+                </div>
+                <p>La force par unité de longueur est : $\displaystyle \frac{F}{L} = \frac{\mu_0 I_1 I_2}{2\pi d}$.</p>
+                <p>✅ <strong>Démarche typique bac</strong> : Calculer $\vec{B}$ créé par $I_1$, puis appliquer la force de Laplace sur $I_2$.</p>
+            </div>
+        </div>
+
+        <!-- APPLICATIONS ET SCHEMA -->
+        <div class="section">
+            <div class="section-title">
+                <span>⚙️</span> Applications pratiques & Représentation
+            </div>
+            <div class="grid-2cols">
+                <div class="card">
+                    <h3>🧪 Rails de Laplace</h3>
+                    <p>Une barre mobile conductrice (longueur $L$, courant $I$) placée sur des rails dans un champ $\vec{B}$ vertical est mise en mouvement par la force de Laplace : $F = I L B$ (si $\vec{B} \perp \vec{L}$).</p>
+                    <div class="schema-placeholder">
+                        <svg width="200" height="100" viewBox="0 0 250 100" style="margin:0 auto; display:block;">
+                            <rect x="20" y="40" width="180" height="8" fill="#5a6e7c" />
+                            <rect x="20" y="70" width="180" height="8" fill="#5a6e7c" />
+                            <rect x="70" y="30" width="80" height="55" fill="none" stroke="#e67e22" stroke-width="3" />
+                            <text x="100" y="22" text-anchor="middle" fill="#e67e22" font-size="12">I</text>
+                            <text x="220" y="55" fill="#1f6392" font-size="10">$\vec{B}$ ⊥ sortant</text>
+                            <text x="30" y="88" fill="#2c3e50" font-size="10">Force →</text>
+                        </svg>
+                        <p style="margin-top: 6px;"><em>Barre mobile soumise à la force de Laplace</em></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>📐 Deux fils parallèles (vue de face)</h3>
+                    <div class="schema-placeholder">
+                        <svg width="200" height="110" viewBox="0 0 220 110" style="margin:0 auto; display:block;">
+                            <circle cx="50" cy="30" r="6" fill="#d35400" />
+                            <text x="50" y="22" text-anchor="middle" fill="#d35400" font-size="11">I₁</text>
+                            <circle cx="170" cy="30" r="6" fill="#d35400" />
+                            <text x="170" y="22" text-anchor="middle" fill="#d35400" font-size="11">I₂</text>
+                            <path d="M50 36 L50 80" stroke="#2c3e50" stroke-width="1.5" stroke-dasharray="4" />
+                            <path d="M170 36 L170 80" stroke="#2c3e50" stroke-width="1.5" stroke-dasharray="4" />
+                            <text x="110" y="55" text-anchor="middle" fill="#1f6392" font-size="12">d</text>
+                            <text x="45" y="95" fill="#c0392b" font-size="10">même sens → attraction</text>
+                            <text x="45" y="108" fill="#c0392b" font-size="10">sens opposés → répulsion</text>
+                        </svg>
+                        <p><em>Force entre deux fils : attractive ou répulsive selon le sens des courants.</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXERCICE TYPÉ BAC -->
+        <div class="section">
+            <div class="section-title">
+                <span>✍️</span> Exercice résolu (type Bac)
+            </div>
+            <div class="card">
+                <h3>📝 Énoncé</h3>
+                <p>Deux conducteurs rectilignes, infinis, parallèles, sont placés dans l’air, distants de $d = 5,0\ \text{cm}$. Ils sont parcourus par des courants $I_1 = 2,0\ \text{A}$ et $I_2 = 3,0\ \text{A}$ de même sens. Calculer la force exercée par le premier conducteur sur une portion de longueur $L = 20\ \text{cm}$ du second conducteur. Préciser le sens de la force.</p>
+                <hr>
+                <h3>✅ Correction détaillée</h3>
+                <p><strong>1. Champ magnétique créé par $I_1$ à l’emplacement de $I_2$ :</strong><br>
+                $$B_1 = \frac{\mu_0 I_1}{2\pi d} = \frac{4\pi \times 10^{-7} \times 2,0}{2\pi \times 0,050} = \frac{4\pi \times 10^{-7} \times 2,0}{0,1\pi} = 8,0 \times 10^{-6}\ \text{T}$$
+                </p>
+                <p><strong>2. Force de Laplace sur le tronçon $L$ de $I_2$ :</strong><br>
+                $F = I_2 \cdot L \cdot B_1$ (car $\vec{B} \perp$ fil) <br>
+                $F = 3,0 \times 0,20 \times 8,0\times10^{-6} = 4,8 \times 10^{-6}\ \text{N}$.
+                </p>
+                <p><strong>3. Sens :</strong> Courants de même sens → force attractive. Donc le second fil est attiré vers le premier.</p>
+                <div class="formula" style="background:#e0f0fa;">
+                    💡 Réponse : $F = 4,8\ \mu\text{N}$ (attractive).
+                </div>
+            </div>
+        </div>
+
+        <!-- POINTS DE VIGILANCE BAC & ASTUCES -->
+        <div class="section">
+            <div class="section-title">
+                <span>⚠️</span> Pièges à éviter & Méthodo Bac
+            </div>
+            <div class="grid-2cols">
+                <div class="card">
+                    <h3>❗ Erreurs fréquentes</h3>
+                    <ul class="list-styled">
+                        <li>❌ Oublier que la force est perpendiculaire au conducteur ET au champ.</li>
+                        <li>❌ Confondre $\mu_0$ et $\varepsilon_0$ (constante magnétique).</li>
+                        <li>❌ Utiliser la distance en cm sans convertir en mètres.</li>
+                        <li>❌ Inverser le sens de la force pour des courants antiparallèles.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🧠 Astuces pour le Bac</h3>
+                    <ul class="list-styled">
+                        <li>🔹 Pour deux fils parallèles, toujours partir de $B = \frac{\mu_0 I}{2\pi d}$ puis $F = I L B$.</li>
+                        <li>🔹 Représenter le champ $\vec{B}$ créé par le premier fil (règle de la main droite).</li>
+                        <li>🔹 Vérifier l’homogénéité : $\mu_0 I^2 / (2\pi d)$ a la dimension d’une force par unité de longueur (N/m).</li>
+                        <li>🔹 Mentionner le nom de la loi : <strong>Force de Laplace</strong> et <strong>Loi de Biot-Savart</strong> pour le champ.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- RAPPEL BAC + REFERENCES -->
+        <div class="footer-note">
+            <strong>📌 Lien avec les épreuves du Baccalauréat (2023-2025)</strong><br>
+            Cette leçon est régulièrement évaluée dans les exercices de magnétostatique : calcul de force entre deux conducteurs, détermination du sens du mouvement, application aux rails de Laplace. Maîtriser la force de Lorentz et la force de Laplace est indispensable pour l’épreuve de physique au Cameroun (Série C & D).
+        </div>
+        <div class="footer-note" style="margin-top: 0.8rem; background:#f3f1e6;">
+            📖 <strong>Mots-clés</strong> : Force de Laplace, interaction magnétique, conducteurs parallèles, attraction/répulsion, $\mu_0$, perméabilité du vide, loi de Biot-Savart, règle de la main droite.
+        </div>
+    </div>
+</div>
+</body>
+</html>

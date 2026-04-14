@@ -1,0 +1,127 @@
+[
+  {
+    "intitule": "Découverte de JavaScript : Le réveil de la page web",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Tu viens d’apprendre que JavaScript est un langage de programmation côté client qui permet de rendre les pages web interactives. Observe attentivement le code HTML suivant :</p>\n<pre><code>&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n    &lt;title&gt;Ma première page&lt;/title&gt;\n&lt;/head&gt;\n&lt;body&gt;\n    &lt;h1&gt;Bienvenue&lt;/h1&gt;\n    &lt;SCRIPT language=\"Javascript\"&gt;\n        document.write(\"&lt;p&gt;Je suis un texte écrit par JavaScript !&lt;/p&gt;\");\n    &lt;/SCRIPT&gt;\n&lt;/body&gt;\n&lt;/html&gt;</code></pre>\n<p>Explique le rôle de la balise <code>&lt;SCRIPT&gt;</code> et décris ce que l’utilisateur verra en ouvrant cette page avec un navigateur.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifie et explique le rôle de la balise `<SCRIPT>` dans le code fourni.",
+        "niveau": "easy",
+        "reponse": "La balise `<SCRIPT language=\"Javascript\">` indique au navigateur que le code qu'elle contient est du JavaScript et qu'il doit être interprété comme tel. Sans cette balise, le code serait considéré comme du texte brut et ne serait pas exécuté.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Décris ce qui s'affichera à l'écran et l'ordre d'apparition des éléments quand l'utilisateur ouvrira la page.",
+        "niveau": "easy",
+        "reponse": "L'utilisateur verra d'abord le titre de niveau 1 'Bienvenue', puis en dessous le paragraphe 'Je suis un texte écrit par JavaScript !' écrit dynamiquement par la fonction `document.write()`. Les deux éléments sont affichés dans l'ordre où ils apparaissent dans le code HTML.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Premiers pas : la calculatrice de l’élève",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans le cadre de l’apprentissage de JavaScript, ton enseignant te demande d’ajouter un peu d’interactivité à une page web. Voici une partie du code HTML :</p>\n<pre><code>&lt;body&gt;\n    &lt;h1&gt;Calcul de la moyenne&lt;/h1&gt;\n    &lt;button onclick=\"calculerMoyenne();\"&gt;Calculer ma moyenne&lt;/button&gt;\n    &lt;SCRIPT language=\"Javascript\"&gt;\n        function calculerMoyenne() {\n            // À compléter\n        }\n    &lt;/SCRIPT&gt;\n&lt;/body&gt;</code></pre>\n<p>Complète la fonction <code>calculerMoyenne()</code> en JavaScript pour qu’elle demande à l’utilisateur trois notes (sur 20) via des boîtes de dialogue, calcule leur moyenne, puis affiche le résultat avec la fonction <code>document.write()</code>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écris le code JavaScript complet de la fonction `calculerMoyenne()` en utilisant `prompt()`, `parseFloat()` et `document.write()`.",
+        "niveau": "medium",
+        "reponse": "```javascript\nfunction calculerMoyenne() {\n    let note1 = parseFloat(prompt(\"Entrez la première note :\"));\n    let note2 = parseFloat(prompt(\"Entrez la deuxième note :\"));\n    let note3 = parseFloat(prompt(\"Entrez la troisième note :\"));\n    let moyenne = (note1 + note2 + note3) / 3;\n    document.write(\"<p>La moyenne des trois notes est : \" + moyenne + \" sur 20.</p>\");\n}\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Explique pourquoi on utilise `parseFloat()` après chaque `prompt()` dans cet exercice.",
+        "niveau": "easy",
+        "reponse": "La fonction `prompt()` retourne toujours une chaîne de caractères (string). `parseFloat()` convertit cette chaîne en un nombre décimal, ce qui est nécessaire pour effectuer des opérations mathématiques comme l'addition et la division. Sans cette conversion, JavaScript ferait une concaténation de chaînes (ex: \"10\" + \"15\" = \"1015\") au lieu d'une addition arithmétique.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Le justicier du code : traquer l’erreur",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un élève a écrit le code JavaScript suivant. Il veut que la page affiche le double du nombre saisi par l’utilisateur. Mais le code ne fonctionne pas comme prévu.</p>\n<pre><code>&lt;SCRIPT language=\"Javascript\"&gt;\n    function calculerDouble() {\n        let nombre = prompt(\"Donne un nombre\");\n        let double = nombre * 2;\n        document.write(\"Le double est : \" + double);\n    }\n    calculerDouble();\n&lt;/SCRIPT&gt;</code></pre>\n<p>Teste mentalement ce code avec la valeur \"5\".</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifie l’erreur logique dans ce code et explique le résultat que l’utilisateur obtiendrait avec la valeur '5'.",
+        "niveau": "medium",
+        "reponse": "L'erreur est l'absence de conversion de la chaîne retournée par `prompt()`. Avec la valeur '5', JavaScript effectue une concaténation de la chaîne '5' avec le nombre 2, ce qui donne la chaîne '52'. L'utilisateur verrait donc 'Le double est : 52' au lieu de 'Le double est : 10'.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Corrige le code en une seule ligne pour qu’il fonctionne correctement. Propose la ligne de correction uniquement.",
+        "niveau": "medium",
+        "reponse": "Il faut remplacer la ligne `let nombre = prompt(\"Donne un nombre\");` par :\n`let nombre = parseFloat(prompt(\"Donne un nombre\"));`",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Création d’un quiz interactif pour les camarades",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Dans le cadre d’un projet de classe, ton groupe doit créer une page web contenant un petit quiz interactif. Le quiz doit poser une seule question : « Quelle est la capitale du Cameroun ? » et proposer trois réponses possibles (Yaoundé, Douala, Garoua). Quand l’utilisateur clique sur une réponse, un message doit indiquer si sa réponse est correcte ou non.</p>\n<p>Tu disposes du code HTML suivant :</p>\n<pre><code>&lt;body&gt;\n    &lt;h2&gt;Quiz : Capitale du Cameroun&lt;/h2&gt;\n    &lt;button onclick=\"verifier('Yaoundé')\"&gt;Yaoundé&lt;/button&gt;\n    &lt;button onclick=\"verifier('Douala')\"&gt;Douala&lt;/button&gt;\n    &lt;button onclick=\"verifier('Garoua')\"&gt;Garoua&lt;/button&gt;\n    &lt;p id=\"resultat\"&gt;&lt;/p&gt;\n    &lt;SCRIPT language=\"Javascript\"&gt;\n        function verifier(reponseChoisie) {\n            // À compléter\n        }\n    &lt;/SCRIPT&gt;\n&lt;/body&gt;</code></pre>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Complète la fonction `verifier(reponseChoisie)` pour qu’elle compare la réponse choisie avec la bonne réponse ('Yaoundé') et affiche le résultat dans le paragraphe ayant l'id 'resultat' en utilisant la propriété `innerHTML`.",
+        "niveau": "hard",
+        "reponse": "```javascript\nfunction verifier(reponseChoisie) {\n    const bonneReponse = 'Yaoundé';\n    let message = '';\n    if (reponseChoisie === bonneReponse) {\n        message = 'Félicitations ! La capitale du Cameroun est bien Yaoundé.';\n    } else {\n        message = 'Désolé, ce n\\'est pas la bonne réponse. La capitale du Cameroun est Yaoundé.';\n    }\n    document.getElementById('resultat').innerHTML = message;\n}\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Compare la fonction `document.write()` et la propriété `innerHTML` utilisée ici. Dans quel contexte est-il préférable d'utiliser `innerHTML` ?",
+        "niveau": "medium",
+        "reponse": "`document.write()` écrit directement dans le flux HTML de la page et est généralement déconseillé après le chargement de la page car il peut écraser le contenu existant. `innerHTML` permet de modifier dynamiquement le contenu d'un élément spécifique de la page (ici le paragraphe avec id='resultat') sans affecter le reste de la page. Il est préférable d'utiliser `innerHTML` pour mettre à jour des parties précises d'une page déjà chargée, comme dans le cas d'un quiz ou d'une interaction utilisateur.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Analyse de l’interaction : la fonction au clic",
+    "type": "ressource",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un site web contient le bouton suivant :</p>\n<pre><code>&lt;button onClick=\"surfaceRect();\"&gt;Calculer&lt;/button&gt;</code></pre>\n<p>On te donne la fonction JavaScript exécutée :</p>\n<pre><code>function surfaceRect() {\n    let longueur = parseFloat(prompt(\"Entrez la longueur (en m) :\"));\n    let largeur = parseFloat(prompt(\"Entrez la largeur (en m) :\"));\n    let prixUnitaire = parseFloat(prompt(\"Entrez le prix au m² :\"));\n    let surface = longueur * largeur;\n    let prixTotal = surface * prixUnitaire;\n    alert(\"Le prix total est de \" + prixTotal + \" FCFA\");\n}</code></pre>\n<p>Un utilisateur a mal saisi une valeur : au lieu de taper un nombre, il a tapé « dix » pour la longueur.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Décris étape par étape ce qui se produit lors du clic sur le bouton 'Calculer', en t'appuyant sur les fonctions JavaScript utilisées.",
+        "niveau": "hard",
+        "reponse": "1. L'événement `onClick` est déclenché, ce qui appelle la fonction `surfaceRect()`.\n2. La première instruction `parseFloat(prompt(\"Entrez la longueur...\"))` : une boîte de dialogue s'affiche. L'utilisateur saisit une valeur.\n3. La valeur saisie est convertie en nombre décimal grâce à `parseFloat()`.\n4. Les mêmes étapes 2 et 3 se répètent pour la largeur et le prix unitaire.\n5. La surface est calculée : `longueur * largeur`.\n6. Le prix total est calculé : `surface * prixUnitaire`.\n7. Une boîte d'alerte (`alert`) affiche le résultat final : 'Le prix total est de ... FCFA'.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Prévois ce qui se passera quand l’utilisateur entre « dix » pour la longueur. Explique le résultat obtenu.",
+        "niveau": "hard",
+        "reponse": "`parseFloat(\"dix\")` retournera `NaN` (Not a Number) car la chaîne \"dix\" ne commence pas par un caractère numérique valide. Par conséquent, `surface` sera `NaN` (car `NaN * largeur` donne `NaN`), et `prixTotal` sera aussi `NaN`. L'alerte affichera : 'Le prix total est de NaN FCFA'. Cela indique à l'utilisateur qu'une erreur de saisie s'est produite.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

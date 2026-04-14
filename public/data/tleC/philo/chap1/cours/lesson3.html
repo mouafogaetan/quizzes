@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision – La méthode philosophique</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (utile si formules logiques) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes */
+        .concept-list, .steps-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li, .steps-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .steps-list li::before {
+            content: "➡️";
+            position: absolute;
+            left: 0;
+            top: -1px;
+            font-size: 0.9rem;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .highlight {
+            background-color: #eef2ff;
+            font-weight: 500;
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.25rem;
+            color: #1e40af;
+        }
+
+        /* Exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Avertissements */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Image illustrative */
+        .illustration {
+            margin: 1rem 0;
+            text-align: center;
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .illustration img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+        }
+
+        .illustration .caption {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">La méthode philosophique</h1>
+            <p class="lesson-subtitle">Philosophie – Terminale C & D – Baccalauréat 2025-2026</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Illustration générique (image IA) -->
+            <div class="illustration">
+                <img src="" alt="Schéma de la démarche philosophique : étonnement, questionnement, analyse, argumentation, conceptualisation – à générer par IA">
+                <div class="caption">Figure 1 : Les étapes de la méthode philosophique (de l'étonnement à la conceptualisation).</div>
+            </div>
+
+            <!-- SECTION CONCEPTS CLÉS -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Le questionnement : s'étonner, douter, problématiser</h3>
+                    <p class="card-description">
+                        La philosophie commence par l’<span class="highlight">étonnement</span> (Platon, Aristote) : ne pas tenir les choses pour acquises. 
+                        Le <span class="highlight">doute méthodique</span> (Descartes) permet de suspendre son jugement pour chercher des certitudes. 
+                        Enfin, <span class="highlight">problématiser</span> c’est transformer une question simple en un problème qui appelle plusieurs réponses possibles.
+                    </p>
+                    <ul class="concept-list">
+                        <li>L’étonnement est le moteur de la recherche de la vérité.</li>
+                        <li>Le doute n’est pas un scepticisme radical mais un outil pour éviter les préjugés.</li>
+                        <li>Problématiser = trouver la tension, l’aporie, la contradiction féconde.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. L’analyse : décomposer et clarifier les concepts</h3>
+                    <p class="card-description">
+                        Analyser, c’est <span class="highlight">décomposer</span> une notion, une thèse ou un texte en ses éléments constitutifs. 
+                        Cette étape permet de définir précisément les termes du problème et d’éviter les malentendus. 
+                        Elle s’accompagne souvent d’une <span class="highlight">clarification conceptuelle</span> (distinguer des sens, des usages).
+                    </p>
+                    <ul class="concept-list">
+                        <li>Exemple : analyser la liberté → liberté d’agir / liberté de choisir / libre arbitre.</li>
+                        <li>L’analyse prépare l’argumentation en évacuant les ambiguïtés.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. L’argumentation : construire une démonstration logique</h3>
+                    <p class="card-description">
+                        Argumenter, c’est <span class="highlight">justifier rationnellement</span> une thèse à l’aide de raisons, d’exemples et d’enchaînements logiques. 
+                        La méthode philosophique exige de <span class="highlight">ne pas se contredire</span> et de respecter les principes logiques (non-contradiction, raison suffisante). 
+                        On distingue thèse, antithèse et synthèse dans la dissertation.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Un bon argument repose sur des prémisses solides et une inférence valide.</li>
+                        <li>La philosophie n’est pas une simple opinion : elle donne des raisons.</li>
+                        <li><em>Lien Bac :</em> structure postulat – arguments – conclusion (explication de texte).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. La conceptualisation : élaborer des concepts universels</h3>
+                    <p class="card-description">
+                        La philosophie ne se contente pas de décrire le particulier ; elle vise l’<span class="highlight">universel</span>. 
+                        <span class="highlight">Conceptualiser</span>, c’est passer de l’expérience singulière à une notion générale, abstraite et opératoire. 
+                        Le concept permet de penser le réel et de dialoguer avec d’autres penseurs.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Exemples : Justice, Vérité, Liberté, Devoir.</li>
+                        <li>Chaque auteur propose sa propre conceptualisation (ex. liberté selon Sartre ≠ liberté selon Spinoza).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION COMPARAISON AVEC LA MÉTHODE SCIENTIFIQUE -->
+            <section class="concept-section">
+                <h2 class="section-title">🔬 Méthode philosophique vs. méthode scientifique</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Distinction essentielle</h3>
+                    <p class="card-description">
+                        La méthode scientifique procède par <span class="highlight">hypothèses, expérimentations, mesures et modélisations</span>. 
+                        Elle cherche à expliquer les phénomènes par des lois vérifiables. La méthode philosophique, elle, interroge les fondements, les valeurs, le sens. 
+                        Elle utilise la <span class="highlight">réflexion critique, l’argumentation logique et la conceptualisation</span> sans recourir nécessairement à l’expérimentation.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Science</strong> : observation → hypothèse → vérification (falsification chez Popper).</li>
+                        <li><strong>Philosophie</strong> : étonnement → questionnement → argumentation → recherche de cohérence.</li>
+                        <li>Complémentarité : la science fournit des faits, la philosophie interroge leur portée et leurs présupposés.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.75rem;">
+                        📌 À retenir : La philosophie ne prétend pas remplacer la science, mais elle évalue ses concepts (temps, matière, conscience) et ses implications éthiques.
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXEMPLES DE COMPRÉHENSION -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Application du doute méthodique (Descartes)</h3>
+                    <p class="exemple-context">
+                        Contexte : Descartes, dans les <em>Méditations métaphysiques</em>, décide de douter de tout ce qui peut être mis en doute (sens, rêve, malin génie) pour trouver un fondement certain.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Démarche philosophique :</strong><br>
+                        1️⃣ <strong>Questionnement</strong> : Que puis-je connaître avec certitude ?<br>
+                        2️⃣ <strong>Analyse</strong> : Distinguer les croyances sensibles (trompeuses) des vérités intellectuelles.<br>
+                        3️⃣ <strong>Argumentation</strong> : Si je doute, je pense ; or penser implique que j’existe. D’où le « Je pense, donc je suis » (Cogito).<br>
+                        4️⃣ <strong>Conceptualisation</strong> : Le sujet pensant (res cogitans) devient le point de départ de la philosophie moderne.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce bac : Dans une explication de texte, repérez toujours comment l’auteur passe du doute à une certitude. C’est une illustration typique de la méthode philosophique.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : La maïeutique socratique – accoucher les esprits</h3>
+                    <p class="exemple-context">
+                        Socrate interroge un interlocuteur sur la justice. Par des questions successives, il l’amène à contredire ses propres affirmations, puis à chercher une définition plus rigoureuse.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Méthode :</strong> ironie (faire reconnaître son ignorance) + maïeutique (art d’accoucher les idées).<br>
+                        → <strong>Questionnement</strong> : Qu’est-ce que la justice ?<br>
+                        → <strong>Analyse</strong> : Déconstruire les réponses trop simples (ex. rendre à chacun ce qui lui est dû).<br>
+                        → <strong>Argumentation</strong> : Montrer les contradictions par des exemples.<br>
+                        → <strong>Conceptualisation</strong> : Tenter de dégager une définition universelle.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Lien avec le bac : L’essai personnel exige de problématiser comme Socrate – ne pas accepter une opinion sans l’examiner.
+                    </div>
+                </div>
+            </section>
+
+            <!-- PIÈGES COURANTS -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre la méthode philosophique avec une simple prise de position personnelle non justifiée. La philosophie exige des <strong>arguments</strong>.</li>
+                        <li><span class="bold">Attention :</span> Ne pas réduire la philosophie à une suite d’opinions d’auteurs. La méthode implique une <strong>démarche active</strong> (questionner, analyser, argumenter).</li>
+                        <li><span class="bold">Confusion à éviter :</span> Croire que la méthode philosophique est identique à la méthode scientifique. Elles sont complémentaires mais leurs objets et leurs outils diffèrent.</li>
+                        <li><span class="bold">Piège dans la dissertation :</span> Oublier la problématisation et enchaîner les connaissances sans fil conducteur. Toujours se demander : « quel est le problème ? »</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- PETIT RAPPEL MÉTHODOLOGIQUE POUR LE BAC -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 Méthodologie – Épreuve de philosophie</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Appliquer la méthode philosophique à l’explication de texte</h3>
+                    <ul class="steps-list">
+                        <li><strong>1. Lire et questionner :</strong> Quel est l’étonnement ou le problème de départ de l’auteur ?</li>
+                        <li><strong>2. Analyser :</strong> Décomposer le texte (postulat, arguments, conclusion).</li>
+                        <li><strong>3. Argumenter :</strong> Reconstruire la logique de l’auteur et discuter sa thèse.</li>
+                        <li><strong>4. Conceptualiser :</strong> Définir les notions clés (ex. liberté, vérité, méthode).</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        📖 Pour l’essai personnel (dissertation), suivez le même chemin : problématique → thèse argumentée → antithèse → dépassement. La méthode philosophique est votre boussole.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Image supplémentaire : cycle de la méthode -->
+            <div class="illustration">
+                <img src="" alt="Infographie cycle vertueux de la méthode philosophique : Étonner → Questionner → Analyser → Argumenter → Conceptualiser → Retour à l'étonnement – génération IA">
+                <div class="caption">Figure 2 : Le cycle de la méthode philosophique – de l’étonnement à la conceptualisation.</div>
+            </div>
+
+        </main>
+        
+        <footer class="fiche-footer">
+            <p>Fiche de révision générée pour les Terminales C & D (Cameroun) – Baccalauréat 2025-2026 · <a href="#">Méthodologie bac</a> · 📚 Réviser avec rigueur</p>
+        </footer>
+    </div>
+</body>
+</html>

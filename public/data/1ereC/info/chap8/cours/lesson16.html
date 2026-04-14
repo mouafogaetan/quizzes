@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - UE16 : Notions de procédure et fonction</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (utile pour d'éventuelles formules) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petit style additionnel pour coller au template mais on garde l'existant */
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            font-family: 'Courier New', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid #fbbf24;
+        }
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #cbd5e1;
+            padding: 0.7rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .comparison-table th {
+            background-color: #eef2ff;
+            color: #1e40af;
+        }
+        .inline-code {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+            font-family: monospace;
+            font-weight: 600;
+            color: #b45309;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">UE 16 : Notions de procédure et fonction</h1>
+            <p class="lesson-subtitle">Informatique · Première C, D, E (Probatoire) · Module 2 : Algorithmique et Programmation</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Définitions fondamentales</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">🔁 Procédure</h3>
+                    <p class="card-description">
+                        Une <strong>procédure</strong> est un sous-programme qui exécute une série d'instructions <strong>sans retourner de valeur</strong>. 
+                        Elle réalise une action (par exemple afficher un menu, trier un tableau, calculer et afficher un résultat). 
+                        En algorithmique, on l’appelle souvent <em>sous-programme</em> ou <em>sous-routine</em>.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>But :</strong> Effectuer une tâche spécifique, améliorer la lisibilité et la réutilisabilité.</li>
+                        <li><strong>Appel :</strong> <span class="inline-code">nom_procedure(paramètres)</span> seul.</li>
+                        <li>Exemple en algorithmique : <span class="inline-code">AfficherMenu()</span> ou <span class="inline-code">TrierTableau(tab, n)</span>.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">⚙️ Fonction</h3>
+                    <p class="card-description">
+                        Une <strong>fonction</strong> est un sous-programme qui retourne <strong>une seule valeur</strong> (entier, réel, booléen, etc.) à l’endroit où elle est appelée. 
+                        Elle calcule un résultat à partir des paramètres fournis.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>But :</strong> Effectuer un calcul et renvoyer le résultat pour une utilisation ultérieure.</li>
+                        <li><strong>Appel :</strong> La fonction s’utilise dans une expression (ex : <span class="inline-code">moyenne ← calculerMoyenne(notes, nb)</span>).</li>
+                        <li>En algorithmique : <span class="inline-code">Fonction carré(x : entier) : entier</span> retourne <span class="inline-code">x*x</span>.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🌐 Variables globales vs locales</h3>
+                    <p class="card-description">
+                        Comprendre la portée des variables est essentiel pour éviter les effets de bord.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Variable locale :</strong> Déclarée à l’intérieur d’une procédure/fonction. Accessible uniquement dans ce bloc. Elle est détruite à la fin de l’exécution du sous-programme.</li>
+                        <li><strong>Variable globale :</strong> Déclarée en dehors de toute procédure/fonction (souvent en tête d’algorithme). Accessible depuis n’importe quelle partie du programme.</li>
+                        <li>🔐 <span class="bold">Bonnes pratiques :</span> Privilégier les variables locales pour une meilleure modularité et éviter les modifications intempestives.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Différences clés tableau -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Comparaison : Fonction vs Procédure</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Critère</th><th>Fonction</th><th>Procédure</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Valeur de retour</td><td>✔️ Retourne une valeur (via <span class="inline-code">return</span>)</td><td>❌ Ne retourne aucune valeur</td></tr>
+                        <tr><td>Utilisation dans une expression</td><td>Oui, ex : <span class="inline-code">a ← max(b, c)</span></td><td>Non, appel simple : <span class="inline-code">afficherMessage()</span></td></tr>
+                        <tr><td>Objectif principal</td><td>Calculer / obtenir un résultat</td><td>Réaliser une action (affichage, modification, etc.)</td></tr>
+                        <tr><td>Exemple en C</td><td><span class="inline-code">int carre(int x) { return x*x; }</span></td><td><span class="inline-code">void afficherBonjour() { printf("Bonjour"); }</span></td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Exemples concrets en algorithmique et C -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples illustrés (Algorithmique & C)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">📐 Exemple 1 : Fonction – Calcul de la surface d’un rectangle</h3>
+                    <p class="exemple-context">On souhaite créer une fonction qui reçoit la longueur et la largeur (réels) et retourne la surface.</p>
+                    <div class="code-block">
+                        <pre>// ALGORITHMIQUE
+Fonction surfaceRectangle(L, l : réel) : réel
+    Début
+        Retourner L * l
+    Fin</pre>
+                    </div>
+                    <div class="code-block">
+                        <pre>// LANGAGE C
+#include <stdio.h>
+
+float surfaceRectangle(float L, float l) {
+    return L * l;
+}
+
+int main() {
+    float longu = 5.5, larg = 3.2;
+    float surf = surfaceRectangle(longu, larg);
+    printf("Surface = %.2f\n", surf);
+    return 0;
+}</pre>
+                    </div>
+                    <p class="exemple-correction"><strong>Analyse :</strong> La fonction <span class="inline-code">surfaceRectangle</span> reçoit deux paramètres et renvoie leur produit. Dans <span class="inline-code">main()</span>, le résultat est stocké dans la variable <span class="inline-code">surf</span>.</p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Une fonction peut être appelée directement dans un <span class="inline-code">printf</span> : <span class="inline-code">printf("%f", surfaceRectangle(4,5));</span>
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">🖨️ Exemple 2 : Procédure – Affichage d’un message de bienvenue</h3>
+                    <p class="exemple-context">Créer une procédure qui affiche un message personnalisé sans retourner de valeur.</p>
+                    <div class="code-block">
+                        <pre>// ALGORITHMIQUE
+Procédure afficherBienvenue(nom : chaîne)
+    Début
+        Ecrire("Bienvenue ", nom, " !")
+    Fin</pre>
+                    </div>
+                    <div class="code-block">
+                        <pre>// LANGAGE C (procédure = fonction void)
+#include <stdio.h>
+
+void afficherBienvenue(char nom[]) {
+    printf("Bienvenue %s !\n", nom);
+}
+
+int main() {
+    afficherBienvenue("Marie");
+    return 0;
+}</pre>
+                    </div>
+                    <p class="exemple-correction"><strong>Explication :</strong> La procédure ne renvoie rien (type <span class="inline-code">void</span> en C). Elle effectue simplement une action d’affichage.</p>
+                    <div class="exemple-astuce">
+                        💡 À retenir : En langage C, on utilise <span class="inline-code">void</span> pour indiquer qu’une fonction ne retourne pas de valeur (équivalent à une procédure).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">🌍 Exemple 3 : Variable globale vs locale – Pièges fréquents</h3>
+                    <p class="exemple-context">Dans cet exemple, on illustre la différence de portée.</p>
+                    <div class="code-block">
+                        <pre>// ALGORITHMIQUE
+Variable globale : total ← 0
+
+Procédure ajouter(valeur : entier)
+    Variable locale : somme ← 0
+    somme ← somme + valeur   // modifie la variable locale
+    total ← total + valeur   // modifie la variable globale
+    Ecrire("Somme locale : ", somme)
+Fin
+
+Programme principal:
+    ajouter(5)
+    ajouter(3)
+    Ecrire("Total global : ", total)   // Affiche 8</pre>
+                    </div>
+                    <p class="exemple-correction"><strong>Interprétation :</strong> <span class="inline-code">somme</span> est réinitialisée à chaque appel, alors que <span class="inline-code">total</span> garde sa valeur entre les appels. Les modifications sur les variables globales sont persistantes.</p>
+                    <div class="exemple-astuce">
+                        ⚠️ Attention : L'usage excessif de variables globales peut rendre le programme difficile à déboguer. Préférez le passage de paramètres.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fonctions prédéfinies vs définies par l'utilisateur -->
+            <section class="concept-section">
+                <h2 class="section-title">🛠️ Fonctions prédéfinies & définies par l'utilisateur</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">📚 Bibliothèques standards</h3>
+                    <p class="card-description">
+                        De nombreux langages (C, Python, JavaScript) offrent des fonctions prêtes à l’emploi.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>En C :</strong> <span class="inline-code">sqrt()</span> (racine carrée), <span class="inline-code">pow()</span> (puissance), <span class="inline-code">printf()</span> (affichage), <span class="inline-code">scanf()</span> (lecture).</li>
+                        <li><strong>En algorithmique :</strong> <span class="inline-code">Ecrire()</span> , <span class="inline-code">Lire()</span> , <span class="inline-code">Aleatoire()</span> sont des fonctions implicites.</li>
+                        <li><strong>Fonctions définies par l’utilisateur :</strong> Celles que le programmeur crée pour répondre à un besoin spécifique (exemple : <span class="inline-code">factorielle()</span> , <span class="inline-code">estPair()</span>).</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.5rem;">
+                        🧠 Astuce : Réutiliser des fonctions évite la duplication de code et facilite la maintenance.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Passage de paramètres : introduction (conforme au programme de première) -->
+            <section class="exemple-section">
+                <h2 class="section-title">📬 Passage de paramètres (notions essentielles)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Paramètres formels vs effectifs</h3>
+                    <p class="card-description">
+                        Lors de la définition d’un sous-programme, on déclare des <strong>paramètres formels</strong> (variables locales qui recevront les valeurs). 
+                        À l’appel, on transmet des <strong>paramètres effectifs</strong> (ou arguments).  
+                        En C, le passage se fait par <strong>valeur</strong> : une copie de la valeur est passée, donc la modification à l’intérieur n’affecte pas l’original.
+                    </p>
+                    <div class="code-block">
+                        <pre>// Exemple : passage par valeur en C
+void incrementer(int x) {
+    x = x + 1;   // modification de la copie locale
+    printf("Dans fonction : %d\n", x);
+}
+
+int main() {
+    int a = 5;
+    incrementer(a);
+    printf("Dans main : %d\n", a);   // a reste 5
+    return 0;
+}</pre>
+                    </div>
+                    <p class="exemple-correction"><strong>Résultat :</strong> <span class="inline-code">a</span> n’est pas modifié. Pour modifier une variable externe, on utilisera des pointeurs (niveau première : à connaître pour la suite).</p>
+                </div>
+            </section>
+
+            <!-- Pièges courants / Erreurs typiques -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & Bonnes pratiques</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Oublier le <span class="inline-code">return</span> dans une fonction :</span> En C, cela génère un comportement indéfini. En algorithmique, la fonction doit impérativement retourner une valeur.</li>
+                        <li><span class="bold">Confondre procédure et fonction :</span> Une procédure ne retourne rien, une fonction retourne toujours une valeur (même <span class="inline-code">void</span> en C n’est pas une fonction mais une procédure).</li>
+                        <li><span class="bold">Modifier une variable globale par accident :</span> Cela rend le code moins prévisible. Toujours privilégier les paramètres.</li>
+                        <li><span class="bold">Mauvaise gestion des types :</span> Le type de retour de la fonction doit correspondre au type déclaré. Exemple : fonction déclarée <span class="inline-code">entier</span> mais qui retourne un réel → erreur de cohérence.</li>
+                        <li><span class="bold">Ne pas initialiser les variables locales :</span> En C, une variable locale non initialisée contient une valeur indéterminée (poubelle). Toujours initialiser avant usage.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Synthèse visuelle supplémentaire (schéma conceptuel avec une image IA) -->
+            <section class="concept-section">
+                <h2 class="section-title">🧩 Schéma récapitulatif</h2>
+                <div class="card concept-card" style="text-align: center;">
+                    <img src="" alt="Diagramme IA représentant la différence entre fonction (boîte avec une flèche de sortie 'valeur retournée') et procédure (boîte avec seulement des actions). Une fonction calcule et renvoie, une procédure exécute et s'arrête." style="max-width: 100%; border-radius: 1rem; margin: 0.5rem 0; background: #f8fafc;">
+                    <p class="card-description" style="font-size: 0.9rem; margin-top: 0.5rem;">
+                        <em>Schéma conceptuel (IA) : À gauche une fonction transforme des entrées en une sortie unique. À droite une procédure réalise une action sans retour.</em>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Récapitulatif des mots-clés -->
+            <section class="exemple-section">
+                <h2 class="section-title">🔑 Mots-clés à retenir</h2>
+                <div class="card" style="background-color: #fefce8; border-left: 6px solid #eab308;">
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center;">
+                        <span class="inline-code" style="background-color: #fef9c3;">Sous-programme</span>
+                        <span class="inline-code" style="background-color: #fef9c3;">Procédure</span>
+                        <span class="inline-code" style="background-color: #fef9c3;">Fonction</span>
+                        <span class="inline-code" style="background-color: #fef9c3;">Variable locale</span>
+                        <span class="inline-code" style="background-color: #fef9c3;">Variable globale</span>
+                        <span class="inline-code" style="background-color: #fef9c3;">Return</span>
+                        <span class="inline-code" style="background-color: #fef9c3;">Paramètre formel</span>
+                        <span class="inline-code" style="background-color: #fef9c3;">Paramètre effectif</span>
+                        <span class="inline-code" style="background-color: #fef9c3;">void (C)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Petit rappel de traduction vers le langage C (conforme programme) -->
+            <section class="concept-section">
+                <h2 class="section-title">🖥️ Traduction Algorithmique → C</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        En langage C, toute procédure est une fonction de type <span class="inline-code">void</span> (aucune valeur retournée). 
+                        Les fonctions non-<span class="inline-code">void</span> doivent comporter une instruction <span class="inline-code">return valeur;</span>.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Algo :</strong> <span class="inline-code">Fonction max(a,b : entier) : entier</span> → <strong>C :</strong> <span class="inline-code">int max(int a, int b) { return (a>b)? a : b; }</span></li>
+                        <li><strong>Algo :</strong> <span class="inline-code">Procédure afficherSomme(x,y : entier)</span> → <strong>C :</strong> <span class="inline-code">void afficherSomme(int x, int y) { printf("%d", x+y); }</span></li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📘 Fiche de révision – UE16 : Procédures et fonctions · Niveau Première (Probatoire C, D, E) · Utilisation conforme au programme officiel du Cameroun.</p>
+            <p>✍️ Créé par Enseignant d'Informatique · 🔄 Révision : module algorithmique et sous-programmes</p>
+        </footer>
+    </div>
+</body>
+</html>

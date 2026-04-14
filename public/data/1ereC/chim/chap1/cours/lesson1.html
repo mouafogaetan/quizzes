@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Structure des alcanes | 1ère C & D</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie professionnelle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Intégration directe du style pour garantir l'affichage */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #0f2b3d, #1a4a6f);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1e5a7d;
+            border-left: 4px solid #1e5a7d;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #1e5a7d;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule, .chem-formula {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .geo-image {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            justify-content: space-between;
+            margin-top: 1rem;
+            align-items: flex-start;
+        }
+
+        .img-card {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            background: #f9f9ff;
+            border-radius: 12px;
+            padding: 0.75rem;
+            border: 1px solid #e2edf2;
+        }
+
+        .img-card p {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            color: #2c5a74;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem; }
+            .fiche-content { padding: 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .geo-image { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 1 : Structure et représentation des alcanes</h1>
+            <p class="lesson-subtitle">Chimie Organique · 1ère C & D · Programme Cameroun</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- SECTION CONCEPTS CLÉS -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Définition et caractéristiques générales</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">Alcane : hydrocarbure saturé</h3>
+                    <p class="card-description">
+                        Les alcanes sont des <strong>hydrocarbures saturés</strong> : ils ne contiennent que des atomes de carbone et d'hydrogène reliés exclusivement par des <strong>liaisons simples</strong> (C–C et C–H). 
+                        Leur formule générale est <span class="formule">C<sub>n</sub>H<sub>2n+2</sub></span> (avec n ≥ 1).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Méthane</strong> : CH<sub>4</sub> (n=1) ; <strong>Éthane</strong> : C<sub>2</sub>H<sub>6</sub> (n=2) ; <strong>Propane</strong> : C<sub>3</sub>H<sub>8</sub> (n=3) ; <strong>Butane</strong> : C<sub>4</sub>H<sub>10</sub> (n=4).</li>
+                        <li>Atomes de carbone hybridés sp<sup>3</sup> → géométrie tétraédrique.</li>
+                        <li>Angle de liaison ≈ 109,5°.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Représentations des molécules d'alcanes</h3>
+                    <p class="card-description">
+                        Pour visualiser la structure 3D et la connectivité, on utilise différents types de formules :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Formule développée</strong> : toutes les liaisons sont représentées (ex : H–C–H, etc.).</li>
+                        <li><strong>Formule semi-développée</strong> : on regroupe les atomes d'hydrogène par carbone (ex : CH<sub>3</sub>–CH<sub>2</sub>–CH<sub>3</sub>).</li>
+                        <li><strong>Représentation en perspective</strong> : traits pleins (liaison dans le plan), triangles (vers l'avant), tirets (vers l'arrière).</li>
+                        <li><strong>Projection de Newman</strong> : visualisation de la conformation le long d'une liaison C–C (éclipsée / décalée).</li>
+                    </ul>
+                    <div class="geo-image">
+                        <div class="img-card">
+                            <img src="" alt="Diagramme d'un tétraèdre représentant la structure du méthane CH4 : carbone central avec quatre hydrogènes aux sommets, angles 109°">
+                            <p>🔬 Méthane : tétraèdre régulier</p>
+                        </div>
+                        <div class="img-card">
+                            <img src="" alt="Projection de Newman pour l'éthane : conformation éclipsée (hydrogènes alignés) et décalée (hydrogènes décalés)">
+                            <p>⚛️ Conformations de l'éthane (Newman)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Structure du méthane et de l'éthane</h3>
+                    <p class="card-description">
+                        <strong>Méthane (CH₄) :</strong> carbone central tétraédrique, <span class="formule">angle H–C–H = 109°28'</span>, longueur de liaison C–H = 110 pm (1,10 Å).<br>
+                        <strong>Éthane (C₂H₆) :</strong> deux carbones tétraédriques liés entre eux. Rotation possible autour de la liaison C–C → conformères :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Conformation éclipsée</strong> : les hydrogènes des deux carbones sont alignés (moins stable, énergie plus élevée).</li>
+                        <li><strong>Conformation décalée</strong> : les hydrogènes sont décalés (plus stable, énergie minimale).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Les cyclanes : cyclohexane</h3>
+                    <p class="card-description">
+                        Les alcanes cycliques (cycloalcanes) ont la formule générale <span class="formule">C<sub>n</sub>H<sub>2n</sub></span>. Le cyclohexane (C₆H₁₂) existe sous deux conformations non planes pour éviter les contraintes :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Forme chaise</strong> : très stable, tous les angles sont proches de 109,5°.</li>
+                        <li><strong>Forme bateau</strong> : moins stable, existe de façon transitoire.</li>
+                    </ul>
+                    <div class="geo-image">
+                        <div class="img-card">
+                            <img src="" alt="Représentation 3D du cyclohexane en conformation chaise, atomes de carbone formant une structure semblable à une chaise de détente">
+                            <p>🪑 Cyclohexane : conformation chaise (stable)</p>
+                        </div>
+                        <div class="img-card">
+                            <img src="" alt="Cyclohexane forme bateau, ressemblant à une barque, avec des hydrogènes en interaction">
+                            <p>⛵ Cyclohexane : conformation bateau</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION EXEMPLES & VISUALISATION -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de représentations et comparaisons</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Du méthane au butane : écriture semi-développée</h3>
+                    <p class="exemple-context">
+                        Passer de la formule brute à la formule semi-développée pour visualiser l'enchaînement des carbones.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Méthane :</strong> CH<sub>4</sub><br>
+                        <strong>Éthane :</strong> CH<sub>3</sub> – CH<sub>3</sub><br>
+                        <strong>Propane :</strong> CH<sub>3</sub> – CH<sub>2</sub> – CH<sub>3</sub><br>
+                        <strong>Butane linéaire :</strong> CH<sub>3</sub> – CH<sub>2</sub> – CH<sub>2</sub> – CH<sub>3</sub>
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce : Chaque atome de carbone doit avoir 4 liaisons. Vérifiez le nombre d’hydrogènes sur chaque carbone : carbone primaire (–CH<sub>3</sub>), secondaire (–CH<sub>2</sub>–).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Comparaison des conformations de l'éthane</h3>
+                    <p class="exemple-context">
+                        Pourquoi la conformation décalée est-elle plus stable que la conformation éclipsée ?
+                    </p>
+                    <p class="exemple-correction">
+                        Dans la forme éclipsée, les nuages électroniques des liaisons C–H sont proches et se repoussent (interactions défavorables). 
+                        Dans la forme décalée, les atomes d'hydrogène sont alternés, réduisant les répulsions stériques et électroniques → énergie plus faible.
+                        Cette différence est visible sur un diagramme énergétique : barrière de rotation ≈ 12 kJ/mol.
+                    </p>
+                    <div class="exemple-astuce">
+                        🔄 À retenir : À température ambiante, l'éthane alterne très rapidement entre conformations, mais la forme décalée est majoritaire.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Représentation perspective : le propane</h3>
+                    <p class="exemple-context">
+                        Utiliser les traits pleins, pointillés et triangles pour représenter l'orientation spatiale des liaisons autour d'un carbone.
+                    </p>
+                    <p class="exemple-correction">
+                        <img src="" alt="Formule de perspective du propane : carbone central CH2 avec deux liaisons en triangles (avant) et deux en tirets (arrière)" style="max-width: 180px; float: right; margin-left: 1rem;">
+                        Pour le propane CH<sub>3</sub>–CH<sub>2</sub>–CH<sub>3</sub>, on représente le carbone central (CH<sub>2</sub>) avec deux liaisons vers les groupements CH<sub>3</sub> : 
+                        une en trait plein dans le plan, l’autre en trait pointillé/tiret vers l’arrière, et les deux atomes H en triangle (vers l’avant). 
+                        Cette méthode évite de confondre la géométrie réelle.
+                    </p>
+                    <div class="exemple-astuce">
+                        🧪 En classe, s’entraîner à passer d’une représentation de Newman à une formule semi-développée.
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION CYCLOHEXANE : DETAILS -->
+            <section class="concept-section">
+                <h2 class="section-title">🌀 Zoom sur le cyclohexane</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Formes chaise et bateau</h3>
+                    <p class="card-description">
+                        Le cyclohexane n'est pas plan à cause des angles de liaison. La <strong>forme chaise</strong> est exempte de tension angulaire et de torsion.
+                        Les liaisons axiales (verticales alternées) et équatoriales (dans le plan moyen) sont distinguables.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Forme chaise : toutes les liaisons C–C sont en conformation décalée → maximum de stabilité.</li>
+                        <li>Forme bateau : présence d’interactions entre hydrogènes en position “proue” → moins stable, mais peut être observée à haute énergie.</li>
+                        <li>À température ambiante, le cyclohexane subit des inversions de chaise rapides.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        📐 <strong>À mémoriser :</strong> Un alcane linéaire est flexible ; les cycloalcanes (comme le cyclohexane) adoptent des conformations pliées pour minimiser l'énergie.
+                    </div>
+                </div>
+            </section>
+
+            <!-- PIÈGES ET ERREURS COURANTES -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & erreurs à éviter</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Ne pas confondre formule brute et géométrie :</span> Deux molécules avec la même formule brute (C<sub>2</sub>H<sub>6</sub>O par exemple) peuvent être isomères, mais les alcanes n'ont pas de liaison multiple. Vérifier la saturation.</li>
+                        <li><span class="bold">Erreur fréquente sur la représentation de Newman :</span> Inverser le cercle avant/arrière. Le gros cercle représente le carbone arrière, le point central le carbone avant.</li>
+                        <li><span class="bold">Oublier les angles tétraédriques :</span> Dans les formules en perspective, les trois liaisons autour d’un carbone doivent être orientées à ~120° en projection plane, mais en réalité 109,5°.</li>
+                        <li><span class="bold">Confondre conformation et configuration :</span> Les conformères (éclipsé/décalé) s’interconvertissent par rotation, contrairement aux isomères configuraux.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- RÉSUMÉ VISUEL ADDITIONNEL (données clés) -->
+            <section class="concept-section">
+                <h2 class="section-title">📐 Tableau récapitulatif : longueurs et angles</h2>
+                <div class="card concept-card">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.95rem;">
+                        <thead>
+                            <tr style="background: #eef2ff;">
+                                <th style="padding: 8px; text-align: left;">Molécule</th>
+                                <th style="padding: 8px; text-align: left;">Longueur de liaison C–C (pm)</th>
+                                <th style="padding: 8px; text-align: left;">Longueur C–H (pm)</th>
+                                <th style="padding: 8px; text-align: left;">Angle caractéristique</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="padding: 6px; border-bottom: 1px solid #ddd;">Méthane (CH₄)</td><td style="padding: 6px; border-bottom: 1px solid #ddd;">—</td><td style="padding: 6px; border-bottom: 1px solid #ddd;">110 pm</td><td style="padding: 6px; border-bottom: 1px solid #ddd;">H–C–H : 109,5°</td></tr>
+                            <tr><td style="padding: 6px; border-bottom: 1px solid #ddd;">Éthane (C₂H₆)</td><td style="padding: 6px; border-bottom: 1px solid #ddd;">154 pm</td><td style="padding: 6px; border-bottom: 1px solid #ddd;">110 pm</td><td style="padding: 6px; border-bottom: 1px solid #ddd;">C–C–H ≈ 109,5°</td></tr>
+                            <tr><td style="padding: 6px;">Cyclohexane (C₆H₁₂)</td><td style="padding: 6px;">154 pm</td><td style="padding: 6px;">110 pm</td><td style="padding: 6px;">C–C–C ~ 111° (chaise)</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top: 1rem;">💡 À savoir : l'hybridation sp³ impose une géométrie tétraédrique. Cette disposition permet une répulsion minimale entre les doublets liants.</p>
+                </div>
+            </section>
+            
+            <!-- ASTUCE FINALE POUR LES EXAMENS -->
+            <div class="exemple-astuce" style="background-color: #e0f2fe; border-left-color: #0284c7; margin-top: 1rem; margin-bottom: 1rem;">
+                📖 <strong>Pour réussir au contrôle :</strong> Savoir dessiner un tétraèdre, représenter le méthane en perspective, reconnaître sur une projection de Newman si la conformation est éclipsée ou décalée, et citer les caractéristiques du cyclohexane (chaise / bateau).
+            </div>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme de Première C & D (Cameroun) · Module Chimie Organique · Révision libre</p>
+        </footer>
+    </div>
+</body>
+</html>

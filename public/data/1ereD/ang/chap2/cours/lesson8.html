@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 8 : Probabilité et Déduction (Modaux)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (intégré pour correspondre au template) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">📊 Lesson 8: Probability and Deduction <br> (Probabilité et Déduction)</h1>
+            <p class="lesson-subtitle">Anglais · 1ère CD · Module 1 – Chapitre 2 : Auxiliaires Modaux</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- SECTION 1: Concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Card 1: Might / May / Could (probabilité faible à moyenne) -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🔍 1. Probabilité : Might / May / Could (il se peut que / peut-être)</h3>
+                    <p class="card-description">
+                        On utilise <strong>might, may</strong> ou <strong>could</strong> pour exprimer une <strong>possibilité</strong> ou une <strong>probabilité faible à moyenne</strong>. 
+                        Cela signifie que quelque chose est possible mais pas certain (entre 30% et 60% de chance). <br>
+                        <em>📖 En français : "il se peut que", "peut-être que", "il est possible que".</em>
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>might / may + base verbale</strong> → possibilité présente ou future.</li>
+                        <li><strong>could</strong> → également une possibilité (souvent théorique).</li>
+                        <li>Pas de différence majeure entre <em>may</em> et <em>might</em> dans ce contexte.</li>
+                        <li><span class="formule">Forme négative : might not / may not / could not (mais could not exprime plutôt l'impossibilité)</span></li>
+                    </ul>
+                    <img src="" alt="Diagramme illustrant une probabilité moyenne avec des points d'interrogation : exemple de situation incertaine" style="width:100%; max-width:250px; display:block; margin:1rem auto 0; border-radius:12px; background:#f1f5f9; padding:0.5rem;">
+                </div>
+
+                <!-- Card 2: Must (certitude logique) -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🔮 2. Certitude / Déduction logique : Must (c'est forcément / certainement)</h3>
+                    <p class="card-description">
+                        <strong>Must</strong> exprime une <strong>certitude logique</strong> ou une <strong>déduction</strong> fondée sur des preuves ou des indices. 
+                        C'est l'équivalent de "c'est forcément", "il doit sûrement", "à coup sûr". 
+                        On l'utilise quand on est presque sûr à 90-100% que quelque chose est vrai.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>must + base verbale</strong> → certitude au présent.</li>
+                        <li><strong>must have + participe passé</strong> → certitude au passé (déduction sur un événement passé).</li>
+                        <li>Exemple : <em>She must be tired</em> (Elle est forcément fatiguée – vu qu'elle a beaucoup travaillé).</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Can't / Couldn't (impossibilité logique) -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🚫 3. Impossibilité logique : Can't / Couldn't (c'est impossible que)</h3>
+                    <p class="card-description">
+                        Pour exprimer qu'une situation est <strong>impossible</strong> selon les indices, on utilise <strong>can't</strong> ou <strong>couldn't</strong>. 
+                        C'est l'opposé de <em>must</em> : "c'est impossible que", "il n'est pas possible que".
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>can't / couldn't + base verbale</strong> → impossibilité au présent.</li>
+                        <li><strong>can't have / couldn't have + participe passé</strong> → impossibilité au passé.</li>
+                        <li>Ne pas confondre avec "can't" pour l'incapacité (mais le contexte est différent).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION 2: Tableau récapitulatif des modaux de probabilité -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Tableau récapitulatif (Degré de certitude)</h2>
+                <div class="card" style="overflow-x: auto;">
+                    <table style="width:100%; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr><th style="padding: 10px; border-bottom: 2px solid #cbd5e1;">Modal</th>
+                                <th style="padding: 10px; border-bottom: 2px solid #cbd5e1;">Valeur</th>
+                                <th style="padding: 10px; border-bottom: 2px solid #cbd5e1;">Probabilité</th>
+                                <th style="padding: 10px; border-bottom: 2px solid #cbd5e1;">Exemple (français/anglais)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="padding: 8px; border-bottom:1px solid #e2e8f0;"><strong>might / may / could</strong></td><td style="padding: 8px; border-bottom:1px solid #e2e8f0;">Possibilité</td><td style="padding: 8px; border-bottom:1px solid #e2e8f0;">Faible à moyenne (~30-60%)</td><td style="padding: 8px; border-bottom:1px solid #e2e8f0;">It <strong>might</strong> rain today. (Il se peut qu'il pleuve)</td></tr>
+                            <tr><td style="padding: 8px; border-bottom:1px solid #e2e8f0;"><strong>must</strong></td><td style="padding: 8px; border-bottom:1px solid #e2e8f0;">Certitude logique</td><td style="padding: 8px; border-bottom:1px solid #e2e8f0;">Très forte (~90-100%)</td><td style="padding: 8px; border-bottom:1px solid #e2e8f0;">He <strong>must</strong> be at home. (Il est forcément à la maison)</td></tr>
+                            <tr><td style="padding: 8px;"><strong>can't / couldn't</strong></td><td style="padding: 8px;">Impossibilité logique</td><td style="padding: 8px;">0% (certain que c'est faux)</td><td style="padding: 8px;">She <strong>can't</strong> be serious. (Elle ne peut pas être sérieuse)</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        💡 <strong>Astuce mnémotechnique :</strong> "May" rime avec "peut-être" (incertain) ; "Must" = "forcé" (logiquement certain) ; "Can't" = "contradiction" (impossible).
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: Exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">📌 Exemple 1 : Probabilité avec might / may / could</h3>
+                    <p class="exemple-context">Contexte : Le ciel est gris et nuageux, mais il n'y a pas encore de pluie.</p>
+                    <p class="exemple-correction">
+                        <strong>🇬🇧 Phrase :</strong> "It <strong>might</strong> rain later, so take an umbrella." <br>
+                        <strong>🇫🇷 Traduction :</strong> "Il se peut qu'il pleuve plus tard, donc prends un parapluie." <br>
+                        <strong>🔎 Explication :</strong> Le locuteur n'est pas certain à 100% mais constate des signes (nuages). On utilise <em>might</em> pour montrer que c'est une possibilité réaliste.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Autre exemple : <em>"She may come to the party, but she isn't sure yet."</em> (Elle viendra peut-être à la fête, mais elle n'est pas sûre.)
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">📌 Exemple 2 : Certitude logique avec must</h3>
+                    <p class="exemple-context">Contexte : Ton ami a étudié toute la nuit pour son examen. Il est très calme et confiant.</p>
+                    <p class="exemple-correction">
+                        <strong>🇬🇧 Phrase :</strong> "He <strong>must</strong> be well-prepared for the exam." <br>
+                        <strong>🇫🇷 Traduction :</strong> "Il est forcément bien préparé pour l'examen." <br>
+                        <strong>🔎 Explication :</strong> À partir des preuves (il a beaucoup étudié, il est confiant), on déduit logiquement qu'il est prêt. On utilise <em>must</em> pour une certitude logique.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 <strong>Au passé :</strong> "The ground is wet; it <strong>must have rained</strong> last night." (Le sol est mouillé ; il a forcément plu hier soir.)
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">📌 Exemple 3 : Impossibilité logique avec can't</h3>
+                    <p class="exemple-context">Contexte : Tu vois quelqu’un qui ressemble à ton voisin, mais ton voisin est en voyage à l’étranger.</p>
+                    <p class="exemple-correction">
+                        <strong>🇬🇧 Phrase :</strong> "That <strong>can't</strong> be Mr. Mbarga; he is in France right now." <br>
+                        <strong>🇫🇷 Traduction :</strong> "Ça ne peut pas être M. Mbarga ; il est en France en ce moment." <br>
+                        <strong>🔎 Explication :</strong> C'est impossible selon les faits. On utilise <em>can't</em> pour exprimer l'impossibilité logique.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Variante négation : <em>"She couldn't have taken the car; her keys are here."</em> (Elle n'a pas pu prendre la voiture ; ses clés sont là.)
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: Pièges courants et différences subtiles -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>must</strong> (certitude logique) avec <strong>have to</strong> (obligation). <br>
+                        ➜ <em>"He must be tired"</em> (déduction) ≠ <em>"He has to work"</em> (obligation).</li>
+                        <li><span class="bold">Attention :</span> <strong>May not</strong> exprime la possibilité négative (il se peut que non) alors que <strong>can't</strong> exprime l'impossibilité. <br>
+                        ➜ <em>"She may not come"</em> (Elle ne viendra peut-être pas) ≠ <em>"She can't come"</em> (Elle ne peut pas venir – c'est impossible).</li>
+                        <li><span class="bold">Ne pas utiliser "must" au négatif pour l'impossibilité :</span> <em>mustn't</em> signifie interdiction, pas certitude négative. Utilisez <strong>can't</strong>.</li>
+                        <li><span class="bold">Piège des temps :</span> Pour la déduction au passé, toujours utiliser <strong>must have + participe passé</strong> et <strong>can't have + participe passé</strong>. <br>
+                        Ex: <em>"She must have forgotten"</em> (Elle a forcément oublié).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SECTION 5: Exercices d'application (petite auto-évaluation) -->
+            <section class="concept-section">
+                <h2 class="section-title">✍️ Entraînement rapide (Auto-évaluation)</h2>
+                <div class="card">
+                    <p><strong>Complétez avec might, must ou can't :</strong></p>
+                    <ol style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>She has been working all day. She ______ be exhausted.</li>
+                        <li>Look at those dark clouds. It ______ rain soon.</li>
+                        <li>He is only five years old. He ______ speak three languages perfectly – that's impossible!</li>
+                        <li>They are laughing a lot. They ______ be enjoying the movie.</li>
+                    </ol>
+                    <details style="margin-top: 1rem; background: #eef2ff; padding: 0.75rem; border-radius: 0.75rem;">
+                        <summary style="font-weight: bold; cursor: pointer;">📖 Voir les réponses (cliquez)</summary>
+                        <p style="margin-top: 0.5rem;">1. <strong>must</strong> (certitude logique) <br>
+                        2. <strong>might</strong> / could (possibilité, pas de certitude totale) <br>
+                        3. <strong>can't</strong> (impossibilité) <br>
+                        4. <strong>must</strong> (déduction logique : ils rient donc ils s'amusent)</p>
+                    </details>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        🧠 Petit conseil : Pour réussir le probatoire, pensez toujours au contexte et aux indices. Posez-vous la question : "À quel point suis-je sûr ?" Si 100% certain → must / can't. Si incertain → might / may / could.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Schéma visuel de déduction -->
+            <section class="concept-section">
+                <h2 class="section-title">🧠 Carte mentale : Choix du modal</h2>
+                <div class="card" style="text-align: center;">
+                    <img src="" alt="Diagramme circulaire ou arbre de décision pour choisir entre might, must et can't selon le degré de certitude" style="max-width:100%; border-radius: 16px; background:#f8fafc;">
+                    <p style="margin-top: 0.75rem; font-size: 0.9rem; color:#475569;">
+                        <strong>Arbre de décision :</strong> <br>
+                        Y a-t-il des preuves solides ? → Oui : Suis-je certain que c'est vrai ? → must / Suis-je certain que c'est faux ? → can't <br>
+                        Pas de preuves solides → Probabilité → might / may / could.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📚 Fiche de révision – Leçon 8 : Probability and Deduction (must, might, may, could, can't) · Niveau 1ère CD · Examen Probatoire</p>
+            <p>💡 Conseil : Relisez les exemples à voix haute et créez vos propres phrases avec des situations de la vie quotidienne au Cameroun (météo, événements, école).</p>
+        </footer>
+    </div>
+</body>
+</html>

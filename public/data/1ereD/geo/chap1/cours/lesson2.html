@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Les problèmes démographiques dans le monde</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 2 : Les problèmes démographiques dans le monde</h1>
+            <p class="lesson-subtitle">Géographie · Première A4 – ABI (et ACD) · Programme officiel Cameroun</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Les deux grands déséquilibres démographiques</h3>
+                    <p class="card-description">
+                        La population mondiale connaît des situations contrastées : la <strong>surpopulation</strong> dans les pays en développement (Afrique, Asie du Sud) et la <strong>sous-population</strong> (ou dépopulation) dans les pays développés (Europe, Japon). Ces deux réalités engendrent des problèmes spécifiques.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Surpopulation</strong> : trop d'habitants par rapport aux ressources disponibles (pression foncière, chômage, insuffisance des services).</li>
+                        <li><strong>Sous-population</strong> : population insuffisante pour assurer le renouvellement des générations et dynamiser l'économie.</li>
+                        <li><strong>Transition démographique</strong> : passage d’un régime de natalité/mortalité élevé à un régime de natalité/mortalité faible. Les pays en développement sont dans la 2e phase (fort accroissement naturel), les pays riches dans la 4e phase (vieillissement).</li>
+                    </ul>
+                    <img src="" alt="Schéma de la transition démographique : cinq phases avec courbes de natalité et mortalité" style="width:100%; margin-top:1rem; border-radius:0.5rem; background:#f1f5f9; padding:0.5rem; text-align:center; font-size:0.8rem; color:#475569;">
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Problèmes liés à la surpopulation (PVD)</h3>
+                    <p class="card-description">
+                        Les pays à forte croissance démographique (ex: Nigeria, Inde, Bangladesh) font face à de multiples défis :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Pression sur les ressources naturelles</strong> : eau, terres agricoles, forêts (déforestation, surexploitation).</li>
+                        <li><strong>Dégradation de l’environnement</strong> : pollutions, insalubrité dans les bidonvilles, production excessive de déchets.</li>
+                        <li><strong>Chômage et sous-emploi</strong> : main-d'œuvre abondante non absorbée par l’économie formelle.</li>
+                        <li><strong>Équipements sociaux insuffisants</strong> : écoles surchargées, systèmes de santé saturés, logements précaires.</li>
+                        <li><strong>Insécurité alimentaire</strong> : production agricole qui ne suit pas toujours le rythme de la croissance démographique.</li>
+                    </ul>
+                    <img src="" alt="Photo d'un bidonville surpeuplé en Afrique subsaharienne, entassement d'habitations précaires" style="width:100%; margin-top:1rem; border-radius:0.5rem; background:#f1f5f9; padding:0.5rem; text-align:center; font-size:0.8rem; color:#475569;">
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Problèmes liés à la sous-population (pays développés)</h3>
+                    <p class="card-description">
+                        Les pays où la fécondité est très faible (moins de 2,1 enfants par femme) connaissent un vieillissement de la population. Exemples : Japon, Allemagne, Italie.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Vieillissement démographique</strong> : hausse de la proportion des personnes âgées (+65 ans).</li>
+                        <li><strong>Manque de main-d’œuvre active</strong> : difficultés pour certains secteurs (agriculture, soins, BTP).</li>
+                        <li><strong>Pression sur les systèmes de retraite et de santé</strong> : cotisants moins nombreux face aux bénéficiaires.</li>
+                        <li><strong>Ralentissement de la croissance économique</strong> : baisse de la consommation et de l’innovation.</li>
+                        <li><strong>Risque de disparition de certaines zones rurales</strong> : villages désertés, écoles fermées.</li>
+                    </ul>
+                    <img src="" alt="Graphique montrant la pyramide des âges d'un pays vieillissant (base étroite, sommet large)" style="width:100%; margin-top:1rem; border-radius:0.5rem; background:#f1f5f9; padding:0.5rem; text-align:center; font-size:0.8rem; color:#475569;">
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Les politiques démographiques</h3>
+                    <p class="card-description">
+                        Face aux déséquilibres, les États mettent en place des stratégies pour influencer la natalité.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Politiques malthusiennes (antinatalistes)</strong> : visent à réduire la natalité dans les pays surpeuplés. Exemples : campagne de planning familial en Inde, politique de l’enfant unique (ancienne) en Chine.</li>
+                        <li><strong>Politiques natalistes</strong> : encouragent les naissances dans les pays vieillissants. Exemples : allocations familiales généreuses, congés parentaux, primes à la naissance (France, Suède, Japon).</li>
+                        <li><strong>Autres mesures</strong> : éducation des filles, accès à la contraception, sensibilisation, allongement du congé parental.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top:0.5rem;">
+                        📌 À retenir : L’efficacité des politiques démographiques dépend du contexte culturel, économique et religieux.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple concret : Surpopulation au Nigeria</h3>
+                    <p class="exemple-context">
+                        Le Nigeria est le pays le plus peuplé d’Afrique (plus de 220 millions d’habitants) avec un accroissement naturel de près de 2,5 % par an. Lagos, la capitale économique, compte plus de 20 millions d’habitants et gagne 600 000 nouveaux arrivants chaque année.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Analyse géographique :</strong> La pression démographique se traduit par l’extension des bidonvilles (Makoko), l’engorgement des routes (bouchons de plusieurs heures), la pollution des lagunes et une insuffisance criante d’écoles et d’hôpitaux. Le gouvernement tente de promouvoir la planification familiale, mais les résistances religieuses et le faible accès à la contraception limitent l’impact.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 À retenir pour l’examen : Dans une production écrite, il faut montrer les liens de cause à effet (forte natalité → manque d’infrastructures → dégradation du cadre de vie).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple concret : Sous-population au Japon</h3>
+                    <p class="exemple-context">
+                        Le Japon affiche l’un des taux de fécondité les plus bas au monde (1,3 enfant par femme). Sa population diminue depuis 2010 et le nombre de personnes âgées de plus de 65 ans dépasse 29 %.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Conséquences :</strong> fermeture de nombreuses écoles rurales, pénurie de main-d’œuvre dans les secteurs de la construction et des services, augmentation des cotisations pour les retraites. Le gouvernement a mis en place des politiques natalistes (primes à la naissance, congés parentaux étendus) et une légère ouverture à l’immigration pour compenser les départs à la retraite.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Comparaison utile : Le Japon et le Niger (forte croissance) illustrent les deux visages extrêmes des problèmes démographiques.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple de politique démographique : L’Inde et le planning familial</h3>
+                    <p class="exemple-context">
+                        Depuis les années 1950, l’Inde tente de limiter sa croissance démographique. Des campagnes de stérilisation volontaire et l’usage de préservatifs ont été promus. Le slogan « Hum Do, Hamare Do » (nous deux, nos deux) encourage la famille de deux enfants.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résultats mitigés :</strong> l’indice de fécondité est passé de 6 enfants par femme dans les années 1950 à environ 2,1 aujourd’hui. Cependant, l’Inde reste le deuxième pays le plus peuplé du monde (1,4 milliard) et connaît toujours des problèmes de sous-alimentation et d’accès à l’eau. Cet exemple montre qu’une politique démographique doit être accompagnée de développement économique.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section dossier : politiques démographiques (conforme au programme) -->
+            <section class="concept-section">
+                <h2 class="section-title">📂 Dossier 1 : Les politiques démographiques (approfondissement)</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Comparaison des modèles</h3>
+                    <ul class="concept-list">
+                        <li><strong>Modèle malthusien</strong> : repose sur l’idée que les ressources augmentent moins vite que la population. Prône la limitation des naissances. Exemples historiques : Chine (politique de l’enfant unique de 1979 à 2015), Inde (stérilisation massive dans les années 1970).</li>
+                        <li><strong>Modèle nataliste</strong> : cherche à stimuler la natalité par des incitations financières et des services aux familles. Exemples : France (allocations familiales, crèches), Suède (congé parental généreux), Corée du Sud (primes à l’accouchement).</li>
+                        <li><strong>Approche intégrée (développement humain)</strong> : lutter contre la surpopulation en améliorant l’éducation des filles, l’accès aux soins et l’emploi des femmes. Cette stratégie, appliquée au Bangladesh ou au Rwanda, a montré son efficacité sans coercition.</li>
+                    </ul>
+                    <img src="" alt="Infographie comparant les effets d'une politique nataliste et d'une politique malthusienne sur la pyramide des âges" style="width:100%; margin-top:1rem; border-radius:0.5rem; background:#f1f5f9; padding:0.5rem;">
+                </div>
+            </section>
+
+            <!-- Section pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>surpopulation</strong> et <strong>forte densité</strong>. Un pays peut être densément peuplé sans être surpeuplé s’il dispose de ressources et de technologies (ex : Singapour). La surpopulation se mesure par le rapport population/ressources.</li>
+                        <li><span class="bold">Attention :</span> Une politique nataliste n’est pas toujours synonyme de « bonheur familial ». Elle peut accentuer la pauvreté si les infrastructures ne suivent pas.</li>
+                        <li><span class="bold">À ne pas confondre :</span> Croissance naturelle (natalité – mortalité) et <strong>croissance migratoire</strong> (solde migratoire). Les problèmes démographiques traitent avant tout du renouvellement des générations.</li>
+                        <li><span class="bold">Idée reçue :</span> Tous les pays du Sud sont surpeuplés. Faux : certains pays du Sud ont une faible densité (Gabon, Canada) mais connaissent d’autres défis (répartition inégale).</li>
+                        <li><span class="bold">Piège dans les calculs :</span> Ne pas oublier d’exprimer le taux d’accroissement naturel en pourcentage ou en ‰. Exemple : (Natalité – Mortalité) / 1000 × 100 = taux %.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section "Savoir argumenter" (conforme aux compétences attendues) -->
+            <section class="exemple-section">
+                <h2 class="section-title">✍️ Entraînement à la production écrite (sujet type examen)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Sujet possible : « Analysez les problèmes démographiques dans les pays en développement et proposez des solutions. »</h3>
+                    <p class="exemple-context">
+                        Structure de réponse attendue (15 lignes minimum) :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Introduction</strong> : rappeler la croissance rapide dans les PVD et son lien avec la transition démographique.</li>
+                        <li><strong>Développement</strong> : énumérer 3 problèmes majeurs (pression sur les ressources, chômage, dégradation environnementale) avec exemples (Cameroun, Nigeria, Inde).</li>
+                        <li><strong>Solutions envisagées</strong> : éducation des filles, planning familial, investissements dans les infrastructures, développement rural pour freiner l’exode.</li>
+                        <li><strong>Conclusion</strong> : nécessité d’une politique intégrée alliant développement économique et maîtrise de la fécondité.</li>
+                    </ul>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Utilisez des connecteurs logiques (d’abord, ensuite, par conséquent, cependant) et des données chiffrées (ex : 2,4 % de croissance annuelle au Cameroun).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lien vers le dossier complet du programme -->
+            <div style="background-color:#eef2ff; border-radius:0.75rem; padding:1rem; margin-top:1rem; text-align:center;">
+                <p style="margin:0; font-size:0.9rem;">📖 Pour aller plus loin : consultez le <strong>Dossier 1 – Les politiques démographiques</strong> dans votre manuel. Réalisez une carte des inégalités de répartition de la population (TP1) et analysez un document sur les conséquences du vieillissement au Japon.</p>
+            </div>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision créée conformément au programme officiel de Géographie – Première (Cameroun) · <a href="#">Réviser avec les annales</a> · 📚 Mise à jour : avril 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

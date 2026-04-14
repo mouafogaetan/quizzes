@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 17 : Mouvement plan dans le champ de pesanteur</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Style spécifique pour une impression et une lecture optimales */
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #1a2b2e;
+        }
+        .fiche-revision {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 2rem;
+        }
+        h1 {
+            color: #0d3b3f;
+            border-bottom: 3px solid #ff8c42;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        h2 {
+            color: #1e555c;
+            margin-top: 1.5rem;
+            border-left: 5px solid #ff8c42;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #2c7a7b;
+            margin-bottom: 0.5rem;
+        }
+        .objectif, .bac-link, .astuce {
+            background-color: #eef2f3;
+            border-left: 4px solid #ff8c42;
+            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .objectif::before {
+            content: "🎯 Objectif : ";
+            font-weight: bold;
+            color: #0d3b3f;
+        }
+        .bac-link::before {
+            content: "📌 Lien Bac : ";
+            font-weight: bold;
+            color: #c7362b;
+        }
+        .astuce::before {
+            content: "💡 Astuce : ";
+            font-weight: bold;
+            color: #2c7a7b;
+        }
+        .formule-card {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .formule {
+            font-family: monospace;
+            font-size: 1.1rem;
+            background: #e9ecef;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #d1e7e0;
+            color: #0d3b3f;
+        }
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+            padding-top: 1rem;
+        }
+        @media (max-width: 768px) {
+            .fiche-revision {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-revision">
+    <h1>📖 Leçon 17 : Mouvement plan dans le champ de pesanteur</h1>
+    <p><strong>Niveau :</strong> Terminale C & D | <strong>Module :</strong> Mécanique – Lois de Newton | <strong>Trimestre :</strong> 2</p>
+
+    <div class="objectif">
+        Étudier le mouvement parabolique d'un projectile lancé dans le champ de pesanteur uniforme (chute libre avec vitesse initiale non verticale). Établir les équations horaires, l'équation de la trajectoire et déterminer des grandeurs caractéristiques (portée, flèche).
+    </div>
+
+    <div class="bac-link">
+        Bac 2023, 2024, 2025 : Mouvement des projectiles, étude de trajectoire parabolique, détermination de la portée et de la flèche. Exercice classique de l'épreuve de mécanique.
+    </div>
+
+    <!-- ================= 1. CONDITIONS ET HYPOTHÈSES ================= -->
+    <h2>1. Conditions et hypothèses du mouvement</h2>
+    <ul>
+        <li><strong>Référentiel :</strong> Terrestre supposé galiléen.</li>
+        <li><strong>Système :</strong> Projectile ponctuel de masse \( m \).</li>
+        <li><strong>Forces :</strong> Seule la force de pesanteur (poids \( \vec{P} = m\vec{g} \)) est prise en compte. On néglige les frottements de l'air et la poussée d'Archimède.</li>
+        <li><strong>Champ de pesanteur :</strong> uniforme, \( \vec{g} \) vertical, dirigé vers le bas, de norme \( g \approx 9,8 \, \text{m·s}^{-2} \).</li>
+    </ul>
+
+    <!-- ================= 2. ÉQUATIONS HORAIRES ================= -->
+    <h2>2. Équations horaires du mouvement</h2>
+    <p>On choisit un repère cartésien \((O, \vec{i}, \vec{j})\) avec :</p>
+    <ul>
+        <li>\(O\) : point de lancement.</li>
+        <li>\(\vec{i}\) : axe horizontal (direction de la portée).</li>
+        <li>\(\vec{j}\) : axe vertical ascendant (sens opposé à \(\vec{g}\)).</li>
+    </ul>
+    <p>À \( t = 0 \), le projectile est lancé du point \( O(0,0) \) avec une vitesse initiale \(\vec{v}_0\) faisant un angle \(\alpha\) avec l'horizontale :</p>
+    \[
+    v_{0x} = v_0 \cos\alpha \quad ; \quad v_{0y} = v_0 \sin\alpha
+    \]
+
+    <div class="formule-card">
+        <h3>📐 Accélération</h3>
+        <p>D'après la 2ᵉ loi de Newton : \(\sum \vec{F} = m\vec{a} \Rightarrow \vec{P} = m\vec{a} \Rightarrow \vec{a} = \vec{g}\).</p>
+        <p>En projection : \( a_x = 0 \) et \( a_y = -g \).</p>
+    </div>
+
+    <div class="formule-card">
+        <h3>⏱️ Vitesse (par intégration)</h3>
+        <p>\( v_x(t) = v_{0x} = v_0 \cos\alpha \) &nbsp;&nbsp;(constante)</p>
+        <p>\( v_y(t) = -g\,t + v_0 \sin\alpha \)</p>
+    </div>
+
+    <div class="formule-card">
+        <h3>📍 Position (par intégration avec conditions initiales \( x(0)=0, y(0)=0 \))</h3>
+        <p>\[
+        x(t) = (v_0 \cos\alpha) \cdot t
+        \]</p>
+        <p>\[
+        y(t) = -\frac{1}{2} g\,t^2 + (v_0 \sin\alpha) \cdot t
+        \]</p>
+        <p>Ces deux équations sont les <strong>équations horaires paramétriques</strong> du mouvement.</p>
+    </div>
+
+    <!-- ================= 3. ÉQUATION DE LA TRAJECTOIRE ================= -->
+    <h2>3. Équation de la trajectoire \( y = f(x) \)</h2>
+    <p>On élimine le temps \( t \) entre \( x(t) \) et \( y(t) \). De \( x = v_0\cos\alpha \cdot t \) on tire \( t = \dfrac{x}{v_0\cos\alpha} \).</p>
+    <p>En reportant dans \( y(t) \) :</p>
+    \[
+    y(x) = -\frac{1}{2} g \left( \frac{x}{v_0\cos\alpha} \right)^2 + (v_0\sin\alpha)\left( \frac{x}{v_0\cos\alpha} \right)
+    \]
+    \[
+    \boxed{ y(x) = -\frac{g}{2v_0^2\cos^2\alpha}\,x^2 + (\tan\alpha)\,x }
+    \]
+
+    <div class="astuce">
+        Il s'agit d'une <strong>parabole</strong> tournée vers le bas (coefficient de \(x^2\) négatif). La trajectoire est donc parabolique.
+    </div>
+
+    <!-- ================= 4. GRANDEURS CARACTÉRISTIQUES ================= -->
+    <h2>4. Grandeurs caractéristiques du mouvement</h2>
+
+    <h3>🔹 Flèche (hauteur maximale) \( H \)</h3>
+    <p>La hauteur maximale est atteinte lorsque la composante verticale de la vitesse s'annule : \( v_y(t_s) = 0 \)</p>
+    \[
+    -g t_s + v_0\sin\alpha = 0 \quad \Rightarrow \quad t_s = \frac{v_0\sin\alpha}{g}
+    \]
+    <p>En reportant dans \( y(t) \) :</p>
+    \[
+    H = y(t_s) = -\frac{1}{2}g\left(\frac{v_0\sin\alpha}{g}\right)^2 + v_0\sin\alpha \cdot \frac{v_0\sin\alpha}{g}
+    = \frac{v_0^2 \sin^2\alpha}{2g}
+    \]
+    \[
+    \boxed{ H = \frac{v_0^2 \sin^2\alpha}{2g} }
+    \]
+
+    <h3>🔹 Portée horizontale \( D \)</h3>
+    <p>La portée correspond à la distance horizontale parcourue lorsque le projectile retombe à l'altitude initiale (\( y=0, x>0 \)).</p>
+    <p>On résout \( y(t) = 0 \) : \( t\left( -\frac{1}{2}gt + v_0\sin\alpha \right) = 0 \)</p>
+    <p>Les solutions : \( t=0 \) (départ) et \( t_p = \dfrac{2v_0\sin\alpha}{g} \) (temps de vol).</p>
+    <p>La portée est \( D = x(t_p) = (v_0\cos\alpha) \cdot \dfrac{2v_0\sin\alpha}{g} = \dfrac{v_0^2 \cdot 2\sin\alpha\cos\alpha}{g} \)</p>
+    \[
+    \boxed{ D = \frac{v_0^2 \sin(2\alpha)}{g} }
+    \]
+    <p>La portée est maximale pour \( \sin(2\alpha)=1 \), soit \( \alpha = 45^\circ \).</p>
+
+    <h3>🔹 Temps de vol \( T \)</h3>
+    \[
+    \boxed{ T = \frac{2v_0\sin\alpha}{g} }
+    \]
+
+    <!-- ================= 5. SYNTHÈSE DES FORMULES ================= -->
+    <h2>5. Tableau récapitulatif des formules essentielles</h2>
+    <table>
+        <thead>
+            <tr><th>Grandeur</th><th>Expression</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Coordonnées</td><td>\( x(t) = v_0\cos\alpha \cdot t \) ; \( y(t) = -\frac{1}{2}gt^2 + v_0\sin\alpha \cdot t \)</td></tr>
+            <tr><td>Trajectoire</td><td>\( y(x) = -\dfrac{g}{2v_0^2\cos^2\alpha} x^2 + (\tan\alpha) x \)</td></tr>
+            <tr><td>Flèche (hauteur max)</td><td>\( H = \dfrac{v_0^2 \sin^2\alpha}{2g} \)</td></tr>
+            <tr><td>Temps de vol</td><td>\( T = \dfrac{2v_0\sin\alpha}{g} \)</td></tr>
+            <tr><td>Portée</td><td>\( D = \dfrac{v_0^2 \sin(2\alpha)}{g} \)</td></tr>
+        </tbody>
+    </table>
+
+    <!-- ================= 6. MÉTHODOLOGIE ================= -->
+    <h2>6. Méthodologie pour résoudre un exercice type Bac</h2>
+    <ol>
+        <li><strong>Schématiser</strong> la situation : repère \((O,x,y)\), vecteur \(\vec{v}_0\), angle \(\alpha\).</li>
+        <li><strong>Bilan des forces</strong> : uniquement le poids. Appliquer le PFD \(\Rightarrow \vec{a} = \vec{g}\).</li>
+        <li><strong>Intégrer</strong> pour obtenir \(\vec{v}(t)\) puis \(\vec{OM}(t)\) en tenant compte des conditions initiales.</li>
+        <li><strong>Établir l'équation de la trajectoire</strong> si demandé en éliminant \(t\).</li>
+        <li><strong>Calculer les grandeurs caractéristiques</strong> (flèche, temps de vol, portée) à l'aide des formules ou par exploitation des équations.</li>
+        <li><strong>Vérifier la cohérence</strong> : unités (m, s, m/s), ordre de grandeur, angle cohérent.</li>
+    </ol>
+
+    <div class="astuce">
+        Pour la flèche, on peut aussi utiliser la relation indépendante du temps : \( v_y^2 - v_{0y}^2 = -2g y \) avec \( v_y = 0 \) à l’apogée.
+    </div>
+
+    <!-- ================= 7. EXEMPLE D'APPLICATION BAC ================= -->
+    <h2>7. Exemple typique (inspiré du Bac)</h2>
+    <p><strong>Énoncé :</strong> Un projectile est lancé d’un point O avec une vitesse \( v_0 = 20 \, \text{m·s}^{-1} \) faisant un angle \( \alpha = 30^\circ \) avec l’horizontale. \( g = 10 \, \text{m·s}^{-2} \). Calculer : (a) la flèche, (b) le temps de vol, (c) la portée.</p>
+    <p><strong>Correction :</strong></p>
+    <ul>
+        <li>\( H = \dfrac{v_0^2 \sin^2\alpha}{2g} = \dfrac{20^2 \times \sin^2 30^\circ}{2\times 10} = \dfrac{400 \times (0,5)^2}{20} = \dfrac{400 \times 0,25}{20} = \dfrac{100}{20} = 5 \, \text{m} \).</li>
+        <li>\( T = \dfrac{2v_0\sin\alpha}{g} = \dfrac{2\times 20 \times 0,5}{10} = \dfrac{20}{10} = 2 \, \text{s} \).</li>
+        <li>\( D = \dfrac{v_0^2 \sin(2\alpha)}{g} = \dfrac{400 \times \sin 60^\circ}{10} = 40 \times \dfrac{\sqrt{3}}{2} = 20\sqrt{3} \approx 34,64 \, \text{m} \).</li>
+    </ul>
+
+    <!-- ================= 8. ERREURS FRÉQUENTES À ÉVITER ================= -->
+    <h2>8. Erreurs fréquentes au Bac</h2>
+    <ul>
+        <li>❌ Oublier que \( \vec{a} = \vec{g} \) et non \( \vec{a} = 0 \) (confondre avec mouvement rectiligne uniforme).</li>
+        <li>❌ Confondre la flèche \( H \) avec la portée \( D \).</li>
+        <li>❌ Utiliser la formule de la portée sans vérifier que le point de chute est à la même altitude que le point de départ.</li>
+        <li>❌ Mauvais signe pour l’accélération verticale (\( a_y = -g \) si l’axe vertical est orienté vers le haut).</li>
+        <li>❌ Négliger les conditions initiales lors de l’intégration.</li>
+    </ul>
+
+    <!-- ================= 9. LIENS AVEC D'AUTRES LEÇONS ================= -->
+    <h2>9. Liens avec d'autres leçons</h2>
+    <ul>
+        <li><strong>Leçon 16</strong> : Mouvement rectiligne dans le champ de pesanteur (cas particulier où \(\alpha = 90^\circ\) ou \(\alpha = 0\)).</li>
+        <li><strong>Leçon 18</strong> : Mouvement d’une particule chargée dans un champ électrique uniforme – analogie formelle (trajectoire parabolique).</li>
+        <li><strong>Leçon 13</strong> : Cinématique – utilisation des vecteurs vitesse et accélération.</li>
+    </ul>
+
+    <div class="footer">
+        Fiche conforme au programme officiel du Cameroun – Terminale C & D (2025-2026) – Enseignant : Physique<br>
+        Révision pour le Baccalauréat – Mouvement parabolique : maîtriser les projections et l’élimination du temps.
+    </div>
+</div>
+</body>
+</html>

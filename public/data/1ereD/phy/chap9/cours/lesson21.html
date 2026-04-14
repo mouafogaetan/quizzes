@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 21 : Les récepteurs (Première C&E)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour typographie moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (intégré pour l'indépendance du fichier) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+        
+        /* Style pour les images et schémas */
+        .schema-img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            background: #f9fafb;
+            padding: 0.5rem;
+        }
+        .figcaption {
+            font-size: 0.8rem;
+            text-align: center;
+            color: #475569;
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 21 : Les récepteurs</h1>
+            <p class="lesson-subtitle">Physique · Première C & E (Séries Scientifiques) · Module 4 : Électricité</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- ÉLÉMENTS CLÉS À RETENIR -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Concept 1 : Définition et modèle -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🔌 Définition d’un récepteur électrique</h3>
+                    <p class="card-description">
+                        Un <strong>récepteur électrique</strong> est un dipôle qui convertit l'énergie électrique qu'il reçoit en une autre forme d'énergie (mécanique, thermique, chimique, lumineuse…). 
+                        Contrairement au générateur, il <strong>reçoit</strong> de l'énergie du circuit.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Force contre-électromotrice (f.c.e.m.)</strong> : notée $E'$ (en volts). C'est la tension qui s'oppose au passage du courant. Elle représente la part de tension convertie en énergie utile.</li>
+                        <li><strong>Résistance interne $r'$</strong> : modélise les pertes par effet Joule à l'intérieur du récepteur (en ohms, $\Omega$).</li>
+                        <li><strong>Caractéristique $U = f(I)$</strong> : pour un récepteur linéaire (moteur, électrolyseur), on a la loi d'Ohm généralisée : <span class="formule">$U = E' + r' I$</span>.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.8rem;">
+                        💡 <strong>Analogies utiles :</strong> Un générateur "pousse" le courant ($U = E - rI$), un récepteur "résiste" et consomme ($U = E' + r'I$).
+                    </div>
+                </div>
+
+                <!-- Concept 2 : Caractéristique et représentation graphique -->
+                <div class="card concept-card">
+                    <h3 class="card-title">📈 Caractéristique tension-courant</h3>
+                    <p class="card-description">
+                        La caractéristique d'un récepteur est une droite affine (en convention récepteur) d'équation :
+                        $$ U = E' + r' I $$
+                        où $U$ est la tension à ses bornes, $I$ l'intensité qui le traverse (de A vers B en convention récepteur).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Ordonnée à l'origine</strong> : $E'$ (force contre-électromotrice).</li>
+                        <li><strong>Pente</strong> : $r'$ (résistance interne).</li>
+                        <li>La puissance électrique reçue par le récepteur : $P_{reçue} = U \cdot I$.</li>
+                    </ul>
+                    <!-- Image illustrative : caractéristique U(I) d'un récepteur -->
+                    <img src="" alt="Graphique caractéristique U=f(I) d'un récepteur : droite affine croissante avec ordonnée à l'origine E' et pente r'" class="schema-img">
+                    <div class="figcaption">Fig. 1 : Caractéristique d’un récepteur – $U = E' + r'I$</div>
+                </div>
+
+                <!-- Concept 3 : Puissance et bilan énergétique -->
+                <div class="card concept-card">
+                    <h3 class="card-title">⚡ Bilan de puissance dans un récepteur</h3>
+                    <p class="card-description">
+                        La puissance électrique totale reçue se divise en deux parties :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Puissance utile</strong> : $P_u = E' \cdot I$ (transformée en énergie mécanique, chimique, etc.).</li>
+                        <li><strong>Puissance perdue par effet Joule</strong> : $P_j = r' I^2$ (dissipation thermique).</li>
+                    </ul>
+                    <p>D'où l'équation de puissance : <span class="formule">$U I = E' I + r' I^2$</span>.</p>
+                    <p>L'énergie totale reçue pendant une durée $t$ : $W_{reçue} = U I t = E' I t + r' I^2 t$.</p>
+                </div>
+            </section>
+
+            <!-- EXEMPLES DE COMPRÉHENSION -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Moteur à courant continu</h3>
+                    <p class="exemple-context">
+                        Un moteur électrique possède une force contre-électromotrice $E' = 12\ V$ et une résistance interne $r' = 2\ \Omega$. 
+                        Il est parcouru par un courant $I = 2,5\ A$. Calculer la tension à ses bornes, la puissance reçue, la puissance utile et le rendement.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution :</strong><br>
+                        • Tension : $U = E' + r'I = 12 + 2 \times 2,5 = 12 + 5 = 17\ V$.<br>
+                        • Puissance reçue : $P_{reçue} = U I = 17 \times 2,5 = 42,5\ W$.<br>
+                        • Puissance utile : $P_u = E' I = 12 \times 2,5 = 30\ W$.<br>
+                        • Puissance perdue (Joule) : $P_j = r' I^2 = 2 \times (2,5)^2 = 2 \times 6,25 = 12,5\ W$. (Vérification : $30 + 12,5 = 42,5$)<br>
+                        • Rendement : $\eta = \frac{P_u}{P_{reçue}} = \frac{30}{42,5} \approx 0,706$ soit <strong>70,6 %</strong>.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Le rendement d’un récepteur est toujours inférieur à 1 à cause des pertes Joule. On peut aussi le calculer par $\eta = \frac{E'}{U}$ si le courant n’est pas nul ?
+                        Attention : $\eta = \frac{E'I}{UI} = \frac{E'}{U}$ seulement lorsque $U$ est la tension aux bornes. Ici $\eta = 12/17 \approx 0,706$ → même résultat.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Électrolyseur</h3>
+                    <p class="exemple-context">
+                        Un électrolyseur (récepteur chimique) a une f.c.e.m. $E' = 4,5\ V$ et $r' = 1,5\ \Omega$. On l’alimente sous une tension $U = 9,0\ V$. 
+                        Déterminer l’intensité du courant et la puissance convertie en énergie chimique.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Calcul :</strong><br>
+                        On utilise $U = E' + r' I \ \Rightarrow\ I = \frac{U - E'}{r'} = \frac{9,0 - 4,5}{1,5} = \frac{4,5}{1,5} = 3,0\ A$.<br>
+                        Puissance chimique (utile) : $P_{chim} = E' I = 4,5 \times 3,0 = 13,5\ W$.<br>
+                        Puissance reçue : $U I = 9 \times 3 = 27\ W$.<br>
+                        Puissance perdue : $r' I^2 = 1,5 \times 9 = 13,5\ W$.
+                    </div>
+                    <div class="exemple-astuce">
+                        🔋 À retenir : L'électrolyseur stocke de l'énergie chimique (ex: recharge d’une batterie). Le sens du courant doit être tel qu'il entre par la borne positive de l'électrolyseur.
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION SCHÉMAS ET MODÉLISATION -->
+            <section class="concept-section">
+                <h2 class="section-title">📐 Modélisation et schéma équivalent</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Schéma électrique équivalent d’un récepteur linéaire</h3>
+                    <p class="card-description">
+                        Tout récepteur linéaire (moteur, électrolyseur, batterie en charge) peut être représenté par une association série :
+                    </p>
+                    <ul class="concept-list">
+                        <li>Une source de tension parfaite de f.c.e.m. $E'$ (flèche opposée au courant).</li>
+                        <li>Une résistance interne $r'$.</li>
+                    </ul>
+                    <img src="" alt="Schéma électrique équivalent d'un récepteur : une résistance r' en série avec une source de tension E' (flèche orientée en sens inverse du courant)" class="schema-img">
+                    <div class="figcaption">Fig. 2 : Modèle de Thévenin pour un récepteur (convention récepteur).</div>
+                    <p class="card-description">
+                        La tension à ses bornes est $U = E' + r'I$, avec $I$ le courant entrant par la borne positive (cas du récepteur).
+                    </p>
+                </div>
+            </section>
+
+            <!-- PIÈGES COURANTS ET ERREURS -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre la loi d’Ohm pour un récepteur ($U = E' + r'I$) avec celle d’un générateur ($U = E - rI$). Vérifier le signe “+” devant $r'I$ !</li>
+                        <li><span class="bold">Attention :</span> Dans un récepteur, la force contre-électromotrice $E'$ s’oppose au courant. La puissance $E'I$ est convertie en énergie utile, pas dissipée.</li>
+                        <li><span class="bold">Piège :</span> Ne pas oublier que la caractéristique $U(I)$ n’est valable qu’en régime permanent et dans le domaine linéaire. Au démarrage, $E'$ peut varier (moteur).</li>
+                        <li><span class="bold">Confusion possible :</span> Le rendement d’un récepteur se définit comme $\eta = \frac{\text{Puissance utile}}{\text{Puissance reçue}} = \frac{E' I}{U I} = \frac{E'}{U}$. Ne pas utiliser $E'/E$ (pas de $E$ dans le récepteur).</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- SYNTHÈSE RAPIDE : Tableau comparatif générateur / récepteur -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Tableau récapitulatif : Générateur vs Récepteur</h2>
+                <div class="card">
+                    <table style="width:100%; border-collapse: collapse; text-align: left;">
+                        <thead style="background-color: #eef2ff;">
+                            <tr><th style="padding: 8px; border-bottom: 2px solid #cbd5e1;">Caractéristique</th><th style="padding: 8px; border-bottom: 2px solid #cbd5e1;">Générateur</th><th style="padding: 8px; border-bottom: 2px solid #cbd5e1;">Récepteur</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">Équation $U(I)$</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">$U = E - rI$</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">$U = E' + r'I$</td></tr>
+                            <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">F.e.m. / F.c.e.m.</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">$E$ (force électromotrice)</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">$E'$ (force contre-électromotrice)</td></tr>
+                            <tr><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">Puissance</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">$P_{fournie} = UI = EI - rI^2$</td><td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">$P_{reçue} = UI = E'I + r'I^2$</td></tr>
+                            <tr><td style="padding: 8px;">Rendement</td><td style="padding: 8px;">$\eta = \frac{U}{E}$ (si $U$ tension aux bornes)</td><td style="padding: 8px;">$\eta = \frac{E'}{U}$</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        🧠 À mémoriser : Dans la convention récepteur, le courant entre par la borne +, et la tension $U$ est comptée positive. La formule $U = E' + r'I$ est alors systématique.
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXERCICE TYPE EXAMEN -->
+            <section class="exemple-section">
+                <h2 class="section-title">📝 Exercice type (inspiré des sujets du Bac Cameroun)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Moteur et rendement</h3>
+                    <p class="exemple-context">
+                        Un moteur électrique fonctionne sous une tension $U = 24\ V$ et absorbe un courant $I = 3,0\ A$. Sa résistance interne est $r' = 1,2\ \Omega$.<br>
+                        a) Calculer la force contre-électromotrice $E'$ du moteur.<br>
+                        b) Déterminer la puissance perdue par effet Joule et la puissance mécanique utile.<br>
+                        c) Quel est le rendement du moteur ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Correction :</strong><br>
+                        a) $U = E' + r'I \ \Rightarrow\ E' = U - r'I = 24 - 1,2 \times 3,0 = 24 - 3,6 = 20,4\ V$.<br>
+                        b) $P_J = r'I^2 = 1,2 \times 9 = 10,8\ W$ ; $P_{méca} = E'I = 20,4 \times 3,0 = 61,2\ W$.<br>
+                        c) $\eta = \frac{E'}{U} = \frac{20,4}{24} = 0,85$ soit 85 %.
+                    </div>
+                    <div class="exemple-astuce">
+                        ✅ Dans les exercices d'examen, on demande souvent de tracer la caractéristique ou de déterminer graphiquement $E'$ et $r'$ à partir d'un relevé expérimental $(U, I)$.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme officiel de Physique - Première C & E (Cameroun) · Module Électricité · Leçon 21 : Les récepteurs 📘</p>
+            <p>Révision créée pour les élèves · <a href="#">Retour au sommaire</a> · 🔋 Maîtriser les récepteurs pour réussir au Baccalauréat</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Le cycle biogéochimique du carbone | SVTEEHB Première C & TI</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;  /* Fond très clair pour contraster avec les cards */
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #065f46, #047857);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #d1fae5;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #047857;
+            border-left: 4px solid #047857;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "🌍";
+            color: #047857;
+            font-weight: bold;
+            font-size: 1rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .highlight {
+            background-color: #ecfdf5;
+            font-weight: 600;
+            color: #065f46;
+            padding: 0.1rem 0.2rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #047857;
+            text-decoration: none;
+            border-bottom: 1px dotted #047857;
+        }
+
+        .fiche-footer a:hover {
+            color: #065f46;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* image placeholder style */
+        .schema-placeholder {
+            background-color: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 0.8rem;
+            text-align: center;
+            margin: 1rem 0;
+            border: 1px dashed #94a3b8;
+            font-size: 0.9rem;
+            color: #334155;
+        }
+        .schema-placeholder img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .caption {
+            font-style: italic;
+            font-size: 0.8rem;
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">🌍 Le cycle biogéochimique du carbone</h1>
+            <p class="lesson-subtitle">SVTEEHB · Première C & TI · Module I – Séquence 6 : Flux d'énergie et cycles biogéochimiques</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Concept 1 : Réservoirs de carbone -->
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Les réservoirs de carbone (puits de carbone)</h3>
+                    <p class="card-description">
+                        Le carbone circule entre plusieurs réservoirs globaux de tailles très différentes. Ces réservoirs stockent le carbone sous forme organique (matière vivante) ou minérale (CO₂, carbonates, combustibles fossiles).
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="highlight">Atmosphère</span> : dioxyde de carbone (CO₂) et méthane (CH₄) – environ 900 GtC.</li>
+                        <li><span class="highlight">Océans</span> : principal réservoir actif (~38 000 GtC) sous forme de carbonates dissous, d’ions bicarbonate et de matière organique marine.</li>
+                        <li><span class="highlight">Biomasse continentale</span> : végétaux, animaux, sols (forêts, savanes, etc.) ~ 2 000 GtC.</li>
+                        <li><span class="highlight">Roches sédimentaires</span> : calcaires (CaCO₃), kérogène, pétrole, charbon – très grand stock (millions GtC) mais cycle lent.</li>
+                    </ul>
+                    <div class="schema-placeholder">
+                        <!-- L'IA pourra générer un schéma simple des réservoirs avec flèches -->
+                        <img src="" alt="Schéma des principaux réservoirs de carbone (atmosphère, océans, biomasse, roches sédimentaires) avec estimations de stockage.">
+                        <div class="caption">Figure 1 : Principaux réservoirs de carbone et flux échangés (en GtC/an).</div>
+                    </div>
+                </div>
+
+                <!-- Concept 2 : Flux majeurs du carbone -->
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Les flux entre les réservoirs</h3>
+                    <p class="card-description">
+                        Le carbone passe d’un réservoir à un autre grâce à des processus biologiques, physiques ou géologiques. Les flux naturels sont aujourd’hui perturbés par les activités humaines.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Photosynthèse</strong> : absorption du CO₂ atmosphérique par les végétaux → matière organique (glucides). Flux majeur ~120 GtC/an.</li>
+                        <li><strong>Respiration (aérobie)</strong> : les êtres vivants (plantes, animaux, décomposeurs) rejettent du CO₂ dans l’atmosphère.</li>
+                        <li><strong>Décomposition</strong> : action des bactéries et champignons sur la matière organique morte → libération de CO₂ et de CH₄.</li>
+                        <li><strong>Combustion naturelle</strong> : incendies de forêts, volcanisme → rejet de CO₂.</li>
+                        <li><strong>Échanges océan-atmosphère</strong> : dissolution du CO₂ dans l’eau de mer (puits) et dégazage (source).</li>
+                        <li><strong>Sédimentation & formation de combustibles fossiles</strong> : accumulation de matière organique dans les sédiments → pétrole, charbon, gaz naturel (cycle très lent).</li>
+                    </ul>
+                </div>
+
+                <!-- Concept 3 : Impacts humains et déséquilibre -->
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Déséquilibre anthropique : effet de serre additionnel</h3>
+                    <p class="card-description">
+                        Depuis la révolution industrielle, les activités humaines accélèrent le rejet de carbone vers l’atmosphère, rompant l’équilibre naturel du cycle.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="highlight">Émissions fossiles</span> : combustion du charbon, pétrole, gaz (centrales thermiques, transports, industries).</li>
+                        <li><span class="highlight">Déforestation</span> : réduction de la biomasse qui fixe le CO₂, et libération du carbone stocké.</li>
+                        <li><span class="highlight">Production de ciment</span> : décarbonation du calcaire (CaCO₃ → CaO + CO₂).</li>
+                        <li><span class="highlight">Conséquences</span> : augmentation de la concentration atmosphérique en CO₂ (de 280 ppm à >420 ppm) → intensification de l’effet de serre → réchauffement climatique, acidification des océans.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples et applications -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension & analyse</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Bilan simplifié du carbone dans une forêt équatoriale</h3>
+                    <p class="exemple-context">
+                        Une forêt tropicale absorbe chaque année 1 200 gC/m² par photosynthèse. La respiration des végétaux et la décomposition des litières libèrent 950 gC/m². Les défrichements et incendies ajoutent 50 gC/m² supplémentaires. Calcule le stockage net de carbone par m². Quel est l’impact de la déforestation sur le cycle du carbone ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution :</strong><br>
+                        Stockage net = Photosynthèse – (Respiration + décomposition + perturbations) <br>
+                        = 1200 – (950 + 50) = 1200 – 1000 = <strong>200 gC/m²/an</strong>. <br>
+                        → Cette forêt est encore un puits de carbone, mais la déforestation réduit la capacité de stockage et émet directement du CO₂. Si on brûle la biomasse, le carbone stocké depuis des décennies est libéré en quelques jours.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Toujours distinguer les flux d’entrée (photosynthèse, dissolution océanique) et les flux de sortie (respiration, décomposition, combustion). Un écosystème est puits si entrée > sortie.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Interprétation d’une courbe de Keeling (concentration atmosphérique en CO₂)</h3>
+                    <p class="exemple-context">
+                        La courbe de Keeling montre une augmentation régulière du CO₂ atmosphérique à Hawaï depuis 1958, avec une oscillation annuelle. Pourquoi cette oscillation ? Pourquoi la tendance générale est-elle à la hausse ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Explication :</strong> L’oscillation annuelle correspond à la saisonnalité de la photosynthèse dans l’hémisphère nord (majorité des terres émergées). Au printemps/été, la végétation capte beaucoup de CO₂ → diminution ; en automne/hiver, la respiration et la décomposition dominent → augmentation. La hausse tendancielle est due aux émissions anthropiques (combustibles fossiles, déforestation) qui dépassent la capacité d’absorption des puits naturels.
+                    </div>
+                    <div class="schema-placeholder">
+                        <img src="" alt="Schéma de la courbe de Keeling montrant l’augmentation annuelle du CO₂ atmosphérique et les variations saisonnières.">
+                        <div class="caption">Figure 2 : Évolution du CO₂ à l’observatoire de Mauna Loa (Hawaï).</div>
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 À retenir : Les pics annuels de CO₂ coïncident avec la fin de l’hiver boréal (avril) ; les creux avec la fin de l’été (septembre).
+                    </div>
+                </div>
+
+                <!-- Exemple concret local (Cameroun) -->
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Contexte camerounais – le bassin du Congo et la séquestration de carbone</h3>
+                    <p class="exemple-context">
+                        Le Cameroun possède une partie du massif forestier du bassin du Congo, deuxième puits de carbone mondial après l’Amazonie. Expliquez pourquoi la préservation de ces forêts est cruciale dans la lutte contre le changement climatique.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Analyse :</strong> Ces forêts captent chaque année des millions de tonnes de CO₂ par photosynthèse, réduisant l’effet de serre. En cas de déforestation ou de dégradation (coupe illégale, agriculture sur brûlis), le carbone stocké est relâché dans l’atmosphère. Protéger ces écosystèmes permet de maintenir le puits de carbone et de préserver la biodiversité, conformément aux objectifs du développement durable et à la contribution déterminée au niveau national (CDN) du Cameroun.
+                    </div>
+                    <div class="exemple-astuce">
+                        📌 Lien avec l’éducation à l’environnement : Les élèves peuvent mener des actions de sensibilisation sur la reforestation et les énergies propres pour limiter les émissions.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges à éviter et notions claires -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & confusions à éviter</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre puits et source :</span> Un puits de carbone <strong>absorbe</strong> plus de carbone qu’il n’en émet (ex : forêt en croissance). Une source <strong>émet</strong> plus qu’il n’absorbe (ex : champ défriché, volcan).</li>
+                        <li><span class="bold">Ne pas assimiler "respiration" à "respiration cellulaire animale uniquement" :</span> Les plantes aussi respirent (jour et nuit) et rejettent du CO₂, en plus de la photosynthèse.</li>
+                        <li><span class="bold">Oublier le rôle des décomposeurs :</span> Les bactéries et champignons du sol participent activement au retour du carbone organique vers l’atmosphère sous forme de CO₂ ou de CH₄.</li>
+                        <li><span class="bold">Penser que le CO₂ océanique est négligeable :</span> Les océans contiennent ~50 fois plus de carbone que l’atmosphère et jouent un rôle tampon majeur.</li>
+                        <li><span class="bold">Erreur fréquente en exercice :</span> Oublier d’inclure la combustion de biomasse et les feux de végétation dans le bilan global du carbone.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section récapitulative des flux + schéma -->
+            <section class="concept-section">
+                <h2 class="section-title">🔄 Synthèse : Schéma fonctionnel du cycle du carbone</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Voici une représentation intégrant les réservoirs (rectangles) et les flux principaux (flèches). Les activités humaines sont en rouge.
+                    </p>
+                    <div class="schema-placeholder">
+                        <img src="" alt="Cycle du carbone complet : atmosphère (CO₂), végétaux (photosynthèse/respiration), animaux, décomposeurs, océans (dissolution, échanges), combustibles fossiles (combustion), sédimentation. Flèches rouges pour les émissions anthropiques.">
+                        <div class="caption">Figure 3 : Cycle biogéochimique du carbone – flux naturels (noir) et perturbations humaines (rouge).</div>
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>Flux naturels majeurs</strong> : photosynthèse (~120 GtC/an), respiration (~60 GtC/an des plantes + 50 GtC/an des sols), échanges océan-atmosphère (~90 GtC/an dans les deux sens).</li>
+                        <li><strong>Flux anthropiques significatifs</strong> : combustion d’énergies fossiles (~10 GtC/an), déforestation (~1,5 GtC/an).</li>
+                        <li><strong>Conséquence directe</strong> : accumulation de CO₂ dans l’atmosphère ≈ +4,5 GtC/an (environ la moitié des émissions reste dans l’air, le reste est absorbé par les océans et la végétation).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Compétences attendues et lien avec le programme -->
+            <section class="exemple-section">
+                <h2 class="section-title">🎯 Objectifs & compétences (examen)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">À savoir faire pour le Baccalauréat</h3>
+                    <ul class="concept-list" style="margin-bottom: 0;">
+                        <li>Identifier les réservoirs de carbone et les flux entre eux à l’aide d’un schéma ou d’un texte documentaire.</li>
+                        <li>Calculer un bilan de carbone simple (entrées – sorties) et déterminer si un écosystème est puits ou source.</li>
+                        <li>Expliquer l’impact des activités humaines (déforestation, combustion d’énergies fossiles, élevage) sur le cycle du carbone et sur le réchauffement climatique.</li>
+                        <li>Proposer des actions individuelles ou collectives pour atténuer l’effet de serre : réduction de l’empreinte carbone, reboisement, énergies renouvelables.</li>
+                        <li>Analyser des graphiques d’évolution du CO₂ atmosphérique (courbe de Keeling) et les oscillations saisonnières.</li>
+                    </ul>
+                </div>
+                <div class="exemple-astuce" style="margin-top: 0.5rem;">
+                    🔎 Rappel : Le cycle du carbone est indissociable de la photosynthèse (Leçon 14-15) et du flux d’énergie (Leçon 16). Les questions d’examen intègrent souvent ces notions.
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📖 Fiche conforme au programme officiel de SVTEEHB – Première C & TI (Cameroun) · Leçon 17 : cycle biogéochimique du carbone · <a href="#">Télécharger PDF</a> · 🌱 Révision créée pour l’éducation à l’environnement et au développement durable</p>
+        </footer>
+    </div>
+</body>
+</html>

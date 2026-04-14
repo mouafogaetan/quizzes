@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 19 : Mouvement dans un champ magnétique uniforme</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie professionnelle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f5f9;
+            padding: 2rem 1rem;
+            color: #0f172a;
+            line-height: 1.5;
+        }
+
+        /* Conteneur principal type fiche A4 */
+        .fiche {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* En-tête colorée avec le module et le titre */
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header .sous-titre {
+            font-size: 1rem;
+            opacity: 0.9;
+            border-left: 3px solid #facc15;
+            padding-left: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Grille principale : 2 colonnes (contenu + sidebar) */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        /* Colonne principale */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        /* Cartes thématiques */
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+            transition: box-shadow 0.2s;
+        }
+
+        .card-header {
+            background: #f8fafc;
+            padding: 0.9rem 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-header i {
+            font-size: 1.3rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Éléments de formules et mise en avant */
+        .formula-box {
+            background: #f1f5f9;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-radius: 0.75rem;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .formula {
+            font-weight: 600;
+            color: #1e40af;
+            font-size: 1.05rem;
+        }
+
+        .highlight {
+            background: #fef9c3;
+            padding: 0.1rem 0.2rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .definition {
+            background: #eef2ff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            font-weight: 500;
+            border-left: 4px solid #2563eb;
+        }
+
+        ul, .liste-simple {
+            padding-left: 1.5rem;
+            margin: 0.8rem 0;
+        }
+        li {
+            margin: 0.5rem 0;
+        }
+
+        .btn-bac {
+            background: #0f172a;
+            color: white;
+            border-radius: 40px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 0.75rem;
+            vertical-align: middle;
+        }
+
+        /* Sidebar droite */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #cbd5e1;
+            display: inline-block;
+            padding-bottom: 0.25rem;
+        }
+
+        .mot-cle {
+            background: white;
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            display: inline-block;
+            margin: 0.2rem 0.2rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .schema-placeholder {
+            background: #eef2ff;
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #1e3a8a;
+            border: 1px dashed #94a3b8;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        footer {
+            background: #f1f5f9;
+            padding: 1rem 2rem;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche">
+    <div class="header">
+        <div class="badge">MODULE 3 : MÉCANIQUE – CHAPITRE 7</div>
+        <h1>Leçon 19 : Mouvement d'une particule chargée dans un champ magnétique uniforme</h1>
+        <div class="sous-titre">Force de Lorentz, trajectoire circulaire ou hélicoïdale – Applications au cyclotron et au spectromètre de masse</div>
+        <div style="margin-top: 0.75rem; font-size: 0.8rem;">🎯 Lien Baccalauréat : Mouvement d'une particule dans un champ magnétique (sujets 2023-2025)</div>
+    </div>
+
+    <div class="grid">
+        <!-- Colonne principale : contenu pédagogique -->
+        <div class="main-content">
+            <!-- Objectifs & Compétences -->
+            <div class="card">
+                <div class="card-header">
+                    📌 Objectifs & Compétences
+                </div>
+                <div class="card-body">
+                    <ul class="liste-simple">
+                        <li>✔ Déterminer la nature du mouvement d’une particule chargée dans un champ magnétique uniforme \(\vec{B}\).</li>
+                        <li>✔ Appliquer la force de Lorentz magnétique : \(\vec{F}_m = q \, \vec{v} \times \vec{B}\).</li>
+                        <li>✔ Établir l’équation de la trajectoire et calculer le rayon de courbure, la période et la fréquence cyclotronique.</li>
+                        <li>✔ Distinguer le cas d’une vitesse initiale perpendiculaire à \(\vec{B}\) (mouvement circulaire uniforme) et le cas d’une vitesse quelconque (mouvement hélicoïdal).</li>
+                        <li>✔ <span class="highlight">Lien Bac :</span> Mouvement d’un électron, d’un proton ou d’une particule alpha dans un accélérateur ou une chambre à bulles.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 1. Force magnétique : expression et propriétés -->
+            <div class="card">
+                <div class="card-header">
+                    ⚡ 1. Force de Lorentz (composante magnétique)
+                </div>
+                <div class="card-body">
+                    <p>Dans une région où règne un champ magnétique \(\vec{B}\) uniforme et stationnaire, une particule de charge \(q\) animée d’une vitesse \(\vec{v}\) subit la force :</p>
+                    <div class="formula-box">
+                        \[
+                        \boxed{\vec{F}_m = q \; \vec{v} \times \vec{B}}
+                        \]
+                    </div>
+                    <ul>
+                        <li><strong>Direction :</strong> perpendiculaire au plan formé par \(\vec{v}\) et \(\vec{B}\) (règle de la main droite).</li>
+                        <li><strong>Sens :</strong> donné par le signe de \(q\) (pour \(q>0\), sens de \(\vec{v} \times \vec{B}\) ; pour \(q<0\), sens opposé).</li>
+                        <li><strong>Propriété essentielle :</strong> \(\vec{F}_m \perp \vec{v}\) ⇒ <strong>La force magnétique ne travaille pas</strong> ⇒ l’énergie cinétique de la particule reste constante. La norme de la vitesse \(v\) est constante.</li>
+                    </ul>
+                    <div class="definition">
+                        💡 <strong>Cas particulier :</strong> Si \(\vec{v}\) est parallèle à \(\vec{B}\), alors \(\vec{v} \times \vec{B} = \vec{0}\) ⇒ la particule n’est pas déviée (mouvement rectiligne uniforme).
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Mouvement circulaire uniforme (v perp. à B) -->
+            <div class="card">
+                <div class="card-header">
+                    🔄 2. Mouvement circulaire uniforme : \( \vec{v}_0 \perp \vec{B} \)
+                </div>
+                <div class="card-body">
+                    <p>Si la vitesse initiale \(\vec{v}_0\) est perpendiculaire à \(\vec{B}\), la force magnétique joue le rôle de force centripète :</p>
+                    <div class="formula-box">
+                        \[
+                        |q| \, v \, B = m \, \frac{v^2}{R}
+                        \]
+                    </div>
+                    <p>On en déduit le <strong>rayon de courbure</strong> (ou rayon cyclotron) :</p>
+                    <div class="formula-box">
+                        \[
+                        \boxed{R = \frac{m \, v}{|q| \, B}}
+                        \]
+                    </div>
+                    <p>La <strong>période</strong> (temps pour un tour complet) et la <strong>fréquence cyclotronique</strong> sont indépendantes de la vitesse \(v\) :</p>
+                    <div class="formula-box">
+                        \[
+                        T = \frac{2\pi m}{|q| B} \quad;\quad f_c = \frac{|q| B}{2\pi m}
+                        \]
+                    </div>
+                    <p>→ La trajectoire est un <strong>cercle</strong> dans le plan perpendiculaire à \(\vec{B}\).</p>
+                    <div class="highlight" style="background:#dbeafe; padding:0.6rem; border-radius:12px;">
+                        📌 <strong>Remarque pour le Bac :</strong> La vitesse angulaire \(\omega_c = \frac{|q|B}{m}\) est appelée <em>pulsation cyclotron</em>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Mouvement hélicoïdal (cas général) -->
+            <div class="card">
+                <div class="card-header">
+                    🌀 3. Cas général : vitesse initiale quelconque
+                </div>
+                <div class="card-body">
+                    <p>Décomposons \(\vec{v}_0\) en une composante parallèle \(v_{\parallel}\) et une composante perpendiculaire \(v_{\perp}\) à \(\vec{B}\).</p>
+                    <ul>
+                        <li>La composante \(v_{\parallel}\) n’est pas affectée par \(\vec{F}_m\) ⇒ mouvement rectiligne uniforme selon \(\vec{B}\).</li>
+                        <li>La composante \(v_{\perp}\) donne un mouvement circulaire uniforme dans le plan transverse.</li>
+                    </ul>
+                    <p>La superposition des deux mouvements produit une <strong>trajectoire hélicoïdale</strong> (ressort) :</p>
+                    <div class="formula-box">
+                        \[
+                        \text{Pas de l'hélice : } \quad p = v_{\parallel} \times T = \frac{2\pi m v_{\parallel}}{|q| B}
+                        \]
+                    </div>
+                    <div class="definition">
+                        ✅ Le rayon de l’hélice est \( R = \dfrac{m v_{\perp}}{|q| B} \) et la période reste \(T = \dfrac{2\pi m}{|q| B}\).
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Applications typiques et lien bac -->
+            <div class="card">
+                <div class="card-header">
+                    🧪 4. Applications – Sujets typiques du Baccalauréat
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li><strong>Cyclotron :</strong> accélérateur circulaire où les particules sont déviées par \(B\) et accélérées par un champ électrique alternatif. La fréquence du générateur doit être égale à la fréquence cyclotron \(f_c\).</li>
+                        <li><strong>Spectromètre de masse :</strong> séparation d’isotopes basée sur la différence des rayons \(R = \frac{mv}{qB}\).</li>
+                        <li><strong>Chambre à bulles :</strong> visualisation de trajectoires circulaires de particules chargées ; le sens de courbure indique le signe de la charge.</li>
+                        <li><strong>Mouvement d’un électron dans un champ magnétique terrestre :</strong> aurores boréales (piégeage dans les ceintures de Van Allen).</li>
+                    </ul>
+                    <div class="formula-box" style="background:#fef2f2; border-left-color:#dc2626;">
+                        📖 <strong>Méthodologie Bac :</strong> 
+                        <br>1️⃣ Faire le bilan des forces (souvent poids négligé devant force magnétique pour les particules légères). 
+                        <br>2️⃣ Appliquer la 2e loi de Newton : \(\sum \vec{F} = m\vec{a}\) ⇒ \(q\vec{v}\times\vec{B} = m\vec{a}\). 
+                        <br>3️⃣ Projeter dans la base de Frenet (ou utiliser la décomposition). 
+                        <br>4️⃣ Obtenir l’accélération normale \(a_n = v^2/R\) et en déduire \(R\).
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Exemple type avec calcul -->
+            <div class="card">
+                <div class="card-header">
+                    ✏️ Exercice-type (Bac)
+                </div>
+                <div class="card-body">
+                    <p><strong>Énoncé :</strong> Un proton (\(m_p = 1,67\times10^{-27}\,\text{kg}\), \(q = 1,6\times10^{-19}\,\text{C}\)) pénètre avec une vitesse \(v_0 = 2,0\times10^6\,\text{m/s}\) perpendiculairement à un champ magnétique uniforme \(B = 0,50\,\text{T}\). Calculer le rayon de sa trajectoire et sa période.</p>
+                    <p><strong>Correction :</strong></p>
+                    <div class="formula-box">
+                        \[
+                        R = \frac{m v}{|q| B} = \frac{1,67\times10^{-27} \times 2,0\times10^{6}}{1,6\times10^{-19} \times 0,50}
+                        \]
+                        \[
+                        R = \frac{3,34\times10^{-21}}{8,0\times10^{-20}} = 4,175\times10^{-2}\,\text{m} \approx 4,2\,\text{cm}
+                        \]
+                        \[
+                        T = \frac{2\pi m}{|q| B} = \frac{2\pi \times 1,67\times10^{-27}}{1,6\times10^{-19} \times 0,50} \approx 1,31\times10^{-7}\,\text{s}
+                        \]
+                    </div>
+                    <p>Le proton décrit un cercle de rayon 4,2 cm avec une période d’environ 131 ns.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar droite : synthèse rapide, mots-clés, formules -->
+        <div class="sidebar">
+            <div class="info-card">
+                <h3>📖 Mots-clés essentiels</h3>
+                <div>
+                    <span class="mot-cle">Force de Lorentz</span>
+                    <span class="mot-cle">Champ magnétique uniforme</span>
+                    <span class="mot-cle">Mouvement circulaire uniforme</span>
+                    <span class="mot-cle">Rayon de courbure</span>
+                    <span class="mot-cle">Période cyclotron</span>
+                    <span class="mot-cle">Trajectoire hélicoïdale</span>
+                    <span class="mot-cle">Fréquence cyclotron</span>
+                    <span class="mot-cle">Spectromètre de masse</span>
+                    <span class="mot-cle">Cyclotron</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>📐 Formules à retenir</h3>
+                <div class="formula-box" style="background:white; margin:0.5rem 0;">
+                    \(\vec{F}_m = q\,\vec{v}\times\vec{B}\)
+                </div>
+                <div class="formula-box" style="background:white; margin:0.5rem 0;">
+                    \(R = \dfrac{mv}{|q|B}\)
+                </div>
+                <div class="formula-box" style="background:white; margin:0.5rem 0;">
+                    \(T = \dfrac{2\pi m}{|q|B}\)
+                </div>
+                <div class="formula-box" style="background:white; margin:0.5rem 0;">
+                    \(f_c = \dfrac{|q|B}{2\pi m}\)
+                </div>
+                <div class="formula-box" style="background:white; margin:0.5rem 0;">
+                    Pas de l’hélice : \(p = v_{\parallel} \cdot T\)
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>⚠️ Erreurs fréquentes (Bac)</h3>
+                <ul style="font-size:0.85rem; margin-top:0.5rem;">
+                    <li>❌ Oublier le signe de la charge pour le sens de la force.</li>
+                    <li>❌ Confondre le rayon \(R\) avec le diamètre.</li>
+                    <li>❌ Utiliser \(T = \frac{2\pi R}{v}\) sans vérifier que \(v\) est constante.</li>
+                    <li>❌ Négliger la composante parallèle : trajectoire rectiligne si \(v_{\parallel} \neq 0\).</li>
+                    <li>❌ Penser que la force magnétique modifie la vitesse scalaire (faux, elle dévie seulement).</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>🧠 Astuce mémoire</h3>
+                <p style="font-size:0.85rem;">🔹 <strong>Règle des trois doigts</strong> (main droite pour q>0) : Pouce = vitesse, Index = champ B, Majeur = force F<sub>m</sub>. <br>
+                🔹 Période cyclotron : <em>indépendante de v et de R</em> ⇒ propriété fondamentale des accélérateurs circulaires.</p>
+                <div class="schema-placeholder">
+                    ⚛️ [Schéma mental] ⊙ B sortant de la page → particule positive tourne dans le sens anti-horaire.
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>🎯 Liens avec les épreuves</h3>
+                <p style="font-size:0.85rem;">Sujets récents (2023-2025) : étude du mouvement d’un électron dans un tube cathodique avec champ magnétique transverse, détermination du rayon, relation charge/masse, spectrographe de Bainbridge.</p>
+                <div class="btn-bac" style="background:#2563eb; margin-top:0.5rem;">Bac C & D</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        📚 Fiche conforme au programme de Physique – Terminale C & D (Cameroun) | Enseignant : M. | Année scolaire 2025-2026  
+        ✅ Relecture scientifique – Mouvement des particules chargées dans un champ magnétique uniforme.
+    </footer>
+</div>
+</body>
+</html>

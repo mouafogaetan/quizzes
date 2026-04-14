@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Indicateurs colorés | Terminale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list, .warning-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li, .warning-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+        
+        .warning-list li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -1px;
+            font-size: 0.9rem;
+        }
+
+        /* Tableaux pour les indicateurs */
+        .indicator-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .indicator-table th, .indicator-table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.7rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .indicator-table th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #0f172a;
+        }
+        
+        .color-acid {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        
+        .color-basic {
+            color: #2563eb;
+            font-weight: 600;
+        }
+        
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.3rem;
+            font-family: monospace;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .exemple-astuce, .exemple-correction strong {
+            color: #2563eb;
+        }
+
+        .exemple-correction {
+            margin-top: 0.5rem;
+        }
+        
+        .image-placeholder {
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+        
+        .image-placeholder img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+        }
+        
+        .highlight {
+            background-color: #fef9c3;
+            padding: 0.1rem 0.2rem;
+            border-radius: 0.2rem;
+            font-weight: 500;
+        }
+
+        .fiche-footer {
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 1rem 2.5rem;
+            font-size: 0.8rem;
+            color: #475569;
+            text-align: center;
+        }
+        
+        @media (max-width: 640px) {
+            .fiche-header, .fiche-content {
+                padding: 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .indicator-table th, .indicator-table td {
+                font-size: 0.85rem;
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">📊 Les indicateurs colorés</h1>
+            <p class="lesson-subtitle">Chimie · Terminale C & D · Bac 2023-2025</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 Principe & fonctionnement</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">Qu'est-ce qu'un indicateur coloré acido-basique ?</h3>
+                    <p class="card-description">
+                        Un indicateur coloré est une substance (souvent un acide ou une base faible) dont la forme acide $HIn$ et la forme basique $In^-$ possèdent <strong>des couleurs différentes</strong> en solution aqueuse. Il permet de repérer une variation de pH, notamment lors d'un dosage ou pour estimer le pH d'une solution.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Couple acide/base :</strong> $HIn \, / \, In^-$</li>
+                        <li><strong>Forme acide (HIn) :</strong> couleur $A$ (ex: rouge, jaune...)</li>
+                        <li><strong>Forme basique (In⁻) :</strong> couleur $B$ (ex: bleu, violet...)</li>
+                        <li><strong>Équilibre :</strong> $HIn_{(aq)} + H_2O_{(l)} \rightleftharpoons In^-_{(aq)} + H_3O^+_{(aq)}$</li>
+                    </ul>
+                    <div class="image-placeholder">
+                        <img src="" alt="Diagramme de l'équilibre acido-basique d'un indicateur coloré : HIn (couleur acide) et In⁻ (couleur basique) en équilibre selon le pH" style="max-width: 280px;">
+                        <p style="margin-top: 0.5rem;"><em>✨ Représentation de l'équilibre : couleur acide ↔ couleur basique</em></p>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Zone de virage et constante d'acidité</h3>
+                    <p class="card-description">
+                        La constante d'acidité $K_a$ du couple $HIn/In^-$ détermine le domaine de pH où le changement de couleur est perceptible par l'œil humain.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Relation de Henderson-Hasselbalch :</strong> $pH = pK_a + \log\left(\frac{[In^-]}{[HIn]}\right)$</li>
+                        <li><strong>Zone de virage :</strong> intervalle de pH $= pK_a \pm 1$<br>
+                            Quand $pH = pK_a$, $[HIn] = [In^-]$ : couleur intermédiaire (mélange).</li>
+                        <li><strong>Règle visuelle :</strong>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.3rem;">
+                                <li>Si $pH \le pK_a - 1$ → forme acide $HIn$ prédomine → couleur acide.</li>
+                                <li>Si $pH \ge pK_a + 1$ → forme basique $In^-$ prédomine → couleur basique.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.8rem; background-color: #eef2ff; padding: 0.6rem; border-radius: 0.6rem;">
+                        💡 <strong>À retenir :</strong> La zone de virage est caractéristique de chaque indicateur. Pour un dosage, on choisit un indicateur dont la zone de virage englobe le pH à l'équivalence.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tableau des indicateurs usuels -->
+            <section class="exemple-section">
+                <h2 class="section-title">📋 Indicateurs colorés usuels (Bac & labo)</h2>
+                <div class="card">
+                    <table class="indicator-table">
+                        <thead>
+                            <tr><th>Indicateur</th><th>Zone de virage (pH)</th><th>Couleur acide</th><th>Couleur basique</th><th>$pK_a$ (environ)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Hélianthine (méthylorange)</td><td>3,1 – 4,4</td><td class="color-acid">Rouge</td><td class="color-basic">Jaune</td><td>3,7</td></tr>
+                            <tr><td>Bleu de bromothymol (BBT)</td><td>6,0 – 7,6</td><td class="color-acid">Jaune</td><td class="color-basic">Bleu</td><td>7,1</td></tr>
+                            <tr><td>Phénolphtaléine</td><td>8,2 – 10,0</td><td>Incolore</td><td class="color-basic">Rose / Fuchsia</td><td>9,4</td></tr>
+                            <tr><td>Rouge de méthyle</td><td>4,4 – 6,2</td><td class="color-acid">Rouge</td><td class="color-basic">Jaune</td><td>5,1</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="card-description" style="margin-top: 0.5rem; font-size: 0.9rem;">
+                        ⚡ <strong>À savoir pour le Bac :</strong> Le BBT est souvent utilisé pour les dosages acide fort – base forte (pH<sub>E</sub>=7). La phénolphtaléine est adaptée pour un dosage acide faible – base forte (pH<sub>E</sub> > 7).
+                    </p>
+                </div>
+            </section>
+
+            <!-- Exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">🧪 Exemples de compréhension & applications Bac</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Choix d’un indicateur pour un dosage</h3>
+                    <p class="exemple-context">
+                        <strong>Énoncé :</strong> On dose une solution d’acide acétique ($CH_3COOH$, acide faible, $pK_a = 4,8$) par une solution de soude ($NaOH$, base forte). Le pH à l’équivalence vaut environ 8,7. Quel indicateur parmi le BBT (virage 6,0-7,6) et la phénolphtaléine (virage 8,2-10,0) convient le mieux ? Justifier.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>✅ Résolution :</strong> Pour un dosage acide faible – base forte, le pH à l’équivalence est basique (pH<sub>E</sub> > 7). Ici pH<sub>E</sub> = 8,7. <br>
+                        - Le BBT vire entre 6,0 et 7,6 : 8,7 est au-delà de sa zone, le virage serait flou. <br>
+                        - La phénolphtaléine vire entre 8,2 et 10,0 : 8,7 se situe <strong>dans la zone de virage</strong>, le changement de couleur (incolore → rose) sera net à l’équivalence. <br>
+                        <span class="highlight">Conclusion :</span> On choisit la <strong>phénolphtaléine</strong>.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Dosage acide fort – base forte → pH<sub>E</sub> = 7 → BBT. Dosage acide faible – base forte → pH<sub>E</sub> > 7 → phénolphtaléine. Base faible – acide fort → pH<sub>E</sub> < 7 → hélianthine.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Détermination de la zone de virage à partir du pKa</h3>
+                    <p class="exemple-context">
+                        Un indicateur coloré a un $pK_a = 5,2$. Donner sa zone de virage approximative et préciser la couleur majoritaire pour un pH = 4,0 et pour un pH = 7,0 sachant que sa forme acide est jaune et sa forme basique est rouge.
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>🔬 Calcul :</strong> Zone de virage = $pK_a \pm 1$ soit de <strong>4,2 à 6,2</strong>.<br>
+                        - À pH = 4,0 (< 4,2) : la forme acide $HIn$ prédomine → couleur <span class="color-acid">jaune</span>.<br>
+                        - À pH = 7,0 (> 6,2) : la forme basique $In^-$ prédomine → couleur <span class="color-basic">rouge</span>.<br>
+                        - À pH = 5,2 (zone de virage centrale) : mélange jaune + rouge → couleur orange.
+                    </div>
+                    <div class="exemple-astuce">
+                        📌 On utilise la relation : $pH = pK_a + \log([In^-]/[HIn])$. Si pH = pK<sub>a</sub>, les deux espèces sont à égalité.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section "Pièges courants" -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & erreurs fréquentes</h2>
+                <div class="card warning-card">
+                    <ul class="warning-list">
+                        <li><span class="bold">Confondre zone de virage et pH neutre :</span> La zone de virage n'est pas toujours centrée sur 7. Par exemple la phénolphtaléine vire en milieu basique (8,2-10,0).</li>
+                        <li><span class="bold">Croire que tous les indicateurs conviennent pour tout dosage :</span> Le mauvais choix d'indicateur rend le repérage de l'équivalence impossible (virage progressif ou hors zone).</li>
+                        <li><span class="bold">Négliger la dilution lors d'un dosage :</span> La dilution modifie légèrement la perception de la couleur mais la zone de virage reste valable.</li>
+                        <li><span class="bold">Oublier que l'indicateur lui-même est un acide faible :</span> Sa présence modifie très peu le pH si la concentration est faible.</li>
+                        <li><span class="bold">Erreur sur le pKa :</span> Plus le pKa est faible, plus l'indicateur est acide (zone de virage décalée vers les pH bas).</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Schéma / illustration supplémentaire -->
+            <section class="concept-section">
+                <h2 class="section-title">📈 Échelle de pH et zones de virage</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Visualisation des principales zones de virage par rapport à l’échelle de pH. Cela permet de mémoriser quel indicateur choisir selon le pH attendu à l’équivalence.
+                    </p>
+                    <div class="image-placeholder">
+                        <img src="" alt="Échelle de pH de 0 à 14 avec zones de virage : hélianthine (3,1-4,4) rouge-jaune, BBT (6,0-7,6) jaune-bleu, phénolphtaléine (8,2-10,0) incolore-rose" style="width: 100%; max-width: 550px;">
+                        <p style="margin-top: 0.5rem; font-size: 0.85rem;">🎨 Positionnement des zones de virage (les plus courantes au Baccalauréat)</p>
+                    </div>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        🔍 <strong>Méthode mnémotechnique :</strong> "Hélianthine pour milieu acide (virage précoce), BBT pour neutre, Phénol pour basique".
+                    </div>
+                </div>
+            </section>
+
+            <!-- Application directe type Bac -->
+            <section class="exemple-section">
+                <h2 class="section-title">✍️ Exercice type Bac (extrait)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">QCM / Raisonnement : Indicateur et dosage de l'ammoniac</h3>
+                    <p class="exemple-context">
+                        On réalise le dosage d’une solution d’ammoniac ($NH_3$, base faible) par une solution d’acide chlorhydrique ($HCl$, acide fort). Le pH à l’équivalence est voisin de 5,3.<br>
+                        Parmi les indicateurs suivants, lequel serait le plus approprié ?<br>
+                        A. BBT (virage 6,0-7,6)<br>
+                        B. Hélianthine (virage 3,1-4,4)<br>
+                        C. Phénolphtaléine (virage 8,2-10,0)<br>
+                        D. Rouge de crésol (virage 7,2-8,8)
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>🧠 Correction :</strong> Un dosage base faible – acide fort conduit à un pH<sub>E</sub> < 7 (milieu acide). Ici pH<sub>E</sub> = 5,3. <br>
+                        - L’hélianthine vire entre 3,1 et 4,4 : 5,3 est supérieur à sa zone (trop acide pour elle).<br>
+                        - Le BBT vire entre 6,0 et 7,6 : 5,3 < 6,0 → pas de virage net.<br>
+                        - La phénolphtaléine vire en milieu basique → inadaptée.<br>
+                        Aucun des indicateurs listés ne convient parfaitement ? En réalité l’hélianthine est parfois utilisée malgré sa zone légèrement inférieure, mais un indicateur comme le <strong>rouge de méthyle (virage 4,4-6,2)</strong> serait idéal. D’après le tableau des indicateurs usuels, pour pH=5,3 on choisirait le <span class="highlight">rouge de méthyle</span> (non proposé ici). L’exercice montre l’importance de comparer zone de virage et pH<sub>E</sub>.
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Rappel : Pour un dosage d’une base faible par un acide fort, le pH à l’équivalence est acide (pH < 7). L’indicateur doit virer dans cette zone acide.
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Rappel Bac : utilisation en laboratoire -->
+            <section class="concept-section">
+                <h2 class="section-title">🧪 En pratique : protocole & choix indicateur</h2>
+                <div class="card concept-card">
+                    <ul class="concept-list">
+                        <li><strong>1. Estimer le pH à l’équivalence</strong> (nature acide fort/base forte, acide faible/base forte, etc.)</li>
+                        <li><strong>2. Choisir un indicateur</strong> dont la zone de virage contient ce pH<sub>E</sub>.</li>
+                        <li><strong>3. Ajouter quelques gouttes d’indicateur</strong> dans la solution à doser (bécher ou erlenmeyer).</li>
+                        <li><strong>4. Relever le changement de couleur</strong> lors de l’équivalence : virage le plus net possible.</li>
+                    </ul>
+                    <p class="card-description" style="margin-top: 0.5rem;">
+                        📖 <strong>Lien Bac 2023 :</strong> Un sujet de Bac a demandé de justifier le choix du BBT pour le dosage de l’acide chlorhydrique par la soude (pH<sub>E</sub>=7). La zone de virage du BBT (6,0-7,6) encadre parfaitement pH=7.
+                    </p>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="fiche-footer">
+            <p>📚 Fiche conforme au programme de Chimie Terminale C & D (Cameroun) · Bac 2023-2025 · Révision personnalisée par enseignant</p>
+        </footer>
+    </div>
+</body>
+</html>

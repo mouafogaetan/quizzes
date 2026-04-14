@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision : La Diffraction (Leçon 38)</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e9f0f5;
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+            color: #1a2c3e;
+        }
+
+        /* Conteneur principal simulant une feuille A4 */
+        .fiche {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête de la leçon */
+        .header {
+            background: linear-gradient(135deg, #0b3b5f 0%, #1b4f7a 100%);
+            color: white;
+            padding: 2rem 2rem 1.8rem 2rem;
+            border-bottom: 5px solid #ffb347;
+        }
+
+        .badge {
+            background: #ffb347;
+            color: #0b3b5f;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-block;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .header h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .objectif-bac {
+            background: rgba(255,255,255,0.15);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 0.7rem;
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
+
+        /* Cartes pour chaque notion */
+        .card {
+            background: #f9fafc;
+            border-left: 5px solid #1b4f7a;
+            border-radius: 18px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            transition: transform 0.1s ease;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0b3b5f;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title span {
+            background: #e2eaf1;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1b4f7a;
+        }
+
+        .definition {
+            background: #eef3fa;
+            padding: 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+            font-weight: 500;
+            border: 1px solid #cbdde9;
+        }
+
+        .formula {
+            background: #ffffff;
+            border: 1px solid #cfdfed;
+            border-radius: 14px;
+            padding: 0.8rem 1.2rem;
+            margin: 0.8rem 0;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+        .formula p {
+            font-size: 1.1rem;
+        }
+
+        .example-box {
+            background: #eef2e6;
+            border-left: 4px solid #5e9b3e;
+            padding: 1rem 1.2rem;
+            border-radius: 14px;
+            margin-top: 1rem;
+        }
+
+        .example-box strong {
+            color: #2c5a1e;
+        }
+
+        .note {
+            background: #fff6e0;
+            border-radius: 14px;
+            padding: 0.8rem 1.2rem;
+            margin: 1rem 0;
+            border: 1px solid #ffe0a3;
+            font-size: 0.9rem;
+        }
+
+        .highlight {
+            color: #c4450c;
+            font-weight: 600;
+        }
+
+        .grid-2 {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .grid-2 > div {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        hr {
+            margin: 1.8rem 0;
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, #cbdde9, transparent);
+        }
+
+        .footer-bac {
+            background: #f0f4f8;
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            border: 1px solid #d4e2ef;
+        }
+
+        @media (max-width: 700px) {
+            .content {
+                padding: 1.2rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            .card-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche">
+    <div class="header">
+        <div class="badge">📖 Terminale C & D – Programme Officiel Cameroun</div>
+        <h1>Leçon 38 : Aspect ondulatoire de la lumière – Diffraction</h1>
+        <h2>Module 5 : Ondes et Physique Moderne | Chapitre 12 : Optique Physique</h2>
+        <div class="objectif-bac">🎯 Lien Bac : Diffraction (sujets 2023-2025) – interprétation du phénomène et calculs d’angle/écart</div>
+    </div>
+
+    <div class="content">
+        <!-- OBJECTIFS -->
+        <div class="card">
+            <div class="card-title">🎯 Objectifs de la leçon <span>Savoir-faire exigibles</span></div>
+            <ul style="margin-left: 1.5rem; line-height: 1.5;">
+                <li>Décrire et interpréter qualitativement le phénomène de diffraction de la lumière.</li>
+                <li>Identifier les conditions d’observation de la diffraction (dimension de l’ouverture ou de l’obstacle).</li>
+                <li>Appliquer la relation $\theta \approx \dfrac{\lambda}{a}$ pour calculer l’angle de diffraction.</li>
+                <li>Déterminer la largeur de la tache centrale de diffraction.</li>
+                <li>Relier le caractère ondulatoire de la lumière à ce phénomène.</li>
+            </ul>
+        </div>
+
+        <!-- 1. Définition et mise en évidence -->
+        <div class="card">
+            <div class="card-title">🔆 1. Mise en évidence – La lumière fléchit</div>
+            <p>La lumière se propage en ligne droite dans un milieu homogène. Cependant, lorsqu’elle rencontre un obstacle ou une ouverture de dimensions <strong class="highlight">comparables à sa longueur d’onde $\lambda$</strong>, elle ne se propage plus rectilignement : elle <strong>diffracte</strong>, c’est-à-dire qu’elle s’étale dans les régions d’ombre géométrique.</p>
+            <div class="definition">
+                📌 <strong>Diffraction</strong> : phénomène ondulatoire caractérisé par l’écartement des rayons lumineux lors du passage à travers une fente étroite ou au contour d’un obstacle. Il prouve la <strong>nature ondulatoire de la lumière</strong>.
+            </div>
+            <div class="note">
+                💡 <strong>Expérience clé (Bac) :</strong> Fente de Young ou fente unique. Éclairage laser → figure de diffraction composée d’une <strong>tache centrale brillante</strong> et de franges secondaires alternativement sombres et claires.
+            </div>
+        </div>
+
+        <!-- 2. Condition de diffraction -->
+        <div class="card">
+            <div class="card-title">📏 2. Condition d’observation</div>
+            <p>La diffraction est notable lorsque la dimension caractéristique $a$ de l’ouverture (fente, trou) ou de l’obstacle est <strong>du même ordre de grandeur que la longueur d’onde $\lambda$</strong> de la lumière.</p>
+            <div class="formula">
+                <p>✔ Condition : &nbsp;&nbsp; $a \;\sim\; \lambda$ &nbsp;&nbsp; ou &nbsp;&nbsp; $a \lesssim 10^{-3} \text{ m}$ pour la lumière visible.</p>
+            </div>
+            <p>Pour la lumière visible : $\lambda \approx 0,4\ \mu\text{m} \text{ à } 0,8\ \mu\text{m}$ (soit $4\times10^{-7}$ m à $8\times10^{-7}$ m). Ainsi une fente de largeur $a = 0,1\ \text{mm}$ donne une diffraction facilement observable.</p>
+        </div>
+
+        <!-- 3. Angle de diffraction – Relation fondamentale -->
+        <div class="card">
+            <div class="card-title">📐 3. Angle de diffraction $\theta$</div>
+            <p>L’angle de diffraction $\theta$ (demi-angle d’ouverture du faisceau après la fente) est donné par :</p>
+            <div class="formula">
+                $$ \theta \approx \frac{\lambda}{a} $$
+                <p style="font-size:0.85rem; margin-top:6px;">avec $\theta$ en radians (rad), $\lambda$ la longueur d’onde (m) et $a$ la largeur de la fente (m).</p>
+            </div>
+            <ul>
+                <li>$\theta$ est d’autant plus grand que $a$ est petite (diffraction marquée).</li>
+                <li>Pour une lumière monochromatique, plus $\lambda$ est grande (rouge), plus la diffraction est importante.</li>
+            </ul>
+            <div class="example-box">
+                <strong>📝 Examen type (Bac) :</strong> On éclaire une fente de largeur $a = 50\ \mu\text{m}$ avec un laser rouge ($\lambda = 650\ \text{nm}$). Calculer $\theta$.<br>
+                $\theta = \dfrac{650\times10^{-9}}{50\times10^{-6}} = 0,013\ \text{rad}$ soit $0,74^\circ$.
+            </div>
+        </div>
+
+        <!-- 4. Largeur de la tache centrale -->
+        <div class="card">
+            <div class="card-title">🎯 4. Largeur de la tache centrale de diffraction</div>
+            <p>Sur un écran placé à une distance $D$ de la fente, la tache centrale brillante a une largeur $L$ mesurée entre les deux premiers minima d’intensité.</p>
+            <div class="formula">
+                $$ L = 2 \cdot D \cdot \theta = \frac{2 \lambda D}{a} $$
+            </div>
+            <p><strong>Interprétation :</strong> plus la fente est étroite ($a$ petit), plus la tache centrale est large. La largeur $L$ est proportionnelle à $D$ et à $\lambda$.</p>
+            <div class="note">
+                🔬 <strong>Figure de diffraction :</strong> Une frange centrale très lumineuse (largeur $L$) encadrée de franges secondaires moins intenses, séparées par des minima lorsque $\sin \theta = k \lambda / a$ ($k = \pm 1, \pm 2, ...$). Pour l’étude en Terminale, on retient surtout la tache centrale.
+            </div>
+        </div>
+
+        <!-- 5. Influence des paramètres -->
+        <div class="card">
+            <div class="card-title">⚙️ 5. Influence de $\lambda$, $a$ et $D$</div>
+            <div class="grid-2">
+                <div>
+                    <strong>✔ Longueur d’onde $\lambda$ :</strong><br>
+                    $\lambda$ augmente → $\theta$ augmente → la diffraction est plus étalée.
+                </div>
+                <div>
+                    <strong>✔ Largeur de fente $a$ :</strong><br>
+                    $a$ diminue → $\theta$ augmente → figure très large.
+                </div>
+                <div>
+                    <strong>✔ Distance écran $D$ :</strong><br>
+                    $D$ augmente → $L$ augmente (mais $\theta$ inchangé).
+                </div>
+            </div>
+            <div class="definition" style="margin-top: 10px;">
+                🌈 <strong>Lumière blanche :</strong> chaque longueur d’onde diffracte différemment (le rouge plus que le bleu). La tache centrale apparaît blanche entourée d’irisations colorées.
+            </div>
+        </div>
+
+        <!-- 6. Diffraction par un obstacle circulaire (tache d’Airy) -->
+        <div class="card">
+            <div class="card-title">⭕ 6. Cas d’une ouverture circulaire</div>
+            <p>Pour un trou circulaire de diamètre $a$, la diffraction donne une tache centrale (tache d’Airy) entourée d’anneaux concentriques. Le premier minimum correspond à :</p>
+            <div class="formula">
+                $$ \theta \approx 1,22 \ \frac{\lambda}{a} $$
+            </div>
+            <p>Cette relation est capitale pour le pouvoir de résolution des instruments d’optique (lunettes, télescopes, microscopes).</p>
+            <div class="note">
+                🔭 <strong>Lien Bac :</strong> Critère de Rayleigh – deux sources ponctuelles sont distinguables si leur écart angulaire est supérieur à $\theta_{min} = 1,22 \lambda / a$.
+            </div>
+        </div>
+
+        <!-- 7. Exemple résolu type Bac -->
+        <div class="card">
+            <div class="card-title">✍️ 7. Exercice type – Préparation Bac</div>
+            <div class="example-box">
+                <strong>Énoncé :</strong> Une fente de largeur $a = 0,08\ \text{mm}$ est éclairée par un laser de longueur d’onde $\lambda = 632,8\ \text{nm}$. Un écran est placé à $D = 2,0\ \text{m}$ de la fente.<br>
+                1. Calculer l’angle de diffraction $\theta$.<br>
+                2. Déterminer la largeur $L$ de la tache centrale.<br>
+                3. Que devient $L$ si on double la largeur de la fente ?<br><br>
+                <strong>Correction :</strong><br>
+                1. $\theta = \dfrac{\lambda}{a} = \dfrac{632,8\times10^{-9}}{0,08\times10^{-3}} = 7,91\times10^{-3}\ \text{rad}$.<br>
+                2. $L = \dfrac{2\lambda D}{a} = 2\times 7,91\times10^{-3}\times 2,0 = 3,16\times10^{-2}\ \text{m} = 3,16\ \text{cm}$.<br>
+                3. Si $a$ double ($0,16\ \text{mm}$), alors $L$ est divisée par 2 : $L' = 1,58\ \text{cm}$.
+            </div>
+            <p style="margin-top: 12px;">💡 <strong>Méthodologie bac :</strong> Toujours exprimer $\lambda$ et $a$ en mètres avant le calcul. L’angle $\theta$ est petit, donc l’approximation $\tan\theta \approx \theta$ est légitime.</p>
+        </div>
+
+        <!-- 8. Conclusion – Où retrouver la diffraction ? -->
+        <div class="card">
+            <div class="card-title">🌍 8. Applications et observations</div>
+            <ul>
+                <li><strong>Disques compacts (CD/DVD) :</strong> les microsillons diffractent la lumière → irisations.</li>
+                <li><strong>Poils ou cheveux :</strong> observation d’une figure de diffraction avec un laser (mesure de diamètre d’un cheveu).</li>
+                <li><strong>Astronomie :</strong> la diffraction limite la résolution des télescopes.</li>
+                <li><strong>Fibres optiques :</strong> la diffraction intervient dans le guidage de la lumière.</li>
+            </ul>
+            <div class="definition" style="background: #e9f2f9;">
+                ⚠️ <strong>À retenir absolument :</strong> La diffraction est une preuve irréfutable du caractère ondulatoire de la lumière. Le modèle géométrique (rayons lumineux) échoue lorsque les dimensions sont petites devant la diffusion.
+            </div>
+        </div>
+
+        <!-- Récapitulatif des formules -->
+        <hr>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; background: #ffffff; padding: 0.5rem 0;">
+            <div style="background: #eef3fa; border-radius: 20px; padding: 0.7rem 1.2rem; flex:1;">
+                <strong>📌 Formules clés :</strong><br>
+                $\theta \approx \dfrac{\lambda}{a}$ &nbsp;&nbsp;|&nbsp;&nbsp; $L = \dfrac{2\lambda D}{a}$<br>
+                Pour un trou : $\theta \approx 1,22\dfrac{\lambda}{a}$
+            </div>
+            <div style="background: #eef3fa; border-radius: 20px; padding: 0.7rem 1.2rem; flex:1;">
+                <strong>🧠 Piège fréquent :</strong> Ne pas confondre $a$ (largeur de la fente) et $D$ (distance fente-écran). La largeur $L$ est proportionnelle à $D$ !
+            </div>
+        </div>
+
+        <div class="footer-bac">
+            🎓 <strong>Conseil pour l’épreuve de Physique (Baccalauréat)</strong><br>
+            Les exercices sur la diffraction combinent souvent : mesure de $L$ sur une figure, détermination de $\lambda$ ou de $a$, analyse de l’influence des paramètres. Toujours vérifier l’homogénéité des unités (mètres). La diffraction valide la dualité onde-particule : elle met en avant l’aspect ondulatoire, complémentaire de l’effet photoélectrique (aspect corpusculaire).
+        </div>
+    </div>
+</div>
+</body>
+</html>

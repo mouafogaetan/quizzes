@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 34 : Puissance en régime sinusoïdal</title>
+    <!-- Configuration de MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie professionnelle -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== STYLES INSPIRÉS DU TEMPLATE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eef2f5;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            color: #1a2c3e;
+        }
+
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* En-tête principale */
+        .header-lesson {
+            background: linear-gradient(135deg, #0b2b40 0%, #124e66 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ffb74d;
+            color: #1e2a32;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.9rem;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .header-lesson h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .header-lesson .subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        .objectif-bac {
+            background: #fef7e0;
+            border-left: 6px solid #f9a825;
+            padding: 0.8rem 1.2rem;
+            margin: 1.2rem 2rem 0 2rem;
+            border-radius: 16px;
+            font-weight: 500;
+            color: #3e2a1f;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .objectif-bac strong {
+            color: #bf6f00;
+        }
+
+        /* Grille de contenu */
+        .content-grid {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1.8rem 2rem 2rem 2rem;
+            gap: 2rem;
+        }
+
+        .main-card {
+            flex: 3;
+            min-width: 240px;
+        }
+
+        .sidebar-card {
+            flex: 1.2;
+            min-width: 220px;
+        }
+
+        /* Cartes génériques */
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03);
+            margin-bottom: 1.8rem;
+            border: 1px solid #e9edf2;
+            overflow: hidden;
+            transition: transform 0.1s ease;
+        }
+
+        .card-header {
+            background: #f8fafc;
+            padding: 0.9rem 1.5rem;
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #0f3b4f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-header i {
+            font-size: 1.4rem;
+        }
+
+        .card-body {
+            padding: 1.2rem 1.5rem;
+        }
+
+        /* Formules et math */
+        .formula-box {
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: 500;
+            border: 1px solid #e2edf2;
+        }
+
+        .formula-inline {
+            background: #eef2ff;
+            padding: 0.2rem 0.4rem;
+            border-radius: 10px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+
+        .example-box {
+            background: #eef9f2;
+            border-left: 4px solid #2e7d64;
+            padding: 1rem 1.2rem;
+            border-radius: 16px;
+            margin: 1.2rem 0;
+        }
+
+        .warning-tip {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 0.8rem 1.2rem;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        .table-formula {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .table-formula td, .table-formula th {
+            border: 1px solid #dce3ec;
+            padding: 0.6rem;
+            vertical-align: top;
+        }
+
+        .table-formula th {
+            background: #eef2f8;
+            font-weight: 600;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: 0;
+            height: 1px;
+            background: #e2edf2;
+        }
+
+        .footer-note {
+            background: #f0f6fa;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.8rem;
+            border-top: 1px solid #cbdde6;
+            color: #2c5a6e;
+        }
+
+        @media (max-width: 700px) {
+            .content-grid {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            .header-lesson h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <!-- En-tête avec identification de la leçon -->
+    <div class="header-lesson">
+        <div class="badge">📐 MODULE 4 – ÉLECTROCINÉTIQUE | CHAPITRE 10</div>
+        <h1>Leçon 34 : Puissance en régime sinusoïdal</h1>
+        <div class="subtitle">Circuits électriques alimentés par une tension alternative – Bilans de puissance, facteur de puissance et applications.</div>
+    </div>
+
+    <!-- Lien avec le Bac -->
+    <div class="objectif-bac">
+        <span style="font-size: 1.5rem;">🎯</span>
+        <span><strong>Lien Bac 2023-2025 :</strong> Facteur de puissance, calcul des puissances active, réactive et apparente. Établir la relation $P = U I \cos\varphi$ et déterminer le facteur de puissance d'un dipôle. Savoir utiliser le triangle des puissances.</span>
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="content-grid">
+        <!-- Colonne principale (cours, définitions) -->
+        <div class="main-card">
+            <!-- Carte 1 : Contexte et définitions -->
+            <div class="card">
+                <div class="card-header">
+                    <span>⚡</span> Puissances en alternatif sinusoïdal
+                </div>
+                <div class="card-body">
+                    <p>En régime sinusoïdal (tension $u(t) = U_{\text{max}} \sin(\omega t)$ et courant $i(t) = I_{\text{max}} \sin(\omega t - \varphi)$), la puissance instantanée oscille. On distingue trois grandeurs fondamentales :</p>
+                    <ul style="margin: 0.8rem 0 0.8rem 1.5rem;">
+                        <li><strong>Puissance active (P)</strong> : puissance réellement consommée et transformée en chaleur, travail mécanique, etc. Unité : <strong>watt (W)</strong>.</li>
+                        <li><strong>Puissance réactive (Q)</strong> : puissance échangée entre le générateur et les éléments réactifs (bobine, condensateur). Unité : <strong>voltampère réactif (VAR)</strong>.</li>
+                        <li><strong>Puissance apparente (S)</strong> : produit des valeurs efficaces de tension et courant. Unité : <strong>voltampère (VA)</strong>.</li>
+                    </ul>
+                    <div class="formula-box">
+                        $$ S = U_{\text{eff}} \times I_{\text{eff}} \quad [\text{VA}] $$
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carte 2 : Expressions mathématiques détaillées -->
+            <div class="card">
+                <div class="card-header">
+                    <span>📐</span> Relations fondamentales & triangle des puissances
+                </div>
+                <div class="card-body">
+                    <p>Soit $\varphi$ le déphasage de la tension par rapport au courant ($\varphi = \arg(\underline{U}) - \arg(\underline{I})$). Alors :</p>
+                    <div class="formula-box">
+                        $$ P = U I \cos\varphi \qquad (\text{Watts}) $$<br>
+                        $$ Q = U I \sin\varphi \qquad (\text{VAR}) $$<br>
+                        $$ S = U I = \sqrt{P^2 + Q^2} $$
+                    </div>
+                    <p>Le <strong>facteur de puissance</strong> (ou cosinus phi) est défini par :</p>
+                    <div class="formula-box">
+                        $$ \boxed{\cos\varphi = \frac{P}{S} = \frac{P}{U I}} $$
+                    </div>
+                    <p>Il varie entre 0 et 1. Un facteur de puissance proche de 1 signifie que la puissance active est maximale pour une même intensité.</p>
+                    <div class="warning-tip">
+                        💡 <strong>Astuce examen :</strong> Pour un dipole purement résistif : $\varphi = 0$ → $P = UI$ et $Q = 0$.<br>
+                        Pour une inductance pure : $\varphi = +\frac{\pi}{2}$ → $P=0$, $Q>0$ (réactive inductive).<br>
+                        Pour un condensateur pur : $\varphi = -\frac{\pi}{2}$ → $P=0$, $Q<0$ (réactive capacitive).
+                    </div>
+                    <div class="example-box">
+                        📘 <strong>Exemple Bac type :</strong> Une charge inductive absorbe $I=10\ \text{A}$ sous $U=220\ \text{V}$ avec $\cos\varphi = 0,75$.<br>
+                        $P = 220\times 10 \times 0,75 = 1650\ \text{W}$ ; $S = 2200\ \text{VA}$ ; $Q = S \sin\varphi = 2200 \times \sin(\arccos 0,75) \approx 1455\ \text{VAR}$.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carte 3 : Cas des dipôles R, L, C et associations -->
+            <div class="card">
+                <div class="card-header">
+                    <span>🔌</span> Puissances selon la charge (R, L, C)
+                </div>
+                <div class="card-body">
+                    <table class="table-formula">
+                        <thead>
+                            <tr><th>Composant</th><th>Déphasage $\varphi$</th><th>P active</th><th>Q réactive</th><th>cosφ</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Résistance pure (R)</td><td>0</td><td>$RI^2 = U^2/R$</td><td>0</td><td>1</td></tr>
+                            <tr><td>Bobine inductive (L)</td><td>$+\pi/2$</td><td>0</td><td>$L\omega I^2 = \frac{U^2}{L\omega}$</td><td>0</td></tr>
+                            <tr><td>Condensateur (C)</td><td>$-\pi/2$</td><td>0</td><td>$-C\omega U^2$</td><td>0</td></tr>
+                            <tr><td>Circuit RLC série</td><td>$\arctan\left(\frac{X_L-X_C}{R}\right)$</td><td>$RI^2$</td><td>$(X_L-X_C)I^2$</td><td>$R/Z$</td></tr>
+                        </tbody>
+                    </table>
+                    <p>En série, l'intensité efficace $I$ est commune ; en parallèle c'est la tension $U$ qui est commune.</p>
+                </div>
+            </div>
+
+            <!-- Carte 4 : Importance du relèvement du facteur de puissance -->
+            <div class="card">
+                <div class="card-header">
+                    <span>🏭</span> Relevement du facteur de puissance (Applications)
+                </div>
+                <div class="card-body">
+                    <p>Dans les installations industrielles, un faible $\cos\varphi$ (charge fortement inductive) entraîne :</p>
+                    <ul>
+                        <li>Un courant élevé pour une même puissance active → échauffement, pertes joules.</li>
+                        <li>Une surcharge des lignes et transformateurs.</li>
+                    </ul>
+                    <p><strong>Solution :</strong> Ajouter des batteries de condensateurs en parallèle (fournissent de la puissance réactive capacitive) pour compenser l'inductif et rapprocher $\cos\varphi$ de 1.</p>
+                    <div class="formula-box">
+                        Puissance réactive nécessaire : $Q_C = P(\tan\varphi_{\text{initial}} - \tan\varphi_{\text{final}})$.
+                    </div>
+                    <div class="example-box">
+                        ⚙️ <strong>Exercice type (Bac 2023, Cameroun) :</strong> Un moteur triphasé (considéré en monophasé équivalent) absorbe $P = 4\ \text{kW}$ sous $U=230\ \text{V}$ avec $\cos\varphi=0,6$. Calculer $I$, $S$, $Q$. Si on veut $\cos\varphi=0,95$, calculer la capacité $C$ à placer en parallèle (50 Hz).<br>
+                        <em>Réponse indicative :</em> $I = P/(U\cos\varphi) \approx 28,98\ \text{A}$ ; $Q_{\text{init}} = P\tan\varphi \approx 5333\ \text{VAR}$ ; $Q_{\text{final}} = 4000\tan(\arccos 0,95) \approx 1315\ \text{VAR}$ ; $Q_C = 4018\ \text{VAR}$ ; $C = Q_C/(U^2 \omega) \approx 242\ \mu\text{F}$.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Colonne latérale : mémos, formules clés et conseils bac -->
+        <div class="sidebar-card">
+            <!-- Résumé mémo -->
+            <div class="card">
+                <div class="card-header">
+                    <span>🧠</span> Synthèse BAC
+                </div>
+                <div class="card-body">
+                    <p><strong>À retenir absolument :</strong></p>
+                    <ul style="margin-left: 1rem;">
+                        <li>$P = UI\cos\varphi$</li>
+                        <li>$Q = UI\sin\varphi$</li>
+                        <li>$S = UI = \sqrt{P^2+Q^2}$</li>
+                        <li>$\cos\varphi = P/S$ = facteur de puissance</li>
+                    </ul>
+                    <hr>
+                    <p><strong>Unités :</strong><br>
+                    $P$ (W), $Q$ (VAR), $S$ (VA)</p>
+                    <div class="warning-tip" style="margin-top: 0.8rem;">
+                        ✅ <strong>Piège fréquent :</strong> Ne pas confondre puissance active et apparente. L'énoncé peut donner $U,I$ et $\cos\varphi$ ; calculer $P$ puis $Q$ avec $\sin\varphi$ (positif pour charge inductive, négatif pour capacitive).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carte : méthode de calcul du facteur de puissance -->
+            <div class="card">
+                <div class="card-header">
+                    <span>📏</span> Méthode express
+                </div>
+                <div class="card-body">
+                    <p>Pour déterminer $\cos\varphi$ à partir des éléments du circuit :</p>
+                    <ol style="margin-left: 1.2rem;">
+                        <li>Calculer l'impédance $Z = \sqrt{R^2 + (X_L-X_C)^2}$.</li>
+                        <li>$\cos\varphi = R / Z$.</li>
+                        <li>Si on connaît $P$ et $S$ : $\cos\varphi = P/(UI)$.</li>
+                    </ol>
+                    <p><strong>Relation avec la puissance instantanée :</strong> la puissance active correspond à la valeur moyenne de $p(t)=u(t)i(t)$.</p>
+                </div>
+            </div>
+
+            <!-- Carte : Tableau récapitulatif des notations -->
+            <div class="card">
+                <div class="card-header">
+                    <span>📖</span> Notations efficaces
+                </div>
+                <div class="card-body">
+                    <p><strong>Valeurs efficaces :</strong></p>
+                    $$ U = \frac{U_{\text{max}}}{\sqrt{2}} \quad ; \quad I = \frac{I_{\text{max}}}{\sqrt{2}} $$
+                    <p><strong>Triangle des puissances :</strong></p>
+                    <div style="text-align:center; margin: 1rem 0;">
+                        <span style="background:#eef2ff; padding: 0.3rem 0.8rem; border-radius: 40px;">S = P + jQ</span>
+                    </div>
+                    <p>La puissance complexe $\underline{S} = \underline{U} \cdot \underline{I}^*$ a pour module $S$ et pour argument $\varphi$.</p>
+                </div>
+            </div>
+
+            <!-- Carte : conseil pour l'épreuve de physique -->
+            <div class="card">
+                <div class="card-header">
+                    <span>🎓</span> Compétences évaluées
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Calculer $P$, $Q$, $S$ à partir de $U,I,\varphi$.</li>
+                        <li>Déterminer le facteur de puissance d'un dipôle.</li>
+                        <li>Utiliser le triangle des puissances pour dimensionner une compensation.</li>
+                        <li>Lire un schéma et interpréter un wattmètre.</li>
+                    </ul>
+                    <div class="warning-tip" style="margin-top: 12px;">
+                        📢 <strong>Bac 2025 attendu :</strong> étude de chaîne énergétique, facteur de puissance et amélioration. Savoir justifier l’intérêt économique d’un bon cosφ.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pied de page : rappel du programme officiel Cameroun -->
+    <div class="footer-note">
+        📍 Programme officiel de Physique – Terminale C & D (Année 2025-2026) | Module 4 : Électrocinétique – Régime sinusoïdal.<br>
+        Conforme aux attendus du Baccalauréat camerounais. Savoir maîtriser les calculs de puissances et la correction du facteur de puissance.
+    </div>
+</div>
+</body>
+</html>

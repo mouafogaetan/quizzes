@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 8 : Les caractéristiques de l’activité enzymatique</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .highlight {
+            background-color: #fef9c3;
+            padding: 0.15rem 0.3rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            color: #854d0e;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Tableau pour les facteurs */
+        .facteur-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .facteur-table th, .facteur-table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .facteur-table th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .facteur-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+
+            .facteur-table th, .facteur-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 8 : Les caractéristiques de l’activité enzymatique</h1>
+            <p class="lesson-subtitle">SVTEEHB · Première D · Module I - Séquence 3 : La catalyse enzymatique</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Influence de la température sur l'activité enzymatique</h3>
+                    <p class="card-description">
+                        La température est un facteur déterminant de l'activité des enzymes. Chaque enzyme possède une <strong class="highlight">température optimale</strong> à laquelle son activité est maximale. 
+                        Pour la plupart des enzymes humaines, cette température se situe autour de <strong>37°C</strong> (température corporelle).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>En dessous de l'optimum :</strong> L'agitation moléculaire diminue, les collisions enzyme-substrat sont moins fréquentes → l'activité ralentit.</li>
+                        <li><strong>À l'optimum :</strong> L'activité enzymatique est maximale.</li>
+                        <li><strong>Au-dessus de l'optimum :</strong> L'enzyme se dénature (perte de sa structure tridimensionnelle), le site actif est altéré → l'activité chute brutalement et peut devenir nulle.</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <img src="" alt="Graphique de l'influence de la température sur l'activité enzymatique : courbe en cloche avec un maximum à 37°C" style="max-width: 100%; border-radius: 0.5rem; background-color: #f8fafc; padding: 0.5rem;">
+                        <p style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Figure 1 : Courbe d'activité enzymatique en fonction de la température</p>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Influence du pH sur l'activité enzymatique</h3>
+                    <p class="card-description">
+                        Le pH modifie l'état d'ionisation des acides aminés du site actif et de l'enzyme. Chaque enzyme a un <strong class="highlight">pH optimal</strong>.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Enzymes digestives gastriques</strong> (comme la pepsine) : pH optimal très acide (<strong>pH ≈ 2</strong>).</li>
+                        <li><strong>Enzymes digestives intestinales</strong> (trypsine, amylase pancréatique) : pH optimal légèrement basique (<strong>pH ≈ 8</strong>).</li>
+                        <li><strong>Enzymes cytoplasmiques</strong> (catalase, etc.) : pH optimal proche de la neutralité (<strong>pH ≈ 7</strong>).</li>
+                        <li>Un écart trop important par rapport au pH optimal entraîne une <strong>dénaturation irréversible</strong> de l'enzyme.</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <img src="" alt="Graphique de l'influence du pH sur l'activité enzymatique avec trois courbes : pepsine optimale à pH 2, catalase à pH 7, trypsine à pH 8" style="max-width: 100%; border-radius: 0.5rem; background-color: #f8fafc; padding: 0.5rem;">
+                        <p style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Figure 2 : Activité enzymatique en fonction du pH pour différentes enzymes</p>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Spécificité de l'action enzymatique</h3>
+                    <p class="card-description">
+                        Les enzymes sont des catalyseurs très spécifiques. On distingue deux niveaux de spécificité :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Spécificité de substrat :</strong> Une enzyme n'agit que sur un seul substrat ou une famille très restreinte de substrats.<br>
+                        <em>Exemple :</em> L'uréase n'hydrolyse que l'urée, la lactase n'hydrolyse que le lactose.</li>
+                        <li><strong>Spécificité de réaction :</strong> Une enzyme catalyse un seul type de réaction chimique.<br>
+                        <em>Exemple :</em> Une décarboxylase enlève un groupe COOH, une kinase transfère un groupe phosphate.</li>
+                    </ul>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <img src="" alt="Schéma de la spécificité enzyme-substrat : une enzyme avec son site actif ne reconnaissant qu'un seul substrat parmi plusieurs molécules" style="max-width: 100%; border-radius: 0.5rem; background-color: #f8fafc; padding: 0.5rem;">
+                        <p style="font-size: 0.8rem; color: #64748b; margin-top: 0.25rem;">Figure 3 : Illustration de la spécificité enzyme-substrat</p>
+                    </div>
+                </div>
+
+                <!-- Tableau récapitulatif des facteurs -->
+                <div class="card concept-card">
+                    <h3 class="card-title">Récapitulatif : Facteurs influençant l'activité enzymatique</h3>
+                    <table class="facteur-table">
+                        <thead>
+                            <tr><th>Facteur</th><th>Effet sur l'activité enzymatique</th><th>Valeur optimale (exemples)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Température</strong></td><td>Augmentation jusqu'à un optimum, puis dénaturation</td><td>37°C (enzymes humaines)</td></tr>
+                            <tr><td><strong>pH</strong></td><td>Activité maximale à un pH spécifique, puis dénaturation</td><td>pH 2 (pepsine), pH 7 (catalase), pH 8 (trypsine)</td></tr>
+                            <tr><td><strong>Concentration en substrat</strong></td><td>Augmente jusqu'à saturation de l'enzyme</td><td>Vitesse maximale (Vmax) atteinte</td></tr>
+                            <tr><td><strong>Concentration en enzyme</strong></td><td>Augmente proportionnellement la vitesse de réaction</td><td>Proportionnalité directe</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="card-description" style="margin-top: 0.75rem; font-size: 0.9rem;">
+                        💡 <strong>À retenir :</strong> Une enzyme conserve son activité tant que sa structure tridimensionnelle (conformation) est intacte. Tout facteur modifiant cette conformation (température excessive, pH extrême) entraîne une <strong>dénaturation</strong> et une perte définitive d'activité.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : La fièvre et les enzymes</h3>
+                    <p class="exemple-context">
+                        Lors d'une forte fièvre (température corporelle supérieure à 40°C), certaines fonctions vitales peuvent être altérées. Expliquez ce phénomène en lien avec l'activité enzymatique.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> Les enzymes du corps humain ont une température optimale d'environ 37°C. Une élévation prolongée de la température au-delà de 40°C provoque la <strong class="highlight">dénaturation progressive des enzymes</strong>. Leur structure tridimensionnelle se déplie, le site actif perd sa conformation spécifique, ce qui empêche la formation du complexe enzyme-substrat. Les réactions métaboliques ralentissent considérablement, pouvant entraîner des dysfonctionnements cellulaires et organiques.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Pensez à un œuf qui cuit à la poêle (dénaturation des protéines) pour visualiser l'effet irréversible de la chaleur sur les enzymes.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Adaptation des enzymes digestives</h3>
+                    <p class="exemple-context">
+                        La pepsine, enzyme digestive de l'estomac, est active à pH 2, tandis que la trypsine, enzyme pancréatique, est active à pH 8. Pourquoi cette différence est-elle essentielle ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> Chaque enzyme est adaptée aux conditions de son environnement de travail. L'estomac sécrète de l'acide chlorhydrique (HCl) qui crée un milieu très acide (pH 2). La pepsine a évolué pour fonctionner à ce pH acide qui dénature les protéines alimentaires et facilite leur digestion. En revanche, le pancréas déverse ses enzymes dans l'intestin grêle, où le milieu est neutralisé à pH 8 par le bicarbonate. La trypsine est donc optimale à pH basique. Cette spécificité permet une digestion efficace dans chaque segment du tube digestif.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Penser au "<strong>passe-partout</strong>" : Chaque enzyme possède sa "serrure" (site actif) adaptée à son "milieu" (pH et température spécifiques).
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Étude graphique</h3>
+                    <p class="exemple-context">
+                        On mesure l'activité d'une enzyme à différentes températures. Les résultats montrent que l'activité augmente jusqu'à 45°C, puis chute brutalement. À 60°C, l'activité est nulle. Que peut-on conclure ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong> 
+                        <ul style="margin: 0.5rem 0 0 1.5rem;">
+                            <li>La <strong>température optimale</strong> de cette enzyme est d'environ 45°C.</li>
+                            <li>Au-delà de cette température, l'enzyme se <strong>dénature</strong> : la chaleur brise les liaisons faibles (liaisons hydrogène, interactions hydrophobes) qui maintiennent la structure tridimensionnelle de l'enzyme.</li>
+                            <li>La <strong>dénaturation est irréversible</strong> à 60°C, d'où une perte totale d'activité.</li>
+                        </ul>
+                        Cette enzyme est probablement une enzyme thermophile (adaptée aux températures élevées) ou d'origine bactérienne.
+                    </p>
+                    <div class="exemple-astuce">
+                        📌 Remarque : Chez l'Homme, une température de 60°C détruirait définitivement toutes les enzymes.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section des pièges à éviter -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>diminution temporaire</strong> de l'activité (ex: basses températures) et <strong>dénaturation irréversible</strong> (ex: températures élevées ou pH extrêmes).</li>
+                        <li><span class="bold">Attention :</span> Ne pas généraliser le pH optimal : chaque enzyme a son propre pH optimal (très acide pour l'estomac, neutre pour la cellule, basique pour l'intestin).</li>
+                        <li><span class="bold">À éviter :</span> Penser que la spécificité enzymatique est absolue : certaines enzymes acceptent plusieurs substrats proches (ex: certaines protéases).</li>
+                        <li><span class="bold">Piège classique :</span> Oublier que la concentration en substrat influence aussi la vitesse : quand tous les sites actifs sont occupés, l'augmentation du substrat n'accélère plus la réaction (saturation).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des notions clés pour l'examen -->
+            <section class="concept-section">
+                <div class="card concept-card">
+                    <h3 class="card-title">🎯 Ce qu'il faut absolument savoir pour l'examen</h3>
+                    <ul class="concept-list">
+                        <li>Définir la <strong>température optimale</strong> et le <strong>pH optimal</strong> d'une enzyme.</li>
+                        <li>Expliquer l'effet de la température et du pH sur l'activité enzymatique (graphiques, courbes en cloche).</li>
+                        <li>Distinguer <strong>ralentissement réversible</strong> (froid) et <strong>dénaturation irréversible</strong> (chaleur excessive, pH extrême).</li>
+                        <li>Définir la <strong>spécificité</strong> enzyme-substrat et enzyme-réaction avec des exemples précis.</li>
+                        <li>Savoir analyser un graphique d'activité enzymatique pour déterminer les conditions optimales.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision SVTEEHB - Première D | Programme officiel Cameroun | 📚 À réviser régulièrement</p>
+        </footer>
+    </div>
+</body>
+</html>

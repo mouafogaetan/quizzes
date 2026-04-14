@@ -1,0 +1,147 @@
+[
+  {
+    "intitule": "Recherche séquentielle : principes fondamentaux",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>La recherche séquentielle (ou linéaire) est une méthode simple pour trouver un élément dans un tableau. Elle consiste à parcourir le tableau élément par élément, du premier au dernier, jusqu'à trouver la valeur recherchée ou atteindre la fin du tableau.</p><p>On utilise souvent une variable booléenne (appelée <strong>drapeau</strong> ou <code>trouve</code>) pour indiquer si l'élément a été trouvé. Cette variable permet d'arrêter la recherche prématurément si l'élément est trouvé, évitant ainsi de parcourir inutilement la fin du tableau.</p><p>Voici un algorithme en pseudocode :</p><pre>Algorithme recherche_sequentielle\nDébut\n    // Déclarations\n    Tableau T[1..N] : Entier\n    i, N, x : Entier\n    trouve : Booleen\n    \n    // Initialisation\n    trouve ← FAUX\n    i ← 1\n    \n    // Saisies\n    Ecrire(\"Donner le nombre d'éléments : \")\n    Lire(N)\n    Pour i de 1 à N faire\n        Ecrire(\"T[\", i, \"] = \")\n        Lire(T[i])\n    FinPour\n    Ecrire(\"Donner la valeur à rechercher : \")\n    Lire(x)\n    \n    // Traitement\n    i ← 1\n    Tant que (i ≤ N) et (trouve = FAUX) faire\n        Si T[i] = x Alors\n            trouve ← VRAI\n        Sinon\n            i ← i + 1\n        FinSi\n    FinTantQue\n    \n    // Sortie\n    Si trouve = VRAI Alors\n        Ecrire(x, \" trouvé à l'indice \", i)\n    Sinon\n        Ecrire(x, \" non trouvé\")\n    FinSi\nFin</pre>",
+      "images": [
+        "Diagramme de flux illustrant le déroulement de la recherche séquentielle avec une condition d'arrêt (trouvé ou fin du tableau)"
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier, dans l'algorithme fourni, la variable utilisée comme drapeau (indicateur d'arrêt). Quelle est sa valeur initiale et que signifie-t-elle ?",
+        "niveau": "easy",
+        "reponse": "La variable drapeau est `trouve`. Sa valeur initiale est FAUX, ce qui signifie qu'au début de la recherche, l'élément recherché n'a pas encore été trouvé.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquer pourquoi la condition de la boucle `Tant que` est `(i ≤ N) et (trouve = FAUX)` et non pas seulement `(i ≤ N)`.",
+        "niveau": "medium",
+        "reponse": "La condition `(i ≤ N) et (trouve = FAUX)` permet d'arrêter la boucle dès que l'élément est trouvé (optimisation). Si on utilisait seulement `(i ≤ N)`, l'algorithme continuerait à parcourir tout le tableau même après avoir trouvé l'élément, ce qui est inefficace.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Citer deux avantages et deux inconvénients de la recherche séquentielle par rapport à d'autres méthodes de recherche (comme la recherche dichotomique).",
+        "niveau": "medium",
+        "reponse": "Avantages : 1) Ne nécessite pas que le tableau soit trié. 2) Simple à implémenter et à comprendre.\nInconvénients : 1) Peut être lente pour de grands tableaux (complexité O(n)). 2) Dans le pire des cas (élément absent ou en dernière position), il faut parcourir tout le tableau.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Justifier pourquoi on initialise `i ← 1` avant la boucle de recherche, alors que `i` avait déjà été utilisé dans la boucle de saisie.",
+        "niveau": "hard",
+        "reponse": "Après la boucle de saisie, la variable `i` a pour valeur `N+1` (valeur finale après la dernière itération). Il est donc nécessaire de réinitialiser `i` à 1 avant de commencer la recherche, sans quoi la boucle `Tant que` ne s'exécuterait pas (car `i` serait déjà supérieur à `N`).",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Contrôle d'accès par badge",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Une entreprise souhaite automatiser le contrôle d'accès à son laboratoire. Chaque employé dispose d'un badge avec un code numérique unique à 4 chiffres. Un algorithme doit vérifier si le code saisi par un visiteur correspond à l'un des codes autorisés stockés dans une liste.</p><p>On dispose d'un tableau <code>codes_autorises[1..50]</code> contenant les 50 codes valides. Le visiteur saisit son code <code>code_saisi</code>. L'algorithme doit afficher \"ACCÈS AUTORISÉ\" si le code est trouvé, sinon \"ACCÈS REFUSÉ\".</p><p>De plus, pour des raisons de sécurité, si un code invalide est saisi 3 fois de suite, l'algorithme doit bloquer l'accès pendant 5 minutes (on simulera ce blocage par un simple message \"SYSTEME BLOQUE 5 MIN\").</p>",
+      "images": [
+        "Schéma d'un lecteur de badge avec un clavier numérique et un écran affichant 'ACCÈS REFUSÉ'",
+        "Représentation d'un tableau de codes autorisés (ex: 1234, 5678, 9012, ...)"
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Concevoir l'algorithme complet (en pseudocode) qui résout ce problème de contrôle d'accès. On utilisera la recherche séquentielle pour vérifier la validité du code saisi. Pensez à gérer le compteur de tentatives infructueuses.",
+        "niveau": "hard",
+        "reponse": "Algorithme controle_acces\nDébut\n    // Déclarations\n    Tableau codes_autorises[1..50] : Entier\n    i, code_saisi, nb_tentatives : Entier\n    trouve : Booleen\n    \n    // Initialisation (codes pré-définis pour l'exemple)\n    // ... (remplissage des 50 codes)\n    nb_tentatives ← 0\n    \n    Tant que nb_tentatives < 3 faire\n        // Saisie\n        Ecrire(\"Saisissez votre code : \")\n        Lire(code_saisi)\n        \n        // Recherche séquentielle\n        i ← 1\n        trouve ← FAUX\n        Tant que (i ≤ 50) et (trouve = FAUX) faire\n            Si codes_autorises[i] = code_saisi Alors\n                trouve ← VRAI\n            Sinon\n                i ← i + 1\n            FinSi\n        FinTantQue\n        \n        // Traitement\n        Si trouve = VRAI Alors\n            Ecrire(\"ACCÈS AUTORISÉ\")\n            nb_tentatives ← 0  // Réinitialisation après succès\n            // Sortie de la boucle (accès autorisé)\n            i ← 51  // Pour sortir de la boucle Tant que externe\n        Sinon\n            nb_tentatives ← nb_tentatives + 1\n            Ecrire(\"ACCÈS REFUSÉ. Tentative \", nb_tentatives, \" sur 3\")\n            Si nb_tentatives = 3 Alors\n                Ecrire(\"SYSTEME BLOQUE 5 MIN\")\n            FinSi\n        FinSi\n    FinTantQue\nFin",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Dresser la table de traçage (trace d'exécution) pour les saisies suivantes, sachant que les codes autorisés sont [1234, 5678, 9012, 3456, 7890] :\n- 1ère saisie : 1111\n- 2ème saisie : 2222\n- 3ème saisie : 3456",
+        "niveau": "hard",
+        "reponse": "| Étape | code_saisi | i | trouve | nb_tentatives | Affichage |\n|-------|------------|---|--------|---------------|-----------|\n| Init  | - | - | - | 0 | - |\n| Saisie1 | 1111 | 1→5 | FAUX | 1 | \"ACCÈS REFUSÉ. Tentative 1 sur 3\" |\n| Saisie2 | 2222 | 1→5 | FAUX | 2 | \"ACCÈS REFUSÉ. Tentative 2 sur 3\" |\n| Saisie3 | 3456 | 1→4 | VRAI | 0 | \"ACCÈS AUTORISÉ\" |",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Modifier l'algorithme précédent pour qu'en cas de succès, il affiche également le nom de l'employé correspondant au code. On suppose qu'on dispose d'un deuxième tableau parallele `noms[1..50]`.",
+        "niveau": "very hard",
+        "reponse": "Dans la boucle de recherche, quand `trouve` devient VRAI, on conserve l'indice `i`. Après la boucle, si `trouve = VRAI`, on affiche `\"ACCÈS AUTORISÉ - Bonjour \", noms[i]`. Sinon, message d'erreur habituel.\n\nModification clé :\n```\nSi trouve = VRAI Alors\n    Ecrire(\"ACCÈS AUTORISÉ - Bonjour \", noms[i])\n    nb_tentatives ← 0\n```",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Gestion des notes d'une classe",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un enseignant souhaite automatiser la recherche des élèves ayant obtenu une note supérieure à la moyenne de la classe. Le fichier des notes contient les informations suivantes pour 40 élèves :</p><ul><li>Numéro d'inscription (entier de 1000 à 4000)</li><li>Nom et prénom (chaîne de caractères)</li><li>Note sur 20 (réel)</li></ul><p>L'enseignant veut un algorithme qui :</p><ol><li>Calcule la moyenne de la classe.</li><li>Affiche la liste des élèves (numéro, nom, note) ayant une note strictement supérieure à cette moyenne.</li><li>Permet à l'utilisateur de rechercher un élève par son numéro d'inscription et affiche toutes ses informations (nom, prénom, note) si trouvé, sinon un message \"Élève non inscrit\".</li></ol>",
+      "images": [
+        "Tableau Excel avec trois colonnes : Numéro, Nom, Note, contenant des données fictives d'élèves"
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Décrire les structures de données (tableaux) nécessaires pour stocker les informations des 40 élèves en algorithmique.",
+        "niveau": "easy",
+        "reponse": "Il faut trois tableaux à une dimension (vecteurs) de taille 40 :\n- `nums[1..40]` : Entier pour les numéros d'inscription\n- `noms[1..40]` : Chaîne pour les noms et prénoms\n- `notes[1..40]` : Réel pour les notes sur 20",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire l'algorithme complet (saisie des données incluse) qui réalise les trois tâches demandées par l'enseignant.",
+        "niveau": "very hard",
+        "reponse": "```\nAlgorithme gestion_notes\nDébut\n    // Déclarations\n    Tableau nums[1..40] : Entier\n    Tableau noms[1..40] : Chaîne\n    Tableau notes[1..40] : Réel\n    i, nb_eleves, num_recherche : Entier\n    somme, moyenne : Réel\n    trouve : Booleen\n    \n    // Saisie des données\n    nb_eleves ← 40\n    somme ← 0\n    Pour i de 1 à nb_eleves faire\n        Ecrire(\"Numéro élève \", i, \" : \")\n        Lire(nums[i])\n        Ecrire(\"Nom et prénom : \")\n        Lire(noms[i])\n        Ecrire(\"Note /20 : \")\n        Lire(notes[i])\n        somme ← somme + notes[i]\n    FinPour\n    \n    // Calcul de la moyenne\n    moyenne ← somme / nb_eleves\n    Ecrire(\"Moyenne de la classe : \", moyenne)\n    \n    // Affichage des élèves supérieurs à la moyenne\n    Ecrire(\"*** Élèves ayant une note > moyenne ***\")\n    Pour i de 1 à nb_eleves faire\n        Si notes[i] > moyenne Alors\n            Ecrire(nums[i], \" - \", noms[i], \" - \", notes[i])\n        FinSi\n    FinPour\n    \n    // Recherche par numéro d'inscription\n    Ecrire(\"Entrez le numéro à rechercher : \")\n    Lire(num_recherche)\n    trouve ← FAUX\n    i ← 1\n    Tant que (i ≤ nb_eleves) et (trouve = FAUX) faire\n        Si nums[i] = num_recherche Alors\n            trouve ← VRAI\n            Ecrire(\"Élève trouvé :\")\n            Ecrire(\"Numéro : \", nums[i])\n            Ecrire(\"Nom : \", noms[i])\n            Ecrire(\"Note : \", notes[i])\n        Sinon\n            i ← i + 1\n        FinSi\n    FinTantQue\n    \n    Si trouve = FAUX Alors\n        Ecrire(\"Élève non inscrit\")\n    FinSi\nFin\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Proposer une optimisation de l'algorithme de recherche par numéro sachant que les numéros d'inscription sont dans l'ordre croissant (les élèves sont saisis dans l'ordre de leurs numéros).",
+        "niveau": "hard",
+        "reponse": "Si les numéros sont triés, on peut utiliser une recherche dichotomique (plus efficace, en O(log n) au lieu de O(n)). L'algorithme de recherche dichotomique compare l'élément recherché avec l'élément du milieu du tableau et réduit de moitié l'espace de recherche à chaque étape. Cela nécessite que le tableau soit trié, ce qui est le cas ici.\n\nAvantage : beaucoup plus rapide pour 40 élèves (au pire 6 comparaisons au lieu de 40).\nInconvénient : plus complexe à implémenter.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Code PIN et sécurité bancaire",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Dans un distributeur automatique de billets (DAB), le code PIN (Personnel Identification Number) de l'utilisateur est vérifié. On suppose que la base de données locale du DAB contient les informations de 100 cartes bancaires : numéro de carte (16 chiffres) et code PIN (4 chiffres).</p><p>Le système doit :</p><ol><li>Demander le numéro de carte à l'utilisateur.</li><li>Rechercher ce numéro dans la base (recherche séquentielle car les numéros ne sont pas triés).</li><li>Si le numéro existe, demander le code PIN et le comparer avec celui stocké. L'utilisateur a droit à 3 tentatives pour le PIN.</li><li>Si le numéro n'existe pas, afficher \"CARTE NON RECONNUE\" et terminer.</li><li>Après 3 échecs consécutifs sur le PIN (pour une même carte), la carte est bloquée et un message \"CARTE BLOQUÉE\" s'affiche.</li></ol>",
+      "images": [
+        "Distributeur automatique de billets avec un écran affichant 'Entrez votre code PIN'",
+        "Base de données simplifiée avec deux colonnes : Numéro de carte (16 chiffres masqués partiellement) et Code PIN"
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire l'algorithme complet en pseudocode respectant toutes les contraintes du distributeur. On utilisera des tableaux parallèles : `cartes[1..100]` (chaîne) et `pins[1..100]` (entier).",
+        "niveau": "very hard",
+        "reponse": "```\nAlgorithme DAB_securise\nDébut\n    // Déclarations\n    Tableau cartes[1..100] : Chaîne\n    Tableau pins[1..100] : Entier\n    i, tentative_pin, code_saisi : Entier\n    carte_saisie : Chaîne\n    trouve, pin_valide : Booleen\n    \n    // Initialisation (données fictives)\n    // ... (remplissage des 100 cartes et codes PIN)\n    \n    // Étape 1 : Saisie du numéro de carte\n    Ecrire(\"Insérez votre carte et saisissez le numéro : \")\n    Lire(carte_saisie)\n    \n    // Étape 2 : Recherche de la carte\n    i ← 1\n    trouve ← FAUX\n    Tant que (i ≤ 100) et (trouve = FAUX) faire\n        Si cartes[i] = carte_saisie Alors\n            trouve ← VRAI\n        Sinon\n            i ← i + 1\n        FinSi\n    FinTantQue\n    \n    // Étape 4 : Carte non trouvée\n    Si trouve = FAUX Alors\n        Ecrire(\"CARTE NON RECONNUE\")\n    Sinon\n        // Étape 3 : Vérification du PIN (3 tentatives max)\n        tentative_pin ← 0\n        pin_valide ← FAUX\n        Tant que (tentative_pin < 3) et (pin_valide = FAUX) faire\n            Ecrire(\"Entrez votre code PIN : \")\n            Lire(code_saisi)\n            Si code_saisi = pins[i] Alors\n                pin_valide ← VRAI\n                Ecrire(\"ACCÈS AUTORISÉ - Choississez une opération\")\n            Sinon\n                tentative_pin ← tentative_pin + 1\n                Si tentative_pin < 3 Alors\n                    Ecrire(\"PIN incorrect. Il vous reste \", 3 - tentative_pin, \" tentative(s)\")\n                FinSi\n            FinSi\n        FinTantQue\n        \n        // Étape 5 : Blocage après 3 échecs\n        Si pin_valide = FAUX Alors\n            Ecrire(\"CARTE BLOQUÉE - Contactez votre banque\")\n        FinSi\n    FinSi\nFin\n```",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquer pourquoi la recherche séquentielle est utilisée plutôt qu'une recherche dichotomique dans ce contexte, bien qu'elle soit moins efficace.",
+        "niveau": "medium",
+        "reponse": "La recherche dichotomique nécessite que le tableau soit trié. Dans un DAB, les numéros de carte sont généralement stockés dans l'ordre d'émission (qui n'est pas nécessairement trié numériquement). De plus, la recherche séquentielle reste acceptable car 100 cartes est un petit effectif (au pire 100 comparaisons, ce qui est négligeable pour un DAB moderne). Enfin, la simplicité d'implémentation et la maintenance sont privilégiées dans les systèmes embarqués.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Proposer une amélioration pour que le système garde en mémoire le nombre de tentatives échouées même après avoir retiré et réinséré la carte (pour éviter de contourner le blocage).",
+        "niveau": "very hard",
+        "reponse": "Il faudrait une base de données persistante (fichier ou table) qui stocke pour chaque numéro de carte le nombre de tentatives échouées et un statut (actif/bloqué). Même après retrait de la carte, ces informations restent. Lors de la prochaine insertion, le système vérifie d'abord le statut : si bloqué, message direct \"CARTE BLOQUÉE\" sans demander le PIN. Sinon, on reprend le compteur là où il s'était arrêté.\n\nEn algorithmique pure (sans persistance), on peut simuler avec un troisième tableau `tentatives[1..100]` initialisé à 0 et un tableau `bloque[1..100]` booléen.\n\nModification clé :\n- Après vérification de l'existence de la carte, vérifier d'abord `bloque[i]`.\n- Si `bloque[i] = VRAI`, afficher \"CARTE BLOQUÉE - Contactez votre banque\".\n- Sinon, utiliser `tentatives[i]` comme compteur persistant.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

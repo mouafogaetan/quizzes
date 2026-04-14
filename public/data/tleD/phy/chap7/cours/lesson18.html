@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 18 : Mouvement dans un champ électrique uniforme</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Style général */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e9f0f5;
+            color: #1a2c3e;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-revision {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête coloré */
+        .header {
+            background: linear-gradient(135deg, #0b3b5f 0%, #1b4f72 100%);
+            color: white;
+            padding: 2rem 2rem 1.5rem 2rem;
+            border-bottom: 5px solid #ffb347;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        .header .chapitre {
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.85;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header .objectifs {
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            border-left: 4px solid #ffb347;
+        }
+
+        .header .objectifs strong {
+            color: #ffb347;
+        }
+
+        /* Corps de la fiche */
+        .content {
+            padding: 2rem;
+        }
+
+        /* Grille pour les sections */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: #fefefe;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid #e2edf2;
+            transition: transform 0.1s ease;
+        }
+
+        .card-title {
+            background: #f0f6fa;
+            padding: 0.8rem 1.2rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #0b3b5f;
+            border-bottom: 2px solid #cbdde6;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-title i {
+            font-size: 1.3rem;
+        }
+
+        .card-content {
+            padding: 1.2rem;
+        }
+
+        .formula {
+            background: #f8fafc;
+            border-left: 5px solid #ffb347;
+            padding: 0.8rem 1rem;
+            margin: 1rem 0;
+            border-radius: 0.75rem;
+            font-family: monospace;
+            font-size: 1rem;
+            overflow-x: auto;
+        }
+
+        .important {
+            background: #fff8e7;
+            border: 1px solid #ffe0a3;
+            padding: 0.8rem 1rem;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #cbdde6;
+            padding: 0.6rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #eef3f7;
+            font-weight: 600;
+        }
+
+        .bac-link {
+            background: #eaf5e8;
+            border-left: 5px solid #2e7d32;
+            padding: 0.7rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .schema {
+            background: #ffffff;
+            border: 1px dashed #8ba9c2;
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, #cbdde6, transparent);
+        }
+
+        footer {
+            background: #f8fafc;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #4b6f86;
+            border-top: 1px solid #dce5ec;
+        }
+
+        @media (max-width: 780px) {
+            body {
+                padding: 1rem;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            background: #ffb34720;
+            color: #c45c00;
+            border-radius: 2rem;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-revision">
+    <div class="header">
+        <div class="chapitre">📘 CHAPITRE 7 : MOUVEMENTS DE PARTICULES CHARGÉES</div>
+        <h1>Leçon 18 : Mouvement d’une particule chargée dans un champ électrique uniforme <span class="badge">BAC 2024</span></h1>
+        <div class="objectifs">
+            <strong>🎯 Objectifs pédagogiques :</strong> <br>
+            – Déterminer la nature du mouvement d’une particule chargée dans un champ électrique uniforme.<br>
+            – Établir les équations horaires et l’équation de la trajectoire.<br>
+            – Appliquer ces résultats au cas du tube cathodique (oscilloscope).
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Première rangée : notions fondamentales + équations -->
+        <div class="grid-2">
+            <!-- Carte 1 : Force et accélération -->
+            <div class="card">
+                <div class="card-title">
+                    <span>⚡</span> Force électrique & accélération
+                </div>
+                <div class="card-content">
+                    <p>Une particule de charge <strong>q</strong> et de masse <strong>m</strong> plongée dans un champ électrique uniforme \(\vec{E}\) subit la force de Coulomb :</p>
+                    <div class="formula">
+                        \[ \vec{F} = q \cdot \vec{E} \]
+                    </div>
+                    <p>D’après la deuxième loi de Newton (\(\sum \vec{F} = m\vec{a}\)) :</p>
+                    <div class="formula">
+                        \[ \vec{a} = \frac{q}{m} \, \vec{E} \]
+                    </div>
+                    <p>→ L’accélération est <strong>constante</strong> (en direction, sens et norme) car \(\vec{E}\) est uniforme. Le mouvement est donc <strong>uniformément varié</strong>.</p>
+                    <div class="important">
+                        💡 <strong>Remarque importante :</strong><br>
+                        Si \(q > 0\) (proton, positon), \(\vec{a}\) est dans le même sens que \(\vec{E}\).<br>
+                        Si \(q < 0\) (électron), \(\vec{a}\) est opposé à \(\vec{E}\).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carte 2 : Nature du mouvement -->
+            <div class="card">
+                <div class="card-title">
+                    <span>📐</span> Types de trajectoires
+                </div>
+                <div class="card-content">
+                    <p>Suivant les conditions initiales de la vitesse \(\vec{v}_0\) par rapport à \(\vec{E}\):</p>
+                    <table>
+                        <tr><th>Condition initiale</th><th>Nature du mouvement</th><th>Trajectoire</th></tr>
+                        <tr><td>\(\vec{v}_0\) parallèle à \(\vec{E}\) (colinéaire)</td><td>Rectiligne uniformément accéléré (ou décéléré)</td><td>Segment de droite</td></tr>
+                        <tr><td>\(\vec{v}_0\) perpendiculaire à \(\vec{E}\)</td><td>Mouvement parabolique (similaire à chute libre)</td><td>Parabole</td></tr>
+                        <tr><td>\(\vec{v}_0\) quelconque</td><td>Composition d’un mouvement rectiligne et parabolique</td><td>Parabole</td></tr>
+                    </table>
+                    <div class="bac-link">
+                        📌 <strong>Lien Bac 2024 :</strong> L’étude de la déviation d’un électron dans un condensateur plan (tube cathodique) est un classique. La trajectoire est parabolique entre les armatures.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deuxième rangée : Étude analytique complète -->
+        <div class="card" style="margin-bottom: 1.8rem;">
+            <div class="card-title">
+                <span>🧮</span> Étude dynamique et équations horaires (cas général 2D)
+            </div>
+            <div class="card-content">
+                <p>Plaçons-nous dans un repère \((O, x, y)\). Supposons \(\vec{E}\) dirigé selon l’axe \(Oy\) : \(\vec{E} = E \, \vec{j}\). Alors \(\vec{a} = \dfrac{qE}{m} \, \vec{j}\).</p>
+                <p>Conditions initiales à \(t=0\) : position \((0,0)\) et vitesse \(\vec{v}_0 = v_{0x}\,\vec{i} + v_{0y}\,\vec{j}\).</p>
+                <div class="formula">
+                    \[
+                    \begin{cases}
+                    a_x = 0 \quad \Rightarrow \quad v_x(t) = v_{0x} = \text{constante} \\
+                    a_y = \frac{qE}{m} \quad \Rightarrow \quad v_y(t) = \frac{qE}{m}\,t + v_{0y}
+                    \end{cases}
+                    \]
+                </div>
+                <p>Par intégration, les équations horaires :</p>
+                <div class="formula">
+                    \[
+                    x(t) = v_{0x} \, t \qquad ; \qquad y(t) = \frac{1}{2}\frac{qE}{m} t^2 + v_{0y} \, t
+                    \]
+                </div>
+                <p><strong>Équation de la trajectoire :</strong> En éliminant \(t = \dfrac{x}{v_{0x}}\) (si \(v_{0x} \neq 0\)) :</p>
+                <div class="formula">
+                    \[
+                    y(x) = \frac{1}{2}\frac{qE}{m v_{0x}^2} \, x^2 + \frac{v_{0y}}{v_{0x}} \, x
+                    \]
+                </div>
+                <p>C’est l’équation d’une <strong>parabole</strong>.</p>
+                <div class="important">
+                    🔍 <strong>Cas particulier fréquent au bac :</strong> électron pénétrant perpendiculairement entre les armatures d’un condensateur plan.<br>
+                    \(v_{0y}=0,\; v_{0x}=v_0,\; q = -e\) (négatif) → la déviation \(y\) est orientée vers l’armature positive (car accélération opposée à \(\vec{E}\)).
+                </div>
+            </div>
+        </div>
+
+        <!-- Troisième section : Applications au condensateur plan et tube cathodique -->
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-title">
+                    <span>📺</span> Condensateur plan & déviation électrostatique
+                </div>
+                <div class="card-content">
+                    <p>Entre deux armatures planes distantes de \(d\) soumises à une tension \(U > 0\) : le champ électrique uniforme vaut \(E = \dfrac{U}{d}\) (dirigé de la plaque positive vers la négative).</p>
+                    <p>Une particule de charge \(q\) subit une force transversale. <br> 
+                    <strong>Déviation verticale à la sortie du condensateur (longueur \(L\)) :</strong></p>
+                    <div class="formula">
+                        \[
+                        |y_{\text{sortie}}| = \frac{|q|\, E \, L^2}{2\, m \, v_0^2}
+                        \]
+                    </div>
+                    <p>La déviation est proportionnelle à \(U\) et inversement proportionnelle à l’énergie cinétique initiale.</p>
+                    <div class="schema">
+                        🖼️ <em>Schéma mental :</em> [Électron] → \(\;\) ----→ (armature +) <br>
+                        &nbsp;&nbsp;&nbsp; vitesse horizontale \(v_0\) &nbsp; &nbsp; trajectoire incurvée vers le haut.
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title">
+                    <span>⚙️</span> Oscilloscope cathodique – Principe
+                </div>
+                <div class="card-content">
+                    <p>Un tube cathodique utilise la déviation électrostatique pour « dessiner » un signal.</p>
+                    <ul style="margin-left: 1.2rem; margin-top: 0.5rem;">
+                        <li>Un canon à électrons émet un faisceau d’électrons accélérés.</li>
+                        <li>Deux paires de plaques de déviation (verticales et horizontales) créent des champs transversaux.</li>
+                        <li>La tension appliquée aux plaques verticales dévie le spot verticalement (signal Y).</li>
+                        <li>La tension en dents de scie sur les plaques horizontales balaie l’écran (base de temps).</li>
+                    </ul>
+                    <div class="formula">
+                        \[
+                        \text{Sensibilité verticale } S = \frac{y}{U_{\text{plaque}}} = \frac{L\cdot l}{2d\,U_a}
+                        \]
+                        (avec \(U_a\) tension d’accélération, \(l\) distance de déviation, \(L\) distance écran).
+                    </div>
+                    <p>📌 <strong>À retenir :</strong> La déviation est linéaire en fonction de la tension appliquée → permet de visualiser des signaux temporels.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exercice type Bac (mini) -->
+        <div class="card" style="margin-top: 0.5rem;">
+            <div class="card-title">
+                <span>✏️</span> Application type Baccalauréat
+            </div>
+            <div class="card-content">
+                <p><strong>Énoncé simplifié :</strong> Un électron (\(m=9,1\times10^{-31}\,\text{kg}\), \(q=-e=-1,6\times10^{-19}\,\text{C}\)) pénètre avec une vitesse \(v_0 = 2,0\times10^7\,\text{m/s}\) horizontalement dans un condensateur plan de longueur \(L=5,0\,\text{cm}\). Le champ électrique entre les armatures vaut \(E=4,0\times10^3\,\text{V/m}\) vertical vers le haut.</p>
+                <ol style="margin-left: 1.5rem;">
+                    <li>Déterminer la direction et le sens de l’accélération.</li>
+                    <li>Établir l’équation de la trajectoire \(y(x)\).</li>
+                    <li>Calculer la déviation verticale à la sortie du condensateur.</li>
+                </ol>
+                <div class="important">
+                    <strong>✅ Correction rapide :</strong><br>
+                    1) \(\vec{a} = \dfrac{-e}{m}\vec{E}\) → opposé à \(\vec{E}\) → vers le bas (car charge négative).<br>
+                    2) \(y(x) = -\dfrac{eE}{2 m v_0^2}\,x^2\) (parabole tournée vers le bas).<br>
+                    3) \(y(L) = -\dfrac{1,6\times10^{-19} \times 4,0\times10^3}{2\times 9,1\times10^{-31}\times (2,0\times10^7)^2} \times (0,05)^2 \) <br>
+                    \(\approx -2,2\times10^{-3}\,\text{m} = -2,2\,\text{mm}\). La déviation est de 2,2 mm vers l’armature négative.
+                </div>
+                <div class="bac-link" style="margin-top: 0.8rem;">
+                    📖 <strong>Compétence exigible :</strong> savoir passer des équations différentielles aux équations horaires et exploiter la trajectoire parabolique. 
+                    Souvent combiné avec une question sur l’énergie cinétique ou la déviation angulaire.
+                </div>
+            </div>
+        </div>
+
+        <!-- Tableau récapitulatif des grandeurs -->
+        <div class="card" style="margin-top: 1rem;">
+            <div class="card-title">
+                <span>📋</span> Synthèse – Ce qu’il faut maîtriser pour le Bac
+            </div>
+            <div class="card-content">
+                <table>
+                    <thead>
+                        <tr><th>Notion</th><th>Expression / Formule</th><th>Conseil</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Force de Coulomb</td><td>\(\vec{F}=q\vec{E}\)</td><td>Dessiner le vecteur force en fonction du signe de q</td></tr>
+                        <tr><td>Accélération</td><td>\(\vec{a}=\dfrac{q}{m}\vec{E}\)</td><td>Constante → mouvement parabolique</td></tr>
+                        <tr><td>Équation horaire \(x(t)\)</td><td>\(x(t)=v_{0x}t\) (si \(v_{0x}=v_0\))</td><td>Mouvement rectiligne uniforme selon Ox</td></tr>
+                        <tr><td>Équation horaire \(y(t)\)</td><td>\(y(t)=\dfrac{1}{2}\dfrac{qE}{m}t^2+v_{0y}t\)</td><td>Mouvement uniformément varié selon Oy</td></tr>
+                        <tr><td>Trajectoire</td><td>\(y(x)=\dfrac{qE}{2mv_{0x}^2}x^2+\dfrac{v_{0y}}{v_{0x}}x\)</td><td>Parabole → symétrie si \(v_{0y}=0\)</td></tr>
+                        <tr><td>Déviation (sortie cond.)</td><td>\(\delta y = \dfrac{|q|EL^2}{2mv_0^2}\)</td><td>Souvent \(q=-e\) pour électron</td></tr>
+                    </tbody>
+                </table>
+                <div class="important">
+                    🧠 <strong>Erreurs fréquentes à éviter :</strong> 
+                    <ul style="margin-top: 0.3rem; margin-left: 1.2rem;">
+                        <li>Oublier le signe de la charge dans l’orientation de l’accélération.</li>
+                        <li>Confondre champ \(\vec{E}\) et force : toujours \(\vec{F}=q\vec{E}\).</li>
+                        <li>Dans un condensateur, ne pas inverser \(U\) et \(d\) : \(E = U/d\).</li>
+                        <li>Ne pas négliger les conditions initiales lors de l’intégration.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lien avec le programme officiel et les sujets de bac -->
+        <div class="card" style="background: #eef2fa; margin-top: 1rem;">
+            <div class="card-title">
+                <span>🎓</span> Corrélation avec les épreuves du Baccalauréat (2023-2025)
+            </div>
+            <div class="card-content">
+                <p>✔️ Ce chapitre apparaît régulièrement dans la <strong>Première partie (utilisation des savoirs)</strong> : établissement d’équations différentielles, détermination de la flèche, de la portée ou de la déviation.</p>
+                <p>✔️ Sujet typique : « Mouvement d’un électron dans un condensateur plan » suivi d’une question sur la sensibilité verticale ou l’énergie.</p>
+                <p>✔️ Peut être couplé à la notion d’énergie cinétique : \( \Delta E_c = W(\vec{F}) = q\cdot U_{\text{AB}} \).</p>
+                <div class="bac-link" style="background: #ffffff;">
+                    💡 <strong>Méthodologie gagnante :</strong> 
+                    <ol style="margin-left: 1.2rem;">
+                        <li>Faire le bilan des forces (souvent uniquement la force électrique).</li>
+                        <li>Appliquer la 2ᵉ loi de Newton → vecteur accélération.</li>
+                        <li>Projeter sur les axes \((x,y)\) et intégrer deux fois.</li>
+                        <li>Utiliser les conditions initiales pour déterminer les constantes.</li>
+                        <li>Obtenir \(x(t)\) et \(y(t)\), puis éliminer \(t\) pour la trajectoire.</li>
+                        <li>Répondre aux questions numériques en faisant attention aux unités (cm → m).</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        🇨🇲 Fiche conforme au programme officiel de Physique – Terminale C & D (Cameroun) – Année 2025-2026<br>
+        Révision ciblée Baccalauréat : Leçon 18 – Mouvement dans un champ électrique uniforme ✅
+    </footer>
+</div>
+</body>
+</html>

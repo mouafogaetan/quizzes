@@ -1,0 +1,129 @@
+[
+  {
+    "intitule": "Comprendre la structure d'une requête SELECT",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Observe attentivement la table <strong>clients</strong> ci-dessous, issue de la base de données d'une petite librairie.</p>",
+      "images": [
+        "Tableau nommé 'clients' avec 4 colonnes : id_client (1, 2, 3), nom (DUPONT, NDIAYE, EFOULAN), prenom (Marie, Amadou, Christelle), ville (Douala, Yaoundé, Douala). Le tableau contient 3 lignes de données."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "En te basant sur la structure de la table, rappelle les rôles des mots-clés suivants dans une requête SQL : SELECT, FROM, WHERE.",
+        "niveau": "easy",
+        "reponse": "SELECT sert à indiquer quelles colonnes afficher. FROM sert à indiquer dans quelle table se trouvent les données. WHERE sert à filtrer les lignes selon une condition.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Explique à quoi sert la requête SQL suivante : <code>SELECT nom, prenom FROM clients WHERE ville = 'Douala';</code>",
+        "niveau": "medium",
+        "reponse": "Cette requête permet d'afficher le nom et le prénom de tous les clients qui habitent à Douala.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Appliquer SELECT pour une recherche simple",
+    "type": "competence",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Nous utilisons la table <strong>etudiants</strong> créée par un professeur principal.</p>",
+      "images": [
+        "Tableau nommé 'etudiants' avec les colonnes : matricule (E001, E002, E003), nom (Meyong, Atangana, Ngo), moyenne (12.5, 15.0, 8.5). Trois lignes de données."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écris une requête SQL qui permet d'afficher le matricule et la moyenne de tous les étudiants.",
+        "niveau": "easy",
+        "reponse": "SELECT matricule, moyenne FROM etudiants;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Le professeur souhaite connaitre le nom de l'étudiant dont le matricule est 'E002'. Écris la requête correspondante.",
+        "niveau": "medium",
+        "reponse": "SELECT nom FROM etudiants WHERE matricule = 'E002';",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Analyser des données avec SELECT et WHERE",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un gérant de supermarché utilise la table <strong>produits</strong> pour gérer son stock. La colonne <code>prix</code> est exprimée en FCFA.</p>",
+      "images": [
+        "Tableau 'produits' avec colonnes : id_produit (1,2,3,4), nom_produit (Riz, Huile, Sucre, Lait), categorie (Alimentaire, Droguerie, Alimentaire, Boisson), prix (2500, 1800, 900, 700). Quatre lignes de données."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Classe les requêtes suivantes par ordre croissant de complexité (de la plus simple à la plus complexe) en justifiant : <br> A. <code>SELECT * FROM produits;</code> <br> B. <code>SELECT nom_produit FROM produits WHERE prix < 1000;</code> <br> C. <code>SELECT nom_produit, prix FROM produits;</code>",
+        "niveau": "hard",
+        "reponse": "1. Requête A (la plus simple car elle affiche toutes les colonnes sans filtre). 2. Requête C (elle filtre les colonnes mais sans condition). 3. Requête B (la plus complexe car elle filtre à la fois les colonnes et les lignes avec une condition).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Le gérant veut la liste des produits de la catégorie 'Alimentaire'. Écris la requête SQL qui répond à ce besoin.",
+        "niveau": "medium",
+        "reponse": "SELECT nom_produit FROM produits WHERE categorie = 'Alimentaire';",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Résoudre un problème de gestion avec SELECT",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Dans le cadre d'un projet scolaire, tu dois aider le bureau d'une association culturelle à analyser sa base de données <strong>membres</strong>. Les colonnes sont : <code>id_membre</code> (numéro unique), <code>nom</code>, <code>date_adhesion</code> (format AAAA-MM-JJ), <code>cotisation</code> (payée ou non).</p>",
+      "images": [
+        "Tableau 'membres' avec 5 lignes : (1, Dikongue, 2024-01-15, oui), (2, Haman, 2024-02-20, non), (3, Mbarga, 2023-12-10, oui), (4, Fouda, 2024-03-05, non), (5, Aboubakar, 2024-01-30, oui)"
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Décompose le problème suivant en plusieurs étapes : <br> <strong>Problème :</strong> Afficher le nom des membres qui ont adhéré en 2024 ET qui ont payé leur cotisation. <br> a) Quelle est la condition sur l'année d'adhésion ? b) Quelle est la condition sur la cotisation ? c) Quelle requête SQL finale répond au problème ?",
+        "niveau": "very hard",
+        "reponse": "a) La date d'adhésion doit être comprise entre '2024-01-01' et '2024-12-31' ou utiliser l'extraction d'année (ANNEE(date_adhesion) = 2024). b) La colonne cotisation doit être égale à 'oui'. c) SELECT nom FROM membres WHERE date_adhesion BETWEEN '2024-01-01' AND '2024-12-31' AND cotisation = 'oui'; (OU variante avec fonction ANNEE selon le SGBD).",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Quelle est la condition sur l'année d'adhésion ?",
+            "niveau": "medium",
+            "reponse": "L'année d'adhésion doit être 2024. En SQL, on peut écrire : date_adhesion LIKE '2024-%' ou utiliser BETWEEN."
+          },
+          {
+            "numero": "1.b",
+            "texte": "Quelle est la condition sur la cotisation ?",
+            "niveau": "easy",
+            "reponse": "La cotisation doit être égale à 'oui'."
+          },
+          {
+            "numero": "1.c",
+            "texte": "Quelle requête SQL finale répond au problème ?",
+            "niveau": "hard",
+            "reponse": "SELECT nom FROM membres WHERE date_adhesion BETWEEN '2024-01-01' AND '2024-12-31' AND cotisation = 'oui';"
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "texte": "Propose une amélioration de la requête précédente pour afficher également la date d'adhésion des membres concernés, triés par ordre alphabétique. Écris la nouvelle requête.",
+        "niveau": "very hard",
+        "reponse": "SELECT nom, date_adhesion FROM membres WHERE date_adhesion BETWEEN '2024-01-01' AND '2024-12-31' AND cotisation = 'oui' ORDER BY nom ASC;",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

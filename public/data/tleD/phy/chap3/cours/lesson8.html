@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 8 : Champ dans un Condensateur</title>
+    <style>
+        /* Styles intégrés pour une compatibilité maximale et une impression propre */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e9ecef;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            color: #212529;
+        }
+
+        /* Conteneur principal de la fiche */
+        .revision-card {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête de la leçon */
+        .card-header {
+            background: linear-gradient(135deg, #0b3b5f 0%, #1b4f72 100%);
+            color: white;
+            padding: 1.75rem 2rem;
+            border-bottom: 4px solid #f39c12;
+        }
+
+        .module-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 0.25rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.01em;
+        }
+
+        .card-header h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .objective-tag {
+            background-color: #f39c12;
+            color: #1e2a36;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* Corps de la fiche */
+        .card-body {
+            padding: 2rem 2rem 2rem 2rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2rem;
+            border-left: 4px solid #e2e8f0;
+            padding-left: 1.25rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0b3b5f;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            font-size: 1.5rem;
+        }
+
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .info-box {
+            background-color: #f8fafc;
+            border-radius: 1rem;
+            padding: 1rem 1.25rem;
+            border: 1px solid #e2edf2;
+            transition: box-shadow 0.2s;
+        }
+
+        .info-box h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e4a76;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 0.25rem;
+        }
+
+        .formula {
+            background-color: #eef2ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            font-family: 'Courier New', 'SF Mono', monospace;
+            font-size: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .formula p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .bac-link {
+            background-color: #fef9e3;
+            border-left: 4px solid #f59e0b;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        ul, .liste-stylisee {
+            padding-left: 1.25rem;
+            margin: 0.75rem 0;
+        }
+        li {
+            margin-bottom: 0.35rem;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        th {
+            background-color: #1e4a76;
+            color: white;
+            padding: 0.6rem;
+            font-weight: 600;
+        }
+        td {
+            border: 1px solid #cbd5e1;
+            padding: 0.6rem;
+            vertical-align: top;
+        }
+        .footnote {
+            font-size: 0.8rem;
+            color: #4b5563;
+            margin-top: 1rem;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+        }
+
+        @media (max-width: 640px) {
+            .card-body {
+                padding: 1.25rem;
+            }
+            .card-header h1 {
+                font-size: 1.5rem;
+            }
+            .section-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js" async></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="revision-card">
+    <div class="card-header">
+        <div class="module-badge">MODULE 1 : MESURES ET INTERACTIONS FONDAMENTALES | CHAPITRE 3</div>
+        <h1>Leçon 8 : Champ électrostatique <br> à l'intérieur d'un condensateur</h1>
+        <h2>📐 Champ uniforme – Relation E = U/d</h2>
+        <div class="objective-tag">🎯 Objectif : Établir l'expression du champ électrostatique uniforme dans un condensateur plan et analyser le mouvement des particules.</div>
+    </div>
+    <div class="card-body">
+        
+        <!-- SECTION CONTEXTE BAC -->
+        <div class="bac-link">
+            📌 <strong>Lien Baccalauréat (2023-2025) :</strong> Mouvement des particules chargées dans un condensateur (déviation, accélération), calcul de champ uniforme, relation avec la tension.
+        </div>
+
+        <!-- SECTION 1 : DÉFINITIONS ET SCHÉMA -->
+        <div class="section">
+            <div class="section-title">⚡ 1. Condensateur plan et champ uniforme</div>
+            <div class="grid-2cols">
+                <div class="info-box">
+                    <h3>🧲 Définition</h3>
+                    <p>Un <strong>condensateur plan</strong> est constitué de deux armatures métalliques planes, parallèles, séparées par une distance $d$ faible devant leurs dimensions. Lorsqu'on applique une tension $U$ entre les armatures, un champ électrostatique uniforme règne dans l'espace inter-armatures (effets de bords négligés).</p>
+                </div>
+                <div class="info-box">
+                    <h3>📐 Caractéristiques du champ</h3>
+                    <ul>
+                        <li><strong>Direction :</strong> perpendiculaire aux armatures.</li>
+                        <li><strong>Sens :</strong> de l'armature positive vers l'armature négative.</li>
+                        <li><strong>Valeur constante :</strong> $E = \dfrac{U}{d}$.</li>
+                        <li><strong>Unité :</strong> $E$ en volt par mètre (V/m) ou N/C.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="formula">
+                <p>📌 FORMULE FONDAMENTALE : Champ uniforme dans un condensateur plan</p>
+                $$ \boxed{E = \frac{U}{d}} $$
+                <p style="font-size:0.85rem; margin-top:0.5rem;">Avec : $U$ : tension entre armatures (V), $d$ : distance entre armatures (m).</p>
+            </div>
+            <p>💡 <em>Remarque :</em> Le champ électrique est indépendant de la charge $Q$ et de la capacité $C$ ; il ne dépend que de $U$ et $d$.</p>
+        </div>
+
+        <!-- SECTION 2 : DÉMONSTRATION ET LIEN AVEC LE POTENTIEL -->
+        <div class="section">
+            <div class="section-title">📈 2. Relation avec la différence de potentiel</div>
+            <p>Dans un champ électrostatique uniforme, la circulation du champ électrique entre deux points A et B est reliée à la différence de potentiel :</p>
+            <div class="formula">
+                $$ U_{AB} = V_A - V_B = \int_A^B \vec{E} \cdot d\vec{\ell} $$
+                <p>Pour un champ uniforme et un déplacement parallèle aux lignes de champ :</p>
+                $$ U = E \times d \quad \Longrightarrow \quad E = \frac{U}{d} $$
+            </div>
+            <p>✅ <strong>Vérification de l'homogénéité :</strong> $[E] = M.L.T^{-3}.I^{-1}$ (car $U$ : $M.L^2.T^{-3}.I^{-1}$, $d$ : $L$) → homogène.</p>
+        </div>
+
+        <!-- SECTION 3 : MOUVEMENT D'UNE PARTICULE CHARGÉE -->
+        <div class="section">
+            <div class="section-title">🚀 3. Mouvement d'une particule chargée dans un condensateur</div>
+            <p>Une particule de charge $q$ et de masse $m$ pénétrant dans le champ uniforme subit la force électrostatique $\vec{F} = q\vec{E}$. En négligeant le poids (devant $F$), l'accélération est constante :</p>
+            <div class="formula">
+                $$ \vec{a} = \frac{q}{m} \vec{E} \quad \text{(vecteur constant)} $$
+            </div>
+            <div class="grid-2cols">
+                <div class="info-box">
+                    <h3>📌 Cas 1 : entrée perpendiculaire aux armatures</h3>
+                    <p>Si $\vec{v}_0$ est perpendiculaire aux armatures (selon $x$), le mouvement est <strong>rectiligne uniformément accéléré</strong> :</p>
+                    $$ v(t) = v_0 + \frac{qE}{m} t $$
+                    <p>La particule est déviée vers l'armature opposée.</p>
+                </div>
+                <div class="info-box">
+                    <h3>📌 Cas 2 : entrée parallèle aux armatures (déviation)</h3>
+                    <p>Si $\vec{v}_0$ est parallèle aux armatures (selon $x$), le mouvement est <strong>parabolique</strong> (similaire à un projectile). Équations horaires :</p>
+                    $$ x(t) = v_0 t \quad ; \quad y(t) = \frac{1}{2} \frac{qE}{m} t^2 $$
+                    <p>La déviation $y$ à la sortie dépend de $U$, $d$, $v_0$.</p>
+                </div>
+            </div>
+            <div class="bac-link">
+                🧪 <strong>Application typique du Bac :</strong> Déviation d'un électron dans un condensateur (tube cathodique, oscilloscope). Calcul de la flèche, vitesse à la sortie, déviation angulaire.
+            </div>
+        </div>
+
+        <!-- SECTION 4 : EXEMPLES DE CALCULS ET ANALOGIES -->
+        <div class="section">
+            <div class="section-title">📊 4. Tableau récapitulatif et analogie mécanique</div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Grandeur électrique</th><th>Analogie mécanique (chute libre)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Champ $\vec{E}$ (N/C)</td><td>Champ de pesanteur $\vec{g}$ (N/kg)</td></tr>
+                        <tr><td>Force $F = qE$</td><td>Poids $P = mg$</td></tr>
+                        <tr><td>Accélération $a = \frac{qE}{m}$</td><td>Accélération $g$</td></tr>
+                        <tr><td>Énergie potentielle électrique $E_p = qU$</td><td>Énergie potentielle gravitationnelle $E_p = mgh$</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="info-box" style="margin-top: 0.75rem;">
+                <h3>🔢 Exemple numérique type (Bac)</h3>
+                <p>Un condensateur plan a ses armatures distantes de $d = 2,0\ \text{cm}$. On applique $U = 400\ \text{V}$. Calculer $E$ :</p>
+                <p>$E = \dfrac{400}{0,02} = 20\ 000\ \text{V/m} = 2,0 \times 10^4\ \text{N/C}$.<br>
+                Un électron ($q = -e = -1,6\times10^{-19}\ \text{C}$) subit une force $F = |q|E = 3,2\times10^{-15}\ \text{N}$.</p>
+            </div>
+        </div>
+
+        <!-- SECTION 5 : POINTS CLÉS POUR LES EXERCICES -->
+        <div class="section">
+            <div class="section-title">✍️ 5. Compétences exigibles (sujets de Bac)</div>
+            <ul class="liste-stylisee">
+                <li>✅ <strong>Calculer</strong> l'intensité du champ électrique uniforme à partir de $U$ et $d$.</li>
+                <li>✅ <strong>Déterminer</strong> la direction et le sens du vecteur $\vec{E}$ connaissant la polarité des armatures.</li>
+                <li>✅ <strong>Établir</strong> les équations horaires du mouvement d’une particule chargée (électron, proton, ion) dans un condensateur.</li>
+                <li>✅ <strong>Comparer</strong> la déviation pour différentes particules (masses, charges).</li>
+                <li>✅ <strong>Utiliser</strong> la conservation de l’énergie : $\Delta E_c = q \cdot U$ pour une particule accélérée entre deux armatures.</li>
+            </ul>
+            <div class="formula">
+                <p>🔋 Énergie cinétique acquise par une particule accélérée depuis le repos :</p>
+                $$ \frac{1}{2} m v^2 = |q| \cdot U $$
+            </div>
+        </div>
+
+        <!-- SECTION 6 : ERREURS FRÉQUENTES ET CONSEILS -->
+        <div class="section">
+            <div class="section-title">⚠️ 6. Pièges à éviter (remédiation)</div>
+            <ul>
+                <li><strong>Ne pas confondre $U$ et $E$ :</strong> $E$ est un champ (N/C), $U$ est une tension (V). La relation $E = U/d$ n'est valable que pour un champ uniforme (condensateur plan).</li>
+                <li><strong>Signe de la charge :</strong> La force $\vec{F}=q\vec{E}$ change de sens selon le signe de $q$ (un électron est dévié en sens inverse d'un proton).</li>
+                <li><strong>Oublier les effets de bords :</strong> Dans les exercices théoriques, on néglige les bords, donc le champ est uniforme partout entre les armatures.</li>
+                <li><strong>Unités :</strong> Toujours convertir $d$ en mètres (cm → m).</li>
+            </ul>
+        </div>
+
+        <!-- SECTION 7 : SYNTHÈSE RAPIDE POUR RÉVISER -->
+        <div class="section">
+            <div class="section-title">📌 Synthèse – Ce qu’il faut retenir absolument</div>
+            <div class="grid-2cols">
+                <div class="info-box">
+                    <h3>🧪 Définition clé</h3>
+                    <p>Condensateur plan → champ uniforme $\vec{E}$ perpendiculaire aux plaques. Intensité $E = U/d$.</p>
+                </div>
+                <div class="info-box">
+                    <h3>📈 Trajectoire</h3>
+                    <p>Charge dans un champ uniforme : mouvement parabolique (si $v_0$ oblique ou parallèle) ou rectiligne accéléré (si $v_0$ colinéaire à $\vec{E}$).</p>
+                </div>
+            </div>
+            <div class="bac-link" style="margin-top: 1rem;">
+                🎓 <strong>Conseil examen :</strong> Lors d'un exercice sur le condensateur, commencez par schématiser les armatures (+ et -), tracer $\vec{E}$, puis appliquer le PFD. Pour la déviation, pensez aux équations horaires paramétriques et éliminez le temps.
+            </div>
+        </div>
+
+        <div class="footnote">
+            Fiche conforme au programme de Physique Terminale C/D – Cameroun (2025-2026) | Baccalauréat : épreuve de champ électrique uniforme et mouvement de particules chargées.
+        </div>
+    </div>
+</div>
+</body>
+</html>

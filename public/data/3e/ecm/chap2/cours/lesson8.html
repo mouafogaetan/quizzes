@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Les Coopératives (3e)</title>
+    <!-- MathJax Configuration (optionnel mais inclus pour cohérence) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 8 : Les Coopératives</h1>
+            <p class="lesson-subtitle">ECM · Classe de Troisième · Module 2 : Les Associations</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section de concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Carte 1 : Définition et types -->
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Qu'est-ce qu'une coopérative ?</h3>
+                    <p class="card-description">
+                        Une coopérative est une association de personnes (ou d'entreprises) qui se regroupent volontairement pour satisfaire leurs besoins économiques, sociaux ou culturels communs. Elle repose sur des valeurs d'entraide, de responsabilité et de transparence. Son but n'est pas uniquement lucratif, mais aussi de servir les intérêts de ses membres (coopérateurs).
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Principes fondamentaux :</strong> adhésion volontaire, gestion démocratique (un homme = une voix), participation économique des membres, autonomie, éducation et formation.</li>
+                        <li><strong>Transparence budgétaire :</strong> obligation de rendre compte clairement de la gestion des fonds aux membres.</li>
+                        <li><strong>Mutuelle :</strong> forme particulière de coopérative centrée sur la solidarité et la prévoyance (ex: mutuelle de santé).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Les différents types de coopératives</h3>
+                    <p class="card-description">
+                        On distingue généralement trois grandes familles de coopératives selon leur activité principale :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Coopératives de production :</strong> Elles regroupent des producteurs (agriculteurs, artisans) pour mettre en commun leurs moyens de production, acheter du matériel ou écouler leurs produits. <em>Exemple :</em> une coopérative cacaoyère.</li>
+                        <li><strong>Coopératives de consommation :</strong> Créées par des consommateurs pour acheter en gros et bénéficier de prix plus bas. <em>Exemple :</em> un magasin coopératif alimentaire.</li>
+                        <li><strong>Coopératives de crédit (ou d'épargne) :</strong> Elles collectent l'épargne des membres et accordent des prêts à des taux avantageux. <em>Exemple :</em> les COOPEC (Coopératives d'Épargne et de Crédit) au Cameroun.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Mode de création et fonctionnement</h3>
+                    <p class="card-description">
+                        La création d'une coopérative obéit à des règles précises pour garantir sa pérennité et sa légitimité.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Création :</strong> Elle est constituée par un nombre minimum de personnes physiques ou morales. Les membres élaborent des statuts, déposent un capital et se font immatriculer (au Cameroun, auprès du registre des coopératives du MINADER ou MINPMEESA selon le secteur).</li>
+                        <li><strong>Fonctionnement démocratique :</strong> 
+                            <ul style="margin-left: 1.5rem; margin-top: 0.3rem; list-style-type: circle;">
+                                <li><strong>Assemblée Générale (AG) :</strong> Instance suprême. Tous les membres s'y réunissent pour voter les orientations, approuver les comptes et élire les dirigeants.</li>
+                                <li><strong>Conseil d'Administration (CA) :</strong> Organe de gestion élu par l'AG. Il met en œuvre les décisions et gère la coopérative au quotidien.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Rôle :</strong> Faciliter l'accès aux ressources, réduire les coûts, améliorer le pouvoir de négociation, créer une dynamique de solidarité et d'entraide.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples concrets & Applications</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Situation : La faillite évitée grâce à la coopérative</h3>
+                    <p class="exemple-context">
+                        Dans un village de l'Ouest Cameroun, plusieurs petits planteurs de café peinent à vendre leur production. Les acheteurs leur proposent des prix très bas. Un groupement de planteurs décide de créer une coopérative de production. Ils mettent en commun leur récolte, achètent une petite machine à torréfier et négocient directement avec des acheteurs en ville.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Application :</strong> Grâce à la coopérative, les planteurs obtiennent un meilleur prix pour leur café (augmentation de 25% du revenu). Ils peuvent aussi mutualiser l'achat d'engrais et de semences, ce qui réduit leurs coûts. La coopérative leur évite la faillite individuelle et assure une stabilité économique.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Une coopérative ne peut réussir sans la participation active de ses membres. La solidarité et le respect des décisions de l'Assemblée Générale sont essentiels.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Étude d'un organigramme simplifié de coopérative</h3>
+                    <p class="exemple-context">
+                        Une coopérative d'épargne et de crédit (COOPEC) organise sa gouvernance de la manière suivante.
+                    </p>
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <!-- Image illustrative pour l'organigramme. L'IA pourra générer un schéma basé sur cette description. -->
+                        <img src="" alt="Organigramme d'une coopérative : Assemblée Générale (au sommet) élit le Conseil d'Administration et le Comité de Surveillance. Le CA nomme le Directeur Général qui supervise les services (crédit, épargne, comptabilité)." style="max-width: 100%; border-radius: 0.5rem; border: 1px solid #e2e8f0; background-color: #f1f5f9; padding: 0.5rem;">
+                        <p style="font-size: 0.8rem; color: #475569; margin-top: 0.5rem;">Schéma : Structure type d'une coopérative de crédit.</p>
+                    </div>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> L'Assemblée Générale (tous les sociétaires) est souveraine. Elle élit le Conseil d'Administration qui définit la stratégie, et un Comité de Surveillance qui contrôle la gestion. Le Directeur, nommé par le CA, assure la gestion opérationnelle avec les employés.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section dédiée au TD sur l'UCCAO -->
+            <section class="concept-section">
+                <h2 class="section-title">🏦 Focus Travaux Dirigés : L'UCCAO</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">L'Union Centrale des Coopératives Agricoles de l'Ouest (UCCAO)</h3>
+                    <p class="card-description">
+                        L'UCCAO est une structure faîtière (une union de coopératives) qui regroupe de nombreuses coopératives agricoles dans la région de l'Ouest Cameroun. Elle joue un rôle majeur dans le secteur du café, du cacao et d'autres produits agricoles.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Fonctionnement :</strong> Elle collecte, traite et commercialise les produits agricoles de ses coopératives membres. Elle négocie les prix avec les exportateurs, apporte un appui technique et financier aux planteurs.</li>
+                        <li><strong>Produits :</strong> Café (Arabica et Robusta), cacao, miel, huile de palme, etc. Elle transforme localement une partie de la production (torréfaction, conditionnement) pour ajouter de la valeur.</li>
+                        <li><strong>Rôle économique :</strong> 
+                            <ul style="margin-left: 1.5rem; margin-top: 0.3rem; list-style-type: circle;">
+                                <li>Améliore les revenus des petits agriculteurs en supprimant les intermédiaires.</li>
+                                <li>Favorise l'agriculture durable et la traçabilité des produits.</li>
+                                <li>Crée des emplois dans les zones rurales (usines de transformation, magasins).</li>
+                            </ul>
+                        </li>
+                        <li><strong>Transparence :</strong> L'UCCAO publie les résultats de ses ventes et reverse les bénéfices aux coopératives membres sous forme de ristournes, selon la quantité de produits livrés.</li>
+                    </ul>
+                    <div style="margin-top: 1rem; text-align: center;">
+                        <img src="" alt="Logo ou image de l'UCCAO montrant des sacs de café et de cacao estampillés UCCAO, avec des agriculteurs lors d'une assemblée." style="max-width: 80%; border-radius: 0.5rem; border: 1px solid #cbd5e1;">
+                        <p style="font-size: 0.8rem; margin-top: 0.3rem;">L'UCCAO : un modèle de coopérative agricole au Cameroun.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section "À ne pas confondre" ou pièges à éviter -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / Points de vigilance</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confusion entre tontine et coopérative :</span> La tontine est une forme d'épargne informelle et temporaire, tandis que la coopérative est une structure formelle, durable et régie par des statuts et une Assemblée Générale.</li>
+                        <li><span class="bold">Mauvaise gestion / manque de transparence :</span> Une coopérative peut faire faillite si les dirigeants ne respectent pas le principe de transparence budgétaire ou si les membres ne contrôlent pas la gestion via le Conseil d'Administration.</li>
+                        <li><span class="bold">Oublier la double qualité :</span> Dans une coopérative, les membres sont à la fois <strong>associés</strong> (ils participent aux décisions) et <strong>utilisateurs</strong> (ils bénéficient des services). Cette double qualité est fondamentale.</li>
+                        <li><span class="bold">Confondre "mutuelle" et "coopérative" :</span> Une mutuelle est une forme particulière de coopérative dont l'objet principal est la protection sociale (santé, prévoyance). Toutes les mutuelles sont des coopératives, mais toutes les coopératives ne sont pas des mutuelles.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des savoir-être et compétences transversales -->
+            <section class="concept-section">
+                <h2 class="section-title">🤝 Les Savoir-être à développer</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Au-delà des connaissances, cette leçon vise à forger des qualités essentielles pour la vie en société et pour l'engagement associatif :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Honnêteté :</strong> Essentielle dans la gestion des fonds communs et les relations entre coopérateurs.</li>
+                        <li><strong>Sens de l’intérêt général :</strong> Privilégier le bien du groupe plutôt que des intérêts personnels.</li>
+                        <li><strong>Esprit d’équipe :</strong> Travailler ensemble pour atteindre des objectifs communs.</li>
+                        <li><strong>Esprit d’initiative :</strong> Proposer des idées pour améliorer le fonctionnement de la coopérative ou développer de nouvelles activités.</li>
+                        <li><strong>Intégrité :</strong> Respecter les engagements, les statuts et les décisions de l'Assemblée Générale.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Révision basée sur le programme officiel d'ECM (3e) - Cameroun · Module 2 : Les Associations · <a href="#">Retour au sommaire</a> · 📚</p>
+        </footer>
+    </div>
+</body>
+</html>

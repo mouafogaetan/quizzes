@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Fécondation chez les mammifères</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Images */
+        .schema-img {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+            display: block;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .img-caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 7 : La fécondation chez les mammifères</h1>
+            <p class="lesson-subtitle">SVTEEHB - Terminale D | Module I : Le monde vivant | Chapitre 3 : La reproduction et le maintien de l'espèce</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Définition de la fécondation</h3>
+                    <p class="card-description">
+                        La fécondation est la rencontre et la fusion des gamètes mâle (spermatozoïde) et femelle (ovocyte II) aboutissant à la formation d'une cellule-œuf ou <strong>zygote</strong> (2n chromosomes). Chez les mammifères, elle est <strong>interne</strong> et a lieu dans la partie ampullaire de la trompe de Fallope (oviducte).
+                    </p>
+                    <img src="" alt="Schéma de la fécondation dans la trompe de Fallope montrant le spermatozoïde rencontrant l'ovocyte" class="schema-img">
+                    <div class="img-caption">Figure 1 : Site de la fécondation chez la femme (trompe utérine).</div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Les grandes étapes de la fécondation</h3>
+                    <p class="card-description">
+                        La fécondation se déroule en plusieurs phases successives et irréversibles :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Étape 1 – Approche et pénétration des enveloppes de l'ovule :</strong> Les spermatozoïdes remontent les voies génitales femelles. Ils subissent la <strong>capacitation</strong> (modifications membranaires) et la <strong>réaction acrosomique</strong> (libération d'enzymes pour traverser la corona radiata et la zone pellucide). Un seul spermatozoïde pénètre l'ovocyte.</li>
+                        <li><strong>Étape 2 – Activation de l'ovule :</strong> Dès l'entrée du spermatozoïde, l'ovocyte achève sa seconde division méiotique et émet le <strong>deuxième globule polaire</strong>. Il se produit la <strong>réaction corticale</strong> (libération de granules qui modifient la zone pellucide) empêchant la polyspermie.</li>
+                        <li><strong>Étape 3 – Fusion des pronoyaux :</strong> Le noyau du spermatozoïde devient le <strong>pronoyau mâle</strong> et le noyau de l'ovocyte le <strong>pronoyau femelle</strong>. Ils se déplacent l'un vers l'autre, leurs membranes se dissolvent et leurs chromosomes s'apparient pour former le <strong>zygote</strong> (2n chromosomes).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Principales structures impliquées</h3>
+                    <ul class="concept-list">
+                        <li><strong>Acrosome :</strong> Vésicule située à la tête du spermatozoïde contenant des enzymes (hyaluronidase, acrosine) lysant les enveloppes de l'ovule.</li>
+                        <li><strong>Zone pellucide :</strong> Enveloppe glycoprotéique entourant l'ovocyte, jouant un rôle dans la reconnaissance espèce-spécifique.</li>
+                        <li><strong>Cône de fécondation :</strong> Éminence cytoplasmique formée par l'ovocyte au point de contact avec le spermatozoïde, facilitant son incorporation.</li>
+                        <li><strong>Pronoyaux :</strong> Noyaux haploïdes (n) du spermatozoïde et de l'ovocyte avant leur fusion.</li>
+                    </ul>
+                    <img src="" alt="Schéma des structures du spermatozoïde (tête avec acrosome, flagelle) et de l'ovocyte (zone pellucide, globule polaire)" class="schema-img">
+                    <div class="img-caption">Figure 2 : Gamètes mâle et femelle chez les mammifères.</div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Résultats et conséquences</h3>
+                    <ul class="concept-list">
+                        <li><strong>Restauration du caryotype diploïde (2n) :</strong> 23 chromosomes du père + 23 chromosomes de la mère → 46 chromosomes (2n=46 chez l'être humain).</li>
+                        <li><strong>Détermination du sexe génétique :</strong> Un spermatozoïde porteur du chromosome X donne une fille (XX), un spermatozoïde Y donne un garçon (XY).</li>
+                        <li><strong>Déclenchement des divisions de segmentation :</strong> Le zygote commence à se diviser (mitoses) pour former l'embryon (morula, puis blastocyste).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension (Lien avec l'examen)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Examen national – Session 2025, Partie A</h3>
+                    <p class="exemple-context">
+                        On étudie les étapes de la fécondation chez une mammifère. Après observation au microscope électronique, on constate que la zone pellucide d'un ovocyte présente des altérations et qu'aucun spermatozoïde ne peut la traverser. Quel est le problème ? Justifiez.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution / Explication :</strong> La zone pellucide est essentielle pour la reconnaissance et la fixation du spermatozoïde. Si elle est altérée, la réaction acrosomique ne peut pas se faire correctement, la traversée des enveloppes est impossible et la fécondation échoue. Cela peut être une cause d'infertilité.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Pensez toujours aux trois étapes principales (pénétration → activation → fusion des pronoyaux) pour répondre aux questions sur la fécondation.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Examen national – Session 2023, Partie A (spermogramme et défaut de formation du cône de fécondation)</h3>
+                    <p class="exemple-context">
+                        Un couple consulte pour infertilité. Le spermogramme du mari montre des spermatozoïdes ayant une morphologie anormale : absence d'acrosome. Expliquez pourquoi cette anomalie empêche la fécondation.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong> L'acrosome contient les enzymes nécessaires à la digestion de la zone pellucide. Sans acrosome, le spermatozoïde ne peut pas pénétrer l'ovocyte ; même s'il entre en contact, la réaction acrosomique n'a pas lieu → pas de fusion possible. La FIV-ICSI (injection directe du spermatozoïde dans l'ovocyte) peut être une solution.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Rappel : L'acrosome est un organite clé de la tête du spermatozoïde, formé à partir de l'appareil de Golgi lors de la spermatogenèse.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section schéma récapitulatif -->
+            <section class="exemple-section">
+                <h2 class="section-title">🔬 Schéma-bilan de la fécondation</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Voici un schéma synthétique des différentes étapes de la fécondation chez les mammifères :
+                    </p>
+                    <img src="" alt="Schéma en plusieurs vignettes : 1) spermatozoïde autour de l'ovocyte, 2) réaction acrosomique, 3) pénétration, 4) réaction corticale, 5) expulsion du 2ème globule polaire, 6) fusion des pronoyaux" class="schema-img">
+                    <div class="img-caption">Figure 3 : Étapes clés de la fécondation (vue schématique).</div>
+                    <ul class="concept-list" style="margin-top: 1rem;">
+                        <li><strong>A</strong> – Les spermatozoïdes rencontrent l'ovocyte entouré de ses enveloppes.</li>
+                        <li><strong>B</strong> – Réaction acrosomique et pénétration d'un seul spermatozoïde.</li>
+                        <li><strong>C</strong> – Activation de l'ovule, réaction corticale (blocage de la polyspermie).</li>
+                        <li><strong>D</strong> – Achèvement de la méiose de l'ovocyte (émission du 2<sup>e</sup> globule polaire).</li>
+                        <li><strong>E</strong> – Formation des pronoyaux mâle et femelle puis fusion → zygote.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Optionnel: section "À ne pas confondre" ou "Pièges à éviter" -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Ne pas confondre :</span> <strong>Fécondation</strong> (fusion des gamètes) et <strong>nidation</strong> (implantation de l'embryon dans l'utérus). La nidation survient environ 6-7 jours après la fécondation.</li>
+                        <li><span class="bold">Attention :</span> Le <strong>deuxième globule polaire</strong> est émis <strong>après</strong> la pénétration du spermatozoïde, et non avant. C'est un signe d'activation de l'ovule.</li>
+                        <li><span class="bold">Erreur fréquente :</span> Croire que plusieurs spermatozoïdes peuvent fusionner normalement avec l'ovocyte. La <strong>réaction corticale</strong> empêche la polyspermie, qui serait létale pour le zygote.</li>
+                        <li><span class="bold">Précision importante :</span> Chez les mammifères, l'ovule est libéré au stade <strong>ovocyte II</strong> (bloqué en métaphase II). La fécondation lève ce blocage.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section : liens avec les techniques de PMA -->
+            <section class="concept-section">
+                <h2 class="section-title">🧬 Applications médicales (PMA)</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        La compréhension des mécanismes de la fécondation a permis le développement de la <strong>Procréation Médicalement Assistée (PMA)</strong> :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>FIV (Fécondation In Vitro) :</strong> mise en contact des ovocytes et des spermatozoïdes dans une éprouvette. La fécondation a lieu naturellement si les gamètes sont fonctionnels.</li>
+                        <li><strong>ICSI (IntraCytoplasmic Sperm Injection) :</strong> injection d'un seul spermatozoïde directement dans le cytoplasme de l'ovocyte. Utilisée en cas de défaut de l'acrosome ou d'oligospermie sévère.</li>
+                        <li><strong>FIVETE (Fécondation In Vitro et Transfert d'Embryon) :</strong> technique où l'embryon obtenu est transféré dans l'utérus de la mère ou d'une mère porteuse.</li>
+                    </ul>
+                    <img src="" alt="Schéma comparatif de la FIV classique (spermatozoïdes autour de l'ovocyte) et de l'ICSI (micro-pipette injectant un spermatozoïde dans l'ovocyte)" class="schema-img">
+                    <div class="img-caption">Figure 4 : Principe de la FIV et de l'ICSI.</div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Révision créée d'après le programme officiel SVTEEHB Terminale D (session 2023-2025) · <a href="#">Source : Ministère de l'Enseignement Secondaire Cameroun</a> · 📚 Fiche rédigée par enseignant SVTEEHB</p>
+        </footer>
+    </div>
+</body>
+</html>

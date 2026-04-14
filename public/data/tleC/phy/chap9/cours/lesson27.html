@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 27 : Capacité d'un condensateur</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #1a1a2e;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        .fiche-revision {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* En-tête */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            margin-top: 0.75rem;
+        }
+
+        /* Grille principale */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        /* Cartes */
+        .card {
+            background: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #f8f9fc;
+            padding: 0.9rem 1.5rem;
+            border-bottom: 2px solid #2a5298;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #1e3c72;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-header .emoji {
+            font-size: 1.3rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        /* Formules et notions clés */
+        .formula {
+            background-color: #f0f7ff;
+            padding: 0.8rem 1rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            font-size: 1rem;
+            text-align: center;
+            margin: 0.75rem 0;
+            border-left: 4px solid #2a5298;
+            font-weight: 600;
+        }
+
+        .notion-item {
+            background-color: #fef9e6;
+            border-left: 4px solid #f4c542;
+            padding: 0.6rem 1rem;
+            margin: 0.75rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .notion-item strong {
+            color: #b45f06;
+        }
+
+        .example {
+            background-color: #e8f5e9;
+            border-left: 4px solid #2e7d32;
+            padding: 0.8rem 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .example strong {
+            color: #1b5e20;
+        }
+
+        ul, .liste {
+            padding-left: 1.5rem;
+            margin: 0.75rem 0;
+        }
+
+        li {
+            margin: 0.4rem 0;
+        }
+
+        .btn-bac {
+            background-color: #e63946;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 2rem;
+            display: inline-block;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: none;
+            border-top: 1px solid #dee2e6;
+        }
+
+        footer {
+            background-color: #f8f9fc;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-revision">
+        <!-- En-tête avec identification de la leçon -->
+        <div class="header">
+            <h1>📘 Leçon 27 : Capacité d'un condensateur</h1>
+            <div class="subtitle">Module 4 – Électrocinétique | Terminale C & D</div>
+            <div class="badge">🎯 Programme officiel Cameroun 2025-2026 • Baccalauréat</div>
+        </div>
+
+        <div class="content-grid">
+            <!-- Colonne gauche : Objectifs et notions clés -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="emoji">🎯</span> Objectifs de la leçon
+                </div>
+                <div class="card-body">
+                    <ul class="liste">
+                        <li>✅ Définir la capacité d’un condensateur et connaître son unité (le Farad).</li>
+                        <li>✅ Établir l’expression de la capacité d’un condensateur plan.</li>
+                        <li>✅ Expliquer le rôle de la permittivité du vide et de la permittivité relative du diélectrique.</li>
+                        <li>✅ Calculer la capacité d’un condensateur à partir de ses caractéristiques géométriques.</li>
+                        <li>✅ <strong>Lien Bac</strong> : problèmes de calcul de capacité et influence du diélectrique (sujets 2023-2025).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Colonne droite : Notions clés fondamentales -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="emoji">⚡</span> Notions clés
+                </div>
+                <div class="card-body">
+                    <div class="notion-item">
+                        <strong>🔹 Condensateur :</strong> Dipôle constitué de deux armatures conductrices séparées par un isolant (diélectrique).
+                    </div>
+                    <div class="notion-item">
+                        <strong>🔹 Capacité (C) :</strong> Aptitude d’un condensateur à stocker des charges électriques. <br>
+                        $C = \frac{Q}{U}$ &nbsp;&nbsp; avec $Q$ : charge (Coulomb) et $U$ : tension (Volt).
+                    </div>
+                    <div class="notion-item">
+                        <strong>🔹 Unité :</strong> Farad (F) ; souvent sous-multiples : $\mu F = 10^{-6}F$, $nF = 10^{-9}F$, $pF = 10^{-12}F$.
+                    </div>
+                    <div class="notion-item">
+                        <strong>🔹 Condensateur plan :</strong> Deux armatures planes, parallèles, de surface $S$, séparées par une distance $d$.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ligne suivante : Expression de la capacité, formules -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="emoji">📐</span> Capacité d’un condensateur plan
+                </div>
+                <div class="card-body">
+                    <p><strong>Expression générale :</strong></p>
+                    <div class="formula">
+                        $C = \varepsilon_0 \cdot \varepsilon_r \cdot \frac{S}{d}$
+                    </div>
+                    <ul>
+                        <li>$\varepsilon_0$ : permittivité diélectrique du vide ($\varepsilon_0 = 8,85 \times 10^{-12} \, F/m$).</li>
+                        <li>$\varepsilon_r$ : permittivité relative du diélectrique (sans unité, $\varepsilon_r \ge 1$).</li>
+                        <li>$S$ : surface des armatures en $m^2$.</li>
+                        <li>$d$ : distance entre les armatures en $m$.</li>
+                    </ul>
+                    <div class="example">
+                        <strong>💡 Exemple :</strong> Pour un condensateur plan avec $S = 0,01 \, m^2$, $d = 0,001 \, m$, $\varepsilon_r = 1$ (air) : <br>
+                        $C = 8,85.10^{-12} \times \frac{0,01}{0,001} = 8,85.10^{-11} F = 88,5 \, pF$.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Facteurs influençant la capacité -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="emoji">🔍</span> Influence des paramètres
+                </div>
+                <div class="card-body">
+                    <div class="notion-item">
+                        <strong>✔ Surface S :</strong> $C$ est proportionnelle à $S$ (plus les armatures sont grandes, plus la capacité est élevée).
+                    </div>
+                    <div class="notion-item">
+                        <strong>✔ Distance d :</strong> $C$ est inversement proportionnelle à $d$ (plus les armatures sont rapprochées, plus $C$ est grande).
+                    </div>
+                    <div class="notion-item">
+                        <strong>✔ Diélectrique ($\varepsilon_r$) :</strong> Un isolant polaire (papier, céramique, mica) augmente la capacité : $C = \varepsilon_r \cdot C_0$ où $C_0$ est la capacité dans le vide.
+                    </div>
+                    <p style="margin-top: 0.75rem;"><span class="btn-bac">BAC</span> <strong>Conseil :</strong> Les exercices du baccalauréat portent souvent sur l’influence de l’insertion d’un diélectrique ou la variation de l’écartement $d$.</p>
+                </div>
+            </div>
+
+            <!-- Ordre de grandeur et application -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="emoji">🧠</span> À retenir absolument
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>🎯 <strong>Définition :</strong> $C = Q/U$ : un Farad correspond à 1 Coulomb par Volt.</li>
+                        <li>🎯 Le Farad est une très grande unité ; les condensateurs usuels ont des capacités de l’ordre du $\mu F$ au $mF$.</li>
+                        <li>🎯 Le champ électrique à l’intérieur d’un condensateur plan s’écrit $E = \frac{U}{d}$ et $E = \frac{\sigma}{\varepsilon_0 \varepsilon_r}$ (densité surfacique $\sigma = Q/S$).</li>
+                    </ul>
+                    <div class="formula">
+                        $\displaystyle C = \frac{\varepsilon_0 \varepsilon_r S}{d}$  &nbsp;⟹&nbsp;  plus $S$ grand, plus $C$ grand ; plus $d$ grand, plus $C$ petit.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exercice type et lien bac -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="emoji">📝</span> Exercice type (Bac)
+                </div>
+                <div class="card-body">
+                    <p><strong>Énoncé :</strong> Un condensateur plan a ses armatures de surface $S = 200 \, cm^2$ séparées par $d = 2,0 \, mm$. Le diélectrique est du verre ($\varepsilon_r = 7,0$).</p>
+                    <ol>
+                        <li>Calculer la capacité $C$ du condensateur.</li>
+                        <li>On applique une tension $U = 12 \, V$. Calculer la charge $Q$ portée par chaque armature.</li>
+                    </ol>
+                    <div class="example">
+                        <strong>✅ Correction :</strong><br>
+                        1. $S = 200 \times 10^{-4} = 0,0200 \, m^2$ ; $d = 2,0 \times 10^{-3} m$<br>
+                        $C = 8,85.10^{-12} \times 7,0 \times \dfrac{0,0200}{2,0.10^{-3}} = 8,85.10^{-12} \times 7,0 \times 10 = 6,195 \times 10^{-10} F \approx 619,5 \, pF$.<br>
+                        2. $Q = C \times U = 6,195.10^{-10} \times 12 = 7,43 \times 10^{-9} C = 7,43 \, nC$.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pied de page avec rappel des compétences -->
+        <footer>
+            🔋 Compétences évaluées : Calculer une capacité | Utiliser la relation $C = \varepsilon_0 \varepsilon_r S/d$ | Relier charge, capacité et tension. <br>
+            📌 Révision basée sur le programme officiel de Physique – Terminale C & D (Cameroun) – Baccalauréat 2025-2026.
+        </footer>
+    </div>
+</body>
+</html>

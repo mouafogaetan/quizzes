@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Les structures itératives (Boucles) | UE12</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petites adaptations spécifiques pour les blocs de code */
+        pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            border-left: 4px solid #3b82f6;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+            color: #0f172a;
+            font-weight: 500;
+        }
+        .code-block {
+            margin: 0.8rem 0;
+        }
+        .inline-code {
+            background-color: #eef2ff;
+            font-weight: 600;
+            color: #1e40af;
+        }
+        .comparaison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        .comparaison-table th, .comparaison-table td {
+            border: 1px solid #cbd5e1;
+            padding: 0.6rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .comparaison-table th {
+            background-color: #e2e8f0;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">📚 UE12 : Les structures itératives (boucles)</h1>
+            <p class="lesson-subtitle">Algorithmique & Programmation | 1ère C, D, E (Probatoire) | Module 2 : Algorithmes</p>
+        </header>
+
+        <!-- Contenu principal -->
+        <main class="fiche-content">
+            <!-- SECTION CONCEPTS CLÉS -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">🔁 Définition : structure itérative (boucle)</h3>
+                    <p class="card-description">
+                        Une <strong>structure itérative</strong> (ou boucle) est une structure de contrôle qui permet de répéter 
+                        une séquence d’instructions un certain nombre de fois ou tant qu’une condition est vraie. 
+                        Elle évite la duplication de code et rend les programmes plus concis et modulables.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Utilité : parcourir des tableaux, calculer des sommes, afficher une série, valider une saisie, etc.</li>
+                        <li>En algorithmique, trois familles principales : <strong>POUR</strong> (itération bornée), <strong>TANT QUE</strong> et <strong>RÉPÉTER JUSQU’À</strong> (itérations conditionnelles).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">1️⃣ Boucle POUR / FOR (nombre d’itérations connu)</h3>
+                    <p class="card-description">
+                        On utilise la boucle <strong>POUR</strong> quand on connaît à l’avance le nombre de répétitions. 
+                        Un compteur (souvent noté <em>i</em>) prend successivement des valeurs entre une borne inférieure et supérieure.
+                    </p>
+                    <div class="code-block">
+                        <strong>Syntaxe algorithmique :</strong>
+                        <pre>pour i allant de 1 à N pas 1 faire
+    instruction(s)
+finpour</pre>
+                        <strong>Syntaxe en langage C :</strong>
+                        <pre>for (i = 1; i <= N; i++) {
+    instruction(s);
+}</pre>
+                    </div>
+                    <ul class="concept-list">
+                        <li>Le <span class="inline-code">pas</span> peut être différent de 1 (ex : pas = 2 pour aller de 1 à N par bonds de 2).</li>
+                        <li>En C, l’indice commence souvent à 0 (pour les tableaux) : <code>for(i=0; i<N; i++)</code>.</li>
+                        <li>L’opérateur <code>++</code> incrémente la variable de 1 : <code>i++</code> équivaut à <code>i = i+1</code>.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2️⃣ Boucle TANT QUE / WHILE (condition pré-test)</h3>
+                    <p class="card-description">
+                        La boucle <strong>TANT QUE</strong> répète un bloc d’instructions tant qu’une condition est vraie. 
+                        <strong>La condition est testée avant chaque itération</strong> → si la condition est fausse dès le début, la boucle ne s’exécute pas du tout.
+                    </p>
+                    <div class="code-block">
+                        <strong>Algorithmique :</strong>
+                        <pre>tant que (condition) faire
+    instruction(s)
+fintantque</pre>
+                        <strong>Langage C :</strong>
+                        <pre>while (condition) {
+    instruction(s);
+}</pre>
+                    </div>
+                    <ul class="concept-list">
+                        <li>Exemple : <code>tant que (note &lt; 0 ou note &gt; 20) faire lire(note) ;</code> → validation de saisie.</li>
+                        <li>Il faut s’assurer que la condition devienne fausse à un moment (sinon boucle infinie).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3️⃣ Boucle RÉPÉTER JUSQU’À / DO...WHILE (condition post-test)</h3>
+                    <p class="card-description">
+                        La boucle <strong>RÉPÉTER JUSQU’À</strong> exécute le bloc d’instructions <strong>au moins une fois</strong> 
+                        puis vérifie la condition d’arrêt. On répète jusqu’à ce que la condition devienne vraie.
+                    </p>
+                    <div class="code-block">
+                        <strong>Algorithmique :</strong>
+                        <pre>répéter
+    instruction(s)
+jusqu'à (condition)</pre>
+                        <strong>Langage C :</strong>
+                        <pre>do {
+    instruction(s);
+} while (condition);   // attention : on continue tant que condition vraie en C (différence sémantique)</pre>
+                    </div>
+                    <div class="exemple-astuce" style="margin-top: 0.5rem;">
+                        💡 <strong>Piège fréquent :</strong> En C, la boucle <code>do...while</code> continue <strong>tant que</strong> la condition est vraie, alors qu’en algorithmique francophone, "jusqu'à" signifie arrêt quand condition vraie. Bien comprendre cette nuance !
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">📊 Tableau comparatif des 3 boucles</h3>
+                    <table class="comparaison-table">
+                        <thead>
+                            <tr><th>Boucle</th><th>Quand l’utiliser ?</th><th>Test de la condition</th><th>Exécution minimale</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>POUR (for)</strong></td><td>Nombre d’itérations connu</td><td>Avant (via compteur)</td><td>0 fois (si N &lt; 1)</td></tr>
+                            <tr><td><strong>TANT QUE (while)</strong></td><td>Itération conditionnée, peut ne pas s’exécuter</td><td>Pré-test</td><td>0 fois</td></tr>
+                            <tr><td><strong>RÉPÉTER (do...while)</strong></td><td>Au moins une exécution nécessaire</td><td>Post-test</td><td>1 fois minimum</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION EXEMPLES DE COMPRÉHENSION -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Boucle POUR – Somme des entiers de 1 à N</h3>
+                    <p class="exemple-context">
+                        Calculer la somme S = 1 + 2 + 3 + ... + N, où N est saisi par l’utilisateur.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution algorithmique :</strong><br>
+                        <pre>Variables : N, i, S : entiers
+Début
+    Ecrire("Donner N : ")
+    Lire(N)
+    S ← 0
+    pour i allant de 1 à N pas 1 faire
+        S ← S + i
+    finpour
+    Ecrire("Somme = ", S)
+Fin</pre>
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Traduction en langage C :</strong>
+                        <pre>#include &lt;stdio.h&gt;
+int main() {
+    int N, i, S = 0;
+    printf("Donner N : ");
+    scanf("%d", &N);
+    for(i = 1; i <= N; i++) {
+        S = S + i;
+    }
+    printf("Somme = %d\n", S);
+    return 0;
+}</pre>
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : La variable S (accumulateur) doit être initialisée à 0 avant la boucle. L’opérateur <code>+=</code> permet d’écrire <code>S += i;</code> plus simplement.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Boucle TANT QUE – Validation de saisie</h3>
+                    <p class="exemple-context">
+                        Demander à l’utilisateur une note comprise entre 0 et 20. Tant que la note n’est pas valide, on redemande.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Algorithmique :</strong>
+                        <pre>Variables : note : réel
+Début
+    Ecrire("Entrez une note (0-20) : ")
+    Lire(note)
+    tant que (note < 0 OU note > 20) faire
+        Ecrire("Erreur, recommencez : ")
+        Lire(note)
+    fintantque
+    Ecrire("Note valide : ", note)
+Fin</pre>
+                    <strong>En langage C :</strong>
+                    <pre>float note;
+printf("Entrez une note (0-20) : ");
+scanf("%f", &note);
+while(note < 0 || note > 20) {
+    printf("Erreur, recommencez : ");
+    scanf("%f", &note);
+}
+printf("Note valide : %.2f\n", note);</pre>
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Cette structure garantit qu’on ne stocke jamais une note invalide. La boucle peut s’exécuter zéro fois si la première note est correcte.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Boucle RÉPÉTER – Menu simple (exécution au moins une fois)</h3>
+                    <p class="exemple-context">
+                        Afficher un menu et demander le choix de l’utilisateur jusqu’à ce qu’il tape 0 pour quitter.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Algorithmique (RÉPÉTER JUSQU’À) :</strong>
+                        <pre>Variables : choix : entier
+Début
+    répéter
+        Ecrire("1. Jouer  2. Scores  0. Quitter")
+        Lire(choix)
+        Selon choix faire
+            // traitement
+        finselon
+    jusqu'à (choix = 0)
+Fin</pre>
+                    <strong>Langage C (do...while) :</strong>
+                    <pre>int choix;
+do {
+    printf("1. Jouer  2. Scores  0. Quitter\n");
+    scanf("%d", &choix);
+    // switch(choix) ...
+} while(choix != 0);  // on continue tant que choix différent de 0</pre>
+                    </p>
+                    <div class="exemple-astuce">
+                        ⚠️ Remarque importante : la condition d’arrêt en algorithmique (<code>jusqu'à choix = 0</code>) devient en C <code>while(choix != 0)</code> car la boucle continue <strong>tant que</strong> la condition est vraie (ici choix différent de 0).
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION APPLICATIONS TYPES (BOUCLES + TABLEAUX) -->
+            <section class="exemple-section">
+                <h2 class="section-title">📈 Boucles et tableaux (notion clé)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Parcourir un tableau avec une boucle POUR</h3>
+                    <p class="exemple-context">
+                        Soit un tableau <code>tabNotes</code> contenant 10 notes (réelles). Afficher chaque note et calculer la moyenne.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>En C :</strong>
+                        <pre>float tabNotes[10] = {12.5, 14.0, 8.5, 16.0, 10.0, 13.0, 11.5, 9.0, 15.5, 18.0};
+float somme = 0.0;
+int i;
+for(i = 0; i < 10; i++) {
+    printf("Note %d : %.2f\n", i+1, tabNotes[i]);
+    somme += tabNotes[i];
+}
+printf("Moyenne = %.2f\n", somme / 10);</pre>
+                        <strong>Algorithmique :</strong>
+                        <pre>pour i allant de 0 à 9 faire
+    Ecrire("Note ", i+1, " : ", tabNotes[i])
+    somme ← somme + tabNotes[i]
+finpour
+moyenne ← somme / 10</pre>
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 <strong>À retenir :</strong> En algorithmique, les indices commencent souvent à 1 ; en langage C, le premier élément est à l'indice 0. Une boucle <code>for(i=0; i<taille; i++)</code> est la convention standard.
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION PIÈGES ET ERREURS COURANTES -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & erreurs à éviter</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Boucle infinie :</span> oublier d’incrémenter le compteur ou de modifier la condition (ex: <code>while(i < 10) { ... }</code> sans <code>i++</code>).</li>
+                        <li><span class="bold">Confusion entre "TANT QUE" et "RÉPÉTER JUSQU'À" :</span> la première peut ne pas s’exécuter, la seconde toujours au moins une fois.</li>
+                        <li><span class="bold">Indice de tableau hors limites :</span> en C, un tableau de taille N se parcourt de 0 à N-1. Un accès à tab[N] provoque une erreur.</li>
+                        <li><span class="bold">Ne pas initialiser les accumulateurs :</span> la somme, le produit, etc., doivent être initialisés (ex: <code>S=0</code> pour une somme, <code>P=1</code> pour un produit).</li>
+                        <li><span class="bold">Erreur dans la condition de la boucle POUR :</span> utiliser <code>&lt;=</code> au lieu de <code>&lt;</code> ou inversement selon la borne souhaitée.</li>
+                        <li><span class="bold">Oubli du point-virgule ou des accolades en C</span> qui modifie la portée de la boucle.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- SYNTHÈSE VISUELLE : LOGO DE RÉPÉTITION -->
+            <section class="concept-section">
+                <div class="card concept-card" style="background: linear-gradient(120deg, #eff6ff, #ffffff);">
+                    <h3 class="card-title">🧠 Synthèse mnémotechnique</h3>
+                    <p class="card-description">
+                        <strong>POUR</strong> = <em>“Je sais combien de fois je répète”</em> → compteur précis.<br>
+                        <strong>TANT QUE</strong> = <em>“Vérifie avant d’entrer, possible zéro fois”</em> → pré-test.<br>
+                        <strong>RÉPÉTER JUSQU’À</strong> = <em>“Exécute au moins une fois, puis vérifie”</em> → post-test.
+                    </p>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <!-- Image illustrative générique pour visualiser une boucle -->
+                        <img src="" alt="Schéma conceptuel d'une boucle en algorithmique : flèche de répétition avec condition d'arrêt. L'IA peut générer un diagramme simple représentant trois blocs : POUR, TANT QUE, REPETER." style="max-width: 100%; border-radius: 12px; background: #f1f5f9; padding: 0.5rem;" onerror="this.style.display='none'">
+                        <p style="font-size: 0.8rem; color: #475569; margin-top: 0.3rem;">Illustration : logique des itérations (schéma conceptuel)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXERCICE RAPIDE POUR S'ENTRAÎNER -->
+            <section class="exemple-section">
+                <h2 class="section-title">✍️ Exercice d’application rapide</h2>
+                <div class="card exemple-card" style="background: #fefce8;">
+                    <h3 class="card-title">À vous de jouer !</h3>
+                    <p class="exemple-context">
+                        Écrire un algorithme (puis sa traduction en C) qui affiche la table de multiplication d’un entier <strong>N</strong> saisi par l’utilisateur (de 1 à 10).
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Indice :</strong> Utilisez une boucle POUR. Le résultat doit ressembler à :<br>
+                        <code>5 x 1 = 5</code><br>
+                        <code>5 x 2 = 10</code><br> ... <br>
+                        <code>5 x 10 = 50</code>
+                    </p>
+                    <details style="margin-top: 1rem; background: #eef2ff; padding: 0.8rem; border-radius: 0.8rem;">
+                        <summary style="font-weight: bold; cursor: pointer;">🔍 Voir une solution possible</summary>
+                        <pre>Algorithmique :
+Variables : N, i : entiers
+Début
+    Ecrire("Entrez un nombre : ")
+    Lire(N)
+    pour i allant de 1 à 10 pas 1 faire
+        Ecrire(N, " x ", i, " = ", N*i)
+    finpour
+Fin
+
+Langage C :
+#include &lt;stdio.h&gt;
+int main() {
+    int N, i;
+    printf("Entrez un nombre : ");
+    scanf("%d", &N);
+    for(i = 1; i <= 10; i++) {
+        printf("%d x %d = %d\n", N, i, N*i);
+    }
+    return 0;
+}</pre>
+                    </details>
+                </div>
+            </section>
+
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📖 Fiche de révision – Unité d’apprentissage 12 : Structures itératives | Programme officiel Probatoire C, D, E (Cameroun) | ✨ Relire, coder, répéter !</p>
+        </footer>
+    </div>
+</body>
+</html>

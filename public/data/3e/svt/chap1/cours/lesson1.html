@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision : Unité et diversité humaine - SVTEEHB 3ème</title>
+    <!-- Google Fonts & Simple CSS Reset for consistency -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- MathJax for any genetic formulas (optional but included for cross symbols) -->
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js" async></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #eef2f5;
+            font-family: 'Inter', sans-serif;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+            color: #1e293b;
+        }
+        .fiche-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .fiche-header {
+            background: linear-gradient(135deg, #0f2b3d 0%, #1b4a6e 100%);
+            color: white;
+            padding: 2rem 2rem 1.8rem;
+            text-align: center;
+        }
+        .lesson-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.5rem;
+        }
+        .lesson-subtitle {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.85;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            display: inline-block;
+            padding-top: 0.5rem;
+        }
+        .fiche-content {
+            padding: 2rem 2rem 1.5rem;
+        }
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 1.8rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 4px solid #f1b24a;
+            display: inline-block;
+            color: #0c4a6e;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 1.25rem;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.05);
+            padding: 1.4rem 1.8rem;
+            margin-bottom: 1.8rem;
+            transition: all 0.2s;
+            border: 1px solid #e2e8f0;
+        }
+        .concept-card, .exemple-card, .warning-card {
+            background: #fefefe;
+        }
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: #1e4a76;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card-description {
+            color: #334155;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+        .concept-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .concept-list li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .concept-list li::before {
+            content: "🧬";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1rem;
+        }
+        .highlight {
+            background: #fef3c7;
+            padding: 0.1rem 0.3rem;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #b45309;
+        }
+        .definition {
+            font-weight: 700;
+            color: #0f5b7a;
+            border-bottom: 1px dashed #cbd5e1;
+        }
+        .exemple-context, .exemple-correction {
+            margin-top: 0.6rem;
+        }
+        .exemple-correction {
+            background: #f8fafc;
+            padding: 0.9rem;
+            border-radius: 1rem;
+            border-left: 5px solid #3b82f6;
+            margin-top: 0.8rem;
+        }
+        .exemple-astuce {
+            background: #eef2ff;
+            border-radius: 1rem;
+            padding: 0.7rem 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e3a8a;
+        }
+        .warning-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .warning-card li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .bold {
+            font-weight: 700;
+            color: #c2410c;
+        }
+        .illustration-caption {
+            font-size: 0.8rem;
+            text-align: center;
+            color: #475569;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        .flex-table {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+        .herit-box, .env-box {
+            flex: 1;
+            background: #f9f9fb;
+            border-radius: 1rem;
+            padding: 1rem;
+            min-width: 180px;
+        }
+        .herit-box h4, .env-box h4 {
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            font-size: 1.1rem;
+        }
+        .herit-box ul, .env-box ul {
+            list-style: none;
+        }
+        .herit-box li, .env-box li {
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer {
+            background: #f1f5f9;
+            padding: 1.2rem 2rem;
+            text-align: center;
+            border-top: 1px solid #dce3ec;
+            font-size: 0.85rem;
+            color: #2c3e66;
+        }
+        a {
+            color: #2b6e9e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 680px) {
+            .fiche-content {
+                padding: 1.2rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+            .lesson-title {
+                font-size: 1.4rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+        .inline-gene {
+            background: #e9ecef;
+            border-radius: 20px;
+            padding: 0.2rem 0.6rem;
+            font-family: monospace;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">📖 Leçon 1.1 : Ressemblances et différences au sein de l'espèce humaine</h1>
+        <p class="lesson-subtitle">SVTEEHB · Classe de Troisième · Unité, diversité & lutte contre les préjugés (Programme officiel)</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- SECTION 1 : Éléments clés -->
+        <section>
+            <h2 class="section-title">🔬 Éléments fondamentaux</h2>
+            
+            <!-- Carte ressemblances -->
+            <div class="card concept-card">
+                <h3 class="card-title">🧬 Tous membres d’une même espèce : <em>Homo sapiens</em></h3>
+                <p class="card-description">L’unité de l’espèce humaine se traduit par des <strong class="definition">caractères communs</strong>, qu’ils soient visibles ou cachés dans notre génome.</p>
+                <ul class="concept-list">
+                    <li><span class="highlight">Ressemblances visibles</span> : bipédie, structure du corps (2 bras, 2 jambes, un cerveau développé), visage avec front, nez, lèvres ; pigmentation variable mais toujours présente.</li>
+                    <li><span class="highlight">Ressemblances invisibles</span> : organisation cellulaire eucaryote, 46 chromosomes (23 paires), mêmes groupes sanguins (système ABO, Rhésus), même ADN composé de 4 bases.</li>
+                    <li>Ces caractères communs assurent la <strong>transmission héréditaire</strong> et l’appartenance à la communauté biologique humaine.</li>
+                </ul>
+                <div class="illustration-caption" style="margin-top:0.8rem;">
+                    🧬 L’ADN contient l’information génétique qui explique à la fois nos ressemblances (gènes communs) et nos singularités (allèles différents).
+                </div>
+            </div>
+
+            <!-- Carte héréditaire vs environnement -->
+            <div class="card concept-card">
+                <h3 class="card-title">🌱 Héréditaire ou acquis ? La grande distinction</h3>
+                <p class="card-description">Pour comprendre les ressemblances familiales et les différences, il faut savoir ce qui dépend des gènes et ce qui est modifié par le milieu.</p>
+                <div class="flex-table">
+                    <div class="herit-box" style="background:#e8f0fe;">
+                        <h4>🧬 <strong>Caractère HÉRÉDITAIRE</strong></h4>
+                        <ul>
+                            <li>✅ Groupe sanguin (A, B, AB, O)</li>
+                            <li>✅ Couleur des yeux (brun, bleu, vert...)</li>
+                            <li>✅ Présence de certains allèles (drépanocytose, mucoviscidose)</li>
+                            <li>✅ Forme des lobes d’oreilles (détaché/soudé)</li>
+                            <li>✅ Transmissible de génération en génération</li>
+                        </ul>
+                    </div>
+                    <div class="env-box" style="background:#fff0e6;">
+                        <h4>🌍 <strong>Modifié par l’ENVIRONNEMENT</strong></h4>
+                        <ul>
+                            <li>🌞 Bronzage (exposition solaire)</li>
+                            <li>💪 Musculature développée par l’entraînement</li>
+                            <li>🍽️ Poids corporel (nutrition)</li>
+                            <li>🖐️ Cicatrices, callosités</li>
+                            <li>📖 Langue parlée, savoir-faire (non génétique)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="exemple-astuce" style="margin-top:1rem;">
+                    💡 <strong>Astuce clé</strong> : « Ce qui s’acquiert par l’usage (bronzage, muscles) ne s’inscrit pas dans l’ADN et ne se transmet pas aux enfants. »
+                </div>
+            </div>
+
+            <!-- Définition hérédité/génétique -->
+            <div class="card concept-card">
+                <h3 class="card-title">📖 Hérédité et Génétique : socle scientifique</h3>
+                <p><span class="definition">Hérédité</span> : transmission des caractères biologiques des parents aux descendants via l’ADN et les chromosomes.<br>
+                <span class="definition">Génétique</span> : science qui étudie les mécanismes de l’hérédité, les gènes, les allèles et les variations.</p>
+                <p>➜ Grâce à la génétique, on comprend pourquoi un enfant peut ressembler à son grand-père sans que ses parents n’aient ce caractère visible (allèle récessif).</p>
+                <div style="background:#f9f3e3; border-radius: 16px; padding: 10px; margin-top: 12px; text-align:center;">
+                    <span class="inline-gene">Allèle dominant (ex: yeux marron)</span> ➕ <span class="inline-gene">Allèle récessif (ex: yeux bleus)</span> → diversité des combinaisons.
+                </div>
+            </div>
+
+            <!-- Préjugés et lutte -->
+            <div class="card concept-card" style="border-left: 6px solid #e11d48;">
+                <h3 class="card-title">🛡️ Répondre aux accusations d’infidélité et de sorcellerie</h3>
+                <p>Dans certains contextes (Afrique, Cameroun), les différences physiques entre parents et enfants peuvent alimenter des préjugés douloureux. La génétique apporte des preuves rationnelles :</p>
+                <ul class="concept-list">
+                    <li>Un enfant peut exprimer un caractère absent chez ses parents (ex: yeux bleus) si les deux parents sont porteurs de l’allèle récessif (hérédité mendélienne).</li>
+                    <li>Les groupes sanguins obéissent à des règles précises : deux parents de groupe A et B peuvent avoir un enfant O (génotypes AO et BO).</li>
+                    <li>La couleur de la peau est polygénique (plusieurs gènes) ; des parents à peau mate peuvent donner naissance à des enfants aux teintes variées.</li>
+                    <li>Aucune "sorcellerie" n’explique les différences : ce sont les lois naturelles de la transmission génétique et les recombinaisons uniques lors de la fécondation.</li>
+                </ul>
+                <div class="exemple-astuce" style="background:#ffe4e6;">
+                    📢 <strong>Message éducatif</strong> : la vulgarisation scientifique et les conseils génétiques permettent d’éviter les conflits familiaux et de renforcer la cohésion sociale.
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION EXEMPLES CONCRETS -->
+        <section>
+            <h2 class="section-title">💡 Exemples de compréhension & cas pratiques</h2>
+            
+            <!-- Exemple yeux bleus -->
+            <div class="card exemple-card">
+                <h3 class="card-title">👁️ Cas 1 : Des parents aux yeux marron, un enfant aux yeux bleus</h3>
+                <div class="exemple-context">
+                    <span class="highlight">Situation :</span> Famille Njoya : père et mère ont les yeux marron. Leur fille aînée a les yeux marron, mais le second garçon a les yeux bleus. Des rumeurs accusent la mère d’infidélité.
+                </div>
+                <div class="exemple-correction">
+                    <strong>🔬 Explication génétique :</strong> L’allèle « yeux marron » (B) est dominant, l’allèle « yeux bleus » (b) est récessif. Si les deux parents sont <strong>hétérozygotes (Bb)</strong>, chacun possède l’allèle récessif b sans l’exprimer. Lors de la fécondation, il y a 25 % de chances d’obtenir un enfant bb (yeux bleus). C’est un phénomène classique de ségrégation mendélienne, sans aucune infidélité.
+                </div>
+                <div class="exemple-astuce">
+                    📌 <strong>Mémo :</strong> Deux parents hétérozygotes peuvent donner naissance à un enfant exprimant un caractère récessif. La génétique est plus forte que les ragots !
+                </div>
+            </div>
+            
+            <!-- Exemple groupe sanguin -->
+            <div class="card exemple-card">
+                <h3 class="card-title">🩸 Cas 2 : Groupe sanguin "inattendu" (père A, mère B, enfant O)</h3>
+                <div class="exemple-context">
+                    Monsieur est du groupe sanguin A, madame du groupe B. Leur enfant est du groupe O. La belle-famille remet en question la paternité.
+                </div>
+                <div class="exemple-correction">
+                    <strong>Analyse allélique :</strong> Le système ABO est codé par trois allèles : A, B et O (O récessif). Le père A peut être de génotype <strong>AO</strong> (hétérozygote), la mère B peut être <strong>BO</strong>. Lors de la formation des gamètes, le père transmet soit A soit O ; la mère transmet soit B soit O. Si l’enfant reçoit O du père et O de la mère, son génotype est OO → groupe sanguin O. Ce croisement donne 25% de chance d’avoir un enfant O, parfaitement normal.
+                </div>
+                <div class="exemple-astuce">
+                    🧪 <strong>Preuve scientifique :</strong> Les groupes sanguins suivent les lois de Mendel. Ne jamais accuser sans connaître la génétique !
+                </div>
+            </div>
+
+            <!-- Exemple jumeaux et bronzage -->
+            <div class="card exemple-card">
+                <h3 class="card-title">🌞 Cas 3 : Jumeaux, même patrimoine génétique, teints différents</h3>
+                <div class="exemple-context">
+                    Deux jumeaux homozygotes (vrais jumeaux) : l’un travaille comme pêcheur en plein soleil (peau très hâlée), l’autre est professeur en salle de classe (peau claire). Leur père pense que le fils à la peau foncée est le seul "véritable" héritier.
+                </div>
+                <div class="exemple-correction">
+                    <strong>Environnement vs hérédité :</strong> La pigmentation de la peau dépend de la production de mélanine stimulée par les UV. Le jumeau exposé au soleil a développé un bronzage intense → caractère acquis. Ce bronzage n’est pas inscrit dans l’ADN et ne se transmet pas. Les deux jumeaux ont exactement les mêmes gènes, seul l’environnement diffère.
+                </div>
+                <div class="exemple-astuce">
+                    ☀️ <strong>Règle d’or :</strong> Un caractère modifié par l’environnement ne devient jamais héréditaire. La couleur de peau héritée dépend des gènes, pas du bronzage.
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION PIÈGES ET IDÉES REÇUES -->
+        <section>
+            <h2 class="section-title">⚠️ Combattre les idées reçues & préjugés</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">❌ Idée fausse :</span> "Si l'enfant ne ressemble ni au père ni à la mère, c'est qu'il n'est pas de la famille."<br>
+                    ✅ <strong>Vérité :</strong> Les caractères peuvent réapparaître après plusieurs générations (allèles récessifs). Un enfant peut hériter du nez de son grand-père ou des yeux de son arrière-grand-mère.</li>
+                    <li><span class="bold">❌ Mythe :</span> "La couleur de peau d'un enfant doit obligatoirement être la moyenne de celle des parents."<br>
+                    ✅ La pigmentation est contrôlée par plusieurs gènes (polygénique) ; la variabilité est très grande au sein d'une fratrie.</li>
+                    <li><span class="bold">❌ Stigmatisation :</span> "Des groupes sanguins différents prouvent l'infidélité."<br>
+                    ✅ Grâce à la génétique des populations, on sait que l'enfant peut avoir un groupe différent (ex: parents A et B → enfant O) sans aucune tromperie.</li>
+                    <li><span class="bold">❌ Confusion :</span> "Un tatouage ou une cicatrice se transmet aux enfants."<br>
+                    ✅ Seul le patrimoine génétique se transmet, les modifications corporelles acquises ne sont pas héritables.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- RÉCAPITULATIF VISUEL -->
+        <section>
+            <div class="card" style="background: linear-gradient(120deg, #f1f6fd, #ffffff); border: 1px solid #b9d0f0;">
+                <h3 class="card-title" style="color: #155e75;">📌 Synthèse visuelle : ressemblances & différences</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 1rem 0;">
+                    <div style="flex:1; min-width:180px; background: #e0f2fe; border-radius: 24px; padding: 1rem; text-align:center;">
+                        <span style="font-size:2rem;">🧬</span>
+                        <p><strong>Ressemblances</strong><br>ADN commun, 46 chromosomes, groupes sanguins, organisation anatomique</p>
+                    </div>
+                    <div style="flex:1; min-width:180px; background: #fce7f3; border-radius: 24px; padding: 1rem; text-align:center;">
+                        <span style="font-size:2rem;">🌈</span>
+                        <p><strong>Différences</strong><br>Allèles variés, couleurs des yeux, groupes sanguins, taille, caractères influencés par l’environnement</p>
+                    </div>
+                </div>
+                <div class="illustration-caption">
+                    L’union des gamètes (spermatozoïde + ovule) crée un patrimoine génétique unique. Les ressemblances viennent des gènes communs, les différences des allèles spécifiques et de l’environnement.
+                </div>
+                <div class="exemple-astuce" style="background: #cffafe; text-align:center;">
+                    🔬 <strong>Pour lutter contre les accusations :</strong> Explique que la diversité génétique est une richesse naturelle, preuve de la beauté de la vie, et non un motif de conflit.
+                </div>
+            </div>
+        </section>
+
+        <!-- Encart supplémentaire pour les lois de transmission (simple) -->
+        <section>
+            <div class="card" style="background:#fef9e6;">
+                <h3 class="card-title">🧬 Rappel : Lois de transmission (Mendel) en bref</h3>
+                <p>Chaque caractère héréditaire est gouverné par des gènes (allèles). Un enfant reçoit un allèle de son père et un de sa mère. Certains allèles sont <strong>dominants</strong> (s’expriment même à un seul exemplaire), d’autres <strong>récessifs</strong> (s’expriment seulement si les deux allèles sont identiques).<br>
+                ➜ Ainsi, deux parents bruns porteurs d’un allèle bleu récessif peuvent avoir un enfant aux yeux bleus.<br>
+                ➜ De même pour les groupes sanguins, les anomalies héréditaires, etc. La génétique démystifie les "accusations" irrationnelles.</p>
+                <div style="font-size:0.85rem; margin-top:0.5rem;">📖 Référence : Lois de Mendel – Ségrégation des allèles lors de la méiose.</div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>📚 Fiche de révision SVTEEHB – Troisième – Thème 1 : Unité et diversité de l’espèce humaine.<br>
+        🔗 Utiliser ces connaissances pour promouvoir la tolérance, dissiper les rumeurs d’infidélité et de sorcellerie par la vulgarisation scientifique.<br>
+        ✨ Édition révisée – Programme officiel Cameroun / Groupe Toupé Intellectual – 2025</p>
+        <p style="margin-top:0.5rem;"><a href="#">🔁 Revoir la leçon complète : Ressemblances et différences au sein de l'espèce humaine</a></p>
+    </footer>
+</div>
+</body>
+</html>

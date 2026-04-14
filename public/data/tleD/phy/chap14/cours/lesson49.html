@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Chaînes électroniques (Leçon 49)</title>
+    <!-- Configuration de MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #eef2f5;
+            color: #1e2a3a;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        /* Conteneur principal type fiche A4 */
+        .fiche-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête avec bandeau */
+        .header {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1a4a6f 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        .header .sous-titre {
+            font-size: 1rem;
+            opacity: 0.85;
+            border-left: 3px solid #ffb347;
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .meta span {
+            background: rgba(255,255,255,0.15);
+            padding: 0.25rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* Corps de la fiche */
+        .content {
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
+
+        /* Grille pour les objectifs et compétences */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 1.3rem 1.5rem;
+            border: 1px solid #e2edf2;
+            transition: all 0.2s;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #0f3b4f;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3 i {
+            font-size: 1.3rem;
+        }
+
+        .card ul, .card p {
+            font-size: 0.95rem;
+            color: #1f3b4a;
+        }
+
+        .card li {
+            margin-left: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* sections principales */
+        .section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2edf2;
+            padding-bottom: 1.5rem;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f3b4f;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .section-title .icon {
+            font-size: 1.6rem;
+        }
+
+        .notions {
+            background: #fef8e7;
+            border-left: 5px solid #ffb347;
+            padding: 1.2rem 1.5rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+        }
+
+        .notions p {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #a45100;
+        }
+
+        .formula {
+            background: #eef2fa;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 0.8rem 1.2rem;
+            border-radius: 14px;
+            margin: 0.8rem 0;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            border: 1px solid #cbdde6;
+        }
+
+        .schema-placeholder {
+            background: #e9f0f5;
+            border: 2px dashed #7fa1b5;
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .example {
+            background: #e9f4f8;
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .btn-bac {
+            background: #e3eef4;
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #005c8a;
+            display: inline-block;
+            margin-left: 0.6rem;
+            vertical-align: middle;
+        }
+
+        footer {
+            background: #f1f5f9;
+            padding: 1rem 2rem;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4b6a7f;
+            border-top: 1px solid #dce5ec;
+        }
+
+        @media (max-width: 700px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <div class="header">
+        <div class="badge">📡 TERMINALE C & D – PHYSIQUE</div>
+        <h1>Leçon 49 : Chaînes électroniques</h1>
+        <div class="sous-titre">Du capteur à l’affichage : structurer une chaîne de traitement du signal</div>
+        <div class="meta">
+            <span>📘 Module 5 – Électronique</span>
+            <span>🎓 Bac 2023 – 2025</span>
+            <span>⚡ Liens : Capteurs, conditionnement, amplification</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Objectifs + Compétences (grille) -->
+        <div class="grid-2">
+            <div class="card">
+                <h3>🎯 Objectifs pédagogiques</h3>
+                <ul>
+                    <li>Identifier les différents éléments d'une chaîne électronique.</li>
+                    <li>Schématiser une chaîne simple de traitement de l'information.</li>
+                    <li>Comprendre le rôle de chaque bloc : capteur, conditionneur, amplificateur, afficheur.</li>
+                    <li>Analyser un montage réel (thermistance, photorésistance) et proposer une chaîne adaptée.</li>
+                    <li><strong>Lien Baccalauréat :</strong> Situations contextualisées (thermomètre électronique, détecteur de lumière).</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🧠 Compétences attendues</h3>
+                <ul>
+                    <li>Schématiser une chaîne électronique fonctionnelle à partir d’un problème concret.</li>
+                    <li>Associer chaque bloc à sa fonction (acquisition, adaptation, amplification, visualisation).</li>
+                    <li>Identifier le type de capteur (thermistance, photorésistance, etc.) selon la grandeur physique.</li>
+                    <li>Expliquer le rôle d’un conditionneur et d’un amplificateur.</li>
+                    <li>Interpréter un schéma bloc dans une situation d’examen.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Notions clés -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🔑</span> Notions clés & définitions
+            </div>
+            <div class="notions">
+                <p>📌 Chaîne électronique :</p>
+                <p>Ensemble organisé de blocs fonctionnels qui transforment une grandeur physique (température, pression, luminosité…) en un signal électrique exploitable, puis en une information compréhensible par l’utilisateur.</p>
+            </div>
+            <ul style="margin-top: 0.8rem; margin-left: 1.5rem;">
+                <li><strong>Capteur :</strong> Convertit une grandeur physique non électrique (température, lumière, pression) en signal électrique (tension, courant, résistance). Ex : thermistance, photorésistance, thermocouple.</li>
+                <li><strong>Conditionneur :</strong> Adapte le signal électrique brut du capteur (filtrage, mise en forme, conversion courant/tension) pour le rendre compatible avec l’étage suivant.</li>
+                <li><strong>Amplificateur :</strong> Augmente l’amplitude du signal (tension ou courant) sans en dénaturer l’information. Ex : Amplificateur opérationnel monté en ampli non inverseur.</li>
+                <li><strong>Afficheur / Actionneur :</strong> Visualise l’information (écran LCD, voltmètre, LED) ou agit sur le système (moteur, relais).</li>
+            </ul>
+            <div class="formula">
+                💡 Chaîne générique : <strong>Grandeur physique</strong> → <strong>Capteur</strong> → <strong>Conditionneur</strong> → <strong>Amplificateur</strong> → <strong>Afficheur</strong>
+            </div>
+        </div>
+
+        <!-- Schéma de chaîne électronique -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📐</span> Schématisation d’une chaîne électronique
+            </div>
+            <div class="schema-placeholder">
+                ⚙️ [ TEMPÉRATURE ] → 🌡️ <strong>Capteur (CTN)</strong> → 🔧 <strong>Conditionneur (Pont diviseur)</strong> → 📈 <strong>Amplificateur (AOP)</strong> → 📟 <strong>Afficheur (Voltmètre)</strong>
+                <br><br>
+                <span style="font-size:0.8rem;">▸ Exemple typique : thermomètre électronique</span>
+            </div>
+            <p style="margin-top: 0.6rem;">La représentation sous forme de <strong>schéma-bloc</strong> est exigible au Bac. Chaque bloc est symbolisé par un rectangle avec une fonction précise, et les flèches indiquent le sens du signal.</p>
+        </div>
+
+        <!-- Exemples concrets : thermistance & photorésistance -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">💡</span> Exemples d’application (Bac)
+            </div>
+            <div class="example">
+                <h4 style="margin-bottom: 0.3rem;">🌡️ Chaîne pour mesure de température (thermistance CTN)</h4>
+                <ul>
+                    <li><strong>Grandeur mesurée</strong> : température θ (°C).</li>
+                    <li><strong>Capteur</strong> : thermistance à coefficient de température négatif (CTN) : sa résistance $R$ diminue quand θ augmente.</li>
+                    <li><strong>Conditionneur</strong> : montage diviseur de tension ($R_{fixe}$ + CTN) → tension $V_{mes}$ variable.</li>
+                    <li><strong>Amplificateur</strong> : amplificateur différentiel pour adapter le niveau de tension à l’afficheur.</li>
+                    <li><strong>Afficheur</strong> : voltmètre numérique gradué en °C.</li>
+                </ul>
+            </div>
+            <div class="example">
+                <h4 style="margin-bottom: 0.3rem;">☀️ Chaîne pour mesure d’éclairement (photorésistance LDR)</h4>
+                <ul>
+                    <li><strong>Grandeur physique</strong> : éclairement E (lux).</li>
+                    <li><strong>Capteur</strong> : photorésistance (LDR), sa résistance diminue avec la lumière.</li>
+                    <li><strong>Conditionneur</strong> : pont de Wheatstone ou diviseur de tension → tension proportionnelle à l’éclairement.</li>
+                    <li><strong>Amplificateur</strong> : amplificateur opérationnel pour commander un afficheur ou une LED.</li>
+                    <li><strong>Afficheur</strong> : galvanomètre ou barrette de LED.</li>
+                </ul>
+                <div class="formula" style="margin-top: 10px;">
+                    🔌 Rappel : Pour un diviseur de tension : $V_{out} = V_{cc} \times \frac{R_{capteur}}{R_{capteur} + R_{fixe}}$<br>
+                    Selon le montage, le conditionneur peut aussi inclure un filtre pour éliminer le bruit.
+                </div>
+            </div>
+        </div>
+
+        <!-- Rôle détaillé de chaque bloc -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">⚙️</span> Fonctions détaillées des blocs
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem;">
+                <div style="flex:1; min-width: 180px; background:#f1f6fa; border-radius: 16px; padding: 0.8rem;">
+                    <strong>🔍 Capteur</strong><br>
+                    - Transformation analogique.<br>
+                    - Exemple : thermocouple → tension µV.<br>
+                    - Caractéristique : sensibilité, plage.
+                </div>
+                <div style="flex:1; min-width: 180px; background:#f1f6fa; border-radius: 16px; padding: 0.8rem;">
+                    <strong>⚡ Conditionneur</strong><br>
+                    - Adaptation d’impédance.<br>
+                    - Linéarisation (pont).<br>
+                    - Filtrage (passe-bas).
+                </div>
+                <div style="flex:1; min-width: 180px; background:#f1f6fa; border-radius: 16px; padding: 0.8rem;">
+                    <strong>📢 Amplificateur</strong><br>
+                    - Gain $A_v = V_{out}/V_{in}$.<br>
+                    - Utilise souvent un AOP.<br>
+                    - Évite la saturation.
+                </div>
+                <div style="flex:1; min-width: 180px; background:#f1f6fa; border-radius: 16px; padding: 0.8rem;">
+                    <strong>🖥️ Afficheur</strong><br>
+                    - Visuel : LCD, aiguille, LED.<br>
+                    - Peut être analogique ou numérique.
+                </div>
+            </div>
+        </div>
+
+        <!-- Lien bac & méthodologie -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📌</span> Méthodologie pour l’épreuve de Bac
+            </div>
+            <p>Dans les exercices d’évaluation des compétences (Partie B), on peut vous demander :</p>
+            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                <li>1. Identifier la <strong>grandeur d’entrée</strong> et la <strong>grandeur de sortie</strong> d’une chaîne.</li>
+                <li>2. Choisir le <strong>capteur adapté</strong> à une situation (température → thermistance, luminosité → photorésistance, pression → jauge de contrainte).</li>
+                <li>3. Proposer un <strong>schéma bloc</strong> légendé.</li>
+                <li>4. Justifier le rôle du conditionneur : pourquoi ne pas brancher directement le capteur sur l’afficheur ? (Signal trop faible, non linéaire, bruit…)</li>
+                <li>5. Calculer un gain ou une tension de sortie à partir des caractéristiques.</li>
+            </ul>
+            <div class="notions" style="margin-top: 1rem;">
+                <p>🎯 <strong>Pièges à éviter :</strong></p>
+                <ul style="margin-left: 1rem;">
+                    <li>Confondre capteur et transducteur (tout capteur est un transducteur, mais l’inverse n’est pas toujours vrai en électronique).</li>
+                    <li>Oublier le conditionneur dans une chaîne réelle.</li>
+                    <li>Ne pas préciser le type d’afficheur (numérique / analogique) selon le contexte.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mini synthèse avec formule ou astuce -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🧠</span> Synthèse à retenir
+            </div>
+            <div class="formula" style="background:#e2f0e8;">
+                ✅ Une chaîne électronique complète permet de <strong>mesurer</strong>, <strong>traiter</strong> et <strong>visualiser</strong> une grandeur physique.<br>
+                ✅ Ordre logique : <strong>Capteur → Conditionneur → Amplificateur → Afficheur</strong>.<br>
+                ✅ Le conditionneur est indispensable pour adapter le signal brut (tension, courant, résistance) aux étages suivants.<br>
+                ✅ L’amplificateur augmente l’amplitude sans modifier l’information.<br>
+                ✅ Au baccalauréat, savoir schématiser et justifier chaque bloc est une compérence clé (ex: capteur de température dans un fer à repasser, cellule photovoltaïque avec afficheur).  
+            </div>
+        </div>
+
+        <!-- Petit QCM / entraînement -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">✍️</span> Entraînement express (type Bac)
+            </div>
+            <div style="background:#fef6e0; border-radius: 18px; padding: 1rem 1.3rem;">
+                <p><strong>❓ Question 1 :</strong> Dans une chaîne électronique destinée à mesurer la température d’une pièce, quel capteur utilise-t-on ? Citez deux blocs obligatoires après le capteur.</p>
+                <p><strong>❓ Question 2 :</strong> Pourquoi un simple capteur (ex: thermistance) ne peut-il pas directement commander un afficheur numérique ?</p>
+                <p><strong>❓ Question 3 :</strong> Schématiser la chaîne électronique d’un détecteur de lumière qui allume une LED quand l’obscurité augmente (photorésistance + ampli + LED).</p>
+                <details style="margin-top: 12px; cursor: pointer;">
+                    <summary style="font-weight: 600; color:#0f5b7a;">📖 Voir pistes de réponse</summary>
+                    <p style="margin-top: 8px;">1. Thermistance (CTN) ou thermocouple. Après le capteur : conditionneur (pont diviseur) + amplificateur. <br>
+                    2. Le signal du capteur est souvent faible, non linéaire, ou sa résistance varie et ne correspond pas directement à l’échelle d’entrée de l’afficheur. Le conditionneur adapte et l’amplificateur augmente le niveau. <br>
+                    3. [Luminosité] → Photorésistance → Pont diviseur (conditionneur) → Amplificateur (AOP) → LED (afficheur/actionneur).</p>
+                </details>
+            </div>
+        </div>
+    </div>
+    <footer>
+        📍 Fiche conforme au programme officiel du Cameroun – Terminale C & D (2025-2026) – Leçon 49 : Chaînes électroniques<br>
+        Révision Bac : savoir identifier les blocs d’une chaîne et justifier leur utilité. Réalisé par Enseignant de Physique.
+    </footer>
+</div>
+</body>
+</html>

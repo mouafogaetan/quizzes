@@ -1,0 +1,122 @@
+[
+  {
+    "intitule": "Les règles de transformation (MCD → MLD) - Exercice Ressource",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Le Modèle Conceptuel des Données (MCD) utilise des entités et des associations. Pour obtenir un schéma relationnel (Modèle Logique des Données ou MLD), on applique des règles précises. Cet exercice vérifie votre compréhension de ces règles.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Énumérer les trois grandes règles de transformation d’un MCD vers un MLD pour : (a) une entité, (b) une association de cardinalité (0,1) ou (1,1), (c) une association de cardinalité (0,n) ou (1,n).",
+        "niveau": "easy",
+        "reponse": "(a) Une entité devient une table. Son identifiant devient la clé primaire de la table. (b) Une association de cardinalité (0,1) ou (1,1) se traduit par l’ajout d’une clé étrangère dans la table de l’entité qui a la cardinalité maximale 1. (c) Une association de cardinalité (0,n) ou (1,n) donne naissance à une nouvelle table dont la clé primaire est la concaténation des clés étrangères (sauf exceptions avec entité associative).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Identifier, dans la transformation d’une association binaire de type (1,1) avec une entité A et une entité B, quelle entité reçoit la clé étrangère. Justifier votre réponse.",
+        "niveau": "medium",
+        "reponse": "On peut placer la clé étrangère dans l’une ou l’autre des deux tables, car chaque occurrence de l’association lie exactement une occurrence de A à une occurrence de B. Le choix dépend des contraintes d’intégrité ou des habitudes de modélisation. Cependant, pour éviter les valeurs nulles, on choisit souvent la table qui a une cardinalité minimale de 1 si l’autre accepte 0.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Dessiner (en pensée) la transformation d’une association (0,n) entre les entités ÉTUDIANT et INSCRIPTION (sans attribut propre). Expliquer pourquoi on crée une table distincte.",
+        "niveau": "hard",
+        "reponse": "L’association (0,n) signifie qu’un étudiant peut avoir 0 ou plusieurs inscriptions et qu’une inscription concerne un seul étudiant. On crée une table INSCRIPTION avec : une clé étrangère vers ÉTUDIANT (identifiant de l’étudiant) et éventuellement une date d’inscription. La clé primaire de cette table peut être un numéro d’inscription artificiel ou la concaténation de l’identifiant étudiant et de la date. On crée une table distincte car la cardinalité maximale du côté de l’entité est n, ce qui nécessite une structure indépendante pour éviter la redondance.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Application aux associations : bibliothèque et étudiants",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous êtes chargé de modéliser une base de données pour une bibliothèque universitaire. Le MCD identifie trois entités : <strong>LIVRE</strong> (avec identifiant <em>ISBN</em>), <strong>ÉTUDIANT</strong> (avec identifiant <em>NumEtud</em>) et une association <strong>EMPRUNT</strong> qui lie un livre à un étudiant. Les cardinalités sont : (1,1) du côté de LIVRE (un emprunt concerne un et un seul livre) et (0,n) du côté de ÉTUDIANT (un étudiant peut avoir 0 ou plusieurs emprunts). De plus, l’association possède un attribut : <em>DateEmprunt</em>.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Appliquer la règle de transformation pour produire le schéma relationnel (MLD) complet (noms des tables, attributs, clés primaires, clés étrangères).",
+        "niveau": "medium",
+        "reponse": "Table LIVRE (ISBN, Titre, Auteur) — clé primaire : ISBN. Table ÉTUDIANT (NumEtud, Nom, Prenom) — clé primaire : NumEtud. Table EMPRUNT (ISBN, NumEtud, DateEmprunt) — clé primaire : (ISBN) car (1,1) côté livre ? Non, attention : ici, une occurrence d’emprunt est identifiée par le livre (un livre ne peut être emprunté qu’une fois à la fois). Mais pour la modélisation, on prend souvent une clé artificielle. Strictement, avec (1,1) du côté livre, l’association est transformée en une table dont la clé primaire est la clé étrangère de l’entité qui a la cardinalité maximale 1. Donc clé primaire = ISBN. Clé étrangère ISBN référence LIVRE(ISBN) et clé étrangère NumEtud référence ÉTUDIANT(NumEtud).",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Justifier le choix de la clé primaire de la table EMPRUNT.",
+            "niveau": "medium",
+            "reponse": "La cardinalité (1,1) du côté LIVRE indique qu’un emprunt concerne exactement un livre et qu’un livre ne peut être impliqué dans plusieurs emprunts simultanés (sauf historique, mais ici c’est un emprunt actif). Pour garantir l’unicité, on prend l’identifiant du livre (ISBN) comme clé primaire de la table EMPRUNT. L’association est donc traitée comme une extension de l’entité LIVRE."
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "texte": "Modifier le MLD précédent si la cardinalité du côté LIVRE devient (0,1) (un livre peut être emprunté ou non) et du côté ÉTUDIANT (1,n) (un étudiant doit avoir au moins un emprunt). Décrire les changements.",
+        "niveau": "hard",
+        "reponse": "Avec (0,1) du côté LIVRE, un livre peut ne pas être emprunté. Avec (1,n) du côté ÉTUDIANT, un étudiant doit avoir au moins un emprunt. La transformation : l’association (0,1) et (1,n) se traduit encore par une table distincte (car présence du n). Table EMPRUNT (ISBN, NumEtud, DateEmprunt). Clé primaire : ISBN (car (0,1) côté livre). Clé étrangère ISBN référence LIVRE(ISBN). Clé étrangère NumEtud référence ÉTUDIANT(NumEtud) et doit être NOT NULL (car cardinalité minimale 1). Pour respecter le (1,n), on doit s’assurer qu’à la création d’un étudiant, il existe déjà un emprunt, ce qui nécessite une contrainte d’intégrité référentielle ou une insertion particulière.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Cas concret : Gestion des notes dans un lycée",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Le proviseur d’un lycée souhaite informatiser la gestion des notes. Le MCD comporte trois entités : <strong>ÉLÈVE</strong> (NumEleve, Nom), <strong>MATIÈRE</strong> (CodeMat, Intitulé, Coefficient), <strong>ENSEIGNANT</strong> (NumEns, Nom). Une association ternaire <strong>ÉVALUATION</strong> lie un élève, une matière et un enseignant. Les cardinalités : un élève peut avoir plusieurs évaluations dans une matière ; une matière peut concerner plusieurs évaluations ; un enseignant peut effectuer plusieurs évaluations. L’association possède l’attribut <em>Note</em> (sur 20).</p><p>De plus, une association binaire <strong>ENSEIGNE</strong> lie MATIÈRE et ENSEIGNANT avec cardinalités (1,n) du côté MATIÈRE (une matière peut être enseignée par plusieurs profs) et (1,1) du côté ENSEIGNANT (un prof n’enseigne qu’une seule matière).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Transformer ce MCD en MLD complet (tables, clés primaires, clés étrangères). Présenter le résultat sous forme de liste de schémas relationnels.",
+        "niveau": "hard",
+        "reponse": "Table ÉLÈVE (NumEleve, Nom) — clé primaire : NumEleve. Table MATIÈRE (CodeMat, Intitulé, Coefficient) — clé primaire : CodeMat. Table ENSEIGNANT (NumEns, Nom) — clé primaire : NumEns. Pour l’association binaire ENSEIGNE (1,n) et (1,1) : on place une clé étrangère dans la table du côté n (MATIÈRE). Donc ajouter dans MATIÈRE : NumEns (clé étrangère vers ENSEIGNANT) avec NOT NULL car cardinalité minimale 1 de l’association du côté MATIÈRE. Pour l’association ternaire ÉVALUATION (pas de cardinalité précisée mais typiquement un élève + matière + enseignant est unique), on crée une table ÉVALUATION (NumEleve, CodeMat, NumEns, Note). Clé primaire : (NumEleve, CodeMat, NumEns). Chaque attribut est clé étrangère vers les tables correspondantes. Note est un attribut simple.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Expliquer pourquoi l’association ENSEIGNE ne donne pas naissance à une table séparée.",
+            "niveau": "medium",
+            "reponse": "Une association binaire dont les cardinalités maximales sont (1,1) et (1,n) ne nécessite pas de table supplémentaire. On place la clé étrangère du côté de la cardinalité maximale n (ici MATIÈRE). Cela évite une table de liaison inutile et respecte les règles de transformation."
+          },
+          {
+            "numero": "1.b",
+            "texte": "Proposer une contrainte d’intégrité pour garantir qu’un enseignant ne peut enseigner qu’une seule matière (déjà dans le schéma) et qu’une évaluation ne peut exister sans un enseignant.",
+            "niveau": "hard",
+            "reponse": "La contrainte qu’un enseignant n’enseigne qu’une seule matière est assurée par la clé étrangère dans MATIÈRE : chaque enseignant apparaît au plus une fois dans la table MATIÈRE (sauf si on autorise un enseignant à avoir plusieurs matières, ce qui est interdit par (1,1) du côté enseignant). Pour l’évaluation, la clé étrangère NumEns dans la table ÉVALUATION doit être NOT NULL (cela garantit qu’on ne peut insérer d’évaluation sans enseignant). De plus, la combinaison (CodeMat, NumEns) doit correspondre à un enseignant qui enseigne effectivement cette matière ; on peut ajouter une clé étrangère composite ou une contrainte CHECK."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Défis : héritage et association réflexive (synthèse)",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Une société de gestion de personnel veut modéliser ses employés. Le MCD comporte une entité <strong>PERSONNE</strong> (ID, Nom) avec deux sous-types : <strong>EMPLOYÉ</strong> (Salaire) et <strong>MANAGER</strong> (Prime). Un manager est aussi un employé. De plus, une association réflexive <strong>SUPERVISE</strong> lie un manager à un employé (un manager supervise plusieurs employés, un employé a au plus un manager).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Proposer une transformation en MLD pour gérer l’héritage (personne → employé et manager) selon la méthode “une table par classe concrète” ou “une table par classe mère”. Expliquer les avantages/inconvénients.",
+        "niveau": "very hard",
+        "reponse": "Méthode 1 : une table par classe mère (PERSONNE) avec un attribut type, et tables EMPLOYÉ et MANAGER avec clé étrangère vers PERSONNE. Avantage : peu de redondance. Inconvénient : nécessite des jointures. Méthode 2 : une table par classe concrète (EMPLOYÉ avec ID, Nom, Salaire ; MANAGER avec ID, Nom, Salaire, Prime). Avantage : requêtes simples, pas de jointure. Inconvénient : duplication du nom. Méthode 3 : une seule table avec tous les attributs (NULL pour les non-managers). Pour l’exercice, on choisit souvent la méthode des tables filles avec clé étrangère vers la mère.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Écrire le schéma relationnel pour l’association SUPERVISE avec les cardinalités données (manager supervise employé).",
+            "niveau": "hard",
+            "reponse": "L’association réflexive SUPERVISE relie MANAGER (jouant le rôle de superviseur) et EMPLOYÉ (supervisé). Cardinalités : (0,n) du côté manager (un manager supervise plusieurs employés) et (0,1) du côté employé (un employé a au plus un manager). Transformation : on ajoute une clé étrangère dans la table EMPLOYÉ qui référence MANAGER. Dans la table EMPLOYÉ, ajouter un attribut IDManager (clé étrangère vers MANAGER). Cela respecte la cardinalité (0,1) car l’attribut peut être NULL. Pas de table supplémentaire."
+          }
+        ]
+      }
+    ]
+  }
+]

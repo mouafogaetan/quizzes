@@ -1,0 +1,137 @@
+[
+  {
+    "intitule": "Capteur de température : thermistance CTN",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un capteur de température utilise une thermistance à coefficient de température négatif (CTN). Sa résistance $R$ (en $\\Omega$) varie avec la température absolue $T$ (en Kelvin) selon la loi : $R(T) = R_0 \\cdot \\exp\\left[ B \\left( \\frac{1}{T} - \\frac{1}{T_0} \\right) \\right]$, où $R_0 = 1000\\ \\Omega$ à $T_0 = 298\\ K$ (25°C) et $B = 3500\\ K$.</p>\n<p>On monte cette thermistance dans un pont diviseur de tension avec une résistance fixe $R_f = 1000\\ \\Omega$ alimenté par une tension $V_e = 5\\ V$. La tension de sortie $V_s$ est mesurée aux bornes de la thermistance.</p>",
+      "images": [
+        "Schéma électrique d'un pont diviseur de tension : une source de tension continue Ve=5V en série avec une résistance fixe Rf=1000 ohms et une thermistance CTN (symbole résistance avec une flèche barrée). La tension de sortie Vs est prise aux bornes de la thermistance."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Exploitation des caractéristiques de la thermistance.",
+        "niveau": "medium",
+        "reponse": "Voir réponses détaillées ci-dessous.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Rappeler la relation liant la température en degrés Celsius ($\\theta$) et la température en Kelvin ($T$). Convertir $T_0 = 298\\ K$ en degrés Celsius.",
+            "niveau": "easy",
+            "reponse": "$T(K) = \\theta(°C) + 273,15$ ; $\\theta_0 = 298 - 273,15 = 24,85\\ °C$ (environ 25°C)."
+          },
+          {
+            "numero": "1.b",
+            "texte": "Calculer la résistance $R$ de la thermistance lorsque la température est de $\\theta = 50\\ °C$.",
+            "niveau": "medium",
+            "reponse": "$T = 50 + 273,15 = 323,15\\ K$ ; $\\frac{1}{T} - \\frac{1}{T_0} = \\frac{1}{323,15} - \\frac{1}{298} \\approx -2,61\\times10^{-4}\\ K^{-1}$ ; $R = 1000 \\times \\exp(3500 \\times (-2,61\\times10^{-4})) = 1000 \\times \\exp(-0,9135) \\approx 1000 \\times 0,401 = 401\\ \\Omega$."
+          },
+          {
+            "numero": "1.c",
+            "texte": "Établir l'expression de la tension de sortie $V_s$ en fonction de $V_e$, $R_f$ et $R$. Calculer $V_s$ pour $\\theta = 50\\ °C$.",
+            "niveau": "medium",
+            "reponse": "Pont diviseur : $V_s = V_e \\times \\frac{R}{R+R_f}$. Soit $V_s = 5 \\times \\frac{401}{401+1000} = 5 \\times \\frac{401}{1401} \\approx 5 \\times 0,286 \\approx 1,43\\ V$."
+          },
+          {
+            "numero": "1.d",
+            "texte": "Déterminer la sensibilité $S = \\frac{dV_s}{d\\theta}$ de ce capteur à $\\theta = 50\\ °C$ (on admettra que $\\frac{dR}{d\\theta} \\approx -4,5\\ \\Omega/°C$ à cette température). Interpréter physiquement cette valeur.",
+            "niveau": "hard",
+            "reponse": "$V_s = V_e \\frac{R}{R+R_f}$ ; $\\frac{dV_s}{dR} = V_e \\frac{R_f}{(R+R_f)^2}$. $\\frac{dV_s}{d\\theta} = \\frac{dV_s}{dR} \\cdot \\frac{dR}{d\\theta} = V_e \\frac{R_f}{(R+R_f)^2} \\cdot \\frac{dR}{d\\theta}$. $\\frac{dV_s}{d\\theta} = 5 \\times \\frac{1000}{(1401)^2} \\times (-4,5) \\approx 5 \\times \\frac{1000}{1 962 801} \\times (-4,5) \\approx 5 \\times 5,09\\times10^{-4} \\times (-4,5) \\approx -0,0115\\ V/°C = -11,5\\ mV/°C$. Cela signifie que lorsque la température augmente de 1°C, la tension de sortie diminue de 11,5 mV."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Photorésistance et seuil d'éclairement",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>On souhaite réaliser un détecteur de luminosité (crépusculaire) à l'aide d'une photorésistance (LDR). À l'obscurité totale ($E=0\\ lux$), sa résistance est $R_{max} = 1\\ M\\Omega$. Sous un éclairement de $E=1000\\ lux$ (plein soleil), sa résistance vaut $R_{min} = 100\\ \\Omega$. La relation entre la résistance $R_{LDR}$ et l'éclairement $E$ est de la forme : $R_{LDR} = k \\cdot E^{-\\alpha}$, avec $k$ une constante et $\\alpha >0$.</p>\n<p>La LDR est montée en série avec une résistance fixe $R_p = 10\\ k\\Omega$ et un générateur de tension continue $V_{cc} = 5\\ V$. La tension aux bornes de la LDR commande l'entrée d'un microcontrôleur qui bascule à l'état HAUT si cette tension dépasse $2,5\\ V$.</p>",
+      "images": [
+        "Schéma d'un circuit diviseur de tension avec une photorésistance LDR (symbole résistance avec une flèche et un photon) et une résistance fixe Rp. La tension d'entrée du microcontrôleur est prise aux bornes de la LDR."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 2,
+        "texte": "Caractérisation et utilisation de la photorésistance.",
+        "niveau": "medium",
+        "reponse": "Voir réponses détaillées.",
+        "sousQuestions": [
+          {
+            "numero": "2.a",
+            "texte": "Déterminer les valeurs des constantes $k$ et $\\alpha$ à partir des données fournies.",
+            "niveau": "hard",
+            "reponse": "On a $R_{LDR} = k E^{-\\alpha}$. Pour $E_1=0$ lux (problème mathématique, on prend une valeur très faible) – Correction : On utilise les deux points : $R_{min}=100$ à $E=1000$ et $R_{max}=10^6$ à $E_{min}$ (on prendra $E_{min}=1$ lux pour résoudre). Alors $100 = k (1000)^{-\\alpha}$ et $10^6 = k (1)^{-\\alpha} = k$. Donc $k = 10^6\\ \\Omega\\cdot lux^{\\alpha}$. En substituant : $100 = 10^6 \\times (1000)^{-\\alpha} \\Rightarrow 10^{-4} = (10^3)^{-\\alpha} = 10^{-3\\alpha} \\Rightarrow -4 = -3\\alpha \\Rightarrow \\alpha = \\frac{4}{3} \\approx 1,333$. Ainsi $R_{LDR} = 10^6 \\cdot E^{-4/3}$."
+          },
+          {
+            "numero": "2.b",
+            "texte": "Exprimer la tension $V_{LDR}$ aux bornes de la photorésistance en fonction de $V_{cc}$, $R_p$ et $R_{LDR}$.",
+            "niveau": "easy",
+            "reponse": "$V_{LDR} = V_{cc} \\times \\frac{R_{LDR}}{R_p + R_{LDR}}$."
+          },
+          {
+            "numero": "2.c",
+            "texte": "Déterminer l'éclairement $E_{seuil}$ pour lequel le microcontrôleur bascule (tension $V_{LDR} = 2,5\\ V$).",
+            "niveau": "hard",
+            "reponse": "On a $2,5 = 5 \\times \\frac{R_{LDR}}{10\\cdot10^3 + R_{LDR}} \\Rightarrow \\frac{1}{2} = \\frac{R_{LDR}}{10000+R_{LDR}} \\Rightarrow 10000+R_{LDR} = 2R_{LDR} \\Rightarrow R_{LDR} = 10000\\ \\Omega = 10\\ k\\Omega$. Or $R_{LDR}=10^6 \\cdot E^{-4/3} = 10^4 \\Rightarrow 10^2 = E^{-4/3} \\Rightarrow E^{4/3} = 10^{-2} \\Rightarrow E = (10^{-2})^{3/4} = 10^{-1,5} \\approx 0,0316\\ lux$. L'obscurité quasi-totale."
+          },
+          {
+            "numero": "2.d",
+            "texte": "Justifier pourquoi ce montage ne peut pas détecter une transition jour/nuit (passage de 1000 lux à 1 lux) avec une seule résistance fixe $R_p$.",
+            "niveau": "medium",
+            "reponse": "La photorésistance a une dynamique de résistance énorme (1 MΩ à l'obscurité, 100 Ω à la lumière). Avec une résistance fixe $R_p=10\\ k\\Omega$, la tension $V_{LDR}$ passe de $5\\times \\frac{10^6}{10^4+10^6} \\approx 4,95\\ V$ (obscurité) à $5\\times \\frac{100}{10^4+100} \\approx 0,05\\ V$ (plein soleil). Le basculement à 2,5 V se produit pour une résistance $R_{LDR}=R_p=10\\ k\\Omega$, ce qui correspond à un éclairement très faible (0,03 lux). Ainsi, dès qu'il y a un peu de lumière (crépuscule >0,03 lux), le système bascule. Pour détecter un seuil plus élevé (ex: 100 lux), il faudrait adapter $R_p$ à la plage d'éclairement souhaitée ou utiliser un comparateur avec hystérésis."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Chaîne électronique de mesure de pression",
+    "type": "ressource",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Un capteur de pression absolue (jauges de contrainte montées en pont de Wheatstone) délivre une tension différentielle $\\Delta V_{capt}$ proportionnelle à la pression $P$ : $\\Delta V_{capt} = k \\cdot P$, avec $k = 10\\ mV/bar$. La pression à mesurer varie de 0 à 10 bar. Cette tension est très faible et parasite. On souhaite l'afficher sur un voltmètre numérique avec une résolution de 0,01 bar.</p>\n<p>Pour cela, on utilise une chaîne électronique composée de : capteur → amplificateur d'instrumentation (gain $G$) → filtre passe-bas → afficheur numérique (calibre 0-10 V).</p>",
+      "images": [
+        "Schéma-bloc d'une chaîne de mesure : un capteur de pression (pont de Wheatstone) relié à un amplificateur d'instrumentation, puis à un filtre passe-bas, puis à un afficheur numérique (voltmètre)."
+      ]
+    },
+    "questions": [
+      {
+        "numero": 3,
+        "texte": "Dimensionnement et analyse d'une chaîne électronique.",
+        "niveau": "hard",
+        "reponse": "Voir réponses.",
+        "sousQuestions": [
+          {
+            "numero": "3.a",
+            "texte": "Calculer la tension maximale délivrée par le capteur.",
+            "niveau": "easy",
+            "reponse": "$\\Delta V_{capt,max} = k \\cdot P_{max} = 10\\ mV/bar \\times 10\\ bar = 100\\ mV = 0,1\\ V$."
+          },
+          {
+            "numero": "3.b",
+            "texte": "Déterminer le gain $G$ que doit fournir l'amplificateur pour que la tension en sortie du filtre (pleine échelle) soit de $10\\ V$ lorsque $P=10\\ bar$.",
+            "niveau": "easy",
+            "reponse": "$V_{out} = G \\times \\Delta V_{capt}$. On veut $V_{out}=10\\ V$ pour $\\Delta V_{capt}=0,1\\ V$. Donc $G = \\frac{10}{0,1} = 100$."
+          },
+          {
+            "numero": "3.c",
+            "texte": "Justifier l'utilité du filtre passe-bas dans cette chaîne, sachant que la pression varie lentement (fréquence < 1 Hz) et que l'environnement est industriel bruyant (50 Hz, 100 Hz).",
+            "niveau": "medium",
+            "reponse": "Le filtre passe-bas atténue les signaux haute fréquence (bruit électrique, rayonnements, parasites secteur 50 Hz). Comme le signal utile (pression) varie très lentement (infra-Hz), on peut choisir une fréquence de coupure basse (ex: 5 Hz) qui laisse passer le signal utile tout en réduisant considérablement le bruit haute fréquence, améliorant ainsi le rapport signal/bruit."
+          },
+          {
+            "numero": "3.d",
+            "texte": "Vérifier si la résolution de l'afficheur (0,01 bar) est compatible avec la chaîne. On suppose que le voltmètre a une résolution de $1\\ mV$ sur le calibre $10\\ V$.",
+            "niveau": "hard",
+            "reponse": "Résolution en pression de l'afficheur : $0,01\\ bar$. Cela correspond à une tension capteur de $\\Delta V_{capt} = k \\times 0,01 = 0,1\\ mV = 100\\ \\mu V$. Après amplification de gain 100, cela donne $100\\ \\mu V \\times 100 = 10\\ mV$ en sortie de l'amplificateur. Le voltmètre a une résolution de $1\\ mV$ sur le calibre 10 V. Donc il peut théoriquement distinguer des variations de $0,001\\ bar$ ($1\\ mV / 100 / k$). La résolution de 0,01 bar est donc largement suffisante (10 fois meilleure que nécessaire)."
+          }
+        ]
+      }
+    ]
+  }
+]

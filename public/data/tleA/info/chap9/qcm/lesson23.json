@@ -1,0 +1,122 @@
+[
+  {
+    "questionText": "En langage SQL, quel est le rôle principal de la commande <code>UPDATE</code> ?",
+    "options": [
+      "Supprimer une ou plusieurs lignes d'une table",
+      "Ajouter une nouvelle ligne dans une table",
+      "Modifier les données existantes dans une ou plusieurs lignes d'une table",
+      "Afficher des données spécifiques d'une table"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "easy",
+    "explanation": "La commande UPDATE est utilisée pour modifier les données déjà présentes dans une table. DELETE supprime des lignes, INSERT ajoute des lignes, et SELECT affiche des données."
+  },
+  {
+    "questionText": "Voici la structure de la table <code>Eleves</code> : <code>Eleves(id, nom, prenom, classe, moyenne)</code>. Quelle requête permet de changer la classe de l'élève dont l'<code>id</code> est 5 de 'Terminale A' en 'Terminale C' ?",
+    "options": [
+      "<code>UPDATE Eleves SET classe = 'Terminale C' WHERE id = 5;</code>",
+      "<code>UPDATE Eleves FROM classe = 'Terminale C' WHERE id = 5;</code>",
+      "<code>MODIFY Eleves SET classe = 'Terminale C' WHERE id = 5;</code>",
+      "<code>UPDATE Eleves SET classe = 'Terminale C' IF id = 5;</code>"
+    ],
+    "correctAnswer": 0,
+    "difficulty": "medium",
+    "explanation": "La syntaxe correcte est : UPDATE nom_table SET nom_colonne = nouvelle_valeur WHERE condition. La clause WHERE est essentielle pour cibler la ligne spécifique (ici id=5), sinon toutes les lignes seraient modifiées."
+  },
+  {
+    "questionText": "Que se passe-t-il si on omet la clause <code>WHERE</code> dans une requête <code>UPDATE</code> ?",
+    "options": [
+      "La requête génère une erreur et ne s'exécute pas.",
+      "Aucune ligne n'est modifiée.",
+      "Seule la première ligne de la table est modifiée.",
+      "Toutes les lignes de la table sont modifiées avec la nouvelle valeur."
+    ],
+    "correctAnswer": 3,
+    "difficulty": "medium",
+    "explanation": "Sans la clause WHERE, la condition est toujours vraie pour toutes les lignes. Par conséquent, la commande UPDATE appliquera la modification à l'ensemble des enregistrements de la table. C'est une erreur fréquente et dangereuse."
+  },
+  {
+    "questionText": "Soit la table <code>Livres</code>. On souhaite augmenter le prix de tous les livres de 500 FCFA. La colonne prix est de type numérique. Quelle est la requête correcte ?",
+    "options": [
+      "<code>UPDATE Livres SET prix = 500;</code>",
+      "<code>UPDATE Livres SET prix = prix + 500;</code>",
+      "<code>UPDATE Livres ADD prix = prix + 500;</code>",
+      "<code>UPDATE Livres WHERE prix = prix + 500;</code>"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "explanation": "Pour modifier une valeur en fonction de sa valeur actuelle, on utilise le nom de la colonne dans l'expression. 'prix = prix + 500' signifie 'la nouvelle valeur de prix est égale à l'ancienne valeur plus 500'. Il n'y a pas de clause WHERE car la modification concerne tous les livres."
+  },
+  {
+    "questionText": "Vous disposez de la table <code>Employes(nom, poste, salaire)</code>. Quelle requête permet de modifier le salaire à 250 000 FCFA et le poste à 'Assistant' pour l'employé nommé 'DIOP' ?",
+    "options": [
+      "<code>UPDATE Employes SET salaire = 250000 AND poste = 'Assistant' WHERE nom = 'DIOP';</code>",
+      "<code>UPDATE Employes SET (salaire, poste) = (250000, 'Assistant') WHERE nom = 'DIOP';</code>",
+      "<code>UPDATE Employes SET salaire = 250000, poste = 'Assistant' WHERE nom = 'DIOP';</code>",
+      "<code>UPDATE Employes SET salaire = 250000 AND SET poste = 'Assistant' WHERE nom = 'DIOP';</code>"
+    ],
+    "correctAnswer": 2,
+    "difficulty": "medium",
+    "explanation": "Pour modifier plusieurs colonnes dans une même requête UPDATE, on les sépare par une virgule dans la clause SET : SET colonne1 = valeur1, colonne2 = valeur2. Les mots-clé AND ou des parenthèses ne sont pas utilisés de cette façon."
+  },
+  {
+    "questionText": "Dans la syntaxe <code>UPDATE table SET colonne = valeur WHERE condition;</code>, que représente la partie <code>valeur</code> ?",
+    "options": [
+      "Le nouveau type de données de la colonne.",
+      "La nouvelle valeur qui sera assignée à la colonne pour les lignes correspondant à la condition.",
+      "L'ancienne valeur de la colonne avant modification.",
+      "Le nom d'une autre colonne de la table."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "easy",
+    "explanation": "La clause SET attribue une nouvelle valeur à une colonne. Cette valeur peut être une constante (ex: 'Paris', 100), le résultat d'un calcul (ex: prix * 1.1), ou la valeur d'une autre colonne."
+  },
+  {
+    "questionText": "Un administrateur veut annuler une modification qu'il vient d'effectuer avec <code>UPDATE</code>. Quelle est l'affirmation correcte ?",
+    "options": [
+      "Il peut utiliser la commande UNDO UPDATE.",
+      "Il peut utiliser la commande ROLLBACK si la modification n'a pas encore été validée (COMMIT) et que le SGBD supporte les transactions.",
+      "Il peut utiliser la commande DELETE pour supprimer les modifications.",
+      "Une fois UPDATE exécuté, la modification est irréversible."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "hard",
+    "explanation": "Dans un SGBD transactionnel (comme MySQL avec InnoDB), si l'UPDATE est effectué au sein d'une transaction non validée (COMMIT), on peut l'annuler avec ROLLBACK. Sans transaction, la modification est permanente, d'où l'importance de la clause WHERE et des sauvegardes. Cette notion est avancée pour des littéraires."
+  },
+  {
+    "questionText": "Vous avez la table <code>Clients(id, nom, ville, solde)</code>. Quelle requête est correctement écrite pour mettre à jour le solde des clients de 'Douala' en lui ajoutant 10 000 ?",
+    "options": [
+      "<code>UPDATE Clients SET solde = solde + 10000 FOR ville = 'Douala';</code>",
+      "<code>UPDATE Clients SET solde = solde + 10000 WHERE ville = 'Douala';</code>",
+      "<code>UPDATE Clients WHERE ville = 'Douala' SET solde = solde + 10000;</code>",
+      "<code>MODIFY Clients SET solde = solde + 10000 WHERE ville = 'Douala';</code>"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "explanation": "La syntaxe correcte place toujours la clause WHERE après la clause SET. On ne peut pas inverser l'ordre. L'expression 'solde = solde + 10000' permet d'ajouter 10000 à la valeur actuelle du solde."
+  },
+  {
+    "questionText": "Un utilisateur exécute la commande : <code>UPDATE Produits SET prix = 0;</code> sans clause WHERE. Quel est le résultat sur la table Produits qui contient 150 lignes ?",
+    "options": [
+      "La commande est refusée car la clause WHERE est obligatoire.",
+      "Le prix du premier produit devient 0.",
+      "Le prix des 150 produits devient 0.",
+      "La commande supprime tous les produits."
+    ],
+    "correctAnswer": 2,
+    "difficulty": "easy",
+    "explanation": "La clause WHERE n'est pas obligatoire dans la syntaxe SQL. Son absence signifie que la condition de mise à jour s'applique à toutes les lignes de la table. Ici, le prix de tous les 150 produits sera défini à 0. C'est pourquoi il faut être très prudent."
+  },
+  {
+    "questionText": "Soit la table <code>Etudiants</code> avec un champ <code>date_naissance</code>. Quelle requête permet de corriger l'année de naissance de tous les étudiants nés en '2005' pour la remplacer par '2006' ?",
+    "options": [
+      "<code>UPDATE Etudiants SET date_naissance = 2006 WHERE date_naissance = 2005;</code>",
+      "<code>UPDATE Etudiants SET date_naissance = '2006' WHERE date_naissance = '2005';</code>",
+      "<code>UPDATE Etudiants SET date_naissance FROM '2005' TO '2006';</code>",
+      "<code>UPDATE Etudiants REPLACE date_naissance = '2006' IF date_naissance = '2005';</code>"
+    ],
+    "correctAnswer": 1,
+    "difficulty": "hard",
+    "explanation": "Si la colonne 'date_naissance' est de type DATE ou TEXTE, les valeurs doivent être entre guillemets simples. La syntaxe correcte est SET colonne = 'nouvelle_valeur' WHERE colonne = 'ancienne_valeur'. Cela modifie uniquement les lignes où la condition est vraie."
+  }
+]

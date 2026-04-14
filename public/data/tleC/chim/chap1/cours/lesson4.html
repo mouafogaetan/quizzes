@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Dilution des solutions (Terminale C/D)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (intégré pour correspondre au fichier style.css demandé) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            font-family: 'Courier New', monospace;
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .exemple-correction strong {
+            color: #1e40af;
+        }
+
+        .exemple-astuce {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background-color: #fef9c3;
+            border-left: 4px solid #eab308;
+            border-radius: 0.75rem;
+            font-size: 0.9rem;
+            color: #854d0e;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -1px;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .fiche-footer {
+            background-color: #f8fafc;
+            border-top: 1px solid #e9eef2;
+            padding: 1rem 2.5rem;
+            font-size: 0.8rem;
+            color: #475569;
+            text-align: center;
+        }
+        
+        .protocol-step {
+            margin: 0.8rem 0 0.8rem 1rem;
+            font-weight: 500;
+        }
+        
+        .img-illustration {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        .img-illustration img {
+            max-width: 100%;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <!-- En-tête avec le nom de la leçon -->
+    <header class="fiche-header">
+        <h1 class="lesson-title">Dilution des solutions</h1>
+        <p class="lesson-subtitle">Chimie – Terminale C & D · Programme officiel (Bac 2025-2026)</p>
+    </header>
+
+    <!-- Contenu principal de la fiche -->
+    <main class="fiche-content">
+        <!-- Section concepts clés -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Principes fondamentaux</h2>
+            
+            <div class="card concept-card">
+                <h3 class="card-title">Principe de conservation de la matière</h3>
+                <p class="card-description">
+                    Lors d’une dilution, on ajoute du solvant (généralement de l’eau distillée) à une solution mère pour obtenir une solution fille moins concentrée. 
+                    La quantité de matière du soluté ne change pas : elle se conserve.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Solution mère</strong> : solution initiale, concentration $C_i$ et volume $V_i$ prélevé.</li>
+                    <li><strong>Solution fille</strong> : solution diluée obtenue, concentration $C_f$ et volume total $V_f$.</li>
+                    <li><span class="formule">$n_{soluté} = C_i \times V_i = C_f \times V_f$</span> (Relation fondamentale)</li>
+                    <li>Facteur de dilution $F = \dfrac{C_i}{C_f} = \dfrac{V_f}{V_i}$. Plus $F$ est grand, plus la solution est diluée.</li>
+                </ul>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">Matériel indispensable & précautions</h3>
+                <p class="card-description">
+                    Une dilution correcte nécessite un équipement précis pour garantir la fiabilité de la concentration finale.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Pipette jaugée</strong> (ou graduée) + propipette : pour prélever le volume $V_i$ de solution mère.</li>
+                    <li><strong>Fiole jaugée</strong> de volume $V_f$ : contiendra la solution fille après homogénéisation.</li>
+                    <li><strong>Eau distillée</strong> : solvant pur, évite les ions parasites.</li>
+                    <li><strong>Bouchon et agitateur</strong> : homogénéisation indispensable après dilution.</li>
+                </ul>
+                <div class="img-illustration">
+                    <img src="" alt="Schéma d'une dilution : prélèvement à la pipette jaugée et transvasement dans une fiole jaugée avec eau distillée">
+                </div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">Protocole expérimental (mode opératoire)</h3>
+                <p class="card-description">
+                    Étapes à suivre rigoureusement pour préparer une solution par dilution.
+                </p>
+                <div class="protocol-step">1️⃣ Calculer le volume $V_i$ à prélever : $V_i = \dfrac{C_f \times V_f}{C_i}$.</div>
+                <div class="protocol-step">2️⃣ Rincer la pipette jaugée avec un peu de solution mère.</div>
+                <div class="protocol-step">3️⃣ Prélever exactement $V_i$ de solution mère à l’aide de la pipette jaugée.</div>
+                <div class="protocol-step">4️⃣ Introduire ce prélèvement dans la fiole jaugée de volume $V_f$.</div>
+                <div class="protocol-step">5️⃣ Ajouter de l’eau distillée jusqu’au trait de jauge (environ aux 2/3, agiter, puis compléter).</div>
+                <div class="protocol-step">6️⃣ Boucher et homogénéiser en retournant la fiole plusieurs fois.</div>
+                <p class="card-description" style="margin-top: 0.8rem;">
+                    💧 <strong>Remarque importante</strong> : toujours ajuster le niveau au trait de jauge avec une pissette d’eau distillée, le ménisque doit être tangent au trait.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section des exemples de compréhension -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Applications types (Bac)</h2>
+            
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 1 : Dilution d’une solution d’acide chlorhydrique</h3>
+                <p class="exemple-context">
+                    On dispose d’une solution mère d’acide chlorhydrique (HCl) de concentration $C_i = 0,50\ mol·L^{-1}$.
+                    On souhaite préparer $V_f = 200\ mL$ d’une solution fille de concentration $C_f = 0,025\ mol·L^{-1}$.
+                </p>
+                <p class="exemple-correction">
+                    <strong>Résolution :</strong> Utilisons la conservation de matière : $C_i V_i = C_f V_f$.<br>
+                    $V_i = \dfrac{C_f \times V_f}{C_i} = \dfrac{0,025 \times 0,200}{0,50} = \dfrac{0,0050}{0,50} = 0,010\ L = 10,0\ mL$.<br>
+                    Il faut donc prélever 10,0 mL de la solution mère à l’aide d’une pipette jaugée de 10 mL, les introduire dans une fiole jaugée de 200 mL, compléter avec de l’eau distillée jusqu’au trait de jauge et homogénéiser.
+                </p>
+                <div class="exemple-astuce">
+                    💡 Astuce : Vérifiez la cohérence : facteur de dilution $F = C_i/C_f = 0,50/0,025 = 20$ ; $V_f/V_i = 200/10 = 20$. Toujours cohérent.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 2 : Dilution successive (préparation d’une échelle de concentrations)</h3>
+                <p class="exemple-context">
+                    À partir d’une solution de glucose $C_0 = 4,0 \times 10^{-2}\ mol·L^{-1}$, on réalise une dilution au 1/10, puis à partir de cette nouvelle solution, on réalise une nouvelle dilution au 1/5. Quelle est la concentration finale ?
+                </p>
+                <p class="exemple-correction">
+                    <strong>Étape 1 :</strong> Dilution au 1/10 ⇒ facteur $F_1 = 10$ ⇒ $C_1 = C_0 / 10 = 4,0 \times 10^{-3}\ mol·L^{-1}$.<br>
+                    <strong>Étape 2 :</strong> Dilution au 1/5 à partir de $C_1$ ⇒ $F_2 = 5$ ⇒ $C_2 = C_1 / 5 = \dfrac{4,0 \times 10^{-3}}{5} = 8,0 \times 10^{-4}\ mol·L^{-1}$.<br>
+                    Soit un facteur global $F_{total} = 10 \times 5 = 50$, $C_2 = C_0 / 50 = 8,0\times 10^{-4}\ mol·L^{-1}$.
+                </p>
+                <div class="exemple-astuce">
+                    💬 Pour une succession de dilutions, les facteurs se multiplient. Pensez toujours à exprimer les volumes en litres pour éviter les erreurs.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 3 : Lien Bac – dosage et dilution préalable</h3>
+                <p class="exemple-context">
+                    Un vinaigre commercial a une concentration en acide éthanoïque trop élevée pour être dosé directement. On dilue 20 fois le vinaigre. La solution diluée a une concentration $C_d = 0,030\ mol·L^{-1}$. Déterminer la concentration du vinaigre original.
+                </p>
+                <p class="exemple-correction">
+                    <strong>Méthode :</strong> Facteur de dilution $F = 20$ ⇒ $C_{mère} = C_{fille} \times F$.<br>
+                    $C_{vinaigre} = 0,030 \times 20 = 0,60\ mol·L^{-1}$.<br>
+                    On retrouve une valeur typique pour l’acidité du vinaigre (environ 6-8%).
+                </p>
+                <div class="exemple-astuce">
+                    📌 Dans les exercices de dosage du baccalauréat, la dilution est souvent une étape préliminaire. Pensez toujours à remonter à la concentration initiale grâce au facteur de dilution.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section pièges à éviter -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Erreurs fréquentes & conseils</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Ne pas confondre volume prélevé et volume final :</span> $V_i$ (pipette) et $V_f$ (fiole jaugée) sont différents.</li>
+                    <li><span class="bold">Oublier l’homogénéisation :</span> après avoir complété jusqu’au trait de jauge, agiter retourner la fiole au moins 5 à 6 fois.</li>
+                    <li><span class="bold">Utiliser une éprouvette graduée à la place d’une fiole jaugée :</span> l’incertitude serait trop grande. Pour des calculs précis (dosages), la fiole jaugée est obligatoire.</li>
+                    <li><span class="bold">Erreur d’unité :</span> toujours convertir les volumes en litres (L) dans la formule $C_iV_i = C_fV_f$ (sinon facteur 1000).</li>
+                    <li><span class="bold">Piège courant au Bac :</span> une question de dilution dans un énoncé de dosage d’acide faible ou fort. Vérifiez que la solution titrée est bien la solution diluée avant de calculer la concentration mère.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section lien avec le programme & astuces de révision -->
+        <section class="exemple-section">
+            <h2 class="section-title">🔬 Lien avec le Baccalauréat 2023-2025</h2>
+            <div class="card concept-card">
+                <p class="card-description">
+                    La dilution est une compétence transversale évaluée au Baccalauréat Camerounais :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Partie expérimentale :</strong> décrire le mode opératoire d’une dilution, calculer le volume à prélever.</li>
+                    <li><strong>Dosages acido-basiques :</strong> souvent la solution à doser est une solution diluée d’un produit commercial (vinaigre, eau de Javel, solution S). Il faut savoir remonter à la concentration commerciale.</li>
+                    <li><strong>Exercices de synthèse :</strong> questions de dilution associées à la relation $C_iV_i = C_fV_f$ et à la conservation de la matière.</li>
+                </ul>
+                <div class="exemple-astuce" style="margin-top: 0.8rem;">
+                    🧪 <strong>Réflexe Bac :</strong> Dès qu’on lit « on dilue une solution », écrire immédiatement $C_{mère}V_{prélevé} = C_{fille}V_{fiole}$ et identifier les grandeurs connues/inconnues.
+                </div>
+            </div>
+        </section>
+        
+        <!-- Petit tableau récapitulatif (formules) -->
+        <section>
+            <h2 class="section-title">📐 Récapitulatif des formules</h2>
+            <div class="card concept-card">
+                <ul class="concept-list">
+                    <li><span class="formule">$C_i \times V_i = C_f \times V_f$</span> &nbsp; (conservation quantité de matière)</li>
+                    <li><span class="formule">$V_i = \dfrac{C_f \times V_f}{C_i}$</span> &nbsp; (volume mère à prélever)</li>
+                    <li><span class="formule">$C_f = C_i \times \dfrac{V_i}{V_f}$</span></li>
+                    <li>Facteur de dilution : <span class="formule">$F = \dfrac{C_i}{C_f} = \dfrac{V_f}{V_i}$</span></li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Petite illustration supplémentaire: schéma de dilution -->
+        <div class="img-illustration">
+            <img src="" alt="Schéma complet d'une dilution en chimie : pipette jaugée prélevant la solution mère, fiole jaugée avec eau distillée, homogénéisation">
+        </div>
+        <p style="font-size: 0.8rem; text-align: center; color: #475569; margin-top: -0.5rem;">*Figure : étapes clés de la dilution (à légender pour la révision)*</p>
+        
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="fiche-footer">
+        <p>Fiche conforme au programme officiel de Chimie – Terminale C & D (Année 2025-2026) | Enseignant : Cameroun 🇨🇲</p>
+        <p>📚 Révision active : maîtriser la dilution est indispensable pour les dosages et les problèmes de concentrations.</p>
+    </footer>
+</div>
+</body>
+</html>

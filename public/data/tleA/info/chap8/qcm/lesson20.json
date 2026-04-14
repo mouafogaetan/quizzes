@@ -1,0 +1,98 @@
+[
+  {
+    "questionText": "Dans une base de données relationnelle, une clé primaire (primary key) est un champ (ou un groupe de champs) qui permet d'identifier de manière :",
+    "options": [
+      "Optionnelle chaque enregistrement dans une table.",
+      "Multiple et non unique chaque enregistrement.",
+      "Unique chaque enregistrement dans une table.",
+      "Aléatoire pour éviter les doublons."
+    ],
+    "correctAnswer": 2,
+    "difficulty": "easy",
+    "explanation": "La clé primaire a pour rôle fondamental d'identifier de manière unique chaque ligne (ou enregistrement) d'une table. Elle garantit qu'il n'y a pas deux lignes identiques et qu'aucune valeur de la clé primaire n'est nulle."
+  },
+  {
+    "questionText": "Considérez la table `ETUDIANTS` ci-dessous. Quel champ est le plus approprié pour être la clé primaire ?\n\n| NuméroInscription | Nom | Prénom | Téléphone |\n|---|---|---|---|\n| 2025-001 | Djoubi | Alice | 699001122 |\n| 2025-002 | Njoya | Charles | 699003344 |\n| 2025-003 | Moussa | Fatima | 699005566 |",
+    "options": [
+      "Nom",
+      "Prénom",
+      "Téléphone",
+      "NuméroInscription"
+    ],
+    "correctAnswer": 3,
+    "difficulty": "easy",
+    "explanation": "Le champ 'NuméroInscription' est un identifiant unique créé spécifiquement pour chaque étudiant. 'Nom' et 'Prénom' peuvent avoir des homonymes (risque de doublon). 'Téléphone' peut être partagé par plusieurs personnes (familial) ou changer, ce qui en fait un mauvais candidat pour une clé primaire stable."
+  },
+  {
+    "questionText": "Quelle est la propriété essentielle d'une clé primaire en termes d'intégrité des données ?",
+    "options": [
+      "Elle peut contenir des valeurs nulles (NULL).",
+      "Elle ne peut pas contenir de valeurs nulles et ses valeurs doivent être uniques.",
+      "Elle doit toujours être de type numérique.",
+      "Elle peut contenir des valeurs dupliquées mais pas de valeurs nulles."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "explanation": "Une clé primaire doit respecter deux contraintes d'intégrité : la contrainte d'unicité (aucune valeur identique) et la contrainte d'intégrité de l'entité (aucune valeur nulle, car NULL signifierait une absence d'identification)."
+  },
+  {
+    "questionText": "Dans une table `COMMANDES`, un client peut passer plusieurs commandes. Une commande est identifiée par son `NuméroCommande`. Chaque commande est passée par un seul client identifié par son `NuméroClient`. Quel est l'avantage de définir `NuméroCommande` comme clé primaire ?",
+    "options": [
+      "Cela permet d'avoir plusieurs commandes avec le même NuméroCommande.",
+      "Cela interdit d'avoir deux commandes avec le même NuméroCommande.",
+      "Cela permet de modifier le NuméroClient de la commande.",
+      "Cela supprime automatiquement le client si on supprime la commande."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "medium",
+    "explanation": "La clé primaire garantit l'unicité. En définissant `NuméroCommande` comme clé primaire, on s'assure qu'il n'existera jamais deux commandes avec le même numéro d'identification, ce qui est logique pour le suivi des transactions."
+  },
+  {
+    "questionText": "On souhaite créer une table `NOTES` pour un bulletin scolaire. Un élève (identifié par `ID_Eleve`) n'a qu'une seule note par matière (identifiée par `ID_Matiere`). Quelle serait la meilleure clé primaire pour cette table ?",
+    "options": [
+      "Le champ `ID_Eleve` seul.",
+      "Le champ `ID_Matiere` seul.",
+      "La combinaison des champs (`ID_Eleve`, `ID_Matiere`).",
+      "Le champ `Note`."
+    ],
+    "correctAnswer": 2,
+    "difficulty": "hard",
+    "explanation": "Il s'agit d'une clé primaire composite. Ni `ID_Eleve` ni `ID_Matiere` ne sont uniques seuls (un élève a plusieurs matières, une matière a plusieurs élèves). Cependant, le couple (Elève, Matière) est unique car un élève ne peut avoir qu'une seule note pour une matière donnée. C'est la clé naturelle de cette table d'association."
+  },
+  {
+    "questionText": "Voici une table `PRODUITS`. Identifiez la clé primaire.\n\n<img src=\"table_produits.png\" alt=\"Table Produits avec colonnes: Reference (REF001, REF002, REF003), Nom (Livre, Cahier, Stylo), Prix (1500, 500, 300)\">",
+    "options": [
+      "Nom",
+      "Prix",
+      "Reference",
+      "Aucune, il n'y a pas de clé primaire visible."
+    ],
+    "correctAnswer": 2,
+    "difficulty": "easy",
+    "explanation": "Dans une table bien conçue, la colonne 'Reference' (ou 'Référence') est généralement l'identifiant unique du produit. Elle contient des valeurs uniques (REF001, REF002, REF003) alors que le 'Nom' et le 'Prix' pourraient être identiques pour d'autres produits (ex: deux stylos à 300 FCFA)."
+  },
+  {
+    "questionText": "Que se passe-t-il si on essaie d'insérer un nouvel enregistrement avec une valeur de clé primaire qui existe déjà dans la table ?",
+    "options": [
+      "La base de données remplace l'ancien enregistrement par le nouveau.",
+      "La base de données génère automatiquement une nouvelle valeur pour la clé primaire.",
+      "La base de données rejette l'insertion et retourne une erreur de violation d'unicité.",
+      "La base de données ajoute quand même l'enregistrement en ignorant la contrainte."
+    ],
+    "correctAnswer": 2,
+    "difficulty": "medium",
+    "explanation": "C'est une règle fondamentale des SGBD (Systèmes de Gestion de Base de Données). La contrainte d'unicité de la clé primaire est stricte. Si vous tentez d'insérer un doublon, le SGBD refuse l'opération pour protéger l'intégrité des données."
+  },
+  {
+    "questionText": "Dans la table `AUTEURS` d'une bibliothèque, quel champ conviendrait le mieux comme clé primaire ?",
+    "options": [
+      "Le nom complet de l'auteur (ex: 'Victor Hugo').",
+      "Le numéro d'identifiant national de l'auteur (NIA).",
+      "L'adresse email de l'auteur.",
+      "Le titre du premier livre de l'auteur."
+    ],
+    "correctAnswer": 1,
+    "difficulty": "hard",
+    "explanation": "Bien que l'email soit unique, il peut changer. Le NIA (ou un identifiant interne auto-incrémenté) est un excellent choix : il est unique, ne change jamais (stable), et ne dépend pas de données externes qui pourraient varier (changement de nom, perte d'email). Un identifiant numérique est souvent préféré pour les clés primaires."
+  }
+]

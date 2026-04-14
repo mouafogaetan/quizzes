@@ -1,0 +1,131 @@
+[
+  {
+    "intitule": "La clause WHERE : Filtrer les données",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>On considère la table <code>Eleve</code> suivante :</p>\n<ul>\n<li><code>Eleve(id_eleve INT, nom VARCHAR(30), prenom VARCHAR(30), note_moyenne FLOAT, classe VARCHAR(10))</code></li>\n</ul>\n<p>Écrire la requête SQL permettant de sélectionner le nom et le prénom des élèves dont la note moyenne est strictement supérieure à 12.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la requête SQL.",
+        "niveau": "easy",
+        "reponse": "SELECT nom, prenom FROM Eleve WHERE note_moyenne > 12;",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Tri des résultats avec ORDER BY",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>À partir de la même table <code>Eleve</code>, écrire la requête SQL qui affiche tous les champs des élèves de la classe 'Terminale C', triés par ordre alphabétique inverse sur le nom.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la requête SQL.",
+        "niveau": "easy",
+        "reponse": "SELECT * FROM Eleve WHERE classe = 'Terminale C' ORDER BY nom DESC;",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Combiner les conditions",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Soit la table <code>Produit</code> : <code>Produit(id_produit INT, nom VARCHAR(50), prix_unitaire FLOAT, quantite_stock INT)</code>.</p>\n<p>Écrire la requête SQL qui sélectionne le nom et le prix unitaire des produits dont la quantité en stock est comprise entre 10 et 50 (inclus) et dont le prix unitaire est inférieur à 2000 FCFA.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la requête SQL correspondante.",
+        "niveau": "medium",
+        "reponse": "SELECT nom, prix_unitaire FROM Produit WHERE quantite_stock BETWEEN 10 AND 50 AND prix_unitaire < 2000;\n\n(Alternative : SELECT nom, prix_unitaire FROM Produit WHERE quantite_stock >= 10 AND quantite_stock <= 50 AND prix_unitaire < 2000;)",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Gestion des notes des élèves",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Une professeure de Terminale D souhaite analyser les résultats de ses élèves. La table <code>Notes</code> est définie ainsi :</p>\n<pre>\nNotes(\n    id_eleve INT,\n    nom_eleve VARCHAR(30),\n    note_maths FLOAT,\n    note_physique FLOAT,\n    note_svt FLOAT\n)\n</pre>\n<p>Consignes :</p>\n<ol>\n<li>Écrire une requête pour afficher le nom des élèves et leur moyenne générale (arrondie à deux décimales).</li>\n<li>Écrire une requête pour afficher le nom des élèves ayant une moyenne supérieure ou égale à 10, triés de la meilleure à la moins bonne moyenne.</li>\n</ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la requête SQL pour la question 1.",
+        "niveau": "medium",
+        "reponse": "SELECT nom_eleve, ROUND((note_maths + note_physique + note_svt) / 3, 2) AS moyenne_generale FROM Notes;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire la requête SQL pour la question 2.",
+        "niveau": "medium",
+        "reponse": "SELECT nom_eleve, (note_maths + note_physique + note_svt) / 3 AS moyenne_generale FROM Notes WHERE (note_maths + note_physique + note_svt) / 3 >= 10 ORDER BY moyenne_generale DESC;",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Application dans une bibliothèque",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Le responsable d'une bibliothèque universitaire utilise une base de données avec les deux tables suivantes :</p>\n<pre>\nLivre(id_livre INT, titre VARCHAR(100), auteur VARCHAR(50), annee_publication INT, id_categorie INT)\nCategorie(id_categorie INT, nom_categorie VARCHAR(50), emplacement VARCHAR(20))\n</pre>\n<p>Travail à faire :</p>\n<ol>\n<li>Sélectionner les titres et les auteurs des livres publiés après l'an 2000.</li>\n<li>Sélectionner les titres des livres de la catégorie 'Roman', en affichant également le nom de la catégorie et l'emplacement.</li>\n<li>Le responsable souhaite la liste des livres (titre, auteur, année) de l'auteur 'Camara Laye' ou de l'auteur 'Mariama Bâ', triée par année de publication (de la plus récente à la plus ancienne).</li>\n</ol>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la requête pour la question 1.",
+        "niveau": "easy",
+        "reponse": "SELECT titre, auteur FROM Livre WHERE annee_publication > 2000;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire la requête pour la question 2. (Nécessite une jointure)",
+        "niveau": "hard",
+        "reponse": "SELECT Livre.titre, Categorie.nom_categorie, Categorie.emplacement FROM Livre INNER JOIN Categorie ON Livre.id_categorie = Categorie.id_categorie WHERE Categorie.nom_categorie = 'Roman';",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Écrire la requête pour la question 3.",
+        "niveau": "medium",
+        "reponse": "SELECT titre, auteur, annee_publication FROM Livre WHERE auteur = 'Camara Laye' OR auteur = 'Mariama Bâ' ORDER BY annee_publication DESC;",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Sélection avec exclusion",
+    "type": "ressource",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Soit la table <code>Employe</code> : <code>Employe(id_employe INT, nom VARCHAR(30), service VARCHAR(30), salaire FLOAT)</code>.</p>\n<p>Écrire une requête pour sélectionner le nom et le salaire des employés qui ne travaillent pas dans les services 'Comptabilité' ou 'Direction'.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la requête SQL en utilisant l'opérateur <> et AND/OR, puis avec l'opérateur NOT IN.",
+        "niveau": "hard",
+        "reponse": "-- Avec <> et AND :\nSELECT nom, salaire FROM Employe WHERE service <> 'Comptabilité' AND service <> 'Direction';\n\n-- Avec NOT IN :\nSELECT nom, salaire FROM Employe WHERE service NOT IN ('Comptabilité', 'Direction');",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

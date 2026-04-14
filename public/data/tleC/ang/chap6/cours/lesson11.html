@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 11 : Proposer des solutions environnementales</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (non utilisé ici mais gardé pour compatibilité) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Style pour l'image */
+        .illustration-img {
+            width: 100%;
+            max-height: 220px;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            margin-top: 0.75rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .img-caption {
+            font-size: 0.75rem;
+            color: #5b6e8c;
+            text-align: center;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">🌍 Leçon 11 : Proposer des solutions environnementales (Speaking)</h1>
+            <p class="lesson-subtitle">Anglais · Terminale C & D · Environnement et développement durable</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <!-- Carte 1 : Vocabulaire de l'action environnementale -->
+                <div class="card concept-card">
+                    <h3 class="card-title">🌱 Vocabulaire essentiel pour proposer des solutions</h3>
+                    <p class="card-description">
+                        Quand on parle de solutions environnementales, on utilise des mots précis pour décrire les problèmes, les actions et les résultats.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>To reduce</strong> : réduire (<em>We must reduce plastic waste.</em>)</li>
+                        <li><strong>To recycle</strong> : recycler (<em>Recycle paper and glass.</em>)</li>
+                        <li><strong>To reuse</strong> : réutiliser (<em>Reuse old containers.</em>)</li>
+                        <li><strong>Waste management</strong> : gestion des déchets</li>
+                        <li><strong>Sustainable development</strong> : développement durable</li>
+                        <li><strong>Renewable energy</strong> : énergie renouvelable (solaire, éolienne)</li>
+                        <li><strong>To protect the environment</strong> : protéger l'environnement</li>
+                        <li><strong>To preserve natural resources</strong> : préserver les ressources naturelles</li>
+                    </ul>
+                    <img src="" alt="Illustration d'une communauté qui recycle et plante des arbres, avec des panneaux solaires en arrière-plan" class="illustration-img">
+                    <div class="img-caption">🌿 Agir localement pour un impact global – exemples d'actions citoyennes.</div>
+                </div>
+
+                <!-- Carte 2 : Grammaire – Les modaux d'obligation et de nécessité -->
+                <div class="card concept-card">
+                    <h3 class="card-title">📚 Grammaire : Modaux d’obligation et de nécessité</h3>
+                    <p class="card-description">
+                        Pour exprimer ce qu’il <strong>faut faire</strong> ou ce qui est <strong>nécessaire</strong> pour résoudre un problème environnemental, on utilise des verbes modaux spécifiques.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Must</strong> (obligation forte, souvent une règle morale ou légale)<br>
+                        <em>Exemple : "We must stop cutting down trees without permission."</em> (Nous devons absolument arrêter de couper des arbres sans autorisation.)</li>
+                        <li><strong>Have to</strong> (obligation externe, une nécessité imposée par la situation)<br>
+                        <em>Exemple : "People have to sort their waste properly."</em> (Les gens doivent trier leurs déchets correctement.)</li>
+                        <li><strong>Need to</strong> (nécessité, ce qui est indispensable)<br>
+                        <em>Exemple : "We need to install more solar panels in our village."</em> (Nous avons besoin d’installer plus de panneaux solaires dans notre village.)</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.5rem;">
+                        💡 Astuce : <strong>Must</strong> est plus personnel et catégorique ; <strong>have to</strong> vient souvent d’une règle extérieure. En expression orale, on utilise beaucoup <strong>need to</strong> pour proposer des solutions réalistes.
+                    </div>
+                </div>
+
+                <!-- Carte 3 : Structures de proposition / suggestion -->
+                <div class="card concept-card">
+                    <h3 class="card-title">💬 Structures pour proposer des solutions</h3>
+                    <p class="card-description">
+                        Lors d’un débat ou d’une discussion de groupe, utilisez ces expressions pour avancer des idées et convaincre.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>“We should + infinitif”</strong> : Nous devrions… (<em>We should educate people about recycling.</em>)</li>
+                        <li><strong>“Why don’t we + infinitif sans to ?”</strong> : Pourquoi ne pas… ? (<em>Why don’t we organize a clean-up day?</em>)</li>
+                        <li><strong>“I suggest that we + infinitif sans to”</strong> : Je suggère que nous… (<em>I suggest that we use less plastic.</em>)</li>
+                        <li><strong>“One solution could be to + infinitif”</strong> : Une solution pourrait être de…</li>
+                        <li><strong>“Let’s + infinitif sans to”</strong> : Faisons… (<em>Let’s plant trees along the river.</em>)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension : simulations orales -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension (Speaking)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">🗣️ Exemple de dialogue : Gestion des déchets au quartier</h3>
+                    <p class="exemple-context">
+                        Contexte : Lors d’une réunion de quartier à Douala, les habitants discutent des déchets plastiques qui obstruent les caniveaux. 
+                        Deux élèves (Marie et Paul) proposent des solutions.
+                    </p>
+                    <div class="exemple-correction">
+                        <p><strong>Marie :</strong> <em>"We need to stop throwing plastic bags everywhere. It's dangerous for the environment."</em><br>
+                        <strong>Paul :</strong> <em>"You're right. Why don’t we organize a collection every Saturday morning?"</em><br>
+                        <strong>Marie :</strong> <em>"Good idea. We also have to educate children at school about recycling."</em><br>
+                        <strong>Paul :</strong> <em>"Exactly! I suggest that we create a small recycling point near the market."</em><br>
+                        <strong>Marie :</strong> <em>"Let’s talk to the chief and ask for bins."</em></p>
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Analyse : Marie utilise <strong>need to</strong> (nécessité), Paul utilise <strong>Why don’t we</strong> (suggestion ouverte), puis <strong>I suggest that we</strong> (proposition structurée) et <strong>Let’s</strong> (action collective). Tous ces outils sont parfaits pour le Speaking.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">🌞 Exemple de mini-discours : Promouvoir l’énergie solaire</h3>
+                    <p class="exemple-context">
+                        Sujet : Vous êtes dans un club d’environnement. Vous voulez convaincre vos camarades d’utiliser l’énergie solaire dans l’école.
+                    </p>
+                    <div class="exemple-correction">
+                        <p><strong>“Fellow students, we have a serious problem with electricity cuts. But one solution could be to use solar energy. We must install solar panels on the roof. Also, we need to ask the school administration for support. Let’s start a campaign to raise funds. Together, we can reduce our dependence on fossil fuels and protect our planet.”</strong></p>
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Astuce orale : Variez les modaux (<strong>must, need to, could be</strong>) et terminez par un appel à l’action (<strong>Let’s</strong>). Votre ton doit être convaincant mais respectueux.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants en expression orale</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Ne pas utiliser "to" après les modaux :</span> On dit <em>"We must recycle"</em> (et non <em>"must to recycle"</em>).</li>
+                        <li><span class="bold">Confondre "must" et "have to" :</span> <em>Must</em> exprime une urgence personnelle ; <em>have to</em> une obligation externe. Dans un débat, les deux sont acceptables mais soyez cohérent.</li>
+                        <li><span class="bold">Oublier de justifier la solution :</span> Ne dites pas seulement <em>"We should plant trees"</em> ; ajoutez <em>"because it reduces erosion and gives shade"</em>.</li>
+                        <li><span class="bold">Vocabulaire trop général :</span> Évitez <em>"things"</em>, préférez <em>"waste, pollution, deforestation, plastic bags, energy"</em>.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section conseils pour l'examen oral (entraînement) -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 S’entraîner pour l’épreuve orale (Bac)</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Méthodologie : débat / discussion sur l’environnement</h3>
+                    <p class="card-description">
+                        Voici une démarche simple pour réussir une tâche orale où vous devez proposer des solutions environnementales :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>1. Identifier le problème</strong> : <em>"The main issue is water pollution in our river."</em></li>
+                        <li><strong>2. Proposer 2 ou 3 solutions concrètes</strong> : utilisez <em>should, need to, why don’t we, one solution could be</em>.</li>
+                        <li><strong>3. Expliquer les bénéfices</strong> : <em>"If we recycle plastic, we will protect fish and aquatic life."</em> (conditionnel type 1).</li>
+                        <li><strong>4. Encourager l’action collective</strong> : <em>"Let’s work together with the local authorities."</em></li>
+                    </ul>
+                    <img src="" alt="Élèves camerounais discutant en groupe sous un arbre, avec une affiche 'Protect our environment' en arrière-plan" class="illustration-img">
+                    <div class="img-caption">🗣️ Le travail en groupe et les débats simulés sont d’excellents entraînements pour le Speaking du baccalauréat.</div>
+                </div>
+            </section>
+
+            <!-- Petit rappel sur les expressions de persuasion -->
+            <section class="exemple-section">
+                <h2 class="section-title">🗣️ Mots et expressions pour convaincre</h2>
+                <div class="card exemple-card">
+                    <ul class="concept-list" style="list-style-type: none;">
+                        <li>✔️ <strong>It is essential to...</strong> (Il est essentiel de...)</li>
+                        <li>✔️ <strong>I strongly believe that...</strong> (Je crois fermement que...)</li>
+                        <li>✔️ <strong>If we don’t act now, ...</strong> (Si nous n’agissons pas maintenant...)</li>
+                        <li>✔️ <strong>Another important point is...</strong> (Un autre point important est...)</li>
+                        <li>✔️ <strong>To sum up, we must...</strong> (En résumé, nous devons...)</li>
+                    </ul>
+                    <div class="exemple-astuce">
+                        🔁 N’oubliez pas la communication non verbale : regardez vos interlocuteurs, parlez clairement, utilisez des gestes pour montrer votre engagement.
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📚 Fiche de révision – Leçon 11 : Proposer des solutions environnementales (Speaking) | Terminale C & D – Programme 2025-2026 | 🇨🇲 Cameroun</p>
+            <p>💡 Entraînez-vous à voix haute avec un camarade : simulez un débat sur la gestion des déchets ou l’énergie solaire.</p>
+        </footer>
+    </div>
+</body>
+</html>

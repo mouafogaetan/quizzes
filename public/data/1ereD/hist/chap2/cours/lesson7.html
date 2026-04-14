@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 7 : Résistances et collaborations</title>
+    <!-- MathJax Configuration (utile si des dates ou formules sont utilisées) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #1e3a5f, #0f2c4e);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #d4af37;
+        }
+
+        .lesson-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cartes génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: #1e3a5f;
+            border-left: 5px solid #d4af37;
+            padding-left: 0.9rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* mise en valeur des dates et infos */
+        .highlight {
+            background-color: #fef9e3;
+            font-weight: 600;
+            color: #b45309;
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.3rem;
+            font-family: monospace;
+        }
+
+        .important-date {
+            font-weight: 700;
+            color: #c2410c;
+        }
+
+        /* Listes stylisées */
+        .styled-list {
+            list-style-type: none;
+            padding-left: 0.2rem;
+        }
+        .styled-list li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.6rem;
+            position: relative;
+        }
+        .styled-list li::before {
+            content: "▹";
+            color: #d4af37;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Pour les résistances spécifiques */
+        .resistance-card {
+            background-color: #fefaf5;
+            border-left: 6px solid #b45309;
+        }
+        .resistance-card .card-title {
+            color: #9a3412;
+            border-left-color: #b45309;
+        }
+
+        .collab-card {
+            background-color: #f0f9ff;
+            border-left: 6px solid #2c7da0;
+        }
+        .collab-card .card-title {
+            color: #0f5b7a;
+            border-left-color: #2c7da0;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background-color: #e9ecef;
+            border-radius: 2rem;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            color: #2c3e66;
+        }
+
+        .image-placeholder {
+            background-color: #f1f5f9;
+            border-radius: 0.75rem;
+            margin: 1rem 0 0.5rem 0;
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px dashed #94a3b8;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+        .image-placeholder img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem; }
+            .fiche-content { padding: 1.5rem; }
+            .lesson-title { font-size: 1.6rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">Leçon 7 : Les réactions africaines face aux agressions européennes</h1>
+        <p class="lesson-subtitle">Résistances armées & collaborations · Première A, C, D, E, TI · Histoire</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Objectifs / introduction rapide -->
+        <section class="concept-section">
+            <h2 class="section-title">🎯 Objectifs de la leçon</h2>
+            <div class="card">
+                <p class="card-description">
+                    Distinguer <strong>résistance armée</strong> et <strong>collaboration</strong> face à la pénétration coloniale européenne en Afrique (fin XIXe – début XXe siècle).  
+                    Identifier les grandes figures de la résistance (Samory Touré, Rabah, Ménélik II, résistances locales camerounaises) et comprendre les logiques de collaboration.
+                </p>
+                <ul class="styled-list">
+                    <li>Comprendre pourquoi certains peuples ont choisi la lutte armée.</li>
+                    <li>Analyser les succès (ex: Éthiopie) et les échecs des résistances.</li>
+                    <li>Connaître les événements majeurs au Cameroun (Douala, Bakwéri, Bassa).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section: grandes résistances africaines -->
+        <section>
+            <h2 class="section-title">⚔️ Les grandes résistances armées</h2>
+            
+            <!-- Samory Touré -->
+            <div class="card resistance-card">
+                <h3 class="card-title">Samory Touré (1830-1900) – L'empire Wassoulou</h3>
+                <div class="image-placeholder">
+                    <img src="" alt="Portrait de Samory Touré, chef résistant ouest-africain, entouré de ses sofas (guerriers) avec fusils.">
+                    <em>Samory Touré, stratège et résistant contre l'expansion française.</em>
+                </div>
+                <p><span class="info-badge">À retenir</span> Empire s'étendant de la côte du Libéria jusqu'au Fouta Djallon. <strong>Armée redoutable :</strong> 35 000 sofas (fantassins) + 3 000 cavaliers, équipés de 6 000 fusils modernes achetés aux Britanniques.</p>
+                <ul class="styled-list">
+                    <li><strong>Résistance contre la France :</strong> début en 1881. Utilisation de tactiques de guérilla et de forteresses.</li>
+                    <li><strong>Traité de Kéniéba-Koura</strong> (28 mars 1886) : accord délimitant les zones d'influence, mais les hostilités reprennent plus tard.</li>
+                    <li>Malgré des fusils modernes, Samory est capturé en 1898 et exilé (mort en 1900). Symbole de la résistance ouest-africaine.</li>
+                </ul>
+                <div class="exemple-astuce">
+                    💡 Astuce : Samory a su créer un État militaire structuré, avec une industrie locale d'armement. À ne pas confondre avec d'autres résistants de l'Afrique de l'Ouest.
+                </div>
+            </div>
+
+            <!-- Rabah -->
+            <div class="card resistance-card">
+                <h3 class="card-title">Rabah (Rabih az-Zubayr) – Résistance en Afrique centrale</h3>
+                <p><span class="info-badge">Contexte</span> Chef guerrier soudanais qui établit un puissant empire autour du lac Tchad. Face à l'avancée française (mission Gentil), il mène une guerre violente.</p>
+                <ul class="styled-list">
+                    <li><strong>Combats dans la région du Tchad et du nord Cameroun</strong> (années 1890).</li>
+                    <li>Bataille décisive de Kousséri (22 avril 1900) : Rabah est tué par les troupes françaises.</li>
+                    <li>Sa mort marque la fin de la grande résistance dans l'espace tchadien et l'établissement du contrôle colonial français.</li>
+                </ul>
+                <div class="image-placeholder">
+                    <img src="" alt="Carte indiquant la zone d'influence de Rabah autour du lac Tchad et les déplacements des troupes françaises.">
+                </div>
+            </div>
+
+            <!-- Ménélik II & Adoua -->
+            <div class="card resistance-card">
+                <h3 class="card-title">Ménélik II (Éthiopie) – La victoire d'Adoua (1896)</h3>
+                <p><span class="highlight">1er mars 1896</span> : bataille d'Adoua, victoire éthiopienne décisive contre l'armée italienne. L'Éthiopie reste le seul pays africain avec le Liberia à ne pas être colonisé.</p>
+                <ul class="styled-list">
+                    <li>L'Italie cherchait à étendre son protectorat après le traité de Wouchalé (1889).</li>
+                    <li>Ménélik II modernise l'armée éthiopienne (armes européennes) et bénéficie d'une unité nationale forte.</li>
+                    <li>Conséquences : reconnaissance internationale de l'indépendance éthiopienne, humiliation de l'Italie.</li>
+                </ul>
+                <div class="exemple-astuce">
+                    💬 À ne pas confondre : Adoua (1896) est une victoire africaine majeure sur une puissance coloniale européenne.
+                </div>
+            </div>
+
+            <!-- Résistances des Boers / Afrique du Sud -->
+            <div class="card resistance-card">
+                <h3 class="card-title">Les Boers – Guerre anglo-boer (1899-1902)</h3>
+                <p>Descendants de colons néerlandais en Afrique du Sud, les Boers résistent à l'expansion britannique. <strong>Vaincus en 1902</strong> après une guerre impitoyable (camps de concentration britanniques).</p>
+                <p>Les Boers finissent par céder mais leur résistance marque la mémoire afrikaner.</p>
+            </div>
+
+            <!-- Résistances Ashanti & Zoulous -->
+            <div class="card resistance-card">
+                <h3 class="card-title">Ashanti (Gold Coast) et Zoulous (Afrique australe)</h3>
+                <ul class="styled-list">
+                    <li><strong>Ashanti :</strong> plusieurs guerres anglo-ashanti (1823-1900). Royaume ashanti prestigieux, finalement annexé en 1902.</li>
+                    <li><strong>Zoulous :</strong> sous le roi Cetshwayo, victoire à Isandlwana (1879) contre les Britanniques, mais défaite finale après la guerre anglo-zouloue.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section Résistances spécifiques au Cameroun -->
+        <section>
+            <h2 class="section-title">🇨🇲 Résistances au Cameroun face aux Allemands (1884-1916)</h2>
+            <div class="card resistance-card">
+                <h3 class="card-title">Les soulèvements contre l'occupation allemande</h3>
+                <p>L'administration allemande rencontre de nombreuses oppositions locales :</p>
+                <ul class="styled-list">
+                    <li><strong>Résistance des Douala :</strong> bombardement de Bonabéri et destruction du quartier Joss le <span class="highlight">18 décembre 1884</span> – les chefs douala refusent les abus et l'extension du contrôle allemand.</li>
+                    <li><strong>Résistance des Bakwéri (région du Mont Cameroun) :</strong> lutte contre les réquisitions et la mainmise sur les terres.</li>
+                    <li><strong>Résistance des Bassa (région du Centre et Littoral) :</strong> plusieurs révoltes au début du XXe siècle, notamment la révolte des Bassa de 1905-1907 contre les travaux forcés.</li>
+                    <li><strong>Bamoun et Foulbé :</strong> les Allemands exploitent les rivalités entre royaumes pour asseoir leur autorité, mais rencontrent aussi des résistances armées.</li>
+                </ul>
+                <div class="image-placeholder">
+                    <img src="" alt="Gravure représentant la résistance des Douala contre les navires de guerre allemands en 1884, quartier Joss en feu.">
+                </div>
+                <div class="exemple-astuce">
+                    📌 À retenir : la révolte des Douala (décembre 1884) est l'une des premières réactions armées au traité germano-douala (juillet 1884).
+                </div>
+            </div>
+        </section>
+
+        <!-- Collaborations : pourquoi certains chefs ont accepté l'influence européenne -->
+        <section>
+            <h2 class="section-title">🤝 Les collaborations : motifs et exemples</h2>
+            <div class="card collab-card">
+                <h3 class="card-title">Chefs ayant signé des traités de protectorat</h3>
+                <p>Toutes les sociétés africaines n'ont pas choisi la lutte armée. Plusieurs chefs et rois ont accepté la présence européenne, parfois par calcul politique ou sous la contrainte.</p>
+                <ul class="styled-list">
+                    <li><strong>Motifs des collaborations :</strong>
+                        <ul style="margin-top: 0.3rem; margin-left: 1.2rem; list-style: circle;">
+                            <li>Calcul politique : utiliser l'allié européen contre un rival local.</li>
+                            <li>Méconnaissance des traités (interprétations différentes des clauses de souveraineté).</li>
+                            <li>Volonté de bénéficier d'avantages commerciaux et d'armes modernes.</li>
+                            <li>Pressions militaires inégales (éviter un massacre).</li>
+                        </ul>
+                    </li>
+                    <li><strong>Exemples célèbres :</strong> certains chefs au Togo, au Nigeria, ou encore des royaumes de l'intérieur du Cameroun qui ont accepté des postes d'auxiliaires pour conserver une autorité locale.</li>
+                    <li>Au Cameroun, les Allemands ont utilisé le système des <em>chefs de canton</em> pour administrer indirectement.</li>
+                </ul>
+                <div class="exemple-astuce">
+                    ⚠️ Attention : la collaboration n'implique pas toujours la trahison ; certains chefs pensaient préserver leur peuple d'une destruction totale.
+                </div>
+            </div>
+        </section>
+
+        <!-- Pièges courants et distinctions -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges à éviter / À ne pas confondre</h2>
+            <div class="card warning-card" style="border-left: 6px solid #ef4444;">
+                <ul style="list-style: none; padding-left: 0;">
+                    <li>🔴 <span class="bold">Confusion des dates :</span> La bataille d'Adoua a lieu le <strong>1er mars 1896</strong> (et non en 1893). Samory signe le traité de Kéniéba-Koura en <strong>1886</strong> (et non 1885).</li>
+                    <li>🔴 <span class="bold">Confusion des acteurs :</span> Rabah combat les Français au Tchad, tandis que Samory leur résiste en Afrique de l'Ouest. Ne pas les mélanger.</li>
+                    <li>🔴 <span class="bold">Idée reçue :</span> Toutes les résistances ont échoué → FAUX, l'Éthiopie a préservé son indépendance.</li>
+                    <li>🔴 <span class="bold">À ne pas confondre :</span> "Résistance armée" ≠ "révolte spontanée" ; certaines résistances étaient organisées (ex: empire de Samory).</li>
+                    <li>🔴 <span class="bold">Collaboration vs soumission :</span> La signature d'un traité n'était pas toujours un acte volontaire, les pressions étaient fortes.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Exemple de compréhension / étude de cas -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Exemple d'analyse : la défaite italienne à Adoua (1896)</h2>
+            <div class="card exemple-card">
+                <h3 class="card-title">Pourquoi Adoua est-elle une résistance exceptionnelle ?</h3>
+                <p class="exemple-context">L'Italie, convaincue de sa supériorité militaire, envahit l'Éthiopie. Ménélik II rassemble une armée d'environ 100 000 hommes.</p>
+                <p class="exemple-correction"><strong>Clés de la victoire éthiopienne :</strong> unité nationale, connaissance du terrain, approvisionnement en armes modernes (fusils et canons), et stratégie défensive. L'Italie perd environ 7 000 hommes. L'Europe est choquée.</p>
+                <div class="exemple-astuce">
+                    🧠 Raisonnement : Cette victoire montre qu'une armée africaine bien organisée et dirigée peut battre une puissance coloniale. L'Éthiopie devient un symbole pour les mouvements panafricains.
+                </div>
+            </div>
+            <div class="card exemple-card">
+                <h3 class="card-title">Comparer résistance douala (1884) et résistance bamiléké</h3>
+                <p class="exemple-context">Les Douala ont opposé une résistance précoce face aux navires allemands. Les chefferies bamiléké, quant à elles, ont mené une guérilla plus diffuse dans les années 1890-1900.</p>
+                <p class="exemple-correction"><strong>Similitudes :</strong> refus de l'impôt, de la main-d’œuvre forcée, défense des terres. <strong>Différence :</strong> Les Douala étaient des intermédiaires commerciaux avant l'arrivée allemande ; leur résistance est vite réprimée par l'artillerie navale.</p>
+                <div class="exemple-astuce">
+                    💬 À méditer : Les résistances locales s'adaptent aux moyens de répression coloniale.
+                </div>
+            </div>
+        </section>
+
+        <!-- Récapitulatif sous forme de tableau mental -->
+        <section>
+            <h2 class="section-title">📖 Tableau récapitulatif : grandes résistances</h2>
+            <div class="card">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                    <thead style="background-color: #eef2ff;">
+                        <tr><th style="padding: 8px; border-bottom: 2px solid #cbd5e1;">Figure / Mouvement</th><th style="padding: 8px; border-bottom: 2px solid #cbd5e1;">Adversaire</th><th style="padding: 8px; border-bottom: 2px solid #cbd5e1;">Issue</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 8px;">Samory Touré</td><td>France</td><td>Défaite (1898), exil</td></tr>
+                        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 8px;">Rabah</td><td>France</td><td>Tué à Kousséri (1900)</td></tr>
+                        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 8px;">Ménélik II</td><td>Italie</td><td><strong>Victoire à Adoua (1896)</strong> → indépendance</td></tr>
+                        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 8px;">Douala (Cameroun)</td><td>Allemagne</td><td>Révolte de 1884 réprimée</td></tr>
+                        <tr><td style="padding: 8px;">Bakwéri / Bassa</td><td>Allemagne</td><td>Résistances prolongées, répressions violentes</td></tr>
+                    </tbody>
+                </table>
+                <p class="exemple-astuce" style="margin-top: 1rem;">✅ À savoir : La collaboration n'est pas une absence de résistance, mais une réponse pragmatique dans un rapport de force défavorable.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Fiche de révision – Histoire 1ère (Cameroun) · Leçon 7 : Réactions africaines · D'après programme officiel | 📚 Réviser avec les dates clés et les exemples locaux</p>
+    </footer>
+</div>
+</body>
+</html>

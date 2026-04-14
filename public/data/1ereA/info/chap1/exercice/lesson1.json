@@ -1,0 +1,111 @@
+[
+  {
+    "intitule": "Partitionnement et formatage : définition et utilité",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Lisez attentivement les définitions suivantes :<br>- <strong>Partitionnement</strong> : division d'un disque dur en plusieurs parties logiques appelées partitions.<br>- <strong>Formatage</strong> : processus de préparation d'une partition pour y stocker des données en y créant un système de fichiers.<br>- <strong>Pilote (driver)</strong> : logiciel qui permet au système d'exploitation de communiquer avec un périphérique matériel.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Rappelez la définition des termes suivants : partitionnement, formatage et pilote.",
+        "niveau": "easy",
+        "reponse": "Partitionnement : division d'un disque dur en plusieurs parties logiques. Formatage : préparation d'une partition pour stocker des données. Pilote : logiciel permettant la communication entre le système d'exploitation et un périphérique.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquez pourquoi le partitionnement d'un disque dur est utile. Donnez deux raisons.",
+        "niveau": "medium",
+        "reponse": "1. Organisation des données : séparer les données personnelles, le système d'exploitation et les applications. 2. Installation de plusieurs systèmes d'exploitation sur le même disque (multiboot).",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Préparation d'un disque dur neuf",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous venez d'acheter un disque dur externe neuf de 1 To. Il n'est pas encore utilisable sur votre ordinateur.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Listez dans l'ordre chronologique les actions nécessaires pour préparer ce disque à recevoir des données.",
+        "niveau": "medium",
+        "reponse": "1. Partitionnement (création d'au moins une partition). 2. Formatage de la partition (choix d'un système de fichiers comme NTFS ou FAT32).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Justifiez pourquoi le formatage est indispensable après le partitionnement.",
+        "niveau": "hard",
+        "reponse": "Le formatage crée une structure de fichiers (système de fichiers) que le système d'exploitation peut comprendre. Sans formatage, la partition est une zone brute non organisée où aucun fichier ne peut être enregistré ni lu.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Organisation des données personnelles",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Marie est une élève de Première. Elle utilise son ordinateur portable pour : ses cours (documents, diapositives), ses loisirs (musiques, vidéos, jeux), et l'administration de son association scolaire (comptes, listes de membres). Actuellement, tout est stocké sur une seule partition (C:). Son ordinateur ralentit et elle a peur de perdre ses données importantes en cas de panne système.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Proposez une solution de partitionnement du disque dur de Marie pour mieux organiser ses données. Décrivez la structure (nombre de partitions, nom, contenu attendu).",
+        "niveau": "hard",
+        "reponse": "Solution possible :\n- Partition 1 (C:) : Système d'exploitation et logiciels (environ 100-150 Go).\n- Partition 2 (D:) : Documents scolaires et association (cours, comptes, listes).\n- Partition 3 (E:) : Loisirs (musiques, vidéos, jeux).\nAvantage : Si Windows doit être réinstallé (partition C: formatée), les données personnelles sur D: et E: restent intactes.",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Expliquez comment cette organisation améliore la sécurité des données de Marie.",
+            "niveau": "medium",
+            "reponse": "En cas de corruption du système d'exploitation (virus, mise à jour ratée) ou de réinstallation, seules les données de la partition système sont affectées. Les partitions contenant les documents personnels et loisirs restent accessibles et non perdues."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Installation double système (multiboot)",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Paul souhaite installer Linux à côté de Windows déjà présent sur son disque dur de 500 Go. Il veut garder ses deux systèmes et pouvoir choisir au démarrage lequel utiliser.</p>",
+      "images": [
+        "Diagramme d'un disque dur partitionné en trois : Windows (150 Go), Linux (150 Go), Données partagées (200 Go) avec une flèche indiquant le choix au démarrage entre Windows et Linux"
+      ]
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Décrivez la procédure de partitionnement que Paul doit réaliser AVANT d'installer Linux.",
+        "niveau": "hard",
+        "reponse": "1. Sauvegarder ses données importantes. 2. Depuis Windows, réduire la taille de la partition Windows existante pour libérer au moins 150 Go non alloués. 3. Laisser cet espace non alloué (non formaté). 4. Lors de l'installation de Linux, choisir d'utiliser l'espace non alloué pour créer les partitions Linux (/, swap, /home).",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Expliquez pourquoi il est préférable de laisser l'espace non alloué plutôt que de le formater sous Windows avant l'installation de Linux.",
+            "niveau": "very hard",
+            "reponse": "Linux utilise des systèmes de fichiers différents (ext4, swap) que Windows ne peut pas créer. En laissant l'espace non alloué, l'installateur Linux pourra y créer les partitions avec les bons formats. Si l'espace était formaté en NTFS par Windows, il faudrait le supprimer ou le reformater."
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "texte": "Quel avantage principal le partitionnement apporte-t-il dans cette installation double système ?",
+        "niveau": "medium",
+        "reponse": "Le partitionnement permet d'isoler chaque système d'exploitation sur sa propre partition, évitant qu'ils ne se chevauchent ou se corrompent mutuellement. Un gestionnaire de démarrage (bootloader) permet ensuite de choisir le système au démarrage.",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

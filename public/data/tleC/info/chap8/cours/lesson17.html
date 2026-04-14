@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 17 : ALTER TABLE (SQL)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (utile pour d'éventuelles notations) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Petit style additionnel pour les blocs de code SQL dans la fiche */
+        .sql-code {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            border-left: 4px solid #3b82f6;
+        }
+        .sql-keyword {
+            color: #facc15;
+            font-weight: 600;
+        }
+        .inline-code {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.3rem;
+            font-family: monospace;
+            font-weight: 500;
+            color: #0c4a6e;
+            font-size: 0.9rem;
+        }
+        .schema-img {
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            padding: 0.5rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            margin: 1rem 0;
+        }
+        .schema-img img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+        }
+        .caption {
+            font-size: 0.85rem;
+            color: #475569;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 17 : Modification de la structure d'une table (ALTER TABLE)</h1>
+            <p class="lesson-subtitle">SQL - Langage de Définition des Données (DDL) · Terminale C & D · Baccalauréat</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section éléments clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. La commande ALTER TABLE</h3>
+                    <p class="card-description">
+                        En SQL, une fois qu'une table a été créée avec <span class="inline-code">CREATE TABLE</span>, il est souvent nécessaire d'en modifier la structure sans perdre les données existantes. 
+                        La commande <strong class="sql-keyword" style="color:#2563eb;">ALTER TABLE</strong> permet d'ajouter, de modifier ou de supprimer des colonnes, ainsi que de renommer une table ou une colonne.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Syntaxe générale :</strong> <span class="inline-code">ALTER TABLE nom_table action;</span></li>
+                        <li><strong>Principales actions :</strong> <span class="inline-code">ADD</span> (ajouter colonne), <span class="inline-code">MODIFY</span> / <span class="inline-code">ALTER COLUMN</span> (modifier type ou contrainte), <span class="inline-code">DROP COLUMN</span> (supprimer colonne).</li>
+                        <li><strong>Compatibilité :</strong> MySQL utilise <span class="inline-code">MODIFY COLUMN</span> ; PostgreSQL utilise <span class="inline-code">ALTER COLUMN ... TYPE</span>. Au baccalauréat, on retient <span class="inline-code">ADD</span>, <span class="inline-code">MODIFY</span> et <span class="inline-code">DROP COLUMN</span>.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Ajouter une colonne (ADD)</h3>
+                    <p class="card-description">
+                        Pour ajouter une nouvelle colonne à une table existante, on utilise la clause <span class="inline-code">ADD</span> suivie de la définition de la colonne (nom, type, éventuellement contrainte).
+                    </p>
+                    <div class="sql-code">
+                        ALTER TABLE eleves<br>
+                        ADD COLUMN email VARCHAR(100) NOT NULL;
+                    </div>
+                    <ul class="concept-list">
+                        <li>La nouvelle colonne s'ajoute en dernière position (ou on peut préciser AFTER colonne dans certains SGBD).</li>
+                        <li>On peut ajouter plusieurs colonnes en une seule commande : <span class="inline-code">ADD (col1 type, col2 type)</span>.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Modifier une colonne (MODIFY / ALTER COLUMN)</h3>
+                    <p class="card-description">
+                        Permet de changer le type de données, la taille ou une contrainte d'une colonne existante. Attention : certaines modifications peuvent échouer si les données existantes ne sont pas compatibles.
+                    </p>
+                    <div class="sql-code">
+                        -- Exemple : augmenter la taille d'une colonne 'nom'<br>
+                        ALTER TABLE eleves<br>
+                        MODIFY COLUMN nom VARCHAR(150);<br><br>
+                        -- Changer le type d'une colonne 'age' en SMALLINT<br>
+                        ALTER TABLE eleves<br>
+                        MODIFY COLUMN age SMALLINT;
+                    </div>
+                    <ul class="concept-list">
+                        <li>⚠️ <strong>Précaution :</strong> Modifier un type (ex: de INT vers VARCHAR) peut entraîner une perte de données si la conversion est impossible.</li>
+                        <li>On peut aussi ajouter ou supprimer une contrainte NOT NULL avec <span class="inline-code">MODIFY</span>.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Supprimer une colonne (DROP COLUMN)</h3>
+                    <p class="card-description">
+                        Pour supprimer définitivement une colonne et toutes ses données. Opération irréversible sans sauvegarde.
+                    </p>
+                    <div class="sql-code">
+                        ALTER TABLE eleves<br>
+                        DROP COLUMN adresse_temporaire;
+                    </div>
+                    <ul class="concept-list">
+                        <li>La commande supprime à la fois la structure et les valeurs.</li>
+                        <li>Certains SGBD n'autorisent pas la suppression d'une colonne référencée par une clé étrangère sans supprimer la contrainte d'abord.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">5. Renommer une table ou une colonne</h3>
+                    <p class="card-description">
+                        Pour renommer une table : <span class="inline-code">RENAME TABLE ancien_nom TO nouveau_nom</span> (MySQL) ou <span class="inline-code">ALTER TABLE ancien_nom RENAME TO nouveau_nom</span>.<br>
+                        Pour renommer une colonne : <span class="inline-code">ALTER TABLE table CHANGE ancien_nom nouveau_nom type</span> (MySQL) ou <span class="inline-code">RENAME COLUMN</span> (SQL standard).
+                    </p>
+                    <div class="sql-code">
+                        -- Renommer une table<br>
+                        ALTER TABLE etudiants RENAME TO apprenants;<br><br>
+                        -- Renommer une colonne (MySQL)<br>
+                        ALTER TABLE apprenants CHANGE COLUMN telephone contact VARCHAR(20);
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension (style baccalauréat) -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension (inspirés du Bac)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Examen blanc : Modification d'une table "Produits"</h3>
+                    <p class="exemple-context">
+                        Une entreprise possède une table nommée <strong>Produits</strong> avec les colonnes : <code>id_produit INT PRIMARY KEY</code>, <code>nom_produit VARCHAR(50)</code>, <code>prix_unitaire DECIMAL(10,2)</code>.
+                        L'entreprise souhaite :
+                        <br>1. Ajouter une colonne <code>stock_disponible INT</code> avec une valeur par défaut 0.
+                        <br>2. Modifier la colonne <code>nom_produit</code> pour qu'elle puisse contenir jusqu'à 100 caractères.
+                        <br>3. Supprimer la colonne <code>prix_unitaire</code> (devenu inutile car nouveau système de tarification).
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Correction SQL :</strong>
+                    </p>
+                    <div class="sql-code">
+                        -- 1. Ajout de la colonne stock_disponible<br>
+                        ALTER TABLE Produits<br>
+                        ADD COLUMN stock_disponible INT DEFAULT 0;<br><br>
+                        -- 2. Extension de la taille de nom_produit<br>
+                        ALTER TABLE Produits<br>
+                        MODIFY COLUMN nom_produit VARCHAR(100);<br><br>
+                        -- 3. Suppression de la colonne prix_unitaire<br>
+                        ALTER TABLE Produits<br>
+                        DROP COLUMN prix_unitaire;
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Astuce : Utilisez toujours <span class="inline-code">DESC nom_table;</span> après chaque modification pour vérifier la nouvelle structure.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Cas pratique : Ajout de contrainte d'intégrité</h3>
+                    <p class="exemple-context">
+                        La table <strong>Commandes</strong> contient une colonne <code>client_id</code> de type INT. On souhaite que cette colonne soit obligatoire (<code>NOT NULL</code>) après coup, car on s'est rendu compte que toute commande doit être liée à un client.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Requête SQL :</strong>
+                    </p>
+                    <div class="sql-code">
+                        ALTER TABLE Commandes<br>
+                        MODIFY COLUMN client_id INT NOT NULL;
+                    </div>
+                    <p class="exemple-correction">
+                        <strong>Remarque :</strong> Si des lignes contiennent déjà des <code>NULL</code> dans cette colonne, la modification échouera. Il faudra d'abord mettre à jour ces enregistrements avec une valeur valide (<span class="inline-code">UPDATE</span>) avant d'appliquer <span class="inline-code">ALTER TABLE</span>.
+                    </p>
+                    <div class="exemple-astuce">
+                        ⚠️ Piège fréquent au Bac : Oublier que <span class="inline-code">MODIFY COLUMN</span> peut supprimer des contraintes existantes si elles ne sont pas réécrites. Toujours spécifier toutes les caractéristiques souhaitées.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Illustration visuelle de l'effet d'ALTER TABLE</h3>
+                    <div class="schema-img">
+                        <!-- Image générée par IA pour schématiser l'ajout d'une colonne -->
+                        <img src="" alt="Diagramme représentant l'ajout d'une colonne 'email' dans une table 'Utilisateurs' avec ALTER TABLE ADD COLUMN. La table passe de 3 colonnes (id, nom, age) à 4 colonnes incluant email.">
+                        <div class="caption">Figure 1 : Impact de la commande ALTER TABLE ... ADD COLUMN sur la structure d'une table relationnelle.</div>
+                    </div>
+                    <p class="exemple-context" style="margin-top: 0.5rem;">
+                        Avant : Table <strong>Utilisateurs</strong> (id, nom, age).<br>
+                        Après exécution de : <span class="inline-code">ALTER TABLE Utilisateurs ADD COLUMN email VARCHAR(255);</span><br>
+                        La colonne "email" est ajoutée (valeurs NULL pour les enregistrements existants).
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section pièges et bonnes pratiques -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Utiliser <span class="inline-code">ALTER TABLE ... DROP COLUMN</span> sans sauvegarde préalable → perte définitive des données de cette colonne.</li>
+                        <li><span class="bold">Confusion ADD / MODIFY :</span> <span class="inline-code">ADD</span> sert à créer une nouvelle colonne ; <span class="inline-code">MODIFY</span> sert à modifier une colonne existante (type, taille). Ne pas les inverser.</li>
+                        <li><span class="bold">Problème de dépendances :</span> Si une colonne est référencée par une clé étrangère, il faut supprimer la contrainte avant de supprimer ou modifier la colonne.</li>
+                        <li><span class="bold">Attention au type de SGBD :</span> Oracle utilise <span class="inline-code">MODIFY</span> sans le mot <span class="inline-code">COLUMN</span>, SQL Server utilise <span class="inline-code">ALTER COLUMN</span>. Au baccalauréat, on utilise la syntaxe standard <span class="inline-code">ALTER TABLE ... MODIFY COLUMN</span> (MySQL).</li>
+                        <li><span class="bold">Ne pas oublier :</span> Une colonne ajoutée avec <span class="inline-code">ADD</span> reçoit la valeur <span class="inline-code">NULL</span> pour tous les enregistrements existants, sauf si une valeur par défaut est précisée (<span class="inline-code">DEFAULT</span>).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section récapitulative des commandes (format mémo) -->
+            <section class="concept-section">
+                <h2 class="section-title">📖 Mémo SQL : Syntaxes ALTER TABLE (à connaître pour l'épreuve)</h2>
+                <div class="card concept-card">
+                    <table style="width:100%; border-collapse: collapse; background:#f8fafc; border-radius:0.75rem;">
+                        <thead>
+                            <tr style="background:#e2e8f0;">
+                                <th style="padding: 0.6rem; text-align:left;">Action</th>
+                                <th style="padding: 0.6rem; text-align:left;">Syntaxe (MySQL/Standard)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;">Ajouter colonne</td><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;"><span class="inline-code">ALTER TABLE table ADD colonne type [contrainte];</span></td></tr>
+                            <tr><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;">Modifier colonne</td><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;"><span class="inline-code">ALTER TABLE table MODIFY COLUMN colonne nouveau_type;</span></td></tr>
+                            <tr><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;">Supprimer colonne</td><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;"><span class="inline-code">ALTER TABLE table DROP COLUMN colonne;</span></td></tr>
+                            <tr><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;">Renommer table</td><td style="padding:0.5rem; border-bottom:1px solid #cbd5e1;"><span class="inline-code">ALTER TABLE ancien RENAME TO nouveau;</span> ou <span class="inline-code">RENAME TABLE ancien TO nouveau;</span></td></tr>
+                            <tr><td style="padding:0.5rem;">Renommer colonne (MySQL)</td><td style="padding:0.5rem;"><span class="inline-code">ALTER TABLE table CHANGE ancien_nom nouveau_nom type;</span></td></tr>
+                        </tbody>
+                    </table>
+                    <div class="exemple-astuce" style="margin-top:1rem;">
+                        🔁 Pensez à vérifier la structure avec <span class="inline-code">DESCRIBE nom_table;</span> ou <span class="inline-code">SHOW COLUMNS FROM nom_table;</span> avant et après les modifications.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lien avec l'examen : Session 2022 Partie II Exercice 2 (référence programme) -->
+            <section class="concept-section">
+                <div class="card concept-card" style="background-color:#f0f9ff; border-left: 6px solid #0284c7;">
+                    <h3 class="card-title" style="color:#0369a1;">📌 Lien avec l'épreuve du Baccalauréat (Session 2022, Partie II, Exercice 2)</h3>
+                    <p class="card-description">
+                        Dans les sujets officiels, la commande <span class="inline-code">ALTER TABLE</span> est souvent demandée pour adapter la structure d'une base de données à de nouveaux besoins. 
+                        Exemple typique : « Après analyse, on décide d'ajouter un attribut <em>date_inscription</em> à la table Etudiants. Écrivez la requête SQL correspondante. »
+                        Savoir utiliser <span class="inline-code">ADD</span>, <span class="inline-code">MODIFY</span> et <span class="inline-code">DROP COLUMN</span> est un attendu fondamental de la partie SGBD.
+                    </p>
+                    <div class="exemple-astuce" style="background-color:#e6f7ff;">
+                        🎯 Objectif Bac : Être capable de rédiger une requête ALTER TABLE complète, de justifier l'utilité de chaque clause et d'anticiper les contraintes d'intégrité.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="fiche-footer">
+            <p>Fiche de révision basée sur le programme officiel du Cameroun (Terminale C & D) · Session 2022-2026 · 
+            <a href="#">Ressources supplémentaires : exemples de bases de données</a> · 📚 Bonne préparation !</p>
+        </footer>
+    </div>
+</body>
+</html>

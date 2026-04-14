@@ -1,0 +1,105 @@
+[
+  {
+    "intitule": "Découverte des références relatives et absolues",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Un élève a saisi dans un tableur les notes de trois devoirs pour deux de ses camarades. Il souhaite calculer la moyenne de chaque élève, puis la moyenne générale de la classe. Observez le tableau ci-dessous (les lignes sont numérotées de 1 à 5, les colonnes de A à D).</p><table border='1'><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr><tr><th>1</th><td>Élève</td><td>Devoir 1</td><td>Devoir 2</td><td>Devoir 3</td></tr><tr><th>2</th><td>Alice</td><td>14</td><td>16</td><td>15</td></tr><tr><th>3</th><td>Bob</td><td>11</td><td>13</td><td>12</td></tr><tr><th>4</th><td colspan='3'>Moyenne générale</td><td></td></tr></table><p>Il saisit la formule <code>= (B2 + C2 + D2) / 3</code> dans la cellule E2.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Expliquer ce qui se passe lorsque l'élève recopie la formule de la cellule E2 vers la cellule E3 (pour Bob) en utilisant la poignée de recopie.",
+        "niveau": "easy",
+        "reponse": "Lors de la recopie, les références de cellules (B2, C2, D2) sont automatiquement ajustées par le tableur en fonction du décalage. En passant de la ligne 2 à la ligne 3, le tableur décale toutes les références de ligne : B2 devient B3, C2 devient C3, D2 devient D3. La formule dans E3 sera donc `= (B3 + C3 + D3) / 3`, ce qui permet de calculer correctement la moyenne de Bob.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Pour calculer la moyenne générale dans la cellule D4, l'élève saisit la formule `= MOYENNE(E2:E3)`. Il veut ensuite utiliser cette même formule pour calculer la moyenne d'autres groupes plus bas dans sa feuille de calcul. Quel type de référence (relative ou absolue) doit-il utiliser et pourquoi ?",
+        "niveau": "medium",
+        "reponse": "Il doit utiliser des références relatives (E2:E3). En effet, lorsqu'il recopiera la formule `= MOYENNE(E2:E3)` vers le bas, les références s'ajusteront automatiquement pour calculer la moyenne du nouveau groupe d'élèves (par exemple, `= MOYENNE(E4:E5)` pour le groupe suivant). Les références relatives sont idéales pour appliquer le même calcul à différentes plages de données.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Calcul d'une facture avec une TVA fixe",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous travaillez dans un mini-marché et devez créer une feuille de calcul pour facturer les clients. La TVA (taxe) est de <strong>19,25%</strong> sur tous les produits. Un client achète trois articles. Votre tableau commence en cellule A1.</p><ul><li>Colonne A : Désignation du produit</li><li>Colonne B : Prix unitaire hors taxe (HT)</li><li>Colonne C : Quantité</li><li>Colonne D : Prix total hors taxe (Prix unitaire * Quantité)</li><li>Colonne E : TVA (19,25% du Prix total HT)</li><li>Colonne F : Prix total Toutes Taxes Comprises (TTC = HT + TVA)</li></ul><p>En cellule B8, vous souhaitez afficher le montant total TTC de la facture.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la formule à saisir dans la cellule D2 (Prix total HT du premier article) en utilisant une référence relative, puis expliquer pourquoi on peut la recopier vers D3 et D4.",
+        "niveau": "easy",
+        "reponse": "Formule en D2 : `= B2 * C2`. Cette formule utilise des références relatives. En la recopiant vers le bas, le tableur ajustera automatiquement les numéros de ligne : en D3 elle deviendra `= B3 * C3`, et en D4 `= B4 * C4`. Cela permet de calculer correctement le prix total HT pour chaque ligne d'article sans avoir à réécrire la formule.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Écrire la formule à saisir dans la cellule E2 (Montant de la TVA). Le taux de TVA (19,25%) est écrit une seule fois dans la cellule H1. Utiliser une référence absolue pour le taux.",
+        "niveau": "medium",
+        "reponse": "Formule en E2 : `= D2 * $H$1`. Le symbole `$` avant la colonne et avant la ligne (H1) fixe la référence. Ainsi, lorsque la formule sera recopiée vers E3 ou E4, la référence au taux de TVA restera toujours `$H$1`, tandis que la référence au prix total HT (D2, D3, D4) s'ajustera automatiquement.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Proposer une formule unique pour calculer directement le Prix total TTC (colonne F) en utilisant le prix unitaire, la quantité et le taux de TVA, sans passer par les colonnes D et E.",
+        "niveau": "hard",
+        "reponse": "Formule en F2 : `= B2 * C2 * (1 + $H$1)`. Cette formule calcule d'abord le prix total HT (B2*C2), puis le multiplie par (1 + taux de TVA) pour obtenir directement le TTC. Le `$H$1` est en référence absolue pour conserver le taux fixe lors de la recopie.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Écrire la formule à saisir dans la cellule B8 pour obtenir la somme de tous les prix TTC (de F2 à F4) et commenter le type de référence utilisé.",
+        "niveau": "easy",
+        "reponse": "Formule en B8 : `= SOMME(F2:F4)`. La plage `F2:F4` utilise des références relatives par défaut, mais comme elle n'est pas destinée à être recopiée ailleurs, le choix des références relatives est approprié et fonctionnel.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Analyse d'erreur : Pourquoi ma formule ne fonctionne pas ?",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Voici quatre formules incorrectes saisies par des élèves dans un tableur. Pour chacune, identifier l'erreur et proposer la correction.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Formule 1 : `= A1 + B1 * C1 -` (saisie dans D1)",
+        "niveau": "medium",
+        "reponse": "Erreur : L'opérateur `-` (soustraction) est seul à la fin de la formule, il lui manque un opérande (une valeur ou une référence). Correction possible : supprimer le `-` final ou ajouter une référence (ex: `= A1 + B1 * C1 - D1`).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Formule 2 : `= (A1 + B1) * C1 +` (saisie dans D1)",
+        "niveau": "medium",
+        "reponse": "Erreur : L'opérateur `+` (addition) est seul à la fin, il lui manque un opérande. Correction : supprimer le `+` final ou ajouter une valeur/référence (ex: `= (A1 + B1) * C1 + 10`).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Formule 3 : `= MOYENNE A1:A5` (saisie dans B1)",
+        "niveau": "medium",
+        "reponse": "Erreur : Il manque les parenthèses autour de la plage de cellules. La syntaxe correcte d'une fonction est `NOM_FONCTION(plage)`. Correction : `= MOYENNE(A1:A5)`.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Formule 4 : `= A1 + $B1$` (saisie dans C1)",
+        "niveau": "hard",
+        "reponse": "Erreur : La référence absolue `$B1$` est incorrecte. Le symbole `$` doit précéder la lettre de colonne pour la fixer, et/ou le numéro de ligne. On ne met pas de `$` après le numéro. La syntaxe correcte est `$B$1` pour fixer colonne et ligne, `$B1` pour fixer seulement la colonne B, ou `B$1` pour fixer seulement la ligne 1. Correction : `= A1 + $B$1` (si on veut que la référence à B1 reste absolue).",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

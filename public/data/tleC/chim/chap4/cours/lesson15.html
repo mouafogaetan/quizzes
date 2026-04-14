@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 15 : Dosage acide fort / base forte</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (intégré pour un fichier autonome) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.375rem;
+            font-family: monospace;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #2c3e66;
+            margin-bottom: 0.75rem;
+            background: #f8fafc;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin-bottom: 0.75rem;
+        }
+
+        .exemple-astuce, .warning-card {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .warning-card ul {
+            padding-left: 1.25rem;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .method-step {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+            align-items: baseline;
+        }
+
+        .step-number {
+            background-color: #2563eb;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .fiche-footer {
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            font-size: 0.85rem;
+            color: #475569;
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">Leçon 15 : Dosage d’un acide fort par une base forte</h1>
+        <p class="lesson-subtitle">Chimie – Terminale C & D (Programme 2025-2026) · Baccalauréat</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section Éléments clés -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Éléments clés à retenir</h2>
+
+            <div class="card concept-card">
+                <h3 class="card-title">Principe du dosage acide fort–base forte</h3>
+                <p class="card-description">
+                    On fait réagir une solution d’acide fort (ex: HCl) de concentration $C_a$ inconnue avec une solution de base forte (ex: NaOH) de concentration $C_b$ connue. La réaction de dosage est <strong>totale et rapide</strong> : 
+                    <span class="formule">$H_3O^+ + OH^- \longrightarrow 2H_2O$</span>.
+                    À l’équivalence, les quantités de matière d’ions $H_3O^+$ et $OH^-$ introduites sont stœchiométriques.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Relation à l’équivalence :</strong> $C_a V_a = C_b V_{bE}$</li>
+                    <li><strong>pH à l’équivalence :</strong> $pH_E = 7$ à 25°C (solution neutre, seule l’eau contribue).</li>
+                    <li><strong>Courbe pH = f($V_b$)</strong> : allure sigmoïde avec un saut de pH vertical autour de l’équivalence.</li>
+                    <li><strong>Indicateurs colorés adaptés :</strong> BBT (virage 6,0–7,6), phénolphtaléine (8,2–10,0) – le BBT est le plus précis car sa zone de virage contient pH=7.</li>
+                </ul>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">Détermination du point d’équivalence</h3>
+                <p class="card-description">
+                    Plusieurs méthodes pour repérer $V_{bE}$ sur la courbe de dosage :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Méthode des tangentes (ou des dérivées) :</strong> tracer les deux tangentes parallèles de part et d’autre du saut, la droite passant par les milieux coupe la courbe au point équivalent.</li>
+                    <li><strong>Méthode de la dérivée première :</strong> $\frac{dpH}{dV_b}$ présente un maximum à l’équivalence.</li>
+                    <li><strong>Utilisation d’un indicateur coloré :</strong> changement de couleur le plus proche de pH=7 (ex: BBT vert → jaune/bleu).</li>
+                    <li><strong>Mesure conductimétrique :</strong> la conductivité varie linéairement avant et après équivalence, le point de rupture donne $V_{bE}$.</li>
+                </ul>
+                <div class="exemple-astuce">
+                    💡 Astuce Bac : On lit $V_{bE}$ sur l’axe des abscisses au centre du saut vertical. Utilisez toujours deux méthodes pour confirmer.
+                </div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">Allure de la courbe & zones remarquables</h3>
+                <p class="card-description">
+                    Avant l’équivalence : $pH = -\log(C_a \cdot \frac{V_a - (C_b/C_a) V_b}{V_a+V_b})$ (milieu acide).<br>
+                    Après l’équivalence : $pH = 14 + \log(\frac{C_b(V_b - V_{bE})}{V_a+V_b})$ (milieu basique).
+                </p>
+                <img src="" alt="Courbe de dosage pH-métrique d’un acide fort par une base forte : axe horizontal volume base (mL), axe vertical pH, saut net à pH=7, VbE indiqué">
+                <p class="card-description" style="margin-top: 0.5rem;">
+                    Le saut de pH est d’environ 4 unités autour de l’équivalence (ex: de pH=3 à pH=11). Le point d’inflexion correspond à $V_{bE}$ et $pH_E = 7$.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section Exemples de compréhension (inspirés du Bac) -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Exemples de compréhension</h2>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple type Bac 2024 (Dosage du vinaigre blanc)</h3>
+                <p class="exemple-context">
+                    On dose $V_a = 20,0\ \text{mL}$ d’une solution d’acide chlorhydrique $HCl$ de concentration inconnue $C_a$ par une solution d’hydroxyde de sodium $(NaOH)$ de concentration $C_b = 0,100\ \text{mol·L}^{-1}$. Le suivi pH-métrique donne un volume équivalent $V_{bE} = 15,0\ \text{mL}$.
+                </p>
+                <div class="exemple-correction">
+                    <strong>1. Écrire l’équation de la réaction de dosage.</strong><br>
+                    $\displaystyle H_3O^+ + OH^- \rightarrow 2H_2O$.<br><br>
+                    <strong>2. Calculer $C_a$.</strong><br>
+                    À l’équivalence : $C_a V_a = C_b V_{bE}$.<br>
+                    $\displaystyle C_a = \frac{C_b \times V_{bE}}{V_a} = \frac{0,100 \times 15,0}{20,0} = 0,0750\ \text{mol·L}^{-1}$.<br><br>
+                    <strong>3. Déterminer le pH à l’équivalence.</strong><br>
+                    Le seul sel formé est $NaCl$, qui ne modifie pas le pH. À 25°C, $pH_E = 7,0$.<br><br>
+                    <strong>4. Choisir un indicateur adapté.</strong><br>
+                    Le BBT (zone de virage 6,0–7,6) convient parfaitement car son virage contient pH=7. La phénolphtaléine (8,2–10) est aussi possible mais moins précise.
+                </div>
+                <div class="exemple-astuce">
+                    💬 Ne pas oublier d’homogénéiser les unités (mL → L) ; le rapport des volumes donne directement la concentration.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Détermination graphique de $V_{bE}$ (Méthode des tangentes)</h3>
+                <p class="exemple-context">
+                    On dispose des mesures suivantes : pH relevés pour différents volumes de NaOH versés. Tracer la courbe et appliquer la méthode des tangentes.
+                </p>
+                <img src="" alt="Graphique illustrant la méthode des tangentes : deux tangentes parallèles de chaque côté du saut, segment joignant leurs milieux, intersection avec la courbe donne le point équivalent">
+                <div class="exemple-correction">
+                    <strong>Étapes pratiques :</strong>
+                    <div class="method-step"><span class="step-number">1</span> <span>Tracer la courbe $pH = f(V_b)$.</span></div>
+                    <div class="method-step"><span class="step-number">2</span> <span>Tracer deux tangentes parallèles dans la partie ascendante et descendante du saut.</span></div>
+                    <div class="method-step"><span class="step-number">3</span> <span>Joindre les points de contact par une droite ; l’intersection de cette droite avec la courbe donne $V_{bE}$.</span></div>
+                    <div class="method-step"><span class="step-number">4</span> <span>Lire $V_{bE}$ sur l’axe des abscisses, puis calculer $C_a$.</span></div>
+                </div>
+                <div class="exemple-astuce">
+                    ⚡ Rappel Bac : Cette méthode est exigible à l’écrit comme à l’oral pratique. Entraînez-vous sur des courbes types.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Application : Influence de la dilution sur le saut de pH</h3>
+                <p class="exemple-context">
+                    On dose 20,0 mL d’acide chlorhydrique $C_a=0,10\ \text{mol·L}^{-1}$ par NaOH $0,10\ \text{mol·L}^{-1}$. Puis on dilue l’acide 10 fois et on refait le dosage.
+                </p>
+                <div class="exemple-correction">
+                    <strong>Comparaison :</strong> Pour l’acide concentré, le saut de pH est très marqué (environ de 3 à 11). Après dilution ($C_a'=0,010\ \text{mol·L}^{-1}$), le saut est moins important (départ pH ≈ 2, fin avant équivalence ~4, après équivalence ~10). Le volume équivalent reste inchangé ($V_{bE} = 2,0\ \text{mL}$) car $C_a V_a = C_b V_{bE}$.<br>
+                    Conclusion : la dilution diminue l’amplitude du saut mais ne change pas $V_{bE}$.
+                </div>
+            </div>
+        </section>
+
+        <!-- Pièges courants / À ne pas confondre -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants & erreurs fréquentes</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">❌ Confondre $pH_E$ d’un acide fort/base forte (7) avec celui d’un acide faible/base forte ($>7$) ou base faible/acide fort ($<7$).</span></li>
+                    <li><span class="bold">❌ Oublier que la relation $C_aV_a = C_bV_{bE}$ n’est valable qu’à l’équivalence.</span> Avant ou après, les quantités ne sont pas stœchiométriques.</li>
+                    <li><span class="bold">❌ Négliger la variation de volume total lors des calculs de pH après équivalence.</span> Utiliser $V_{total} = V_a + V_b$ dans l’expression de la concentration.</li>
+                    <li><span class="bold">❌ Choisir un indicateur dont la zone de virage ne contient pas pH=7 (ex: hélianthine 3,1–4,4) → virage trop précoce.</span></li>
+                    <li><span class="bold">❌ Mélanger les symboles : $V_{bE}$ (volume base à l’équivalence) ≠ $V_E$ parfois noté $V_{eq}$.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Méthodologie pas-à-pas (résumé opérationnel) -->
+        <section class="concept-section">
+            <h2 class="section-title">📝 Démarche type pour résoudre un exercice de dosage (Acide fort – Base forte)</h2>
+            <div class="card concept-card">
+                <ul class="concept-list">
+                    <li><strong>1. Repérer les données :</strong> $C_b$, $V_a$, $V_{bE}$ (ou à déterminer graphiquement).</li>
+                    <li><strong>2. Écrire l’équation support :</strong> $H_3O^+ + OH^- \to 2H_2O$.</li>
+                    <li><strong>3. Utiliser la condition d’équivalence :</strong> $n_{H_3O^+ initial} = n_{OH^- ajouté}$ → $C_a V_a = C_b V_{bE}$.</li>
+                    <li><strong>4. Calculer $C_a$ et éventuellement la masse ou le titre de la solution mère.</strong></li>
+                    <li><strong>5. Déterminer le pH à l’équivalence :</strong> toujours 7 à 25°C (si température différente, utiliser $pKe$).</li>
+                    <li><strong>6. Choisir un indicateur :</strong> BBT (zone 6,0–7,6) ou phénolphtaléine (8,2–10,0). Justifier par “la zone de virage contient pH=7”.</li>
+                    <li><strong>7. Exploiter une éventuelle courbe :</strong> localiser le saut de pH, déterminer $V_{bE}$ par tangente.</li>
+                </ul>
+                <div class="exemple-astuce" style="margin-top: 1rem;">
+                    🔎 Pour le Baccalauréat Camerounais : Les dosages acide fort–base forte tombent souvent en lien avec la verrerie (fiole jaugée, pipette, burette) et la lecture de courbe pH-métrique. Maîtrisez la méthode des tangentes et la formule de l’équivalence.
+                </div>
+            </div>
+        </section>
+
+        <!-- Schéma de montage (lié au programme officiel) -->
+        <section class="exemple-section">
+            <h2 class="section-title">🧪 Montage expérimental du dosage</h2>
+            <div class="card exemple-card">
+                <img src="" alt="Schéma du montage de dosage pH-métrique : burette contenant NaOH, bécher avec la solution d’HCl et agitateur magnétique, électrode de pH reliée à un pH-mètre, agitateur magnétique">
+                <p class="card-description">
+                    <strong>Matériel :</strong> burette graduée (base), pipette jaugée + fiole (prise d’essai acide), bécher, agitateur magnétique, pH-mètre étalonné.
+                </p>
+                <p class="card-description">
+                    <strong>Protocole :</strong> Introduire $V_a$ mL d’acide dans le bécher, ajouter eau distillée pour immerger l’électrode. Verser la base par increments, noter le pH après chaque ajout. Tracer $pH = f(V_b)$ et déterminer $V_{bE}$.
+                </p>
+            </div>
+        </section>
+
+        <!-- Petite section Bac direct -->
+        <section class="warning-section">
+            <h2 class="section-title">🎯 Lien direct avec les épreuves du Bac 2023-2025</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><strong>Bac 2024 (Cameroun, série C) :</strong> Dosage de l’acide chlorhydrique par la soude – calcul de concentration et choix d’indicateur.</li>
+                    <li><strong>Bac 2023 (Liban, adapté) :</strong> Exploitation d’une courbe de dosage avec détermination graphique de $V_{bE}$ et calcul de $C_a$.</li>
+                    <li><strong>Sujet type :</strong> On attend la maîtrise de $C_aV_a = C_bV_{bE}$, la connaissance de $pH_E = 7$ et le choix judicieux d’un indicateur coloré (BBT).</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>📚 Fiche conforme au programme officiel de Chimie – Terminale C & D (Cameroun) · Révision Bac 2025-2026 · Méthode & exercices types inclus</p>
+    </footer>
+</div>
+</body>
+</html>

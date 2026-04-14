@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Machines simples (3ème)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie moderne -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base (identique au style fourni, mais intégré pour une seule page) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Style pour les images descriptives (placeholders) */
+        .schema-placeholder {
+            background-color: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px dashed #94a3b8;
+            font-style: italic;
+            color: #334155;
+        }
+        .schema-placeholder img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .schema-caption {
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 7.1 : Introduction aux machines simples</h1>
+            <p class="lesson-subtitle">PCT – Classe de 3ème | Module 2 : L’énergie mécanique et les machines simples</p>
+        </header>
+
+        <!-- Contenu principal -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">🔧 Qu'est-ce qu'une machine simple ?</h3>
+                    <p class="card-description">
+                        Une <strong>machine simple</strong> est un dispositif mécanique élémentaire qui permet de transformer, transmettre ou amplifier une force. 
+                        Son objectif principal est de <strong>faciliter l’accomplissement d’un travail</strong> en réduisant l’effort (force) que l’utilisateur doit fournir.
+                        Elle ne crée pas d’énergie, mais modifie l’intensité ou la direction de la force appliquée.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Elle permet d’obtenir un <strong>gain mécanique</strong> : force motrice (F) inférieure à la force résistante (poids P).</li>
+                        <li>On utilise souvent l’expression : <span class="formule">F < P</span> (l’effort fourni est plus petit que la charge à soulever).</li>
+                        <li>Exemples classiques : plan incliné, levier, poulie, treuil, vis, coin.</li>
+                    </ul>
+                    <div class="schema-placeholder">
+                        <!-- Image descriptive générique d'une machine simple (plan incliné) -->
+                        <img src="data:image/jpeg;base64,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" alt="Schéma explicatif d'une machine simple : un plan incliné permettant de monter une charge avec un effort réduit. Dessin montrant un chariot sur une rampe, avec une force F inférieure au poids P.">
+                        <div class="schema-caption">📐 Principe de base : la force motrice (F) est inférieure au poids (P) grâce au chemin plus long.</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">⚙️ Principe de fonctionnement : travail et rendement</h3>
+                    <p class="card-description">
+                        Une machine simple respecte le principe de conservation de l’énergie (en l’absence de frottements) : 
+                        le travail fourni par l’utilisateur est égal au travail reçu par la charge. 
+                        Mathématiquement : <span class="formule">\(W_{motrice} = W_{résistante}\)</span> soit <span class="formule">\(F \times d_F = P \times d_P\)</span>.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Gain en force</strong> : on diminue l’effort (F) mais on augmente la distance parcourue (déplacement du point d’application).</li>
+                        <li><strong>Gain en distance</strong> : certaines machines permettent d’augmenter la vitesse ou la course (ex: pignon-crémaillère).</li>
+                        <li>En réalité, les frottements dissipent une partie de l’énergie : le <strong>rendement</strong> (<span class="formule">\(\eta\)</span>) est toujours inférieur à 1.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🏗️ Principales machines simples au programme</h3>
+                    <p class="card-description">
+                        Dans ce module, nous étudierons en détail plusieurs machines simples utilisées depuis l’Antiquité jusqu’aux systèmes modernes.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Plan incliné</strong> : une surface inclinée qui permet de monter une charge avec moins d’effort.</li>
+                        <li><strong>Poulies et palans</strong> : systèmes de poulies (fixe, mobile, palan) pour répartir l’effort.</li>
+                        <li><strong>Treuil</strong> : composé d’un tambour et d’une manivelle, il transforme un mouvement de rotation en translation.</li>
+                        <li><strong>Levier</strong> (vu en classe de 4ème) : barre rigide pivotant autour d’un point d’appui.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Utilisation d’un plan incliné pour charger un fût</h3>
+                    <p class="exemple-context">
+                        Un ouvrier doit monter un baril de 200 kg sur une plate-forme située à 1,5 m de haut. 
+                        Il utilise une planche inclinée de 5 m de long. Quel effort (force motrice) doit-il fournir si on néglige les frottements ?
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Résolution :</strong> Le poids du baril : <span class="formule">\(P = m \times g = 200 \times 10 = 2000\ \text{N}\)</span>.<br>
+                        Le travail à fournir sans machine : <span class="formule">\(W = P \times h = 2000 \times 1,5 = 3000\ \text{J}\)</span>.<br>
+                        Avec le plan incliné (longueur L = 5 m), on a : <span class="formule">\(F \times L = P \times h\)</span>.<br>
+                        Donc <span class="formule">\(F = \dfrac{P \times h}{L} = \dfrac{2000 \times 1,5}{5} = \dfrac{3000}{5} = 600\ \text{N}\)</span>.<br>
+                        L’effort est réduit de 2000 N à 600 N : un gain mécanique évident.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : plus la rampe est longue, plus l’effort nécessaire est faible. Mais la distance à parcourir augmente !
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Poulie mobile – partage de l’effort</h3>
+                    <p class="exemple-context">
+                        Un système de palan à deux brins supporte une charge de 800 N. Quelle force F faut-il exercer pour soulever la charge ? (Frottements négligés)
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Principe :</strong> Dans un palan simple à n brins porteurs, la force motrice est <span class="formule">\(F = P / n\)</span>.<br>
+                        Ici, n = 2 → <span class="formule">\(F = 800 / 2 = 400\ \text{N}\)</span>.<br>
+                        La machine permet de diviser l’effort par 2. Par contre, la corde doit être tirée sur une distance deux fois plus grande que la hauteur de levage.
+                    </div>
+                    <div class="schema-placeholder">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAADNCAMAAAC8cX2UAAAAkFBMVEX///8AAAD09PTx8fH5+fnr6+v7+/v29vbu7u7R0dHU1NTf399GRkbMzMzJycnFxcWqqqqenp7k5ORZWVmGhobb29u4uLg2NjYqKirAwMBKSkpUVFRzc3NpaWmPj4+YmJgVFRViYmIyMjI+Pj58fHympqaysrIfHx+cnJyJiYlvb28lJSUODg5mZmZHR0cbGxsH0vHnAAAMsUlEQVR4nO2dh3qbSBCAZ+gsfelFdFC33//tbkFScrYl53KxJQX4k0/CgJwdbZm6BGBhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFh4bdRbl6R7tiKOyOp9NFN+CryVbZrW/bX8/K83a3M27fSWLhfu74Zqmm08ERqEiXFnmrirRsloo7vSpt1ILYtBQ/83ugBAuJk7BwEWRbbViFZNjty7ibB/4Z3tV3qBm0t375HNPjTgYY9ksQrGgUhzuwMwAua3LbYe2b7rlU5urFq7fg+Tf8TSLvqBHlnhdrtW4zLkfYKbp4AuDETu+3bQezEttis97amUJkaZnDcmLd/1dPQOUwMSc7azY0b+Pjn2NcQddMF2AU/xU7dFRvsXpiQyuIODqySVXefpv8JXZGAXqfZ1rt+nfx7nWO9DQqKQq3+FFsfv5U2YGPAyFe1Uql3aPUfY1QrjKFLX6xrV+X4jbbWkL10iAVsEQ2b9f020BFZ/7c2QOpEctG2iC/Pr8ilZJViaWB6rank/eLEDS/88FWIPJsanCxJMs+x1VBgH5eHA0UYf356xDTcYYBXlJdsTsZCuYKIiEH00RrR1L+h1/4/Wer2x/cnBf8vUEN/hKC1H3SOZk7HGL1F1x+Mt2cs8piW3JWVhW9+FgP+QS25K7qI/9ZU1l9hcPwxFJus/jGVRWsWXc3GeL/f/LBWTOPTe6cDn+RR7Q5H9I3fMXHkxHaLwRHxU159fmv6y9jpLdqD+OVcBjhD9vboWKkDLTbFtM3Rf8E3MdBGhmwX344IT48f4VL3L4iJfBlxezkSPommTY7m4lJnrvcXxHm/CM09H1DE1Qfnc7L0l8Chskfd5R7aljvi/BjYOuq7ebggjJ/R3VUa7j7JgU2LVARrN9ooHka5/ejm3AtXhOwUNG130bF/dHPuhWtc0vXefp/MRuztj3FdlWucjdhxdjnS9zrOIW44Ijdnn4vfY1jOxzq9KC3tgGE0G3MFgvT0riG+1FNOeb3FxGB464SuwHI2cxus+mDLfI/Ap0k7G3MFCO5rXCc6Nqbrur++fyIQ1GmIe2SKbOWGj27N3SDYSJ5t5WyGb+v1bKJp5iERXRubDTtsmtkEjFVsFLfHIfUn7ufjixjYCFZzGNSYkEbtrz8wDdjclkFH9Nmx5xwe3Zx7Ye0TDjoc5XUQ52KeWthw7CUZjuPMDR7dnjuhDr1t4qixFWyKR7fnTqhDb9PD63Ash8fVo9tzJ9SQ9TaHOLrdlfH66PbcCYIhDwLi6HNua5xJ3Yo5DHJAHOuL7ba8Wmf8Ad5Q2fejWTL4hiEJBi8ZPGgiKBpQUTWMp3fcySh2XY9LuHWw/9uaFqCOcox6oyRRmKrYGczMe92x85LXvWD99ElEY83mNqxOwQYe6+xXHxgJjtDakQ9Zf9QATWwdtGhUSjF2RQB/QcaYYM3crnx3MktRDX9Vs6P4RIKggt57laHzVogd0VdZYzl2FsepngUQ+d/f7j/EHwd5i6ckr/eZnSaL1LA0VZTG3i6KVwptd1Tr2D9WemsliF7cFvhXiE3Xg9idm4y9rKZ4bU2TeJEYqkrlS6ligBnyXd1GNFHNg7Xyqm2BnB/aGcfELr9LbDEgrI09BaKAJZmWIYHM2mtKsupb5n9bjU9waaIMYryOiltxi3drmkB9Qkxf4d8MfmrbbLGONxRiBWzN0FQy/KuBaoBJ4bsKdbmkWptmuduLlQUoYhXmzJ0QAW3a2CH+TlWCsg5Zb8dJdEoTHNKfaxqnMF1k+uLTqPK4AqI1BuRFxsRWQqF34dh0sA9JAvFPA9P/tUN1WtIIHk63Vp3O5Jc4JrCvavxzOWROzl5QgXiXmewdy1ef3/sNNG6bDqvsBcWyflVCehKbNjW7UdtBl0TENwODik9YhRmsIDCH3s53TGy+MWqlxxKlUMU3YjO0+PMyUmaTD3HDEjUoMKNtu46fthKR31dITNyhaB/cRnmF7FgFUtbthTYE+120WzY+29dEy2gYEHVlpogllfUu/9am/xGczXQE6Vg/mbYgmMDHlgAiMYGzQPxYeOOb5NaGFz/Uh95eD7W2kkYgjP6bnfZ3wKk3ttmSshnFvnSya64mtSVI0tRrC7sW6sNZF89ib8L1MOjfTgtJUkRREX1fHeyFeOsD5+ScbEs00IqCKWyLDTIbVMPunBgkh9nl/sZhFoBqQkDBMkAcQtGCMxh4WwK2U9xxizevfvQItdQdejvLznV5QVEROUhMkJmkPiXEV9U4tiyNiqLIy7IEcePt6erYJmLNxamt50hAD0FFscidvdsDh17YdU3OfmPhgRtDqQNp2O+OmZu2Yfdz2Hp3DdoJmknedjktB+MUNq9nba9FeRJiaamaT3xNFDn5vSLQDfC1ks0LQ+di1/Yk3dKaxCeYMa91qFfmDkBSuxXZqHFWJDFpE4lkiFFmxxYaDVTpoNJ7WwTi24Wd6MlghdnH9Ky3ksolefPJGFyzj/sRmxf9i2wNCZUMnG3ukF292sDRGsSWaGofGnfY86yj4RTbzh/ERhpRXfRCEoXh/fMvgt//XNjV9biSx/h6TvvpYxXPJwZpGkBmlAKgH8pxZW+CBJju0/0sQOcsNhD3FK8ocnaGXa3UdAjkIKqJwVVx+SBbSDFi1mcCE46s9UHEmNn3p0vtaLB9go/rFPKhk48lBo4HmDeyVNsVYDHMZDa3azQ6DEsZihbSHpmpH2CtpzZ0OxMbpIcouvFsgG/Hj4nI+kyNxkFO1tFZwQV9+4u8Jz8YBtpQ8EE04EVQfPY9UZGCogAdpopPeFAIYXco4ngBqDKsFBJbW9g3PnyYPG7flezgQWQ2+dACTS/PVo5fO9POEWirXZLG9TjIQd+dVzE+qdJHtuoeCDLZjwoMarz0cdWnT+uMfBnq4SR2ml9y216ynn45vTpkRRj6y+58Jt7MoFDL2I8rORx/VGdp++xR2uV+EIxGO8Xrs7MNIVbZ9DfCqeHp4UA9Js8VOPteTjkw5jqm+mx2bjPUxuVP7/vnz2V8Heq5t/0EZ1OLB4Pjedrrp63uGfB4OIo+xtJALptbz4mbInLaKGJsF3Hlbh/dlnuS7MOw2DjFIZhSpPhX8NH5ATu7w3z2MQ9bY84G+M6c01Kuhmcv81i41ee3Ton+4m+G+uHw9HVVX0Z20dYrz8XZ7N+G+rI9JD+EOB/N/SOAFLguTt/PPkNf5PND1TW3w9nsA9N0gQtH14scsNEf3Zx7oSWSUIyeJ105ySx6205jTdYvc5vuo9fkoe35fmRFpJqBiH1y0dXqS4pPXLby/xEEjglLiBYbhuqLooEtHZ9JMWKvy3JCeluWeZGKxIpjQ/MJFWXhkmUVh2RfcVFa7RoPz18Q/TmSJPAcNdTY0izT96ks38rvkMsyFiI+U+5Lc9MtUPeFwFHWPLNgwzHO05SZ0q0H2xa6sIU+TQs40mwoRUmH2cq61qeU/pdc1kl9cZDvomdKhhiNEcbJxkCu5NRkiAXknWur2vDwJxqlZqnt8k1LdOOg1QBmSIzfS9zFY3cj+zafah1XEz/sQuYqBGuOpKPY9rF12OrzEvXRcdsDTTf6VucOPrvLiDrnN/OVVWXGKVZ6+VSbt9WDmw8VMrsgksmpt+3KG4rB9FbPKi8AmmxcR1dLbRTbcX6zMETKcSB9rvXMSCXgwoAiX6p2FexEpejceKh+anrs3VjnPW/jcVVQapFGTV2hv10Po671p/NCyJCANcPQBjtsiFXru65vm2YF4BJX3UHbpLwd6q6o01BP4lBvfvsxIlLab58ubDpOVXmwm3l2yHEC007c8J85yCAMF8Wh7J0bfuQ4jh39fgZPjHA/mw3rPxGiqA2nX7jxHqnp+jkFyS+4Ms4neviTvL+6/Wvq0NSZ35ImiPBi4eyWNG/dJeZ8Hgh4IcASVUyfyiS/Az2mgY/uzGa3oGMO6WvVzEuHKdHBxVCu8LlcsG9nNQgsp83T7Nz9duLVLsteETOvRsyLvJvHeo69NWD6sWWqQWCks8iLyPjuRPD+xCQJdu9O+Nf+p8PJ8aFeXsI5PDms/qCzXp8tpvYNSB9ncv5UwfLvQYw+nIqfzROTvn5fZP9xRIsz8MTyK+sXTn+fiHvFCk8nH0uUrz2puWgm9WiGKxjXxFZx6uGG4lrRoYBT3zuRXQ0SN0+XDftauJer9nc7cSeMXn/2fP9c6f0vx37vfp3wJx5c2t5wtuppO2G7G5sb20kbLEp6I2TYh1M2WPxb+59oNOWAeR8W+UjnbOzCduwL3WHKTliwj6K6iaJIr6P98GckQixn4IQtLCwsLCwsLCwsLCwsLCwsLCwsLCwsPBP/AEKJ2OX3y/3BAAAAAElFTkSuQmCC" alt="Schéma d’un palan à deux brins : une poulie mobile et une poulie fixe, la charge est suspendue à la poulie mobile, le câble est tiré vers le bas avec une force F = P/2.">
+                        <div class="schema-caption">Palan à 2 brins : gain en force = 2, perte en distance = 2.</div>
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Retenir : plus le nombre de brins est grand, plus l’effort est réduit, mais plus le déplacement de la corde est important.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section avantages et inconvénients (conforme au cours) -->
+            <section class="concept-section">
+                <h2 class="section-title">⚖️ Avantages & inconvénients des machines simples</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">✅ Avantages</h3>
+                    <ul class="concept-list">
+                        <li><strong>Réduction de l’effort</strong> : possibilité de déplacer des charges lourdes avec une force humaine réduite.</li>
+                        <li><strong>Adaptabilité</strong> : faciles à mettre en œuvre (planche inclinée, poulie).</li>
+                        <li><strong>Polyvalence</strong> : combinées entre elles, elles forment des machines complexes (grues, ascenseurs).</li>
+                    </ul>
+                </div>
+                <div class="card concept-card">
+                    <h3 class="card-title">❌ Inconvénients</h3>
+                    <ul class="concept-list">
+                        <li><strong>Encombrement</strong> : nécessitent souvent de l’espace (longue rampe, grande hauteur de tirage).</li>
+                        <li><strong>Distance parcourue plus grande</strong> : on perd en déplacement ou en temps.</li>
+                        <li><strong>Frottements</strong> : réduisent le rendement et peuvent user les pièces.</li>
+                        <li>Dans certains cas, le dispositif peut être plus complexe à installer (palan avec plusieurs poulies).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section pièges courants / à ne pas confondre -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Penser qu’une machine simple « crée » de l’énergie. Non, elle transforme ou transmet l’énergie (principe de conservation).</li>
+                        <li><span class="bold">Attention :</span> Confondre la force motrice (F) avec le poids (P). Toujours identifier clairement la charge et l’effort appliqué.</li>
+                        <li><span class="bold">Oublier les frottements :</span> Dans les exercices théoriques on néglige souvent les frottements, mais dans la réalité le rendement est inférieur à 1, donc F réelle > F théorique.</li>
+                        <li><span class="bold">Ne pas maîtriser la relation travail :</span> Pour une machine simple idéale, <span class="formule">\(F \times d_F = P \times d_P\)</span>. Important pour résoudre les problèmes.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Rappel des notions fondamentales avec schémas et vocabulaire -->
+            <section class="concept-section">
+                <h2 class="section-title">📐 Notions essentielles (vocabulaire technique)</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Organes d’une machine simple</h3>
+                    <ul class="concept-list">
+                        <li><strong>Force motrice (F)</strong> : effort exercé par l’utilisateur ou le moteur.</li>
+                        <li><strong>Force résistante (P ou R)</strong> : charge à déplacer (poids, résistance).</li>
+                        <li><strong>Travail (W)</strong> : produit de la force par le déplacement (en joules).</li>
+                        <li><strong>Gain mécanique</strong> : rapport <span class="formule">\(P / F\)</span>. Il indique combien de fois l’effort est réduit.</li>
+                        <li><strong>Rendement (η)</strong> : rapport entre travail utile et travail fourni, toujours <span class="formule">\(\eta \le 1\)</span>.</li>
+                    </ul>
+                    <div class="schema-placeholder">
+                        <img src="" alt="Schéma comparatif d’un système sans machine (soulèvement direct) et avec machine simple (plan incliné ou poulie) montrant la réduction d’effort mais l’augmentation de la distance.">
+                        <div class="schema-caption">Comparaison : sans machine (force P) vs avec machine simple (force F < P) – même travail fourni.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lien vers la suite du programme et synthèse -->
+            <section class="exemple-section">
+                <div class="card exemple-card" style="background-color: #ecfdf5;">
+                    <h3 class="card-title">🔍 Synthèse à retenir pour le devoir</h3>
+                    <p class="card-description">
+                        Les machines simples sont des outils fondamentaux en technologie et en physique. Leur rôle est de <strong>faciliter le travail humain</strong> en modifiant l’intensité ou la direction des forces. 
+                        Dans les exercices, on utilise souvent la relation <span class="formule">\(F \times d_F = P \times d_P\)</span> (travail sans frottement) et <span class="formule">\(F = P / n\)</span> pour les palans. 
+                        Savoir reconnaître le type de machine (plan incliné, poulie, treuil) et identifier l’effort, la charge, les distances est essentiel pour résoudre les problèmes.
+                    </p>
+                    <div class="exemple-astuce">
+                        💪 Pour bien démarrer le chapitre : retenir que « machine simple » rime avec « gain mécanique » et « transformation de mouvement ».
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📚 Fiche de révision - Leçon 7.1 : Introduction aux machines simples | Programme PCT 3ème (Cameroun) | ✨ Révision conforme au document officiel</p>
+        </footer>
+    </div>
+</body>
+</html>

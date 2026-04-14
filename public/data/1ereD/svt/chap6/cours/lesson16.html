@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision · Le flux d'énergie dans un écosystème · SVTEEHB Première D</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts : Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* petit style additionnel pour rester cohérent avec le template (style.css intégré) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+        .schema-img {
+            margin: 1rem 0;
+            text-align: center;
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+        }
+        .schema-img img {
+            max-width: 100%;
+            border-radius: 8px;
+            height: auto;
+        }
+        .legend {
+            font-size: 0.8rem;
+            color: #4b5563;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">Leçon 16 : Le flux d’énergie dans un écosystème</h1>
+        <p class="lesson-subtitle">SVTEEHB · Première D · Module I – Séquence 6 : Le flux d’énergie et les cycles biogéochimiques</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section concepts clés -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Éléments clés à retenir</h2>
+            
+            <div class="card concept-card">
+                <h3 class="card-title">1. Niveaux trophiques et acteurs de l'écosystème</h3>
+                <p class="card-description">
+                    Dans un écosystème, la matière organique et l’énergie circulent selon une organisation en <strong>niveaux trophiques</strong> :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Producteurs primaires (autotrophes)</strong> : végétaux chlorophylliens, algues, phytoplancton. Ils transforment l’énergie lumineuse en énergie chimique via la photosynthèse (matière organique).</li>
+                    <li><strong>Consommateurs primaires (herbivores)</strong> : ils se nourrissent des producteurs.</li>
+                    <li><strong>Consommateurs secondaires (carnivores)</strong> : ils se nourrissent des herbivores.</li>
+                    <li><strong>Consommateurs tertiaires (super-prédateurs)</strong> : situés au sommet de la chaîne alimentaire.</li>
+                    <li><strong>Décomposeurs</strong> : bactéries, champignons. Ils transforment la matière organique morte en éléments minéraux (minéralisation) et libèrent de l’énergie thermique.</li>
+                </ul>
+                <div class="schema-img">
+                    <!-- Image générée par IA pour illustrer les niveaux trophiques -->
+                    <img src="" alt="Schéma des niveaux trophiques : producteurs (végétaux), consommateurs primaires (herbivores), consommateurs secondaires (carnivores), décomposeurs (champignons/bactéries) avec flèches représentant le flux d'énergie et de matière.">
+                    <div class="legend">Fig. 1 : Organisation des niveaux trophiques et transfert d’énergie (flèches oranges = flux d’énergie).</div>
+                </div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">2. Le flux d'énergie : unidirectionnel et dissipé</h3>
+                <p class="card-description">
+                    L’énergie <strong>circule de façon linéaire</strong> dans l’écosystème, du Soleil vers les producteurs puis les consommateurs, et finalement vers les décomposeurs. Contrairement à la matière (qui se recycle), l’énergie <strong>ne se recycle pas</strong> : elle est perdue sous forme de chaleur (thermodynamique).
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Rendement écologique</strong> : seulement 10 à 20 % de l’énergie d’un niveau trophique est transférée au niveau suivant (règle des 10%). Le reste est dissipé sous forme de chaleur (respiration, déchets, mouvement).</li>
+                    <li>L’énergie solaire captée par les producteurs est convertie en biomasse (énergie chimique).</li>
+                    <li>À chaque transfert, une grande partie est perdue : cela limite le nombre de maillons dans une chaîne alimentaire (généralement 4 ou 5 niveaux).</li>
+                </ul>
+                <div class="schema-img">
+                    <img src="" alt="Diagramme de flux d'énergie unidirectionnel : Soleil → producteurs → consommateurs primaires → secondaires → décomposeurs, avec des flèches montrant la perte de chaleur à chaque niveau.">
+                    <div class="legend">Fig. 2 : Flux unidirectionnel de l’énergie. Chaque rectangle représente un niveau trophique ; les flèches courbes indiquent la dissipation calorique.</div>
+                </div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">3. Pyramides écologiques : énergie, biomasse et nombres</h3>
+                <p class="card-description">
+                    Pour représenter le flux d’énergie et la structure d’un écosystème, on utilise des pyramides écologiques :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Pyramide des énergies</strong> : exprime l’énergie stockée par unité de surface et de temps (kcal/m²/an). Toujours de forme large à la base (producteurs) et étroite au sommet.</li>
+                    <li><strong>Pyramide des biomasses</strong> : masse de matière organique présente à chaque niveau (g/m²). Généralement décroissante (sauf certains écosystèmes aquatiques où la biomasse des producteurs peut être faible mais leur productivité élevée).</li>
+                    <li><strong>Pyramide des nombres</strong> : nombre d’individus par niveau trophique.</li>
+                </ul>
+                <p class="card-description">La <strong>pyramide des énergies</strong> est la plus fiable car elle reflète la quantité d’énergie réellement transmise et ne peut jamais être inversée.</p>
+            </div>
+        </section>
+
+        <!-- Exemples de compréhension -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Exemples de compréhension</h2>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 1 : Chaîne alimentaire simplifiée (savane camerounaise)</h3>
+                <p class="exemple-context">
+                    Dans une savane arbustive, on observe : herbes (producteurs) → antilopes (consommateurs primaires) → lions (consommateurs secondaires). La biomasse des herbes est de 50 000 kg, celle des antilopes 5 000 kg et celle des lions 500 kg.
+                </p>
+                <p class="exemple-correction">
+                    <strong>Analyse du flux d’énergie :</strong> Seulement environ 10 % de l’énergie stockée par les herbes est transférée aux antilopes (respiration, excréta, chaleur). De même entre antilopes et lions. La perte d’énergie à chaque niveau explique pourquoi les lions sont rares (faible biomasse). Si l’on calcule l’énergie contenue dans chaque niveau, on observe une forte diminution. <br>
+                    <span class="formule">Rendement ≈ (Énergie niveau n+1 / Énergie niveau n) × 100</span>
+                </p>
+                <div class="exemple-astuce">
+                    💡 Astuce : plus un consommateur est élevé dans la chaîne, plus son territoire doit être grand pour trouver assez de proies. C’est une conséquence directe de la dissipation d’énergie.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 2 : Réseau trophique et impact de l’activité humaine</h3>
+                <p class="exemple-context">
+                    Dans un lac, les producteurs (phytoplancton) sont consommés par le zooplancton (herbivore), lui-même mangé par des petits poissons (carnivores), puis par des grands poissons. 
+                </p>
+                <p class="exemple-correction">
+                    <strong>Interprétation :</strong> Le flux d’énergie part du Soleil, capté par le phytoplancton. Si les humains pêchent massivement les grands poissons, la pression sur les petits poissons diminue, mais l’énergie qui remontait vers les super-prédateurs est perdue dans le système. L’équilibre du réseau trophique est modifié : prolifération possible du zooplancton, puis baisse du phytoplancton. Tout changement affecte le transfert énergétique.
+                </p>
+                <div class="exemple-astuce">
+                    🌿 À retenir : Toute action humaine modifiant un maillon perturbe le flux d’énergie et la stabilité de l’écosystème.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section pièges courants -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Erreur fréquente :</span> Croire que l’énergie se recycle comme la matière. → <strong>Faux</strong> : l’énergie est <strong>unidirectionnelle</strong> et se dissipe en chaleur ; la matière seule se recycle via les cycles biogéochimiques.</li>
+                    <li><span class="bold">Confusion :</span> Producteurs ≠ toujours végétaux (exemple : certaines bactéries chimiosynthétiques). Mais dans les écosystèmes terrestres courants, les végétaux chlorophylliens sont les principaux producteurs.</li>
+                    <li><span class="bold">Attention :</span> Ne pas assimiler biomasse et énergie directement sans tenir compte du temps (productivité). Une faible biomasse peut avoir une forte production (ex : phytoplancton).</li>
+                    <li><span class="bold">Idée reçue :</span> Les décomposeurs ne font pas partie du flux d’énergie principal → ils récupèrent l’énergie de la matière organique morte et participent également à la dissipation thermique, bouclant le cycle de la matière.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section supplémentaire : liens avec le développement durable et contexte local -->
+        <section class="concept-section">
+            <h2 class="section-title">🌍 Contexte local & Éducation à l’environnement</h2>
+            <div class="card concept-card">
+                <h3 class="card-title">Application au Cameroun : forêts, savanes et impact anthropique</h3>
+                <p class="card-description">
+                    Au Cameroun, les écosystèmes forestiers (forêt dense humide) et les savanes possèdent des flux d’énergie spécifiques. La <strong>déforestation</strong> réduit la biomasse des producteurs primaires, ce qui diminue l’énergie disponible pour tous les niveaux trophiques supérieurs (faune, populations humaines dépendantes de la chasse, etc.). Comprendre le flux d’énergie aide à justifier la nécessité de préserver les puits de carbone et la biodiversité.
+                </p>
+                <div class="schema-img">
+                    <img src="" alt="Paysage camerounais montrant une forêt dense et une savane avec une flèche symbolisant le flux d'énergie solaire vers les arbres et les herbes.">
+                    <div class="legend">Fig. 3 : Écosystèmes du Cameroun – Les producteurs (arbres, graminées) captent l’énergie solaire, base de toutes les chaînes alimentaires.</div>
+                </div>
+                <p class="card-description">
+                    <strong>Pour aller plus loin :</strong> La connaissance du flux énergétique est essentielle pour l’aménagement durable des parcs nationaux (ex : Parc national de Waza, Réserve de biosphère du Dja).
+                </p>
+            </div>
+        </section>
+
+        <!-- Résumé express (optionnel sous forme de bloc) -->
+        <div style="background-color: #eef2ff; padding: 1.2rem; border-radius: 1rem; margin-top: 1rem;">
+            <p style="font-weight: 700; margin-bottom: 0.5rem;">📖 À retenir absolument :</p>
+            <p>✔ L’énergie entre dans l’écosystème par le Soleil → producteurs → consommateurs → décomposeurs. <br>
+            ✔ À chaque transfert, <strong>90 % de l’énergie est perdue</strong> (chaleur, respiration). <br>
+            ✔ Les pyramides écologiques (énergie, biomasse, nombres) illustrent cette diminution. <br>
+            ✔ Le flux d’énergie est <strong>unidirectionnel</strong> et ne peut être recyclé, contrairement aux éléments chimiques (carbone, azote).</p>
+        </div>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Révision SVTEEHB – Première D · Module I – Le monde vivant · Leçon 16 | Programme officiel Cameroun | <a href="#">Retour aux fiches</a> · 🌱 Flux d’énergie & développement durable</p>
+    </footer>
+</div>
+</body>
+</html>

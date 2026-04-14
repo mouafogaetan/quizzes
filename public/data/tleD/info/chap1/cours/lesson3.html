@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Les Boucles (Terminale C & D)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Ajout d'un style supplémentaire pour la mise en avant des boucles */
+        .code-block {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .code-block span.keyword {
+            color: #7dd3fc;
+            font-weight: 600;
+        }
+        .code-block span.comment {
+            color: #94a3b8;
+            font-style: italic;
+        }
+        .code-block span.variable {
+            color: #fde047;
+        }
+        .schema-boucle {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .badge-examen {
+            background-color: #2563eb10;
+            border: 1px solid #2563eb20;
+            color: #1e40af;
+            border-radius: 2rem;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">📚 Leçon 3 : Boucles (Structures itératives)</h1>
+            <p class="lesson-subtitle">Algorithmique · Terminale C & D · Session 2023-2024</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section Éléments clés -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Qu'est-ce qu'une boucle ?</h3>
+                    <p class="card-description">
+                        Une structure itérative (ou boucle) permet d'exécuter un bloc d'instructions plusieurs fois de suite, 
+                        sans avoir à le réécrire. On parle d'<strong>itération</strong>. Chaque répétition est un <strong>tour de boucle</strong>.
+                        Une boucle doit toujours contenir une <strong>condition d'arrêt</strong> pour éviter les boucles infinies.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Utilité :</strong> Traitement de séries de données, calculs répétitifs, parcours de tableaux.</li>
+                        <li><strong>Composants :</strong> Initialisation, condition de poursuite, itération (incrémentation/décrémentation).</li>
+                        <li><strong>Représentation :</strong> En algorithmique, on utilise les mots-clés : <span class="formule">Pour</span>, <span class="formule">Tant que</span>, <span class="formule">Répéter...Jusqu'à</span>.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. La boucle POUR (ou FOR)</h3>
+                    <p class="card-description">
+                        Utilisée lorsque le <strong>nombre d'itérations est connu à l'avance</strong>. Elle s'appuie sur un compteur qui varie d'une valeur initiale à une valeur finale avec un pas.
+                    </p>
+                    <div class="code-block">
+                        <span class="keyword">Pour</span> compteur ← valeur_initiale <span class="keyword">À</span> valeur_finale [<span class="keyword">Pas</span> pas] <span class="keyword">Faire</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;// Instructions répétées<br>
+                        <span class="keyword">FinPour</span>
+                    </div>
+                    <ul class="concept-list">
+                        <li><strong>Exemple :</strong> Afficher les entiers de 1 à 10 → <span class="formule">Pour i de 1 à 10 faire Ecrire(i)</span>.</li>
+                        <li><strong>Incrémentation :</strong> Si le pas est omis, il vaut 1.</li>
+                        <li><strong>Ne jamais modifier le compteur</strong> manuellement à l'intérieur de la boucle.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. La boucle TANT QUE (WHILE)</h3>
+                    <p class="card-description">
+                        Boucle conditionnelle <strong>pré-testée</strong> : on vérifie la condition avant chaque itération. 
+                        Si la condition est vraie, on exécute le bloc, puis on revérifie. 
+                        Convient quand on ne connaît pas à l'avance le nombre d'itérations.
+                    </p>
+                    <div class="code-block">
+                        <span class="keyword">Tant que</span> (condition) <span class="keyword">Faire</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;// Instructions<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;// Mise à jour des variables (pour que la condition devienne fausse un jour)<br>
+                        <span class="keyword">FinTantQue</span>
+                    </div>
+                    <ul class="concept-list">
+                        <li><span class="bold">Risque :</span> Si la condition est toujours vraie → boucle infinie.</li>
+                        <li><span class="bold">Cas typique :</span> Somme d'entiers jusqu'à dépasser un seuil, saisie contrôlée.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. La boucle RÉPÉTER... JUSQU'À (DO...WHILE)</h3>
+                    <p class="card-description">
+                        Boucle <strong>post-testée</strong> : on exécute le bloc d'instructions une première fois, puis on vérifie la condition d'arrêt. 
+                        Elle s'exécute donc <strong>au moins une fois</strong>.
+                    </p>
+                    <div class="code-block">
+                        <span class="keyword">Répéter</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;// Instructions exécutées au moins une fois<br>
+                        <span class="keyword">Jusqu'à</span> (condition_d_arrêt)
+                    </div>
+                    <ul class="concept-list">
+                        <li>Dans <span class="formule">Jusqu'à</span>, la condition indique l'arrêt (contrairement à Tant que où elle indique la continuation).</li>
+                        <li>Idéal pour les menus interactifs : on affiche le menu au moins une fois.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Tableau comparatif synthétique -->
+            <section class="concept-section">
+                <h2 class="section-title">📊 Comparaison rapide des 3 boucles</h2>
+                <div class="card concept-card">
+                    <table style="width:100%; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr><th style="border-bottom: 2px solid #cbd5e1; padding: 0.5rem;">BOUCLE</th><th style="border-bottom: 2px solid #cbd5e1; padding: 0.5rem;">Test</th><th style="border-bottom: 2px solid #cbd5e1; padding: 0.5rem;">Nb d'itérations min</th><th style="border-bottom: 2px solid #cbd5e1; padding: 0.5rem;">Quand l'utiliser ?</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><strong>POUR</strong></td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">Avant (via compteur)</td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">0 (si intervalle vide)</td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">Nombre d'itérations connu</td></tr>
+                            <tr><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;"><strong>TANT QUE</strong></td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">Avant (pré-test)</td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">0</td><td style="padding: 0.5rem; border-bottom: 1px solid #e2e8f0;">Itérations dépendent d'une condition</td></tr>
+                            <tr><td style="padding: 0.5rem;"><strong>RÉPÉTER... JUSQU'À</strong></td><td style="padding: 0.5rem;">Après (post-test)</td><td style="padding: 0.5rem;">1</td><td style="padding: 0.5rem;">Exécution garantie au moins une fois</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section exemples -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension (Algorithmique)</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Somme des entiers de 1 à N (Boucle POUR)</h3>
+                    <div class="badge-examen">📌 Bac 2023 - Partie III</div>
+                    <p class="exemple-context">Écrire un algorithme qui lit un entier N > 0 et affiche la somme S = 1+2+...+N.</p>
+                    <div class="code-block">
+                        <span class="keyword">Variables</span> : N, i, S : Entiers<br>
+                        <span class="keyword">Début</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Ecrire("Donner N : ")<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Lire(N)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;S ← 0<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Pour</span> i ← 1 <span class="keyword">À</span> N <span class="keyword">Faire</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;S ← S + i<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">FinPour</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Ecrire("La somme est : ", S)<br>
+                        <span class="keyword">Fin</span>
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 Astuce : La boucle POUR est idéale car le nombre de tours (N) est connu. Penser à initialiser S à 0 avant la boucle.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Saisie contrôlée (Boucle TANT QUE)</h3>
+                    <p class="exemple-context">On veut lire une note comprise entre 0 et 20. Tant que l'utilisateur saisit une note invalide, on redemande.</p>
+                    <div class="code-block">
+                        <span class="keyword">Variables</span> : note : Réel<br>
+                        <span class="keyword">Début</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Ecrire("Entrez une note (0-20) : ")<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Lire(note)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Tant que</span> (note < 0 <span class="keyword">OU</span> note > 20) <span class="keyword">Faire</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ecrire("Erreur, recommencez : ")<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lire(note)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">FinTantQue</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Ecrire("Note valide : ", note)<br>
+                        <span class="keyword">Fin</span>
+                    </div>
+                    <div class="exemple-astuce">
+                        ⚠️ Important : La première saisie est lue avant la boucle, pour que la condition soit testée correctement.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Afficher un menu (RÉPÉTER... JUSQU'À)</h3>
+                    <p class="exemple-context">Menu interactif : l'utilisateur choisit une option (1: Jouer, 2: Quitter). La boucle doit s'afficher au moins une fois.</p>
+                    <div class="code-block">
+                        <span class="keyword">Variables</span> : choix : Entier<br>
+                        <span class="keyword">Début</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Répéter</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ecrire("=== MENU ===")<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ecrire("1. Jouer")<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ecrire("2. Quitter")<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lire(choix)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Si</span> choix = 1 <span class="keyword">Alors</span> Ecrire("Démarrage jeu...") <span class="keyword">FinSi</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Jusqu'à</span> (choix = 2)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Ecrire("Au revoir")<br>
+                        <span class="keyword">Fin</span>
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Particularité : La condition d'arrêt est testée à la fin, donc le bloc est exécuté au moins une fois même si l'utilisateur veut quitter immédiatement.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pièges courants / erreurs -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants & erreurs à éviter</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Boucle infinie :</span> Oublier de modifier la variable de condition dans un TANT QUE. Exemple : <span class="formule">Tant que i < 10 Faire</span> sans incrémenter i → bloc répété indéfiniment.</li>
+                        <li><span class="bold">Confusion POUR / TANT QUE :</span> Utiliser POUR quand le nombre d'itérations n'est pas connu à l'avance (ex: tant que l'utilisateur n'appuie pas sur 'Q').</li>
+                        <li><span class="bold">Ne pas initialiser les accumulateurs :</span> Avant une somme (S ← 0) ou un produit (P ← 1), toujours initialiser la variable.</li>
+                        <li><span class="bold">Mauvaise interprétation de la condition dans Répéter...Jusqu'à :</span> On s'arrête <strong>quand</strong> la condition est vraie, alors que dans Tant que on continue <strong>tant que</strong> la condition est vraie. Attention à la logique inverse.</li>
+                        <li><span class="bold">Dépassement de bornes :</span> Dans les tableaux, une boucle POUR qui va jusqu'à Taille inclus peut causer une erreur si l'indice maximum est taille-1.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Applications aux examens + lien avec le langage C -->
+            <section class="concept-section">
+                <h2 class="section-title">🔁 Lien avec le Bac & Langage C</h2>
+                <div class="card concept-card">
+                    <p>📖 D'après le programme officiel (Session 2023, 2024, 2025), la maîtrise des boucles est évaluée en algorithmique et en programmation C.</p>
+                    <p><strong>Transposition en langage C :</strong></p>
+                    <ul class="concept-list">
+                        <li><span class="formule">POUR</span> → <code>for (initialisation; condition; incrémentation) { ... }</code></li>
+                        <li><span class="formule">TANT QUE</span> → <code>while (condition) { ... }</code></li>
+                        <li><span class="formule">RÉPÉTER... JUSQU'À</span> → <code>do { ... } while (condition);</code> (attention : en C, on continue <strong>tant que</strong> condition vraie, contrairement à "Jusqu'à" algorithmique où on s'arrête quand condition vraie → adapter la négation).</li>
+                    </ul>
+                    <div class="code-block">
+                        // Exemple en C : Somme des entiers de 1 à N (version for)<br>
+                        int somme = 0;<br>
+                        for (int i = 1; i <= N; i++) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;somme += i;<br>
+                        }<br>
+                        printf("Somme = %d", somme);
+                    </div>
+                    <div class="exemple-astuce" style="margin-top:0.8rem;">
+                        🧠 À retenir pour l'écriture du code : <strong>i++</strong> équivaut à <strong>i ← i+1</strong> ; ne pas oublier les accolades pour les blocs de plusieurs instructions.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Visualisation avec un petit schéma (image IA) -->
+            <section class="exemple-section">
+                <h2 class="section-title">🖼️ Schéma de principe (flux d'exécution)</h2>
+                <div class="card exemple-card">
+                    <p class="card-description">Organigramme simplifié d'une boucle TANT QUE :</p>
+                    <!-- Image générée par IA pour illustrer, le alt décrit l'image -->
+                    <img src="" alt="Organigramme d'une boucle TantQue : début, condition vérifiée, si vrai bloc d'instructions puis retour à la condition, si faux sortie de la boucle." style="max-width:100%; border-radius:1rem; margin:0.5rem 0; background: #f8fafc; padding:0.5rem;">
+                    <p class="exemple-context" style="font-size:0.9rem;">*Figure : Logique d'une structure itérative pré-testée (TANT QUE). La condition est évaluée avant chaque exécution.*</p>
+                    <div class="exemple-astuce">
+                        🔁 Une boucle POUR peut toujours être réécrite avec TANT QUE, mais l'inverse n'est pas toujours simple.
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="fiche-footer">
+            <p>📘 Fiche de révision - Terminale C & D (Informatique) · Boucles : Pour, Tant que, Répéter · Conforme au programme officiel sessions 2022-2025 · <a href="#">Réviser avec des exercices</a> · 📚</p>
+        </footer>
+    </div>
+</body>
+</html>

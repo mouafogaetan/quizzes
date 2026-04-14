@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Identifier le texte descriptif (3e)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (gardé pour d'éventuelles formules, même si non utilisé ici) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Le style est repris du fichier style.css fourni ; on l'intègre ici pour l'autonomie de la fiche */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card {
+                padding: 1.2rem;
+            }
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* style supplémentaire pour les images flexibles */
+        .schema-img {
+            max-width: 100%;
+            border-radius: 0.75rem;
+            margin: 1rem 0;
+            display: block;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .img-caption {
+            font-size: 0.8rem;
+            text-align: center;
+            color: #475569;
+            margin-top: -0.8rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <header class="fiche-header">
+            <h1 class="lesson-title">📖 Identifier le texte descriptif</h1>
+            <p class="lesson-subtitle">Français · Classe de 3ème · Module 1 – Chapitre 3 : Typologie textuelle</p>
+        </header>
+
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">🔍 Qu’est-ce qu’un texte descriptif ?</h3>
+                    <p class="card-description">
+                        Le texte descriptif a pour but de <strong>représenter par le langage</strong> un lieu, un personnage, un objet, un paysage ou une ambiance. 
+                        Il ne raconte pas une action principale (narration) mais <strong>s’attarde sur les caractéristiques</strong> pour donner à voir, à imaginer. 
+                        On le retrouve souvent dans les romans, les nouvelles, les guides touristiques, ou à l’intérieur de récits.
+                    </p>
+                    <ul class="concept-list">
+                        <li>Il répond à la question : <em>« À quoi cela ressemble-t-il ? »</em></li>
+                        <li>Il utilise des <strong>adjectifs qualificatifs</strong>, des <strong>comparaisons</strong>, des <strong>champs lexicaux</strong>.</li>
+                        <li>Les temps dominants : <strong>imparfait</strong> (description d’état), <strong>présent de description</strong>.</li>
+                        <li>On y repère souvent des <strong>indices spatiaux</strong> (en haut, à gauche, au fond) et des <strong>points de vue</strong>.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 0.8rem;">
+                        💡 <strong>Astuce mnémotechnique</strong> : Pour reconnaître une description, cherchez « qui est ? », « comment est ? », « il y a... », « on voyait... ». Pas d’enchaînement d’actions !
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🏷️ Les procédés typiques de la description</h3>
+                    <p class="card-description">
+                        Pour analyser un texte descriptif, il faut savoir repérer et nommer les outils employés par l’auteur.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Champ lexical</strong> : ensemble de mots liés à un même thème (ex. champ lexical de la mer : vague, écume, marin, horizon, sel).</li>
+                        <li><strong>Adjectifs qualificatifs</strong> : ils enrichissent le portrait (grand, lumineux, mélancolique).</li>
+                        <li><strong>Comparaisons et métaphores</strong> : « ses yeux brillaient comme des étoiles » → effet imagé.</li>
+                        <li><strong>Énumérations et accumulations</strong> : listes d’éléments qui donnent une impression d’abondance.</li>
+                        <li><strong>Indications spatiales</strong> : « au premier plan », « derrière le rocher », « à droite » → organisent l’espace.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">📐 Les différents types de description</h3>
+                    <ul class="concept-list">
+                        <li><strong>Portrait</strong> : description physique et/ou morale d’un personnage.</li>
+                        <li><strong>Topographie / description de lieu</strong> : paysage, intérieur, ville.</li>
+                        <li><strong>Description objective</strong> : neutre, factuelle (documentaire, guide).</li>
+                        <li><strong>Description subjective</strong> : teintée de sentiments, d’opinions (regard du narrateur).</li>
+                    </ul>
+                    <div style="margin-top: 1rem;">
+                        <img src="" alt="Schéma présentant les trois grands types de description : portrait, lieu, ambiance. Avec flèches pour objectif/subjectif." class="schema-img" style="max-width:100%; border-radius: 12px;">
+                        <p class="img-caption">📸 *Illustration : les formes de description (à visualiser pour mieux mémoriser)*</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">📝 Exemple 1 – Reconnaître une description dans un extrait</h3>
+                    <p class="exemple-context">
+                        « La vieille maison était blottie au creux du vallon. Ses murs de pierre noircis par le temps portaient des traces de mousse humide. 
+                        Devant la porte, un vieux puits de pierre grise semblait veiller sur la cour envahie d’herbes folles. 
+                        L’air sentait la terre mouillée et le bois ancien. »
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>🔎 Analyse :</strong> Il s’agit d’un texte descriptif (description d’un lieu). 
+                        On relève : <br>
+                        - <strong>Champ lexical de la vétusté et de la nature</strong> : « pierre noircis », « mousse », « herbes folles », « terre mouillée ». <br>
+                        - <strong>Adjectifs</strong> : « vieille », « noircis », « humide », « grise », « ancien ». <br>
+                        - <strong>Indices spatiaux</strong> : « au creux du vallon », « devant la porte », « sur la cour ». <br>
+                        - <strong>Temps utilisé</strong> : imparfait (« était », « portaient », « semblait ») → durée, état.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 Astuce : Si vous pouvez dessiner mentalement le lieu ou le personnage grâce aux détails, vous êtes face à une description.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">🎨 Exemple 2 – Portrait subjectif (sentiments mêlés)</h3>
+                    <p class="exemple-context">
+                        « M. Linard était un vieil homme au visage creusé de rides profondes. Mais ses yeux bleus, d’une clarté enfantine, 
+                        illuminaient son regard d’une douceur infinie. Il portait une veste élimée, aux coudes rapiécés, et ses mains tremblaient 
+                        légèrement lorsqu’il tenait sa tasse. Pourtant, il dégageait une impression de sérénité et de bienveillance. »
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>📖 Identification :</strong> Portrait physique + moral. <br>
+                        - <strong>Champs lexicaux</strong> : vieillesse (creusé, rides, élimée, tremblaient), douceur (clarté, douceur infinie, sérénité). <br>
+                        - <strong>Adverbes et jugement</strong> : « pourtant » introduit un contraste, « impression de sérénité » = subjectivité du narrateur. <br>
+                        - <strong>Structure</strong> : d’abord l’apparence usée, puis les yeux et l’impression générale → progression.
+                    </div>
+                    <div class="exemple-astuce">
+                        ✨ L’auteur utilise la description pour faire naître de l’empathie. Notez les adjectifs mélioratifs « douceur », « sérénité ».
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">🌿 Exemple 3 – Relever le champ lexical et la valeur expressive</h3>
+                    <p class="exemple-context">
+                        « La forêt tropicale étendait son dôme végétal impénétrable. Des lianes enchevêtrées pendaient comme des serpents paresseux ; 
+                        un souffle moite, chargé d’odeurs de terre et de fruits fermentés, stagnait sous la voûte obscure. Le cri lointain d’un singe 
+                        déchirait par instants le silence pesant. »
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>🌳 Relevés :</strong> <br>
+                        - <strong>Champ lexical de la jungle dense</strong> : « dôme végétal », « lianes enchevêtrées », « voûte obscure », « cri de singe ». <br>
+                        - <strong>Comparaison</strong> : « comme des serpents paresseux » → danger, lenteur. <br>
+                        - <strong>Sensations</strong> : « souffle moite » (toucher), « odeurs de terre et fruits fermentés » (odorat). <br>
+                        ➡ L’auteur crée une atmosphère étouffante, mystérieuse. La description sert l’ambiance du récit.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges courants -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre description et narration :</span> une narration raconte des actions qui se succèdent (verbes d’action au passé simple ou présent). La description <strong>s’arrête sur les états</strong> (imparfait, verbes d’état : être, sembler, paraître).</li>
+                        <li><span class="bold">Oublier de justifier par des indices :</span> lors d’une analyse, il ne suffit pas de dire « c’est une description », il faut citer un adjectif, un champ lexical ou un indicateur spatial.</li>
+                        <li><span class="bold">Négliger les points de vue :</span> une description peut être interne (vue par un personnage) ou externe (narrateur objectif). Cela change l’interprétation.</li>
+                        <li><span class="bold">Ne pas voir le mélange des types :</span> dans un même texte, une description peut s’insérer dans une narration (ex. « Il entra dans la chambre. La pièce était sombre et poussiéreuse »).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section supplémentaire : outils d'analyse pratique -->
+            <section class="exemple-section">
+                <h2 class="section-title">🛠️ Outil : Grille d’analyse d’un texte descriptif</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        Pour réussir l’exercice d’identification et d’analyse, posez-vous ces questions :
+                    </p>
+                    <ul class="concept-list">
+                        <li>Quel est l’<strong>objet décrit</strong> ? (personnage, lieu, objet, ambiance)</li>
+                        <li>Quels sont les <strong>champs lexicaux dominants</strong> ? (nature, douleur, joie, ville, etc.)</li>
+                        <li>Relevez au moins trois <strong>adjectifs qualificatifs</strong> et précisez leur effet.</li>
+                        <li>Y a-t-il des <strong>comparaisons / métaphores</strong> ? Lesquelles ?</li>
+                        <li>Quel est le <strong>temps verbal majoritaire</strong> ? (imparfait → description ; présent → description saisissante)</li>
+                        <li>Le point de vue : <strong>descripteur omniscient</strong> ou regard d’un personnage ?</li>
+                    </ul>
+                    <div style="margin: 1rem 0 0 0;">
+                        <img src="" alt="Grille visuelle en arborescence avec les questions clés pour analyser une description (champ lexical, adjectifs, temps, point de vue)." class="schema-img">
+                        <p class="img-caption">📋 *Grille de lecture : pratique pour l’évaluation*</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exercice d'application rapide -->
+            <section class="exemple-section">
+                <h2 class="section-title">✍️ Entraînement – À toi de jouer !</h2>
+                <div class="card exemple-card" style="background-color: #fefce8;">
+                    <h3 class="card-title">🔥 Mini exercice : relève les indices descriptifs</h3>
+                    <p class="exemple-context">
+                        « Le marché était une véritable fourmilière. Des odeurs d’épices, de poisson fumé et de fruits mûrs se mêlaient dans l’air moite. 
+                        Les femmes aux pagnes colorés discutaient avec animation devant les étals croulant sous les légumes. Un vieux griot, adossé à un manguier, 
+                        observait la foule d’un œil amusé. »
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>✅ Correction (à vérifier) :</strong> <br>
+                        - <strong>Champ lexical</strong> : marché, épices, étals, légumes, foule → champ lexical du commerce/ambiance populaire. <br>
+                        - <strong>Comparaison</strong> : « une véritable fourmilière » → métaphore de l’agitation. <br>
+                        - <strong>Adjectifs</strong> : « moite », « colorés », « vieux », « amusé ». <br>
+                        - <strong>But</strong> : planter le décor et l’animation d’un marché africain. <br>
+                        👉 Bravo si tu as trouvé ces éléments !
+                    </div>
+                    <div class="exemple-astuce">
+                        🧠 Petit défi : essaie de réécrire ce passage en supprimant tous les adjectifs. Que constates-tu ? (La description perd son pouvoir évocateur).
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="fiche-footer">
+            <p>📚 Fiche de révision – 3ème – Module 1 : L’analyse globale du texte (Chapitre 3 – Identifier le texte descriptif) <br>
+            ✍️ Basée sur le programme officiel du Cameroun · Utilise les images suggérées pour mieux visualiser les schémas.</p>
+        </footer>
+    </div>
+</body>
+</html>

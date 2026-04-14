@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision : Conjuguer avec précision (3e)</title>
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;  /* Fond très clair pour contraster avec les cards */
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24; /* petite touche de couleur vive */
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .temps-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .temps-table th, .temps-table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.6rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .temps-table th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+            color: #1e40af;
+        }
+        
+        .highlight {
+            background-color: #fef9c3;
+            font-weight: 500;
+            padding: 0.1rem 0.2rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981; /* vert pour distinguer */
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+            
+            .temps-table {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">📖 Conjuguer avec précision</h1>
+            <p class="lesson-subtitle">Français · Classe de 3ème · Module 3 – Chapitre 7 – Leçon 3</p>
+        </header>
+
+        <!-- Contenu principal -->
+        <main class="fiche-content">
+            <!-- Section Éléments clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Identifier un verbe : infinitif, temps et mode</h3>
+                    <p class="card-description">
+                        Pour analyser un verbe, il faut toujours déterminer trois éléments :
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="bold">Infinitif</span> : la forme de base (ex: <em>manger, finir, prendre</em>).</li>
+                        <li><span class="bold">Temps</span> : moment de l'action (passé, présent, futur).</li>
+                        <li><span class="bold">Mode</span> : manière dont l'action est envisagée (indicatif, subjonctif, impératif, conditionnel).</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top:0.8rem;">
+                        💡 <strong>Astuce :</strong> Pour trouver l'infinitif, on peut utiliser "il faut + verbe" : "il faut qu'il <span class="highlight">parte</span>" → partir.
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Les temps et modes à maîtriser en 3ème</h3>
+                    <p class="card-description">
+                        Au programme de l’examen, il faut savoir conjuguer et reconnaître :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Indicatif :</strong> présent, imparfait, passé simple, futur simple, plus-que-parfait.</li>
+                        <li><strong>Subjonctif :</strong> présent (surtout après "que" exprimant le souhait, l'obligation, le doute).</li>
+                        <li><strong>Impératif :</strong> présent (pour donner un ordre, un conseil).</li>
+                        <li><strong>Conditionnel :</strong> présent (souvent avec "si" ou pour exprimer un souhait).</li>
+                    </ul>
+                    <img src="" alt="Tableau récapitulatif des terminaisons des principaux temps : présent, imparfait, futur simple, passé simple, subjonctif présent, impératif présent, conditionnel présent - schéma pédagogique coloré" style="width:100%; max-width:320px; margin-top:0.75rem; border-radius:0.5rem; border:1px solid #e2e8f0;">
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Tableau des terminaisons essentielles</h3>
+                    <table>
+                        <thead>
+                            <tr><th>Temps / Mode</th><th>Terminaisons (verbes du 1er groupe type <em>chanter</em>)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Présent de l'indicatif</td><td>-e, -es, -e, -ons, -ez, -ent</td></tr>
+                            <tr><td>Imparfait</td><td>-ais, -ais, -ait, -ions, -iez, -aient</td></tr>
+                            <tr><td>Passé simple</td><td>-ai, -as, -a, -âmes, -âtes, -èrent</td></tr>
+                            <tr><td>Futur simple</td><td>-ai, -as, -a, -ons, -ez, -ont</td></tr>
+                            <tr><td>Plus-que-parfait</td><td>auxiliaire (être/avoir) à l'imparfait + participe passé</td></tr>
+                            <tr><td>Subjonctif présent</td><td>-e, -es, -e, -ions, -iez, -ent</td></tr>
+                            <tr><td>Conditionnel présent</td><td>-ais, -ais, -ait, -ions, -iez, -aient (comme l'imparfait mais sur le radical du futur)</td></tr>
+                            <tr><td>Impératif présent</td><td>-e (ou -s), -ons, -ez (sans pronom sujet)</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="card-description" style="margin-top:0.5rem;">
+                        ⚠️ Attention : Les terminaisons du conditionnel présent sont identiques à celles de l'imparfait, mais le radical est celui du futur.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section Exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Identifier l'infinitif, le temps et le mode</h3>
+                    <p class="exemple-context">Phrase : <em>“Il fallait que tu vinsses à l’heure.”</em></p>
+                    <div class="exemple-correction">
+                        <strong>Résolution :</strong><br>
+                        → Verbe : <span class="highlight">vinsses</span><br>
+                        - Infinitif : <strong>venir</strong><br>
+                        - Temps : <strong>imparfait</strong> (action passée non achevée)<br>
+                        - Mode : <strong>subjonctif</strong> (introduit par "que" après un verbe exprimant la nécessité "fallait").<br>
+                        → Astuce : pour le subjonctif imparfait (littéraire), on le transforme souvent en subjonctif présent dans la langue courante.
+                    </div>
+                    <div class="exemple-astuce">
+                        💬 <strong>Pour l’examen :</strong> On attend surtout la maîtrise du subjonctif présent, de l’impératif et du conditionnel dans les exercices de conjugaison.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Conjuguer au conditionnel et au subjonctif</h3>
+                    <p class="exemple-context">Consigne : “Conjuguez le verbe <strong>réussir</strong> au conditionnel présent, puis à l’impératif présent (2e pers. du pluriel).”</p>
+                    <div class="exemple-correction">
+                        <strong>Correction :</strong><br>
+                        - Conditionnel présent : <span class="highlight">je réussirais, tu réussirais, il réussirait, nous réussirions, vous réussiriez, ils réussiraient</span><br>
+                        - Impératif présent (2e pers. pluriel) : <span class="highlight">réussissez !</span> (sans le pronom "vous").<br>
+                        📌 Rappel : l’impératif ne se conjugue qu’aux personnes : tu, nous, vous.
+                    </div>
+                    <div class="exemple-astuce">
+                        🔎 Pour former le conditionnel : infinitif + terminaisons de l’imparfait (<strong>réussir + ais</strong>). Pour le subjonctif présent, on utilise souvent le radical de la 3e personne du pluriel du présent de l’indicatif.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Reconnaître le plus-que-parfait dans un texte</h3>
+                    <p class="exemple-context">Texte : “Quand il arriva, elle <span class="highlight">avait déjà préparé</span> le repas.”</p>
+                    <div class="exemple-correction">
+                        <strong>Analyse :</strong><br>
+                        - Verbe : <strong>avait préparé</strong><br>
+                        - Infinitif : <strong>préparer</strong><br>
+                        - Temps : <strong>plus-que-parfait de l’indicatif</strong> (action antérieure à une autre action passée exprimée par le passé simple "arriva").<br>
+                        - Formation : auxiliaire "avoir" à l’imparfait + participe passé.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Pièges fréquents -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Confondre imparfait et passé simple :</span> l’imparfait décrit une action habituelle ou inachevée (il <em>mangeait</em>), le passé simple une action ponctuelle achevée (il <em>mangea</em>).</li>
+                        <li><span class="bold">Oublier l’accord du participe passé avec l’auxiliaire être :</span> “Elles sont <span class="highlight">venues</span>” (et non venu).</li>
+                        <li><span class="bold">Mélanger conditionnel et futur :</span> le futur exprime une certitude (<em>je partirai</em>), le conditionnel un souhait ou une hypothèse (<em>je partirais si...</em>).</li>
+                        <li><span class="bold">Erreur sur le subjonctif :</span> après “il faut que”, “bien que”, “pour que” → toujours subjonctif. Exemple : “Il faut que tu <span class="highlight">viennes</span>” (et non “viens”).</li>
+                        <li><span class="bold">Impératif négatif :</span> on conserve l’impératif : “Ne <span class="highlight">pars</span> pas !” (pas de “ne pars pas” avec le subjonctif).</li>
+                    </ul>
+                    <img src="" alt="Affiche humoristique avec une illustration montrant les erreurs classiques en conjugaison : confusion futur/conditionnel, oubli du subjonctif, terminaisons d'imparfait mal orthographiées" style="width:100%; max-width:280px; margin-top:0.5rem; border-radius:0.5rem;">
+                </div>
+            </section>
+
+            <!-- Section Astuces et stratégies -->
+            <section class="concept-section">
+                <h2 class="section-title">🎯 Stratégies pour réussir en conjugaison</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">1. La méthode des 3 questions</h3>
+                    <p class="card-description">
+                        Face à un verbe à analyser, posez-vous ces questions :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Qui ?</strong> → Le sujet permet de trouver la personne.</li>
+                        <li><strong>Quand ?</strong> → Indices de temps (aujourd’hui, demain, hier, un jour…).</li>
+                        <li><strong>Comment ?</strong> → Mode (certitude : indicatif ; doute ou obligation : subjonctif ; ordre : impératif ; hypothèse : conditionnel).</li>
+                    </ul>
+                </div>
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Les verbes auxiliaires à connaître par cœur</h3>
+                    <p class="card-description">
+                        Les auxiliaires <strong>être</strong> et <strong>avoir</strong> servent à former les temps composés (passé composé, plus-que-parfait, futur antérieur...). Leur conjugaison doit être parfaitement maîtrisée.
+                    </p>
+                    <div style="display:flex; flex-wrap:wrap; gap:1rem; margin-top:0.5rem;">
+                        <div style="flex:1; min-width:180px;">
+                            <strong>Être (imparfait) :</strong> j’étais, tu étais, il était, nous étions, vous étiez, ils étaient.<br>
+                            <strong>Être (présent) :</strong> je suis, tu es, il est, nous sommes, vous êtes, ils sont.
+                        </div>
+                        <div style="flex:1; min-width:180px;">
+                            <strong>Avoir (imparfait) :</strong> j’avais, tu avais, il avait, nous avions, vous aviez, ils avaient.<br>
+                            <strong>Avoir (présent) :</strong> j’ai, tu as, il a, nous avons, vous avez, ils ont.
+                        </div>
+                    </div>
+                </div>
+                <div class="card concept-card">
+                    <h3 class="card-title">3. S'entraîner avec des phrases types</h3>
+                    <p class="card-description">
+                        Pour automatiser la conjugaison, créez des petites phrases modèles :
+                    </p>
+                    <ul class="concept-list">
+                        <li>Subjonctif : <em>Il est important que tu <span class="highlight">fasses</span> tes devoirs.</em></li>
+                        <li>Conditionnel : <em>Si j’avais le temps, je <span class="highlight">lirais</span> ce roman.</em></li>
+                        <li>Impératif : <em><span class="highlight">Prenez</span> le temps de réviser !</em></li>
+                        <li>Passé simple (récit) : <em>Le héros <span class="highlight">combattit</span> le dragon.</em></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Mini exercice pour tester ses connaissances -->
+            <section class="exemple-section">
+                <h2 class="section-title">✍️ À toi de jouer ! (Auto-évaluation)</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exercice flash</h3>
+                    <p class="exemple-context">
+                        1. Donne l’infinitif, le temps et le mode de <em>“qu’ils chantassent”</em>.<br>
+                        2. Conjugue le verbe <strong>finir</strong> au subjonctif présent (toutes les personnes).<br>
+                        3. Transforme cette phrase à l’impératif présent : “Tu ranges ta chambre.”<br>
+                        4. Mets la phrase au conditionnel présent : “Nous partons en vacances.”
+                    </p>
+                    <div class="exemple-correction">
+                        <strong>Corrigé rapide :</strong><br>
+                        1. Infinitif : <em>chanter</em> ; temps : imparfait ; mode : subjonctif (subjonctif imparfait littéraire).<br>
+                        2. Subjonctif présent de finir : que je finisse, que tu finisses, qu’il finisse, que nous finissions, que vous finissiez, qu’ils finissent.<br>
+                        3. Impératif : <em>Range ta chambre !</em><br>
+                        4. Conditionnel présent : <em>Nous partirions en vacances.</em>
+                    </div>
+                    <div class="exemple-astuce">
+                        💡 <strong>Conseil du prof :</strong> Fais chaque jour 5 lignes de conjugaison sur les verbes irréguliers (venir, prendre, vouloir, pouvoir, savoir). Cela te permettra de gagner en rapidité le jour de l’épreuve.
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📚 Fiche de révision – Français 3ème – Conjugaison : maîtriser les temps et modes essentiels. <br>
+            📍 Enseignant : Collège / Lycée – Cameroun · Programme officiel en vigueur <br>
+            🔗 Besoin d’exercices supplémentaires ? <a href="#">Demande à ton professeur</a></p>
+        </footer>
+    </div>
+</body>
+</html>

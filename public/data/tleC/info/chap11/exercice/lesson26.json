@@ -1,0 +1,160 @@
+[
+  {
+    "intitule": "Diagnostic réseau avec les commandes ipconfig et ping",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Un élève connecté au réseau du lycée rencontre des difficultés pour accéder à Internet. Il peut se connecter aux autres ordinateurs du lycée, mais il n'arrive pas à ouvrir le site web <code>www.education.cm</code>. Son professeur lui demande d'utiliser les commandes <code>ipconfig</code> et <code>ping</code> pour diagnostiquer le problème.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Rappeler la fonction principale de la commande <code>ipconfig</code> et citer deux informations qu'elle permet d'obtenir sur une machine sous Windows.",
+        "niveau": "easy",
+        "reponse": "La commande ipconfig affiche la configuration réseau d'une machine. Deux informations obtenues sont : l'adresse IP et le masque de sous-réseau. (On peut aussi citer : passerelle par défaut, serveur DNS, adresse MAC...)."
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquer à quoi sert la commande <code>ping</code> et comment interpréter un message 'Réponse de ... : octets=32 temps<1ms TTL=128'.",
+        "niveau": "easy",
+        "reponse": "La commande ping permet de tester la connectivité entre deux machines sur un réseau. Un message 'Réponse de ...' avec un temps indiqué signifie que la communication est établie avec succès et que l'hôte distant répond (temps de réponse faible)."
+      },
+      {
+        "numero": 3,
+        "texte": "L'élève exécute d'abord <code>ipconfig</code> et obtient les lignes suivantes :\n\n```\nCarte Ethernet Connexion au réseau local :\n   Adresse IPv4. . . . . . . . . . . : 192.168.1.25\n   Masque de sous-réseau. . . . . . : 255.255.255.0\n   Passerelle par défaut. . . . . . : 192.168.1.1\n```\nAnalyser ces informations pour déterminer si la configuration IP semble correcte.",
+        "niveau": "medium",
+        "reponse": "La configuration semble correcte : l'adresse IP (192.168.1.25) est dans la plage privée, le masque (255.255.255.0) est cohérent avec l'adresse IP, et une passerelle par défaut (192.168.1.1) est définie, ce qui est nécessaire pour sortir du réseau local."
+      },
+      {
+        "numero": 4,
+        "texte": "Il teste ensuite la connectivité en exécutant <code>ping 192.168.1.1</code> et obtient :\n\n```\nDélai d'attente de la demande dépassé.\nDélai d'attente de la demande dépassé.\n```\nInterpréter ce résultat. Que peut-on en conclure ? Proposer une hypothèse sur l'origine du problème.",
+        "niveau": "hard",
+        "reponse": "Le message 'Délai d'attente dépassé' signifie que l'ordinateur n'a pas reçu de réponse de la passerelle (192.168.1.1). On peut conclure que la connectivité avec la passerelle est interrompue. Hypothèses : la passerelle est éteinte, le câble réseau est débranché, ou il y a un problème de pare-feu."
+      },
+      {
+        "numero": 5,
+        "texte": "Pour confirmer son diagnostic, l'élève exécute <code>ping 8.8.8.8</code> (serveur DNS public de Google). Les requêtes aboutissent. Comparer ces résultats avec ceux du ping vers la passerelle. Qu'en déduisez-vous finalement sur la nature de la panne ?",
+        "niveau": "very hard",
+        "reponse": "Si le ping vers 8.8.8.8 réussit, l'ordinateur a bien accès à Internet. Comme le ping vers la passerelle échoue, cela indique un problème de résolution de noms DNS ou un routage local anormal. La panne n'est pas une coupure Internet complète. Il se peut que le serveur DNS configuré ne fonctionne pas."
+      }
+    ]
+  },
+  {
+    "intitule": "Résolution de panne réseau en entreprise",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Vous êtes technicien informatique dans une petite entreprise à Douala. Un employé du service commercial, Monsieur Kamga, vous signale qu'il ne peut plus accéder au serveur interne de l'entreprise (adresse IP 172.16.10.5), ni à Internet. Par contre, il peut toujours accéder aux partages réseau des collègues de son propre service.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Établir une stratégie de diagnostic en listant, dans l'ordre logique, les commandes réseau que vous allez utiliser sur le poste de M. Kamga. Justifier chaque étape.",
+        "niveau": "medium",
+        "reponse": "1. <code>ipconfig</code> (ou <code>ifconfig</code> sous Linux) : pour vérifier la configuration IP, masque, passerelle et DNS.\n2. <code>ping 127.0.0.1</code> (loopback) : pour tester la pile TCP/IP locale.\n3. <code>ping [adresse_IP_passerelle]</code> : pour tester la connectivité avec la passerelle.\n4. <code>ping 172.16.10.5</code> : pour tester l'accès au serveur interne.\n5. <code>ping 8.8.8.8</code> : pour tester l'accès à Internet.\n6. <code>ping www.google.com</code> : pour tester la résolution DNS."
+      },
+      {
+        "numero": 2,
+        "texte": "Après exécution de la commande <code>ipconfig</code>, vous obtenez :\n- Adresse IP : 192.168.1.45\n- Masque : 255.255.255.0\n- Passerelle par défaut : 192.168.1.1\n- Serveur DNS : 192.168.1.1\n\nRelever une incohérence dans cette configuration. Justifier.",
+        "niveau": "hard",
+        "reponse": "L'incohérence est que M. Kamga a une adresse IP en 192.168.1.x alors que le serveur interne est en 172.16.10.5. Ces deux réseaux sont différents. Normalement, il ne peut pas atteindre le serveur sans passerelle ou routeur interconnectant les deux réseaux. Cela explique pourquoi il n'accède pas au serveur."
+      },
+      {
+        "numero": 3,
+        "texte": "Vous exécutez alors <code>ping 192.168.1.1</code>. Les requêtes aboutissent. Que cela signifie-t-il concernant la connectivité avec la passerelle ?",
+        "niveau": "easy",
+        "reponse": "Cela signifie que la connectivité avec la passerelle (192.168.1.1) est bonne. La carte réseau, le câble et le commutateur jusqu'à la passerelle fonctionnent."
+      },
+      {
+        "numero": 4,
+        "texte": "Vous effectuez ensuite <code>ping 8.8.8.8</code>. Les requêtes aboutissent également. Puis vous faites <code>ping www.cameroon.cm</code> et vous obtenez : 'Ping request could not find host www.cameroon.cm'. Diagnostiquer précisément le problème. Justifier en comparant les résultats des deux derniers pings.",
+        "niveau": "very hard",
+        "reponse": "Le problème est un dysfonctionnement du résolveur DNS. Le ping vers 8.8.8.8 (IP brute) fonctionne, donc la connectivité Internet est bonne. Le ping vers www.cameroon.cm échoue, car le nom ne peut pas être traduit en adresse IP. La cause probable est que le serveur DNS (192.168.1.1) ne répond pas correctement aux requêtes de résolution."
+      },
+      {
+        "numero": 5,
+        "texte": "Proposer une solution temporaire que vous pourriez appliquer immédiatement sur le poste de M. Kamga pour lui permettre d'accéder à Internet en attendant une réparation complète du serveur DNS.",
+        "niveau": "hard",
+        "reponse": "Solution temporaire : modifier manuellement la configuration DNS du poste pour utiliser un serveur DNS public fiable, comme celui de Google (8.8.8.8) ou Cloudflare (1.1.1.1). Sous Windows, cela se fait dans les propriétés de la carte réseau → Protocole TCP/IPv4 → 'Utiliser les adresses de serveur DNS suivantes'."
+      }
+    ]
+  },
+  {
+    "intitule": "Comparaison des commandes réseau sous Windows et Linux",
+    "type": "ressource",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Dans un laboratoire informatique, les postes sont partagés entre des ordinateurs sous Windows 11 et des ordinateurs sous Linux Ubuntu. Un élève doit diagnostiquer un problème de connectivité sur une machine dont il ne connaît pas le système d'exploitation.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Rappeler la commande permettant d'afficher la configuration IP sous Windows et son équivalent sous Linux.",
+        "niveau": "easy",
+        "reponse": "Sous Windows : <code>ipconfig</code>. Sous Linux : <code>ifconfig</code> (ou <code>ip addr show</code>)."
+      },
+      {
+        "numero": 2,
+        "texte": "Expliquer pourquoi la commande <code>ping</code> est disponible sur les deux systèmes et quelle est son utilité universelle.",
+        "niveau": "easy",
+        "reponse": "Le ping est une commande standard du protocole ICMP (Internet Control Message Protocol), présent sur toutes les piles TCP/IP. Elle sert à tester la connectivité et mesurer le temps de réponse entre deux hôtes, indépendamment du système d'exploitation."
+      },
+      {
+        "numero": 3,
+        "texte": "Sur une machine Linux, l'élève tape <code>ifconfig</code> et n'obtient que l'interface <code>lo</code> (loopback). Il ne voit pas son interface Ethernet. Interpréter ce résultat et proposer une cause possible.",
+        "niveau": "hard",
+        "reponse": "Cela signifie que l'interface réseau physique (eth0, enp0s3, etc.) n'est pas active ou n'est pas reconnue. Causes possibles : le pilote (driver) de la carte réseau n'est pas installé, la carte est désactivée matériellement, ou l'utilisateur n'a pas les privilèges suffisants (il faut souvent utiliser <code>sudo ifconfig</code>)."
+      },
+      {
+        "numero": 4,
+        "texte": "Comparer l'utilité des options <code>/release</code> et <code>/renew</code> de <code>ipconfig</code> sous Windows avec l'équivalent sous Linux via la commande <code>dhclient</code>.",
+        "niveau": "very hard",
+        "reponse": "Sous Windows, <code>ipconfig /release</code> libère l'adresse IP obtenue par DHCP, et <code>ipconfig /renew</code> en demande une nouvelle. Sous Linux, <code>sudo dhclient -r</code> libère l'adresse (release), et <code>sudo dhclient</code> en demande une nouvelle (renew). Ces commandes sont utiles pour forcer un renouvellement de bail DHCP en cas de conflit d'adresses."
+      }
+    ]
+  },
+  {
+    "intitule": "Interprétation des messages d'erreur des commandes réseau",
+    "type": "competence",
+    "niveau": "very hard",
+    "enonce": {
+      "texte": "<p>Un technicien réseau reçoit plusieurs rapports d'incidents avec les messages d'erreur ci-dessous. Pour chaque cas, il doit identifier la cause probable et proposer une action corrective.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Message : <code>Destination host unreachable</code> après un <code>ping 192.168.1.100</code>. Proposer trois causes possibles.",
+        "niveau": "hard",
+        "reponse": "1. La machine cible (192.168.1.100) est éteinte.\n2. Aucune route n'existe vers le réseau de destination (problème de routage).\n3. Un pare-feu bloque les paquets ICMP."
+      },
+      {
+        "numero": 2,
+        "texte": "Message : <code>Request timed out</code> après plusieurs pings. Quelle est la différence fondamentale avec 'Destination host unreachable' ?",
+        "niveau": "medium",
+        "reponse": "'Request timed out' signifie que la requête a été envoyée mais qu'aucune réponse n'a été reçue dans le délai imparti. 'Destination host unreachable' est une réponse explicite d'un routeur indiquant que la destination ne peut pas être atteinte. Timeout peut indiquer un filtre pare-feu ou une perte de paquets."
+      },
+      {
+        "numero": 3,
+        "texte": "Message : <code>TTL expired in transit</code>. Expliquer ce que signifie TTL et dans quel cas ce message apparaît.",
+        "niveau": "hard",
+        "reponse": "TTL (Time To Live) est un champ qui diminue à chaque saut (routeur). Le message apparaît quand le TTL atteint 0 avant d'arriver à destination, généralement à cause d'une boucle de routage ou d'un réseau trop grand. La commande <code>traceroute</code> utilise ce principe."
+      },
+      {
+        "numero": 4,
+        "texte": "Après <code>ipconfig</code>, on voit 'Média déconnecté' pour l'interface Wi-Fi. Quelle est la cause la plus probable ?",
+        "niveau": "easy",
+        "reponse": "La cause la plus probable est que le Wi-Fi est désactivé (interrupteur physique, touche Fn, ou logiciel) ou qu'aucun réseau sans fil n'est à portée."
+      },
+      {
+        "numero": 5,
+        "texte": "Message : <code>'ping' n'est pas reconnu en tant que commande interne ou externe</code> sous Windows. Diagnostiquer le problème.",
+        "niveau": "medium",
+        "reponse": "Soit la variable d'environnement PATH ne contient pas le répertoire système (%SystemRoot%\\System32), soit le fichier ping.exe a été supprimé ou corrompu. Solution : vérifier PATH ou exécuter <code>sfc /scannow</code> pour restaurer les fichiers système."
+      }
+    ]
+  }
+]

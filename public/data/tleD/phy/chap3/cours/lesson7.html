@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 7 : Champ électrostatique</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Styles de base pour la fiche */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e9f0f5;  /* Fond léger */
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        /* Conteneur principal style feuille A4 */
+        .fiche-revision {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête avec bande colorée */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1.8rem 2.5rem;
+            border-bottom: 6px solid #ffb347;
+        }
+
+        .header h1 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.3rem;
+        }
+
+        .header .sous-titre {
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.9;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .badge {
+            background-color: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Corps de la fiche */
+        .content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Cartes pour chaque section */
+        .card {
+            background: #f8fafc;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background-color: #f1f5f9;
+            padding: 1rem 1.8rem;
+            border-bottom: 2px solid #cbd5e1;
+        }
+
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #0f3b5f;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .card-header h2 i {
+            font-size: 1.6rem;
+        }
+
+        .card-body {
+            padding: 1.5rem 1.8rem;
+        }
+
+        /* Grille pour les formules ou points clés */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .highlight {
+            background: #eef2ff;
+            border-left: 5px solid #3b82f6;
+            padding: 1rem 1.3rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+        }
+
+        .formula {
+            background: #0f172a;
+            color: #f1f5f9;
+            font-family: 'Courier New', monospace;
+            padding: 0.8rem 1.2rem;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .formula-inline {
+            background: #e6edf5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+
+        .btn-bac {
+            background-color: #ffedd5;
+            border-left: 6px solid #f59e0b;
+            padding: 0.8rem 1.2rem;
+            border-radius: 16px;
+            font-weight: 500;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 0.7rem;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #e2e8f0;
+            font-weight: 600;
+        }
+
+        .footer {
+            background-color: #f1f5f9;
+            padding: 1rem 2.5rem;
+            border-top: 1px solid #cbd5e1;
+            font-size: 0.8rem;
+            color: #475569;
+            text-align: center;
+        }
+
+        @media (max-width: 680px) {
+            .content {
+                padding: 1rem;
+            }
+            .card-body {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-revision">
+    <div class="header">
+        <h1>📐 Leçon 7 : Champ électrostatique</h1>
+        <div class="sous-titre">
+            <span class="badge">🔬 Module 1 : Mesures et interactions fondamentales</span>
+            <span class="badge">⚡ Chapitre 3 : Interaction électrique</span>
+            <span class="badge">🎯 Terminale C & D</span>
+        </div>
+        <p style="margin-top: 0.8rem; font-size: 0.95rem;">Objectif : Définir et calculer le champ électrostatique créé par une ou plusieurs charges ponctuelles. Principe de superposition.</p>
+    </div>
+
+    <div class="content">
+        <!-- Carte 1 : Définition et expression -->
+        <div class="card">
+            <div class="card-header">
+                <h2>⚡ 1. Champ électrostatique : définition</h2>
+            </div>
+            <div class="card-body">
+                <p>Le champ électrostatique $\vec{E}$ est une grandeur vectorielle qui représente l’influence électrique exercée par une ou plusieurs charges fixes en un point de l’espace. Il se manifeste par la force subie par une <strong>charge test positive</strong> placée en ce point.</p>
+                <div class="highlight">
+                    <strong>📌 Définition opérationnelle :</strong><br>
+                    Soit une charge ponctuelle $q$ (source) et une charge d’essai $q_0$ placée à une distance $d$. La force électrostatique exercée sur $q_0$ est :
+                    $$ \vec{F} = q_0 \cdot \vec{E} $$
+                    D’où l’expression du champ :
+                    $$ \boxed{\vec{E} = \frac{\vec{F}}{q_0}} $$
+                    <em>Unité :</em> newton par coulomb (N/C) ou volt par mètre (V/m).
+                </div>
+                <p><strong>👉 Sens physique :</strong> Si $q_0 > 0$, $\vec{E}$ a le même sens que $\vec{F}$ ; si $q_0 < 0$, sens opposé.</p>
+            </div>
+        </div>
+
+        <!-- Carte 2 : Champ créé par une charge ponctuelle -->
+        <div class="card">
+            <div class="card-header">
+                <h2>🧲 2. Champ créé par une charge ponctuelle</h2>
+            </div>
+            <div class="card-body">
+                <p>Une charge ponctuelle $q$ placée à l’origine crée en un point $M$ distant de $r$ un champ électrostatique radial :</p>
+                <div class="formula">
+                    $$ \vec{E}(M) = \frac{k \cdot q}{r^2} \cdot \vec{u}_r $$
+                </div>
+                <p>Avec :</p>
+                <ul style="margin-left: 1.5rem; margin-bottom: 1rem;">
+                    <li>$k = 9 \times 10^9 \, \text{N·m}^2\!\cdot\!\text{C}^{-2}$ (constante de Coulomb)</li>
+                    <li>$r$ : distance entre la charge source et le point d’observation (en mètres)</li>
+                    <li>$\vec{u}_r$ : vecteur unitaire dirigé de $q$ vers $M$</li>
+                </ul>
+                <div class="grid-2">
+                    <div class="highlight">
+                        ✅ <strong>Si $q > 0$</strong> : champ <strong>éloignant</strong> (radial sortant).<br>
+                        ✅ <strong>Si $q < 0$</strong> : champ <strong>attirant</strong> (radial entrant).
+                    </div>
+                    <div class="highlight">
+                        📐 <strong>Norme du champ :</strong> $E = \dfrac{k \cdot |q|}{r^2}$<br>
+                        (décroît comme l’inverse du carré de la distance).
+                    </div>
+                </div>
+                <div class="btn-bac">
+                    🎓 <strong>Lien Bac 2023 :</strong> Savoir calculer le champ électrique créé par une charge ponctuelle – exercice typique de première partie (application directe).
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte 3 : Principe de superposition -->
+        <div class="card">
+            <div class="card-header">
+                <h2>🔁 3. Principe de superposition</h2>
+            </div>
+            <div class="card-body">
+                <p>Lorsque plusieurs charges $q_1, q_2, \dots, q_n$ sont présentes, le champ électrostatique total en un point $M$ est la <strong>somme vectorielle</strong> des champs créés par chaque charge individuellement.</p>
+                <div class="formula">
+                    $$ \vec{E}_{\text{total}}(M) = \vec{E}_1(M) + \vec{E}_2(M) + \dots + \vec{E}_n(M) $$
+                </div>
+                <p><strong>Exemple classique :</strong> Deux charges $+q$ et $-q$ séparées par une distance $2a$ (dipôle électrostatique). En un point de l’axe, le champ résultant se calcule par addition vectorielle.</p>
+                <div class="highlight">
+                    💡 <strong>Méthode pratique :</strong> 
+                    <ol style="margin-top: 0.4rem; margin-left: 1.2rem;">
+                        <li>Représenter les vecteurs $\vec{E}_i$ en fonction du signe des charges.</li>
+                        <li>Décomposer selon les axes (projections).</li>
+                        <li>Additionner les composantes $E_x$, $E_y$, puis calculer la norme et la direction.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte 4 : Lignes de champ et analogie -->
+        <div class="card">
+            <div class="card-header">
+                <h2>🗺️ 4. Lignes de champ électrostatique</h2>
+            </div>
+            <div class="card-body">
+                <p>Les <strong>lignes de champ</strong> (ou lignes de force) sont des courbes tangentes en chaque point au vecteur champ $\vec{E}$. Elles permettent de visualiser la direction et le sens du champ.</p>
+                <ul>
+                    <li><strong>Pour une charge positive isolée</strong> : lignes radiales sortantes.</li>
+                    <li><strong>Pour une charge négative isolée</strong> : lignes radiales entrantes.</li>
+                    <li><strong>Entre deux charges opposées</strong> : lignes qui partent de la charge positive et aboutissent sur la charge négative.</li>
+                    <li><strong>Entre deux charges de même signe</strong> : lignes qui se repoussent mutuellement.</li>
+                </ul>
+                <div class="formula" style="background: #1e293b;">
+                    📈 <strong>Propriété fondamentale :</strong> Le champ électrostatique dérive d’un potentiel $V$ tel que $\vec{E} = -\vec{\nabla} V$. (Hors programme détaillé, mais notion utile pour la continuité).
+                </div>
+                <div class="btn-bac">
+                    🧠 <strong>Conseil Bac :</strong> Savoir interpréter qualitativement la carte de champ à partir de la distribution des charges (QCM ou schéma à compléter).
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte 5 : Applications et exemples numériques -->
+        <div class="card">
+            <div class="card-header">
+                <h2>📊 5. Exemple type – Calcul de champ</h2>
+            </div>
+            <div class="card-body">
+                <p><strong>Énoncé type Bac :</strong> Une charge $q_1 = +4,0\ \mu\text{C}$ est placée à l’origine O. Une charge $q_2 = -2,0\ \mu\text{C}$ est placée au point $A(0,30\ \text{cm})$. Calculer le champ électrostatique résultant au point $M$ situé à $10\ \text{cm}$ de O sur l’axe (Ox).</p>
+                <div class="highlight">
+                    <strong>✅ Correction rapide :</strong><br>
+                    1. Champ créé par $q_1$ en $M$ : $E_1 = k\dfrac{|q_1|}{r_1^2}$ avec $r_1 = 0,10\ \text{m}$.<br>
+                    2. Champ créé par $q_2$ en $M$ : $r_2 = 0,20\ \text{m}$ (distance A à M).<br>
+                    3. Appliquer superposition vectorielle sur l’axe (attention aux signes : $q_2$ négatif ⇒ champ vers $q_2$).<br>
+                    4. Calculer $E_{\text{tot}} = E_1 + E_2$ (en prenant l’orientation de l’axe).
+                </div>
+                <p>📌 <strong>Résultat numérique indicatif :</strong> $E_1 = 3,6 \times 10^6\ \text{N/C}$ ; $E_2 = 4,5 \times 10^5\ \text{N/C}$ ; $E_{\text{tot}} \approx 4,05 \times 10^6\ \text{N/C}$ vers la droite (si convention).</p>
+            </div>
+        </div>
+
+        <!-- Carte 6 : Synthèse et formule clé -->
+        <div class="card">
+            <div class="card-header">
+                <h2>📌 Synthèse & essentiel</h2>
+            </div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <th>Grandeur</th>
+                        <th>Symbole / Formule</th>
+                        <th>Unité (SI)</th>
+                    </tr>
+                    <tr>
+                        <td>Champ électrostatique</td>
+                        <td>$\vec{E} = \dfrac{\vec{F}}{q_0}$</td>
+                        <td>N/C ou V/m</td>
+                    </tr>
+                    <tr>
+                        <td>Champ d’une charge ponctuelle</td>
+                        <td>$E = k \dfrac{|q|}{r^2}$</td>
+                        <td>N/C</td>
+                    </tr>
+                    <tr>
+                        <td>Constante de Coulomb</td>
+                        <td>$k = 9\times10^9$</td>
+                        <td>N·m²·C⁻²</td>
+                    </tr>
+                    <tr>
+                        <td>Superposition</td>
+                        <td>$\vec{E}_{\text{tot}} = \sum \vec{E}_i$</td>
+                        <td>vectorielle</td>
+                    </tr>
+                </table>
+                <div class="highlight" style="margin-top: 0.8rem;">
+                    ⚠️ <strong>Erreurs fréquentes au Bac :</strong>
+                    <ul>
+                        <li>Oublier le caractère vectoriel du champ (ne pas additionner les normes sans tenir compte du sens).</li>
+                        <li>Confondre champ électrique $\vec{E}$ et force $\vec{F}$ (ne pas oublier la charge test).</li>
+                        <li>Mal convertir les distances (cm → m) et utiliser $k$ correctement.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte 7 : Exercice rapide d’auto-évaluation -->
+        <div class="card">
+            <div class="card-header">
+                <h2>✏️ Je vérifie mes acquis</h2>
+            </div>
+            <div class="card-body">
+                <ol style="margin-left: 1.2rem;">
+                    <li>Une charge $q = -5\ \mu\text{C}$ est placée en un point. En un point $P$ situé à $3\ \text{cm}$, le champ électrique a-t-il une direction radiale entrante ou sortante ? Justifier.</li>
+                    <li>Deux charges identiques $+q$ sont placées en $(-a,0)$ et $(+a,0)$. Exprimer le champ électrique au point $M(0,y)$ sur l’axe des ordonnées.</li>
+                    <li>Vrai ou faux ? « Le principe de superposition ne s’applique qu’aux champs créés par des charges positives. »</li>
+                </ol>
+                <details style="margin-top: 1rem; background-color: #fef9e3; padding: 0.8rem; border-radius: 14px;">
+                    <summary style="font-weight: 600; cursor: pointer;">🔍 Voir les réponses succinctes</summary>
+                    <p>1. Champ radial entrant car $q<0$ ⇒ les lignes de champ pointent vers la charge. <br>
+                    2. Par symétrie, $E_x = 0$ et $E_y = 2 \cdot \frac{k q}{a^2 + y^2} \cdot \frac{y}{\sqrt{a^2+y^2}}$ (composante verticale). <br>
+                    3. Faux : la superposition vectorielle est générale, quel que soit le signe des charges.</p>
+                </details>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>📚 Fiche conforme au programme de Physique – Terminale C & D (Cameroun) | Année 2025-2026 | Liens avec épreuves Bac 2023-2025</p>
+        <p style="margin-top: 0.3rem;">⚡ Révision : Champ électrostatique – Savoir calculer, superposer et interpréter le vecteur champ.</p>
+    </div>
+</div>
+</body>
+</html>

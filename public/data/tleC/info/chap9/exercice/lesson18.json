@@ -1,0 +1,112 @@
+[
+  {
+    "intitule": "Gestion d'une bibliothèque - Requêtes d'insertion",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Dans le cadre de la gestion d'une bibliothèque municipale, on souhaite créer une base de données pour suivre les livres et les emprunteurs. Une table `Livres` a déjà été créée avec la structure suivante :</p><ul><li><code>id_livre</code> (INT, clé primaire)</li><li><code>titre</code> (VARCHAR(100))</li><li><code>auteur</code> (VARCHAR(50))</li><li><code>annee_publication</code> (INT)</li><li><code>disponible</code> (VARCHAR(3)) : valeurs possibles 'OUI' ou 'NON'</li></ul><p>À l'aide du langage SQL, répondez aux questions suivantes.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la requête SQL qui permet d'insérer un nouveau livre dans la table `Livres` avec les caractéristiques suivantes :\n- ID : 101\n- Titre : 'Cameroon Digital'\n- Auteur : 'Mbarga Essomba'\n- Année : 2024\n- Disponible : 'OUI'",
+        "niveau": "easy",
+        "reponse": "```sql\nINSERT INTO Livres (id_livre, titre, auteur, annee_publication, disponible)\nVALUES (101, 'Cameroon Digital', 'Mbarga Essomba', 2024, 'OUI');\n```\n\n**Explication :** La requête `INSERT INTO` spécifie la table et la liste des colonnes. La clause `VALUES` fournit les données correspondantes dans le même ordre. Les chaînes de caractères (VARCHAR) sont encadrées par des guillemets simples.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Proposer une autre syntaxe de la requête `INSERT INTO` qui permet d'obtenir le même résultat que la question 1, en supposant que l'on connaît l'ordre exact des colonnes dans la table.",
+        "niveau": "medium",
+        "reponse": "```sql\nINSERT INTO Livres\nVALUES (101, 'Cameroon Digital', 'Mbarga Essomba', 2024, 'OUI');\n```\n\n**Explication :** Lorsqu'on omet la liste des colonnes, SQL attend des valeurs pour toutes les colonnes de la table dans l'ordre défini lors de la création. Cette syntaxe est plus courte mais moins explicite et plus sensible aux modifications futures de la structure de la table.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Insérer simultanément deux nouveaux livres dans la table `Livres` avec les données suivantes :\n- Livre 1 : (102, 'Introduction à l''algorithmique', 'Djibril Sow', 2023, 'OUI')\n- Livre 2 : (103, 'Réseaux sans fil au Cameroun', 'Alice Ngo Mvondo', 2025, 'NON')",
+        "niveau": "medium",
+        "reponse": "```sql\nINSERT INTO Livres (id_livre, titre, auteur, annee_publication, disponible)\nVALUES \n(102, 'Introduction à l''algorithmique', 'Djibril Sow', 2023, 'OUI'),\n(103, 'Réseaux sans fil au Cameroun', 'Alice Ngo Mvondo', 2025, 'NON');\n```\n\n**Explication :** Pour insérer plusieurs lignes à la fois, on sépare chaque jeu de valeurs par une virgule. Cela est plus efficace que d'exécuter plusieurs requêtes `INSERT` distinctes, car cela réduit les allers-retours entre l'application et le serveur de base de données. Notez l'apostrophe dans \"Introduction à l'algorithmique\" : elle est doublée ('') pour être échappée.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Mise à jour des stocks d'une librairie",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous êtes stagiaire dans une librairie à Douala. La base de données contient une table `Produits` qui gère les livres en stock. La structure de la table est :</p><ul><li><code>id_produit</code> (INT, clé primaire)</li><li><code>nom</code> (VARCHAR(100))</li><li><code>prix_unitaire</code> (DECIMAL(10,2))</li><li><code>quantite_stock</code> (INT)</li><li><code>categorie</code> (VARCHAR(30))</li></ul><p>Le gérant vous demande d'effectuer plusieurs opérations de mise à jour des données.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la requête SQL qui permet d'augmenter le prix unitaire de 5% pour tous les produits de la catégorie 'Informatique'.",
+        "niveau": "medium",
+        "reponse": "```sql\nUPDATE Produits\nSET prix_unitaire = prix_unitaire * 1.05\nWHERE categorie = 'Informatique';\n```\n\n**Explication :** La clause `UPDATE` spécifie la table. `SET` définit la nouvelle valeur : ici on multiplie le prix actuel par 1,05 (soit +5%). La clause `WHERE` filtre les lignes concernées. Sans `WHERE`, tous les produits verraient leur prix augmenter. Cette requête utilise une expression arithmétique dans l'affectation.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "Le produit avec l'ID 45 vient d'être vendu. Le stock passe de 8 à 7 unités. Écrire la requête de mise à jour correspondante.",
+        "niveau": "easy",
+        "reponse": "```sql\nUPDATE Produits\nSET quantite_stock = 7\nWHERE id_produit = 45;\n```\n\n**Explication :** On modifie directement la colonne `quantite_stock` pour lui donner la nouvelle valeur. La condition `WHERE` utilise la clé primaire `id_produit` pour cibler précisément l'enregistrement concerné. On aurait aussi pu écrire `SET quantite_stock = quantite_stock - 1` pour décrémenter automatiquement.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Un nouveau livre intitulé 'Intelligence Artificielle pour Tous' (catégorie 'Technologie', prix 15 000 FCFA, stock initial 50 unités) vient d'arriver. Insérer ce nouveau produit dans la table `Produits`. Vous attribuerez l'ID 200.",
+        "niveau": "easy",
+        "reponse": "```sql\nINSERT INTO Produits (id_produit, nom, prix_unitaire, quantite_stock, categorie)\nVALUES (200, 'Intelligence Artificielle pour Tous', 15000.00, 50, 'Technologie');\n```\n\n**Explication :** La requête `INSERT INTO` ajoute une nouvelle ligne. Toutes les colonnes non mentionnées (s'il y en avait) recevraient une valeur par défaut (NULL si aucune valeur par défaut n'est définie). Le prix est exprimé en FCFA avec deux décimales.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Après inventaire, on découvre que tous les produits dont la quantité en stock est inférieure à 5 doivent être marqués avec un statut particulier. Mais la colonne `statut` n'existe pas encore. Proposer une solution complète en deux étapes.",
+        "niveau": "hard",
+        "reponse": "**Étape 1 - Ajout de la colonne :**\n```sql\nALTER TABLE Produits\nADD statut VARCHAR(20) DEFAULT 'Normal';\n```\n\n**Étape 2 - Mise à jour conditionnelle :**\n```sql\nUPDATE Produits\nSET statut = 'Commande urgente'\nWHERE quantite_stock < 5;\n```\n\n**Explication :** Cette approche combine deux commandes SQL. D'abord, `ALTER TABLE` modifie la structure de la table pour ajouter une colonne `statut` avec une valeur par défaut 'Normal' pour les lignes existantes. Ensuite, `UPDATE` avec `WHERE` modifie uniquement les produits concernés. Sans l'étape 1, la requête `UPDATE` échouerait car la colonne `statut` n'existerait pas.",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Application complète : Gestion des notes d'élèves",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Dans un lycée de Yaoundé, l'administration souhaite numériser la gestion des notes. On dispose de deux tables :</p>\n<p><strong>Table Élèves</strong> :</p>\n<pre>\n| id_eleve | nom       | prenom    | classe   | moyenne_generale |\n|----------|-----------|-----------|----------|------------------|\n| 1        | Fouda     | Charles   | Tle C    | NULL             |\n| 2        | Ngo       | Aicha     | Tle D    | NULL             |\n| 3        | Mbarga    | Paul      | Tle C    | NULL             |\n</pre>\n<p><strong>Table Notes</strong> :</p>\n<pre>\n| id_note | id_eleve | matiere          | note |\n|---------|----------|------------------|------|\n| 1       | 1        | Mathématiques    | 15.5 |\n| 2       | 1        | Physique         | 12.0 |\n| 3       | 2        | Mathématiques    | 18.0 |\n| 4       | 2        | Anglais          | 14.5 |\n| 5       | 3        | Mathématiques    | 10.0 |\n| 6       | 3        | Informatique     | 16.0 |\n</pre>\n<p>La colonne `moyenne_generale` de la table `Élèves` est actuellement vide (NULL).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Insérer une nouvelle élève dans la table `Élèves` : id_eleve = 4, nom = 'Biyong', prénom = 'Vanessa', classe = 'Tle C', moyenne_generale = NULL (car on ne la connaît pas encore).",
+        "niveau": "easy",
+        "reponse": "```sql\nINSERT INTO Élèves (id_eleve, nom, prenom, classe, moyenne_generale)\nVALUES (4, 'Biyong', 'Vanessa', 'Tle C', NULL);\n```\n\nOu plus simplement (en omettant la colonne NULL) :\n```sql\nINSERT INTO Élèves (id_eleve, nom, prenom, classe)\nVALUES (4, 'Biyong', 'Vanessa', 'Tle C');\n```\n\n**Explication :** `NULL` représente l'absence de valeur. On peut soit le préciser explicitement, soit omettre la colonne si elle accepte les NULL (ce qui est le cas ici car aucune contrainte `NOT NULL` n'est spécifiée).",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "L'élève avec l'ID 3 (Paul Mbarga) a eu une note supplémentaire en Anglais : 13/20. Insérer cette note dans la table `Notes` (utilisez un id_note = 7).",
+        "niveau": "easy",
+        "reponse": "```sql\nINSERT INTO Notes (id_note, id_eleve, matiere, note)\nVALUES (7, 3, 'Anglais', 13.0);\n```\n\n**Explication :** La clé étrangère `id_eleve` doit correspondre à un ID existant dans la table `Élèves`. L'insertion échouerait avec une erreur d'intégrité référentielle si on essayait d'insérer une note pour un élève inexistant.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "Corriger la note de l'élève 2 (Aicha Ngo) en Mathématiques : elle avait 18.0 mais c'était une erreur, sa note réelle est 16.5. Écrire la requête de mise à jour.",
+        "niveau": "medium",
+        "reponse": "```sql\nUPDATE Notes\nSET note = 16.5\nWHERE id_eleve = 2 AND matiere = 'Mathématiques';\n```\n\n**Explication :** La condition `WHERE` combine deux critères avec l'opérateur logique `AND` pour cibler précisément la note à modifier. On aurait aussi pu utiliser `id_note = 3` si on connaissait l'identifiant unique de cette note.",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Calculer et mettre à jour la moyenne générale de chaque élève dans la table `Élèves`. La moyenne se calcule à partir de toutes les notes de l'élève dans la table `Notes`.",
+        "niveau": "very hard",
+        "reponse": "```sql\n-- Version avec sous-requête corrélée (standard SQL)\nUPDATE Élèves e\nSET moyenne_generale = (\n    SELECT AVG(note) \n    FROM Notes n \n    WHERE n.id_eleve = e.id_eleve\n);\n\n-- Version alternative avec table dérivée (plus explicite)\nUPDATE Élèves e\nSET e.moyenne_generale = (\n    SELECT ROUND(AVG(n.note), 2)\n    FROM Notes n\n    WHERE n.id_eleve = e.id_eleve\n);\n```\n\n**Explication :** \n- La sous-requête calcule la moyenne (`AVG`) des notes pour l'élève courant.\n- `ROUND(..., 2)` arrondit à deux décimales.\n- La sous-requête est corrélée : elle fait référence à la ligne en cours de mise à jour via `e.id_eleve`.\n- Les élèves sans aucune note (comme le nouvel élève ID 4) recevront NULL comme moyenne.\n\n**Résultat attendu après exécution :**\n- Élève 1 (Charles) : (15.5 + 12.0) / 2 = 13.75\n- Élève 2 (Aicha) : (16.5 + 14.5) / 2 = 15.5 (après correction)\n- Élève 3 (Paul) : (10.0 + 16.0 + 13.0) / 3 = 13.0\n- Élève 4 (Vanessa) : NULL",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

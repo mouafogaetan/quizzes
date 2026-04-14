@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Atomes : constitution et symbole (3e PCT)</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Style pour les images simulées */
+        .schema-placeholder {
+            background: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px dashed #94a3b8;
+            font-size: 0.9rem;
+            color: #1e293b;
+        }
+        .schema-placeholder img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .schema-caption {
+            font-style: italic;
+            font-size: 0.85rem;
+            color: #475569;
+        }
+        .highlight {
+            background-color: #fef9c3;
+            font-weight: 600;
+            padding: 0 0.2rem;
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">⚛️ Atomes : constitution et symbole</h1>
+            <p class="lesson-subtitle">PCT – 3ème (Cameroun) · Programme officiel</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section des concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">🔬 1. Qu’est-ce qu’un atome ?</h3>
+                    <p class="card-description">
+                        L’<strong>atome</strong> est la plus petite entité constitutive de la matière qui existe à l’état libre ou qui participe à la composition d’une molécule. 
+                        C’est l’unité fondamentale de la matière. Il est électriquement <strong>neutre</strong> à l’état stable.
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="highlight">Constitution :</span> un <strong>noyau central</strong> (chargé positivement) + des <strong>électrons</strong> (chargés négativement) qui gravitent autour.</li>
+                        <li><span class="highlight">Taille :</span> très petite (ordre du dixième de nanomètre). Le noyau est 100 000 fois plus petit que l’atome.</li>
+                        <li><span class="highlight">Principe de neutralité :</span> nombre de protons (dans le noyau) = nombre d’électrons (autour).</li>
+                    </ul>
+                    <!-- Image explicative du modèle de l'atome -->
+                    <div class="schema-placeholder">
+                        <img src="" alt="Schéma d'un atome avec un noyau central contenant des protons (charges +) et des neutrons, entouré d'un nuage électronique avec des électrons (charges -). Légende : Noyau (protons + neutrons) et électrons en mouvement.">
+                        <div class="schema-caption">📐 Modèle simplifié de l’atome : noyau dense positif et électrons en périphérie.</div>
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🧲 2. Constitution détaillée : protons, neutrons, électrons</h3>
+                    <p class="card-description">
+                        L’atome est composé de particules élémentaires : 
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Protons (p⁺) :</strong> charge électrique positive, situés dans le noyau. Leur nombre est le <span class="formule">numéro atomique Z</span>.</li>
+                        <li><strong>Neutrons (n⁰) :</strong> particules neutres, situées dans le noyau. Leur nombre est noté N.</li>
+                        <li><strong>Électrons (e⁻) :</strong> charge négative, gravitent autour du noyau. Leur nombre est égal au nombre de protons pour un atome neutre.</li>
+                    </ul>
+                    <p class="card-description">
+                        💡 <strong>À retenir :</strong> La masse de l’atome est concentrée dans le noyau (protons + neutrons), les électrons ont une masse négligeable.
+                    </p>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">🔣 3. Symboles chimiques des principaux atomes</h3>
+                    <p class="card-description">
+                        Chaque atome est représenté par un <strong>symbole</strong> (1 ou 2 lettres, la première toujours en majuscule). 
+                        Voici les plus courants à connaître pour la classe de 3e :
+                    </p>
+                    <ul class="concept-list">
+                        <li><span class="formule">C</span> : Carbone</li>
+                        <li><span class="formule">O</span> : Oxygène</li>
+                        <li><span class="formule">H</span> : Hydrogène</li>
+                        <li><span class="formule">Cl</span> : Chlore</li>
+                        <li><span class="formule">Na</span> : Sodium (du latin <em>Natrium</em>)</li>
+                        <li><span class="formule">Fe</span> : Fer (du latin <em>Ferrum</em>)</li>
+                        <li><span class="formule">N</span> : Azote</li>
+                        <li><span class="formule">Ca</span> : Calcium</li>
+                        <li><span class="formule">Mg</span> : Magnésium</li>
+                        <li><span class="formule">Al</span> : Aluminium</li>
+                    </ul>
+                    <p class="card-description">
+                        ⚡ Pour bien les mémoriser, associe chaque symbole à son nom courant et à un exemple d’utilisation (ex: Fe dans les métaux, O dans l’air).
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 1 : Identifier la neutralité d’un atome</h3>
+                    <p class="exemple-context">
+                        Un atome de sodium (Na) possède 11 protons dans son noyau. Combien d’électrons doit-il avoir pour être électriquement neutre ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Résolution :</strong> Dans un atome stable, le nombre d’électrons est égal au nombre de protons. <br>
+                        L’atome de sodium contient donc <span class="formule">11 électrons</span>. La charge totale du noyau (+11) est compensée par la charge des électrons (-11).
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Astuce : « proton = positif, électron = négatif ; atome neutre = même nombre de + et de - »
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 2 : Lire et interpréter un symbole chimique</h3>
+                    <p class="exemple-context">
+                        Sur une étiquette de bouteille d’eau, on lit la présence de calcium (Ca) et de chlorure (Cl⁻). Quel est le symbole de l’atome de chlore ? L’atome de calcium ?
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Réponse :</strong> 
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>Calcium → <span class="formule">Ca</span></li>
+                            <li>Chlore → <span class="formule">Cl</span></li>
+                        </ul>
+                        Dans l’étiquette, Cl⁻ désigne l’ion chlorure (le chlore a gagné un électron). Mais l’atome de chlore neutre s’écrit Cl.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Ne pas confondre l’atome (neutre) et l’ion (chargé). Le symbole est le même, mais la charge est indiquée en exposant pour l’ion.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple 3 : Reconnaître les constituants</h3>
+                    <p class="exemple-context">
+                        Voici un modèle de l’atome d’oxygène : 8 protons, 8 neutrons et 8 électrons. Indique la localisation de ces particules.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Explication :</strong> 
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>Les 8 protons et les 8 neutrons se trouvent dans le <strong>noyau</strong>.</li>
+                            <li>Les 8 électrons gravitent autour du noyau, dans le <strong>nuage électronique</strong>.</li>
+                        </ul>
+                        L’atome d’oxygène est neutre car 8 protons (+) et 8 électrons (–).
+                    </p>
+                    <div class="schema-placeholder">
+                        <img src="" alt="Représentation de l'atome d'oxygène : noyau contenant 8 protons (rouge) et 8 neutrons (gris), deux couches électroniques avec 2 électrons sur la couche interne et 6 sur la couche externe.">
+                        <div class="schema-caption">📌 Atome d’oxygène (O) : noyau (8 p⁺, 8 n⁰) et électrons répartis.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section : pièges courants et astuces -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre le symbole du cobalt (Co) et du carbone (C) / chlore (Cl). Toujours bien distinguer les majuscules/minuscules.</li>
+                        <li><span class="bold">Attention :</span> Dans un atome neutre, <span class="formule">nombre de protons = nombre d’électrons</span>. Ne jamais inverser.</li>
+                        <li><span class="bold">Piège :</span> Le noyau est très petit mais concentre presque toute la masse. Les électrons ne sont pas collés au noyau, ils sont en mouvement permanent.</li>
+                        <li><span class="bold">Confusion :</span> Le symbole Na pour le sodium vient du latin <em>Natrium</em> ; ne pas l’écrire « So ».</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section supplémentaire : tableau récapitulatif des symboles -->
+            <section class="concept-section">
+                <h2 class="section-title">📋 Tableau récapitulatif : atomes usuels</h2>
+                <div class="card concept-card">
+                    <h3 class="card-title">Symboles et noms à maîtriser (3e)</h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width:100%; border-collapse: collapse; margin-top: 0.5rem;">
+                            <thead style="background-color: #eef2ff;">
+                                <tr>
+                                    <th style="padding: 0.5rem; border:1px solid #cbd5e1;">Nom de l’atome</th>
+                                    <th style="padding: 0.5rem; border:1px solid #cbd5e1;">Symbole</th>
+                                    <th style="padding: 0.5rem; border:1px solid #cbd5e1;">Numéro atomique Z</th>
+                                    <th style="padding: 0.5rem; border:1px solid #cbd5e1;">Exemple d’utilisation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Carbone</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;" class="formule">C</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">6</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Matière organique, diamant</td></tr>
+                                <tr><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Oxygène</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;" class="formule">O</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">8</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Respiration, combustion</td></tr>
+                                <tr><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Hydrogène</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;" class="formule">H</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">1</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Eau, carburant</td></tr>
+                                <tr><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Chlore</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;" class="formule">Cl</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">17</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Désinfectant, sel NaCl</td></tr>
+                                <tr><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Sodium</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;" class="formule">Na</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">11</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Sel de cuisine</td></tr>
+                                <tr><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Fer</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;" class="formule">Fe</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">26</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Construction, acier</td></tr>
+                                <tr><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Azote</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;" class="formule">N</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">7</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Atmosphère, engrais</td></tr>
+                                <tr><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Calcium</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;" class="formule">Ca</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">20</td><td style="padding: 0.5rem; border:1px solid #cbd5e1;">Os, ciment</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="card-description" style="margin-top: 1rem;">
+                        💡 <strong>Méthode de mémorisation :</strong> fabrique des flashcards avec le symbole d’un côté et le nom + Z de l’autre.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Rappel de la loi de neutralité électrique -->
+            <section class="exemple-section">
+                <h2 class="section-title">⚖️ Principe de neutralité électrique</h2>
+                <div class="card exemple-card" style="border-left-color: #8b5cf6;">
+                    <h3 class="card-title" style="color:#6d28d9; border-left-color:#8b5cf6;">Règle fondamentale</h3>
+                    <p class="card-description">
+                        Un atome est <strong>électriquement neutre</strong> car il possède autant de charges positives (protons) que de charges négatives (électrons).
+                        On écrit : <span class="formule">nombre de protons (Z) = nombre d’électrons</span>.
+                    </p>
+                    <p class="card-description">
+                        Si un atome perd ou gagne des électrons, il devient un ion (non neutre). C’est le début de la chimie des ions (leçon 1.3).
+                    </p>
+                    <div class="exemple-astuce">
+                        ✅ À retenir : pour un atome neutre, <strong>Z = nombre d’électrons</strong>. La masse du noyau est concentrée dans les protons et neutrons.
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>📚 Fiche de révision – Programme PCT 3ème (Cameroun) – Leçon 1.1 : Atomes, constitution et symbole | ✍️ À relire avant l’évaluation</p>
+            <p>🔗 Utilise ces concepts pour décrire un atome, donner son symbole et appliquer la neutralité électrique.</p>
+        </footer>
+    </div>
+</body>
+</html>

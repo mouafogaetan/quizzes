@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision : Les éléments de sismologie (Leçon 36)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Réinitialisation et styles complémentaires spécifiques à la fiche (cohérents avec style.css) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .fiche-container {
+            max-width: 950px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        .concept-list, .data-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li, .data-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .data-list li::before {
+            content: "📐";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 0.9rem;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        .schema-placeholder {
+            background: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px dashed #94a3b8;
+        }
+
+        .schema-placeholder img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        .caption {
+            font-size: 0.8rem;
+            color: #475569;
+            margin-top: 0.4rem;
+            font-style: italic;
+        }
+
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        @media (max-width: 600px) {
+            .fiche-header { padding: 1.5rem 1.5rem; }
+            .fiche-content { padding: 1.5rem 1.5rem; }
+            .lesson-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.3rem; }
+            .card { padding: 1.2rem; }
+            .fiche-footer { padding: 1rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">Leçon 36 : Les éléments de sismologie</h1>
+        <p class="lesson-subtitle">SVTEEHB – Première C & TI · Module III · Structure et énergie internes de la Terre</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section 1 : Concepts fondamentaux -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Éléments clés à retenir</h2>
+
+            <!-- Carte 1 : Qu'est-ce que la sismologie ? -->
+            <div class="card concept-card">
+                <h3 class="card-title">1. La sismologie : étude des séismes et des ondes sismiques</h3>
+                <p class="card-description">
+                    La sismologie est la discipline qui étudie les tremblements de terre (séismes) et la propagation des ondes mécaniques qu'ils génèrent. 
+                    Ces ondes traversent l'intérieur de la Terre et fournissent des informations précieuses sur sa structure interne (composition, état physique, discontinuités).
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Séisme</strong> : vibration brutale de la croûte terrestre due à une libération d'énergie (rupture de roches, mouvement de failles).</li>
+                    <li><strong>Foyer (hypocentre)</strong> : point de rupture initiale à l'intérieur de la Terre, où l'énergie est libérée.</li>
+                    <li><strong>Épicentre</strong> : projection verticale du foyer à la surface terrestre. C'est la zone la plus touchée en surface.</li>
+                    <li><strong>Ondes sismiques</strong> : elles se propagent dans toutes les directions à partir du foyer.</li>
+                </ul>
+                <!-- Emplacement pour schéma foyer/épicentre -->
+                <div class="schema-placeholder">
+                    <img src="" alt="Schéma légendé montrant le foyer (hypocentre) et l'épicentre d'un séisme, avec la propagation des ondes sismiques depuis la zone de rupture.">
+                    <div class="caption">Figure 1 : Localisation du foyer (hypocentre) et de l'épicentre. Source : schéma explicatif.</div>
+                </div>
+            </div>
+
+            <!-- Carte 2 : Types d'ondes sismiques -->
+            <div class="card concept-card">
+                <h3 class="card-title">2. Les différents types d'ondes sismiques</h3>
+                <p class="card-description">
+                    On distingue deux grandes familles d'ondes : les <strong>ondes de volume</strong> (traversent l'intérieur de la Terre) et les <strong>ondes de surface</strong> (se propagent le long de la croûte, plus lentes mais plus destructrices).
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Ondes P (primaires ou de compression)</strong> : 
+                        <ul>
+                            <li>Ce sont des ondes longitudinales : la vibration est parallèle à la direction de propagation.</li>
+                            <li>Elles se propagent dans les solides, les liquides et les gaz.</li>
+                            <li>Vitesse la plus élevée (environ 6 à 13 km/s selon le milieu). Elles sont les premières enregistrées par les sismographes.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ondes S (secondaires ou de cisaillement)</strong> : 
+                        <ul>
+                            <li>Ondes transversales : la vibration est perpendiculaire à la direction de propagation.</li>
+                            <li>Elles ne se propagent <strong>que dans les solides</strong> (pas dans les liquides).</li>
+                            <li>Vitesse inférieure aux ondes P (environ 3,5 à 7 km/s). Arrivent en second sur les sismogrammes.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ondes de surface (Love et Rayleigh)</strong> : 
+                        <ul>
+                            <li>Elles résultent de l'interaction des ondes P et S avec la surface terrestre.</li>
+                            <li>Amplitude élevée, responsables des dégâts majeurs lors des séismes.</li>
+                            <li>Les plus lentes mais les plus énergétiques.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="schema-placeholder">
+                    <img src="" alt="Animation simplifiée ou schéma illustrant la différence entre onde P (compression/dilatation) et onde S (cisaillement).">
+                    <div class="caption">Figure 2 : Comparaison entre onde P (compression) et onde S (cisaillement).</div>
+                </div>
+            </div>
+
+            <!-- Carte 3 : Enregistrement et paramètres des séismes -->
+            <div class="card concept-card">
+                <h3 class="card-title">3. Mesure et échelles sismiques</h3>
+                <p class="card-description">
+                    Les sismographes (ou sismomètres) enregistrent les mouvements du sol sous forme de <strong>sismogrammes</strong>. Deux grandeurs essentielles caractérisent un séisme :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Magnitude</strong> : mesure de l'énergie libérée au foyer. Échelle ouverte (ex: Richter, moment magnitude). Une augmentation d'1 unité correspond à un facteur ~30 en énergie.</li>
+                    <li><strong>Intensité</strong> : évalue les dégâts et les ressentis en surface. Échelle MSK (de I à XII). Dépend de la distance à l'épicentre, de la nature du sol, etc.</li>
+                    <li>Les sismogrammes permettent aussi de déterminer la distance épicentrale grâce au décalage temporel entre l'arrivée des ondes P et S ($\Delta t = t_S - t_P$).</li>
+                </ul>
+                <div class="formule" style="margin-top: 12px; display: inline-block;">
+                    Distance approximative : $d = v_P \times t_P = v_S \times t_S$ → $\Delta t = t_S - t_P$ proportionnel à d.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2 : Exemples de compréhension (exploitation de documents) -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Exemples de compréhension</h2>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 1 : Lecture d'un sismogramme</h3>
+                <p class="exemple-context">
+                    Un sismogramme enregistre l'arrivée des ondes P à 12h 15min 20s et des ondes S à 12h 15min 28s. 
+                    La vitesse moyenne des ondes P est de 8 km/s, celle des ondes S est de 4,5 km/s. 
+                    Déterminer la distance entre la station sismique et l'épicentre.
+                </p>
+                <div class="exemple-correction">
+                    <strong>Résolution :</strong><br>
+                    1. Calcul du décalage temporel : $\Delta t = 28s - 20s = 8\ s$.<br>
+                    2. Relation : $d = v_P \times t_P = v_S \times t_S$ et $\Delta t = t_S - t_P$.<br>
+                    3. On sait que $t_S = t_P + \Delta t$, donc $v_P \times t_P = v_S \times (t_P + \Delta t)$<br>
+                    4. $8 \times t_P = 4,5 \times (t_P + 8)$ → $8t_P = 4,5t_P + 36$ → $3,5 t_P = 36$ → $t_P \approx 10,29\ s$.<br>
+                    5. $d = v_P \times t_P = 8 \times 10,29 \approx 82,3\ km$.<br>
+                    <strong>Réponse :</strong> La station se trouve à environ 82 km de l'épicentre.
+                </div>
+                <div class="exemple-astuce">
+                    💡 Astuce : La différence d'arrivée P-S est directement liée à la distance. Plus l'écart est grand, plus l'épicentre est éloigné.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 2 : Interprétation de la zone d'ombre des ondes S</h3>
+                <p class="exemple-context">
+                    Les sismologues observent qu'au-delà d'une distance angulaire de 103° par rapport à l'épicentre, les ondes S ne sont plus enregistrées. 
+                    En revanche, les ondes P sont détectées sur l'ensemble du globe mais avec une zone d'ombre entre 103° et 142°.
+                </p>
+                <div class="exemple-correction">
+                    <strong>Explication :</strong><br>
+                    - L'absence d'ondes S dans certaines régions prouve que le noyau externe de la Terre est <strong>liquide</strong>, car les ondes S ne se propagent pas dans les liquides.<br>
+                    - La zone d'ombre des ondes P est due à la réfraction (déviation) des ondes à la limite manteau-noyau externe, créant une région où elles n'arrivent pas directement.<br>
+                    - Ces observations sont fondamentales pour déduire la structure interne de la Terre.
+                </div>
+                <div class="exemple-astuce">
+                    🌍 À retenir : La sismologie est une « radiographie de la Terre ». Les ondes P et S se comportent différemment selon la densité et l'état physique des couches traversées.
+                </div>
+                <div class="schema-placeholder">
+                    <img src="" alt="Schéma montrant les trajets des ondes P et S à travers la Terre, avec la zone d'ombre S et la zone d'ombre P.">
+                    <div class="caption">Figure 3 : Propagation des ondes sismiques et mise en évidence du noyau externe liquide.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3 : Données chiffrées / tableaux de vitesse -->
+        <section class="concept-section">
+            <h2 class="section-title">📊 Vitesses des ondes dans les différents milieux terrestres</h2>
+            <div class="card">
+                <h3 class="card-title">Ordres de grandeur (à connaître)</h3>
+                <ul class="data-list">
+                    <li><strong>Croûte continentale</strong> : ondes P ~ 6,0 - 6,5 km/s ; ondes S ~ 3,5 - 3,8 km/s</li>
+                    <li><strong>Manteau supérieur</strong> : ondes P ~ 8,0 - 8,2 km/s ; ondes S ~ 4,5 - 4,7 km/s</li>
+                    <li><strong>Manteau inférieur</strong> : ondes P ~ 13 km/s ; ondes S ~ 7 km/s</li>
+                    <li><strong>Noyau externe (liquide)</strong> : ondes P ~ 8 - 10 km/s ; ondes S : <span class="bold">aucune propagation</span></li>
+                    <li><strong>Noyau interne (solide)</strong> : ondes P ~ 11 km/s ; ondes S ~ 3,5 km/s</li>
+                </ul>
+                <p class="card-description" style="margin-top: 12px;">
+                    La différence de vitesse des ondes et leur capacité ou non à traverser une couche renseignent sur la nature (solide/liquide) et la densité des matériaux.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 4 : Pièges courants et conseils -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Erreur fréquente :</span> Confondre magnitude et intensité. La magnitude est une valeur unique liée à l’énergie libérée, l’intensité varie selon les endroits.</li>
+                    <li><span class="bold">Attention :</span> Les ondes P sont des ondes de compression (longitudinales), pas des ondes transversales. Les ondes S sont transversales.</li>
+                    <li><span class="bold">Ne pas oublier :</span> Les ondes S ne traversent <strong>aucun liquide</strong> → leur absence dans certaines zones permet de déduire la présence d’un noyau externe liquide.</li>
+                    <li><span class="bold">Piège classique :</span> Le foyer (hypocentre) se trouve en profondeur, l’épicentre à la surface. Beaucoup d’élèves les inversent.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 5 : Petit récapitulatif "En résumé" -->
+        <section class="concept-section">
+            <div class="card" style="background-color: #eef2ff; border-left: 6px solid #2563eb;">
+                <h3 class="card-title" style="color:#1e3a8a;">📖 En résumé – Leçons clés pour l'examen</h3>
+                <ul class="concept-list">
+                    <li>La sismologie étudie les séismes et la propagation des ondes.</li>
+                    <li>Deux types d'ondes de volume : P (compression, tous milieux) et S (cisaillement, uniquement solides).</li>
+                    <li>Le décalage d'arrivée P–S permet de calculer la distance épicentrale.</li>
+                    <li>L'étude des trajets des ondes a permis de découvrir la structure en couches de la Terre (croûte, manteau, noyau externe liquide, noyau interne solide).</li>
+                    <li>Savoir interpréter un sismogramme simple et relier la vitesse des ondes aux propriétés physiques des milieux traversés.</li>
+                </ul>
+                <div class="exemple-astuce" style="margin-top: 12px;">
+                    🧠 Conseil de révision : Refaites l'exercice de calcul de distance avec différentes valeurs et dessinez les trajets des ondes P/S à travers la Terre pour mémoriser la zone d'ombre.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Fiche conforme au programme de SVTEEHB – Première C & TI (Cameroun) · Leçon 36 : Éléments de sismologie · <a href="#">Réviser avec des quiz</a> · 🌍 Comprendre la Terre par les ondes</p>
+    </footer>
+</div>
+</body>
+</html>

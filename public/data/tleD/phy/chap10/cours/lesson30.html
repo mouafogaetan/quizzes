@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 30 : Circuits RC et RL</title>
+    <!-- Configuration MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une meilleure typographie -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== STYLES GÉNÉRAUX ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e9f0f5;  /* Fond discret */
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            color: #1e2a3e;
+        }
+
+        .fiche-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        /* En-tête de la fiche */
+        .fiche-header {
+            background: linear-gradient(135deg, #0b3b5f 0%, #1b5a7a 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+        }
+
+        .fiche-header .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .fiche-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .fiche-header .sous-titre {
+            font-size: 1rem;
+            opacity: 0.9;
+            border-left: 3px solid #ffcd7e;
+            padding-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .objectif-bac {
+            margin-top: 1rem;
+            background: #ffcd7e20;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid #ffcd7e80;
+        }
+
+        /* Grille principale : 2 colonnes */
+        .fiche-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        /* Colonne gauche (contenu principal) */
+        .col-left {
+            background: #ffffff;
+            padding: 2rem 1.8rem;
+            border-right: 1px solid #e2edf2;
+        }
+
+        /* Colonne droite (formules, astuces) */
+        .col-right {
+            background: #fbfef9;
+            padding: 2rem 1.8rem;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #0f4c5f;
+            border-left: 5px solid #f4a261;
+            padding-left: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #2c5a6e;
+            margin: 1rem 0 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-subtitle i {
+            font-style: normal;
+            font-weight: 700;
+            background: #eef2f5;
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        p, li {
+            color: #2c3e44;
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            background: #eef7fc;
+            border-left: 3px solid #2a9d8f;
+            padding: 0.8rem 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+
+        .formule-card {
+            background: #eef2fa;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #cfdfed;
+        }
+
+        .formule-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e4663;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .formule {
+            font-family: monospace;
+            background: #ffffffcc;
+            padding: 0.5rem;
+            border-radius: 14px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .table-memo {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .table-memo th, .table-memo td {
+            border: 1px solid #cbdde6;
+            padding: 0.6rem;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        .table-memo th {
+            background: #e2edf2;
+            font-weight: 700;
+        }
+
+        .astuce {
+            background: #fff7e8;
+            border-radius: 18px;
+            padding: 1rem;
+            border-left: 6px solid #e9c46a;
+            margin: 1rem 0;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.7rem;
+            border-top: 1px solid #dce5ea;
+            padding-top: 1rem;
+            color: #5f7f8c;
+        }
+
+        @media (max-width: 800px) {
+            .fiche-grid {
+                grid-template-columns: 1fr;
+            }
+            .col-left {
+                border-right: none;
+                border-bottom: 1px solid #e2edf2;
+            }
+            .fiche-header h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        button.copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: #2a9d8f;
+        }
+        .equation {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <div class="fiche-header">
+        <div class="badge">📘 Terminale C & D – Programme officiel Cameroun</div>
+        <h1>⚡ Leçon 30 : Circuits RC et RL</h1>
+        <div class="sous-titre">Régime transitoire – Constante de temps – Réponse en tension et intensité</div>
+        <div class="objectif-bac">🎯 Liens Bac 2023-2025 : Régime variable, constante de temps τ, charge/décharge exponentielle.</div>
+    </div>
+
+    <div class="fiche-grid">
+        <!-- Colonne gauche : notions et cours -->
+        <div class="col-left">
+            <div class="section">
+                <div class="section-title">📖 Contexte & objectifs</div>
+                <p>Un circuit électrique peut passer d’un régime permanent à un autre suite à une commutation (fermeture ou ouverture d’interrupteur). Pendant cette phase transitoire, tensions et courants évoluent de façon exponentielle. Les circuits <strong>RC</strong> (Résistance + Condensateur) et <strong>RL</strong> (Résistance + Bobine) sont les systèmes élémentaires pour comprendre l’établissement ou la disparition du courant.</p>
+                <div class="highlight">
+                    ✅ Objectifs :<br>
+                    – Étudier expérimentalement la réponse temporelle des circuits RC et RL.<br>
+                    – Déterminer et utiliser la constante de temps τ.<br>
+                    – Établir les équations différentielles et leurs solutions.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🔌 1. Circuit RC série</div>
+                <div class="section-subtitle"><i>1</i> Charge du condensateur (régime transitoire)</div>
+                <p>On considère un générateur de f.e.m. $E$, une résistance $R$ et un condensateur de capacité $C$ montés en série. À $t=0$, on ferme l’interrupteur $K$. La loi des mailles donne :</p>
+                <div class="formule equation">$$ E = u_R(t) + u_C(t) = R\,i(t) + \frac{q(t)}{C} $$</div>
+                <p>Avec $i = \frac{dq}{dt} = C\frac{du_C}{dt}$, l’équation différentielle de $u_C(t)$ s’écrit :</p>
+                <div class="formule equation">$$ RC \frac{du_C}{dt} + u_C = E $$</div>
+                <p>La solution, avec la condition initiale $u_C(0)=0$, est :</p>
+                <div class="formule equation">$$ u_C(t) = E \left(1 - e^{-t/\tau}\right) \quad \text{avec} \quad \tau = RC $$</div>
+                <p>L’intensité décroît exponentiellement : $i(t) = \frac{E}{R} e^{-t/\tau}$.</p>
+
+                <div class="section-subtitle"><i>2</i> Décharge du condensateur</div>
+                <p>Condensateur préchargé sous $U_0 = E$, on bascule l’interrupteur sur une résistance $R$ (ou on court-circuite). L’équation devient : $RC\frac{du_C}{dt} + u_C = 0$. La solution est :</p>
+                <div class="formule equation">$$ u_C(t) = U_0 \, e^{-t/\tau} \qquad ; \qquad i(t) = -\frac{U_0}{R} e^{-t/\tau} $$</div>
+                <div class="astuce">
+                    💡 <strong>Constante de temps τ = RC</strong> : c’est la durée au bout de laquelle la tension $u_C$ atteint 63 % de sa valeur finale (charge) ou 37 % de sa valeur initiale (décharge). Après $5\tau$, on considère le régime permanent atteint.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">🔄 2. Circuit RL série</div>
+                <div class="section-subtitle"><i>1</i> Établissement du courant</div>
+                <p>Une bobine d’inductance $L$ et de résistance interne $r$ (souvent négligée) est associée en série avec $R$. On applique un échelon de tension $E$ à $t=0$. Loi des mailles :</p>
+                <div class="formule equation">$$ E = R\,i(t) + L\frac{di}{dt} $$</div>
+                <p>Condition initiale : $i(0)=0$ (courant nul dans la bobine). Solution :</p>
+                <div class="formule equation">$$ i(t) = \frac{E}{R} \left(1 - e^{-t/\tau_L}\right) \quad \text{avec} \quad \tau_L = \frac{L}{R} $$</div>
+                <p>Tension aux bornes de la bobine : $u_L(t) = L\frac{di}{dt} = E\, e^{-t/\tau_L}$.</p>
+
+                <div class="section-subtitle"><i>2</i> Rupture du courant (suppression du générateur)</div>
+                <p>On court-circuite la bobine préalablement parcourue par $I_0 = E/R$ : l’équation devient $L\frac{di}{dt} + R i = 0$ → décroissance exponentielle :</p>
+                <div class="formule equation">$$ i(t) = I_0 \, e^{-t/\tau_L} \qquad ; \qquad u_L(t) = -R I_0 e^{-t/\tau_L} $$</div>
+                <div class="astuce">
+                    ⚡ <strong>τ pour RL : τ = L/R</strong> (exprimé en secondes). Plus L est grande ou plus R est petite, plus le régime transitoire est long.
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">📈 3. Aspects graphiques et détermination de τ</div>
+                <p><strong>Méthode de la tangente à l’origine :</strong> la tangente à la courbe $u_C(t)$ à $t=0$ coupe l’asymptote horizontale (valeur finale) à $t = \tau$.</p>
+                <p><strong>Méthode des 63% :</strong> pour un circuit RC en charge, $\tau$ est l’instant où $u_C = 0,63 E$. Pour RL en établissement, $i(\tau) = 0,63 \cdot I_{max}$.</p>
+                <div class="highlight">
+                    📌 Bac : Savoir exploiter une courbe expérimentale pour extraire $\tau$, puis en déduire $C$ (si $R$ connue) ou $L$ (si $R$ connue).
+                </div>
+            </div>
+        </div>
+
+        <!-- Colonne droite : formules clés, tableaux, liens bac -->
+        <div class="col-right">
+            <div class="formule-card">
+                <h3>📐 Constantes de temps</h3>
+                <div class="formule">$$ \boxed{\tau_{RC} = R \times C} $$</div>
+                <div class="formule" style="margin-top: 10px;">$$ \boxed{\tau_{RL} = \frac{L}{R}} $$</div>
+                <p style="margin-top: 8px;">$R$ en ohms ($\Omega$), $C$ en farads (F) → $\tau$ en secondes (s). <br>$L$ en henrys (H).</p>
+            </div>
+
+            <div class="formule-card">
+                <h3>⚡ Solutions complètes – Régime transitoire</h3>
+                <table class="table-memo">
+                    <thead>
+                        <tr><th>Circuit</th><th>Grandeur</th><th>Évolution (charge/établissement)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td rowspan="2">RC série</td><td>$u_C(t)$</td><td>$E(1-e^{-t/RC})$</td></tr>
+                        <tr><td>$i(t)$</td><td>$\frac{E}{R}e^{-t/RC}$</td></tr>
+                        <tr><td rowspan="2">RL série</td><td>$i(t)$</td><td>$\frac{E}{R}(1-e^{-tR/L})$</td></tr>
+                        <tr><td>$u_L(t)$</td><td>$E\,e^{-tR/L}$</td></tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 0.85rem; margin-top: 6px;">Pour la décharge du condensateur : $u_C(t)=U_0 e^{-t/RC}$ ; pour la rupture dans RL : $i(t)=I_0 e^{-tR/L}$.</p>
+            </div>
+
+            <div class="formule-card">
+                <h3>📊 Énergie & puissance (rappels)</h3>
+                <p>Énergie emmagasinée dans un condensateur : $E_C = \frac12 C u_C^2$ <br>
+                Énergie stockée dans une bobine : $E_L = \frac12 L i^2$</p>
+                <p>Pendant le régime transitoire, une partie de l’énergie est dissipée par effet Joule dans $R$.</p>
+            </div>
+
+            <div class="astuce">
+                🧠 <strong>Astuces Bac & Méthodologie</strong><br>
+                ✅ Identifier le régime : "on ferme K à t=0" ⇒ charge du condensateur ou établissement du courant.<br>
+                ✅ Écrire la loi d’additivité des tensions (mailles) et remplacer $i$ par $C\frac{du_C}{dt}$ ou $u_L = L\frac{di}{dt}$.<br>
+                ✅ Vérifier la condition initiale : condensateur déchargé ⇒ $u_C(0)=0$ ; bobine : $i_L(0^-)=i_L(0^+)$ (continuité de l'intensité dans une bobine).<br>
+                ✅ Pour déterminer $\tau$ graphiquement, tracer la tangente à l'origine ou lire l'abscisse correspondant à $0,63$ de la valeur asymptotique.
+            </div>
+
+            <div class="formule-card">
+                <h3>📌 Liens avec les sujets officiels</h3>
+                <p><strong>Bac 2024 Cameroun :</strong> Étude d’un circuit RC – détermination de $\tau$ par méthode de la tangente, calcul de capacité.<br>
+                <strong>Bac 2025 (attendu) :</strong> Association RC/RL, réponse à un échelon de tension, équations différentielles du premier ordre.</p>
+                <p>Savoir exploiter les oscillogrammes pour distinguer charge/décharge, déterminer $R$ ou $C$.</p>
+            </div>
+
+            <div class="formule-card">
+                <h3>🧪 Exemple-type (RC)</h3>
+                <p>Soit $R = 10\ \mathrm{k\Omega}$, $C = 100\ \mathrm{\mu F}$. $\tau = 10^4 \times 100\cdot10^{-6} = 1\ \mathrm{s}$.<br>
+                À $t = 1\ \mathrm{s}$ (charge), $u_C = E(1-e^{-1}) \approx 0,632 E$.</p>
+                <p><strong>Exemple RL :</strong> $L = 0,5\ \mathrm{H}$, $R= 100\ \Omega$ ⇒ $\tau = 0,5/100 = 5\ \mathrm{ms}$.</p>
+            </div>
+            <div class="footer-note">
+                ⏱️ Fiche conforme au programme de Terminale C & D (Cameroun) – Module 4 : Électrocinétique, Chapitre 10.
+            </div>
+        </div>
+    </div>
+    <div style="background: #f0f6fa; padding: 1rem 2rem; border-top: 1px solid #cde0e8;">
+        <p style="font-size: 0.8rem; text-align: center;">✏️ Révision rapide : Pour tout circuit du 1er ordre, la solution générale est de la forme $X(t) = X_\infty + (X_0 - X_\infty)e^{-t/\tau}$. Identifier l’état initial et l’état final.</p>
+    </div>
+</div>
+</body>
+</html>

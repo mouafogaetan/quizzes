@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Leçon 18 : Problèmes des villes camerounaises</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (optionnel mais gardé pour cohérence) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 950px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #1e40af, #0f2b6d);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #f59e0b;
+        }
+
+        .lesson-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+        }
+
+        /* badges ou indicateurs */
+        .bac-link {
+            background-color: #e9ecef;
+            font-size: 0.8rem;
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            margin-top: 0.5rem;
+            color: #2c3e66;
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <!-- En-tête avec le nom de la leçon -->
+    <header class="fiche-header">
+        <h1 class="lesson-title">Leçon 18 : Les problèmes des villes camerounaises</h1>
+        <p class="lesson-subtitle">Géographie – Terminale A – Programme officiel 2025-2026 (Bac 2021-2025)</p>
+    </header>
+
+    <!-- Contenu principal de la fiche -->
+    <main class="fiche-content">
+        <!-- Section des concepts / éléments à retenir -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Problèmes urbains majeurs (Cameroun)</h2>
+            <div class="card concept-card">
+                <h3 class="card-title">1. Problèmes d'infrastructures et d'équipements</h3>
+                <p class="card-description">
+                    Les grandes villes camerounaises (Douala, Yaoundé, Garoua, Bafoussam) connaissent des déficits criants en équipements collectifs.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Logements insuffisants</strong> → développement des habitats spontanés (quartiers précaires, bidonvilles).</li>
+                    <li><strong>Transports inadaptés</strong> → embouteillages chroniques, réseaux de bus défaillants, axes non bitumés.</li>
+                    <li><strong>Réseaux d'eau potable et d'électricité</strong> → coupures fréquentes, inégalités d'accès (certains quartiers non raccordés).</li>
+                    <li><strong>Assainissement déficient</strong> → eaux usées à ciel ouvert, caniveaux obstrués, problèmes d'évacuation des déchets.</li>
+                </ul>
+                <div class="bac-link">🔗 Lien Bac 2023 : « Problèmes d'infrastructures et insécurité dans les villes »</div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">2. Problèmes sociaux et insécurité</h3>
+                <p class="card-description">
+                    La croissance urbaine rapide engendre chômage, précarité et délinquance.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Chômage élevé</strong> (estimé entre 30 et 40 % dans certaines zones) → surtout chez les jeunes.</li>
+                    <li><strong>Mendicité et débrouille</strong> : développement du secteur informel (vendeurs à la sauvette, petits métiers).</li>
+                    <li><strong>Délinquance juvénile</strong> : phénomène des « microbes » à Douala, vols à main armée, violences urbaines.</li>
+                    <li><strong>Insécurité croissante</strong> : vols dans les transports, cambriolages, zones d'ombre dans les quartiers non lotis.</li>
+                    <li><strong>Conséquences sanitaires</strong> : promiscuité favorisant paludisme, tuberculose, difficultés d'accès aux soins.</li>
+                </ul>
+                <div class="bac-link">🔗 Sujet Bac 2021 : « Problèmes des villes du Tiers-Monde » (transposable au Cameroun)</div>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">3. Problèmes environnementaux et de gestion</h3>
+                <p class="card-description">
+                    L'étalement urbain et l'absence de planification durable dégradent l'environnement.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Expansion urbaine sur les espaces verts</strong> : disparition des zones agricoles périurbaines et des forêts.</li>
+                    <li><strong>Gestion inefficace des déchets</strong> : dépotoirs sauvages, pollution des sols et des cours d'eau (ex : rivière Mfoundi à Yaoundé).</li>
+                    <li><strong>Pollution atmosphérique et sonore</strong> : véhicules anciens, groupes électrogènes, activités artisanales.</li>
+                    <li><strong>Inondations récurrentes</strong> : imperméabilisation des sols, construction en zones marécageuses (ex : quartiers de Douala comme Bépanda, Ndogpassi).</li>
+                </ul>
+            </div>
+
+            <div class="card concept-card">
+                <h3 class="card-title">4. Problèmes de gouvernance et de financement</h3>
+                <p class="card-description">
+                    Les municipalités peinent à répondre aux besoins en raison de moyens limités et d'une planification inadéquate.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Plans d'urbanisme obsolètes</strong> ou non respectés (construction anarchique).</li>
+                    <li><strong>Moyens financiers insuffisants</strong> des communes pour entretenir les infrastructures.</li>
+                    <li><strong>Corruption et faible redevabilité</strong> : détournements, attributions irrégulières de parcelles.</li>
+                    <li><strong>Difficultés de mobilité</strong> et de coordination entre acteurs (État, collectivités, opérateurs privés).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section des exemples concrets -->
+        <section class="exemple-section">
+            <h2 class="section-title">📖 Études de cas – Exemples de compréhension</h2>
+            
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 1 : Douala, métropole aux défis multiples</h3>
+                <p class="exemple-context">
+                    Douala, capitale économique et ville la plus peuplée du Cameroun (plus de 3,5 millions d'habitants), concentre les problèmes urbains.
+                </p>
+                <p class="exemple-correction">
+                    <strong>Constats :</strong> <br>
+                    - Infrastructures : axes routiers saturés (ex: boulevard de la Liberté), absence de ponts supplémentaires sur le Wouri.<br>
+                    - Inondations fréquentes dans les zones basses (Bépanda, Cité des Palmiers) à cause des canalisations obstruées.<br>
+                    - Insécurité : phénomène des « microbes » (jeunes délinquants) sévissant dans les quartiers défavorisés (New Bell, Nkolmintag).<br>
+                    - Déchets : montagnes d'ordures dans certains quartiers (Maképé, Bonamoussadi) par manque de collecte régulière.
+                </p>
+                <div class="exemple-astuce">
+                    💡 Astuce mémoire : Pour Douala → pensez « transport saturé + eau stagnante + microbes + ordures ». Lien direct avec les concepts.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 2 : Yaoundé, problèmes de planification et d'étalement</h3>
+                <p class="exemple-context">
+                    Yaoundé, capitale politique, connaît une croissance démographique rapide (environ 4% par an) et des difficultés spécifiques.
+                </p>
+                <p class="exemple-correction">
+                    <strong>Analyses :</strong> <br>
+                    - Étalement urbain : quartiers spontanés sur les collines (Mvog-Mbi, Etoudi) avec absence de voirie et d'assainissement.<br>
+                    - Mobilité : embouteillages chroniques (carrefour Ahala, Poste centrale), transports collectifs informels (« moto-taxis » non régulés).<br>
+                    - Assainissement : rivière Mfoundi polluée, caniveaux à ciel ouvert dans les quartiers populaires (Mokolo, Mvolyé).<br>
+                    - Logement : insuffisance de logements sociaux, développement des « chefferies » verticales anarchiques.
+                </p>
+                <div class="exemple-astuce">
+                    📌 À retenir : Yaoundé → problème de relief (collines) accentuant les difficultés de circulation et de drainage.
+                </div>
+            </div>
+
+            <div class="card exemple-card">
+                <h3 class="card-title">Exemple 3 : Villes secondaires (Bafoussam, Garoua, Maroua)</h3>
+                <p class="exemple-context">
+                    Les villes de l'Ouest et du Nord subissent aussi des crises urbaines, avec des spécificités liées à leur contexte.
+                </p>
+                <p class="exemple-correction">
+                    <strong>Illustrations :</strong> <br>
+                    - Bafoussam (région de l'Ouest) : pression foncière, fortes densités, problèmes d'évacuation des ordures.<br>
+                    - Garoua : croissance rapdue aux sécheresses et à l'exode rural, infrastructures de santé insuffisantes, insécurité liée à la contrebande.<br>
+                    - Maroua : problèmes d'eau potable récurrents, quartiers inondables, dégradation des sols.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section des pièges courants / à ne pas confondre -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants – À éviter dans l'analyse</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Ne pas confondre causes et conséquences :</span> l'exode rural est une <strong>cause</strong> de la croissance urbaine, tandis que le chômage et l'insalubrité sont des <strong>conséquences</strong>.</li>
+                    <li><span class="bold">Erreur fréquente :</span> Limiter les problèmes aux seules grandes villes (Douala/Yaoundé) ; il faut évoquer les villes secondaires et leur spécificités.</li>
+                    <li><span class="bold">Attention :</span> Oublier le lien entre problèmes environnementaux et santé publique (ex : eau stagnante = paludisme, décharges = maladies respiratoires).</li>
+                    <li><span class="bold">Piège à éviter :</span> Présenter uniquement les aspects négatifs sans faire allusion à des tentatives de solutions (même partielles). L'énoncé peut demander « problèmes » uniquement, mais la finesse consiste à montrer qu'on connaît leur complexité.</li>
+                    <li><span class="bold">Ne pas négliger les données chiffrées :</span> mentionner des taux de chômage (environ 30-40%), le pourcentage de citadins (plus de 55%) renforce la crédibilité de la copie.</li>
+                </ul>
+            </div>
+            <div class="card concept-card" style="background-color: #eef2ff; margin-top: 0.5rem;">
+                <h3 class="card-title">📌 Mots-clés à maîtriser (vocabulaire Bac)</h3>
+                <p>
+                    <strong>Crise urbaine</strong> – <strong>infrastructures</strong> – <strong>chômage structurel</strong> – <strong>délinquance</strong> – <strong>insalubrité</strong> – <strong>bidonville</strong> – <strong>étalement urbain</strong> – <strong>assainissement</strong> – <strong>planification</strong> – <strong>exode rural</strong>.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section Références Bac -->
+        <section class="concept-section">
+            <h2 class="section-title">🎯 Liens avec les épreuves du Baccalauréat</h2>
+            <div class="card concept-card">
+                <ul class="concept-list">
+                    <li><strong>Sujet Bac 2023</strong> (séries générales) : « Analyse des problèmes d'infrastructures et de l'insécurité dans les villes camerounaises » → mobiliser les exemples Douala/Yaoundé et proposer une structure en parties (problèmes d'équipement, sociaux, environnementaux).</li>
+                    <li><strong>Sujet Bac 2021</strong> : « Les problèmes des villes du Tiers‑Monde » → appliquer la grille d'analyse au Cameroun, en intégrant les spécificités nationales (microbes, inondations, défaillances des transports).</li>
+                    <li><strong>Épreuve de cartographie / graphique</strong> possible : localiser les principales villes en crise sur une carte du Cameroun, ou réaliser un diagramme comparant les types de problèmes (exemple : enquête de perception).</li>
+                    <li><strong>Production écrite (10-15 lignes) :</strong> introduction (définir « problèmes urbains »), développement structuré (infrastructures, social, environnement), conclusion brève.</li>
+                </ul>
+                <div class="exemple-astuce" style="margin-top: 0.8rem;">
+                    ✏️ Méthodo rapide : pour un paragraphe argumenté → Thèse (constat), exemples (villes précises), analyse des causes, puis transition.
+                </div>
+            </div>
+        </section>
+        
+        <!-- Rappel méthodologique selon le programme -->
+        <section class="exemple-section">
+            <h2 class="section-title">📝 Conseils pour l'épreuve de géographie (Bac)</h2>
+            <div class="card exemple-card" style="border-left-color: #f59e0b;">
+                <h3 class="card-title">Structure type pour un sujet sur les problèmes urbains</h3>
+                <p class="exemple-correction">
+                    <strong>1. Introduction :</strong> définition de la crise urbaine + contexte de forte croissance urbaine au Cameroun (taux d'urbanisation > 55%). <br>
+                    <strong>2. Développement :</strong> <br>
+                    &nbsp;&nbsp;&nbsp;• I – Des infrastructures défaillantes (logement, transport, eau, électricité). <br>
+                    &nbsp;&nbsp;&nbsp;• II – Des problèmes sociaux graves (chômage, insécurité, santé). <br>
+                    &nbsp;&nbsp;&nbsp;• III – Une dégradation environnementale et une mauvaise gestion (déchets, inondations, étalement). <br>
+                    <strong>3. Conclusion :</strong> bilan des difficultés + ouverture sur les politiques de remédiation (ex: plan de développement urbain, projet de mobilité à Douala).
+                </p>
+                <div class="exemple-astuce">
+                    💡 Astuce : citez au moins deux villes différentes (Douala et Yaoundé) et donnez un chiffre ou un fait précis pour crédibiliser votre copie.
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Pied de page -->
+    <footer class="fiche-footer">
+        <p>Fiche conforme au programme officiel de Géographie – Terminale A (Cameroun) · Bac 2021-2025 · Leçon 18 : Problèmes des villes camerounaises · <a href="#">Révisions personnalisées</a> · 📚 Mise à jour 2026</p>
+    </footer>
+</div>
+</body>
+</html>

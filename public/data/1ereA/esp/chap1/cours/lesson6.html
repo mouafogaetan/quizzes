@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Ocio y deportes (Leçon 6)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration (utile pour d'éventuelles formules, mais pas central ici) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 950px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #0f766e, #0d5c5a);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #facc15;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+            color: #ccfbf1;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #0f766e;
+            border-left: 4px solid #0f766e;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #0f766e;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #0f766e;
+            text-decoration: none;
+            border-bottom: 1px dotted #0f766e;
+        }
+
+        .fiche-footer a:hover {
+            color: #0c5c56;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-container">
+    <header class="fiche-header">
+        <h1 class="lesson-title">Lección 6: Ocio y deportes</h1>
+        <p class="lesson-subtitle">Español · Primera (A4 – A BI) · Camerún</p>
+    </header>
+
+    <main class="fiche-content">
+        <!-- Section éléments clés -->
+        <section class="concept-section">
+            <h2 class="section-title">📌 Éléments clés à retenir</h2>
+            
+            <!-- Carte 1 : Objectifs communicatifs -->
+            <div class="card concept-card">
+                <h3 class="card-title">🎯 Objectifs communicatifs</h3>
+                <p class="card-description">
+                    Dans cette leçon, tu vas apprendre à <strong>parler des activités de loisirs et des sports</strong>, 
+                    à exprimer tes préférences et à décrire les bienfaits du sport pour la santé. 
+                    Voici les compétences orales et écrites attendues :
+                </p>
+                <ul class="concept-list">
+                    <li>🗣️ <strong>Parler de ses loisirs :</strong> “En mi tiempo libre, me gusta jugar al fútbol, bailar o leer”.</li>
+                    <li>🏆 <strong>Décrire des activités sportives :</strong> “El baloncesto es un deporte dinámico y emocionante”.</li>
+                    <li>💪 <strong>Exprimer les bénéfices du sport :</strong> “Hacer deporte reduce el estrés y mejora la salud cardiovascular”.</li>
+                    <li>❤️ <strong>Utiliser les verbes de préférence :</strong> “Me gusta nadar”, “Prefiero el atletismo al fútbol”.</li>
+                    <li>🔄 <strong>Employer des adverbes de fréquence :</strong> “Siempre, casi siempre, a veces, nunca…”</li>
+                </ul>
+                <div class="exemple-astuce" style="margin-top:0.75rem;">
+                    💡 En français : Cette fiche t’aide à tenir une conversation sur ce que tu aimes faire pendant ton temps libre, 
+                    comprendre un texte sur les loisirs, et rédiger un petit paragraphe sur les avantages du sport.
+                </div>
+            </div>
+
+            <!-- Carte 2 : Grammaire – verbes de préférence (gustar, preferir, encantar) -->
+            <div class="card concept-card">
+                <h3 class="card-title">📚 Grammaire : verbes de préférence & goûts</h3>
+                <p class="card-description">
+                    Les verbes <strong>gustar</strong> (aimer/plaire), <strong>preferir</strong> (préférer) et <strong>encantar</strong> (adorer) 
+                    sont très utilisés pour parler de ses loisirs. Attention à leur construction particulière.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>GUSTAR</strong> → Me gusta + infinitif (activité en général) : <em>Me gusta correr.</em><br>
+                        Me gustan + nom pluriel : <em>Me gustan los deportes de equipo.</em>
+                    </li>
+                    <li><strong>PREFERIR</strong> (e→ie) → Prefiero el fútbol / Prefiero jugar al baloncesto.</li>
+                    <li><strong>ENCANTAR</strong> (comme gustar mais plus fort) → Me encanta bailar salsa.</li>
+                    <li><strong>OTROS VERBOS ÚTILES:</strong> Detestar (détester), odiar (haïr), disfrutar (apprécier).</li>
+                </ul>
+                <div class="exemple-astuce" style="margin-top:0.5rem;">
+                    🔍 Petit rappel : “A mí me gusta” renforce l’opinion. En français : “Moi, j’aime…”<br>
+                    Exemple : <em>A mí me gusta el ciclismo, pero a mi hermano le gusta el fútbol.</em>
+                </div>
+            </div>
+
+            <!-- Carte 3 : Adverbios de frecuencia -->
+            <div class="card concept-card">
+                <h3 class="card-title">⏱️ Adverbios de frecuencia</h3>
+                <p class="card-description">
+                    Pour dire à quelle fréquence tu pratiques une activité, utilise ces adverbes (placés généralement avant le verbe) :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Siempre</strong> → toujours (ej. : Siempre juego al tenis los sábados).</li>
+                    <li><strong>Casi siempre</strong> → presque toujours.</li>
+                    <li><strong>A menudo / Frecuentemente</strong> → souvent.</li>
+                    <li><strong>A veces</strong> → parfois.</li>
+                    <li><strong>Raramente / Casi nunca</strong> → rarement.</li>
+                    <li><strong>Nunca</strong> → jamais (attention : ne pas mettre “no” devant le verbe : “Nunca hago ejercicio”).</li>
+                </ul>
+                <p class="card-description" style="margin-top:0.5rem;">
+                    ✔️ Exemple : “Los fines de semana, <strong>a menudo</strong> salgo a correr al parque, pero <strong>a veces</strong> prefiero nadar.”
+                </p>
+            </div>
+
+            <!-- Carte 4 : Vocabulaire thématique (ocio y deportes) -->
+            <div class="card concept-card">
+                <h3 class="card-title">🏅 Vocabulaire : loisirs et sports</h3>
+                <p class="card-description">
+                    Mémorise ces mots pour enrichir ton expression.
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Deportes populares :</strong> fútbol (football), baloncesto (basket), natación (natation), atletismo, ciclismo, voleibol, tenis, balonmano (handball).</li>
+                    <li><strong>Actividades de ocio :</strong> leer (lire), escuchar música, ver la tele, salir con amigos, viajar, bailar, cocinar, jugar a videojuegos.</li>
+                    <li><strong>Beneficios del deporte :</strong> saludable (sain), energía, bienestar, reducir el estrés, fortalecer los músculos, mejorar la respiración.</li>
+                    <li><strong>Instalaciones / lugares :</strong> el estadio, el polideportivo, la piscina, el gimnasio, el parque, la cancha.</li>
+                </ul>
+                <img src="" alt="Illustration de personnes faisant du sport : football, natation, course à pied, et loisirs comme la lecture ou la musique" style="max-width:100%; margin-top:12px; border-radius:12px; border:1px solid #e2e8f0;">
+                <p style="font-size:0.8rem; color:#475569; margin-top:4px;">(Image suggestive : activités sportives et de détente pour mieux mémoriser le lexique)</p>
+            </div>
+        </section>
+
+        <!-- Section exemples de compréhension (mises en situation) -->
+        <section class="exemple-section">
+            <h2 class="section-title">💡 Exemples de compréhension</h2>
+            
+            <!-- Exemple 1 : parler de ses loisirs -->
+            <div class="card exemple-card">
+                <h3 class="card-title">🎧 Dialogue type – Parler de ses goûts sportifs</h3>
+                <div class="exemple-context">
+                    📖 Deux amis, Lucía y Ahmed, conversan sobre sus actividades preferidas.
+                </div>
+                <div class="exemple-correction">
+                    <strong>Lucía :</strong> ¿Qué haces en tu tiempo libre, Ahmed?<br>
+                    <strong>Ahmed :</strong> Pues, <strong>me encanta jugar al baloncesto</strong> los miércoles y viernes. También <strong>me gusta escuchar música</strong> mientras descanso.<br>
+                    <strong>Lucía :</strong> ¡Qué bien! A mí <strong>me gusta mucho la natación</strong>. Voy a la piscina <strong>casi siempre</strong> los fines de semana. ¿Y qué deporte <strong>prefieres</strong> para mantenerte en forma?<br>
+                    <strong>Ahmed :</strong> <strong>Prefiero</strong> el baloncesto porque es dinámico y trabajo en equipo. <strong>Hacer deporte</strong> me ayuda a liberar estrés.
+                </div>
+                <div class="exemple-astuce">
+                    💬 Analyse : Remarque l'utilisation de “me encanta”, “me gusta”, “prefiero” et l'adverbe “casi siempre”. 
+                    Pour parler de toi, inspire-toi de ce dialogue.
+                </div>
+            </div>
+
+            <!-- Exemple 2 : production écrite – avantages du sport -->
+            <div class="card exemple-card">
+                <h3 class="card-title">📝 Rédaction semi-guidée – Bienfaits du sport</h3>
+                <div class="exemple-context">
+                    ✍️ Consigne : « Escribe un pequeño texto (10-12 líneas) explicando por qué es importante practicar deporte. Usa verbos de preferencia y adverbios de frecuencia. »
+                </div>
+                <div class="exemple-correction">
+                    <strong>Ejemplo de respuesta:</strong><br>
+                    “Para mí, <strong>hacer deporte es fundamental</strong> para estar sano. <strong>Siempre intento</strong> correr tres veces por semana. <strong>Me gusta mucho el fútbol</strong> porque me divierto con mis amigos. <strong>A veces</strong> voy al gimnasio para fortalecer mis músculos. <strong>Prefiero</strong> los deportes al aire libre, como el ciclismo. El deporte reduce el estrés y mejora la concentración en clase. Por eso, <strong>recomiendo a todos</strong> practicar alguna actividad física con regularidad.”
+                </div>
+                <div class="exemple-astuce">
+                    🌟 Astuce pour l’examen : Utilise des connecteurs comme “porque”, “además”, “sin embargo” pour enrichir ta production. 
+                    N’oublie pas la concordance sujet-verbe.
+                </div>
+            </div>
+
+            <!-- Exemple 3 : exercice de compréhension orale/écrite type -->
+            <div class="card exemple-card">
+                <h3 class="card-title">📖 Compréhension de lecture – mini-texte</h3>
+                <div class="exemple-context">
+                    <strong>Texto:</strong> “En mi ciudad, muchos jóvenes practican el balonmano los sábados. A Ana <strong>le encanta nadar</strong>, pero <strong>nunca</strong> va a la piscina porque queda lejos. Ella <strong>prefiere</strong> salir a correr en el parque. El deporte le da energía y la ayuda a dormir mejor.”<br><br>
+                    <strong>Preguntas:</strong> 1. ¿Qué deporte prefiere Ana? 2. ¿Con qué frecuencia va a la piscina? 3. ¿Cuáles son los beneficios que menciona el texto?
+                </div>
+                <div class="exemple-correction">
+                    <strong>Respuestas modelo:</strong><br>
+                    1. Ana prefiere salir a correr en el parque.<br>
+                    2. Nunca va a la piscina porque le queda lejos.<br>
+                    3. El deporte le da energía y la ayuda a dormir mejor.
+                </div>
+                <div class="exemple-astuce">
+                    ✅ En commentaire dirigé, il faut citer des phrases du texte pour justifier ta réponse. 
+                    Exemple : “El texto dice ‘nunca va a la piscina’.”
+                </div>
+            </div>
+        </section>
+
+        <!-- Pièges courants / À ne pas confondre -->
+        <section class="warning-section">
+            <h2 class="section-title">⚠️ Pièges courants & erreurs fréquentes</h2>
+            <div class="card warning-card">
+                <ul>
+                    <li><span class="bold">Confondre « gusta » et « gustan » :</span> On utilise <strong>gusta</strong> devant un verbe à l’infinitif (me gusta bailar) 
+                        ou un nom singulier (me gusta el fútbol), et <strong>gustan</strong> devant un nom au pluriel (me gustan los deportes).</li>
+                    <li><span class="bold">Oublier le « a » dans les expressions renforcées :</span> “A mí me gusta” (et non “mí me gusta” sans la préposition).</li>
+                    <li><span class="bold">Mauvaise position des adverbes de fréquence :</span> On dit “Siempre juego al tenis” et non “Juego siempre al tenis” (c’est possible mais moins naturel ; en règle générale, avant le verbe conjugué).</li>
+                    <li><span class="bold">Traduction littérale de “je préfère” :</span> Attention à la conjugaison irrégulière de <strong>preferir</strong> (e → ie) : prefiero, prefieres, prefiere, preferimos, preferís, prefieren.</li>
+                    <li><span class="bold">Confondre “ocio” (loisir) et “trabajo” (travail) :</span> Le temps libre = tiempo libre. Ne pas dire “mi ocio” mais “mis actividades de ocio”.</li>
+                </ul>
+                <div class="exemple-astuce" style="background-color:#fff0f0; margin-top:0.8rem;">
+                    📌 En français : Fais attention à ces pièges lors de tes exercices de traduction (thème/version) et de rédaction. 
+                    Relis toujours tes phrases pour vérifier l’accord et la place des adverbes.
+                </div>
+            </div>
+        </section>
+
+        <!-- Petit plus : conseils pour l'examen / la production orale -->
+        <section class="concept-section">
+            <h2 class="section-title">🎤 Expression orale & écrite – Conseils pratiques</h2>
+            <div class="card concept-card">
+                <h3 class="card-title">🗣️ Pour briller à l’oral</h3>
+                <p class="card-description">
+                    Lorsque tu parles de tes loisirs, n’hésite pas à justifier ton choix : “Me gusta el baloncesto <strong>porque</strong> es emocionante y hago amigos”. 
+                    Utilise la structure : “En mi tiempo libre, suelo + infinitif” ou “Disfruto mucho + infinitif”. 
+                    Voici une trame simple pour te présenter :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>Introducción:</strong> “Hoy voy a hablar de mis aficiones.”</li>
+                    <li><strong>Desarrollo:</strong> “Normalmente, los fines de semana practico natación. Me encanta porque me relaja. Además, a veces juego al fútbol con mis compañeros de clase.”</li>
+                    <li><strong>Conclusión:</strong> “En resumen, el deporte es importante para mi salud y mi felicidad.”</li>
+                </ul>
+                <img src="" alt="Jeunes faisant du sport en groupe au Cameroun, courir ensemble dans un stade ou terrain" style="max-width:100%; margin-top:12px; border-radius:12px; border:1px solid #e2e8f0;">
+                <p style="font-size:0.8rem; color:#475569;">(Image d’illustration : solidarité et bienfaits du sport, un thème central dans la leçon)</p>
+            </div>
+        </section>
+        
+        <!-- Rappel des objectifs d’examen -->
+        <section class="exemple-section">
+            <h2 class="section-title">📌 Lien avec les épreuves du Probatoire</h2>
+            <div class="card exemple-card">
+                <p class="card-description">
+                    Cette leçon t’aidera dans les 4 compétences évaluées :
+                </p>
+                <ul class="concept-list">
+                    <li><strong>📖 Compréhension de lecture :</strong> un texte sur les loisirs ou les bienfaits du sport (répondre à des questions, justifier par des citations).</li>
+                    <li><strong>✍️ Compétences linguistiques :</strong> conjuguer “gustar”, “preferir”, utiliser adverbes de fréquence, vocabulaire des sports.</li>
+                    <li><strong>🔄 Traduction :</strong> phrases du français à l’espagnol incluant “je fais du sport trois fois par semaine” → “Hago deporte tres veces por semana”.</li>
+                    <li><strong>📝 Production écrite :</strong> sujet type “Escribe una carta a un amigo contándole tus actividades de ocio favoritas y por qué son beneficiosas”.</li>
+                </ul>
+                <div class="exemple-astuce">
+                    🎯 Pour t’entraîner : Rédige un paragraphe de 10 lignes sur ton sport préféré en employant au moins 3 adverbes de fréquence et 2 verbes de goût (gustar, encantar, preferir).
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fiche-footer">
+        <p>Fiche de révision · Lección 6: Ocio y deportes · Primera (Camerún) · <a href="#">Retour au sommaire</a> · 📚 ¡A practicar!</p>
+        <p style="font-size:0.8rem; margin-top:6px;">Consejo: Revisa los verbos irregulares y practica en voz alta.</p>
+    </footer>
+</div>
+</body>
+</html>

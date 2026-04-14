@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de révision - Sensibilisation à la gestion des déchets</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts pour une typographie plus agréable -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Style pour les images illustratives */
+        .illustration {
+            margin: 1rem 0;
+            text-align: center;
+            background-color: #f8fafc;
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .illustration img {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            height: auto;
+        }
+
+        .illustration-caption {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        .slogan-box {
+            background: linear-gradient(135deg, #e0f2fe, #fef3c7);
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            color: #1e3a8a;
+            border: 2px dashed #fbbf24;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 26 : Sensibilisation à la gestion des déchets</h1>
+            <p class="lesson-subtitle">SVTEEHB · Terminales Littéraires (A, ES, SH) · Programme 2025-2026</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section de concepts / éléments à retenir -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Objectif de la leçon</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        <strong>Objectif :</strong> Produire des outils de sensibilisation (affiche, slogan) pour promouvoir le recyclage et la gestion durable des déchets. 
+                        Cette leçon vise à développer l'esprit citoyen et la responsabilité environnementale chez les élèves.
+                    </p>
+                </div>
+
+                <h2 class="section-title">🧠 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">Pourquoi sensibiliser à la gestion des déchets ?</h3>
+                    <p class="card-description">
+                        La gestion inappropriée des déchets (plastiques, papiers, déchets ménagers) entraîne de graves conséquences : pollution des sols et des eaux, émission de gaz à effet de serre, risques sanitaires, et dégradation des écosystèmes. 
+                        La sensibilisation permet de modifier les comportements individuels et collectifs.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Pollution visuelle et olfactive</strong> : les dépotoirs sauvages nuisent au cadre de vie.</li>
+                        <li><strong>Risques pour la santé</strong> : prolifération de vecteurs de maladies (moustiques, rongeurs).</li>
+                        <li><strong>Impact sur la biodiversité</strong> : ingestion de plastiques par les animaux marins et terrestres.</li>
+                        <li><strong>Épuisement des ressources naturelles</strong> : la fabrication de nouveaux objets consomme énergie et matières premières.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Les piliers de la sensibilisation</h3>
+                    <p class="card-description">
+                        Une campagne de sensibilisation efficace repose sur trois piliers : informer, former, et engager. Les supports visuels (affiches) et les messages percutants (slogans) sont des outils privilégiés pour toucher un large public.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Informer</strong> : expliquer les conséquences des mauvaises pratiques et les bénéfices du recyclage.</li>
+                        <li><strong>Former</strong> : montrer les gestes simples (trier ses déchets, utiliser des sacs réutilisables, composter).</li>
+                        <li><strong>Engager</strong> : proposer des actions concrètes (participer à une collecte, fabriquer des objets recyclés).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Caractéristiques d'une affiche de sensibilisation réussie</h3>
+                    <p class="card-description">
+                        Une affiche doit capter l'attention, transmettre un message clair et inciter à l'action.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Titre accrocheur</strong> : court, percutant, souvent sous forme d'interpellation ou de question.</li>
+                        <li><strong>Visuel marquant</strong> : photographie, dessin, symbole (ex: terre qui souffre, animaux menacés).</li>
+                        <li><strong>Message simple et positif</strong> : éviter la culpabilisation excessive, privilégier des solutions.</li>
+                        <li><strong>Call-to-action (appel à l'action)</strong> : « Triez vos déchets », « Adoptez le geste éco-citoyen ».</li>
+                        <li><strong>Logo ou signature</strong> : identification de l'organisateur (établissement scolaire, ONG, mairie).</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">Règles d'or pour un slogan efficace</h3>
+                    <p class="card-description">
+                        Le slogan est une phrase courte, rythmée, facile à mémoriser et à répéter.
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Brièveté</strong> : maximum 8 à 10 mots.</li>
+                        <li><strong>Jeu de mots ou rime</strong> : facilite la mémorisation (ex: « Moins de déchets, plus de respect ! »).</li>
+                        <li><strong>Ton positif ou engageant</strong> : « Ensemble, recyclons notre avenir » plutôt que « Ne polluez pas ».</li>
+                        <li><strong>Lien avec l'action concrète</strong> : « Chaque bouteille recyclée est une ressource préservée ».</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section des exemples de compréhension -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples d'outils de sensibilisation</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemple d'affiche : "La planète ne se nettoiera pas toute seule"</h3>
+                    <div class="illustration">
+                        <img src="" alt="Affiche de sensibilisation montrant une planète Terre entourée de déchets plastiques avec une main qui tend un sac de recyclage. Ciel nuageux et couleurs contrastées pour capter l'attention.">
+                        <div class="illustration-caption">Illustration : affiche type pour une campagne de recyclage dans un lycée.</div>
+                    </div>
+                    <p class="exemple-context">Contexte : Campagne menée dans un établissement scolaire pour inciter les élèves à utiliser les poubelles de tri (papiers, plastiques).</p>
+                    <p class="exemple-correction">
+                        <strong>Analyse des composants :</strong><br>
+                        - <strong>Titre</strong> : « La planète ne se nettoiera pas toute seule » (interpellation directe).<br>
+                        - <strong>Visuel</strong> : Terre entourée de déchets, une main tenant un sac de tri (vert pour le verre/plastique, jaune pour les emballages).<br>
+                        - <strong>Message complémentaire</strong> : « Chaque geste compte. Triez vos déchets à la cantine et en salle de classe. »<br>
+                        - <strong>Call-to-action</strong> : « Rejoins les éco-délégués ! »<br>
+                        - <strong>Logo</strong> : Logo du club environnement du lycée.
+                    </p>
+                    <div class="exemple-astuce">
+                        💡 Astuce : Pour l'examen, on peut être amené à décrire ou à concevoir une affiche. N'oubliez pas de justifier chaque élément (choix des couleurs, du message, du visuel) en lien avec l'objectif de sensibilisation.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Exemples de slogans pour la gestion des déchets</h3>
+                    <p class="exemple-context">À utiliser sur des affiches, des T-shirts, des réseaux sociaux ou des banderoles.</p>
+                    <div class="slogan-box">
+                        ✨ « Un déchet bien trié, c'est une ressource préservée ! » ✨
+                    </div>
+                    <div class="slogan-box" style="background: linear-gradient(135deg, #dcfce7, #fef9c3); margin-top: 0.75rem;">
+                        🌍 « Moins de plastique, plus de fantastique ! » 🌍
+                    </div>
+                    <div class="slogan-box" style="background: linear-gradient(135deg, #ffe4e6, #fecdd3); margin-top: 0.75rem;">
+                        ♻️ « Recycler aujourd'hui, c'est vivre demain. » ♻️
+                    </div>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        💬 En évaluation, vous pouvez être invités à créer votre propre slogan en respectant les règles : rime, brièveté, impact émotionnel positif.
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Activité type : Production d'une affiche pour la semaine du développement durable</h3>
+                    <p class="exemple-context">Situation problème : Votre établissement organise une semaine de sensibilisation à la gestion des déchets. En tant que délégué environnement, vous devez réaliser une affiche pour encourager le tri des bouteilles plastiques et des papiers.</p>
+                    <p class="exemple-correction">
+                        <strong>Proposition de réalisation :</strong><br>
+                        1. <strong>Titre</strong> : « Stop au gaspillage, place au recyclage ! »<br>
+                        2. <strong>Image</strong> : deux poubelles (jaune pour plastique/métal, bleue pour papier) avec des flèches circulaires. Au-dessus, une illustration de la planète qui sourit.<br>
+                        3. <strong>Message central</strong> : « 1 kg de papier recyclé = 1 arbre sauvé. 10 bouteilles plastiques = 1 tee-shirt recyclé. »<br>
+                        4. <strong>Consigne claire</strong> : « Dépose tes bouteilles dans le bac jaune et tes feuilles dans le bac bleu. »<br>
+                        5. <strong>Signature</strong> : « Club Éco-Lycée, avec le soutien de la région. »<br>
+                        <em>Cette affiche utilise des données chiffrées (impact concret) et des couleurs vives pour attirer l'œil.</em>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section des pièges à éviter -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Erreurs fréquentes dans les campagnes de sensibilisation</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Message trop négatif ou culpabilisant</span> : « Vous détruisez la planète » peut bloquer l'adhésion. Privilégier une formulation positive ou constructive.</li>
+                        <li><span class="bold">Absence d'appel à l'action concret</span> : Une affiche qui dit seulement « Sauvons l'environnement » sans dire comment est inefficace.</li>
+                        <li><span class="bold">Surcharge d'informations</span> : Trop de texte ou d'images nuit à la lisibilité. L'affiche doit être comprise en quelques secondes.</li>
+                        <li><span class="bold">Oubli du public cible</span> : Un slogan pour des adultes ne fonctionne pas forcément pour des lycéens. Adapter le vocabulaire et les références.</li>
+                        <li><span class="bold">Manque de cohérence</span> : Utiliser des couleurs ternes pour parler d'écologie peut réduire l'impact. Le vert, le bleu, le jaune sont souvent associés au recyclage.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section lien avec l'examen -->
+            <section class="concept-section">
+                <h2 class="section-title">📝 Lien avec l'examen (Sessions 2023, 2025)</h2>
+                <div class="card concept-card">
+                    <p class="card-description">
+                        D'après le programme officiel, cette leçon prépare à répondre à des questions d'évaluation des compétences telles que :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Session 2023, Partie A</strong> : Production d'une affiche pour limiter les inondations (transposition possible à la gestion des déchets).</li>
+                        <li><strong>Session 2025, Partie B</strong> : Création d'un slogan sur l'élimination des déchets.</li>
+                        <li>Savoir analyser une campagne existante : identifier le message, le public cible, les moyens employés.</li>
+                        <li>Être capable de justifier ses choix pour un support de sensibilisation en lien avec les enjeux locaux (Cameroun : gestion des déchets plastiques, dépotoirs sauvages).</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top: 1rem;">
+                        🎯 Conseil examen : Lisez bien la situation problème. On peut vous demander de <strong>concevoir</strong> une affiche ou un slogan, ou d'<strong>analyser</strong> un document existant. Appuyez-vous toujours sur des arguments scientifiques et des gestes réalistes.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pour aller plus loin -->
+            <section class="exemple-section">
+                <h2 class="section-title">🌱 Projets citoyens possibles</h2>
+                <div class="card exemple-card">
+                    <h3 class="card-title">Idées d'actions concrètes dans son établissement</h3>
+                    <ul class="concept-list">
+                        <li>Organiser un concours d'affiches entre classes sur le thème « Zéro déchet au lycée ».</li>
+                        <li>Créer des « éco-codes » (affichettes sur les poubelles : « ici uniquement les papiers », « ici les bouteilles plastiques »).</li>
+                        <li>Réaliser un reportage photo ou une vidéo de sensibilisation diffusée lors des heures de vie de classe.</li>
+                        <li>Mettre en place un « défi du mois » : classe qui réduit le plus ses déchets à la cantine.</li>
+                    </ul>
+                    <div class="illustration">
+                        <img src="" alt="Élèves en train de trier des déchets plastiques dans une cour d'école avec des bacs de recyclage colorés. Au fond, une affiche 'Agissons ensemble'.">
+                        <div class="illustration-caption">Exemple d'action collective : atelier de tri et sensibilisation au recyclage.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche de révision conforme au programme SVTEEHB - Terminales Littéraires (Cameroun) · Année 2025-2026 · <a href="#">Réviser avec un quiz</a> · 📚 Sensibilisation & développement durable</p>
+        </footer>
+    </div>
+</body>
+</html>

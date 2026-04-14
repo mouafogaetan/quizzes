@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 23 : Transformation et conservation des fruits</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f4f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Conteneur principal de la fiche */
+        .fiche-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            overflow: hidden;
+            border: 1px solid #e9eef2;
+        }
+
+        /* En-tête */
+        .fiche-header {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 2rem 2.5rem;
+            border-bottom: 4px solid #fbbf24;
+        }
+
+        .lesson-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3rem;
+            line-height: 1.2;
+        }
+
+        .lesson-subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 400;
+            color: #e0e7ff;
+        }
+
+        /* Contenu */
+        .fiche-content {
+            padding: 2rem 2.5rem;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1.2rem 0;
+            color: #0f172a;
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Cards génériques */
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e9eef2;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2563eb;
+            border-left: 4px solid #2563eb;
+            padding-left: 0.75rem;
+        }
+
+        .card-description {
+            color: #334155;
+            margin-bottom: 1rem;
+        }
+
+        /* Listes dans les concepts */
+        .concept-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+        }
+
+        .concept-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .concept-list li::before {
+            content: "•";
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .formule {
+            background-color: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #b45309;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Cartes d'exemples */
+        .exemple-card {
+            background-color: #f8fafc;
+            border-left: 6px solid #10b981;
+        }
+
+        .exemple-card .card-title {
+            color: #0b5e42;
+            border-left-color: #10b981;
+        }
+
+        .exemple-context {
+            font-style: italic;
+            color: #475569;
+            margin-bottom: 0.75rem;
+            background-color: #eef2ff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .exemple-correction {
+            margin: 1rem 0;
+        }
+
+        .exemple-astuce {
+            background-color: #fffbeb;
+            border-left: 4px solid #fbbf24;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            color: #92400e;
+            margin-top: 1rem;
+        }
+
+        /* Section d'avertissement */
+        .warning-card {
+            background-color: #fef2f2;
+            border-left: 6px solid #ef4444;
+        }
+
+        .warning-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .warning-card li::before {
+            content: "⚠️";
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.1rem;
+        }
+
+        .bold {
+            font-weight: 600;
+            color: #b91c1c;
+        }
+
+        /* Pied de page */
+        .fiche-footer {
+            padding: 1.2rem 2.5rem;
+            border-top: 1px dashed #cbd5e1;
+            font-size: 0.9rem;
+            color: #64748b;
+            background-color: #fcfcfd;
+            text-align: center;
+        }
+
+        .fiche-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px dotted #2563eb;
+        }
+
+        .fiche-footer a:hover {
+            color: #1e40af;
+            border-bottom-style: solid;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .fiche-header {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .fiche-content {
+                padding: 1.5rem 1.5rem;
+            }
+            
+            .lesson-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+            }
+            
+            .card {
+                padding: 1.2rem;
+            }
+            
+            .fiche-footer {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* Image style */
+        .schema-img {
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem auto;
+            display: block;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+        }
+        .img-caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #4b5563;
+            margin-top: 0.3rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="fiche-container">
+        <!-- En-tête avec le nom de la leçon -->
+        <header class="fiche-header">
+            <h1 class="lesson-title">Leçon 23 : Transformation et conservation des fruits</h1>
+            <p class="lesson-subtitle">SVTEEHB · Terminale C · Module IV : La biotechnologie au service de l'homme</p>
+        </header>
+
+        <!-- Contenu principal de la fiche -->
+        <main class="fiche-content">
+            <!-- Section concepts clés -->
+            <section class="concept-section">
+                <h2 class="section-title">📌 Éléments clés à retenir</h2>
+                
+                <div class="card concept-card">
+                    <h3 class="card-title">1. Pertes post-récolte et nécessité de transformation</h3>
+                    <p class="card-description">
+                        Les fruits sont des denrées périssables. Au Cameroun et dans les régions tropicales, les pertes post-récolte peuvent atteindre 30 à 50% en raison de l'altération microbienne, de la maturation accélérée et du manque d'infrastructures de conservation. 
+                        La transformation permet de : 
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Limiter le gaspillage alimentaire</strong> en valorisant les fruits invendables à l'état frais.</li>
+                        <li><strong>Prolonger la durée de vie</strong> des produits (confitures, jus, poudre, fruits secs).</li>
+                        <li><strong>Créer de la valeur ajoutée</strong> et des sources de revenus pour les agriculteurs.</li>
+                        <li><strong>Assurer une disponibilité</strong> hors-saison.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">2. Méthodes de transformation des fruits</h3>
+                    <p class="card-description">
+                        Selon le fruit et l'usage, plusieurs techniques sont employées. Les principales sont :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Transformation en jus :</strong> extraction du jus par pression ou broyage, puis pasteurisation (chauffage à 85-90°C) pour détruire les micro-organismes.</li>
+                        <li><strong>Transformation en confiture / marmelade :</strong> cuisson des fruits avec du sucre (environ 50-60% de sucre) pour créer un milieu hypertonique défavorable aux microbes. La pectine naturelle du fruit assure la gélification.</li>
+                        <li><strong>Transformation en poudre (exemple de la tomate ou mangue) :</strong> séchage par atomisation ou par étuve, puis broyage. La poudre peut être réhydratée ou utilisée comme condiment.</li>
+                        <li><strong>Fruits séchés :</strong> déshydratation naturelle (soleil) ou artificielle (four). La réduction de l'eau (moins de 20% d'humidité) inhibe la croissance microbienne.</li>
+                    </ul>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">3. Exemple détaillé : transformation de la tomate en poudre (lien examen 2025)</h3>
+                    <p class="card-description">
+                        D'après l'épreuve de la session 2025, voici les étapes clés de la transformation de la tomate en poudre :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Étape 1 : Tri et lavage</strong> – élimination des fruits abîmés et impuretés.</li>
+                        <li><strong>Étape 2 : Blanchiment</strong> – immersion dans l'eau chaude (80-100°C) pendant 2-3 minutes pour inactiver les enzymes et ramollir la peau.</li>
+                        <li><strong>Étape 3 : Réduction en purée</strong> – broyage mécanique et tamisage pour éliminer les pépins et les peaux.</li>
+                        <li><strong>Étape 4 : Concentration</strong> – évaporation partielle de l'eau pour obtenir une pâte épaisse.</li>
+                        <li><strong>Étape 5 : Séchage</strong> – passage dans un séchoir à tambour ou atomiseur (température contrôlée).</li>
+                        <li><strong>Étape 6 : Broyage et conditionnement</strong> – obtention d'une poudre fine, stockée dans des sachets hermétiques à l'abri de l'humidité.</li>
+                    </ul>
+                    <div class="exemple-astuce" style="margin-top:0.8rem;">
+                        💡 Astuce : Le séchage réduit considérablement le volume et le poids, facilitant le transport et la conservation (jusqu'à 12 mois).
+                    </div>
+                </div>
+
+                <div class="card concept-card">
+                    <h3 class="card-title">4. Principes de conservation après transformation</h3>
+                    <p class="card-description">
+                        Une fois transformés, les produits doivent être conservés dans des conditions adaptées pour éviter l'altération :
+                    </p>
+                    <ul class="concept-list">
+                        <li><strong>Confitures :</strong> mise en pot stérilisé (chauffage à 100°C) et fermeture hermétique. Le sucre agit comme conservateur naturel.</li>
+                        <li><strong>Jus pasteurisés :</strong> conditionnement aseptique et conservation au frais après ouverture.</li>
+                        <li><strong>Poudres de fruits :</strong> stockage dans des contenants imperméables à l'air et à l'humidité, à l'abri de la lumière.</li>
+                        <li><strong>Séchage solaire :</strong> utilisation de claies surélevées avec protection contre les insectes (moustiquaire).</li>
+                    </ul>
+                    <img src="" alt="Diagramme des étapes de transformation de la tomate en poudre : tri, lavage, blanchiment, broyage, concentration, séchage, conditionnement" class="schema-img">
+                    <div class="img-caption">Figure 1 : Chaîne de transformation de la tomate en poudre (d'après épreuve 2025)</div>
+                </div>
+            </section>
+
+            <!-- Section des exemples concrets -->
+            <section class="exemple-section">
+                <h2 class="section-title">💡 Exemples de compréhension</h2>
+                
+                <div class="card exemple-card">
+                    <h3 class="card-title">Examen 2025, Partie A : Étapes de transformation de la tomate</h3>
+                    <p class="exemple-context">
+                        Un agriculteur souhaite valoriser une récolte excédentaire de tomates (200 kg) qui ne peut être écoulée sur le marché frais en raison d'un défaut d'acheminement. Il opte pour la transformation en poudre.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Démarche à suivre :</strong><br>
+                        1. Trier les tomates saines, laver à l'eau claire.<br>
+                        2. Blanchir 2 minutes dans de l'eau bouillante pour faciliter l'épluchage et détruire les enzymes.<br>
+                        3. Réduire en purée, filtrer pour retirer les peaux et pépins.<br>
+                        4. Faire évaporer l'eau jusqu'à obtention d'une pâte concentrée (réduction d'environ 80% du volume).<br>
+                        5. Sécher la pâte dans un séchoir solaire amélioré ou un four à 60°C pendant 8h.<br>
+                        6. Broyer finement et conditionner dans des sachets étanches. <br>
+                        <strong>Résultat :</strong> environ 15-20 kg de poudre (soit un ratio de 10:1). La poudre se conserve 12 mois et peut être utilisée pour des sauces, soupes ou boissons.
+                    </p>
+                    <div class="exemple-astuce">
+                        💬 Lien avec l'examen : En 2025, les candidats devaient replacer les étapes dans l'ordre et expliquer l'intérêt du blanchiment. Retenez bien l'ordre chronologique !
+                    </div>
+                </div>
+
+                <div class="card exemple-card">
+                    <h3 class="card-title">Application locale : Fabrication de confiture de mangues</h3>
+                    <p class="exemple-context">
+                        Dans un village de l'Ouest Cameroun, les mangues sont abondantes pendant la saison pluvieuse. Les femmes transforment l'excédent en confiture pour éviter les pertes.
+                    </p>
+                    <p class="exemple-correction">
+                        <strong>Protocole simplifié :</strong><br>
+                        - Éplucher et couper 5 kg de mangues mûres en morceaux.<br>
+                        - Ajouter 3 kg de sucre et le jus de 2 citrons (apport d'acidité et de pectine).<br>
+                        - Cuire à feu doux pendant 45 min en remuant jusqu'à obtenir la consistance "gelée".<br>
+                        - Mettre en pots stérilisés, retourner les pots pour créer le vide d'air.<br>
+                        <strong>Explication scientifique :</strong> Le sucre crée une pression osmotique élevée qui déshydrate les micro-organismes. La chaleur détruit les germes pathogènes. La confiture se conserve plusieurs mois à température ambiante.
+                    </p>
+                    <div class="exemple-astuce">
+                        🥭 Astuce de terrain : Ajouter un peu de pectine de pomme si le fruit n'est pas assez riche en pectine naturelle (ex: ananas, goyave).
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section pièges et erreurs fréquentes -->
+            <section class="warning-section">
+                <h2 class="section-title">⚠️ Pièges courants / À ne pas confondre</h2>
+                <div class="card warning-card">
+                    <ul>
+                        <li><span class="bold">Erreur fréquente :</span> Confondre <strong>pasteurisation</strong> (chauffage modéré ~80-90°C, conserve les qualités nutritionnelles) et <strong>stérilisation</strong> (chauffage >100°C, détruit tous les micro-organismes mais altère vitamines). Pour les jus, on utilise plutôt la pasteurisation.</li>
+                        <li><span class="bold">Attention :</span> Oublier l'étape de <strong>blanchiment</strong> avant séchage ou mise en conserve. Sans blanchiment, les enzymes (polyphénol oxydase) brunissent le produit et accélèrent l'altération.</li>
+                        <li><span class="bold">Piège à éviter :</span> Penser que la transformation en poudre supprime toute eau. En réalité, il reste 5 à 8% d'humidité ; un stockage dans un endroit humide peut favoriser les moisissures.</li>
+                        <li><span class="bold">Confusion conceptuelle :</span> "Pertes post-récolte" ≠ "gaspillage alimentaire" chez le consommateur final. Les pertes post-récolte concernent la période entre la récolte et la distribution.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section vocabulaire clé -->
+            <section class="concept-section">
+                <h2 class="section-title">📚 Mots-clés & définitions (examen)</h2>
+                <div class="card concept-card">
+                    <ul class="concept-list">
+                        <li><strong>Pertes post-récolte :</strong> diminution quantitative et qualitative des produits agricoles entre la récolte et la consommation.</li>
+                        <li><strong>Blanchiment :</strong> traitement thermique court qui inactive les enzymes et élimine les micro-organismes de surface.</li>
+                        <li><strong>Confiture :</strong> mélange de fruits, de sucre et parfois de pectine cuit jusqu'à gélification (taux de sucre ≥ 55%).</li>
+                        <li><strong>Atomisation (spray drying) :</strong> technique de séchage rapide par pulvérisation d'un liquide dans une chambre chaude. Utilisée pour le lait en poudre et certains jus.</li>
+                        <li><strong>Durée de conservation :</strong> temps pendant lequel un produit transformé garde ses qualités organoleptiques et sanitaires (jusqu'à 12-18 mois pour les poudres).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Petit récap pour l'examen -->
+            <section class="exemple-section">
+                <div class="card exemple-card" style="background-color: #e0f2fe;">
+                    <h3 class="card-title" style="color:#0369a1;">🎯 Ce qu'il faut absolument savoir pour le Bac (SVTEEHB)</h3>
+                    <p class="exemple-correction">
+                        - Les <strong>étapes de transformation de la tomate en poudre</strong> (ordre et rôle de chaque étape).<br>
+                        - L'importance de la transformation pour lutter contre les <strong>pertes post-récolte</strong> au Cameroun.<br>
+                        - Le rôle du sucre, de la chaleur et de la déshydratation dans la <strong>conservation</strong>.<br>
+                        - Savoir expliquer pourquoi un fruit frais se conserve moins longtemps qu'un fruit transformé (rôle de l'eau, pH, activité enzymatique).<br>
+                        - Donner des exemples de produits transformés locaux : confiture de banane, jus d'ananas pasteurisé, poudre de tomate, mangue séchée.
+                    </p>
+                    <div class="exemple-astuce" style="background-color:#cffafe;">
+                        📌 Conseil du correcteur : Lors de la partie B (situation problème), on peut vous demander de rédiger une affiche de sensibilisation aux bonnes méthodes de conservation. Mettez en avant des éco-gestes simples (séchage solaire, stérilisation des bocaux, utilisation du citron comme acidifiant naturel).
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Pied de page -->
+        <footer class="fiche-footer">
+            <p>Fiche conforme au programme officiel SVTEEHB Terminale C (Session 2025) · Révision leçon 23 : Valorisation des produits naturels · <a href="#">Retour au sommaire</a> · 📘 Module IV : Biotechnologie</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+[
+  {
+    "intitule": "Modification de la table 'Etudiants' - QCM",
+    "type": "ressource",
+    "niveau": "easy",
+    "enonce": {
+      "texte": "<p>Une base de données scolaire contient une table nommée <code>Etudiants</code>. Voici sa structure actuelle :</p>\n<ul>\n<li><code>id_etudiant</code> (INT, clé primaire)</li>\n<li><code>nom</code> (VARCHAR(50))</li>\n<li><code>prenom</code> (VARCHAR(50))</li>\n<li><code>date_naissance</code> (DATE)</li>\n</ul>\n<p>Répondez aux questions suivantes en choisissant la (ou les) bonne(s) réponse(s).</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Identifier la requête SQL correcte pour ajouter une colonne `adresse` de type `VARCHAR(100)` à la table `Etudiants`.",
+        "niveau": "easy",
+        "reponse": "ALTER TABLE Etudiants ADD adresse VARCHAR(100);",
+        "sousQuestions": [
+          {
+            "numero": "1.a",
+            "texte": "Choisir la bonne syntaxe.",
+            "niveau": "easy",
+            "reponse": "ALTER TABLE Etudiants ADD adresse VARCHAR(100); (Les réponses avec ADD COLUMN sont aussi valables selon le SGBD, mais la forme standard est ADD seul). Les réponses \"ADD COLUMN adresse\" ou \"MODIFY\" sont incorrectes."
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "texte": "Identifier la requête SQL correcte pour modifier le type de la colonne `nom` afin qu'elle puisse contenir 100 caractères (au lieu de 50).",
+        "niveau": "easy",
+        "reponse": "ALTER TABLE Etudiants MODIFY nom VARCHAR(100);",
+        "sousQuestions": [
+          {
+            "numero": "2.a",
+            "texte": "Choisir la bonne syntaxe.",
+            "niveau": "easy",
+            "reponse": "ALTER TABLE Etudiants MODIFY nom VARCHAR(100); (Sur certains SGBD comme PostgreSQL, on utilise ALTER COLUMN ... TYPE...)."
+          }
+        ]
+      },
+      {
+        "numero": 3,
+        "texte": "Identifier la requête SQL correcte pour supprimer la colonne `date_naissance` de la table `Etudiants`.",
+        "niveau": "easy",
+        "reponse": "ALTER TABLE Etudiants DROP COLUMN date_naissance;",
+        "sousQuestions": [
+          {
+            "numero": "3.a",
+            "texte": "Choisir la bonne syntaxe.",
+            "niveau": "easy",
+            "reponse": "ALTER TABLE Etudiants DROP COLUMN date_naissance; (Sur MySQL, le mot-clé COLUMN est optionnel : DROP date_naissance)."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "intitule": "Gestion de la bibliothèque scolaire",
+    "type": "competence",
+    "niveau": "medium",
+    "enonce": {
+      "texte": "<p>Vous êtes le/la bibliothécaire d'un lycée. Vous avez créé une table <code>Livres</code> avec la structure suivante :</p>\n<pre>\nCREATE TABLE Livres (\n    id_livre INT PRIMARY KEY,\n    titre VARCHAR(100),\n    auteur VARCHAR(50),\n    annee_publication INT,\n    disponible BOOLEAN\n);\n</pre>\n<p>Après quelques semaines d'utilisation, vous devez apporter des modifications à la structure de cette table.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "Écrire la requête SQL pour ajouter une colonne `nombre_pages` (type entier) qui stockera le nombre de pages de chaque livre.",
+        "niveau": "medium",
+        "reponse": "ALTER TABLE Livres ADD nombre_pages INT;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "La colonne `auteur` est actuellement limitée à 50 caractères, mais certains noms d'auteurs sont plus longs. Écrire la requête SQL pour augmenter la taille de cette colonne à 100 caractères.",
+        "niveau": "medium",
+        "reponse": "ALTER TABLE Livres MODIFY auteur VARCHAR(100);",
+        "sousQuestions": []
+      },
+      {
+        "numero": 3,
+        "texte": "La colonne `disponible` (type BOOLEAN) n'est pas très explicite. Écrire la requête SQL pour renommer cette colonne en `est_disponible`.",
+        "niveau": "hard",
+        "reponse": "ALTER TABLE Livres RENAME COLUMN disponible TO est_disponible;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Finalement, vous décidez que la colonne `annee_publication` n'est pas nécessaire pour le moment. Écrire la requête SQL pour supprimer cette colonne de la table.",
+        "niveau": "medium",
+        "reponse": "ALTER TABLE Livres DROP COLUMN annee_publication;",
+        "sousQuestions": []
+      }
+    ]
+  },
+  {
+    "intitule": "Évolution du système de gestion d'une école",
+    "type": "competence",
+    "niveau": "hard",
+    "enonce": {
+      "texte": "<p>Le système de gestion d'une école utilise une table <code>Eleves</code> créée avec le script SQL suivant :</p>\n<pre>\nCREATE TABLE Eleves (\n    matricule CHAR(10) PRIMARY KEY,\n    nom_complet VARCHAR(100) NOT NULL,\n    date_inscription DATE\n);\n</pre>\n<p>Au fil du temps, l'administration souhaite faire évoluer la base de données pour ajouter de nouvelles fonctionnalités. Vous devez écrire les requêtes SQL correspondant à chaque évolution.</p>",
+      "images": []
+    },
+    "questions": [
+      {
+        "numero": 1,
+        "texte": "L'école souhaite désormais suivre la classe de chaque élève. Écrire la requête SQL pour ajouter une colonne `classe` de type `VARCHAR(10)` à la table `Eleves`.",
+        "niveau": "hard",
+        "reponse": "ALTER TABLE Eleves ADD classe VARCHAR(10);",
+        "sousQuestions": []
+      },
+      {
+        "numero": 2,
+        "texte": "On se rend compte que la colonne `nom_complet` devrait être séparée en deux colonnes distinctes : `nom` et `prenom`. Écrire les requêtes SQL pour : <br> a) Ajouter les deux nouvelles colonnes (`nom` et `prenom`, toutes deux de type `VARCHAR(50)`) <br> b) Supprimer l'ancienne colonne `nom_complet`.",
+        "niveau": "hard",
+        "reponse": "a) ALTER TABLE Eleves ADD nom VARCHAR(50), ADD prenom VARCHAR(50); <br> b) ALTER TABLE Eleves DROP COLUMN nom_complet;",
+        "sousQuestions": [
+          {
+            "numero": "2.a",
+            "texte": "Ajouter les colonnes `nom` et `prenom`.",
+            "niveau": "hard",
+            "reponse": "ALTER TABLE Eleves ADD nom VARCHAR(50), ADD prenom VARCHAR(50);"
+          },
+          {
+            "numero": "2.b",
+            "texte": "Supprimer la colonne `nom_complet`.",
+            "niveau": "hard",
+            "reponse": "ALTER TABLE Eleves DROP COLUMN nom_complet;"
+          }
+        ]
+      },
+      {
+        "numero": 3,
+        "texte": "L'école veut maintenant obligatoirement saisir la date d'inscription. Quelle modification de structure devez-vous apporter pour rendre la colonne `date_inscription` non nulle (NOT NULL), sachant qu'il n'y a actuellement aucune valeur NULL dans cette colonne ?",
+        "niveau": "very hard",
+        "reponse": "ALTER TABLE Eleves MODIFY date_inscription DATE NOT NULL;",
+        "sousQuestions": []
+      },
+      {
+        "numero": 4,
+        "texte": "Pour des raisons de performance, l'école décide d'ajouter une clé étrangère sur la colonne `classe` qui fait référence à la table `Classes` (colonne `code_classe`). Écrire la requête SQL pour ajouter cette contrainte de clé étrangère.",
+        "niveau": "very hard",
+        "reponse": "ALTER TABLE Eleves ADD CONSTRAINT fk_classe FOREIGN KEY (classe) REFERENCES Classes(code_classe);",
+        "sousQuestions": []
+      }
+    ]
+  }
+]

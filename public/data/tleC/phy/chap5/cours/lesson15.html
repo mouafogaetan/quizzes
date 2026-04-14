@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de Révision - Leçon 15 : Dynamique des solides (Terminale C/D)</title>
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            color: #0f172a;
+        }
+
+        /* Conteneur principal type fiche A4 */
+        .fiche-revision {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* En-tête avec bande colorée */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1.8rem 2rem;
+            border-bottom: 5px solid #facc15;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #facc15;
+            color: #1e293b;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.8rem;
+            border-radius: 30px;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .header h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 0.75rem;
+        }
+
+        .objectifs-bac {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .objectifs-bac span {
+            background: rgba(255,255,255,0.2);
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Contenu principal */
+        .content {
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
+
+        /* Cartes pour les notions clés */
+        .section-card {
+            background: #f8fafc;
+            border-left: 6px solid #3b82f6;
+            border-radius: 18px;
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #0c4a6e;
+        }
+
+        .section-title i {
+            font-size: 1.6rem;
+        }
+
+        .grid-notions {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .notion-item {
+            background: white;
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e2e8f0;
+            transition: 0.1s linear;
+        }
+
+        .notion-item strong {
+            color: #1e40af;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+
+        .formule {
+            background: #eef2ff;
+            padding: 0.6rem 1rem;
+            border-radius: 14px;
+            font-family: monospace;
+            font-size: 1rem;
+            margin: 0.75rem 0;
+            text-align: center;
+            border: 1px solid #cbd5e1;
+        }
+
+        .methodo {
+            background: #fff7ed;
+            border-left-color: #f97316;
+        }
+
+        .attention {
+            background: #fee2e2;
+            border-left-color: #dc2626;
+        }
+
+        .exemple {
+            background: #e6f7ec;
+            border-left-color: #10b981;
+        }
+
+        footer {
+            background: #f1f5f9;
+            padding: 1rem 2rem;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 680px) {
+            .content {
+                padding: 1.2rem;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="fiche-revision">
+    <div class="header">
+        <div class="badge">📚 MODULE 3 – MÉCANIQUE | CHAPITRE 5 : LOIS DE NEWTON</div>
+        <h1>Leçon 15 : Dynamique des solides</h1>
+        <h2>Principe Fondamental de la Dynamique (PFD) – Translation</h2>
+        <div class="objectifs-bac">
+            <span>🎯 Bac 2023 – Étude dynamique d'un ressort</span>
+            <span>📐 Lien Bac : PFD et résolution de problèmes</span>
+            <span>⚙️ Translation & bilan des forces</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Objectifs pédagogiques -->
+        <div class="section-card">
+            <div class="section-title">
+                <span>🎯</span> Objectifs de la leçon
+            </div>
+            <ul style="margin-left: 1.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+                <li>✔ Appliquer le principe fondamental de la dynamique (PFD) à des solides en <strong>translation rectiligne</strong>.</li>
+                <li>✔ Faire le bilan complet des forces extérieures agissant sur un système.</li>
+                <li>✔ Établir l’équation différentielle du mouvement à partir de la 2<sup>e</sup> loi de Newton.</li>
+                <li>✔ Résoudre des problèmes de dynamique avec forces constantes ou variables (ressort, frottements).</li>
+                <li>✔ <strong>Lien Baccalauréat 2023-2025</strong> : Savoir exploiter le PFD dans des situations concrètes (plan incliné, traction, ressort).</li>
+            </ul>
+        </div>
+
+        <!-- Notions clés + formules -->
+        <div class="section-card">
+            <div class="section-title">
+                <span>⚡</span> Notions clés & Formules fondamentales
+            </div>
+            <div class="grid-notions">
+                <div class="notion-item">
+                    <strong>📌 Translation d’un solide</strong>
+                    Tout point du solide possède le même vecteur vitesse et le même vecteur accélération. On peut réduire l’étude à celle du centre d’inertie G.
+                </div>
+                <div class="notion-item">
+                    <strong>📌 Principe Fondamental de la Dynamique (PFD)</strong>
+                    Dans un référentiel galiléen, la somme des forces extérieures est égale au produit de la masse par l’accélération du centre d’inertie.
+                    <div class="formule">\[
+                        \sum \vec{F}_{\text{ext}} = m \cdot \vec{a}_G
+                    \]</div>
+                </div>
+                <div class="notion-item">
+                    <strong>📌 Projection sur un axe</strong>
+                    On choisit un axe (Ox) orienté selon le mouvement.
+                    <div class="formule">\[
+                        \sum F_{\text{ext},x} = m \cdot a_x = m \cdot \frac{dv_x}{dt}
+                    \]</div>
+                </div>
+                <div class="notion-item">
+                    <strong>📌 Méthodologie de résolution</strong>
+                    1. Système isolé + référentiel galiléen.<br>
+                    2. Bilan des forces (poids, réaction, tension, frottement, etc.).<br>
+                    3. Appliquer PFD vectoriel.<br>
+                    4. Projeter sur les axes.<br>
+                    5. Intégrer pour obtenir v(t) et x(t).
+                </div>
+            </div>
+        </div>
+
+        <!-- Cas particuliers + forces classiques -->
+        <div class="section-card">
+            <div class="section-title">
+                <span>🧲</span> Forces classiques & situations types
+            </div>
+            <div class="grid-notions">
+                <div class="notion-item">
+                    <strong>⚖️ Poids</strong> \(\vec{P} = m\vec{g}\) vertical vers le bas.<br>
+                    <strong>📏 Réaction normale</strong> \(\vec{R}_N\) perpendiculaire au support.<br>
+                    <strong>🔥 Frottement solide</strong> \(\vec{f} = \mu \cdot R_N\) (sens opposé au mouvement).
+                </div>
+                <div class="notion-item">
+                    <strong>🌀 Tension d’un ressort (Hooke)</strong>
+                    \(\vec{T} = -k (x - x_0) \vec{i}\).<br>
+                    Force de rappel proportionnelle à l’allongement.
+                </div>
+                <div class="notion-item">
+                    <strong>📐 Plan incliné</strong>
+                    Projection du poids : \(P_x = mg\sin\alpha\), \(P_y = -mg\cos\alpha\).<br>
+                    Le PFD donne \(mg\sin\alpha - f = m a\).
+                </div>
+            </div>
+        </div>
+
+        <!-- Exemple résolu type Bac -->
+        <div class="section-card exemple">
+            <div class="section-title">
+                <span>📘</span> Extype Bac – Solide sur plan incliné avec frottement
+            </div>
+            <p><strong>Énoncé :</strong> Un solide de masse \(m = 2\,\text{kg}\) glisse sur un plan incliné d’angle \(\alpha = 30^\circ\). Coefficient de frottement \(\mu = 0,2\). Déterminer l’accélération.</p>
+            <p><strong>✅ Solution :</strong></p>
+            <ul style="margin-left: 1.2rem;">
+                <li>Bilan des forces : \(\vec{P}\), \(\vec{R}_N\) et frottement \(\vec{f}\) (opposé au mouvement).</li>
+                <li>Projection sur l’axe Ox parallèle au plan (vers le bas) : \(mg\sin\alpha - f = m a\).</li>
+                <li>Avec \(f = \mu R_N\) et \(R_N = mg\cos\alpha\).</li>
+                <li>Donc \(a = g\sin\alpha - \mu g\cos\alpha\).</li>
+                <li>\(a = 9,8 \times \sin 30^\circ - 0,2 \times 9,8 \times \cos 30^\circ = 4,9 - 1,697 \approx 3,20\,\text{m/s}^2\).</li>
+            </ul>
+            <div class="formule" style="margin-top: 8px;">\[
+                a = g(\sin\alpha - \mu\cos\alpha)
+            \]</div>
+        </div>
+
+        <!-- Equation différentielle et intégration -->
+        <div class="section-card">
+            <div class="section-title">
+                <span>📈</span> Établir l’équation différentielle & lois horaires
+            </div>
+            <p>À partir du PFD projeté \( \sum F_x = m \frac{dv}{dt} \), on obtient une équation différentielle du 1er ou 2nd ordre selon les forces.</p>
+            <ul>
+                <li><strong>Force constante</strong> (ex: plan incliné sans frottement) : \(a = cte\) ⇒ \(v(t) = a t + v_0\) et \(x(t) = \frac{1}{2} a t^2 + v_0 t + x_0\).</li>
+                <li><strong>Force de rappel élastique</strong> (ressort) : \(m \frac{d^2x}{dt^2} = -k x\) ⇒ oscillateur harmonique.</li>
+                <li><strong>Frottement fluide</strong> : \(m \frac{dv}{dt} = -k v + F\) ⇒ vitesse limite.</li>
+            </ul>
+            <div class="attention" style="margin-top: 12px; background: #fff3e3; padding: 8px 12px; border-radius: 14px;">
+                ⚠️ <strong>Attention :</strong> Toujours vérifier que le référentiel est galiléen (terrestre en général). Pour un ascenseur ou un référentiel accéléré, il faut introduire des forces d’inertie.
+            </div>
+        </div>
+
+        <!-- Tableau récapitulatif des étapes -->
+        <div class="section-card methodo">
+            <div class="section-title">
+                <span>🧠</span> Méthodologie Bac – Résolution de problème de dynamique
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div><strong>1️⃣</strong> Définir le <strong>système</strong> (solide étudié) et le <strong>référentiel</strong> (galiléen).</div>
+                <div><strong>2️⃣</strong> Faire le <strong>bilan des forces extérieures</strong> (schématiser).</div>
+                <div><strong>3️⃣</strong> Écrire la 2<sup>e</sup> loi de Newton vectorielle : \(\sum \vec{F} = m\vec{a}\).</div>
+                <div><strong>4️⃣</strong> Projeter sur les axes judicieusement choisis (selon le mouvement).</div>
+                <div><strong>5️⃣</strong> Obtenir l’équation différentielle (ou directement l’accélération).</div>
+                <div><strong>6️⃣</strong> Intégrer pour trouver \(v(t)\) puis \(x(t)\) (conditions initiales).</div>
+                <div><strong>7️⃣</strong> Exploiter les résultats : durée, vitesse maximale, distance, etc.</div>
+            </div>
+        </div>
+
+        <!-- Exercice d'auto-évaluation (type TD) -->
+        <div class="section-card">
+            <div class="section-title">
+                <span>✏️</span> À toi de jouer ! (extrait TD Bac)
+            </div>
+            <p><strong>Situation :</strong> Un solide de masse \(m = 500\,\text{g}\) est lancé sur une table horizontale avec une vitesse initiale \(v_0 = 2\,\text{m/s}\). Coefficient de frottement dynamique \(\mu_d = 0,25\).</p>
+            <ol style="margin-left: 1.2rem;">
+                <li>Faire le bilan des forces et calculer l’accélération.</li>
+                <li>Établir \(v(t)\) et la distance parcourue avant l’arrêt.</li>
+                <li>Quelle serait la distance si le solide était sur un plan incliné de \(15^\circ\) (même μ) ?</li>
+            </ol>
+            <details style="margin-top: 12px; background: #eef2ff; padding: 10px; border-radius: 16px;">
+                <summary><strong>🔍 Voir corrigé rapide</strong></summary>
+                <p>1. \(a = -\mu g = -0,25\times 9,8 = -2,45\,\text{m/s}^2\).<br>
+                2. \(v(t) = 2 - 2,45 t\), arrêt \(t=0,816\,s\), distance \(x = v_0 t + \frac12 a t^2 = 0,816\,m\).<br>
+                3. Sur plan incliné : \(a = -g(\sin\alpha + \mu\cos\alpha) = -9,8(\sin15° + 0,25\cos15°) \approx -4,90\,\text{m/s}^2\) ⇒ distance plus courte.</p>
+            </details>
+        </div>
+
+        <!-- Liens avec le Bac et conseils -->
+        <div class="section-card attention" style="border-left-color: #f59e0b;">
+            <div class="section-title">
+                <span>🏆</span> Coup de pouce Bac – Erreurs fréquentes
+            </div>
+            <ul>
+                <li>❌ Oublier la force de frottement ou la réaction normale dans le bilan.</li>
+                <li>❌ Projeter incorrectement le poids sur un plan incliné (mélanger cos et sin).</li>
+                <li>❌ Utiliser le PFD dans un référentiel non galiléen sans forces d’inertie.</li>
+                <li>❌ Confondre vitesse et accélération lors de l’intégration.</li>
+            </ul>
+            <p style="margin-top: 10px;"><strong>💡 Astuce :</strong> Pour les problèmes de dynamique, commencez toujours par un <u>schéma clair des forces</u> avant toute écriture mathématique.</p>
+        </div>
+    </div>
+    <footer>
+        📖 Fiche conforme au programme officiel de Physique Terminale C & D (Cameroun) – Bac 2025 • Principe Fondamental de la Dynamique (Translation)
+    </footer>
+</div>
+</body>
+</html>
